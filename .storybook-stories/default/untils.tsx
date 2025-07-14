@@ -1,11 +1,13 @@
-import { FC, PropsWithChildren } from 'react'
+import { Stack } from '@local/components/stack';
+import { addSXProps } from '@local/index';
 
-import { Stack } from '@local/components/stack'
+import { FC, PropsWithChildren } from 'react';
 
-export const WrapperBig: FC<PropsWithChildren> = props => {
+export const WrapperBig: FC<PropsWithChildren & addSXProps> = (props) => {
   return (
     <Stack
-      sx={theme => ({
+      sx={(theme) => ({
+        ...(typeof props.sx === 'object' ? props.sx : props.sx?.(theme)),
         default: {
           borderRadius: '8px',
           padding: '16px',
@@ -15,18 +17,21 @@ export const WrapperBig: FC<PropsWithChildren> = props => {
           borderColor: theme.palette.blueHover,
           flexDirection: 'row',
           flexWrap: 'wrap',
-          gap: '6px'
-        }
+          gap: '6px',
+          overflow: 'hidden',
+          ...(typeof props.sx === 'object' ? props.sx.default : props.sx?.(theme).default),
+        },
       })}
     >
       {props.children}
     </Stack>
-  )
-}
-export const WrapperMin: FC<PropsWithChildren> = props => {
+  );
+};
+export const WrapperMin: FC<PropsWithChildren & addSXProps> = (props) => {
   return (
     <Stack
-      sx={theme => ({
+      sx={(theme) => ({
+        ...(typeof props.sx === 'object' ? props.sx : props.sx?.(theme)),
         default: {
           borderRadius: '8px',
           padding: '8px',
@@ -36,11 +41,12 @@ export const WrapperMin: FC<PropsWithChildren> = props => {
           borderColor: theme.palette.blueHover,
           flexDirection: 'row',
           flexWrap: 'wrap',
-          gap: '6px'
-        }
+          gap: '6px',
+          ...(typeof props.sx === 'object' ? props.sx.default : props.sx?.(theme).default),
+        },
       })}
     >
       {props.children}
     </Stack>
-  )
-}
+  );
+};

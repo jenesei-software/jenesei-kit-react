@@ -1,11 +1,15 @@
-import { useVirtualizer } from '@tanstack/react-virtual'
-import moment from 'moment'
-import { FC, KeyboardEvent, RefObject, memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
-
 import { ListLanguage, MapThemeList } from '@local/consts'
 import { ErrorMessage } from '@local/styles/error'
 import { KEY_SIZE_DATA } from '@local/theme'
 
+import { useVirtualizer } from '@tanstack/react-virtual'
+import moment from 'moment'
+import { FC, KeyboardEvent, memo, RefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+
+import { Button } from '../button'
+import { Icon } from '../icon'
+import { Popover, usePopover } from '../popover'
+import { Typography } from '../typography'
 import {
   ButtonList,
   ContainerDropdownListOptionProps,
@@ -17,7 +21,6 @@ import {
   ISelectItem,
   ISelectLanguageOption,
   ISelectMapThemeOption,
-  SelectTextArea,
   SelectLanguageProps,
   SelectList,
   SelectListOption,
@@ -25,13 +28,10 @@ import {
   SelectMonthProps,
   SelectMonthsProps,
   SelectProps,
+  SelectTextArea,
   SelectWrapper,
   SelectYearProps
 } from '.'
-import { Button } from '../button'
-import { Icon } from '../icon'
-import { Popover, usePopover } from '../popover'
-import { Typography } from '../typography'
 
 const DEFAULT_LABEL_SELECT_ALL = 'Select all option'
 const DEFAULT_LABEL_PLACEHOLDER = 'Select an option'
@@ -248,8 +248,8 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
             ref={refTextArea}
             genre={props.genre}
             size={props.size}
+            minRows={1}
             maxRows={5}
-            sizeHeight={sizeHeight - (sizePadding / 2.8) * 2 - 2}
             isAutoHeight
             onChange={value => {
               props?.onChangeSearch?.(value)

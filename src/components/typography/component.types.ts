@@ -1,5 +1,3 @@
-import { CSSProperties, PropsWithChildren, Ref } from 'react'
-
 import { SXProps } from '@local/styles/sx'
 import {
   IThemeDevice,
@@ -9,6 +7,8 @@ import {
   IThemeTypographyWeight
 } from '@local/theme'
 import { AddDollarSign } from '@local/types'
+
+import { CSSProperties, PropsWithChildren, Ref } from 'react'
 
 import { TooltipProps } from '../tooltip'
 
@@ -25,7 +25,7 @@ type TypographyDefaultProps = {
 
   flex?: string
 
-  height?: number
+  height?: number | string
 
   isHoverUnderlining?: boolean
 

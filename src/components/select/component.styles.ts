@@ -1,6 +1,3 @@
-import { motion } from 'framer-motion'
-import styled, { css } from 'styled-components'
-
 import { Icon } from '@local/components/icon'
 import { getFontSizeStyles } from '@local/components/typography'
 import { addRemoveOutline } from '@local/styles/add'
@@ -8,6 +5,10 @@ import { addError } from '@local/styles/error'
 import { addSX } from '@local/styles/sx'
 import { KEY_SIZE_DATA } from '@local/theme/theme'
 
+import { motion } from 'framer-motion'
+import styled, { css } from 'styled-components'
+
+import { TextArea } from '../textarea'
 import {
   ButtonListProps,
   DropdownListOptionIconProps,
@@ -17,7 +18,6 @@ import {
   SelectListProps,
   SelectWrapperProps
 } from '.'
-import { TextArea } from '../textarea'
 
 const addSelectWrapperGenre = css<SelectWrapperProps>`
   ${props => css`
@@ -276,9 +276,12 @@ export const SelectListOption = styled(motion.li)<SelectListOptionProps>`
 `
 
 export const SelectTextArea = styled(TextArea)`
-  border: 0px solid !important;
+  border: 0 !important;
+  /* padding: 0 !important; */
   background-color: transparent !important;
   padding-left: 0px;
   padding-right: 0px;
+  width: 100%;
+  flex-grow: 1;
   ${addRemoveOutline};
 `
