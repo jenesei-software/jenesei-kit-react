@@ -1,9 +1,9 @@
+import { ErrorMessage } from '@local/styles/error'
+import { KEY_SIZE_DATA } from '@local/theme/theme'
+
 import { useMergeRefs } from '@floating-ui/react'
 import { useCallback, useEffect, useMemo, useRef } from 'react'
 import { useTheme } from 'styled-components'
-
-import { ErrorMessage } from '@local/styles/error'
-import { KEY_SIZE_DATA } from '@local/theme/theme'
 
 import { StyledTextArea, StyledTextAreaWrapper, TextAreaProps } from '.'
 

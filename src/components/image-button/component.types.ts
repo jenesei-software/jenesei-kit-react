@@ -1,31 +1,30 @@
-import { addSXProps } from '@local/styles/sx'
+import { addSXProps } from '@local/styles/sx';
 
-import { ButtonProps } from '../button'
-import { ImageSelectItemProps } from '../image-select'
+import { ButtonProps } from '../button';
+import { ImageSelectItemProps } from '../image-select';
 
 export interface ImageButtonProps extends addSXProps {
-  button: ButtonProps
+  button: ButtonProps;
 
   dialog: {
-    button: ButtonProps
-    buttonDelete: ButtonProps
-  }
+    button: ButtonProps;
+    buttonDelete: ButtonProps;
+  };
 
   imageSettings: {
-    maxSize: number
-    maxCount: number
-    aspect?: number
-  }
+    maxSize: number;
+    maxCount: number;
+    aspect?: number;
+  };
 
   locale: {
-    buttonAdd: string
+    buttonAdd: string;
 
-    dialogSave: string
-    dialogCancel: string
+    dialogSave: string;
+    dialogCancel: string;
+    dialogAddImage: string;
+    dialogDeleteImage: string;
+  };
 
-    dialogAddImage: string
-    dialogDeleteImage: string
-  }
-
-  onSave: (files: ImageSelectItemProps[] | null) => void
+  onSave: (files: ImageSelectItemProps[] | null) => void;
 }
