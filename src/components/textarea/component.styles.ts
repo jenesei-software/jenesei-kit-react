@@ -1,5 +1,5 @@
 import { getFontSizeStyles } from '@local/components/typography';
-import { addOutline, addRemoveOutline, addTransitionWithoutSize } from '@local/styles/add';
+import { addOutlineChildren, addRemoveOutline, addTransitionWithoutSize } from '@local/styles/add';
 import { addError } from '@local/styles/error';
 import { addSX } from '@local/styles/sx';
 import { KEY_SIZE_DATA } from '@local/theme';
@@ -63,7 +63,7 @@ export const TextAreaWrapper = styled.div<TextAreaWrapperProps>`
   ${addTextAreaWrapperGenre};
   ${addTextAreaWrapperIsInputEffect};
   ${addTextAreaWrapperHidden};
-  ${addOutline};
+  ${addOutlineChildren};
   ${addSX};
 `;
 
@@ -109,9 +109,8 @@ export const addTextArea = css<StyledTextAreaProps>`
   padding: 0 !important;
   border: none !important;
   margin: 0 !important;
-  white-space: nowrap;
+  white-space: normal;
   text-overflow: ellipsis;
-  text-wrap: auto;
   height: auto;
   background-color: transparent;
   ${(props) => getFontSizeStyles(16, props.$isBold ? 500 : 400, props.theme.font.family, `${props.$lineHeight}px`)};

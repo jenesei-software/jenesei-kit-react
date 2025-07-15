@@ -58,9 +58,12 @@ export const TextArea = (props: TextAreaProps) => {
         $genre={props.genre}
         $size={props.size}
         $lineHeight={lineHeight}
+        $isReadOnly={props.isReadOnly}
         className={props.className}
+        tabIndex={-1}
       >
         <StyledTextArea
+          tabIndex={0}
           ref={ref}
           $lineHeight={lineHeight}
           $isResize={props.isResize}
@@ -75,17 +78,18 @@ export const TextArea = (props: TextAreaProps) => {
           readOnly={props.isReadOnly}
           required={props.isRequired}
           defaultValue={props.defaultValue}
-          value={props.value ?? ''}
+          value={props.value === null ? '' : props.value}
           rows={props.minRows}
           placeholder={props.placeholder}
           onChange={(event) => handleOnChange(event.target.value)}
           onBlur={props.onBlur}
           onFocus={props.onFocus}
+          onKeyDown={props.onKeyDown}
           name={props.name}
           id={props.id}
           style={{
             minHeight: `${minHeight}px`,
-            maxHeight: props.isAutoHeight ? `${maxHeight}px` : `${minHeight}px`,
+            maxHeight: props.isResize ? 'none' : props.isAutoHeight ? `${maxHeight}px` : `${minHeight}px`,
           }}
         />
       </TextAreaWrapper>

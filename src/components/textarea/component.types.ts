@@ -5,14 +5,12 @@ import { AddDollarSign } from '@local/types';
 
 import { FocusEventHandler, KeyboardEventHandler, RefObject } from 'react';
 
-type BaseTextAreaProps = addErrorProps &
+type CommonTextAreaProps = addErrorProps &
   addSXProps & {
     name?: string;
     id?: string;
     ref?: RefObject<HTMLTextAreaElement | null>;
     className?: string;
-    defaultValue?: string;
-    isAllowEmptyFormatting?: boolean;
     genre: TextAreaGenre;
     minRows: number;
     size: IThemeSize;
@@ -29,20 +27,44 @@ type BaseTextAreaProps = addErrorProps &
     onKeyDown?: KeyboardEventHandler<HTMLTextAreaElement>;
     placeholder?: string;
     isBold?: boolean;
-    value?: string | null;
   };
 
+// Контролируемый вариант
+type ControlledValue = {
+  value: string | null;
+  defaultValue?: never;
+};
+
+// Неконтролируемый вариант
+type UncontrolledValue = {
+  value?: never;
+  defaultValue: string;
+};
+
+type BaseTextAreaProps = CommonTextAreaProps & (ControlledValue | UncontrolledValue);
+
+// AutoHeight вариант
 type AutoHeightTextAreaProps = BaseTextAreaProps & {
   isAutoHeight: true;
   maxRows: number;
+  isResize?: false | undefined;
 };
 
-type FixedHeightTextAreaProps = BaseTextAreaProps & {
+// Resizable (с запретом autoHeight и maxRows)
+type ResizableTextAreaProps = BaseTextAreaProps & {
+  isResize: true;
   isAutoHeight?: false | undefined;
   maxRows?: never;
 };
 
-export type TextAreaProps = AutoHeightTextAreaProps | FixedHeightTextAreaProps;
+// Fixed (не autoHeight и не resizable)
+type FixedTextAreaProps = BaseTextAreaProps & {
+  isResize?: false | undefined;
+  isAutoHeight?: false | undefined;
+  maxRows?: never;
+};
+
+export type TextAreaProps = AutoHeightTextAreaProps | ResizableTextAreaProps | FixedTextAreaProps;
 
 export type TextAreaGenre = keyof IThemeGenreTextArea;
 
@@ -56,7 +78,7 @@ export type StyledTextAreaProps = AddDollarSign<
 >;
 
 export type TextAreaWrapperProps = AddDollarSign<
-  Pick<TextAreaProps, 'isDisabled' | 'isInputEffect' | 'sx' | 'size' | 'genre'> & {
+  Pick<TextAreaProps, 'isDisabled' | 'isInputEffect' | 'sx' | 'size' | 'genre' | 'isReadOnly'> & {
     lineHeight: number;
   }
 >;

@@ -17,7 +17,7 @@ export const Id: Story = {
     primaryColor: 'blueGoogle',
     name: 'AddUser',
     size: 'large',
-    type: 'checkbox'
+    type: 'id'
   }
 }
 
