@@ -73,6 +73,6 @@ const AllWrapper: FC = () => {
   );
 };
 
-export const All = {
+export const Separator = {
   render: () => <AllWrapper />,
 };

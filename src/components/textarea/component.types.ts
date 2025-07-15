@@ -31,7 +31,7 @@ type CommonTextAreaProps = addErrorProps &
 
 // Контролируемый вариант
 type ControlledValue = {
-  value: string | null;
+  value: string | null | undefined;
   defaultValue?: never;
 };
 

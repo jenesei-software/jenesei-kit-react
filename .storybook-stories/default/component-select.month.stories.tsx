@@ -37,7 +37,7 @@ const SelectMonthWrapper: FC<SelectMonthProps> = props => {
         }
       }}
     >
-      <SelectMonth {...props} placeholder="Month" value={value} onChange={handleSelectChange} />
+      <SelectMonth {...props} labelPlaceholder="Month" value={value} onChange={handleSelectChange} />
     </Stack>
   )
 }

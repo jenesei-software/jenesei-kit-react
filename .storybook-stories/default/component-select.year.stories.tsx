@@ -34,6 +34,7 @@ const defaultArgs: Partial<SelectYearProps> = {
 const SelectYearWrapper: FC<SelectYearProps> = props => {
   const [value, setValue] = useState<number | null>(moment.utc().startOf('year').valueOf())
   const handleSelectChange = (value: number | null) => {
+    console.log('Selected year:', value)
     setValue(value)
   }
   return (
@@ -46,7 +47,7 @@ const SelectYearWrapper: FC<SelectYearProps> = props => {
         }
       }}
     >
-      <SelectYear {...props} placeholder="Year" value={value} onChange={handleSelectChange} />
+      <SelectYear {...props} labelPlaceholder='Year' value={value} onChange={handleSelectChange} />
     </Stack>
   )
 }

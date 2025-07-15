@@ -104,10 +104,10 @@ export const addAlwaysOutline = css<{ $isShowAlwaysOutline?: boolean }>`
     `}
 `;
 export const addRemoveOutline = css`
-  outline: 0px solid transparent;
-  outline-offset: 0px;
+  outline: 0px solid transparent !important;
+  outline-offset: 0px !important;
   &:focus-visible {
-    outline: 0px solid ${(props) => props.theme.states.focus};
+    outline: 0px solid ${(props) => props.theme.states.focus} !important;
   }
 `;
 

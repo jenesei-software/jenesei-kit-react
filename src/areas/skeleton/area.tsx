@@ -1,31 +1,31 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react';
 
-import { SkeletonProps, StyledSkeleton } from '.'
+import { SkeletonProps, StyledSkeleton } from '.';
 
-export const Skeleton: FC<SkeletonProps> = props => {
-  const [visible, setVisible] = useState(props.defaultVisible ?? false)
+export const Skeleton: FC<SkeletonProps> = (props) => {
+  const [visible, setVisible] = useState(props.defaultVisible ?? false);
 
   useEffect(() => {
     if ('time' in props) {
       const timer = setTimeout(() => {
-        setVisible(true)
-      }, props.time)
+        setVisible(true);
+      }, props.time);
 
       return () => {
-        clearTimeout(timer)
-      }
+        clearTimeout(timer);
+      };
     }
-  }, [props])
+  }, [props]);
 
   useEffect(() => {
     if ('visible' in props) {
-      setVisible(!props.visible)
+      setVisible(!props.visible);
     }
-  }, [props])
+  }, [props]);
 
   return (
     <StyledSkeleton {...props} $visible={visible} $type={props.type}>
       {props.children}
     </StyledSkeleton>
-  )
-}
+  );
+};

@@ -1,20 +1,20 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import { FC } from 'react'
-import 'styled-components'
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { FC } from 'react';
+import 'styled-components';
 
-import { Skeleton as SkeletonComponent, SkeletonProps } from '@local/areas/skeleton'
-import { Stack } from '@local/components/stack'
-import { Typography } from '@local/components/typography'
+import { Skeleton as SkeletonComponent, SkeletonProps } from '@local/areas/skeleton';
+import { Stack } from '@local/components/stack';
+import { Typography } from '@local/components/typography';
 
 const meta: Meta<typeof SkeletonComponent> = {
   component: SkeletonComponent,
-  title: 'Area/Skeleton'
-}
+  title: 'Area/Skeleton',
+};
 
-export default meta
-type Story = StoryObj<typeof SkeletonComponent>
+export default meta;
+type Story = StoryObj<typeof SkeletonComponent>;
 
-const SkeletonWrapper: FC<SkeletonProps> = props => {
+const SkeletonWrapper: FC<SkeletonProps> = (props) => {
   return (
     <SkeletonComponent
       {...props}
@@ -23,85 +23,86 @@ const SkeletonWrapper: FC<SkeletonProps> = props => {
           overflow: 'auto',
           width: '300px',
           height: '300px',
-          borderRadius: '12px'
-        }
+          borderRadius: '12px',
+        },
       }}
     >
       <Stack
-        sx={theme => ({
+        sx={(theme) => ({
           default: {
             width: '100%',
             height: '100%',
             padding: '12px',
             borderRadius: '6px',
-            backgroundColor: theme.palette.whiteStandard
-          }
+            backgroundColor: theme.palette.whiteStandard,
+          },
         })}
       >
         <Typography
           sx={{
             default: {
-              variant: 'h7'
-            }
+              variant: 'h7',
+            },
           }}
         >
           One
         </Typography>
       </Stack>
     </SkeletonComponent>
-  )
-}
+  );
+};
 
 export const SkeletonOne: Story = {
-  render: args => <SkeletonWrapper {...args} />,
-  args: { visible: true, isHover: true }
-}
+  render: (args) => <SkeletonWrapper {...args} />,
+  args: { visible: true, isHover: true },
+};
 
-const SkeletonManyWrapper: FC<SkeletonProps> = props => {
+const SkeletonManyWrapper: FC<SkeletonProps> = (props) => {
   return (
     <Stack
       sx={{
         default: {
           overflow: 'auto',
           flexDirection: 'row',
-          gap: '12px'
-        }
+          gap: '12px',
+        },
       }}
     >
       <Stack
         sx={{
           default: {
             flexDirection: 'column',
-            gap: '12px'
-          }
+            gap: '12px',
+          },
         }}
       >
         <SkeletonComponent
           {...props}
+          type='primary'
           sx={() => ({
             default: {
               width: '300px',
               height: '300px',
-              padding: '12px'
-            }
+              padding: '12px',
+            },
           })}
         >
           <Stack
-            sx={theme => ({
+            sx={(theme) => ({
               default: {
                 width: '100%',
                 height: '100%',
                 padding: '12px',
                 borderRadius: '6px',
-                backgroundColor: theme.palette.whiteStandard
-              }
+                backgroundColor: theme.palette.whiteStandard,
+              },
             })}
           >
             <Typography
               sx={{
                 default: {
-                  variant: 'h7'
-                }
+                  variant: 'h7',
+                },
               }}
             >
               One
@@ -112,8 +113,8 @@ const SkeletonManyWrapper: FC<SkeletonProps> = props => {
           sx={{
             default: {
               flexDirection: 'row',
-              gap: '12px'
-            }
+              gap: '12px',
+            },
           }}
         >
           <SkeletonComponent
@@ -122,27 +123,27 @@ const SkeletonManyWrapper: FC<SkeletonProps> = props => {
               default: {
                 width: '50px',
                 height: '50px',
-                borderRadius: '100%'
-              }
+                borderRadius: '100%',
+              },
             })}
-            type="secondary"
+            type='secondary'
           >
             <Stack
-              sx={theme => ({
+              sx={(theme) => ({
                 default: {
                   width: '100%',
                   height: '100%',
                   padding: '12px',
                   borderRadius: '6px',
-                  backgroundColor: theme.palette.whiteStandard
-                }
+                  backgroundColor: theme.palette.whiteStandard,
+                },
               })}
             >
               <Typography
                 sx={{
                   default: {
-                    variant: 'h7'
-                  }
+                    variant: 'h7',
+                  },
                 }}
               >
                 One
@@ -155,27 +156,27 @@ const SkeletonManyWrapper: FC<SkeletonProps> = props => {
               default: {
                 height: '50px',
                 borderRadius: '6px',
-                flexGrow: 1
-              }
+                flexGrow: 1,
+              },
             })}
-            type="secondary"
+            type='secondary'
           >
             <Stack
-              sx={theme => ({
+              sx={(theme) => ({
                 default: {
                   width: '100%',
                   height: '100%',
                   padding: '12px',
                   borderRadius: '6px',
-                  backgroundColor: theme.palette.whiteStandard
-                }
+                  backgroundColor: theme.palette.whiteStandard,
+                },
               })}
             >
               <Typography
                 sx={{
                   default: {
-                    variant: 'h7'
-                  }
+                    variant: 'h7',
+                  },
                 }}
               >
                 One
@@ -188,36 +189,37 @@ const SkeletonManyWrapper: FC<SkeletonProps> = props => {
         sx={{
           default: {
             flexDirection: 'column',
-            gap: '12px'
-          }
+            gap: '12px',
+          },
         }}
       >
         <SkeletonComponent
           {...props}
+          type='primary'
           sx={() => ({
             default: {
               width: '300px',
               height: '300px',
-              padding: '12px'
-            }
+              padding: '12px',
+            },
           })}
         >
           <Stack
-            sx={theme => ({
+            sx={(theme) => ({
               default: {
                 width: '100%',
                 height: '100%',
                 padding: '12px',
                 borderRadius: '6px',
-                backgroundColor: theme.palette.whiteStandard
-              }
+                backgroundColor: theme.palette.whiteStandard,
+              },
             })}
           >
             <Typography
               sx={{
                 default: {
-                  variant: 'h7'
-                }
+                  variant: 'h7',
+                },
               }}
             >
               One
@@ -228,8 +230,8 @@ const SkeletonManyWrapper: FC<SkeletonProps> = props => {
           sx={{
             default: {
               flexDirection: 'row',
-              gap: '12px'
-            }
+              gap: '12px',
+            },
           }}
         >
           <SkeletonComponent
@@ -238,27 +240,27 @@ const SkeletonManyWrapper: FC<SkeletonProps> = props => {
               default: {
                 width: '50px',
                 height: '50px',
-                borderRadius: '100%'
-              }
+                borderRadius: '100%',
+              },
             })}
-            type="secondary"
+            type='secondary'
           >
             <Stack
-              sx={theme => ({
+              sx={(theme) => ({
                 default: {
                   width: '100%',
                   height: '100%',
                   padding: '12px',
                   borderRadius: '6px',
-                  backgroundColor: theme.palette.whiteStandard
-                }
+                  backgroundColor: theme.palette.whiteStandard,
+                },
               })}
             >
               <Typography
                 sx={{
                   default: {
-                    variant: 'h7'
-                  }
+                    variant: 'h7',
+                  },
                 }}
               >
                 One
@@ -271,27 +273,27 @@ const SkeletonManyWrapper: FC<SkeletonProps> = props => {
               default: {
                 height: '50px',
                 borderRadius: '6px',
-                flexGrow: 1
-              }
+                flexGrow: 1,
+              },
             })}
-            type="secondary"
+            type='secondary'
           >
             <Stack
-              sx={theme => ({
+              sx={(theme) => ({
                 default: {
                   width: '100%',
                   height: '100%',
                   padding: '12px',
                   borderRadius: '6px',
-                  backgroundColor: theme.palette.whiteStandard
-                }
+                  backgroundColor: theme.palette.whiteStandard,
+                },
               })}
             >
               <Typography
                 sx={{
                   default: {
-                    variant: 'h7'
-                  }
+                    variant: 'h7',
+                  },
                 }}
               >
                 One
@@ -301,13 +303,13 @@ const SkeletonManyWrapper: FC<SkeletonProps> = props => {
         </Stack>
       </Stack>
     </Stack>
-  )
-}
+  );
+};
 
 export const SkeletonMany: Story = {
-  render: args => <SkeletonManyWrapper {...args} />,
+  render: (args) => <SkeletonManyWrapper {...args} />,
   args: {
     visible: true,
-    isHover: true
-  }
-}
+    isHover: true,
+  },
+};
