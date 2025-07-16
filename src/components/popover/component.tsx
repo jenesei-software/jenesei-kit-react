@@ -46,8 +46,10 @@ export const Popover: FC<PopoverProps> = props => {
 }
 
 export const usePopover = (props: UsePopoverProps) => {
+  const { onFocus, onBlur } = props;
   const [isOpen, setIsOpen] = useState(false)
   const [minWidth, setMinWidth] = useState<number | undefined>(undefined)
+  const [wasEverOpen, setWasEverOpen] = useState(false)
 
   const {
     refs,
@@ -120,7 +122,7 @@ export const usePopover = (props: UsePopoverProps) => {
           refEl instanceof HTMLElement &&
           floatingEl instanceof HTMLElement &&
           !refEl.contains(e.target as Node) &&
-          !floatingEl.contains(e.target as Node) && 
+          !floatingEl.contains(e.target as Node) &&
           !otherRefs.some(ref => {
             if (typeof ref === 'object' && ref !== null && 'current' in ref) {
               return (ref.current as HTMLElement | null)?.contains(e.target as Node)
@@ -221,6 +223,18 @@ export const usePopover = (props: UsePopoverProps) => {
     }
   }, [floatingStyles, props.isWidthAsContent, minWidth])
 
+  useEffect(() => {
+    if (isOpen) {
+      onFocus?.()
+      setWasEverOpen(true)
+    }
+  }, [isOpen, onFocus])
+
+  useEffect(() => {
+    if (!isOpen && wasEverOpen) {
+      onBlur?.()
+    }
+  }, [isOpen, wasEverOpen, onBlur])
   return {
     isOpen,
     setIsOpen,

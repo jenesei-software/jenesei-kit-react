@@ -28,7 +28,7 @@ type InputDefaultProps = addErrorProps &
 
     isNotShowHoverStyle?: boolean
 
-    autocomplete?: HTMLInputAutoCompleteAttribute
+    autoComplete?: HTMLInputAutoCompleteAttribute | string
 
     isAllowEmptyFormatting?: boolean
 

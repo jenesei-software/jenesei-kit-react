@@ -56,6 +56,7 @@ export const TextAreaWrapper = styled.div<TextAreaWrapperProps>`
   justify-content: flex-start;
   flex-direction: column;
   overflow: hidden;
+  width: 100%;
   ${addTransitionWithoutSize};
   ${addTextAreaWrapperSize};
   ${addTextAreaWrapperGenre};

@@ -3,7 +3,7 @@ import { addSXProps } from '@local/styles/sx';
 import { IThemeGenreSelect, IThemeSize } from '@local/theme';
 import { AddDollarSign } from '@local/types';
 
-import { FocusEventHandler, ReactNode, Ref } from 'react';
+import { FocusEvent, ReactNode, Ref } from 'react';
 
 import { MonthItem } from '../date-picker';
 import { MapTheme } from '../map';
@@ -24,7 +24,6 @@ export interface ISelectItem {
 
 export type SelectProps<T extends ISelectItem> = addErrorProps &
   addSXProps & {
-    name?: string;
     id?: string;
 
     size: IThemeSize;
@@ -38,7 +37,7 @@ export type SelectProps<T extends ISelectItem> = addErrorProps &
     isShowSelectAll?: boolean;
     isShowSelectAllLabel?: boolean;
     isShowAddOption?: boolean;
-    isShowDisabledOptions?: boolean;
+    isNotShowDisabledOptions?: boolean;
     isOnClickOptionClose?: boolean;
     isNotShowHoverStyle?: boolean;
     isSortValueAsOption?: boolean;
@@ -76,8 +75,8 @@ export type SelectProps<T extends ISelectItem> = addErrorProps &
     onAddOption?: (value: string) => void;
     onChange: (value: T[]) => void;
     onChangeAll?: (value: T[], isAll: boolean) => void;
-    onFocus?: FocusEventHandler<HTMLInputElement>;
-    onBlur?: FocusEventHandler<HTMLInputElement>;
+    onFocus?: (event?: FocusEvent<HTMLElement>) => void;
+    onBlur?: (event?: FocusEvent<HTMLElement>) => void;
     fetchNextPage?: () => void;
     getEstimateSize?: (index: number) => number;
   };

@@ -3,17 +3,17 @@ import { FC, useState } from 'react'
 import 'styled-components'
 
 import { Input } from '@local/components/input'
-import { Range, RangeProps } from '@local/components/range'
+import { Range as RangeComponent, RangeProps } from '@local/components/range'
 import { Stack } from '@local/components/stack'
 
-const meta: Meta<typeof Range> = {
-  component: Range,
+const meta: Meta<typeof RangeComponent> = {
+  component: RangeComponent,
   title: 'Component/Range'
 }
 
 export default meta
 
-type Story = StoryObj<typeof Range>
+type Story = StoryObj<typeof RangeComponent>
 
 const RangeWrapper: FC<RangeProps> = props => {
   const [min, setMin] = useState<number>(100)
@@ -73,7 +73,7 @@ const RangeWrapper: FC<RangeProps> = props => {
         genre="realebail-white"
         size="small"
       />
-      <Range
+      <RangeComponent
         {...props}
         min={0}
         max={1000000}
@@ -87,7 +87,7 @@ const RangeWrapper: FC<RangeProps> = props => {
   )
 }
 
-export const Default: Story = {
+export const Range: Story = {
   render: args => <RangeWrapper {...args} />,
   args: {
     genre: 'realebail-white',

@@ -95,7 +95,6 @@ npm install react-dom --save
 npm install react-image-webp --save
 npm install react-leaflet --save
 npm install react-leaflet-markercluster --save
-npm install react-number-format --save
 npm install styled-components --save
 npm install styled-reset --save
 npm install uuid --save

@@ -1,22 +1,22 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import 'styled-components'
 
-import { InputOTP, InputOTPProps } from '@local/components/input-otp'
+import { InputOTP as InputOTPComponent, InputOTPProps } from '@local/components/input-otp'
 
-const meta: Meta<typeof InputOTP> = {
-  component: InputOTP,
+const meta: Meta<typeof InputOTPComponent> = {
+  component: InputOTPComponent,
   title: 'Component/InputOTP'
 }
 
 export default meta
-type Story = StoryObj<typeof InputOTP>
+type Story = StoryObj<typeof InputOTPComponent>
 
 const defaultArgs: Partial<InputOTPProps> = {
   genre: 'blackBorder',
   size: 'largeMedium'
 }
 
-export const Default: Story = {
+export const InputOTP: Story = {
   args: {
     ...defaultArgs,
     length: 6,

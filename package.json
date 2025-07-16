@@ -320,7 +320,6 @@
     "react-image-webp": "^0.8.0",
     "react-leaflet": "^5.0.0",
     "react-leaflet-markercluster": "^5.0.0-rc.0",
-    "react-number-format": "^5.4.2",
     "styled-components": ">=6.0",
     "styled-reset": "^4.5.2",
     "uuid": "^11.0.3"

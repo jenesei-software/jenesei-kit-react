@@ -3,11 +3,12 @@ import { addSXProps } from '@local/styles/sx';
 import { IThemeGenreTextArea, IThemeSize } from '@local/theme';
 import { AddDollarSign } from '@local/types';
 
-import { FocusEventHandler, KeyboardEventHandler, RefObject } from 'react';
+import { FocusEvent, KeyboardEventHandler, RefObject } from 'react';
 
 type CommonTextAreaProps = addErrorProps &
   addSXProps & {
     name?: string;
+    autoComplete?: string;
     id?: string;
     ref?: RefObject<HTMLTextAreaElement | null>;
     className?: string;
@@ -27,9 +28,9 @@ type CommonTextAreaProps = addErrorProps &
     isRequired?: boolean;
     isNoSpaces?: boolean;
     isBold?: boolean;
-    onBlur?: FocusEventHandler<HTMLTextAreaElement>;
+    onFocus?: (event?: FocusEvent<HTMLTextAreaElement>) => void;
+    onBlur?: (event?: FocusEvent<HTMLTextAreaElement>) => void;
     onChange?: (value: string) => void;
-    onFocus?: FocusEventHandler<HTMLTextAreaElement>;
     onKeyDown?: KeyboardEventHandler<HTMLTextAreaElement>;
   };
 

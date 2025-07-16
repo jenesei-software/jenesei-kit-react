@@ -15,11 +15,6 @@ export type DatePickerProps = addErrorProps &
 
     id?: string;
 
-    inputProps: Omit<
-      InputStandardProps,
-      'isDisabled' | 'name' | 'id' | 'genre' | 'size' | 'placeholder' | 'width' | 'value' | 'isInputEffect' | 'error'
-    >;
-
     isDisabled?: boolean;
 
     isMinWidth?: boolean;

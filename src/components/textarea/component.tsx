@@ -88,6 +88,7 @@ export const TextArea = (props: TextAreaProps) => {
           onFocus={props.onFocus}
           onKeyDown={props.onKeyDown}
           name={props.name}
+          autoComplete={props.autoComplete}
           id={props.id}
           style={{
             minHeight: `${minHeight}px`,

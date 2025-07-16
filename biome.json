@@ -13,7 +13,7 @@
     "expand": "auto",
     "useEditorconfig": true
   },
-   "javascript": {
+  "javascript": {
     "formatter": {
       "quoteStyle": "single",
       "jsxQuoteStyle": "single"
@@ -22,6 +22,9 @@
   "linter": {
     "enabled": true,
     "rules": {
+      "suspicious": {
+        "noArrayIndexKey": "off"
+      },
       "style": {
         "useImportType": "off"
       },

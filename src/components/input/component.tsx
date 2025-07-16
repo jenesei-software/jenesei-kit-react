@@ -1,7 +1,7 @@
+import { ErrorMessage } from '@local/styles/error'
+
 import { useCallback } from 'react'
 import { NumberFormatValues } from 'react-number-format'
-
-import { ErrorMessage } from '@local/styles/error'
 
 import {
   InputPostfixChildren,
@@ -68,7 +68,7 @@ export const Input = (props: InputProps) => {
             readOnly={props.isReadOnly}
             required={props.isRequired}
             defaultValue={props.defaultValue}
-            value={props.value}
+            value={props.value === null ? '' : props.value}
             placeholder={props.placeholder}
             onValueChange={props => handleOnChange(props)}
             onBlur={props.onBlur}
@@ -100,7 +100,7 @@ export const Input = (props: InputProps) => {
             readOnly={props.isReadOnly}
             required={props.isRequired}
             defaultValue={props.defaultValue}
-            value={props.value}
+            value={props.value === null ? '' : props.value}
             placeholder={props.placeholder}
             onValueChange={props => handleOnChange(props)}
             onBlur={props.onBlur}
@@ -136,10 +136,10 @@ export const Input = (props: InputProps) => {
             readOnly={props.isReadOnly}
             required={props.isRequired}
             defaultValue={props.defaultValue}
-            value={props.value ?? ''}
+            value={props.value === null ? '' : props.value}
             placeholder={props.placeholder}
             type={props.type}
-            autoComplete={props.autocomplete}
+            autoComplete={props.autoComplete}
             onInput={event => {
               const input = event.target as HTMLInputElement
               handleOnChange(input.value)

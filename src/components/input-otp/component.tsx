@@ -1,9 +1,9 @@
-import { ClipboardEvent, FocusEvent, KeyboardEvent, useCallback, useRef, useState } from 'react'
-
 import { ErrorMessage } from '@local/styles/error'
 
-import { InputOTPProps, InputOTPWrapper } from '.'
+import { ClipboardEvent, FocusEvent, KeyboardEvent, useCallback, useRef, useState } from 'react'
+
 import { Input } from '../input'
+import { InputOTPProps, InputOTPWrapper } from '.'
 
 export const InputOTP = (props: InputOTPProps) => {
   const [otp, setOtp] = useState<string[]>(new Array(props.length).fill(''))
@@ -133,6 +133,13 @@ export const InputOTP = (props: InputOTPProps) => {
           setTimeout(() => {
             if (wrapperRef.current && !wrapperRef.current.contains(document.activeElement)) {
               props.onBlur?.(e)
+            }
+          }, 0)
+        }}
+        onFocus={e => {
+          setTimeout(() => {
+            if (wrapperRef.current?.contains(document.activeElement)) {
+              props.onFocus?.(e)
             }
           }, 0)
         }}

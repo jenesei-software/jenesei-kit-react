@@ -57,6 +57,8 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
     isClickOutside: true,
     isWidthAsContent: true,
     isDisabled: props?.isDisabled,
+    onBlur: props.onBlur,
+    onFocus: props.onFocus,
   });
   const refTextArea = useRef<HTMLTextAreaElement>(null);
   const refDropdownList = useRef<HTMLDivElement>(null);
@@ -90,12 +92,13 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
   const [isShowSearch, setIsShowSearch] = useState<boolean>(false);
 
   const optionsLength = useMemo(() => {
-    if (props.isShowDisabledOptions) {
-      return props.option.length;
-    } else {
+    if (props.isNotShowDisabledOptions) {
       return props.option.filter((option) => !option.isDisabled).length;
+    } else {
+      return props.option.length;
+
     }
-  }, [props.option, props.isShowDisabledOptions]);
+  }, [props.option, props.isNotShowDisabledOptions]);
 
   const heightDropdownList = useMemo(
     () =>

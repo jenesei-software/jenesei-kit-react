@@ -2,16 +2,16 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { FC, useEffect, useState } from 'react'
 import 'styled-components'
 
-import { Pagination, PaginationProps } from '@local/components/pagination'
+import { Pagination as PaginationComponent, PaginationProps } from '@local/components/pagination'
 import { Stack } from '@local/components/stack'
 
-const meta: Meta<typeof Pagination> = {
-  component: Pagination,
+const meta: Meta<typeof PaginationComponent> = {
+  component: PaginationComponent,
   title: 'Component/Pagination'
 }
 
 export default meta
-type Story = StoryObj<typeof Pagination>
+type Story = StoryObj<typeof PaginationComponent>
 
 const defaultArgs: Partial<PaginationProps> = {
   buttonControl: {
@@ -51,12 +51,12 @@ const PaginationWrapper: FC<PaginationProps> = props => {
         }
       }}
     >
-      <Pagination {...props} index={index} changeIndex={index => setIndex(index)} />
+      <PaginationComponent {...props} index={index} changeIndex={index => setIndex(index)} />
     </Stack>
   )
 }
 
-export const Default: Story = {
+export const Pagination: Story = {
   render: args => <PaginationWrapper {...args} />,
   args: {
     ...defaultArgs,

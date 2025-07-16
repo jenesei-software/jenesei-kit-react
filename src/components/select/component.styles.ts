@@ -294,6 +294,7 @@ export const SelectTextArea = styled(TextArea)`
   background-color: transparent !important;
   min-height: initial !important;
   width: 100%;
+  max-width: 100%;
   flex-grow: 1;
   padding: ${(props) => KEY_SIZE_DATA[props.size].padding / 2.8}px 0px;
   ${addRemoveOutline};
