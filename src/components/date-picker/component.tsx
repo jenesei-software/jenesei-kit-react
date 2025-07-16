@@ -10,6 +10,7 @@ import { Fragment, KeyboardEvent, RefObject, useCallback, useEffect, useMemo, us
 import { useTheme } from 'styled-components';
 
 import { Popover, usePopover } from '../popover';
+import { Typography } from '../typography';
 import {
   DateDayProps,
   DateDropdownDay,
@@ -195,7 +196,11 @@ export const DatePicker = (props: DatePickerProps) => {
     () => 40 + rows * 28 + (rows - 1) * 6 + KEY_SIZE_DATA[props.size].padding * 2,
     [props.size, rows],
   );
-  const radius = useMemo(() => KEY_SIZE_DATA[props.size].radius, [props.size]);
+  const sizeRadius = useMemo(() => KEY_SIZE_DATA[props.size].radius, [props.size]);
+
+  const isHasValue = useMemo(() => {
+    return props.value !== null && props.value !== undefined;
+  }, [props.value]);
 
   const isBlockNextMonth = useMemo(() => {
     if (currentYear === null || currentMonth === null || currentDay === null) return true;
@@ -227,12 +232,16 @@ export const DatePicker = (props: DatePickerProps) => {
 
   const refSelectMonth = useRef<HTMLElement>(null);
   const refSelectYear = useRef<HTMLElement>(null);
-  const { isOpen, close, refReference, refFloating, floatingStyles } = usePopover({
+
+  const sizePadding = useMemo(() => KEY_SIZE_DATA[props.size].padding, [props.size]);
+
+  const { isOpen, close, refReference, refFloating, floatingStyles, open } = usePopover({
     placement: 'bottom-start',
-    offset: 8,
-    mode: 'clickOpen',
+    offset: sizePadding,
+    mode: 'independence',
     isClickOutside: true,
     refsExcludeClickOutside: [refSelectMonth, refSelectYear],
+    isDisabled: props?.isDisabled,
   });
 
   const handleOnClose = useCallback(
@@ -364,14 +373,14 @@ export const DatePicker = (props: DatePickerProps) => {
   return (
     <>
       <DateWrapper
-        ref={refReference as RefObject<HTMLDivElement | null>}
         $size={props.size}
         $genre={props.genre}
         $sx={props.sx}
         $isDisabled={props?.isDisabled}
         $isMinWidth={props?.isMinWidth}
-        $radius={radius}
+        $radius={sizeRadius}
         $parentListHeight={height}
+        tabIndex={-1}
       // onFocus={event => {
       //   if (props?.isDisabled) return
       //   if (props.onFocus) props.onFocus?.(event)
@@ -379,13 +388,24 @@ export const DatePicker = (props: DatePickerProps) => {
       // }}
       >
         <DateInputWrapper
+          ref={refReference as RefObject<HTMLDivElement | null>}
           tabIndex={0}
           $genre={props.genre}
           $size={props.size}
           $error={isError ? { isError: true } : props.error}
           $isOpen={isOpen}
+          onClick={() => {
+            open();
+          }}
+          onFocus={() => {
+            open();
+          }}
         >
-          {dataDate.map((date, index) => (
+          {!isHasValue && props.labelPlaceholder && !isOpen ? <Typography
+            sx={{ default: { size: 16, line: 1, isNoUserSelect: true } }}
+          >
+            {props.labelPlaceholder}
+          </Typography> : dataDate.map((date, index) => (
             <Fragment key={date.type}>
               <DateInput
                 onValueChange={(values, sourceInfo) => {
@@ -450,12 +470,12 @@ export const DatePicker = (props: DatePickerProps) => {
                   }
                 }}
                 onFocus={(e) => {
-                  date.setActive();
+                  // date.setActive();
                   e.target.select();
                 }}
                 onBlur={() => {
                   if (index !== dataDate.length - 1)
-                    if (date.valueInput && date.valueInput.includes('_'))
+                    if (date.valueInput?.includes('_'))
                       date.setValueInput(fixUnderscoreToZero(date.valueInput));
                 }}
                 onKeyDown={handleKeyDown}
@@ -472,6 +492,7 @@ export const DatePicker = (props: DatePickerProps) => {
               )}
             </Fragment>
           ))}
+
         </DateInputWrapper>
       </DateWrapper>
       <Popover
@@ -484,6 +505,7 @@ export const DatePicker = (props: DatePickerProps) => {
         size={props.size}
         genre={props.genre}
         isOpen={isOpen}
+        isShowAlwaysOutline
         floatingStyles={floatingStyles}
         ref={refFloating}
       >
@@ -528,6 +550,7 @@ export const DatePicker = (props: DatePickerProps) => {
                     .valueOf()}
                   isOnClickOptionClose
                   isStayValueAfterSelect
+                  isOnlyColorInSelectListOption
                   isCenter
                   isShortLabel
                   refFloating={refSelectMonth}
@@ -555,6 +578,7 @@ export const DatePicker = (props: DatePickerProps) => {
                   }}
                   isOnClickOptionClose
                   isStayValueAfterSelect
+                  isOnlyColorInSelectListOption
                   isCenter
                   startDate={props.startDate}
                   endDate={props.endDate}

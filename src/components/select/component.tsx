@@ -89,7 +89,13 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
   );
   const [isShowSearch, setIsShowSearch] = useState<boolean>(false);
 
-  const optionsLength = useMemo(() => props.option.length, [props.option.length]);
+  const optionsLength = useMemo(() => {
+    if (props.isShowDisabledOptions) {
+      return props.option.length;
+    } else {
+      return props.option.filter((option) => !option.isDisabled).length;
+    }
+  }, [props.option, props.isShowDisabledOptions]);
 
   const heightDropdownList = useMemo(
     () =>
@@ -292,6 +298,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
                   genre={props.genre}
                   size={props.size}
                   isBold={props.isBold}
+                  isOnlyColorInSelectListOption={props.isOnlyColorInSelectListOption}
                   isClearWhenClickSelectListOption={props.isClearWhenClickSelectListOption}
                   isWrapSelectOption={props.isWrapSelectOption}
                   isNotShowHoverStyle={props.isNotShowHoverStyle}
@@ -566,6 +573,7 @@ const ContainerSelectListOptionComponent = <T extends object & ISelectItem>(
     <SelectListOption
       tabIndex={-1}
       onClick={props.onClick}
+      $isOnlyColorInSelectListOption={props.isOnlyColorInSelectListOption}
       $isClearWhenClickSelectListOption={props.isClearWhenClickSelectListOption}
       $isWrapSelectOption={props.isWrapSelectOption}
       $isCenter={props.isCenter}

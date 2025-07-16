@@ -223,35 +223,57 @@ export const ButtonList = styled.div<ButtonListProps>`
   ${addButtonListSize};
 `;
 const addSelectListOptionGenre = css<SelectListOptionProps>`
-  ${(props) => css`
-    background: ${props.theme.colors.select[props.$genre].background.rest};
-    border-color: ${props.theme.colors.select[props.$genre].border.rest};
-    color: ${props.theme.colors.select[props.$genre].color.rest};
-    &:active {
-      background: ${props.theme.colors.select[props.$genre].background.rest};
-      border-color: ${props.theme.colors.select[props.$genre].border.rest};
+${(props) =>
+  props.$isOnlyColorInSelectListOption
+    ? css`
+      border: 0px solid;
+      border-color: transparent;
+      background-color: transparent;
       color: ${props.theme.colors.select[props.$genre].color.rest};
-    }
-    ${
-      !props.$isNotShowHoverStyle &&
-      css`
-      &:hover {
-        background: ${props.theme.colors.select[props.$genre].background.hover};
-        border-color: ${props.theme.colors.select[props.$genre].border.hover};
-        color: ${props.theme.colors.select[props.$genre].color.hover};
+      &:active {
+        color: ${props.theme.colors.select[props.$genre].color.rest};
+      }
+      ${
+        !props.$isNotShowHoverStyle &&
+        css`
+        &:hover {
+          color: ${props.theme.colors.select[props.$genre].color.hover};
+        }
+      `
+      }
+      &:focus-visible {
+        color: ${props.theme.colors.select[props.$genre].color.rest};
       }
     `
-    }
-    &:focus-visible {
+    : css`
+      border: 1px solid;
       background: ${props.theme.colors.select[props.$genre].background.rest};
       border-color: ${props.theme.colors.select[props.$genre].border.rest};
       color: ${props.theme.colors.select[props.$genre].color.rest};
-    }
-  `};
+      &:active {
+        background: ${props.theme.colors.select[props.$genre].background.rest};
+        border-color: ${props.theme.colors.select[props.$genre].border.rest};
+        color: ${props.theme.colors.select[props.$genre].color.rest};
+      }
+      ${
+        !props.$isNotShowHoverStyle &&
+        css`
+        &:hover {
+          background: ${props.theme.colors.select[props.$genre].background.hover};
+          border-color: ${props.theme.colors.select[props.$genre].border.hover};
+          color: ${props.theme.colors.select[props.$genre].color.hover};
+        }
+      `
+      }
+      &:focus-visible {
+        background: ${props.theme.colors.select[props.$genre].background.rest};
+        border-color: ${props.theme.colors.select[props.$genre].border.rest};
+        color: ${props.theme.colors.select[props.$genre].color.rest};
+      }
+    `}
 `;
 const addSelectListOptionSize = css<SelectListOptionProps>`
   padding: ${(props) => KEY_SIZE_DATA[props.$size].padding / 2.8}px;
-  border: 1px solid;
   border-radius: ${(props) => KEY_SIZE_DATA[props.$size].radius}px;
 `;
 export const SelectListOption = styled(motion.li)<SelectListOptionProps>`

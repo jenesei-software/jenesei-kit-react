@@ -55,6 +55,12 @@ export const PastHundredYears: Story = {
     genre: 'blackBorder',
     startDate: PastHundredYearsStartDate,
     endDate: PastHundredYearsEndDate,
+    labelPlaceholder: 'Select date please',
+    sx: {
+      default: {
+        width: '300px'
+      }
+    },
     value: null,
     onBlur(event) {
       console.log('onBlur', event)

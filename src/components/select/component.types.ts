@@ -38,6 +38,7 @@ export type SelectProps<T extends ISelectItem> = addErrorProps &
     isShowSelectAll?: boolean;
     isShowSelectAllLabel?: boolean;
     isShowAddOption?: boolean;
+    isShowDisabledOptions?: boolean;
     isOnClickOptionClose?: boolean;
     isNotShowHoverStyle?: boolean;
     isSortValueAsOption?: boolean;
@@ -49,6 +50,7 @@ export type SelectProps<T extends ISelectItem> = addErrorProps &
     isFetching?: boolean;
     isClearWhenClickSelectListOption?: boolean;
     isStaySearchAfterSelect?: boolean;
+    isOnlyColorInSelectListOption?: boolean;
 
     labelPlaceholder?: string;
     labelEmptyOption?: string;
@@ -167,6 +169,7 @@ export type ContainerSelectListOptionProps<T extends ISelectItem> = Pick<
   | 'isBold'
   | 'isWrapSelectOption'
   | 'isClearWhenClickSelectListOption'
+  | 'isOnlyColorInSelectListOption'
 > & {
   item: T;
 
@@ -184,6 +187,7 @@ export type SelectListOptionProps = AddDollarSign<
     | 'isBold'
     | 'isWrapSelectOption'
     | 'isClearWhenClickSelectListOption'
+    | 'isOnlyColorInSelectListOption'
   > & {
     item?: ISelectItem;
     isChecked?: boolean;
