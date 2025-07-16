@@ -54,7 +54,7 @@ export const TextAreaWrapper = styled.div<TextAreaWrapperProps>`
   border: 1px solid;
   position: relative;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-start;
   flex-direction: column;
   overflow: hidden;
@@ -105,7 +105,7 @@ const addTextAreaIsResize = css<Pick<StyledTextAreaProps, '$isResize'>>`
 `;
 export const addTextArea = css<StyledTextAreaProps>`
   overflow-x: hidden;
-  width: 100% !important;
+  width: -webkit-fill-available;
   padding: 0 !important;
   border: none !important;
   margin: 0 !important;

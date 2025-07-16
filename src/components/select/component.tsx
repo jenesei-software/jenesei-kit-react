@@ -74,7 +74,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
   const minViewDropdown = useMemo(() => props.minViewDropdown ?? DEFAULT_MIN_VIEW_DROPDOWN, [props.minViewDropdown]);
 
   const isAll = useMemo(
-    () => props.value.length == props.option.length || props.value.length === props.optionAllLength,
+    () => props.value.length === props.option.length || props.value.length === props.optionAllLength,
     [props.option.length, props.optionAllLength, props.value.length],
   );
   const isHaveOption = useMemo(() => !!props.option.length, [props.option.length]);
@@ -213,6 +213,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
     },
     [props],
   );
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     onChangeShowSearch(false);
   }, [onChangeShowSearch, props.isDisabled]);
@@ -279,7 +280,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
               const isChecked = isSelectedItem(value);
               return (
                 <ContainerSelectListOption
-                  key={index}
+                  key={`${value.value}-${index}`}
                   isChecked={isChecked}
                   onClick={() => props.isClearWhenClickSelectListOption && onClick(value)}
                   item={value}
@@ -596,12 +597,7 @@ export const SelectLanguage: FC<SelectLanguageProps> = (props) => {
   }, [option, value]);
 
   return (
-    <Select<ISelectLanguageOption>
-      {...props}
-      option={viewOption}
-      value={valueLocal}
-      onChange={handleSelectChange}
-    />
+    <Select<ISelectLanguageOption> {...props} option={viewOption} value={valueLocal} onChange={handleSelectChange} />
   );
 };
 export const SelectMonth: FC<SelectMonthProps> = (props) => {
@@ -639,14 +635,7 @@ export const SelectMonth: FC<SelectMonthProps> = (props) => {
     return [findOption];
   }, [value, option]);
 
-  return (
-    <Select<ISelectLanguageOption>
-      {...props}
-      option={option}
-      value={valueLocal}
-      onChange={handleSelectChange}
-    />
-  );
+  return <Select<ISelectLanguageOption> {...props} option={option} value={valueLocal} onChange={handleSelectChange} />;
 };
 export const SelectMonths: FC<SelectMonthsProps> = (props) => {
   const { value, onChange, startDate, endDate, monthsLocale, isShortLabel } = props;
@@ -755,14 +744,7 @@ export const SelectYear: FC<SelectYearProps> = (props) => {
     return [findOption];
   }, [value, option]);
 
-  return (
-    <Select<ISelectLanguageOption>
-      {...props}
-      option={option}
-      value={valueLocal}
-      onChange={handleSelectChange}
-    />
-  );
+  return <Select<ISelectLanguageOption> {...props} option={option} value={valueLocal} onChange={handleSelectChange} />;
 };
 export const SelectMapTheme: FC<SelectMapThemeProps> = (props) => {
   const { value, onChange } = props;

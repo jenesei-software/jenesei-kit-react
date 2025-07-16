@@ -67,7 +67,7 @@ const SelectWrapperAll: FC = () => {
           genre='blackBorder'
           value={valueMonth}
           onChange={handleSelectChangeMonth}
-          monthsLocale={[]}
+          monthsLocale={localeMonths}
         />
       </WrapperBig>
       <WrapperBig sx={{ default: { flexDirection: 'column' } }}>
@@ -114,6 +114,8 @@ const SelectWrapperAll: FC = () => {
           labelPlaceholder='Year'
           value={valueYear}
           onChange={handleSelectChangeYear}
+          startDate={moment.utc().subtract(100, 'years').startOf('year').valueOf()}
+          endDate={moment.utc().startOf('day').valueOf()}
         />
       </WrapperBig>
     </WrapperBig>

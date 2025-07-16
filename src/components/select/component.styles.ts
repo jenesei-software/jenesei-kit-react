@@ -58,21 +58,8 @@ const addSelectWrapperSize = css<SelectWrapperProps>`
   ${(props) =>
     props.$isOpen &&
     css`
-      &:after {
-        pointer-events: none;
-        user-select: none;
-        content: '';
-        position: absolute;
-        top: -1px;
-        left: -1px;
-        bottom: -1px;
-        right: -1px;
-        outline: 2px ${(props) => props.theme.states.focus} solid;
-        outline-offset: 1px;
-        border-radius: ${KEY_SIZE_DATA[props.$size].radius}px;
-        height: calc(100% + var(--after-height) + 2px);
-        z-index: 1;
-      }
+      outline: 2px ${(props) => props.theme.states.focus} solid;
+      outline-offset: 1px;
     `}
 `;
 export const SelectWrapper = styled(motion.div)<SelectWrapperProps>`
@@ -84,7 +71,6 @@ export const SelectWrapper = styled(motion.div)<SelectWrapperProps>`
   align-items: center;
   align-content: center;
   flex-wrap: wrap;
-  ${addRemoveOutline};
   ${addSelectWrapperGenre};
   ${addSelectWrapperSize};
   ${addError};
