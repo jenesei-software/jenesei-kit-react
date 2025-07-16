@@ -74,6 +74,8 @@ export const TextArea = (props: TextAreaProps) => {
           $size={props.size}
           $isBold={props.isBold}
           $isDisabled={props.isDisabled}
+          maxLength={props.maxLength}
+          minLength={props.minLength}
           disabled={props.isDisabled}
           readOnly={props.isReadOnly}
           required={props.isRequired}

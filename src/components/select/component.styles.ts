@@ -284,9 +284,9 @@ export const SelectListOption = styled(motion.li)<SelectListOptionProps>`
 export const SelectTextArea = styled(TextArea)`
   border: 0 !important;
   background-color: transparent !important;
-  padding-left: 0px;
-  padding-right: 0px;
+  min-height: initial !important;
   width: 100%;
   flex-grow: 1;
+  padding: ${(props) => KEY_SIZE_DATA[props.size].padding / 2.8}px 0px;
   ${addRemoveOutline};
 `;

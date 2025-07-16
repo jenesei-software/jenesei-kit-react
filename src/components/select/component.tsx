@@ -41,7 +41,7 @@ const DEFAULT_LABEL_ADD_OPTION = (value: string) => `Add "${value}" option`;
 
 const DEFAULT_MAX_VIEW_SELECT = 2;
 const DEFAULT_MAX_VIEW_DROPDOWN = 5;
-const DEFAULT_MIN_VIEW_DROPDOWN = 5;
+const DEFAULT_MIN_VIEW_DROPDOWN = 1;
 const DEFAULT_OVERSCAN = 1;
 
 export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) => {
@@ -601,7 +601,6 @@ export const SelectLanguage: FC<SelectLanguageProps> = (props) => {
       option={viewOption}
       value={valueLocal}
       onChange={handleSelectChange}
-      minViewDropdown={1}
     />
   );
 };
@@ -644,7 +643,6 @@ export const SelectMonth: FC<SelectMonthProps> = (props) => {
     <Select<ISelectLanguageOption>
       {...props}
       option={option}
-      minViewDropdown={1}
       value={valueLocal}
       onChange={handleSelectChange}
     />
@@ -713,7 +711,6 @@ export const SelectMonths: FC<SelectMonthsProps> = (props) => {
       option={viewOption}
       minViewDropdown={1}
       isMulti
-      isShowDropdownOptionIcon
       value={valueLocal}
       onChange={handleSelectChange}
       onChangeAll={(_value, isAll) => {
@@ -762,7 +759,6 @@ export const SelectYear: FC<SelectYearProps> = (props) => {
     <Select<ISelectLanguageOption>
       {...props}
       option={option}
-      minViewDropdown={1}
       value={valueLocal}
       onChange={handleSelectChange}
     />
@@ -771,23 +767,21 @@ export const SelectYear: FC<SelectYearProps> = (props) => {
 export const SelectMapTheme: FC<SelectMapThemeProps> = (props) => {
   const { value, onChange } = props;
 
-  const option = useMemo(() => MapThemeList, []);
-  const optionsNormalize = useMemo(
-    () => MapThemeList.map((e) => ({ label: e.name, value: e.name, placeholder: e.name })),
-    [],
-  );
+  const option = useMemo(() => MapThemeList.map((e) => ({ label: e.name, value: e.name, placeholder: e.name })), []);
 
-  const [viewOption, setViewOption] = useState<ISelectMapThemeOption[]>(optionsNormalize);
+  const [viewOption, setViewOption] = useState<ISelectMapThemeOption[]>(option);
   useEffect(() => {
-    setViewOption(optionsNormalize);
-  }, [optionsNormalize]);
-  const handleSelectChange = (value: ISelectLanguageOption[]) => {
-    if (value.length === 0) onChange([]);
-    onChange(value);
+    setViewOption(option);
+  }, [option]);
+  const handleSelectChange = (value: ISelectMapThemeOption[]) => {
+    if (value.length === 0) onChange(null);
+    const findOption = MapThemeList.find((e) => e.name === value[0].value);
+    onChange(findOption ?? null);
   };
   const valueLocal = useMemo(() => {
-    if (!value) return [];
-    return value.map((val) => option.find((opt) => opt.value === val)).filter(Boolean) as ISelectLanguageOption[];
+    const findOption = option.find((e) => e.value === value.name);
+    if (!findOption) return [];
+    return [findOption];
   }, [value, option]);
 
   const [search, setSearch] = useState<string>('');
@@ -796,33 +790,24 @@ export const SelectMapTheme: FC<SelectMapThemeProps> = (props) => {
       setSearch(value);
 
       if (value === '') {
-        setViewOption(optionsNormalize);
+        setViewOption(option);
       } else {
-        const filteredOptions = optionsNormalize.filter((option) =>
+        const filteredOptions = option.filter((option) =>
           Object.values(option).some((field) => field?.toString().toLowerCase().includes(value.toLowerCase())),
         );
         setViewOption(filteredOptions);
       }
     },
-    [optionsNormalize],
+    [option],
   );
   return (
     <Select<ISelectMapThemeOption>
       {...props}
       option={viewOption}
-      // isEmptyOption={isEmptyOption}
-      minView={1}
-      maxView={8}
-      isOnClickOptionClose
-      value={value ? [value] : []}
+      value={valueLocal}
       onChange={handleSelectChange}
-      // inputProps={{
-      //   ...props.inputProps,
-      //   variety: 'standard',
-      //   isReadOnly: true,
-      //   value: (value?.placeholder as string) ?? query,
-      //   onChange: handleQueryChange
-      // }}
+      valueSearch={search}
+      onChangeSearch={handleSearchChange}
     />
   );
 };

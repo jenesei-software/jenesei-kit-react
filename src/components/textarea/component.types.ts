@@ -14,6 +14,11 @@ type CommonTextAreaProps = addErrorProps &
     genre: TextAreaGenre;
     minRows: number;
     size: IThemeSize;
+    placeholder?: string;
+
+    maxLength?: number;
+    minLength?: number;
+
     isDisabled?: boolean;
     isResize?: boolean;
     isLoading?: boolean;
@@ -21,12 +26,11 @@ type CommonTextAreaProps = addErrorProps &
     isInputEffect?: boolean;
     isRequired?: boolean;
     isNoSpaces?: boolean;
+    isBold?: boolean;
     onBlur?: FocusEventHandler<HTMLTextAreaElement>;
     onChange?: (value: string) => void;
     onFocus?: FocusEventHandler<HTMLTextAreaElement>;
     onKeyDown?: KeyboardEventHandler<HTMLTextAreaElement>;
-    placeholder?: string;
-    isBold?: boolean;
   };
 
 // Контролируемый вариант
