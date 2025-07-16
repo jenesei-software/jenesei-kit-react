@@ -2,9 +2,10 @@ import { ListLanguage, MapThemeList } from '@local/consts';
 import { ErrorMessage } from '@local/styles/error';
 import { KEY_SIZE_DATA } from '@local/theme';
 
+import { useMergeRefs } from '@floating-ui/react';
 import { useVirtualizer } from '@tanstack/react-virtual';
 import moment from 'moment';
-import { FC, KeyboardEvent, memo, RefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { FC, KeyboardEvent, memo, Ref, RefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { Button } from '../button';
 import { Icon } from '../icon';
@@ -49,7 +50,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
   const sizePadding = useMemo(() => KEY_SIZE_DATA[props.size].padding, [props.size]);
   const sizeRadius = useMemo(() => KEY_SIZE_DATA[props.size].radius, [props.size]);
 
-  const { isOpen, close, open, refReference, refFloating, floatingStyles, toggle } = usePopover({
+  const { isOpen, close, open, refReference: refReferencePopover, refFloating: refFloatingPopover, floatingStyles, toggle } = usePopover({
     placement: 'bottom-start',
     offset: sizePadding,
     mode: 'independence',
@@ -59,6 +60,9 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
   });
   const refTextArea = useRef<HTMLTextAreaElement>(null);
   const refDropdownList = useRef<HTMLDivElement>(null);
+
+  const refReference = useMergeRefs([props.refReference, refReferencePopover])
+  const refFloating = useMergeRefs([props.refFloating, refFloatingPopover])
 
   const labelSelectAll = useMemo(() => props.labelSelectAll ?? DEFAULT_LABEL_SELECT_ALL, [props.labelSelectAll]);
   const labelPlaceholder = useMemo(() => props.labelPlaceholder ?? DEFAULT_LABEL_PLACEHOLDER, [props.labelPlaceholder]);
@@ -236,9 +240,10 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
         $isNotShowHoverStyle={props?.isNotShowHoverStyle}
         $size={props.size}
         $genre={props.genre}
+        $isCenter={props.isCenter}
         $sx={props.sx}
         $isOpen={isOpen}
-        ref={refReference as RefObject<HTMLDivElement | null>}
+        ref={refReference as Ref<HTMLDivElement | null>}
         onClick={() => {
           open();
           onChangeShowSearch(true);

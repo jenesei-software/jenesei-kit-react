@@ -37,7 +37,7 @@ const SelectWrapperAll: FC = () => {
     setValueYear(value);
   };
   return (
-    <WrapperBig sx={{ default: { flexDirection: 'column' } }}>
+    <WrapperBig sx={{ default: { flexDirection: 'column', minWidth: '500px' } }}>
       <WrapperBig sx={{ default: { flexDirection: 'column' } }}>
         <Typography
           sx={{
@@ -112,6 +112,28 @@ const SelectWrapperAll: FC = () => {
           size='medium'
           genre='blackBorder'
           labelPlaceholder='Year'
+          value={valueYear}
+          onChange={handleSelectChangeYear}
+          startDate={moment.utc().subtract(100, 'years').startOf('year').valueOf()}
+          endDate={moment.utc().startOf('day').valueOf()}
+        />
+      </WrapperBig>
+        <WrapperBig sx={{ default: { flexDirection: 'column' } }}>
+        <Typography
+          sx={{
+            default: {
+              variant: 'h5',
+              color: 'black100',
+            },
+          }}
+        >
+          Single, Year, Center
+        </Typography>
+        <SelectYear
+          size='medium'
+          genre='blackBorder'
+          labelPlaceholder='Year'
+          isCenter
           value={valueYear}
           onChange={handleSelectChangeYear}
           startDate={moment.utc().subtract(100, 'years').startOf('year').valueOf()}

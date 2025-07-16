@@ -55,6 +55,7 @@ const addSelectWrapperSize = css<SelectWrapperProps>`
   height: fit-content;
   min-height: ${(props) => KEY_SIZE_DATA[props.$size].height}px;
   border-radius: ${(props) => KEY_SIZE_DATA[props.$size].radius}px;
+  justify-content: ${(props) => (props.$isCenter ? 'center' : 'flex-start')};
   ${(props) =>
     props.$isOpen &&
     css`
@@ -67,7 +68,6 @@ export const SelectWrapper = styled(motion.div)<SelectWrapperProps>`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-start;
   align-items: center;
   align-content: center;
   flex-wrap: wrap;
@@ -132,6 +132,7 @@ const addDropdownListOptionSize = css<DropdownListOptionProps>`
   width: 100%;
   border: 1px solid;
   border-radius: 0;
+  justify-content: ${(props) => (props.$isCenter ? 'center' : 'flex-start')};
   &:first-child {
     ${(props) =>
       props.$isShowScroll
@@ -252,7 +253,6 @@ const addSelectListOptionSize = css<SelectListOptionProps>`
   padding: ${(props) => KEY_SIZE_DATA[props.$size].padding / 2.8}px;
   border: 1px solid;
   border-radius: ${(props) => KEY_SIZE_DATA[props.$size].radius}px;
-  text-align: ${(props) => (props.$isCenter ? 'center' : 'left')};
 `;
 export const SelectListOption = styled(motion.li)<SelectListOptionProps>`
   display: flex;

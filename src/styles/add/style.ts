@@ -115,3 +115,14 @@ export const addNiceNumber = css`
   font-variant-numeric: tabular-nums;
   font-feature-settings: 'tnum';
 `;
+
+export const addDisabled = css<{ $isDisabled?: boolean }>`
+ ${(props) =>
+   props.$isDisabled
+     ? css`
+          opacity: 0.5;
+        `
+     : css`
+          opacity: 1;
+        `};
+`;

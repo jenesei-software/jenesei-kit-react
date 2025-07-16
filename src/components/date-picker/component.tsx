@@ -225,11 +225,14 @@ export const DatePicker = (props: DatePickerProps) => {
     return isAfterStartDate;
   }, [currentYear, currentMonth, currentDay, props.startDate]);
 
+  const refSelectMonth = useRef<HTMLElement>(null);
+  const refSelectYear = useRef<HTMLElement>(null);
   const { isOpen, close, refReference, refFloating, floatingStyles } = usePopover({
     placement: 'bottom-start',
     offset: 8,
     mode: 'clickOpen',
     isClickOutside: true,
+    refsExcludeClickOutside: [refSelectMonth, refSelectYear],
   });
 
   const handleOnClose = useCallback(
@@ -369,11 +372,11 @@ export const DatePicker = (props: DatePickerProps) => {
         $isMinWidth={props?.isMinWidth}
         $radius={radius}
         $parentListHeight={height}
-        // onFocus={event => {
-        //   if (props?.isDisabled) return
-        //   if (props.onFocus) props.onFocus?.(event)
-        //   // handleOnOpen()
-        // }}
+      // onFocus={event => {
+      //   if (props?.isDisabled) return
+      //   if (props.onFocus) props.onFocus?.(event)
+      //   // handleOnOpen()
+      // }}
       >
         <DateInputWrapper
           tabIndex={0}
@@ -512,7 +515,6 @@ export const DatePicker = (props: DatePickerProps) => {
             {currentYear !== null && currentMonth !== null && currentDay !== null ? (
               <Stack sx={{ default: { gap: '8px' } }}>
                 <SelectMonth
-                  isShortLabel
                   monthsLocale={props.locale.months}
                   genre={props.genre}
                   size={'small'}
@@ -526,17 +528,20 @@ export const DatePicker = (props: DatePickerProps) => {
                     .valueOf()}
                   isOnClickOptionClose
                   isStayValueAfterSelect
+                  isCenter
+                  isShortLabel
+                  refFloating={refSelectMonth}
                   onChange={(timestamp: number | null) => {
                     if (timestamp) onChangeDate(timestamp, false, true);
                   }}
                   startDate={props.startDate}
                   endDate={props.endDate}
-                  isCenter
-                  sx={{ default: { width: '70px' } }}
+                  sx={{ default: { width: '60px' } }}
                 />
                 <SelectYear
                   genre={props.genre}
                   size={'small'}
+                  refFloating={refSelectYear}
                   value={moment
                     .utc()
                     .year(currentYear)
@@ -548,10 +553,12 @@ export const DatePicker = (props: DatePickerProps) => {
                   onChange={(timestamp: number | null) => {
                     if (timestamp) onChangeDate(timestamp, false, true);
                   }}
-                  
+                  isOnClickOptionClose
+                  isStayValueAfterSelect
+                  isCenter
                   startDate={props.startDate}
                   endDate={props.endDate}
-                  sx={{ default: { width: '70px' } }}
+                  sx={{ default: { width: '60px' } }}
                 />
               </Stack>
             ) : null}
@@ -582,7 +589,7 @@ export const DatePicker = (props: DatePickerProps) => {
                 $size={props.size}
                 $row={daysInMonth[0]?.weekOfMonth - 1}
                 $column={index + 1}
-                key={index}
+                key={`${e.label}-${index}`}
               >
                 {e.label}
               </DateDropdownDayOfWeek>

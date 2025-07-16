@@ -1,5 +1,5 @@
 import { getFontSizeStyles } from '@local/components/typography';
-import { addNiceNumber, addOutline, addTransition } from '@local/styles/add';
+import { addDisabled, addNiceNumber, addOutline, addTransition } from '@local/styles/add';
 import { addError } from '@local/styles/error';
 import { addSX } from '@local/styles/sx';
 import { IThemeSizePropertyDefault, KEY_SIZE_DATA } from '@local/theme';
@@ -102,10 +102,6 @@ export const InputSizeConstructor = (props: IThemeSizePropertyDefault) => css`
   border-radius: ${props.radius}px;
 `;
 
-/****************************************** Hidden *************************************************/
-const InputHidden = css<StyledInputProps>`
-  opacity: ${(props) => (props.$isDisabled ? 0.5 : 1)};
-`;
 /****************************************** is isInputEffect *************************************************/
 export const InputIsInputEffect = css<Pick<StyledInputProps, '$isInputEffect'>>`
   ${(props) =>
@@ -130,7 +126,7 @@ export const StyledInputCSS = css<StyledInputProps>`
   ${InputSize};
   ${InputGenre};
   ${addInputPlaceholder};
-  ${InputHidden};
+  ${addDisabled};
   ${InputIsInputEffect};
   ${addOutline};
   ${addTransition};
@@ -182,8 +178,8 @@ export const InputPrefixChildren = styled.div<StyledInputChildrenProps>`
   display: flex;
   left: ${(props) => props.$left};
   width: ${(props) => props.$width};
-  opacity: ${(props) => (props.$isDisabled ? 0.5 : 1)};
   height: 100%;
+  ${addDisabled};
   ${addTransition};
 `;
 
@@ -192,7 +188,7 @@ export const InputPostfixChildren = styled.div<StyledInputChildrenProps>`
   display: flex;
   right: ${(props) => props.$right};
   width: ${(props) => props.$width};
-  opacity: ${(props) => (props.$isDisabled ? 0.5 : 1)};
   height: 100%;
+  ${addDisabled};
   ${addTransition};
 `;

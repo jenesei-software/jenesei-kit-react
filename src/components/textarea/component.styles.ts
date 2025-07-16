@@ -1,5 +1,5 @@
 import { getFontSizeStyles } from '@local/components/typography';
-import { addOutlineChildren, addRemoveOutline, addTransitionWithoutSize } from '@local/styles/add';
+import { addDisabled, addOutlineChildren, addRemoveOutline, addTransitionWithoutSize } from '@local/styles/add';
 import { addError } from '@local/styles/error';
 import { addSX } from '@local/styles/sx';
 import { KEY_SIZE_DATA } from '@local/theme';
@@ -32,9 +32,7 @@ const addTextAreaWrapperGenre = css<TextAreaWrapperProps>`
     }
   `};
 `;
-const addTextAreaWrapperHidden = css<TextAreaWrapperProps>`
-  opacity: ${(props) => (props.$isDisabled ? 0.5 : 1)};
-`;
+
 const addTextAreaWrapperIsInputEffect = css<Pick<TextAreaWrapperProps, '$isInputEffect'>>`
   ${(props) =>
     props.$isInputEffect &&
@@ -62,7 +60,7 @@ export const TextAreaWrapper = styled.div<TextAreaWrapperProps>`
   ${addTextAreaWrapperSize};
   ${addTextAreaWrapperGenre};
   ${addTextAreaWrapperIsInputEffect};
-  ${addTextAreaWrapperHidden};
+  ${addDisabled};
   ${addOutlineChildren};
   ${addSX};
 `;

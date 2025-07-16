@@ -115,12 +115,18 @@ export const usePopover = (props: UsePopoverProps) => {
       clickOutsideHandler.current = (e: MouseEvent) => {
         const refEl = refs.reference.current
         const floatingEl = refs.floating.current
-
+        const otherRefs = props.refsExcludeClickOutside || []
         if (
           refEl instanceof HTMLElement &&
           floatingEl instanceof HTMLElement &&
           !refEl.contains(e.target as Node) &&
-          !floatingEl.contains(e.target as Node)
+          !floatingEl.contains(e.target as Node) && 
+          !otherRefs.some(ref => {
+            if (typeof ref === 'object' && ref !== null && 'current' in ref) {
+              return (ref.current as HTMLElement | null)?.contains(e.target as Node)
+            }
+            return false
+          })
         ) {
           setIsOpen(false)
         }
@@ -139,7 +145,7 @@ export const usePopover = (props: UsePopoverProps) => {
         clearTimeout(hoverCloseTimeout.current)
       }
     }
-  }, [isOpen, refs.reference, refs.floating, update, props.isClickOutside, props.isDisabled])
+  }, [isOpen, refs.reference, refs.floating, update, props.isClickOutside, props.isDisabled, props.refsExcludeClickOutside])
 
   useEffect(() => {
     if (!isOpen || !props.isFloatingHover || !refs.reference.current || !refs.floating.current || props.isDisabled)
