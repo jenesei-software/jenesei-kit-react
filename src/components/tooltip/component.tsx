@@ -18,7 +18,7 @@ export const Tooltip: FC<TooltipProps> = memo(props => {
 })
 
 export const TooltipContent: FC<TooltipProps> = props => {
-  const { isOpen, reference, floating, floatingStyles } = usePopover({
+  const { isOpen, refReference, refFloating, floatingStyles } = usePopover({
     placement: props.placement ?? DEFAULT_TOOLTIP_PLACEMENT_FALLBACK,
     offset: props.offset ?? DEFAULT_TOOLTIP_OFFSET_FALLBACK,
     mode: props.mode ?? 'hover',
@@ -30,7 +30,7 @@ export const TooltipContent: FC<TooltipProps> = props => {
   })
   return (
     <>
-      <TooltipContainer sx={props.sx} ref={reference as Ref<HTMLDivElement | null>}>
+      <TooltipContainer sx={props.sx} ref={refReference as Ref<HTMLDivElement | null>}>
         {props.children}
       </TooltipContainer>
       <TooltipBox
@@ -38,7 +38,7 @@ export const TooltipContent: FC<TooltipProps> = props => {
         isOpen={isOpen}
         genre={props.genre}
         floatingStyles={floatingStyles}
-        ref={floating}
+        ref={refFloating}
         maxHeight={props.maxHeight}
         maxWidth={props.maxWidth}
       >

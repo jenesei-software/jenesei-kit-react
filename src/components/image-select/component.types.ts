@@ -4,10 +4,10 @@ import { ButtonProps } from '@local/components/button'
 import { ImageButtonProps } from '@local/components/image-button'
 import { addErrorProps } from '@local/styles/error'
 import { addSXProps } from '@local/styles/sx'
-import { TJeneseiThemeGenreImageSelect, TJeneseiThemeSize } from '@local/theme'
+import { IThemeGenreImageSelect, IThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
-export type TImageSelectGenre = keyof TJeneseiThemeGenreImageSelect
+export type TImageSelectGenre = keyof IThemeGenreImageSelect
 
 export type ImageSelectItemProps = {
   crop?: {
@@ -44,7 +44,7 @@ export type ImageSelectProps = {
     dragAndDrop: string
   } & ImageButtonProps['locale']
   genre: TImageSelectGenre
-  size: TJeneseiThemeSize
+  size: IThemeSize
   propsButton: {
     default: Pick<ButtonProps, 'size' | 'genre'>
     delete: Pick<ButtonProps, 'size' | 'genre'>

@@ -1,6 +1,6 @@
 import { PropsWithChildren, ReactNode } from 'react'
 
-import { JeneseiPaletteKeys } from '@local/theme'
+import { IThemePaletteKeys } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
 export type ProviderDialogProps = PropsWithChildren & {
@@ -39,7 +39,7 @@ export type DialogContentObjectProps = {
     maxHeight?: string
     padding?: string
     borderRadius?: string
-    background?: JeneseiPaletteKeys
+    background?: IThemePaletteKeys
   }
 }
 

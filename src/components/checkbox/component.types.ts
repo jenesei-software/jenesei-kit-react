@@ -3,7 +3,7 @@ import { PropsWithChildren } from 'react'
 import { IconItemProps, TIconCheckboxNameString } from '@local/components/icon'
 import { addErrorProps, addErrorStylesProps } from '@local/styles/error'
 import { addSXProps, addSXStyleProps } from '@local/styles/sx'
-import { TJeneseiThemeGenre, TJeneseiThemeSize } from '@local/theme'
+import { IThemeGenre, IThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
 import { addSXTypographyProps, addSXTypographyStyleProps } from '../typography'
@@ -27,13 +27,13 @@ export type CheckboxProps = PropsWithChildren & {
 
   iconOrder?: IconItemProps<'checkbox'>['order']
 
-  sizeIcon?: TJeneseiThemeSize
+  sizeIcon?: IThemeSize
 
   onChange?: (checked: boolean) => void
 
   isWidthAsHeight?: boolean
 
-  size: TJeneseiThemeSize
+  size: IThemeSize
 } & addSXProps &
   addErrorProps &
   addSXTypographyProps
@@ -48,6 +48,6 @@ export type StyledCheckboxProps = AddDollarSign<
   addErrorStylesProps &
   addSXTypographyStyleProps
 
-export type TCheckboxGenre = keyof TJeneseiThemeGenre
+export type TCheckboxGenre = keyof IThemeGenre
 
 export type StyledIconProps = AddDollarSign<Pick<CheckboxProps, 'genre' | 'checked'>>

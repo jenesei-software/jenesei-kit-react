@@ -1,72 +1,72 @@
-import { motion } from 'framer-motion'
-import { DragEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { useTheme } from 'styled-components'
+import { ImageSupportedFormatsForInput } from '@local/consts';
+import { useImageCrop } from '@local/hooks/use-image-crop';
+import { useImageView } from '@local/hooks/use-image-view';
+import { ErrorMessage } from '@local/styles/error';
+import { KEY_SIZE_DATA } from '@local/theme';
 
-import { ImageSupportedFormatsForInput } from '@local/consts'
-import { useImageCrop } from '@local/hooks/use-image-crop'
-import { useImageView } from '@local/hooks/use-image-view'
-import { ErrorMessage } from '@local/styles/error'
-import { KEY_SIZE_DATA } from '@local/theme'
+import { motion } from 'framer-motion';
+import { DragEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useTheme } from 'styled-components';
 
-import { ImageSelectItemProps, ImageSelectListWrapper, ImageSelectProps, ImageSelectWrapper } from '.'
-import { Button } from '../button'
-import { Image } from '../image'
-import { Stack } from '../stack'
-import { Typography } from '../typography'
+import { Button } from '../button';
+import { Image } from '../image';
+import { Stack } from '../stack';
+import { Typography } from '../typography';
+import { ImageSelectItemProps, ImageSelectListWrapper, ImageSelectProps, ImageSelectWrapper } from '.';
 
 export const ImageSelect = (props: ImageSelectProps) => {
-  const { onChange } = props
+  const { onChange } = props;
 
-  const size = useMemo(() => KEY_SIZE_DATA[props.size], [props.size])
+  const size = useMemo(() => KEY_SIZE_DATA[props.size], [props.size]);
 
-  const [images, setImages] = useState<ImageSelectItemProps[]>(props.images || [])
+  const [images, setImages] = useState<ImageSelectItemProps[]>(props.images || []);
 
-  const [isDraggingOver, setIsDraggingOver] = useState(false)
+  const [isDraggingOver, setIsDraggingOver] = useState(false);
 
-  const refInput = useRef<HTMLInputElement | null>(null)
+  const refInput = useRef<HTMLInputElement | null>(null);
 
-  const theme = useTheme()
+  const theme = useTheme();
 
   const handleDrop = (e: DragEvent<HTMLDivElement>) => {
-    e.preventDefault()
+    e.preventDefault();
     if (e.dataTransfer.files?.length) {
-      handleAddFilesCrop(e.dataTransfer.files)
+      handleAddFilesCrop(e.dataTransfer.files);
     }
-  }
+  };
 
   const handleDelete = (id: number) => {
-    setImages(prev => {
-      const finalImages = prev.filter(img => img.id !== id)
-      onChange?.(finalImages)
-      return finalImages
-    })
-  }
+    setImages((prev) => {
+      const finalImages = prev.filter((img) => img.id !== id);
+      onChange?.(finalImages);
+      return finalImages;
+    });
+  };
 
   const handleOnSave = useCallback(
     (files: ImageSelectItemProps[] | null) => {
       if (files) {
-        setImages(prev => {
+        setImages((prev) => {
           const newImages = files.map((file, idx) => ({
             ...file,
-            index: prev.length + idx
-          }))
-          const finalImages = [...prev, ...newImages]
-          onChange?.(finalImages)
-          return finalImages
-        })
+            index: prev.length + idx,
+          }));
+          const finalImages = [...prev, ...newImages];
+          onChange?.(finalImages);
+          return finalImages;
+        });
       }
     },
-    [onChange]
-  )
+    [onChange],
+  );
 
   const openFileDialog = () => {
-    refInput.current?.click()
-  }
+    refInput.current?.click();
+  };
 
   const resetImages = () => {
-    setImages(props.defaultImages || [])
-    onChange?.(props.defaultImages || [])
-  }
+    setImages(props.defaultImages || []);
+    onChange?.(props.defaultImages || []);
+  };
 
   const { handleAddFiles: handleAddFilesCrop } = useImageCrop({
     onSave: handleOnSave,
@@ -74,47 +74,47 @@ export const ImageSelect = (props: ImageSelectProps) => {
     dialog: {
       button: {
         genre: props.propsButton.default.genre,
-        size: props.propsButton.default.size
+        size: props.propsButton.default.size,
       },
       buttonDelete: {
         genre: props.propsButton.delete.genre,
-        size: props.propsButton.delete.size
-      }
+        size: props.propsButton.delete.size,
+      },
     },
     imageSettings: {
       maxSize: props.imageSettings.maxSize,
       maxCount: props.imageSettings.maxCount - images.length,
-      aspect: props.imageSettings.aspect
+      aspect: props.imageSettings.aspect,
     },
-    refInput: refInput
-  })
+    refInput: refInput,
+  });
 
   const { handleAdd } = useImageView({
     size: props.size,
     locale: props.locale,
     imageSettings: props.imageSettings,
-    genre: props.genre
-  })
+    genre: props.genre,
+  });
 
   useEffect(() => {
-    setImages(props.images || [])
-  }, [props.images])
+    setImages(props.images || []);
+  }, [props.images]);
 
   return (
     <>
       <ImageSelectWrapper $genre={props.genre} $size={props.size} id={props.id} $sx={props.sx} $error={props.error}>
         <ImageSelectListWrapper
-          onDrop={e => {
-            handleDrop(e)
-            setIsDraggingOver(false)
+          onDrop={(e) => {
+            handleDrop(e);
+            setIsDraggingOver(false);
           }}
-          onDragOver={e => e.preventDefault()}
+          onDragOver={(e) => e.preventDefault()}
           onDragEnter={() => setIsDraggingOver(true)}
           onDragLeave={() => setIsDraggingOver(false)}
           animate={{
             borderColor: isDraggingOver
               ? theme.colors.imageSelect[props.genre].border.hover
-              : theme.colors.imageSelect[props.genre].border.rest
+              : theme.colors.imageSelect[props.genre].border.rest,
           }}
           transition={{ duration: 0.3 }}
           $genre={props.genre}
@@ -125,14 +125,14 @@ export const ImageSelect = (props: ImageSelectProps) => {
               layout: {
                 duration: 0.3,
                 ease: 'easeInOut',
-                type: 'spring'
-              }
+                type: 'spring',
+              },
             }}
             layout
             style={{ display: 'flex', flexWrap: 'wrap', gap: `${size.padding - 2}px` }}
           >
             {images.map(
-              img =>
+              (img) =>
                 img.url && (
                   <motion.div
                     key={img.id}
@@ -143,19 +143,19 @@ export const ImageSelect = (props: ImageSelectProps) => {
                       userSelect: 'none',
                       overflow: 'hidden',
                       borderRadius: `${size.radius}px`,
-                      flexGrow: 1
+                      flexGrow: 1,
                     }}
                     layout
                     transition={{
                       layout: {
                         duration: 0.3,
                         ease: 'easeInOut',
-                        type: 'spring'
-                      }
+                        type: 'spring',
+                      },
                     }}
                   >
                     <Image
-                      sxStack={theme => ({
+                      sxStack={(theme) => ({
                         default: {
                           width: '100%',
                           height: '100%',
@@ -163,14 +163,14 @@ export const ImageSelect = (props: ImageSelectProps) => {
                           justifyContent: 'center',
                           backgroundColor: theme.palette.black10,
                           position: 'absolute',
-                          pointerEvents: 'none'
-                        }
+                          pointerEvents: 'none',
+                        },
                       })}
                       isShowBeforeImage={props.isContain}
                       sxImage={{
                         default: {
-                          objectFit: props.isContain ? 'contain' : 'cover'
-                        }
+                          objectFit: props.isContain ? 'contain' : 'cover',
+                        },
                       }}
                       alt={img.name || 'image'}
                       src={img.url}
@@ -178,8 +178,8 @@ export const ImageSelect = (props: ImageSelectProps) => {
                         <Typography
                           sx={{
                             default: {
-                              variant: 'h6'
-                            }
+                              variant: 'h6',
+                            },
                           }}
                         >
                           {props.locale.imageFallback}
@@ -191,16 +191,16 @@ export const ImageSelect = (props: ImageSelectProps) => {
                         default: {
                           position: 'absolute',
                           top: 5,
-                          right: 5
-                        }
+                          right: 5,
+                        },
                       }}
                       genre={props.genre}
-                      size="small"
+                      size='small'
                       icons={[
                         {
                           type: 'id',
-                          name: 'Close'
-                        }
+                          name: 'Close',
+                        },
                       ]}
                       isWidthAsHeight
                       isHiddenBorder
@@ -212,16 +212,16 @@ export const ImageSelect = (props: ImageSelectProps) => {
                         default: {
                           position: 'absolute',
                           bottom: 5,
-                          right: 5
-                        }
+                          right: 5,
+                        },
                       }}
                       genre={props.genre}
-                      size="small"
+                      size='small'
                       icons={[
                         {
                           type: 'id',
-                          name: 'Activity'
-                        }
+                          name: 'Activity',
+                        },
                       ]}
                       isWidthAsHeight
                       isHiddenBorder
@@ -229,12 +229,12 @@ export const ImageSelect = (props: ImageSelectProps) => {
                       onClick={() => img.url && handleAdd({ id: img.id, imageSrc: img.url })}
                     />
                   </motion.div>
-                )
+                ),
             )}
-            {images.length === 0 && (
+            {images.length === 0 ? (
               <div
                 onClick={openFileDialog}
-                key="empty"
+                key='empty'
                 style={{
                   position: 'relative',
                   width: `${props.imageSettings.width}px`,
@@ -247,43 +247,43 @@ export const ImageSelect = (props: ImageSelectProps) => {
                   alignItems: 'center',
                   justifyContent: 'center',
                   textAlign: 'center',
-                  cursor: 'pointer'
+                  cursor: 'pointer',
                 }}
               >
                 <Typography
                   style={{
-                    color: theme.colors.imageSelect[props.genre].color.rest
+                    color: theme.colors.imageSelect[props.genre].color.rest,
                   }}
                   sx={{
-                    default: {}
+                    default: {},
                   }}
                 >
                   {props.locale.dragAndDrop}
                 </Typography>
               </div>
-            )}
+            ) : null}
           </motion.div>
 
           <input
             ref={refInput}
-            type="file"
+            type='file'
             accept={ImageSupportedFormatsForInput}
             multiple
             style={{ display: 'none' }}
-            onChange={e => {
-              if (e.target.files) handleAddFilesCrop(e.target.files)
+            onChange={(e) => {
+              if (e.target.files) handleAddFilesCrop(e.target.files);
             }}
           />
         </ImageSelectListWrapper>
         <Stack sx={{ default: { flexGrow: 1, gap: `${size.padding - 2}px` } }}>
           <Button
-            type="button"
+            type='button'
             genre={props.genre}
             size={props.size}
             sx={{
               default: {
-                flexGrow: 3
-              }
+                flexGrow: 3,
+              },
             }}
             isRadius
             onClick={openFileDialog}
@@ -292,11 +292,11 @@ export const ImageSelect = (props: ImageSelectProps) => {
           </Button>
           <Button
             isRadius
-            type="button"
+            type='button'
             sx={{
               default: {
-                flexGrow: 1
-              }
+                flexGrow: 1,
+              },
             }}
             onClick={resetImages}
             genre={props.genre}
@@ -308,5 +308,5 @@ export const ImageSelect = (props: ImageSelectProps) => {
       </ImageSelectWrapper>
       {props?.error ? <ErrorMessage {...props.error} size={props?.error.size ?? props.size} /> : null}
     </>
-  )
-}
+  );
+};

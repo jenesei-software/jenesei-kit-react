@@ -34,7 +34,7 @@ const ScrollWrapper: FC<ScrollProps> = props => {
         }
       })}
     >
-      <Button onClick={toggleContent} size={'small'} genre={'gray'}>
+      <Button isMinWidthAsContent onClick={toggleContent} size={'small'} genre={'gray'}>
         Toggle Content
       </Button>
       <Stack

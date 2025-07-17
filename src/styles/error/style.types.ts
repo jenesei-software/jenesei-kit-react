@@ -1,5 +1,5 @@
 import { addSXProps } from '@local/styles/sx'
-import { TJeneseiThemeSize } from '@local/theme'
+import { IThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
 export type ErrorMessagePropsDollar = AddDollarSign<ErrorMessageProps>
@@ -10,7 +10,7 @@ export type ErrorMessageProps = {
 
   isErrorAbsolute?: boolean
 
-  size?: TJeneseiThemeSize
+  size?: IThemeSize
 
   sx?: addSXProps['sx']
 }

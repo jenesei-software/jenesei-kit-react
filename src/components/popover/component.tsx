@@ -10,6 +10,7 @@ export const Popover: FC<PopoverProps> = props => {
     <AnimatePresence>
       {props.isOpen && (
         <div
+          tabIndex={-1}
           ref={props.ref as Ref<HTMLDivElement | null>}
           style={{
             position: 'absolute',
@@ -21,9 +22,10 @@ export const Popover: FC<PopoverProps> = props => {
           }}
         >
           <PopoverWrapper
+            tabIndex={-1}
+            $isShowAlwaysOutline={props.isShowAlwaysOutline}
             $genre={props.genre ?? 'black'}
             className={props.className}
-            tabIndex={0}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
@@ -44,8 +46,10 @@ export const Popover: FC<PopoverProps> = props => {
 }
 
 export const usePopover = (props: UsePopoverProps) => {
+  const { onFocus, onBlur } = props;
   const [isOpen, setIsOpen] = useState(false)
   const [minWidth, setMinWidth] = useState<number | undefined>(undefined)
+  const [wasEverOpen, setWasEverOpen] = useState(false)
 
   const {
     refs,
@@ -69,13 +73,19 @@ export const usePopover = (props: UsePopoverProps) => {
   const hoverCloseDelay = useMemo(() => props.hoverCloseDelay ?? DEFAULT_POPOVER_CLOSE_DELAY, [props.hoverCloseDelay])
 
   useEffect(() => {
+    if (props.isDisabled) return
     const refEl = refs.reference.current
     if (!refEl) return
 
-    if (props.mode === 'click' && refEl instanceof HTMLElement) {
+    if ((props.mode === 'click' || props.mode === 'clickOpen') && refEl instanceof HTMLElement) {
       const handleClick = () => {
-        setIsOpen(prev => !prev)
+        if (props.mode === 'click') {
+          setIsOpen(prev => !prev)
+        } else if (props.mode === 'clickOpen') {
+          setIsOpen(true)
+        }
       }
+
       refEl.addEventListener('click', handleClick)
       return () => {
         refEl.removeEventListener('click', handleClick)
@@ -96,10 +106,10 @@ export const usePopover = (props: UsePopoverProps) => {
         if (hoverCloseTimeout.current) clearTimeout(hoverCloseTimeout.current)
       }
     }
-  }, [props.mode, refs.reference, hoverCloseDelay])
+  }, [props.mode, refs.reference, hoverCloseDelay, props.isDisabled])
 
   useEffect(() => {
-    if (!isOpen || !refs.reference.current || !refs.floating.current) return
+    if (!isOpen || !refs.reference.current || !refs.floating.current || props.isDisabled) return
 
     const cleanup = autoUpdate(refs.reference.current, refs.floating.current, update)
 
@@ -107,12 +117,18 @@ export const usePopover = (props: UsePopoverProps) => {
       clickOutsideHandler.current = (e: MouseEvent) => {
         const refEl = refs.reference.current
         const floatingEl = refs.floating.current
-
+        const otherRefs = props.refsExcludeClickOutside || []
         if (
           refEl instanceof HTMLElement &&
           floatingEl instanceof HTMLElement &&
           !refEl.contains(e.target as Node) &&
-          !floatingEl.contains(e.target as Node)
+          !floatingEl.contains(e.target as Node) &&
+          !otherRefs.some(ref => {
+            if (typeof ref === 'object' && ref !== null && 'current' in ref) {
+              return (ref.current as HTMLElement | null)?.contains(e.target as Node)
+            }
+            return false
+          })
         ) {
           setIsOpen(false)
         }
@@ -131,10 +147,11 @@ export const usePopover = (props: UsePopoverProps) => {
         clearTimeout(hoverCloseTimeout.current)
       }
     }
-  }, [isOpen, refs.reference, refs.floating, update, props.isClickOutside])
+  }, [isOpen, refs.reference, refs.floating, update, props.isClickOutside, props.isDisabled, props.refsExcludeClickOutside])
 
   useEffect(() => {
-    if (!isOpen || !props.isFloatingHover || !refs.reference.current || !refs.floating.current) return
+    if (!isOpen || !props.isFloatingHover || !refs.reference.current || !refs.floating.current || props.isDisabled)
+      return
 
     const refEl = refs.reference.current
     const floatingEl = refs.floating.current
@@ -177,17 +194,26 @@ export const usePopover = (props: UsePopoverProps) => {
         clearTimeout(hoverCloseTimeout.current)
       }
     }
-  }, [isOpen, props.isFloatingHover, refs.reference, refs.floating, hoverOffset, hoverCloseDelay])
+  }, [isOpen, props.isFloatingHover, refs.reference, refs.floating, hoverOffset, hoverCloseDelay, props.isDisabled])
 
   useLayoutEffect(() => {
-    if (!isOpen || !props.isWidthAsContent || !refs.reference.current) return
+    if (!props.isWidthAsContent || !refs.reference.current) return
     const rect = refs.reference.current.getBoundingClientRect()
     setMinWidth(rect.width)
-  }, [isOpen, props.isWidthAsContent, refs.reference])
+  }, [props.isWidthAsContent, refs.reference])
 
-  const open = useCallback(() => setIsOpen(true), [])
-  const close = useCallback(() => setIsOpen(false), [])
-  const toggle = useCallback(() => setIsOpen(prev => !prev), [])
+  const open = useCallback(() => {
+    if (props.isDisabled) return
+    setIsOpen(true)
+  }, [props.isDisabled])
+  const close = useCallback(() => {
+    if (props.isDisabled) return
+    setIsOpen(false)
+  }, [props.isDisabled])
+  const toggle = useCallback(() => {
+    if (props.isDisabled) return
+    setIsOpen(prev => !prev)
+  }, [props.isDisabled])
 
   const combinedStyles = useMemo(() => {
     return {
@@ -197,13 +223,26 @@ export const usePopover = (props: UsePopoverProps) => {
     }
   }, [floatingStyles, props.isWidthAsContent, minWidth])
 
+  useEffect(() => {
+    if (isOpen) {
+      onFocus?.()
+      setWasEverOpen(true)
+    }
+  }, [isOpen, onFocus])
+
+  useEffect(() => {
+    if (!isOpen && wasEverOpen) {
+      onBlur?.()
+    }
+  }, [isOpen, wasEverOpen, onBlur])
   return {
     isOpen,
+    setIsOpen,
     open,
     close,
     toggle,
-    reference: refs.setReference as Ref<HTMLElement | null>,
-    floating: refs.setFloating as Ref<HTMLElement | null>,
+    refReference: refs.setReference as Ref<HTMLElement | null>,
+    refFloating: refs.setFloating as Ref<HTMLElement | null>,
     floatingStyles: combinedStyles,
     placement: actualPlacement
   }

@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 import { addSX } from '@local/styles/sx'
-import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
+import { IThemeSizePropertyDefault, KEY_SIZE_DATA } from '@local/theme'
 
 import { InputOTPWrapperProps } from '.'
 
@@ -9,7 +9,7 @@ import { InputOTPWrapperProps } from '.'
 export const InputOTPSize = css<InputOTPWrapperProps>`
   ${props => InputOTPSizeConstructor({ ...KEY_SIZE_DATA[props.$size], ...props })};
 `
-export const InputOTPSizeConstructor = (props: IJeneseiThemeSize & InputOTPWrapperProps) => css`
+export const InputOTPSizeConstructor = (props: IThemeSizePropertyDefault & InputOTPWrapperProps) => css`
   gap: ${props.padding - 2}px;
   width: 100%;
 `

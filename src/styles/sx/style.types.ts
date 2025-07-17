@@ -1,6 +1,6 @@
 import { CSSObject, DefaultTheme } from 'styled-components'
 
-import { TJeneseiDevice } from '@local/theme'
+import { IThemeDevice } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
 export interface addSXProps {
@@ -10,12 +10,12 @@ export type SXProps =
   | ({
       default: CSSObject
     } & {
-      [K in TJeneseiDevice]?: CSSObject
+      [K in IThemeDevice]?: CSSObject
     })
   | ((theme: DefaultTheme) => {
       default: CSSObject
     } & {
-      [K in TJeneseiDevice]?: CSSObject
+      [K in IThemeDevice]?: CSSObject
     })
 
 export type addSXStyleProps = AddDollarSign<addSXProps>

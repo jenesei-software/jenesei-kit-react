@@ -1,7 +1,7 @@
-import styled from 'styled-components'
-
 import { addTransition } from '@local/styles/add'
 import { addSX } from '@local/styles/sx'
+
+import styled from 'styled-components'
 
 import { ImageIMGProps } from '.'
 

@@ -1,15 +1,15 @@
 import { PropsWithChildren, ReactElement } from 'react'
 
 import { PreviewAdditionalProps } from '@local/areas/preview'
-import { JeneseiPaletteKeys } from '@local/theme'
+import { IThemePaletteKeys } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
 import { ScreenWidthProps } from '../context-screen-width'
 
 export interface ProviderAppProps extends PropsWithChildren {
   defaultPreview?: PreviewAdditionalProps
-  defaultBgColor: JeneseiPaletteKeys
-  defaultStatusBarColor: JeneseiPaletteKeys
+  defaultBgColor: IThemePaletteKeys
+  defaultStatusBarColor: IThemePaletteKeys
   defaultBgImage?: string
   defaultTitle: string
   defaultDescription: string
@@ -58,8 +58,8 @@ export interface ProviderAppProps extends PropsWithChildren {
 export interface AppContextProps {
   changePreview: (newPreviewProps: PreviewAdditionalProps) => void
 
-  changeStatusBarColor: (color: JeneseiPaletteKeys) => void
-  changeBgColor: (color: JeneseiPaletteKeys) => void
+  changeStatusBarColor: (color: IThemePaletteKeys) => void
+  changeBgColor: (color: IThemePaletteKeys) => void
   changeBgImage: (image: string) => void
   changeTitle: (title: string) => void
   changeDescription: (description: string) => void

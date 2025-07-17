@@ -1,29 +1,27 @@
-import { pluginUpdateReadmePD } from '@jenesei-software/jenesei-plugin-vite'
-import react from '@vitejs/plugin-react'
-import path, { resolve } from 'path'
-import process from 'process'
-import { defineConfig } from 'vite'
-import dts from 'vite-plugin-dts'
-import tsconfigPaths from 'vite-tsconfig-paths'
+import { pluginUpdateReadmePD } from '@jenesei-software/jenesei-plugin-vite';
+import react from '@vitejs/plugin-react';
+import path, { resolve } from 'path';
+import process from 'process';
+import { defineConfig } from 'vite';
+import dts from 'vite-plugin-dts';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
-import { peerDependencies } from './package.json'
+import { peerDependencies } from './package.json';
 
 export default defineConfig(() => {
-  const isStorybook = process.env.NODE_ENV === 'storybook'
-
-  console.log('isStorybookBuild: ', String(isStorybook))
+  const isStorybook = process.env.NODE_ENV === 'storybook';
 
   return {
     resolve: {
       alias: {
-        '@local': path.resolve(__dirname, './src')
-      }
+        '@local': path.resolve(__dirname, './src'),
+      },
     },
     plugins: [
       pluginUpdateReadmePD({
         insertionPoint: '# IMPORTANT',
         pathReadme: resolve(__dirname, 'README.md'),
-        pathPackageJson: resolve(__dirname, 'package.json')
+        pathPackageJson: resolve(__dirname, 'package.json'),
       }),
       react(),
       tsconfigPaths(),
@@ -33,8 +31,8 @@ export default defineConfig(() => {
           // exclude: ['src/declaration/styled-components.d.ts'],
           rollupTypes: true,
           insertTypesEntry: true,
-          tsconfigPath: './tsconfig.json'
-        })
+          tsconfigPath: './tsconfig.json',
+        }),
     ].filter(Boolean),
     publicDir: false,
     build: {
@@ -99,10 +97,10 @@ export default defineConfig(() => {
           ['context-local-storage']: resolve(__dirname, 'src/contexts/context-local-storage/index.ts'),
           ['context-permission']: resolve(__dirname, 'src/contexts/context-permission/index.ts'),
           ['context-screen-width']: resolve(__dirname, 'src/contexts/context-screen-width/index.ts'),
-          ['context-sonner']: resolve(__dirname, 'src/contexts/context-sonner/index.ts')
+          ['context-sonner']: resolve(__dirname, 'src/contexts/context-sonner/index.ts'),
         },
         formats: ['es', 'cjs'],
-        fileName: (format, name) => `${name}.${format}.js`
+        fileName: (format, name) => `${name}.${format}.js`,
       },
       rollupOptions: {
         external: Object.keys(peerDependencies),
@@ -116,10 +114,10 @@ export default defineConfig(() => {
             'react-number-format': 'reactNumberFormat',
             '@tanstack/react-virtual': 'reactVirtual',
             'js-cookie': 'Cookies',
-            '@tanstack/react-router': 'reactRouter'
-          }
-        }
-      }
-    }
-  }
-})
+            '@tanstack/react-router': 'reactRouter',
+          },
+        },
+      },
+    },
+  };
+});

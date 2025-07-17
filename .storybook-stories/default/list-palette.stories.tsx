@@ -5,23 +5,11 @@ import 'styled-components'
 import { Stack } from '@local/components/stack'
 import { JeneseiPalette } from '@local/theme'
 
+import { WrapperBig } from './tools'
+
 const PaletteWrapper: FC = () => {
   return (
-    <Stack
-      sx={theme => ({
-        default: {
-          borderRadius: '8px',
-          padding: '16px',
-          border: '1px dashed',
-          height: 'fit-content',
-          color: theme.palette.whiteStandard,
-          borderColor: theme.palette.blueHover,
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          gap: '6px'
-        }
-      })}
-    >
+    <WrapperBig>
       {Object.entries(JeneseiPalette).map(([key, color]) => (
         <Stack
           key={key}
@@ -45,7 +33,7 @@ const PaletteWrapper: FC = () => {
           {key}
         </Stack>
       ))}
-    </Stack>
+    </WrapperBig>
   )
 }
 const meta: Meta = {

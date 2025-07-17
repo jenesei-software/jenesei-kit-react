@@ -11,21 +11,25 @@ export const StyledScroll = styled(Stack)<StyledScrollProps>`
   ${props => css`
     ${props.$horizontal &&
     css`
+      scrollbar-gutter: stable;
       overflow-x: auto;
     `}
 
     ${props.$vertical &&
     css`
+      scrollbar-gutter: stable;
       overflow-y: auto;
     `}
 
     ${props.$isAlwaysHorizontal &&
     css`
+      scrollbar-gutter: stable;
       overflow-x: scroll;
     `}
 
     ${props.$isAlwaysVertical &&
     css`
+      scrollbar-gutter: stable;
       overflow-y: scroll;
     `}
   `}

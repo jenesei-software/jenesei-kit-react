@@ -15,12 +15,12 @@ export const CookieContext = createContext<CookieContextProps | null>(null)
  * You should understand which cookies you are changing and whether you have access to them.
  *
  * @remarks
- * The local storage is typed using the `jenesei-ui-react.d.ts` file:
+ * The local storage is typed using the `jenesei-kit-react.d.ts` file:
  *
  * ```typescript
- * import '@jenesei-software/jenesei-ui-react'
+ * import '@jenesei-software/jenesei-kit-react'
  *
- * declare module '@jenesei-software/jenesei-ui-react' {
+ * declare module '@jenesei-software/jenesei-kit-react' {
  *   export interface ValidCookieObject {
  *    access_token: string
  *    refresh_token: string

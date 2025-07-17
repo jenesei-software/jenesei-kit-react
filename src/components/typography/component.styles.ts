@@ -1,9 +1,10 @@
-import styled, { css, keyframes } from 'styled-components'
+import { addOutline } from '@local/styles/add';
+import { addSX as addSXStandard } from '@local/styles/sx';
+import { JeneseiPalette } from '@local/theme/theme';
 
-import { addSX as addSXStandard } from '@local/styles/sx'
-import { JeneseiPalette } from '@local/theme/theme'
+import styled, { css, keyframes } from 'styled-components';
 
-import { TypographyAllProps, TypographyCSSProps, addSXTypographyStyleProps } from '.'
+import { addSXTypographyStyleProps, TypographyAllProps, TypographyCSSProps } from '.';
 
 const shadowPulse = keyframes`
   0% {
@@ -15,41 +16,52 @@ const shadowPulse = keyframes`
   100% {
     text-shadow: 0 0 0 rgba(0, 0, 0, 0);
   }
-`
+`;
 
 function toStyledCSS(value: TypographyAllProps) {
   return css`
-    ${value.shadow &&
-    value.shadow === 'shadowPulse' &&
-    css`
+    ${
+      value.shadow &&
+      value.shadow === 'shadowPulse' &&
+      css`
       animation: ${shadowPulse} 2s infinite;
-    `};
-    ${value.letterSpacing &&
-    css`
+    `
+    };
+    ${
+      value.letterSpacing &&
+      css`
       letter-spacing: ${value.letterSpacing};
-    `};
-    ${value.flex &&
-    css`
+    `
+    };
+    ${
+      value.flex &&
+      css`
       flex: ${value.flex};
-    `};
-    ${value.cursor &&
-    css`
+    `
+    };
+    ${
+      value.cursor &&
+      css`
       cursor: ${value.cursor};
-    `};
-    ${value.overflow &&
-    css`
+    `
+    };
+    ${
+      value.overflow &&
+      css`
       overflow: ${value.overflow};
-    `};
-    ${value.line !== undefined
-      ? value.line === 1
-        ? css`
+    `
+    };
+    ${
+      value.line !== undefined
+        ? value.line === 1
+          ? css`
             text-overflow: ellipsis;
             overflow: hidden;
             white-space: nowrap;
             width: -webkit-fill-available;
             max-width: fit-content;
           `
-        : css`
+          : css`
             word-break: break-word;
             white-space: normal;
             text-overflow: ellipsis;
@@ -60,205 +72,237 @@ function toStyledCSS(value: TypographyAllProps) {
             width: fit-content;
             overflow-wrap: anywhere;
           `
-      : css``};
-    ${value.family &&
-    css`
+        : css``
+    };
+    ${
+      value.family &&
+      css`
       font-family: ${value.family};
-    `};
-    ${value.weight &&
-    css`
+    `
+    };
+    ${
+      value.weight &&
+      css`
       font-weight: ${value.weight};
-    `};
-    ${value.height &&
-    css`
+    `
+    };
+    ${
+      value.height &&
+      css`
       line-height: ${value.height}px;
-    `};
-    ${value.color &&
-    css`
+    `
+    };
+    ${
+      value.color &&
+      css`
       color: ${JeneseiPalette[value.color]};
-    `};
-    ${value.align &&
-    css`
+    `
+    };
+    ${
+      value.align &&
+      css`
       text-align: ${value.align};
-    `};
-    ${value.wrap &&
-    css`
+    `
+    };
+    ${
+      value.wrap &&
+      css`
       text-wrap: ${value.wrap};
-    `};
-    ${value.decoration &&
-    css`
+    `
+    };
+    ${
+      value.decoration &&
+      css`
       text-decoration: ${value.decoration};
-    `};
-    ${value.transform &&
-    css`
+    `
+    };
+    ${
+      value.transform &&
+      css`
       text-transform: ${value.transform};
-    `};
-    ${value.isHoverUnderlining &&
-    css`
+    `
+    };
+    ${
+      value.isHoverUnderlining &&
+      css`
       &:hover {
         text-decoration: underline;
       }
-    `};
-    ${'size' in value &&
-    value.size &&
-    css`
+    `
+    };
+    ${
+      value.isNoUserSelect &&
+      css`
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+    `
+    };
+    ${
+      'size' in value &&
+      value.size &&
+      css`
       font-size: ${value.size}px;
-    `};
-    ${'variant' in value && value.variant
-      ? value.variant === 'h1'
-        ? css`
-            font-size: ${props => props.theme.font.sizeHeading.h1 * props.theme.font.sizeDefault.default}px;
-            line-height: ${props => props.theme.font.lineHeight};
+    `
+    };
+    ${
+      'variant' in value && value.variant
+        ? value.variant === 'h1'
+          ? css`
+            font-size: ${(props) => props.theme.font.sizeHeading.h1 * props.theme.font.sizeDefault.default}px;
+            line-height: ${(props) => props.theme.font.lineHeight};
             margin: 0;
-            @media (max-width: ${props => props.theme.screens.tablet.width}px) {
-              font-size: ${props => props.theme.font.sizeHeading.h1 * props.theme.font.sizeDefault.tablet}px;
+            @media (max-width: ${(props) => props.theme.screens.tablet.width}px) {
+              font-size: ${(props) => props.theme.font.sizeHeading.h1 * props.theme.font.sizeDefault.tablet}px;
             }
 
-            @media (max-width: ${props => props.theme.screens.mobile.width}px) {
-              font-size: ${props => props.theme.font.sizeHeading.h1 * props.theme.font.sizeDefault.mobile}px;
+            @media (max-width: ${(props) => props.theme.screens.mobile.width}px) {
+              font-size: ${(props) => props.theme.font.sizeHeading.h1 * props.theme.font.sizeDefault.mobile}px;
             }
           `
-        : value.variant === 'h2'
-          ? css`
-              font-size: ${props => props.theme.font.sizeHeading.h2 * props.theme.font.sizeDefault.default}px;
-              line-height: ${props => props.theme.font.lineHeight};
+          : value.variant === 'h2'
+            ? css`
+              font-size: ${(props) => props.theme.font.sizeHeading.h2 * props.theme.font.sizeDefault.default}px;
+              line-height: ${(props) => props.theme.font.lineHeight};
               margin: 0;
-              @media (max-width: ${props => props.theme.screens.tablet.width}px) {
-                font-size: ${props => props.theme.font.sizeHeading.h2 * props.theme.font.sizeDefault.tablet}px;
+              @media (max-width: ${(props) => props.theme.screens.tablet.width}px) {
+                font-size: ${(props) => props.theme.font.sizeHeading.h2 * props.theme.font.sizeDefault.tablet}px;
               }
 
-              @media (max-width: ${props => props.theme.screens.mobile.width}px) {
-                font-size: ${props => props.theme.font.sizeHeading.h2 * props.theme.font.sizeDefault.mobile}px;
+              @media (max-width: ${(props) => props.theme.screens.mobile.width}px) {
+                font-size: ${(props) => props.theme.font.sizeHeading.h2 * props.theme.font.sizeDefault.mobile}px;
               }
             `
-          : value.variant === 'h3'
-            ? css`
-                font-size: ${props => props.theme.font.sizeHeading.h3 * props.theme.font.sizeDefault.default}px;
-                line-height: ${props => props.theme.font.lineHeight};
+            : value.variant === 'h3'
+              ? css`
+                font-size: ${(props) => props.theme.font.sizeHeading.h3 * props.theme.font.sizeDefault.default}px;
+                line-height: ${(props) => props.theme.font.lineHeight};
                 margin: 0;
-                @media (max-width: ${props => props.theme.screens.tablet.width}px) {
-                  font-size: ${props => props.theme.font.sizeHeading.h3 * props.theme.font.sizeDefault.tablet}px;
+                @media (max-width: ${(props) => props.theme.screens.tablet.width}px) {
+                  font-size: ${(props) => props.theme.font.sizeHeading.h3 * props.theme.font.sizeDefault.tablet}px;
                 }
 
-                @media (max-width: ${props => props.theme.screens.mobile.width}px) {
-                  font-size: ${props => props.theme.font.sizeHeading.h3 * props.theme.font.sizeDefault.mobile}px;
+                @media (max-width: ${(props) => props.theme.screens.mobile.width}px) {
+                  font-size: ${(props) => props.theme.font.sizeHeading.h3 * props.theme.font.sizeDefault.mobile}px;
                 }
               `
-            : value.variant === 'h4'
-              ? css`
-                  font-size: ${props => props.theme.font.sizeHeading.h4 * props.theme.font.sizeDefault.default}px;
-                  line-height: ${props => props.theme.font.lineHeight};
+              : value.variant === 'h4'
+                ? css`
+                  font-size: ${(props) => props.theme.font.sizeHeading.h4 * props.theme.font.sizeDefault.default}px;
+                  line-height: ${(props) => props.theme.font.lineHeight};
                   margin: 0;
-                  @media (max-width: ${props => props.theme.screens.tablet.width}px) {
-                    font-size: ${props => props.theme.font.sizeHeading.h4 * props.theme.font.sizeDefault.tablet}px;
+                  @media (max-width: ${(props) => props.theme.screens.tablet.width}px) {
+                    font-size: ${(props) => props.theme.font.sizeHeading.h4 * props.theme.font.sizeDefault.tablet}px;
                   }
 
-                  @media (max-width: ${props => props.theme.screens.mobile.width}px) {
-                    font-size: ${props => props.theme.font.sizeHeading.h4 * props.theme.font.sizeDefault.mobile}px;
+                  @media (max-width: ${(props) => props.theme.screens.mobile.width}px) {
+                    font-size: ${(props) => props.theme.font.sizeHeading.h4 * props.theme.font.sizeDefault.mobile}px;
                   }
                 `
-              : value.variant === 'h5'
-                ? css`
-                    font-size: ${props => props.theme.font.sizeHeading.h5 * props.theme.font.sizeDefault.default}px;
-                    line-height: ${props => props.theme.font.lineHeight};
+                : value.variant === 'h5'
+                  ? css`
+                    font-size: ${(props) => props.theme.font.sizeHeading.h5 * props.theme.font.sizeDefault.default}px;
+                    line-height: ${(props) => props.theme.font.lineHeight};
                     margin: 0;
-                    @media (max-width: ${props => props.theme.screens.tablet.width}px) {
-                      font-size: ${props => props.theme.font.sizeHeading.h5 * props.theme.font.sizeDefault.tablet}px;
+                    @media (max-width: ${(props) => props.theme.screens.tablet.width}px) {
+                      font-size: ${(props) => props.theme.font.sizeHeading.h5 * props.theme.font.sizeDefault.tablet}px;
                     }
 
-                    @media (max-width: ${props => props.theme.screens.mobile.width}px) {
-                      font-size: ${props => props.theme.font.sizeHeading.h5 * props.theme.font.sizeDefault.mobile}px;
+                    @media (max-width: ${(props) => props.theme.screens.mobile.width}px) {
+                      font-size: ${(props) => props.theme.font.sizeHeading.h5 * props.theme.font.sizeDefault.mobile}px;
                     }
                   `
-                : value.variant === 'h6'
-                  ? css`
-                      font-size: ${props => props.theme.font.sizeHeading.h6 * props.theme.font.sizeDefault.default}px;
-                      line-height: ${props => props.theme.font.lineHeight};
+                  : value.variant === 'h6'
+                    ? css`
+                      font-size: ${(props) => props.theme.font.sizeHeading.h6 * props.theme.font.sizeDefault.default}px;
+                      line-height: ${(props) => props.theme.font.lineHeight};
                       margin: 0;
-                      @media (max-width: ${props => props.theme.screens.tablet.width}px) {
-                        font-size: ${props => props.theme.font.sizeHeading.h6 * props.theme.font.sizeDefault.tablet}px;
+                      @media (max-width: ${(props) => props.theme.screens.tablet.width}px) {
+                        font-size: ${(props) => props.theme.font.sizeHeading.h6 * props.theme.font.sizeDefault.tablet}px;
                       }
 
-                      @media (max-width: ${props => props.theme.screens.mobile.width}px) {
-                        font-size: ${props => props.theme.font.sizeHeading.h6 * props.theme.font.sizeDefault.mobile}px;
+                      @media (max-width: ${(props) => props.theme.screens.mobile.width}px) {
+                        font-size: ${(props) => props.theme.font.sizeHeading.h6 * props.theme.font.sizeDefault.mobile}px;
                       }
                     `
-                  : value.variant === 'h7'
-                    ? css`
-                        font-size: ${props => props.theme.font.sizeHeading.h7 * props.theme.font.sizeDefault.default}px;
-                        line-height: ${props => props.theme.font.lineHeight};
+                    : value.variant === 'h7'
+                      ? css`
+                        font-size: ${(props) => props.theme.font.sizeHeading.h7 * props.theme.font.sizeDefault.default}px;
+                        line-height: ${(props) => props.theme.font.lineHeight};
                         margin: 0;
-                        @media (max-width: ${props => props.theme.screens.tablet.width}px) {
-                          font-size: ${props =>
+                        @media (max-width: ${(props) => props.theme.screens.tablet.width}px) {
+                          font-size: ${(props) =>
                             props.theme.font.sizeHeading.h7 * props.theme.font.sizeDefault.tablet}px;
                         }
 
-                        @media (max-width: ${props => props.theme.screens.mobile.width}px) {
-                          font-size: ${props =>
+                        @media (max-width: ${(props) => props.theme.screens.mobile.width}px) {
+                          font-size: ${(props) =>
                             props.theme.font.sizeHeading.h7 * props.theme.font.sizeDefault.mobile}px;
                         }
                       `
-                    : value.variant === 'h8'
-                      ? css`
-                          font-size: ${props =>
+                      : value.variant === 'h8'
+                        ? css`
+                          font-size: ${(props) =>
                             props.theme.font.sizeHeading.h8 * props.theme.font.sizeDefault.default}px;
-                          line-height: ${props => props.theme.font.lineHeight};
+                          line-height: ${(props) => props.theme.font.lineHeight};
                           margin: 0;
-                          @media (max-width: ${props => props.theme.screens.tablet.width}px) {
-                            font-size: ${props =>
+                          @media (max-width: ${(props) => props.theme.screens.tablet.width}px) {
+                            font-size: ${(props) =>
                               props.theme.font.sizeHeading.h8 * props.theme.font.sizeDefault.tablet}px;
                           }
 
-                          @media (max-width: ${props => props.theme.screens.mobile.width}px) {
-                            font-size: ${props =>
+                          @media (max-width: ${(props) => props.theme.screens.mobile.width}px) {
+                            font-size: ${(props) =>
                               props.theme.font.sizeHeading.h8 * props.theme.font.sizeDefault.mobile}px;
                           }
                         `
-                      : value.variant === 'h9'
-                        ? css`
-                            font-size: ${props =>
+                        : value.variant === 'h9'
+                          ? css`
+                            font-size: ${(props) =>
                               props.theme.font.sizeHeading.h9 * props.theme.font.sizeDefault.default}px;
-                            line-height: ${props => props.theme.font.lineHeight};
+                            line-height: ${(props) => props.theme.font.lineHeight};
                             margin: 0;
-                            @media (max-width: ${props => props.theme.screens.tablet.width}px) {
-                              font-size: ${props =>
+                            @media (max-width: ${(props) => props.theme.screens.tablet.width}px) {
+                              font-size: ${(props) =>
                                 props.theme.font.sizeHeading.h9 * props.theme.font.sizeDefault.tablet}px;
                             }
 
-                            @media (max-width: ${props => props.theme.screens.mobile.width}px) {
-                              font-size: ${props =>
+                            @media (max-width: ${(props) => props.theme.screens.mobile.width}px) {
+                              font-size: ${(props) =>
                                 props.theme.font.sizeHeading.h9 * props.theme.font.sizeDefault.mobile}px;
                             }
                           `
-                        : null
-      : null};
-  `
+                          : null
+        : null
+    };
+  `;
 }
 
 export const addSXTypography = css<addSXTypographyStyleProps>`
-  ${props => {
-    const rawSX = props.$sxTypography
-    if (!rawSX) return null
-    return toStyledCSS(rawSX.default)
+  ${(props) => {
+    const rawSX = props.$sxTypography;
+    if (!rawSX) return null;
+    return toStyledCSS(rawSX.default);
   }}
 
-  ${props => {
-    const rawSX = props.$sxTypography
-    if (!rawSX) return null
+  ${(props) => {
+    const rawSX = props.$sxTypography;
+    if (!rawSX) return null;
 
     return Object.entries(rawSX)
       .filter(([key]) => key !== 'default')
       .map(([deviceKey, value]) => {
-        const screenWidth = props.theme.screens[deviceKey as keyof typeof props.theme.screens]?.width
-        if (!screenWidth) return null
+        const screenWidth = props.theme.screens[deviceKey as keyof typeof props.theme.screens]?.width;
+        if (!screenWidth) return null;
         return css`
           @media (max-width: ${screenWidth}px) {
             ${toStyledCSS(value)}
           }
-        `
-      })
+        `;
+      });
   }}
-`
+`;
 
 const TypographyCSS = css<TypographyCSSProps>`
   font-style: normal;
@@ -266,11 +310,12 @@ const TypographyCSS = css<TypographyCSSProps>`
   overflow: visible;
   text-overflow: ellipsis;
   overflow-wrap: anywhere;
-  line-height: ${props => props.theme.font.lineHeight};
+  line-height: ${(props) => props.theme.font.lineHeight};
   ${addSXTypography};
   ${addSXStandard}
-`
+`;
 
 export const Title = styled.span<TypographyCSSProps>`
   ${TypographyCSS}
-`
+  ${addOutline}
+`;

@@ -1,62 +1,48 @@
-import { motion } from 'framer-motion'
-import styled, { css } from 'styled-components'
+import { addDisabled, addOutline, addTransition } from '@local/styles/add';
+import { addError } from '@local/styles/error';
+import { KEY_SIZE_DATA_TOGGLE } from '@local/theme';
 
-import { addTransition } from '@local/styles/add'
-import { addError } from '@local/styles/error'
-import { IJeneseiThemeSizeToggle, KEY_SIZE_DATA_TOGGLE } from '@local/theme'
+import { motion } from 'framer-motion';
+import styled, { css } from 'styled-components';
 
-import { StyledToggleProps } from '.'
+import { StyledToggleProps } from '.';
 
-/****************************************** Size *************************************************/
-const ToggleWrapperSize = css<StyledToggleProps>`
-  ${props => ToggleWrapperSizeConstructor(KEY_SIZE_DATA_TOGGLE[props.$size])};
-`
-const ToggleWrapperSizeConstructor = (props: IJeneseiThemeSizeToggle) => css`
-  height: ${props.height}px;
-  width: ${props.width}px;
-  padding: ${props.padding}px;
+/****************************************** Add *************************************************/
+const addToggleWrapperSize = css<StyledToggleProps>`
+  ${(props) => css`
+    height: ${KEY_SIZE_DATA_TOGGLE[props.$size].height}px;
+    width: ${KEY_SIZE_DATA_TOGGLE[props.$size].width}px;
+    padding: ${KEY_SIZE_DATA_TOGGLE[props.$size].padding}px;
+    border-radius: 100px;
+  `};
+`;
+
+const addToggleCenterSize = css<StyledToggleProps>`
+  ${(props) => css`
+  height: ${KEY_SIZE_DATA_TOGGLE[props.$size].thumb}px;
+  width: ${KEY_SIZE_DATA_TOGGLE[props.$size].thumb}px;
   border-radius: 100px;
-`
-
-const ToggleCenterSize = css<StyledToggleProps>`
-  ${props => ToggleCenterSizeConstructor(KEY_SIZE_DATA_TOGGLE[props.$size])};
-`
-const ToggleCenterSizeConstructor = (props: IJeneseiThemeSizeToggle) => css`
-  height: ${props.thumb}px;
-  width: ${props.thumb}px;
-  border-radius: 100px;
-`
-
+  `}
+`;
 /****************************************** Standard *************************************************/
 export const ToggleWrapper = styled(motion.div)<StyledToggleProps>`
-  ${ToggleWrapperSize};
-
   cursor: pointer;
   border: 1px solid transparent;
 
   display: flex;
   align-items: center;
 
+  ${addToggleWrapperSize};
   ${addTransition};
+  ${addOutline};
+  ${addDisabled};
 
-  &:focus-visible {
-    outline: 1px solid ${props => props.theme.states.focus};
-  }
-  ${props =>
-    props.$isDisabled
-      ? css`
-          opacity: 0.5;
-        `
-      : css`
-          opacity: 1;
-        `};
-
-  ${props =>
+  ${(props) =>
     props.$value
       ? css`
           background: ${props.theme.colors.toggle[props.$genre].active.rest.track};
           border-color: ${props.theme.colors.toggle[props.$genre].active.rest.border};
-          justify-content: flex-end;
+          justify-content: flex-start;
           &:hover {
             background: ${props.theme.colors.toggle[props.$genre].active.hover.track};
             border-color: ${props.theme.colors.toggle[props.$genre].active.hover.border};
@@ -73,13 +59,13 @@ export const ToggleWrapper = styled(motion.div)<StyledToggleProps>`
         `};
 
   ${addError};
-`
+`;
 
 export const ToggleCenter = styled(motion.div)<StyledToggleProps>`
-  ${ToggleCenterSize};
+  ${addToggleCenterSize};
   ${addTransition};
 
-  ${props =>
+  ${(props) =>
     props.$value
       ? css`
           background: ${props.theme.colors.toggle[props.$genre].active.rest.thumb};
@@ -97,4 +83,4 @@ export const ToggleCenter = styled(motion.div)<StyledToggleProps>`
             box-shadow: ${props.theme.colors.toggle[props.$genre].unActive.hover.thumbBoxShadow};
           }
         `}
-`
+`;

@@ -4,7 +4,7 @@ import 'styled-components'
 
 import { Smooth as SmoothComponent } from '@local/areas/smooth'
 import { Button } from '@local/components/button'
-import { Stack, StackProps } from '@local/components/stack'
+import { Stack, StackMotion, StackProps } from '@local/components/stack'
 import { Typography } from '@local/components/typography'
 
 const meta: Meta<typeof SmoothComponent> = {
@@ -35,10 +35,13 @@ const SmoothWrapper: FC<StackProps> = props => {
         }
       })}
     >
-      <Button onClick={toggleContent} size={'small'} genre={'gray'}>
-        Toggle Content
-      </Button>
-      <Stack
+      <StackMotion layout="position">
+        <Button onClick={toggleContent} size={'small'} genre={'gray'}>
+          Toggle Content
+        </Button>
+      </StackMotion>
+      <StackMotion
+        layout="position"
         sx={theme => ({
           default: {
             height: '100px',
@@ -56,7 +59,7 @@ const SmoothWrapper: FC<StackProps> = props => {
         >
           One
         </Typography>
-      </Stack>
+      </StackMotion>
       {content ? (
         <Stack
           sx={theme => ({

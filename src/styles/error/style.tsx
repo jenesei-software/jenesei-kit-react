@@ -2,7 +2,7 @@ import { FC } from 'react'
 import styled, { css } from 'styled-components'
 
 import { getFontSizeStyles } from '@local/components/typography'
-import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
+import { IThemeSizePropertyDefault, KEY_SIZE_DATA } from '@local/theme'
 
 import { ErrorMessageProps, ErrorMessagePropsDollar, addErrorStylesProps } from '.'
 import { WordsPullUp } from '../motion'
@@ -15,7 +15,7 @@ const ErrorMessageSize = css<ErrorMessagePropsDollar>`
       : null};
 `
 const ErrorMessageSizeConstructor = (
-  props: IJeneseiThemeSize & { $isErrorAbsolute: ErrorMessageProps['isErrorAbsolute'] }
+  props: IThemeSizePropertyDefault & { $isErrorAbsolute: ErrorMessageProps['isErrorAbsolute'] }
 ) => css`
   ${props.$isErrorAbsolute
     ? css`

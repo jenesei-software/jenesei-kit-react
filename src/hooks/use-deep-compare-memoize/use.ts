@@ -19,7 +19,8 @@ const isDeepEqual = (a: any, b: any): boolean => {
   return true
 }
 
-export const useDeepCompareMemoize = <T extends object | undefined | boolean>(value: T): T => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const useDeepCompareMemoize = <T extends object | undefined | boolean | any[]>(value: T): T => {
   const ref = useRef<T>(value)
 
   if (!isDeepEqual(value, ref.current)) {

@@ -1,131 +1,157 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import { FC, useState } from 'react'
-import 'styled-components'
+import type { Meta } from '@storybook/react-vite';
+import { FC, useState } from 'react';
+import 'styled-components';
 
-import { Input, InputProps } from '@local/components/input'
-import { Stack } from '@local/components/stack'
+import { Input as InputComponent } from '@local/components/input';
+import { Typography } from '@local/components/typography';
 
-const meta: Meta<typeof Input> = {
-  component: Input,
-  title: 'Component/Input'
-}
+import { WrapperBig } from './tools';
 
-export default meta
-type Story = StoryObj<typeof Input>
+const meta: Meta<typeof InputComponent> = {
+  component: InputComponent,
+  title: 'Component/Input',
+};
 
-const defaultArgs: Partial<InputProps> = {
-  genre: 'blackBorder',
-  size: 'largeMedium',
-  error: {
-    errorMessage: 'Большая страшная ошибка на много строк',
-    isError: true,
-    isErrorAbsolute: true
-  },
-  isDisabled: false,
-  isRequired: false,
-  isReadOnly: false,
-  isLoading: false,
-  sx: {
-    default: {
-      width: '300px'
-    }
-  }
-}
+export default meta;
 
-const InputStringWrapper: FC<InputProps> = props => {
-  const [value, setValue] = useState<string>('')
+const InputWrapperAll: FC = () => {
+  const [valueStandard, setValueStandard] = useState<string>('');
+  const [valuePhone, setValuePhone] = useState<string>('');
+  const [valueCost, setValueCost] = useState<number | null>(null);
 
   return (
-    <Stack sx={{ default: { position: 'relative', height: 'fit-content' } }}>
-      <Input {...props} value={value} variety="standard" onChange={newValue => setValue(newValue)} />
-    </Stack>
-  )
-}
+    <WrapperBig sx={{ default: { flexDirection: 'row', width: '400px' } }}>
+      <WrapperBig sx={{ default: { flexDirection: 'column', width: '100%' } }}>
+        <Typography
+          sx={{
+            default: {
+              variant: 'h5',
+              color: 'black100',
+            },
+          }}
+        >
+          Variety - standard
+        </Typography>
+        <InputComponent
+          placeholder='Standard'
+          genre='blackBorder'
+          size='medium'
+          value={valueStandard}
+          variety='standard'
+          onChange={(newValue) => setValueStandard(newValue)}
+        />
+      </WrapperBig>
+      <WrapperBig sx={{ default: { flexDirection: 'column', width: '100%' } }}>
+        <Typography
+          sx={{
+            default: {
+              variant: 'h5',
+              color: 'black100',
+            },
+          }}
+        >
+          Variety - standard, password
+        </Typography>
+        <InputComponent
+          placeholder='Password'
+          genre='blackBorder'
+          type='password'
+          size='medium'
+          value={valueStandard}
+          variety='standard'
+          onChange={(newValue) => setValueStandard(newValue)}
+        />
+      </WrapperBig>
+      <WrapperBig sx={{ default: { flexDirection: 'column', width: '100%' } }}>
+        <Typography
+          sx={{
+            default: {
+              variant: 'h5',
+              color: 'black100',
+            },
+          }}
+        >
+          Variety - pattern, phone
+        </Typography>
+        <InputComponent
+          placeholder='Phone'
+          propsPattern={{
+            format: '+7 (9##) ###-##-##',
+            mask: '_',
+            type: 'tel',
+          }}
+          genre='blackBorder'
+          size='medium'
+          value={valuePhone}
+          variety='pattern'
+          onChange={(newValue) => setValuePhone(newValue.formattedValue)}
+        />
+      </WrapperBig>
+      <WrapperBig sx={{ default: { flexDirection: 'column', width: '100%' } }}>
+        <Typography
+          sx={{
+            default: {
+              variant: 'h5',
+              color: 'black100',
+            },
+          }}
+        >
+          Variety - pattern, code
+        </Typography>
+        <InputComponent
+          placeholder='Code'
+          propsPattern={{
+            format: '# # # #',
+            mask: '_',
+            type: 'text',
+          }}
+          genre='blackBorder'
+          size='medium'
+          value={valueStandard}
+          variety='pattern'
+          onChange={(newValue) => setValuePhone(newValue.formattedValue)}
+        />
+      </WrapperBig>
+      <WrapperBig sx={{ default: { flexDirection: 'column', width: '100%' } }}>
+        <Typography
+          sx={{
+            default: {
+              variant: 'h5',
+              color: 'black100',
+            },
+          }}
+        >
+          Variety - numeric, cost
+        </Typography>
+        <InputComponent
+          placeholder='Cost'
+          propsNumeric={{
+            allowLeadingZeros: false,
+            thousandSeparator: ' ',
+            allowNegative: false,
+            allowedDecimalSeparators: ['.'],
+            decimalScale: 2,
+            decimalSeparator: ',',
+            fixedDecimalScale: true,
+            prefix: '$',
+            suffix: ' USD',
+            thousandsGroupStyle: 'thousand',
+            isAllowed: (values) => {
+              const { floatValue } = values;
+              return (floatValue ?? 0) >= 0 && (floatValue ?? 0) <= 10000;
+            },
+          }}
+          genre='blackBorder'
+          size='medium'
+          value={valueCost}
+          variety='numeric'
+          onChange={(newValue) => setValueCost(newValue.floatValue ?? null)}
+        />
+      </WrapperBig>
+    </WrapperBig>
+  );
+};
 
-export const Password: Story = {
-  render: args => <InputStringWrapper {...args} />,
-  args: {
-    ...defaultArgs,
-    onChange(value) {
-      console.log(value)
-    },
-    variety: 'standard',
-    type: 'password',
-    placeholder: 'Password'
-  }
-}
-
-export const Phone: Story = {
-  args: {
-    ...defaultArgs,
-    onChange(value) {
-      console.log(value)
-    },
-    variety: 'pattern',
-    propsPattern: {
-      format: '+7 (9##) ###-##-##',
-      mask: '_',
-      type: 'tel'
-    },
-    placeholder: 'Phone'
-  }
-}
-
-export const INN: Story = {
-  args: {
-    ...defaultArgs,
-    variety: 'pattern',
-    onChange(value) {
-      console.log(value)
-    },
-    propsPattern: {
-      format: '### ### ### ###',
-      mask: '',
-      type: 'text'
-    },
-    placeholder: 'INN'
-  }
-}
-
-export const Code: Story = {
-  args: {
-    ...defaultArgs,
-    onChange(value) {
-      console.log(value)
-    },
-    placeholder: 'Code',
-    variety: 'pattern',
-    propsPattern: {
-      format: '# # # #',
-      mask: '_',
-      type: 'text'
-    }
-  }
-}
-
-export const Cost: Story = {
-  args: {
-    ...defaultArgs,
-    placeholder: 'Cost',
-    variety: 'numeric',
-    onChange(value) {
-      console.log(value)
-    },
-    propsNumeric: {
-      allowLeadingZeros: false,
-      thousandSeparator: ' ',
-      allowNegative: false,
-      allowedDecimalSeparators: ['.'],
-      decimalScale: 2,
-      decimalSeparator: ',',
-      fixedDecimalScale: true,
-      prefix: '$',
-      suffix: ' USD',
-      thousandsGroupStyle: 'thousand',
-      isAllowed: values => {
-        const { floatValue } = values
-        return (floatValue ?? 0) >= 0 && (floatValue ?? 0) <= 10000
-      }
-    }
-  }
-}
+export const Input = {
+  render: () => <InputWrapperAll />,
+};

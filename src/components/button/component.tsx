@@ -1,90 +1,97 @@
-import { FC, Ref, useMemo } from 'react'
-import { useTheme } from 'styled-components'
-
 import {
   Icon,
   TIconCheckboxNameString,
   TIconIdNameString,
   TIconLoadingNameString,
   TIconLogoNameString,
-  TIconRealEbailNameString
-} from '@local/components/icon'
-import { Ripple } from '@local/components/ripple'
+  TIconRealEbailNameString,
+} from '@local/components/icon';
+import { Ripple } from '@local/components/ripple';
 
-import { ButtonProps, StyledButton, StyledButtonIconsWrapper } from '.'
+import { useMergeRefs } from '@floating-ui/react';
+import { FC, Ref, useMemo, useRef } from 'react';
+import { useTheme } from 'styled-components';
 
-export const Button: FC<ButtonProps> = props => {
-  const theme = useTheme()
+import { ButtonProps, StyledButton, StyledButtonIconsWrapper } from '.';
+
+export const Button: FC<ButtonProps> = (props) => {
+  const theme = useTheme();
 
   const iconComponents = useMemo(
     () =>
       (props.icons ?? [])
-        ?.filter(icon => !icon.isHidden)
+        ?.filter((icon) => !icon.isHidden)
         ?.map((icon, index) =>
           icon?.type === 'id' ? (
             <Icon
-              key={index}
+              key={`${icon.type}-${icon.name}-${index}`}
               name={icon?.name as TIconIdNameString}
-              type="id"
+              type='id'
               size={icon?.size ?? props.size}
               turn={icon.turn}
               order={icon.order}
             />
           ) : icon?.type === 'logo' ? (
             <Icon
-              key={index}
+              key={`${icon.type}-${icon.name}-${index}`}
               name={icon?.name as TIconLogoNameString}
-              type="logo"
+              type='logo'
               size={icon?.size ?? props.size}
               turn={icon.turn}
               order={icon.order}
             />
           ) : icon?.type === 'checkbox' ? (
             <Icon
-              key={index}
+              key={`${icon.type}-${icon.name}-${index}`}
               name={icon?.name as TIconCheckboxNameString}
-              type="checkbox"
+              type='checkbox'
               size={icon?.size ?? props.size}
               turn={icon.turn}
               order={icon.order}
             />
           ) : icon?.type === 'loading' ? (
             <Icon
-              key={index}
+              key={`${icon.type}-${icon.name}-${index}`}
               name={icon?.name as TIconLoadingNameString}
-              type="loading"
+              type='loading'
               size={icon?.size ?? props.size}
               turn={icon.turn}
               order={icon.order}
             />
           ) : icon?.type === 'realebail' ? (
             <Icon
-              key={index}
+              key={`${icon.type}-${icon.name}-${index}`}
               name={icon?.name as TIconRealEbailNameString}
-              type="realebail"
+              type='realebail'
               size={icon?.size ?? props.size}
               turn={icon.turn}
               order={icon.order}
             />
-          ) : null
+          ) : null,
         ),
-    [props.icons, props.size]
-  )
+    [props.icons, props.size],
+  );
 
-  const handleClick: ButtonProps['onClick'] = event => {
+  const handleClick: ButtonProps['onClick'] = (event) => {
     if (!props.isDisabled && props.onClick) {
-      props.onClick(event)
+      props.onClick(event);
     }
-  }
+  };
+  const refDefault = useRef<HTMLButtonElement>(null);
+
+  const ref = useMergeRefs([refDefault, props.ref]);
 
   return (
     <StyledButton
+      $isNotHoverEffect={props.isNotHoverEffect}
+      whileTap={props.isWhileTapEffect ? { scale: 0.9, transition: { duration: 0.02 } } : {}}
       id={props.id}
-      tabIndex={0}
+      tabIndex={props.tabIndex ?? 0}
       $isFullSize={props.isFullSize}
       $genre={props.genre}
       $size={props.size}
       $isDisabled={props.isDisabled}
+      $isMinWidthAsContent={props.isMinWidthAsContent}
       $isWidthAsHeight={props.isWidthAsHeight}
       $isRadius={props.isRadius}
       $isHidden={props.isHidden}
@@ -95,24 +102,24 @@ export const Button: FC<ButtonProps> = props => {
       type={props.type ?? 'button'}
       className={props.className}
       onClick={handleClick}
-      ref={props.ref as Ref<HTMLButtonElement>}
+      onMouseDown={props.onMouseDown}
+      ref={ref as Ref<HTMLButtonElement>}
       $sx={props.sx}
     >
       <Ripple
         color={theme.colors.checkbox[props.genre].color.rest}
-        isDisabled={props.isDisabled}
+        isDisabled={props.isDisabled ?? props.isDisabledRipple}
         isHidden={props.isHidden}
       />
-      <>
-        {!props.isOnlyIcon && <div style={{ order: 0, display: 'contents' }}>{props.children && props.children}</div>}
-        <StyledButtonIconsWrapper
-          $size={props.size}
-          $isIconGroup={props.isIconGroup}
-          $iconGroupOrder={'iconGroupOrder' in props ? props.iconGroupOrder : undefined}
-        >
-          {iconComponents}
-        </StyledButtonIconsWrapper>
-      </>
+
+      {!props.isOnlyIcon && <div style={{ order: 0, display: 'contents' }}>{props.children && props.children}</div>}
+      <StyledButtonIconsWrapper
+        $size={props.size}
+        $isIconGroup={props.isIconGroup}
+        $iconGroupOrder={'iconGroupOrder' in props ? props.iconGroupOrder : undefined}
+      >
+        {iconComponents}
+      </StyledButtonIconsWrapper>
     </StyledButton>
-  )
-}
+  );
+};

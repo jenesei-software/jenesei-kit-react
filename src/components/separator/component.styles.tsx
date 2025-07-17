@@ -1,15 +1,21 @@
-import styled from 'styled-components'
+import { addSX } from '@local/styles/sx';
 
-import { addSX } from '@local/styles/sx'
+import styled from 'styled-components';
 
-import { SeparatorWrapperProps } from '.'
+import { SeparatorWrapperProps } from '.';
 
-const DEFAULT_SEPARATOR_SIZE = '1px'
+const DEFAULT_SEPARATOR_SIZE = '1px';
 
 export const SeparatorWrapper = styled.div<SeparatorWrapperProps>`
-  height: ${props => (props.$type === 'horizontal' ? DEFAULT_SEPARATOR_SIZE : '100%')};
-  width: ${props => (props.$type === 'vertical' ? DEFAULT_SEPARATOR_SIZE : '100%')};
-  background: ${props => props.$color && props.theme.palette[props.$color]};
-  border-radius: ${props => props.$radius || '0px'};
+  flex-grow: 1;
+  flex-shrink: 1;
+
+  width: ${(props) => (props.$type === 'horizontal' ? 'auto' : props.$thickness || DEFAULT_SEPARATOR_SIZE)};
+  max-width: ${(props) => (props.$type === 'horizontal' ? '100%' : props.$thickness || DEFAULT_SEPARATOR_SIZE)};
+  height: ${(props) => (props.$type === 'vertical' ? 'auto' : props.$thickness || DEFAULT_SEPARATOR_SIZE)};
+  max-height: ${(props) => (props.$type === 'vertical' ? '100%' : props.$thickness || DEFAULT_SEPARATOR_SIZE)};
+
+  background: ${(props) => props.$color && props.theme.palette[props.$color]};
+  border-radius: ${(props) => props.$radius || '0px'};
   ${addSX};
-`
+`;

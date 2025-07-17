@@ -1,3 +1,8 @@
+import { addErrorProps } from '@local/styles/error';
+import { addSXProps } from '@local/styles/sx';
+import { IThemeGenreInput, IThemeSize } from '@local/theme';
+import { AddDollarSign } from '@local/types';
+
 import {
   ClipboardEventHandler,
   FocusEventHandler,
@@ -5,99 +10,105 @@ import {
   HTMLInputTypeAttribute,
   KeyboardEventHandler,
   PropsWithChildren,
-  Ref
-} from 'react'
-import { NumberFormatValues, NumericFormatProps, PatternFormatProps } from 'react-number-format'
+  Ref,
+} from 'react';
+import { NumberFormatValues, NumericFormatProps, PatternFormatProps } from 'react-number-format';
 
-import { addErrorProps } from '@local/styles/error'
-import { addSXProps } from '@local/styles/sx'
-import { TJeneseiThemeGenreInput, TJeneseiThemeSize } from '@local/theme'
-import { AddDollarSign } from '@local/types'
-
-type InputDefaultProps = addErrorProps &
+type CommonInputProps = addErrorProps &
   addSXProps & {
-    ref?: Ref<HTMLInputElement | null>
+    ref?: Ref<HTMLInputElement | null>;
 
-    name?: string
+    name?: string;
 
-    id?: string
+    id?: string;
 
-    className?: string
+    className?: string;
 
-    defaultValue?: string
+    isNotShowHoverStyle?: boolean;
 
-    isNotShowHoverStyle?: boolean
+    autoComplete?: HTMLInputAutoCompleteAttribute | string;
 
-    autocomplete?: HTMLInputAutoCompleteAttribute
+    isAllowEmptyFormatting?: boolean;
 
-    isAllowEmptyFormatting?: boolean
+    genre: TInputGenre;
 
-    genre: TInputGenre
+    size: IThemeSize;
 
-    size: TJeneseiThemeSize
+    tabIndex?: number;
 
-    tabIndex?: number
+    isWidthAsHeight?: boolean;
 
-    isWidthAsHeight?: boolean
+    isNiceNumber?: boolean;
 
-    isNiceNumber?: boolean
+    isDisabled?: boolean;
 
-    isDisabled?: boolean
+    isLoading?: boolean;
 
-    isLoading?: boolean
+    isReadOnly?: boolean;
 
-    isReadOnly?: boolean
+    isInputEffect?: boolean;
 
-    isInputEffect?: boolean
+    isRequired?: boolean;
 
-    isRequired?: boolean
+    isCenter?: boolean;
 
-    isCenter?: boolean
+    isNoSpaces?: boolean;
 
-    isNoSpaces?: boolean
+    onBlur?: FocusEventHandler<HTMLInputElement>;
 
-    onBlur?: FocusEventHandler<HTMLInputElement>
+    onPaste?: ClipboardEventHandler<HTMLInputElement>;
 
-    onPaste?: ClipboardEventHandler<HTMLInputElement>
+    onFocus?: FocusEventHandler<HTMLInputElement>;
 
-    onFocus?: FocusEventHandler<HTMLInputElement>
+    onKeyDown?: KeyboardEventHandler<HTMLInputElement>;
 
-    onKeyDown?: KeyboardEventHandler<HTMLInputElement>
+    placeholder?: string;
 
-    placeholder?: string
+    isBold?: boolean;
 
-    isBold?: boolean
+    postfixChildren?: InputChildrenProps;
 
-    postfixChildren?: InputChildrenProps
+    prefixChildren?: InputChildrenProps;
 
-    prefixChildren?: InputChildrenProps
+    inputMode?: 'text' | 'none' | 'tel' | 'url' | 'email' | 'numeric' | 'decimal' | 'search';
 
-    value?: string | null | number
+    maxLength?: number;
+    minLength?: number;
+  };
 
-    inputMode?: 'text' | 'none' | 'tel' | 'url' | 'email' | 'numeric' | 'decimal' | 'search'
+// Контролируемый вариант
+type ControlledValue = {
+  value: string | number | null | undefined;
+  defaultValue?: never;
+};
 
-    maxLength?: number
-    minLength?: number
-  }
-export type InputStandardProps = InputDefaultProps & {
-  variety: 'standard'
-  onChange?: (value: string) => void
-  type?: HTMLInputTypeAttribute
-  min?: number
-  max?: number
-  step?: number
-}
-export type InputPatternProps = InputDefaultProps & {
-  variety: 'pattern'
-  onChange?: (value: NumberFormatValues) => void
+// Неконтролируемый вариант
+type UncontrolledValue = {
+  value?: never;
+  defaultValue: string | number | null | undefined;
+};
+
+type BaseInputProps = CommonInputProps & (ControlledValue | UncontrolledValue);
+
+export type InputStandardProps = BaseInputProps & {
+  variety: 'standard';
+  onChange?: (value: string) => void;
+  type?: HTMLInputTypeAttribute;
+  min?: number;
+  max?: number;
+  step?: number;
+};
+export type InputPatternProps = BaseInputProps & {
+  variety: 'pattern';
+  onChange?: (value: NumberFormatValues) => void;
   propsPattern: Pick<
     PatternFormatProps,
     'format' | 'mask' | 'allowEmptyFormatting' | 'patternChar' | 'valueIsNumericString' | 'type'
-  >
-}
-export type InputNumericProps = InputDefaultProps & {
-  variety: 'numeric'
-  onChange?: (value: NumberFormatValues) => void
+  >;
+};
+export type InputNumericProps = BaseInputProps & {
+  variety: 'numeric';
+  onChange?: (value: NumberFormatValues) => void;
   propsNumeric: Pick<
     NumericFormatProps,
     | 'allowLeadingZeros'
@@ -111,23 +122,23 @@ export type InputNumericProps = InputDefaultProps & {
     | 'thousandsGroupStyle'
     | 'isAllowed'
     | 'suffix'
-  >
-}
-export type InputProps = InputStandardProps | InputPatternProps | InputNumericProps
+  >;
+};
+export type InputProps = InputStandardProps | InputPatternProps | InputNumericProps;
 
 export interface InputChildrenProps extends PropsWithChildren {
-  left: string
+  left: string;
 
-  right: string
+  right: string;
 
-  width: string
+  width: string;
 }
 
 export type StyledInputChildrenProps = AddDollarSign<
   Pick<InputProps, 'isDisabled'> & Pick<InputChildrenProps, 'left' | 'right' | 'width'>
->
+>;
 
-export type TInputGenre = keyof TJeneseiThemeGenreInput
+export type TInputGenre = keyof IThemeGenreInput;
 
 export type StyledInputProps = AddDollarSign<
   Pick<
@@ -146,8 +157,8 @@ export type StyledInputProps = AddDollarSign<
     | 'sx'
     | 'isCenter'
   >
->
+>;
 
 export type StyledInputWrapperProps = AddDollarSign<
   Pick<InputProps, 'isDisabled' | 'isInputEffect' | 'sx' | 'size' | 'isWidthAsHeight'>
->
+>;

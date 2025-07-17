@@ -1,7 +1,7 @@
 import { FC, createContext, useCallback, useEffect, useState } from 'react'
 
 import { Preview, PreviewAdditionalProps } from '@local/areas/preview'
-import { JeneseiPalette, JeneseiPaletteKeys } from '@local/theme'
+import { JeneseiPalette, IThemePaletteKeys } from '@local/theme'
 
 import {
   AppContextProps,
@@ -157,19 +157,19 @@ const usePreview = (defaultPreview: ProviderAppProps['defaultPreview']) => {
  * Custom hook to manage background color state with history tracking.
  */
 type BgColorState = {
-  bgColor: JeneseiPaletteKeys
-  bgColorHistory: JeneseiPaletteKeys[]
+  bgColor: IThemePaletteKeys
+  bgColorHistory: IThemePaletteKeys[]
   bgColorIndex: number
 }
 
-export const useBgColor = (defaultColor: JeneseiPaletteKeys) => {
+export const useBgColor = (defaultColor: IThemePaletteKeys) => {
   const [state, setState] = useState<BgColorState>({
     bgColor: defaultColor,
     bgColorHistory: [defaultColor],
     bgColorIndex: 0
   })
 
-  const changeBgColor = useCallback((color: JeneseiPaletteKeys) => {
+  const changeBgColor = useCallback((color: IThemePaletteKeys) => {
     setState(prev => {
       const newHistory = [...prev.bgColorHistory.slice(0, prev.bgColorIndex + 1), color]
       return {
@@ -223,19 +223,19 @@ export const useBgColor = (defaultColor: JeneseiPaletteKeys) => {
  * Custom hook to manage the status bar color with history tracking.
  */
 type StatusBarColorState = {
-  statusBarColor: JeneseiPaletteKeys
-  statusBarColorHistory: JeneseiPaletteKeys[]
+  statusBarColor: IThemePaletteKeys
+  statusBarColorHistory: IThemePaletteKeys[]
   statusBarColorIndex: number
 }
 
-export const useStatusBarColor = (defaultColor: JeneseiPaletteKeys) => {
+export const useStatusBarColor = (defaultColor: IThemePaletteKeys) => {
   const [state, setState] = useState<StatusBarColorState>({
     statusBarColor: defaultColor,
     statusBarColorHistory: [defaultColor],
     statusBarColorIndex: 0
   })
 
-  const changeStatusBarColor = useCallback((color: JeneseiPaletteKeys) => {
+  const changeStatusBarColor = useCallback((color: IThemePaletteKeys) => {
     setState(prev => {
       const newHistory = [...prev.statusBarColorHistory.slice(0, prev.statusBarColorIndex + 1), color]
       return {

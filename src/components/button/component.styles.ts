@@ -1,10 +1,11 @@
+import { motion } from 'framer-motion'
 import styled, { css } from 'styled-components'
 
 import { addRippleDefault } from '@local/components/ripple'
 import { addSXTypography, getFontSizeStyles } from '@local/components/typography'
 import { addOutline, addTransition } from '@local/styles/add'
 import { addSX } from '@local/styles/sx'
-import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
+import { IThemeSizePropertyDefault, KEY_SIZE_DATA } from '@local/theme'
 
 import { StyledDollarButtonIconsWrapperProps, StyledDollarButtonProps } from '.'
 
@@ -15,7 +16,7 @@ const ButtonGenre = css<StyledDollarButtonProps>`
     border-color: ${props.theme.colors.button[props.$genre].border.rest};
     color: ${props.theme.colors.button[props.$genre].color.rest};
     &:hover {
-      ${!props.$isHidden &&
+      ${(!props.$isHidden || props.$isNotHoverEffect) &&
       css`
         background: ${props.theme.colors.button[props.$genre].background.hover};
         border-color: ${props.theme.colors.button[props.$genre].border.hover};
@@ -83,24 +84,24 @@ export const ButtonSize = css<StyledDollarButtonProps>`
     ButtonSizeConstructor({
       ...KEY_SIZE_DATA[props.$size],
       isFullSize: props.$isFullSize,
-      isWidthAsHeight: props.$isWidthAsHeight
+      isWidthAsHeight: props.$isWidthAsHeight,
+      isMinWidthAsContent: props.$isMinWidthAsContent
     })};
 `
 export const ButtonSizeConstructor = (
-  props: IJeneseiThemeSize & {
+  props: IThemeSizePropertyDefault & {
     isFullSize?: boolean
     isWidthAsHeight?: boolean
+    isMinWidthAsContent?: boolean
   }
 ) => css`
-  /* height: ${props.height}px; */
   height: fit-content;
   min-height: ${props.height}px;
   max-height: fit-content;
+  padding: 2px ${props.padding}px;
   border-radius: ${props.radius}px;
   gap: ${props.padding - 2}px;
   ${params => getFontSizeStyles(props.font, 700, params.theme.font.family)};
-  padding: 2px ${props.padding}px;
-
   ${() =>
     props.isFullSize &&
     css`
@@ -113,6 +114,10 @@ export const ButtonSizeConstructor = (
     width: ${props.height}px;
     min-width: ${props.height}px;
     padding: 0px;
+  `};
+  ${props.isMinWidthAsContent &&
+  css`
+    min-width: max-content;
   `};
 `
 /****************************************** Border *************************************************/
@@ -127,10 +132,7 @@ const ButtonFlex = css<StyledDollarButtonProps>`
   justify-content: center;
 `
 /****************************************** Styled *************************************************/
-export const StyledButton = styled.button<StyledDollarButtonProps>`
-  overflow: hidden;
-  text-overflow: ellipsis;
-
+export const StyledButton = styled(motion.button)<StyledDollarButtonProps>`
   cursor: pointer;
   user-select: none;
 

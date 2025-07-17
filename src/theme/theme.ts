@@ -1,22 +1,22 @@
 import { getContrastYIQ } from '@local/functions'
 
 import {
-  IJeneseiTheme,
-  IJeneseiThemeSize,
-  IJeneseiThemeSizeToggle,
-  JeneseiPaletteKeys,
-  TJeneseiThemeGenre,
-  TJeneseiThemeGenreDate,
-  TJeneseiThemeGenreImageSelect,
-  TJeneseiThemeGenreInput,
-  TJeneseiThemeGenreRange,
-  TJeneseiThemeGenreSelect,
-  TJeneseiThemeGenreSonner,
-  TJeneseiThemeGenreToggle,
-  TJeneseiThemeSize
+  ITheme,
+  IThemeGenre,
+  IThemeGenreDate,
+  IThemeGenreImageSelect,
+  IThemeGenreInput,
+  IThemeGenreRange,
+  IThemeGenreSelect,
+  IThemeGenreSonner,
+  IThemeGenreToggle,
+  IThemePaletteKeys,
+  IThemeSize,
+  IThemeSizePropertyDefault,
+  IThemeSizePropertyToggle
 } from '.'
 
-export const JeneseiPalette: Record<JeneseiPaletteKeys, string> = {
+export const JeneseiPalette: Record<IThemePaletteKeys, string> = {
   currentColor: 'currentColor',
   inherit: 'inherit',
   transparent: 'transparent',
@@ -68,7 +68,7 @@ export const JeneseiPalette: Record<JeneseiPaletteKeys, string> = {
   amnezia: '#222224'
 }
 
-const DefaultJeneseiThemeGenre: TJeneseiThemeGenre = {
+const ThemeGenre: IThemeGenre = {
   'realebail-white': {
     background: {
       rest: JeneseiPalette.whiteJanice,
@@ -265,7 +265,7 @@ const DefaultJeneseiThemeGenre: TJeneseiThemeGenre = {
     }
   }
 }
-const DefaultJeneseiThemeImageSelect: TJeneseiThemeGenreImageSelect = {
+const ThemeImageSelect: IThemeGenreImageSelect = {
   'realebail-white': {
     background: {
       rest: JeneseiPalette.whiteJanice,
@@ -327,7 +327,7 @@ const DefaultJeneseiThemeImageSelect: TJeneseiThemeGenreImageSelect = {
     }
   }
 }
-const DefaultJeneseiThemeGenreInput: TJeneseiThemeGenreInput = {
+const ThemeGenreInput: IThemeGenreInput = {
   'realebail-white': {
     background: {
       rest: JeneseiPalette.whiteStandard,
@@ -389,7 +389,7 @@ const DefaultJeneseiThemeGenreInput: TJeneseiThemeGenreInput = {
     }
   }
 }
-const DefaultJeneseiThemeGenreRange: TJeneseiThemeGenreRange = {
+const ThemeGenreRange: IThemeGenreRange = {
   'realebail-white': {
     track: {
       background: {
@@ -471,7 +471,7 @@ const DefaultJeneseiThemeGenreRange: TJeneseiThemeGenreRange = {
     }
   }
 }
-const DefaultJeneseiThemeSelect: TJeneseiThemeGenreSelect = {
+const ThemeSelect: IThemeGenreSelect = {
   'realebail-white': {
     background: {
       rest: JeneseiPalette.whiteJanice,
@@ -545,7 +545,7 @@ const DefaultJeneseiThemeSelect: TJeneseiThemeGenreSelect = {
     }
   }
 }
-const DefaultJeneseiThemeGenreDate: TJeneseiThemeGenreDate = {
+const ThemeGenreDate: IThemeGenreDate = {
   'realebail-white': {
     background: {
       rest: JeneseiPalette.whiteJanice,
@@ -655,7 +655,7 @@ const DefaultJeneseiThemeGenreDate: TJeneseiThemeGenreDate = {
     }
   }
 }
-const DefaultJeneseiThemeGenreToggle: TJeneseiThemeGenreToggle = {
+const ThemeGenreToggle: IThemeGenreToggle = {
   product: {
     active: {
       rest: {
@@ -687,7 +687,7 @@ const DefaultJeneseiThemeGenreToggle: TJeneseiThemeGenreToggle = {
     }
   }
 }
-const DefaultJeneseiThemeGenreSonner: TJeneseiThemeGenreSonner = {
+const ThemeGenreSonner: IThemeGenreSonner = {
   black: {
     button: {
       genre: 'black'
@@ -769,7 +769,7 @@ const DefaultJeneseiThemeGenreSonner: TJeneseiThemeGenreSonner = {
     }
   }
 }
-export const JeneseiThemeLight: IJeneseiTheme = {
+export const ThemeLight: ITheme = {
   transition: {
     duration: '0.3s',
     timingFunction: 'ease',
@@ -818,21 +818,21 @@ export const JeneseiThemeLight: IJeneseiTheme = {
     danger: JeneseiPalette.redGoogle
   },
   colors: {
-    range: DefaultJeneseiThemeGenreRange,
-    sonner: DefaultJeneseiThemeGenreSonner,
-    button: DefaultJeneseiThemeGenre,
-    date: DefaultJeneseiThemeGenreDate,
-    toggle: DefaultJeneseiThemeGenreToggle,
-    checkbox: DefaultJeneseiThemeGenre,
-    input: DefaultJeneseiThemeGenreInput,
-    imageSelect: DefaultJeneseiThemeImageSelect,
-    select: DefaultJeneseiThemeSelect
+    range: ThemeGenreRange,
+    sonner: ThemeGenreSonner,
+    button: ThemeGenre,
+    date: ThemeGenreDate,
+    toggle: ThemeGenreToggle,
+    checkbox: ThemeGenre,
+    input: ThemeGenreInput,
+    imageSelect: ThemeImageSelect,
+    select: ThemeSelect
   },
   getContrastYIQ: getContrastYIQ
 }
-export const JeneseiThemeBlack: IJeneseiTheme = JeneseiThemeLight
+export const ThemeBlack: ITheme = ThemeLight
 
-export const KEY_SIZE_DATA: Record<TJeneseiThemeSize, IJeneseiThemeSize> = {
+export const KEY_SIZE_DATA: Record<IThemeSize, IThemeSizePropertyDefault> = {
   large: {
     height: 46,
     heightIcon: 24,
@@ -869,7 +869,7 @@ export const KEY_SIZE_DATA: Record<TJeneseiThemeSize, IJeneseiThemeSize> = {
     font: 12
   }
 }
-export const KEY_SIZE_DATA_TOGGLE: Record<TJeneseiThemeSize, IJeneseiThemeSizeToggle> = {
+export const KEY_SIZE_DATA_TOGGLE: Record<IThemeSize, IThemeSizePropertyToggle> = {
   large: {
     height: 46,
     width: 92,

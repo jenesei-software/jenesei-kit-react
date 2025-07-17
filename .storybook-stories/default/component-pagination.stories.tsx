@@ -1,17 +1,18 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import { FC, useEffect, useState } from 'react'
-import 'styled-components'
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { FC, useEffect, useState } from 'react';
+import 'styled-components';
 
-import { Pagination, PaginationProps } from '@local/components/pagination'
-import { Stack } from '@local/components/stack'
+import { Pagination as PaginationComponent, PaginationProps } from '@local/components/pagination';
 
-const meta: Meta<typeof Pagination> = {
-  component: Pagination,
-  title: 'Component/Pagination'
-}
+import { WrapperBig } from './tools';
 
-export default meta
-type Story = StoryObj<typeof Pagination>
+const meta: Meta<typeof PaginationComponent> = {
+  component: PaginationComponent,
+  title: 'Component/Pagination',
+};
+
+export default meta;
+type Story = StoryObj<typeof PaginationComponent>;
 
 const defaultArgs: Partial<PaginationProps> = {
   buttonControl: {
@@ -19,45 +20,39 @@ const defaultArgs: Partial<PaginationProps> = {
     size: 'medium',
     isRadius: true,
     isWidthAsHeight: true,
-    isPlaystationEffect: true
+    isPlaystationEffect: true,
   },
   buttonCount: {
     active: {
       genre: 'product',
       size: 'medium',
       isRadius: true,
-      isPlaystationEffect: true
+      isPlaystationEffect: true,
     },
     inactive: {
       genre: 'white',
       size: 'medium',
       isRadius: true,
-      isPlaystationEffect: true
-    }
-  }
-}
+      isPlaystationEffect: true,
+    },
+  },
+};
 
-const PaginationWrapper: FC<PaginationProps> = props => {
-  const [index, setIndex] = useState(props.index)
+const PaginationWrapper: FC<PaginationProps> = (props) => {
+  const [index, setIndex] = useState(props.index);
 
   useEffect(() => {
-    setIndex(props.index)
-  }, [props.index])
+    setIndex(props.index);
+  }, [props.index]);
   return (
-    <Stack
-      sx={{
-        default: {
-          padding: '10px'
-        }
-      }}
-    >
-      <Pagination {...props} index={index} changeIndex={index => setIndex(index)} />
-    </Stack>
-  )
-}
+    <WrapperBig>
+      <PaginationComponent {...props} index={index} changeIndex={(index) => setIndex(index)} />
+    </WrapperBig>
+  );
+};
 
-export const Default: Story = {
-  render: args => <PaginationWrapper {...args} />,
+export const Pagination: Story = {
+  render: (args) => <PaginationWrapper {...args} />,
   args: {
     ...defaultArgs,
     index: 1,
@@ -67,7 +62,7 @@ export const Default: Story = {
     viewQuantity: 4,
     locale: {
       next: 'Next',
-      prev: 'Prev'
-    }
-  }
-}
+      prev: 'Prev',
+    },
+  },
+};

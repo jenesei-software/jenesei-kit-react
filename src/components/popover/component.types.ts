@@ -1,48 +1,56 @@
-import { Placement } from '@floating-ui/react'
-import { CSSProperties, PropsWithChildren, Ref } from 'react'
+import { addErrorStylesProps } from '@local/styles/error';
+import { addSXProps, addSXStyleProps } from '@local/styles/sx';
+import { IThemeSize } from '@local/theme';
+import { AddDollarSign } from '@local/types';
 
-import { addErrorStylesProps } from '@local/styles/error'
-import { addSXProps, addSXStyleProps } from '@local/styles/sx'
-import { TJeneseiThemeSize } from '@local/theme'
-import { AddDollarSign } from '@local/types'
+import { Placement } from '@floating-ui/react';
+import { CSSProperties, PropsWithChildren, Ref } from 'react';
 
-import { TButtonGenre } from '../button'
-import { addSXTypographyProps, addSXTypographyStyleProps } from '../typography'
+import { TButtonGenre } from '../button';
+import { addSXTypographyProps, addSXTypographyStyleProps } from '../typography';
 
 export type PopoverProps = PropsWithChildren & {
-  className?: string
-  maxWidth?: string
-  maxHeight?: string
-  isOpen: boolean
-  floatingStyles: CSSProperties
-  onClose?: () => void
-  ref?: Ref<HTMLElement | null>
-  size?: TJeneseiThemeSize
-  genre?: TButtonGenre
+  className?: string;
+  maxWidth?: string;
+  maxHeight?: string;
+  isOpen: boolean;
+  isShowAlwaysOutline?: boolean;
+  floatingStyles: CSSProperties;
+  onClose?: () => void;
+  ref?: Ref<HTMLElement | null>;
+  size?: IThemeSize;
+  genre?: TButtonGenre;
 } & addSXProps &
-  addSXTypographyProps
+  addSXTypographyProps;
 
 export type StyledPopoverProps = AddDollarSign<
-  Pick<PopoverProps, 'maxWidth' | 'maxHeight' | 'size'> & Required<Pick<PopoverProps, 'genre'>>
+  Pick<PopoverProps, 'maxWidth' | 'maxHeight' | 'size' | 'isShowAlwaysOutline'> & Required<Pick<PopoverProps, 'genre'>>
 > &
   addSXStyleProps &
   addErrorStylesProps &
-  addSXTypographyStyleProps
+  addSXTypographyStyleProps;
 
 export type UsePopoverProps = {
-  hoverCloseDelay?: number
+  hoverCloseDelay?: number;
 
-  hoverOffset?: number
+  hoverOffset?: number;
 
-  isClickOutside?: boolean
+  isClickOutside?: boolean;
 
-  isFloatingHover?: boolean
+  isDisabled?: boolean;
 
-  isWidthAsContent?: boolean
+  isFloatingHover?: boolean;
 
-  mode?: 'click' | 'hover'
+  isWidthAsContent?: boolean;
 
-  offset?: number
+  mode?: 'click' | 'hover' | 'clickOpen' | 'independence';
 
-  placement: Placement
-}
+  offset?: number;
+
+  placement: Placement;
+
+  refsExcludeClickOutside?: Ref<HTMLElement | null>[];
+
+  onFocus?: () => void;
+  onBlur?: () => void;
+};

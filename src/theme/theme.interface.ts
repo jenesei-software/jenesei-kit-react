@@ -1,4 +1,4 @@
-export interface TJeneseiThemeGenreType {
+export interface IThemeGenreTypeDefault {
   background: {
     rest: string
     hover: string
@@ -15,7 +15,7 @@ export interface TJeneseiThemeGenreType {
     placeholder: string
   }
 }
-export interface TJeneseiThemeGenreTypeRange {
+export interface IThemeGenreTypeRange {
   thumb: {
     background: {
       rest: string
@@ -36,7 +36,7 @@ export interface TJeneseiThemeGenreTypeRange {
     }
   }
 }
-export interface TJeneseiThemeGenreTypeSelect {
+export interface IThemeGenreTypeSelect {
   background: {
     rest: string
     hover: string
@@ -56,7 +56,7 @@ export interface TJeneseiThemeGenreTypeSelect {
     placeholder: string
   }
 }
-export interface TJeneseiThemeGenreTypeImageSelect {
+export interface IThemeGenreTypeImageSelect {
   background: {
     rest: string
     hover: string
@@ -73,7 +73,7 @@ export interface TJeneseiThemeGenreTypeImageSelect {
     placeholder: string
   }
 }
-export interface TJeneseiThemeGenreTypeToggle {
+export interface IThemeGenreTypeToggle {
   active: {
     rest: {
       track: string
@@ -104,7 +104,7 @@ export interface TJeneseiThemeGenreTypeToggle {
     }
   }
 }
-export interface TJeneseiThemeGenreTypeDate {
+export interface IThemeGenreTypeDate {
   background: {
     rest: string
     hover: string
@@ -133,9 +133,9 @@ export interface TJeneseiThemeGenreTypeDate {
     line: string
   }
 }
-export interface TJeneseiThemeGenreTypeSonner {
+export interface IThemeGenreTypeSonner {
   button: {
-    genre: keyof TJeneseiThemeGenre
+    genre: keyof IThemeGenre
   }
 
   description: {
@@ -158,15 +158,7 @@ export interface TJeneseiThemeGenreTypeSonner {
   }
 }
 
-export interface TJeneseiThemeGenreTypeForm {
-  background: string
-
-  border: string
-
-  color: string
-}
-
-export type TJeneseiGenreName =
+export type IThemeGenreName =
   | 'gray'
   | 'grayBorder'
   | 'black'
@@ -181,9 +173,9 @@ export type TJeneseiGenreName =
   | 'realebail-gray'
   | 'realebail-white'
 
-export type TJeneseiThemeGenre = Record<
+export type IThemeGenre = Record<
   Extract<
-    TJeneseiGenreName,
+    IThemeGenreName,
     | 'gray'
     | 'grayBorder'
     | 'black'
@@ -198,40 +190,40 @@ export type TJeneseiThemeGenre = Record<
     | 'realebail-gray'
     | 'realebail-white'
   >,
-  TJeneseiThemeGenreType
+  IThemeGenreTypeDefault
 >
 
-export type TJeneseiThemeGenreToggle = Record<Extract<TJeneseiGenreName, 'product'>, TJeneseiThemeGenreTypeToggle>
-export type TJeneseiThemeGenreSonner = Record<
-  Extract<TJeneseiGenreName, 'black' | 'greenTransparent' | 'redTransparent' | 'yellowTransparent'>,
-  TJeneseiThemeGenreTypeSonner
+export type IThemeGenreToggle = Record<Extract<IThemeGenreName, 'product'>, IThemeGenreTypeToggle>
+export type IThemeGenreSonner = Record<
+  Extract<IThemeGenreName, 'black' | 'greenTransparent' | 'redTransparent' | 'yellowTransparent'>,
+  IThemeGenreTypeSonner
 >
-export type TJeneseiThemeGenreInput = Record<
-  Extract<TJeneseiGenreName, 'gray' | 'grayBorder' | 'blackBorder' | 'realebail-white'>,
-  TJeneseiThemeGenreType
+export type IThemeGenreInput = Record<
+  Extract<IThemeGenreName, 'gray' | 'grayBorder' | 'blackBorder' | 'realebail-white'>,
+  IThemeGenreTypeDefault
 >
-export type TJeneseiThemeGenreRange = Record<
-  Extract<TJeneseiGenreName, 'gray' | 'grayBorder' | 'blackBorder' | 'realebail-white'>,
-  TJeneseiThemeGenreTypeRange
+export type IThemeGenreRange = Record<
+  Extract<IThemeGenreName, 'gray' | 'grayBorder' | 'blackBorder' | 'realebail-white'>,
+  IThemeGenreTypeRange
 >
-export type TJeneseiThemeGenreImageSelect = Record<
-  Extract<TJeneseiGenreName, 'gray' | 'grayBorder' | 'blackBorder' | 'realebail-white'>,
-  TJeneseiThemeGenreTypeImageSelect
+export type IThemeGenreImageSelect = Record<
+  Extract<IThemeGenreName, 'gray' | 'grayBorder' | 'blackBorder' | 'realebail-white'>,
+  IThemeGenreTypeImageSelect
 >
-export type TJeneseiThemeGenreSelect = Record<
-  Extract<TJeneseiGenreName, 'gray' | 'grayBorder' | 'blackBorder' | 'realebail-white'>,
-  TJeneseiThemeGenreTypeSelect
+export type IThemeGenreSelect = Record<
+  Extract<IThemeGenreName, 'gray' | 'grayBorder' | 'blackBorder' | 'realebail-white'>,
+  IThemeGenreTypeSelect
 >
-export type TJeneseiThemeGenreTextArea = Record<
-  Extract<TJeneseiGenreName, 'gray' | 'grayBorder' | 'blackBorder' | 'realebail-white'>,
-  TJeneseiThemeGenreType
+export type IThemeGenreTextArea = Record<
+  Extract<IThemeGenreName, 'gray' | 'grayBorder' | 'blackBorder' | 'realebail-white'>,
+  IThemeGenreTypeDefault
 >
-export type TJeneseiThemeGenreDate = Record<
-  Extract<TJeneseiGenreName, 'gray' | 'grayBorder' | 'blackBorder' | 'realebail-white'>,
-  TJeneseiThemeGenreTypeDate
+export type IThemeGenreDate = Record<
+  Extract<IThemeGenreName, 'gray' | 'grayBorder' | 'blackBorder' | 'realebail-white'>,
+  IThemeGenreTypeDate
 >
 
-export interface IJeneseiThemeSize {
+export interface IThemeSizePropertyDefault {
   font: number
 
   height: number
@@ -243,7 +235,7 @@ export interface IJeneseiThemeSize {
   radius: number
 }
 
-export interface IJeneseiThemeSizeToggle {
+export interface IThemeSizePropertyToggle {
   height: number
 
   padding: number
@@ -253,67 +245,13 @@ export interface IJeneseiThemeSizeToggle {
   width: number
 }
 
-export type IJeneseiThemeScreens = Record<TJeneseiDevice, { width: number }>
-
-export type TJeneseiThemeSize = 'large' | 'largeMedium' | 'medium' | 'mediumSmall' | 'small'
-
-export type TJeneseiFontFamily = 'Inter' | 'Roboto' | 'Work Sans' | 'Roboto Mono'
-
-export type TJeneseiTypographyHeading = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'h7' | 'h8' | 'h9'
-export type TJeneseiTypographyWeight = 100 | 300 | 400 | 500 | 700 | 900
-export type TJeneseiDevice = 'default' | 'tablet' | 'mobile'
-
-export interface IJeneseiTheme {
-  states: {
-    focus: string
-    danger: string
-  }
-  colors: {
-    range: TJeneseiThemeGenreRange
-    date: TJeneseiThemeGenreDate
-    button: TJeneseiThemeGenre
-    toggle: TJeneseiThemeGenreToggle
-    checkbox: TJeneseiThemeGenre
-    input: TJeneseiThemeGenreInput
-    imageSelect: TJeneseiThemeGenreImageSelect
-    select: TJeneseiThemeGenreSelect
-    sonner: TJeneseiThemeGenreSonner
-  }
-
-  effects: {
-    input: string
-    button: string
-  }
-
-  font: {
-    family: TJeneseiFontFamily
-    weight: TJeneseiTypographyWeight
-    sizeDefault: Record<TJeneseiDevice, number>
-    sizeHeading: Record<TJeneseiTypographyHeading, number>
-    lineHeight: number
-  }
-
-  palette: Record<JeneseiPaletteKeys, string>
-
-  screens: IJeneseiThemeScreens
-
-  scrollbar: {
-    width: number
-    background: string
-    thumb: string
-    thumbBorder: string
-  }
-
-  transition: {
-    duration: string
-    timingFunction: string
-    default: string
-    icon: string
-  }
-  getContrastYIQ: (hexcolor: string) => string
-}
-
-export type JeneseiPaletteKeys =
+export type IThemeScreen = Record<IThemeDevice, { width: number }>
+export type IThemeSize = 'large' | 'largeMedium' | 'medium' | 'mediumSmall' | 'small'
+export type IThemeFontFamily = 'Inter' | 'Roboto' | 'Work Sans' | 'Roboto Mono'
+export type IThemeTypographyHeading = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'h7' | 'h8' | 'h9'
+export type IThemeTypographyWeight = 100 | 300 | 400 | 500 | 700 | 900
+export type IThemeDevice = 'default' | 'tablet' | 'mobile'
+export type IThemePaletteKeys =
   | 'transparent'
   | 'black100'
   | 'black80'
@@ -363,3 +301,46 @@ export type JeneseiPaletteKeys =
   | 'amnezia'
   | 'inherit'
   | 'currentColor'
+export interface ITheme {
+  states: {
+    focus: string
+    danger: string
+  }
+  colors: {
+    range: IThemeGenreRange
+    date: IThemeGenreDate
+    button: IThemeGenre
+    toggle: IThemeGenreToggle
+    checkbox: IThemeGenre
+    input: IThemeGenreInput
+    imageSelect: IThemeGenreImageSelect
+    select: IThemeGenreSelect
+    sonner: IThemeGenreSonner
+  }
+  effects: {
+    input: string
+    button: string
+  }
+  font: {
+    family: IThemeFontFamily
+    weight: IThemeTypographyWeight
+    sizeDefault: Record<IThemeDevice, number>
+    sizeHeading: Record<IThemeTypographyHeading, number>
+    lineHeight: number
+  }
+  palette: Record<IThemePaletteKeys, string>
+  screens: IThemeScreen
+  scrollbar: {
+    width: number
+    background: string
+    thumb: string
+    thumbBorder: string
+  }
+  transition: {
+    duration: string
+    timingFunction: string
+    default: string
+    icon: string
+  }
+  getContrastYIQ: (hexcolor: string) => string
+}

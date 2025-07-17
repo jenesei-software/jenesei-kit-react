@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
+import { IThemeSizePropertyDefault, KEY_SIZE_DATA } from '@local/theme'
 
 import { Popover, PopoverProps } from '../popover'
 import { Stack } from '../stack'
@@ -17,7 +17,7 @@ export const addTooltipBoxSize = css<PopoverProps>`
       ...KEY_SIZE_DATA[props.size ?? 'medium']
     })};
 `
-export const addTooltipBoxSizeConstructor = (props: IJeneseiThemeSize) => css`
+export const addTooltipBoxSizeConstructor = (props: IThemeSizePropertyDefault) => css`
   gap: 0px;
   padding: ${props.padding}px ${props.padding}px 0px ${props.padding}px;
   :after {

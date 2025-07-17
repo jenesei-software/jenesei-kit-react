@@ -5,9 +5,11 @@ export const JeneseiGlobalStyles = createGlobalStyle`
   ${reset};
   
   #storybook-root {
+    overflow: hidden;
     display: flex;
-    width: 100%;
-    height: 100%;
+    max-height: 100dvh;
+    max-width: 100dvw;
+    overflow:auto;
   }
   .sb-show-main.sb-main-padded {
     padding:0;

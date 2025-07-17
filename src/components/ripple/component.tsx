@@ -66,7 +66,7 @@ export const Ripple: FC<RippleProps> = props => {
             <RippleSpan
               $duration={duration}
               $color={color}
-              key={'span' + index}
+              key={`span-${index}`}
               style={{
                 top: ripple.y,
                 left: ripple.x,

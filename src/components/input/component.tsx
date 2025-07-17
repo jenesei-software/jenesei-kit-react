@@ -1,7 +1,7 @@
-import { useCallback } from 'react'
-import { NumberFormatValues } from 'react-number-format'
+import { ErrorMessage } from '@local/styles/error';
 
-import { ErrorMessage } from '@local/styles/error'
+import { useCallback } from 'react';
+import { NumberFormatValues } from 'react-number-format';
 
 import {
   InputPostfixChildren,
@@ -10,26 +10,26 @@ import {
   StyledInput,
   StyledInputNumeric,
   StyledInputPattern,
-  StyledInputWrapper
-} from '.'
+  StyledInputWrapper,
+} from '.';
 
 export const Input = (props: InputProps) => {
   const handleOnChange = useCallback(
     (input: string | NumberFormatValues) => {
       if (props.variety === 'standard') {
-        const value = typeof input === 'string' ? input : input.value
-        const cleaned = props.isNoSpaces ? value.replace(/\s+/g, '') : value
-        props.onChange?.(cleaned)
+        const value = typeof input === 'string' ? input : input.value;
+        const cleaned = props.isNoSpaces ? value.replace(/\s+/g, '') : value;
+        props.onChange?.(cleaned);
       }
 
       if (props.variety === 'pattern' || props.variety === 'numeric') {
         if (typeof input !== 'string') {
-          props.onChange?.(input)
+          props.onChange?.(input);
         }
       }
     },
-    [props]
-  )
+    [props],
+  );
 
   return (
     <>
@@ -67,10 +67,10 @@ export const Input = (props: InputProps) => {
             disabled={props.isDisabled}
             readOnly={props.isReadOnly}
             required={props.isRequired}
-            defaultValue={props.defaultValue}
-            value={props.value}
+            defaultValue={props.defaultValue === null ? '' : props.defaultValue}
+            value={props.value === null ? '' : props.value}
             placeholder={props.placeholder}
-            onValueChange={props => handleOnChange(props)}
+            onValueChange={(props) => handleOnChange(props)}
             onBlur={props.onBlur}
             onFocus={props.onFocus}
             onPaste={props.onPaste}
@@ -99,10 +99,10 @@ export const Input = (props: InputProps) => {
             disabled={props.isDisabled}
             readOnly={props.isReadOnly}
             required={props.isRequired}
-            defaultValue={props.defaultValue}
-            value={props.value}
+            defaultValue={props.defaultValue === null ? '' : props.defaultValue}
+            value={props.value === null ? '' : props.value}
             placeholder={props.placeholder}
-            onValueChange={props => handleOnChange(props)}
+            onValueChange={(props) => handleOnChange(props)}
             onBlur={props.onBlur}
             onFocus={props.onFocus}
             onPaste={props.onPaste}
@@ -135,14 +135,14 @@ export const Input = (props: InputProps) => {
             disabled={props.isDisabled}
             readOnly={props.isReadOnly}
             required={props.isRequired}
-            defaultValue={props.defaultValue}
-            value={props.value ?? ''}
+            defaultValue={props.defaultValue === null ? '' : props.defaultValue}
+            value={props.value === null ? '' : props.value}
             placeholder={props.placeholder}
             type={props.type}
-            autoComplete={props.autocomplete}
-            onInput={event => {
-              const input = event.target as HTMLInputElement
-              handleOnChange(input.value)
+            autoComplete={props.autoComplete}
+            onInput={(event) => {
+              const input = event.target as HTMLInputElement;
+              handleOnChange(input.value);
             }}
             onBlur={props.onBlur}
             onFocus={props.onFocus}
@@ -170,48 +170,48 @@ export const Input = (props: InputProps) => {
       </StyledInputWrapper>
       {props?.error ? <ErrorMessage {...props.error} size={props?.error.size ?? props.size} /> : null}
     </>
-  )
-}
+  );
+};
 
 export function formatPhoneNumber(dialCode: string, international: string) {
   function isDigit(char: string): boolean {
-    return /\d/.test(char)
+    return /\d/.test(char);
   }
 
-  let formattedNumber = ''
-  let placeholderNumber = ''
-  let dialCodeIndex = 0
+  let formattedNumber = '';
+  let placeholderNumber = '';
+  let dialCodeIndex = 0;
 
   if (dialCode.length === 0) {
-    return { format: '', placeholder: '' }
+    return { format: '', placeholder: '' };
   }
 
   for (let i = 0; i < international.length; i++) {
-    const char = international.charAt(i)
+    const char = international.charAt(i);
 
     if (char === dialCode.charAt(dialCodeIndex)) {
-      formattedNumber += char
-      placeholderNumber += isDigit(char) ? '#' : char
-      dialCodeIndex++
+      formattedNumber += char;
+      placeholderNumber += isDigit(char) ? '#' : char;
+      dialCodeIndex++;
     } else {
       if (isDigit(char)) {
-        formattedNumber += '#'
-        placeholderNumber += '-'
+        formattedNumber += '#';
+        placeholderNumber += '-';
       } else {
-        formattedNumber += char
-        placeholderNumber += char
+        formattedNumber += char;
+        placeholderNumber += char;
       }
     }
   }
 
   while (dialCodeIndex < dialCode.length) {
-    formattedNumber += dialCode.charAt(dialCodeIndex)
-    placeholderNumber += dialCode.charAt(dialCodeIndex)
-    dialCodeIndex++
+    formattedNumber += dialCode.charAt(dialCodeIndex);
+    placeholderNumber += dialCode.charAt(dialCodeIndex);
+    dialCodeIndex++;
   }
 
   return {
     format: formattedNumber,
-    placeholder: placeholderNumber
-  }
+    placeholder: placeholderNumber,
+  };
 }

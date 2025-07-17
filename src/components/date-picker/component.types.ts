@@ -1,113 +1,112 @@
-import { FocusEvent } from 'react'
+import { InputStandardProps, StyledInputProps, StyledInputWrapperProps } from '@local/components/input';
+import { addErrorProps } from '@local/styles/error';
+import { addSXProps } from '@local/styles/sx';
+import { IThemeGenreDate, IThemeSize } from '@local/theme';
+import { AddDollarSign } from '@local/types';
 
-import { InputStandardProps, StyledInputProps, StyledInputWrapperProps } from '@local/components/input'
-import { addErrorProps } from '@local/styles/error'
-import { addSXProps } from '@local/styles/sx'
-import { TJeneseiThemeGenreDate, TJeneseiThemeSize } from '@local/theme'
-import { AddDollarSign } from '@local/types'
+import { SelectMonthProps } from '../select';
 
-import { SelectDateProps } from '../select'
-
-export type TDateGenre = keyof TJeneseiThemeGenreDate
-
-export interface DateDayProps {
-  dayOfWeek: number
-
-  isCurrentMonth: boolean
-
-  isDisabled: boolean
-
-  isToday: boolean
-
-  isWeekend: boolean
-
-  labelNumber: number
-
-  labelString: string
-
-  value: number
-
-  weekOfMonth: number
-}
+export type DatePickerMode = 'DD.MM.YYYY' | 'MM.DD.YYYY' | 'YYYY.MM.DD';
 export type DatePickerProps = addErrorProps &
   addSXProps & {
-    endDate?: number
+    endDate?: number;
 
-    genre: TDateGenre
+    genre: TDateGenre;
 
-    id?: string
+    id?: string;
 
-    inputProps: Omit<
-      InputStandardProps,
-      'isDisabled' | 'name' | 'id' | 'genre' | 'size' | 'placeholder' | 'width' | 'value' | 'isInputEffect' | 'error'
-    >
+    isDisabled?: boolean;
 
-    isDisabled?: boolean
+    isMinWidth?: boolean;
 
-    isMinWidth?: boolean
+    isInputEffect?: InputStandardProps['isInputEffect'];
 
-    isInputEffect?: InputStandardProps['isInputEffect']
+    isOnClickClose?: boolean;
 
-    isOnClickClose?: boolean
+    labelPlaceholder?: string;
 
     locale: {
-      months: SelectDateProps['monthsLocale']
-      weeks: WeekItem[]
-      inputs: InputItem
-    }
+      months: SelectMonthProps['monthsLocale'];
+      weeks: WeekItem[];
+      inputs: InputItem;
+    };
 
-    name?: string
+    mode?: DatePickerMode;
 
-    onBlur?: (event?: MouseEvent) => void
+    name?: string;
 
-    onChange: (timestamp: number | null) => void
+    onBlur?: () => void;
 
-    onFocus?: (event: FocusEvent<HTMLDivElement, Element>) => void
+    onChange: (timestamp: number | null) => void;
 
-    size: TJeneseiThemeSize
+    onFocus?: () => void;
 
-    startDate?: number
+    size: IThemeSize;
 
-    value: number | null
-  }
+    startDate?: number;
+
+    value: number | null;
+  };
+
+export type TDateGenre = keyof IThemeGenreDate;
+
+export interface DateDayProps {
+  dayOfWeek: number;
+
+  isCurrentMonth: boolean;
+
+  isDisabled: boolean;
+
+  isToday: boolean;
+
+  isWeekend: boolean;
+
+  labelNumber: number;
+
+  labelString: string;
+
+  value: number;
+
+  weekOfMonth: number;
+}
 
 export type DateWrapperProps = AddDollarSign<
   Pick<InputStandardProps, 'genre' | 'isDisabled'> & {
-    parentListHeight: number
-    radius: number
-    isMinWidth?: boolean
+    parentListHeight: number;
+    radius: number;
+    isMinWidth?: boolean;
   }
 > &
-  StyledInputWrapperProps
+  StyledInputWrapperProps;
 
-export type DateInputProps = AddDollarSign<Pick<DatePickerProps, 'error' | 'genre' | 'size'>>
+export type DateInputProps = AddDollarSign<Pick<DatePickerProps, 'error' | 'genre' | 'size'> & { isOpen?: boolean }>;
 
 export type DateStyledOptionProps = AddDollarSign<{
-  isSelectedItem?: boolean
-  isCheckboxProps?: boolean
+  isSelectedItem?: boolean;
+  isCheckboxProps?: boolean;
 }> &
-  StyledInputProps
+  StyledInputProps;
 
-export type DateStyledListProps = AddDollarSign<Pick<InputStandardProps, 'genre' | 'size'>>
+export type DateStyledListProps = AddDollarSign<Pick<InputStandardProps, 'genre' | 'size'>>;
 
 export type DateDropdownListProps = AddDollarSign<
   Pick<DatePickerProps, 'isInputEffect'> & Pick<DatePickerProps, 'genre' | 'size'>
->
+>;
 
 export type DateDropdownDayProps = AddDollarSign<
   Pick<DatePickerProps, 'genre' | 'size'> &
     Pick<DateDayProps, 'isToday' | 'isWeekend'> & {
-      row: number
-      column: number
-      isChoice?: boolean
-      isCurrentMonth?: boolean
+      row: number;
+      column: number;
+      isChoice?: boolean;
+      isCurrentMonth?: boolean;
     }
->
+>;
 
 export type MonthItem = {
-  localeLong: string
+  localeLong: string;
 
-  localeShort: string
+  localeShort: string;
 
   value:
     | 'january'
@@ -121,19 +120,19 @@ export type MonthItem = {
     | 'september'
     | 'october'
     | 'november'
-    | 'december'
-}
+    | 'december';
+};
 export type WeekItem = {
-  localeLong: string
+  localeLong: string;
 
-  localeShort: string
+  localeShort: string;
 
-  value: 'mo' | 'tu' | 'we' | 'th' | 'fr' | 'sa' | 'su'
-}
+  value: 'mo' | 'tu' | 'we' | 'th' | 'fr' | 'sa' | 'su';
+};
 export type InputItem = {
-  day: string
+  day: string;
 
-  month: string
+  month: string;
 
-  year: string
-}
+  year: string;
+};

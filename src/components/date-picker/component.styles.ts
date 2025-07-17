@@ -8,13 +8,14 @@ import { addNiceNumber, addOutline, addRemoveOutline, addRemoveScrollbar, addTra
 import { addError } from '@local/styles/error'
 import { addSX } from '@local/styles/sx'
 import { KEY_SIZE_DATA } from '@local/theme/theme'
-import { IJeneseiThemeSize } from '@local/theme/theme.interface'
+import { IThemeSizePropertyDefault } from '@local/theme/theme.interface'
 
 import { DateDropdownDayProps, DateDropdownListProps, DateInputProps, DateStyledListProps, DateWrapperProps } from '.'
 
 export const DateWrapper = styled.div<DateWrapperProps>`
   width: 100%;
   position: relative;
+  height: fit-content;
   ${props =>
     props.$isMinWidth &&
     css`
@@ -25,31 +26,7 @@ export const DateWrapper = styled.div<DateWrapperProps>`
 `
 
 export const DateDropdownListParent = styled(motion.div)<DateStyledListProps>`
-  display: none;
-
-  height: 0px;
-  width: fit-content;
-  max-width: 270px;
-
-  position: absolute;
-
-  overflow: hidden;
-  overflow-y: auto;
-
-  margin: 0;
-  padding: 0;
-  margin-top: 6px;
-
   ${addRemoveScrollbar};
-`
-
-/****************************************** Size *************************************************/
-export const dateDropdownListSize = css<DateDropdownListProps>`
-  ${props => props.$size && DateDropdownListSizeConstructor(KEY_SIZE_DATA[props.$size])};
-`
-export const DateDropdownListSizeConstructor = (props: IJeneseiThemeSize) => css`
-  padding: ${props.padding}px;
-  border-radius: ${props.radius}px;
 `
 
 export const DateDropdownList = styled.div<DateDropdownListProps>`
@@ -63,9 +40,6 @@ export const DateDropdownList = styled.div<DateDropdownListProps>`
   width: 100%;
   padding-top: 6px;
   transform: translateZ(0);
-  background: ${props => props.theme.colors.input[props.$genre].background.rest};
-  border: solid 1px ${props => props.theme.colors.input[props.$genre].border.rest};
-  ${dateDropdownListSize}
   ${InputIsInputEffect};
   justify-content: flex-start;
   gap: 10px;
@@ -142,7 +116,7 @@ export const DateDropdownDaySize = css<DateDropdownDayProps>`
 
   ${addOutline};
 `
-export const DateDropdownDaySizeConstructor = (props: IJeneseiThemeSize) => css`
+export const DateDropdownDaySizeConstructor = (props: IThemeSizePropertyDefault) => css`
   border-radius: ${props.radius}px;
   ${params => getFontSizeStyles(12, 700, params.theme.font.family)};
 `
@@ -203,6 +177,13 @@ const DateInputWrapperGenre = css<DateInputProps>`
       color: ${props.theme.colors.input[props.$genre].color.rest};
       outline: 2px solid ${props => props.theme.states.focus};
     }
+    ${props.$isOpen &&
+    css`
+      background: ${props.theme.colors.input[props.$genre].background.rest};
+      border-color: ${props.theme.colors.input[props.$genre].border.rest};
+      color: ${props.theme.colors.input[props.$genre].color.rest};
+      outline: 2px solid ${props => props.theme.states.focus};
+    `}
   `};
 `
 
@@ -210,7 +191,7 @@ const DateInputWrapperGenre = css<DateInputProps>`
 export const DateInputWrapperSize = css<DateInputProps>`
   ${props => DateInputWrapperSizeConstructor(KEY_SIZE_DATA[props.$size])};
 `
-export const DateInputWrapperSizeConstructor = (props: IJeneseiThemeSize) => css`
+export const DateInputWrapperSizeConstructor = (props: IThemeSizePropertyDefault) => css`
   padding: 0px ${props.padding}px;
   height: ${props.height}px;
   min-height: ${props.height}px;
@@ -222,7 +203,7 @@ export const DateInputWrapper = styled.div<DateInputProps>`
   resize: none;
   overflow: hidden;
   width: 100%;
-  border: 1px solid;
+  border: 1px solid transparent;
 
   white-space: nowrap;
 

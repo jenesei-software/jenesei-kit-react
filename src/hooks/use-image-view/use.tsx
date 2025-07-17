@@ -1,5 +1,3 @@
-import { useCallback, useMemo } from 'react'
-
 import { Button } from '@local/components/button'
 import { Image } from '@local/components/image'
 import { SliderImageProps } from '@local/components/image-slider'
@@ -7,6 +5,8 @@ import { Stack } from '@local/components/stack'
 import { Typography } from '@local/components/typography'
 import { useDialog } from '@local/contexts/context-dialog'
 import { KEY_SIZE_DATA } from '@local/theme'
+
+import { useCallback, useMemo } from 'react'
 
 import { useImageViewProps } from '.'
 

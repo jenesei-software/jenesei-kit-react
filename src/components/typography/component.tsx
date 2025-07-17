@@ -1,31 +1,31 @@
-import { LinkProps, createLink } from '@tanstack/react-router'
-import { memo, useEffect, useMemo, useRef, useState } from 'react'
+import { useScreenWidth } from '@local/contexts/context-screen-width';
 
-import { useScreenWidth } from '@local/contexts/context-screen-width'
+import { createLink, LinkProps } from '@tanstack/react-router';
+import { memo, useEffect, useMemo, useRef, useState } from 'react';
 
-import { Title, TypographyCSSProps, TypographyProps, TypographyTooltipProps } from '.'
-import { Tooltip } from '../tooltip'
+import { Tooltip } from '../tooltip';
+import { Title, TypographyCSSProps, TypographyProps, TypographyTooltipProps } from '.';
 
 const TypographyWithRef = (props: TypographyProps) => {
-  const { screenActual } = useScreenWidth()
+  const { screenActual } = useScreenWidth();
   const cssProps: TypographyCSSProps & Pick<TypographyProps, 'onClick' | 'className' | 'style'> = useMemo(
     () => ({
       $sxTypography: props.sx,
       style: props.style,
       className: props.className,
       $sx: props.sxStandard,
-      onClick: props.onClick ? props.onClick : () => {}
+      onClick: props.onClick ? props.onClick : () => {},
     }),
-    [props.sx, props.style, props.className, props.sxStandard, props.onClick]
-  )
+    [props.sx, props.style, props.className, props.sxStandard, props.onClick],
+  );
 
-  const screenSX = useMemo(() => props.sx?.[screenActual] ?? props.sx?.default, [props.sx, screenActual])
+  const screenSX = useMemo(() => props.sx?.[screenActual] ?? props.sx?.default, [props.sx, screenActual]);
 
   if (screenSX && 'variant' in screenSX) {
     if (screenSX.variant === 'h7' || screenSX.variant === 'h8' || screenSX.variant === 'h9') {
       return (
         <Title
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          // biome-ignore lint/suspicious/noExplicitAny: <explanation>
           ref={props.ref as any}
           as={props.isAnchor ? 'a' : props.isParagraph ? 'p' : props.isSpan ? 'span' : 'span'}
           href={props.href}
@@ -33,11 +33,11 @@ const TypographyWithRef = (props: TypographyProps) => {
         >
           {props.children}
         </Title>
-      )
+      );
     } else {
       return (
         <Title
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          // biome-ignore lint/suspicious/noExplicitAny: <explanation>
           ref={props.ref as any}
           as={props.isAnchor ? 'a' : props.isParagraph ? 'p' : props.isSpan ? 'span' : screenSX.variant}
           href={props.href}
@@ -45,13 +45,13 @@ const TypographyWithRef = (props: TypographyProps) => {
         >
           {props.children}
         </Title>
-      )
+      );
     }
   }
 
   return (
     <Title
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // biome-ignore lint/suspicious/noExplicitAny: <explanation>
       ref={props.ref as any}
       as={props.isAnchor ? 'a' : props.isParagraph ? 'p' : props.isSpan ? 'span' : 'span'}
       href={props.href}
@@ -59,32 +59,34 @@ const TypographyWithRef = (props: TypographyProps) => {
     >
       {props.children}
     </Title>
-  )
-}
+  );
+};
 
 export const Typography = (props: TypographyProps) => {
-  return <TypographyWithRef {...props} />
-}
+  return <TypographyWithRef {...props} />;
+};
 
 const TypographySizeIsAnchor = (props: TypographyProps & LinkProps) => {
-  return <TypographyWithRef isAnchor {...props} ref={props.ref} href={props.href} />
-}
+  return <TypographyWithRef isAnchor {...props} ref={props.ref} href={props.href} />;
+};
 
-export const TypographyLink = createLink(TypographySizeIsAnchor)
+export const TypographyLink = createLink(TypographySizeIsAnchor);
 
 export const TypographyTooltip = memo((props: TypographyTooltipProps) => {
-  const [isOverflowing, setIsOverflowing] = useState(false)
-  const contentRef = useRef<HTMLDivElement>(null)
+  const [isOverflowing, setIsOverflowing] = useState(false);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     const checkOverflow = () => {
       if (contentRef.current) {
-        setIsOverflowing(contentRef.current.scrollWidth > contentRef.current.clientWidth)
+        setIsOverflowing(contentRef.current.scrollWidth > contentRef.current.clientWidth);
       }
-    }
-    checkOverflow()
-    window.addEventListener('resize', checkOverflow)
-    return () => window.removeEventListener('resize', checkOverflow)
-  }, [props.children])
+    };
+    checkOverflow();
+    window.addEventListener('resize', checkOverflow);
+    return () => window.removeEventListener('resize', checkOverflow);
+  }, [props.children]);
 
   return (
     <Tooltip isDisabled={!isOverflowing} content={props.children} {...props.tooltip}>
@@ -92,9 +94,9 @@ export const TypographyTooltip = memo((props: TypographyTooltipProps) => {
         {props.children}
       </TypographyWithRef>
     </Tooltip>
-  )
-})
+  );
+});
 
-TypographyTooltip.displayName = 'TypographyTooltip'
-TypographyWithRef.displayName = 'TypographyWithRef'
-TypographySizeIsAnchor.displayName = 'TypographySizeIsAnchor'
+TypographyTooltip.displayName = 'TypographyTooltip';
+TypographyWithRef.displayName = 'TypographyWithRef';
+TypographySizeIsAnchor.displayName = 'TypographySizeIsAnchor';

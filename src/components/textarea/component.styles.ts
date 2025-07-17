@@ -1,43 +1,16 @@
-import styled, { css } from 'styled-components'
+import { getFontSizeStyles } from '@local/components/typography';
+import { addDisabled, addOutlineChildren, addRemoveOutline, addTransitionWithoutSize } from '@local/styles/add';
+import { addError } from '@local/styles/error';
+import { addSX } from '@local/styles/sx';
+import { KEY_SIZE_DATA } from '@local/theme';
 
-import { getFontSizeStyles } from '@local/components/typography'
-import { addOutline, addTransitionWithoutSize } from '@local/styles/add'
-import { addError } from '@local/styles/error'
-import { addSX } from '@local/styles/sx'
-import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
+import styled, { css } from 'styled-components';
 
-import { StyledTextAreaProps, StyledTextAreaWrapperProps } from '.'
+import { StyledTextAreaProps, TextAreaWrapperProps } from '.';
 
 /****************************************** Wrapper *************************************************/
-export const StyledTextAreaWrapper = styled.div<StyledTextAreaWrapperProps>`
-  width: max-content;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-direction: column;
-  width: 100%;
-  ${addSX};
-`
-
-/****************************************** Placeholder *************************************************/
-export const TextAreaPlaceholder = css<StyledTextAreaProps>`
-  &::placeholder,
-  &::-webkit-input-placeholder {
-    ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, props.theme.font.family, props.theme.font.lineHeight)};
-    color: ${props => props.theme.colors.input[props.$genre].color.placeholder};
-    opacity: 1;
-  }
-  &:-ms-input-placeholder {
-    ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, props.theme.font.family, props.theme.font.lineHeight)};
-    color: ${props => props.theme.colors.input[props.$genre].color.placeholder};
-    opacity: 1;
-  }
-`
-
-/****************************************** Genre *************************************************/
-const TextAreaGenre = css<StyledTextAreaProps>`
-  ${props => css`
+const addTextAreaWrapperGenre = css<TextAreaWrapperProps>`
+  ${(props) => css`
     background: ${props.theme.colors.input[props.$genre].background.rest};
     border-color: ${props.theme.colors.input[props.$genre].border.rest};
     color: ${props.theme.colors.input[props.$genre].color.rest};
@@ -58,79 +31,96 @@ const TextAreaGenre = css<StyledTextAreaProps>`
       color: ${props.theme.colors.input[props.$genre].color.rest};
     }
   `};
-`
+`;
 
-/****************************************** Size *************************************************/
-export const TextAreaSize = css<StyledTextAreaProps>`
-  ${props => TextAreaSizeConstructor(KEY_SIZE_DATA[props.$size])};
-`
-export const TextAreaSizeConstructor = (props: IJeneseiThemeSize) => css`
-  padding: ${props.padding - 4}px ${props.padding}px ${props.padding - 6}px ${props.padding}px;
-  border-radius: ${props.radius}px;
-`
-
-/****************************************** Hidden *************************************************/
-const TextAreaHidden = css<StyledTextAreaProps>`
-  opacity: ${props => (props.$isDisabled ? 0.5 : 1)};
-`
-/****************************************** is PlaystationEffect *************************************************/
-export const TextAreaIsTextAreaEffect = css<Pick<StyledTextAreaProps, '$isTextAreaEffect'>>`
-  ${props =>
-    props.$isTextAreaEffect &&
+const addTextAreaWrapperIsInputEffect = css<Pick<TextAreaWrapperProps, '$isInputEffect'>>`
+  ${(props) =>
+    props.$isInputEffect &&
     css`
       box-shadow: ${props.theme.effects.input};
     `}
-`
+`;
+const addTextAreaWrapperSize = css<TextAreaWrapperProps>`
+  ${(props) => css`
+    padding: ${KEY_SIZE_DATA[props.$size].padding - 4}px ${KEY_SIZE_DATA[props.$size].padding}px ${KEY_SIZE_DATA[props.$size].padding - 4}px ${KEY_SIZE_DATA[props.$size].padding}px;
+    border-radius: ${KEY_SIZE_DATA[props.$size].radius}px;
+    min-height: ${KEY_SIZE_DATA[props.$size].height}px;
+  `};
+`;
 
-/****************************************** is Resize *************************************************/
-const TextAreaIsResize = css<Pick<StyledTextAreaProps, '$isResize'>>`
-  ${props =>
+export const TextAreaWrapper = styled.div<TextAreaWrapperProps>`
+  border: 1px solid;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  overflow: hidden;
+  width: 100%;
+  ${addTransitionWithoutSize};
+  ${addTextAreaWrapperSize};
+  ${addTextAreaWrapperGenre};
+  ${addTextAreaWrapperIsInputEffect};
+  ${addDisabled};
+  ${addOutlineChildren};
+  ${addSX};
+`;
+
+/****************************************** TextArea *************************************************/
+const addTextAreaPlaceholder = css<StyledTextAreaProps>`
+  &::placeholder,
+  &::-webkit-input-placeholder {
+    ${(props) => getFontSizeStyles(16, props.$isBold ? 500 : 400, props.theme.font.family, props.theme.font.lineHeight)};
+    color: ${(props) => props.theme.colors.input[props.$genre].color.placeholder};
+    opacity: 1;
+  }
+  &:-ms-input-placeholder {
+    ${(props) => getFontSizeStyles(16, props.$isBold ? 500 : 400, props.theme.font.family, props.theme.font.lineHeight)};
+    color: ${(props) => props.theme.colors.input[props.$genre].color.placeholder};
+    opacity: 1;
+  }
+`;
+const addTextAreaGenre = css<StyledTextAreaProps>`
+  ${(props) => css`
+    color: ${props.theme.colors.input[props.$genre].color.rest};
+    border-color: transparent;
+    &:active {
+      color: ${props.theme.colors.input[props.$genre].color.rest};
+    }
+    &:hover {
+      color: ${props.theme.colors.input[props.$genre].color.hover};
+    }
+    &:focus-visible {
+      color: ${props.theme.colors.input[props.$genre].color.rest};
+    }
+  `};
+`;
+const addTextAreaIsResize = css<Pick<StyledTextAreaProps, '$isResize'>>`
+  ${(props) =>
     !props.$isResize &&
     css`
       resize: none;
     `}
-`
-/****************************************** Default *************************************************/
-export const StyledTextAreaCSS = css<StyledTextAreaProps>`
+`;
+export const addTextArea = css<StyledTextAreaProps>`
   overflow-x: hidden;
-  width: 100% !important;
-  border: 1px solid;
-  white-space: nowrap;
+  width: -webkit-fill-available;
+  padding: 0 !important;
+  border: none !important;
+  margin: 0 !important;
+  white-space: normal;
   text-overflow: ellipsis;
-  text-wrap: auto;
+  height: auto;
+  background-color: transparent;
+  ${(props) => getFontSizeStyles(16, props.$isBold ? 500 : 400, props.theme.font.family, `${props.$lineHeight}px`)};
 
-  ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, props.theme.font.family, props.theme.font.lineHeight)};
-
-  ${TextAreaIsResize};
-  ${TextAreaSize};
-  ${TextAreaGenre};
-  ${TextAreaPlaceholder};
-  ${TextAreaHidden};
-  ${TextAreaIsTextAreaEffect};
-  ${addTransitionWithoutSize};
-  ${addOutline};
+  ${addTextAreaGenre};
+  ${addTextAreaIsResize};
+  ${addTextAreaPlaceholder};
+  ${addRemoveOutline};
   ${addError};
-`
+`;
 
 export const StyledTextArea = styled.textarea<StyledTextAreaProps>`
-  ${StyledTextAreaCSS};
-`
-
-// /****************************************** Loading *************************************************/
-// const TextAreaStyledLoadingSize = css<StyledTextAreaProps>`
-//   ${props => TextAreaStyledLoadingConstructor(KEY_SIZE_DATA[props.$size])};
-// `
-// const TextAreaStyledLoadingConstructor = (props: IJeneseiThemeSize) => css`
-//   padding: ${props.padding - 6}px ${props.padding}px ${props.padding - 4}px ${props.padding}px;
-// `
-
-// export const TextAreaStyledLoading = styled(Loading)<StyledTextAreaProps>`
-//   ${TextAreaStyledLoadingSize};
-//   position: absolute;
-//   display: flex;
-//   align-items: center;
-//   right: 0px;
-//   box-sizing: content-box;
-//   backdrop-filter: blur(2px);
-//   mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 15%, rgba(0, 0, 0, 0) 100%);
-// `
+  ${addTextArea};
+`;

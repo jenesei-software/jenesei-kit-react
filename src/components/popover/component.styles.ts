@@ -2,9 +2,9 @@ import { motion } from 'framer-motion'
 import styled, { css } from 'styled-components'
 
 import { addSXTypography, getFontSizeStyles } from '@local/components/typography'
-import { addOutline } from '@local/styles/add'
+import { addAlwaysOutline } from '@local/styles/add'
 import { addSX } from '@local/styles/sx'
-import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
+import { IThemeSizePropertyDefault, KEY_SIZE_DATA } from '@local/theme'
 
 import { StyledPopoverProps } from '.'
 
@@ -14,7 +14,7 @@ const addPopoverGenre = css<StyledPopoverProps>`
     background: ${props.theme.colors.button[props.$genre].background.rest};
     border-color: ${props.theme.colors.button[props.$genre].border.rest};
     color: ${props.theme.colors.button[props.$genre].color.rest};
-    box-shadow: ${props.theme.effects.button};
+    /* box-shadow: ${props.theme.effects.button}; */
   `};
 `
 
@@ -25,7 +25,7 @@ export const addPopoverSize = css<StyledPopoverProps>`
       ...KEY_SIZE_DATA[props.$size ?? 'medium']
     })};
 `
-export const addPopoverSizeConstructor = (props: IJeneseiThemeSize) => css`
+export const addPopoverSizeConstructor = (props: IThemeSizePropertyDefault) => css`
   display: flex;
   border-radius: ${props.radius}px;
   padding: ${props.padding}px;
@@ -40,8 +40,8 @@ export const PopoverWrapper = styled(motion.div)<StyledPopoverProps>`
   overflow: auto;
   flex-direction: column;
   ${addPopoverSize};
-  ${addOutline};
+  ${addAlwaysOutline};
   ${addSXTypography};
-  ${addSX};
   ${addPopoverGenre};
+  ${addSX};
 `

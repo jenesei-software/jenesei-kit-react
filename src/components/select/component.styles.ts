@@ -1,216 +1,301 @@
-import { motion } from 'framer-motion'
-import styled, { css } from 'styled-components'
+import { Icon } from '@local/components/icon';
+import { getFontSizeStyles } from '@local/components/typography';
+import { addRemoveOutline } from '@local/styles/add';
+import { addError } from '@local/styles/error';
+import { addSX } from '@local/styles/sx';
+import { KEY_SIZE_DATA } from '@local/theme/theme';
 
-import { StyledInputCSS, StyledMotionInput } from '@local/components/input'
-import { addBorder, addRemoveOutline, addRemoveScrollbar, addTransition } from '@local/styles/add'
-import { addSX } from '@local/styles/sx'
-import { IJeneseiThemeSize } from '@local/theme'
-import { KEY_SIZE_DATA } from '@local/theme/theme'
+import { motion } from 'framer-motion';
+import styled, { css } from 'styled-components';
 
+import { TextArea } from '../textarea';
 import {
-  DropdownOptionIconProps,
-  SelectStyledFooterProps,
-  SelectStyledInputProps,
-  SelectStyledListProps,
-  SelectStyledOptionProps,
-  SelectWrapperProps
-} from '.'
-import { Icon } from '../icon'
+  ButtonListProps,
+  DropdownListOptionIconProps,
+  DropdownListOptionProps,
+  DropdownListParentProps,
+  SelectListOptionProps,
+  SelectListProps,
+  SelectWrapperProps,
+} from '.';
 
-export const SelectWrapper = styled(motion.div)<SelectWrapperProps>`
-  width: 100%;
-  position: relative;
-  height: fit-content;
-  ${props =>
-    !props.$isDisabled &&
-    css`
-      &:focus-within {
-        &:after {
-          content: '';
-          position: absolute;
-          top: -1px;
-          left: -1px;
-          bottom: -1px;
-          right: -1px;
-          outline: 2px ${props.theme.states.focus} solid;
-          outline-offset: 1px;
-          border-radius: ${`${props.$radius + 1}px`};
-          pointer-events: none;
-          height: calc(100% + var(--after-height) + 2px);
-        }
+const addSelectWrapperGenre = css<SelectWrapperProps>`
+  ${(props) => css`
+    background: ${props.theme.colors.input[props.$genre].background.rest};
+    border-color: ${props.theme.colors.input[props.$genre].border.rest};
+    color: ${props.theme.colors.input[props.$genre].color.rest};
+    &:active {
+      background: ${props.theme.colors.input[props.$genre].background.rest};
+      border-color: ${props.theme.colors.input[props.$genre].border.rest};
+      color: ${props.theme.colors.input[props.$genre].color.rest};
+    }
+    ${
+      !props.$isNotShowHoverStyle &&
+      css`
+      &:hover {
+        background: ${props.theme.colors.input[props.$genre].background.hover};
+        border-color: ${props.theme.colors.input[props.$genre].border.hover};
+        color: ${props.theme.colors.input[props.$genre].color.hover};
       }
-    `}
-
-  outline: none !important;
-
-  &:focus-visible {
-    outline: none !important;
-  }
-  ${addSX};
-`
-
-export const DropdownListParentSize = css<SelectStyledListProps>`
-  ${props => props.$size && DropdownListParentSizeConstructor(KEY_SIZE_DATA[props.$size])};
-`
-export const DropdownListParentSizeConstructor = (props: IJeneseiThemeSize) => css`
-  border-radius: 0px 0px ${props.radius}px ${props.radius}px;
-`
-
-export const DropdownListParent = styled(motion.div)<SelectStyledListProps>`
-  outline: none;
-  display: none;
-
-  height: 0px;
+    `
+    }
+    &:focus-visible {
+      background: ${props.theme.colors.input[props.$genre].background.rest};
+      border-color: ${props.theme.colors.input[props.$genre].border.rest};
+      color: ${props.theme.colors.input[props.$genre].color.rest};
+    }
+  `};
+`;
+const addSelectWrapperSize = css<SelectWrapperProps>`
+  border: 1px solid;
   width: 100%;
-
-  position: absolute;
-
+  padding: ${(props) => KEY_SIZE_DATA[props.$size].padding / 4}px
+    ${(props) => KEY_SIZE_DATA[props.$size].padding - KEY_SIZE_DATA[props.$size].padding / 2.8}px;
+  gap: ${(props) => KEY_SIZE_DATA[props.$size].padding / 2.8}px;
+  height: fit-content;
+  min-height: ${(props) => KEY_SIZE_DATA[props.$size].height}px;
+  border-radius: ${(props) => KEY_SIZE_DATA[props.$size].radius}px;
+  justify-content: ${(props) => (props.$isCenter ? 'center' : 'flex-start')};
+  ${(props) =>
+    props.$isOpen &&
+    css`
+      outline: 2px ${(props) => props.theme.states.focus} solid;
+      outline-offset: 1px;
+    `}
+`;
+export const SelectWrapper = styled(motion.div)<SelectWrapperProps>`
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  ${addSelectWrapperGenre};
+  ${addSelectWrapperSize};
+  ${addError};
+  ${addSX};
+`;
+const addDropdownListParentSize = css<DropdownListParentProps>`
+  gap: ${(props) => KEY_SIZE_DATA[props.$size].padding / 2.8}px;
+`;
+export const DropdownListParent = styled(motion.div)<DropdownListParentProps>`
+  height: 100%;
+  width: 100%;
   overflow: hidden;
   overflow-y: auto;
-
   margin: 0;
   padding: 0;
-
-  background: ${props => props.theme.colors.input[props.$genre].background.rest};
-  border: solid 1px ${props => props.theme.colors.input[props.$genre].border.rest};
-  border-top: 0px !important;
-  ${DropdownListParentSize};
-  ${props => !props.$isShowScroll && addRemoveScrollbar};
-`
-
-export const DropdownList = styled.ul`
-  list-style: none;
-
-  position: relative;
-
   display: flex;
   flex-direction: column;
-
+  ${addDropdownListParentSize};
+`;
+export const DropdownList = styled.ul`
+  list-style: none;
+  position: relative;
+  display: flex;
+  flex-direction: column;
   width: 100%;
-
   transform: translateZ(0);
-`
+  flex-shrink: 0;
+`;
 
-export const DropdownOption = styled.li<SelectStyledOptionProps>`
-  ${StyledInputCSS};
+const addDropdownListOptionGenre = css<DropdownListOptionProps>`
+  ${(props) => css`
+    background: ${props.theme.colors.select[props.$genre].background.rest};
+    border-color: ${props.theme.colors.select[props.$genre].border.rest};
+    color: ${props.theme.colors.select[props.$genre].color.rest};
+    &:active {
+      background: ${props.theme.colors.select[props.$genre].background.rest};
+      border-color: ${props.theme.colors.select[props.$genre].border.rest};
+      color: ${props.theme.colors.select[props.$genre].color.rest};
+    }
+    ${
+      !props.$isNotShowHoverStyle &&
+      css`
+      &:hover {
+        background: ${props.theme.colors.select[props.$genre].background.hover};
+        border-color: ${props.theme.colors.select[props.$genre].border.hover};
+        color: ${props.theme.colors.select[props.$genre].color.hover};
+      }
+    `
+    }
+    &:focus-visible {
+      background: ${props.theme.colors.select[props.$genre].background.rest};
+      border-color: ${props.theme.colors.select[props.$genre].border.rest};
+      color: ${props.theme.colors.select[props.$genre].color.rest};
+    }
+  `};
+`;
+const addDropdownListOptionSize = css<DropdownListOptionProps>`
+  padding: 0px ${(props) => KEY_SIZE_DATA[props.$size].padding}px;
   width: 100%;
-  border: 0px;
+  border: 1px solid;
+  border-radius: 0;
+  justify-content: ${(props) => (props.$isCenter ? 'center' : 'flex-start')};
+  &:first-child {
+    ${(props) =>
+      props.$isShowScroll
+        ? css`
+            border-radius: ${KEY_SIZE_DATA[props.$size].radius}px 0px 0px 0px;
+          `
+        : css`
+            border-radius: ${KEY_SIZE_DATA[props.$size].radius}px ${KEY_SIZE_DATA[props.$size].radius}px 0px 0px;
+          `}
+  }
+  &:last-child {
+    ${(props) =>
+      props.$isShowScroll
+        ? css`
+            border-radius: 0px 0px 0px ${KEY_SIZE_DATA[props.$size].radius}px;
+          `
+        : css`
+            border-radius: 0px 0px ${KEY_SIZE_DATA[props.$size].radius}px ${KEY_SIZE_DATA[props.$size].radius}px;
+          `}
+  }
+  &:not(:first-child):not(:last-child) {
+    border-radius: 0px;
+  }
+  &:first-child:last-child {
+    ${(props) =>
+      props.$isShowScroll
+        ? css`
+            border-radius: ${KEY_SIZE_DATA[props.$size].radius}px 0px 0px ${KEY_SIZE_DATA[props.$size].radius}px;
+          `
+        : css`
+            border-radius: ${KEY_SIZE_DATA[props.$size].radius}px;
+          `}
+  }
+`;
+export const DropdownListOption = styled.li<DropdownListOptionProps>`
+  ${(props) => getFontSizeStyles(16, props.$isBold ? 500 : 400, props.theme.font.family, props.theme.font.lineHeight)};
   display: flex;
   align-items: center;
-  border-radius: 0;
-  opacity: 1;
-  ${addRemoveOutline};
-  ${addBorder};
-  &:last-child {
-    border-radius: 0px 0px ${props => KEY_SIZE_DATA[props.$size].radius}px
-      ${props => KEY_SIZE_DATA[props.$size].radius}px;
-  }
   cursor: pointer;
-  position: absolute;
   top: 0;
   left: 0;
-`
+  user-select: none;
+  flex-shrink: 0;
+  opacity: ${(props) => (props.$item?.isDisabled ? 0.5 : 1)};
+  ${addDropdownListOptionGenre};
+  ${addDropdownListOptionSize};
+  ${addRemoveOutline};
+`;
 
-export const DropdownOptionHoverAndCheckedSize = css<SelectStyledOptionProps>`
-  ${props => DropdownOptionHoverAndCheckedSizeConstructor(KEY_SIZE_DATA[props.$size])};
-`
-export const DropdownOptionHoverAndCheckedSizeConstructor = (props: IJeneseiThemeSize) => css`
-  width: calc(100% - ${props.padding - 6}px);
-  height: calc(100% - ${props.padding - 4}px);
-  border-radius: ${props.radius}px;
-`
-
-export const DropdownOptionLayout = styled.div<SelectStyledOptionProps>`
+const addDropdownOptionIconSize = css<DropdownListOptionIconProps>`
+  right: ${(props) => KEY_SIZE_DATA[props.$size].padding - 6}px;
+  height: ${(props) => KEY_SIZE_DATA[props.$size].height}px;
+`;
+export const DropdownListOptionIcon = styled(Icon)<DropdownListOptionIconProps>`
   position: absolute;
-  width: 100%;
-  height: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  left: 0;
   right: 0;
-  ${DropdownOptionHoverAndCheckedSize};
-  border-style: solid;
-  border-width: 1px;
-  border-color: transparent;
+  height: 100%;
+  align-items: center;
+  ${addDropdownOptionIconSize};
+  ${addRemoveOutline};
+  color: ${(props) =>
+    props.$checked
+      ? props.theme.colors.select[props.$genre].border.select
+      : props.theme.colors.input[props.$genre].border.rest};
+`;
 
-  ${addTransition};
-
-  ${props =>
-    !props.$isNotShowHoverStyle &&
-    css`
-      &:hover {
-        background: ${props.theme.colors.select[props.$genre].background.select};
-        color: ${props.theme.colors.select[props.$genre].color.select};
+const addSelectListSize = css<SelectListProps>`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: ${(props) => (props.$isWrapSelectOption ? 'wrap' : 'nowrap')};
+  gap: ${(props) => KEY_SIZE_DATA[props.$size].padding / 2.8}px;
+`;
+export const SelectList = styled.ul<SelectListProps>`
+  list-style: none;
+  position: relative;
+  overflow: hidden;
+  ${addSelectListSize};
+`;
+const addButtonListSize = css<ButtonListProps>`
+  display: flex;
+  flex-direction: row;
+  gap: ${(props) => KEY_SIZE_DATA[props.$size].padding / 2.8}px;
+  padding: ${(props) => KEY_SIZE_DATA[props.$size].padding / 2.8}px ${(props) => KEY_SIZE_DATA[props.$size].padding}px;
+`;
+export const ButtonList = styled.div<ButtonListProps>`
+  position: absolute;
+  right: 0;
+  ${addButtonListSize};
+`;
+const addSelectListOptionGenre = css<SelectListOptionProps>`
+${(props) =>
+  props.$isOnlyColorInSelectListOption
+    ? css`
+      border: 0px solid;
+      border-color: transparent;
+      background-color: transparent;
+      color: ${props.theme.colors.select[props.$genre].color.rest};
+      &:active {
+        color: ${props.theme.colors.select[props.$genre].color.rest};
+      }
+      ${
+        !props.$isNotShowHoverStyle &&
+        css`
+        &:hover {
+          color: ${props.theme.colors.select[props.$genre].color.hover};
+        }
+      `
+      }
+      &:focus-visible {
+        color: ${props.theme.colors.select[props.$genre].color.rest};
+      }
+    `
+    : css`
+      border: 1px solid;
+      background: ${props.theme.colors.select[props.$genre].background.rest};
+      border-color: ${props.theme.colors.select[props.$genre].border.rest};
+      color: ${props.theme.colors.select[props.$genre].color.rest};
+      &:active {
+        background: ${props.theme.colors.select[props.$genre].background.rest};
+        border-color: ${props.theme.colors.select[props.$genre].border.rest};
+        color: ${props.theme.colors.select[props.$genre].color.rest};
+      }
+      ${
+        !props.$isNotShowHoverStyle &&
+        css`
+        &:hover {
+          background: ${props.theme.colors.select[props.$genre].background.hover};
+          border-color: ${props.theme.colors.select[props.$genre].border.hover};
+          color: ${props.theme.colors.select[props.$genre].color.hover};
+        }
+      `
+      }
+      &:focus-visible {
+        background: ${props.theme.colors.select[props.$genre].background.rest};
+        border-color: ${props.theme.colors.select[props.$genre].border.rest};
+        color: ${props.theme.colors.select[props.$genre].color.rest};
       }
     `}
-  ${props =>
-    props.$checked &&
-    css`
-      background: ${props.theme.colors.select[props.$genre].background.select};
-      border-color: ${props.theme.colors.select[props.$genre].border.select};
-      color: ${props.theme.colors.select[props.$genre].color.select};
-    `}
-`
-
-const DropdownOptionIconSize = css<DropdownOptionIconProps>`
-  ${props => DropdownOptionIconSizeConstructor(KEY_SIZE_DATA[props.$size])};
-`
-const DropdownOptionIconSizeConstructor = (props: IJeneseiThemeSize) => css`
-  right: ${props.padding - 6}px;
-  height: ${props.height}px;
-`
-
-export const DropdownOptionIcon = styled(Icon)<DropdownOptionIconProps>`
-  position: absolute;
-  right: 0;
-  height: 100%;
-  align-items: center;
-  ${DropdownOptionIconSize};
-  color: ${props =>
-    props.$checked
-      ? props.theme.colors.select[props.$genre].border.select
-      : props.theme.colors.input[props.$genre].border.rest};
-`
-
-export const SelectInputIcon = styled(Icon)<DropdownOptionIconProps>`
-  position: absolute;
-  user-select: none;
-  pointer-events: none;
-  right: 0;
-  top: 0;
-  align-items: center;
-  ${DropdownOptionIconSize};
-  color: ${props =>
-    props.$checked
-      ? props.theme.colors.select[props.$genre].border.select
-      : props.theme.colors.input[props.$genre].border.rest};
-`
-export const DropdownFooter = styled.li<SelectStyledFooterProps>`
-  ${StyledInputCSS};
+`;
+const addSelectListOptionSize = css<SelectListOptionProps>`
+  padding: ${(props) => KEY_SIZE_DATA[props.$size].padding / 2.8}px;
+  border-radius: ${(props) => KEY_SIZE_DATA[props.$size].radius}px;
+`;
+export const SelectListOption = styled(motion.li)<SelectListOptionProps>`
   display: flex;
   align-items: center;
-  border-radius: 0;
   opacity: 1;
-  border: 0px;
-  cursor: pointer;
-  position: sticky;
-  bottom: 0;
-  padding: 0px;
+  cursor: ${(props) => (props.$isClearWhenClickSelectListOption ? 'pointer' : 'default')};
   flex-shrink: 0;
-  margin-top: auto;
-`
-
-export const DropdownErase = styled.div`
-  margin-left: auto;
-  height: 100%;
-`
-
-export const DropdownSelectAll = styled.div`
-  margin-right: auto;
-  height: 100%;
-`
-
-export const SelectStyledInput = styled(StyledMotionInput)<SelectStyledInputProps>`
+  overflow: hidden;
+  width: fit-content;
+  ${addSelectListOptionGenre};
+  ${addSelectListOptionSize};
   ${addRemoveOutline};
-  ${addSX};
-`
+`;
+
+export const SelectTextArea = styled(TextArea)`
+  border: 0 !important;
+  background-color: transparent !important;
+  min-height: initial !important;
+  width: 100%;
+  max-width: 100%;
+  flex-grow: 1;
+  padding: ${(props) => KEY_SIZE_DATA[props.size].padding / 2.8}px 0px ${(props) => KEY_SIZE_DATA[props.size].padding / 2.8}px ${(props) => KEY_SIZE_DATA[props.size].padding / 2.8}px;
+  ${addRemoveOutline};
+`;

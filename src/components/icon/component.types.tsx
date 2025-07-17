@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { addSXProps, addSXStyleProps } from '@local/styles/sx'
-import { JeneseiPaletteKeys, TJeneseiThemeSize } from '@local/theme'
+import { IThemePaletteKeys, IThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
 export type IconItemProps<T extends keyof IconTypeMap> = {
@@ -9,16 +9,16 @@ export type IconItemProps<T extends keyof IconTypeMap> = {
   name: IconTypeMap[T]
   className?: string
   onClick?: (event: React.MouseEvent<SVGSVGElement>) => void
-  size: TJeneseiThemeSize | '100%'
-  primaryColor?: JeneseiPaletteKeys
-  secondColor?: JeneseiPaletteKeys
+  size: IThemeSize | '100%'
+  primaryColor?: IThemePaletteKeys
+  secondColor?: IThemePaletteKeys
   turn?: number
   order?: number
   tabIndex?: number
 } & addSXProps
 
 export type StyledIconIdItemProps = AddDollarSign<
-  Pick<IconItemProps<'id'>, 'size' | 'turn' | 'order'> & { color?: JeneseiPaletteKeys }
+  Pick<IconItemProps<'id'>, 'size' | 'turn' | 'order'> & { color?: IThemePaletteKeys }
 > &
   addSXStyleProps
 

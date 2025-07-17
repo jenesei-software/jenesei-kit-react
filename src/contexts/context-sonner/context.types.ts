@@ -1,7 +1,7 @@
 import { PropsWithChildren, ReactNode } from 'react'
 
 import { TIconIdNameString } from '@local/components/icon'
-import { IJeneseiTheme, TJeneseiThemeGenre } from '@local/theme/theme.interface'
+import { ITheme, IThemeGenre } from '@local/theme/theme.interface'
 import { AddDollarSign } from '@local/types'
 
 export type ProviderSonnerProps = PropsWithChildren & {
@@ -46,7 +46,7 @@ type SonnerElementDefaultProps = {
   isMoreThanLastViewIndex: boolean
   isHovered: boolean
   isLastViewIndex: boolean
-  buttonGenre: keyof TJeneseiThemeGenre
+  buttonGenre: keyof IThemeGenre
   isTop: boolean
 } & Required<Pick<SonnerContentDefaultProps, 'genre'>>
 
@@ -57,7 +57,7 @@ type SonnerContentDefaultProps = {
   hidingTime?: number
   icon?: TIconIdNameString
   id?: string
-  genre?: keyof IJeneseiTheme['colors']['sonner']
+  genre?: keyof ITheme['colors']['sonner']
   isLoading?: boolean
   button?:
     | {

@@ -1,68 +1,89 @@
-import { FocusEventHandler, KeyboardEventHandler } from 'react'
+import { addErrorProps } from '@local/styles/error';
+import { addSXProps } from '@local/styles/sx';
+import { IThemeGenreTextArea, IThemeSize } from '@local/theme';
+import { AddDollarSign } from '@local/types';
 
-import { addErrorProps } from '@local/styles/error'
-import { addSXProps } from '@local/styles/sx'
-import { TJeneseiThemeGenreTextArea, TJeneseiThemeSize } from '@local/theme'
-import { AddDollarSign } from '@local/types'
+import { FocusEvent, KeyboardEventHandler, RefObject } from 'react';
 
-export type TextAreaProps = addErrorProps &
+type CommonTextAreaProps = addErrorProps &
   addSXProps & {
-    name?: string
+    name?: string;
+    autoComplete?: string;
+    id?: string;
+    ref?: RefObject<HTMLTextAreaElement | null>;
+    className?: string;
+    genre: TextAreaGenre;
+    minRows: number;
+    size: IThemeSize;
+    placeholder?: string;
 
-    id?: string
+    maxLength?: number;
+    minLength?: number;
 
-    className?: string
+    isDisabled?: boolean;
+    isResize?: boolean;
+    isLoading?: boolean;
+    isReadOnly?: boolean;
+    isInputEffect?: boolean;
+    isRequired?: boolean;
+    isNoSpaces?: boolean;
+    isBold?: boolean;
+    onFocus?: (event?: FocusEvent<HTMLTextAreaElement>) => void;
+    onBlur?: (event?: FocusEvent<HTMLTextAreaElement>) => void;
+    onChange?: (value: string) => void;
+    onKeyDown?: KeyboardEventHandler<HTMLTextAreaElement>;
+  };
 
-    defaultValue?: string
+// Контролируемый вариант
+type ControlledValue = {
+  value: string | null | undefined;
+  defaultValue?: never;
+};
 
-    isAllowEmptyFormatting?: boolean
+// Неконтролируемый вариант
+type UncontrolledValue = {
+  value?: never;
+  defaultValue: string;
+};
 
-    genre: TTextAreaGenre
+type BaseTextAreaProps = CommonTextAreaProps & (ControlledValue | UncontrolledValue);
 
-    height?: number
+// AutoHeight вариант
+type AutoHeightTextAreaProps = BaseTextAreaProps & {
+  isAutoHeight: true;
+  maxRows: number;
+  isResize?: false | undefined;
+};
 
-    maxRows?: number
+// Resizable (с запретом autoHeight и maxRows)
+type ResizableTextAreaProps = BaseTextAreaProps & {
+  isResize: true;
+  isAutoHeight?: false | undefined;
+  maxRows?: never;
+};
 
-    size: TJeneseiThemeSize
+// Fixed (не autoHeight и не resizable)
+type FixedTextAreaProps = BaseTextAreaProps & {
+  isResize?: false | undefined;
+  isAutoHeight?: false | undefined;
+  maxRows?: never;
+};
 
-    isDisabled?: boolean
+export type TextAreaProps = AutoHeightTextAreaProps | ResizableTextAreaProps | FixedTextAreaProps;
 
-    isResize?: boolean
-
-    isAutoHeight?: boolean
-
-    isLoading?: boolean
-
-    isReadOnly?: boolean
-
-    isTextAreaEffect?: boolean
-
-    isRequired?: boolean
-
-    isNoSpaces?: boolean
-
-    onBlur?: FocusEventHandler<HTMLTextAreaElement>
-
-    onChange?: (value: string) => void
-
-    onFocus?: FocusEventHandler<HTMLTextAreaElement>
-
-    onKeyDown?: KeyboardEventHandler<HTMLTextAreaElement>
-
-    placeholder?: string
-
-    isBold?: boolean
-
-    value?: string | null
-  }
-
-export type TTextAreaGenre = keyof TJeneseiThemeGenreTextArea
+export type TextAreaGenre = keyof IThemeGenreTextArea;
 
 export type StyledTextAreaProps = AddDollarSign<
   Pick<
     TextAreaProps,
-    'genre' | 'size' | 'error' | 'isLoading' | 'isTextAreaEffect' | 'isDisabled' | 'isBold' | 'isResize'
-  >
->
+    'genre' | 'size' | 'error' | 'isLoading' | 'isInputEffect' | 'isDisabled' | 'isBold' | 'isResize'
+  > & {
+    lineHeight: number;
+  }
+>;
 
-export type StyledTextAreaWrapperProps = AddDollarSign<Pick<TextAreaProps, 'isDisabled' | 'isTextAreaEffect' | 'sx'>>
+export type TextAreaWrapperProps = AddDollarSign<
+  Pick<TextAreaProps, 'isDisabled' | 'isInputEffect' | 'sx' | 'size' | 'genre' | 'isReadOnly'> & {
+    lineHeight: number;
+  }
+>;
