@@ -6,7 +6,8 @@ import 'styled-components'
 import { DatePicker as DatePickerComponent } from '@local/components/date-picker'
 import { Typography } from '@local/components/typography'
 import { localeInput, localeMonths, localeWeeks } from '@local/consts'
-import { WrapperBig } from './untils'
+
+import { WrapperBig } from './tools'
 
 const meta: Meta<typeof DatePickerComponent> = {
   component: DatePickerComponent,

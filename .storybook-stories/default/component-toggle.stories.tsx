@@ -5,7 +5,7 @@ import 'styled-components';
 import { Toggle as ToggleComponent } from '@local/components/toggle';
 import { Typography } from '@local/components/typography';
 
-import { WrapperBig, WrapperMin } from './untils';
+import { WrapperBig, WrapperMin } from './tools';
 
 const meta: Meta<typeof ToggleComponent> = {
   component: ToggleComponent,

@@ -79,7 +79,7 @@ export const TextArea = (props: TextAreaProps) => {
           disabled={props.isDisabled}
           readOnly={props.isReadOnly}
           required={props.isRequired}
-          defaultValue={props.defaultValue}
+          defaultValue={props.defaultValue === null ? '' : props.defaultValue}
           value={props.value === null ? '' : props.value}
           rows={props.minRows}
           placeholder={props.placeholder}

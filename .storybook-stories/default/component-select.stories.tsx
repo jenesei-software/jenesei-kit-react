@@ -7,7 +7,7 @@ import { localeMonths, Typography } from '@local/index';
 
 import moment from 'moment';
 
-import { WrapperBig } from './untils';
+import { WrapperBig } from './tools';
 
 const meta: Meta<typeof SelectLanguage> = {
   component: SelectLanguage,
@@ -118,7 +118,7 @@ const SelectWrapperAll: FC = () => {
           endDate={moment.utc().startOf('day').valueOf()}
         />
       </WrapperBig>
-        <WrapperBig sx={{ default: { flexDirection: 'column' } }}>
+      <WrapperBig sx={{ default: { flexDirection: 'column' } }}>
         <Typography
           sx={{
             default: {

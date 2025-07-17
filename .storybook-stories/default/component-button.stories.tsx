@@ -4,7 +4,7 @@ import 'styled-components'
 
 import { Button as ButtonComponent } from '@local/components/button'
 
-import { WrapperBig, WrapperMin } from './untils'
+import { WrapperBig, WrapperMin } from './tools'
 
 const meta: Meta<typeof ButtonComponent> = {
   component: ButtonComponent,

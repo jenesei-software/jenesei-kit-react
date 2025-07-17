@@ -1,59 +1,61 @@
-import { useMergeRefs } from '@floating-ui/react'
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import { FC } from 'react'
-import 'styled-components'
+import { useMergeRefs } from '@floating-ui/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { FC } from 'react';
+import 'styled-components';
 
-import { Button } from '@local/components/button'
-import { Popover as PopoverComponent, PopoverProps, usePopover } from '@local/components/popover'
-import { Stack } from '@local/components/stack'
-import { Typography } from '@local/components/typography'
+import { Button } from '@local/components/button';
+import { Popover as PopoverComponent, PopoverProps, usePopover } from '@local/components/popover';
+import { Stack } from '@local/components/stack';
+import { Typography } from '@local/components/typography';
+
+import { WrapperBig } from './tools';
 
 const meta: Meta<typeof PopoverComponent> = {
   component: PopoverComponent,
-  title: 'Component/Popover'
-}
+  title: 'Component/Popover',
+};
 
-export default meta
+export default meta;
 
-type Story = StoryObj<typeof PopoverComponent>
+type Story = StoryObj<typeof PopoverComponent>;
 
-const PopoverWrapper: FC<PopoverProps> = props => {
+const PopoverWrapper: FC<PopoverProps> = (props) => {
   const { isOpen, refReference, refFloating, floatingStyles } = usePopover({
     placement: 'bottom-start',
     offset: 8,
-    mode: 'click'
-  })
+    mode: 'click',
+  });
   const {
     isOpen: isOpenTop,
     refReference: refReferenceTop,
     refFloating: refFloatingTop,
-    floatingStyles: floatingStylesTop
+    floatingStyles: floatingStylesTop,
   } = usePopover({
     placement: 'top-start',
     offset: 8,
     mode: 'hover',
-    isFloatingHover: false
-  })
-  const ref = useMergeRefs([refReference, refReferenceTop])
+    isFloatingHover: false,
+  });
+  const ref = useMergeRefs([refReference, refReferenceTop]);
 
   return (
-    <Stack sx={{ default: { gap: '8px', padding: '100px' } }}>
+    <WrapperBig sx={{ default: { padding: '100px' } }}>
       <Button genre={'black'} size={'medium'} ref={ref}>
-        Popover
+        {isOpen ? 'Open' : 'Close'}
       </Button>
       <PopoverComponent
         {...props}
-        size="small"
+        size='small'
         isOpen={isOpenTop}
         floatingStyles={floatingStylesTop}
         ref={refFloatingTop}
       >
-        Popover
+        {isOpen ? 'Open' : 'Close'}
       </PopoverComponent>
       <PopoverComponent
         {...props}
-        genre="white"
-        size="medium"
+        genre='white'
+        size='medium'
         isOpen={isOpen}
         floatingStyles={floatingStyles}
         ref={refFloating}
@@ -61,28 +63,28 @@ const PopoverWrapper: FC<PopoverProps> = props => {
           default: {
             padding: '0px',
             gap: '0px',
-            width: '120px'
-          }
+            width: '120px',
+          },
         }}
       >
         <Stack
           sx={{
             default: {
-              flexDirection: 'column'
-            }
+              flexDirection: 'column',
+            },
           }}
         >
           <Typography
             sxStandard={{
               default: {
                 padding: '8px 16px',
-                textAlign: 'left'
-              }
+                textAlign: 'left',
+              },
             }}
             sx={{
               default: {
-                variant: 'h6'
-              }
+                variant: 'h6',
+              },
             }}
           >
             Menu
@@ -98,10 +100,10 @@ const PopoverWrapper: FC<PopoverProps> = props => {
           </Button>
         </Stack>
       </PopoverComponent>
-    </Stack>
-  )
-}
+    </WrapperBig>
+  );
+};
 
 export const Popover: Story = {
-  render: args => <PopoverWrapper {...args} />
-}
+  render: (args) => <PopoverWrapper {...args} />,
+};

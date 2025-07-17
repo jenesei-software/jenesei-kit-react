@@ -6,7 +6,7 @@ import { Input } from '@local/components/input';
 import { TextArea as TextAreaComponent } from '@local/components/textarea';
 import { Typography } from '@local/components/typography';
 
-import { WrapperBig, WrapperMin } from './untils';
+import { WrapperBig, WrapperMin } from './tools';
 
 const meta: Meta<typeof TextAreaComponent> = {
   component: TextAreaComponent,

@@ -5,7 +5,7 @@ import 'styled-components'
 import { Stack } from '@local/components/stack'
 import { JeneseiPalette } from '@local/theme'
 
-import { WrapperBig } from './untils'
+import { WrapperBig } from './tools'
 
 const PaletteWrapper: FC = () => {
   return (

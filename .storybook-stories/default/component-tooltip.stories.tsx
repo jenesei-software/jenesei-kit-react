@@ -8,7 +8,7 @@ import { Tooltip as TooltipComponent } from '@local/components/tooltip';
 import { Typography } from '@local/components/typography';
 import { LoremIpsumText } from '@local/consts';
 
-import { WrapperBig, WrapperMin } from './untils';
+import { WrapperBig, WrapperMin } from './tools';
 
 const meta: Meta<typeof TooltipComponent> = {
   component: TooltipComponent,

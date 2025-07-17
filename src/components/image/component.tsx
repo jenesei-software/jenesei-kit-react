@@ -1,21 +1,51 @@
-import { FC, useEffect, useState } from 'react'
+import { Skeleton } from '@local/areas/skeleton';
+import { Stack } from '@local/components/stack';
 
-import { Skeleton } from '@local/areas/skeleton'
-import { Stack } from '@local/components/stack'
+import { FC, useEffect, useState } from 'react';
 
-import { ImageIMG, ImageProps } from '.'
+import { ImageIMG, ImageProps } from '.';
 
-export const Image: FC<ImageProps> = props => {
-  const [isPending, setIsPending] = useState(true)
-  const [isError, setIsError] = useState(false)
+export const Image: FC<ImageProps> = (props) => {
+  const [isPending, setIsPending] = useState(true);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    setIsPending(true)
-    setIsError(false)
-  }, [props.src])
+    if (!props.src) return;
+
+    const img = new (window.Image as { new (width?: number, height?: number): HTMLImageElement })();
+
+    img.onload = () => {
+      setIsPending(false);
+      setIsError(false);
+    };
+
+    img.onerror = () => {
+      setIsPending(false);
+      setIsError(true);
+    };
+
+    img.src = props.src;
+
+    if (img.complete) {
+      if (img.naturalWidth > 0) {
+        setIsPending(false);
+        setIsError(false);
+      } else {
+        setIsPending(false);
+        setIsError(true);
+      }
+    }
+
+    return () => {
+      img.onload = null;
+      img.onerror = null;
+      setIsPending(true);
+      setIsError(false);
+    };
+  }, [props.src]);
   return (
     <Stack
-      sx={theme => ({
+      sx={(theme) => ({
         ...props?.sxStack,
         default: {
           position: 'relative',
@@ -34,16 +64,16 @@ export const Image: FC<ImageProps> = props => {
                   backgroundPosition: 'center',
                   filter: 'blur(20px)',
                   transform: 'scale(1.1)',
-                  zIndex: 0
-                }
+                  zIndex: 0,
+                },
               }
             : {}),
           ...(props?.sxStack
             ? typeof props?.sxStack === 'function'
               ? props?.sxStack(theme).default
               : props?.sxStack.default
-            : {})
-        }
+            : {}),
+        },
       })}
     >
       {!isError ? (
@@ -53,25 +83,16 @@ export const Image: FC<ImageProps> = props => {
             sx={{
               default: {
                 width: '100%',
-                height: '100%'
-              }
+                height: '100%',
+              },
             }}
           />
         ) : null
       ) : null}
       {!isError && (
-        <ImageIMG
-          loading="lazy"
-          $isPending={isPending}
-          src={props.src}
-          alt={props.alt}
-          onLoadStart={() => setIsPending(true)}
-          onLoad={() => setIsPending(false)}
-          onError={() => setIsError(true)}
-          $sx={props.sxImage}
-        />
+        <ImageIMG loading='lazy' $isPending={isPending} src={props.src} alt={props.alt} $sx={props.sxImage} />
       )}
       {isError ? props.componentFallback || null : null}
     </Stack>
-  )
-}
+  );
+};

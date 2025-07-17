@@ -5,7 +5,7 @@ import { KEY_SIZE_DATA } from '@local/theme';
 import { useMergeRefs } from '@floating-ui/react';
 import { useVirtualizer } from '@tanstack/react-virtual';
 import moment from 'moment';
-import { FC, KeyboardEvent, memo, Ref, RefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { FC, KeyboardEvent, memo, Ref, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { Button } from '../button';
 import { Icon } from '../icon';
@@ -50,7 +50,15 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
   const sizePadding = useMemo(() => KEY_SIZE_DATA[props.size].padding, [props.size]);
   const sizeRadius = useMemo(() => KEY_SIZE_DATA[props.size].radius, [props.size]);
 
-  const { isOpen, close, open, refReference: refReferencePopover, refFloating: refFloatingPopover, floatingStyles, toggle } = usePopover({
+  const {
+    isOpen,
+    close,
+    open,
+    refReference: refReferencePopover,
+    refFloating: refFloatingPopover,
+    floatingStyles,
+    toggle,
+  } = usePopover({
     placement: 'bottom-start',
     offset: sizePadding,
     mode: 'independence',
@@ -63,8 +71,8 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
   const refTextArea = useRef<HTMLTextAreaElement>(null);
   const refDropdownList = useRef<HTMLDivElement>(null);
 
-  const refReference = useMergeRefs([props.refReference, refReferencePopover])
-  const refFloating = useMergeRefs([props.refFloating, refFloatingPopover])
+  const refReference = useMergeRefs([props.refReference, refReferencePopover]);
+  const refFloating = useMergeRefs([props.refFloating, refFloatingPopover]);
 
   const labelSelectAll = useMemo(() => props.labelSelectAll ?? DEFAULT_LABEL_SELECT_ALL, [props.labelSelectAll]);
   const labelPlaceholder = useMemo(() => props.labelPlaceholder ?? DEFAULT_LABEL_PLACEHOLDER, [props.labelPlaceholder]);
@@ -96,7 +104,6 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
       return props.option.filter((option) => !option.isDisabled).length;
     } else {
       return props.option.length;
-
     }
   }, [props.option, props.isNotShowDisabledOptions]);
 
@@ -202,9 +209,9 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
       close();
     }
   }, [close, isAll, onChangeShowSearch, props]);
-  const onClear = useCallback(() => {
-    props.onChange([]);
-  }, [props]);
+  // const onClear = useCallback(() => {
+  //   props.onChange([]);
+  // }, [props]);
   const onClearSearch = useCallback(() => {
     props.onChangeSearch?.('');
   }, [props]);
@@ -313,7 +320,9 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
         ) : null}
         {isHaveValue && (props.isShowSelectAllLabel ? isAll : false) ? (
           <Typography
-            sxStandard={{ default: { padding: `${sizePadding / 2.8}px 0px` } }}
+            sxStandard={{
+              default: { padding: `${sizePadding / 2.8}px 0px ${sizePadding / 2.8}px ${sizePadding / 2.8}px` },
+            }}
             sx={{ default: { size: 16, line: 1, isNoUserSelect: true } }}
           >
             {labelSelectAll}
@@ -324,7 +333,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
             sxStandard={(theme) => ({
               default: {
                 color: theme.colors.input[props.genre].color.placeholder,
-                padding: `${sizePadding / 2.8}px 0px`,
+                padding: `${sizePadding / 2.8}px 0px ${sizePadding / 2.8}px ${sizePadding / 2.8}px`,
               },
             })}
             sx={{ default: { size: 16, line: 1, isNoUserSelect: true } }}
@@ -335,7 +344,9 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
 
         {isValueMoreMaxViewSelect && isHaveValue && (props.isShowSelectAllLabel ? !isAll : true) ? (
           <Typography
-            sxStandard={{ default: { padding: `${sizePadding / 2.8}px 0px` } }}
+            sxStandard={{
+              default: { padding: `${sizePadding / 2.8}px 0px ${sizePadding / 2.8}px ${sizePadding / 2.8}px` },
+            }}
             sx={{ default: { size: 16, line: 1, isNoUserSelect: true } }}
           >
             {labelAndMore(props.value.length - maxViewSelect)}
@@ -600,7 +611,7 @@ export const SelectLanguage: FC<SelectLanguageProps> = (props) => {
 
   const option = ListLanguage;
 
-  const [viewOption, setViewOption] = useState<ISelectLanguageOption[]>(option);
+  const [viewOption] = useState<ISelectLanguageOption[]>(option);
 
   const handleSelectChange = (value: ISelectLanguageOption[]) => {
     if (value.length === 0) onChange(null);

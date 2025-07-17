@@ -5,7 +5,7 @@ import 'styled-components';
 import { Separator as SeparatorComponent } from '@local/components/separator';
 import { Typography } from '@local/index';
 
-import { WrapperBig, WrapperMin } from './untils';
+import { WrapperBig, WrapperMin } from './tools';
 
 const meta: Meta<typeof SeparatorComponent> = {
   component: SeparatorComponent,
