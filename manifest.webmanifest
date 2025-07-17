@@ -1,0 +1,50 @@
+{
+  "background_color": "#ffffff",
+  "description": "The best UI for React.",
+  "display": "standalone",
+  "icons": [
+    {
+      "purpose": "any",
+      "sizes": "64x64",
+      "src": "icons/icon-64x64.ico",
+      "type": "image/x-icon"
+    },
+    {
+      "purpose": "any",
+      "sizes": "192x192",
+      "src": "icons/icon-192x192.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "any",
+      "sizes": "256x256",
+      "src": "icons/icon-256x256.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "any",
+      "sizes": "384x384",
+      "src": "icons/icon-384x384.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "any",
+      "sizes": "512x512",
+      "src": "icons/icon-512x512.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "any",
+      "sizes": "180x180",
+      "src": "icons/icon-180x180.png",
+      "type": "image/png"
+    }
+  ],
+  "lang": "en",
+  "name": "Jenesei UI React",
+  "orientation": "portrait",
+  "scope": "/",
+  "short_name": "Jen. React",
+  "start_url": "/",
+  "theme_color": "#ffffff"
+}
