@@ -309,7 +309,7 @@ export const DatePicker = (props: DatePickerProps) => {
       } else if (momentEndDate && momentCheckDate.isAfter(momentEndDate, 'day')) {
         momentNewDate = momentEndDate.startOf('day');
       }
-      if (valueMoment && valueMoment.isSame(momentNewDate, 'day')) return;
+      if (valueMoment?.isSame(momentNewDate, 'day')) return;
       setValueMoment(momentNewDate);
       setCurrentDay(momentNewDate.date());
       setCurrentMonth(momentNewDate.month());
@@ -334,6 +334,7 @@ export const DatePicker = (props: DatePickerProps) => {
     onChangeDate(newDate.valueOf(), false, false);
   }, [currentDay, currentMonth, currentYear, onChangeDate]);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     const valueMoment = props.value ? moment(props.value).utc() : moment.utc();
     if (props.value !== null && props.value !== undefined) {
@@ -452,7 +453,7 @@ export const DatePicker = (props: DatePickerProps) => {
                         const day = inputDay ? Number(inputDay) : NaN;
                         const month = inputMonth ? Number(inputMonth) : NaN;
                         const year = value ? Number(value) : NaN;
-                        if (!isNaN(day) && !isNaN(month) && !isNaN(year)) {
+                        if (!Number.isNaN(day) && !Number.isNaN(month) && !Number.isNaN(year)) {
                           const m = moment.utc(`${day}.${month}.${year}`, 'D.M.YYYY', true).startOf('day');
                           if (m.isValid()) {
                             onChangeDate(m.valueOf(), false, true);
