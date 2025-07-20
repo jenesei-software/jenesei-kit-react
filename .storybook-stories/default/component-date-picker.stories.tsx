@@ -1,24 +1,22 @@
-import type { Meta } from '@storybook/react-vite'
-import moment from 'moment'
-import { FC } from 'react'
-import 'styled-components'
+import type { Meta } from '@storybook/react-vite';
+import moment from 'moment';
+import { FC } from 'react';
+import 'styled-components';
 
-import { DatePicker as DatePickerComponent } from '@local/components/date-picker'
-import { Typography } from '@local/components/typography'
-import { localeInput, localeMonths, localeWeeks } from '@local/consts'
+import { DatePicker as DatePickerComponent } from '@local/components/date-picker';
+import { Typography } from '@local/components/typography';
+import { localeInput, localeMonths, localeWeeks } from '@local/consts';
 
-import { WrapperBig } from './tools'
+import { WrapperBig } from './tools';
 
 const meta: Meta<typeof DatePickerComponent> = {
   component: DatePickerComponent,
-  title: 'Component/DatePicker'
-}
+  title: 'Component/DatePicker',
+};
 
-export default meta
+export default meta;
 
 const DatePickerWrapperAll: FC = () => {
-
-
   return (
     <WrapperBig sx={{ default: { flexDirection: 'row' } }}>
       <WrapperBig sx={{ default: { flexDirection: 'column' } }}>
@@ -37,7 +35,7 @@ const DatePickerWrapperAll: FC = () => {
           locale={{
             months: localeMonths,
             weeks: localeWeeks,
-            inputs: localeInput
+            inputs: localeInput,
           }}
           value={null}
           size='medium'
@@ -45,9 +43,9 @@ const DatePickerWrapperAll: FC = () => {
           startDate={moment.utc().subtract(100, 'years').startOf('year').valueOf()}
           endDate={moment.utc().startOf('day').valueOf()}
           onChange={(timestamp) => {
-            console.log('onChange', timestamp)
-          }} />
-
+            console.log('onChange', timestamp);
+          }}
+        />
       </WrapperBig>
       <WrapperBig sx={{ default: { flexDirection: 'column' } }}>
         <Typography
@@ -65,7 +63,7 @@ const DatePickerWrapperAll: FC = () => {
           locale={{
             months: localeMonths,
             weeks: localeWeeks,
-            inputs: localeInput
+            inputs: localeInput,
           }}
           value={null}
           size='medium'
@@ -73,9 +71,9 @@ const DatePickerWrapperAll: FC = () => {
           startDate={moment.utc().subtract(118, 'years').startOf('year').valueOf()}
           endDate={moment.utc().subtract(18, 'years').valueOf()}
           onChange={(timestamp) => {
-            console.log('onChange', timestamp)
-          }} />
-
+            console.log('onChange', timestamp);
+          }}
+        />
       </WrapperBig>
       <WrapperBig sx={{ default: { flexDirection: 'column' } }}>
         <Typography
@@ -93,7 +91,7 @@ const DatePickerWrapperAll: FC = () => {
           locale={{
             months: localeMonths,
             weeks: localeWeeks,
-            inputs: localeInput
+            inputs: localeInput,
           }}
           value={null}
           size='medium'
@@ -101,14 +99,14 @@ const DatePickerWrapperAll: FC = () => {
           startDate={moment.utc().startOf('day').valueOf()}
           endDate={moment.utc().add(3, 'months').startOf('day').valueOf()}
           onChange={(timestamp) => {
-            console.log('onChange', timestamp)
-          }} />
-
+            console.log('onChange', timestamp);
+          }}
+        />
       </WrapperBig>
     </WrapperBig>
-  )
-}
+  );
+};
 
 export const DatePicker = {
   render: () => <DatePickerWrapperAll />,
-}
+};

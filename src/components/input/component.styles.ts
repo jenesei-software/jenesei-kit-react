@@ -43,7 +43,7 @@ export const addInputPlaceholder = css<StyledInputProps>`
     opacity: 1;
   }
 `;
-export const InputPlaceholderNiceNumber = css<StyledInputProps>`
+export const addInputPlaceholderNiceNumber = css<StyledInputProps>`
   &::placeholder,
   &::-webkit-input-placeholder {
     ${(props) => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Roboto Mono', props.theme.font.lineHeight)};

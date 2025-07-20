@@ -1,14 +1,14 @@
-import { motion } from 'framer-motion'
-import { PatternFormat } from 'react-number-format'
-import styled, { css } from 'styled-components'
-
-import { InputIsInputEffect, InputPlaceholderNiceNumber } from '@local/components/input'
+import { addInputPlaceholderNiceNumber, InputIsInputEffect } from '@local/components/input'
 import { getFontSizeStyles } from '@local/components/typography'
 import { addNiceNumber, addOutline, addRemoveOutline, addRemoveScrollbar, addTransition } from '@local/styles/add'
 import { addError } from '@local/styles/error'
 import { addSX } from '@local/styles/sx'
 import { KEY_SIZE_DATA } from '@local/theme/theme'
 import { IThemeSizePropertyDefault } from '@local/theme/theme.interface'
+
+import { motion } from 'framer-motion'
+import { PatternFormat } from 'react-number-format'
+import styled, { css } from 'styled-components'
 
 import { DateDropdownDayProps, DateDropdownListProps, DateInputProps, DateStyledListProps, DateWrapperProps } from '.'
 
@@ -153,7 +153,7 @@ export const DateInput = styled(PatternFormat)<DateInputProps>`
   text-align: left;
   ${props => getFontSizeStyles(16, 400, 'Roboto Mono', props.theme.font.lineHeight)};
   ${DateInputGenre};
-  ${InputPlaceholderNiceNumber};
+  ${addInputPlaceholderNiceNumber};
   ${addRemoveOutline};
 `
 

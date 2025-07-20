@@ -381,11 +381,11 @@ export const DatePicker = (props: DatePickerProps) => {
         $radius={sizeRadius}
         $parentListHeight={height}
         tabIndex={-1}
-      // onFocus={event => {
-      //   if (props?.isDisabled) return
-      //   if (props.onFocus) props.onFocus?.(event)
-      //   // handleOnOpen()
-      // }}
+        // onFocus={event => {
+        //   if (props?.isDisabled) return
+        //   if (props.onFocus) props.onFocus?.(event)
+        //   // handleOnOpen()
+        // }}
       >
         <DateInputWrapper
           ref={refReference as RefObject<HTMLDivElement | null>}
@@ -401,98 +401,105 @@ export const DatePicker = (props: DatePickerProps) => {
             open();
           }}
         >
-          {!isHasValue && props.labelPlaceholder && !isOpen ? <Typography
-            sx={{ default: { size: 16, line: 1, isNoUserSelect: true } }}
-          >
-            {props.labelPlaceholder}
-          </Typography> : dataDate.map((date, index) => (
-            <Fragment key={date.type}>
-              <DateInput
-                onValueChange={(values, sourceInfo) => {
-                  if (date.type === 'DD') {
-                    if (sourceInfo.source !== 'event') return;
-                    const value = values.formattedValue;
-                    setInputMonth(null);
-                    setInputYear(null);
+          {!isHasValue && props.labelPlaceholder && !isOpen ? (
+            <Typography
+              sx={{ default: { size: 16, line: 1, isNoUserSelect: true } }}
+              sxStandard={(theme) => ({
+                default: {
+                  color: theme.colors.input[props.genre].color.placeholder,
+                },
+              })}
+            >
+              {props.labelPlaceholder}
+            </Typography>
+          ) : (
+            dataDate.map((date, index) => (
+              <Fragment key={date.type}>
+                <DateInput
+                  onValueChange={(values, sourceInfo) => {
+                    if (date.type === 'DD') {
+                      if (sourceInfo.source !== 'event') return;
+                      const value = values.formattedValue;
+                      setInputMonth(null);
+                      setInputYear(null);
 
-                    if (Number(value) && Number(value) > 31) {
-                      setInputDay('31');
-                    } else {
-                      setInputDay(value);
-                    }
-                    if (value !== '' && !value.includes('_')) {
-                      setActiveSegment('month');
-                    }
-                  } else if (date.type === 'MM') {
-                    if (sourceInfo.source !== 'event') return;
-                    const value = values.formattedValue;
-                    setInputYear(null);
-                    if (Number(value) > 12) {
-                      setInputMonth('12');
-                    } else {
-                      setInputMonth(value);
-                    }
-                    if (value !== '' && !value.includes('_')) {
-                      setActiveSegment('year');
-                    }
-                  } else if (date.type === 'YYYY') {
-                    if (sourceInfo.source !== 'event') return;
-                    const value = values.formattedValue;
-                    setInputYear(value);
+                      if (Number(value) && Number(value) > 31) {
+                        setInputDay('31');
+                      } else {
+                        setInputDay(value);
+                      }
+                      if (value !== '' && !value.includes('_')) {
+                        setActiveSegment('month');
+                      }
+                    } else if (date.type === 'MM') {
+                      if (sourceInfo.source !== 'event') return;
+                      const value = values.formattedValue;
+                      setInputYear(null);
+                      if (Number(value) > 12) {
+                        setInputMonth('12');
+                      } else {
+                        setInputMonth(value);
+                      }
+                      if (value !== '' && !value.includes('_')) {
+                        setActiveSegment('year');
+                      }
+                    } else if (date.type === 'YYYY') {
+                      if (sourceInfo.source !== 'event') return;
+                      const value = values.formattedValue;
+                      setInputYear(value);
 
-                    if (value !== '' && !value.includes('_')) {
-                      const day = inputDay ? Number(inputDay) : NaN;
-                      const month = inputMonth ? Number(inputMonth) : NaN;
-                      const year = value ? Number(value) : NaN;
-                      if (!isNaN(day) && !isNaN(month) && !isNaN(year)) {
-                        const m = moment.utc(`${day}.${month}.${year}`, 'D.M.YYYY', true).startOf('day');
-                        if (m.isValid()) {
-                          onChangeDate(m.valueOf(), false, true);
-                        } else {
-                          setIsError(true);
-                          setTimeout(() => {
-                            setIsError(false);
-                            setInputDay(null);
-                            setInputMonth(null);
-                            setInputYear(null);
-                            setActiveSegment('day');
-                          }, 1000);
+                      if (value !== '' && !value.includes('_')) {
+                        const day = inputDay ? Number(inputDay) : NaN;
+                        const month = inputMonth ? Number(inputMonth) : NaN;
+                        const year = value ? Number(value) : NaN;
+                        if (!isNaN(day) && !isNaN(month) && !isNaN(year)) {
+                          const m = moment.utc(`${day}.${month}.${year}`, 'D.M.YYYY', true).startOf('day');
+                          if (m.isValid()) {
+                            onChangeDate(m.valueOf(), false, true);
+                          } else {
+                            setIsError(true);
+                            setTimeout(() => {
+                              setIsError(false);
+                              setInputDay(null);
+                              setInputMonth(null);
+                              setInputYear(null);
+                              setActiveSegment('day');
+                            }, 1000);
+                          }
                         }
                       }
                     }
-                  }
-                }}
-                $genre={props.genre}
-                $size={props.size}
-                getInputRef={(ref: HTMLInputElement | null) => {
-                  if (ref && !date.ref.current) {
-                    date.ref.current = ref;
-                  }
-                }}
-                onFocus={(e) => {
-                  // date.setActive();
-                  e.target.select();
-                }}
-                onBlur={() => {
-                  if (index !== dataDate.length - 1)
-                    if (date.valueInput?.includes('_'))
-                      date.setValueInput(fixUnderscoreToZero(date.valueInput));
-                }}
-                onKeyDown={handleKeyDown}
-                value={date.valueInput ?? ''}
-                placeholder={date.placeholder}
-                format={'#'.repeat(date.type.length)}
-                style={{ width: date.width }}
-                readOnly={isError}
-                type='text'
-                mask='_'
-              />
-              {index !== dataDate.length - 1 && (
-                <span style={{ width: '4px', pointerEvents: 'none', textAlign: 'center' }}>.</span>
-              )}
-            </Fragment>
-          ))}
-
+                  }}
+                  $genre={props.genre}
+                  $size={props.size}
+                  getInputRef={(ref: HTMLInputElement | null) => {
+                    if (ref && !date.ref.current) {
+                      date.ref.current = ref;
+                    }
+                  }}
+                  onFocus={(e) => {
+                    // date.setActive();
+                    e.target.select();
+                  }}
+                  onBlur={() => {
+                    if (index !== dataDate.length - 1)
+                      if (date.valueInput?.includes('_')) date.setValueInput(fixUnderscoreToZero(date.valueInput));
+                  }}
+                  onKeyDown={handleKeyDown}
+                  value={date.valueInput ?? ''}
+                  placeholder={date.placeholder}
+                  format={'#'.repeat(date.type.length)}
+                  style={{ width: date.width }}
+                  readOnly={isError}
+                  type='text'
+                  mask='_'
+                />
+                {index !== dataDate.length - 1 && (
+                  <span style={{ width: '4px', pointerEvents: 'none', textAlign: 'center' }}>.</span>
+                )}
+              </Fragment>
+            ))
+          )}
         </DateInputWrapper>
       </DateWrapper>
       <Popover
