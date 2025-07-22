@@ -1,8 +1,9 @@
-import { FC, createContext, useCallback, useEffect, useState } from 'react'
-
 import { Preview, PreviewAdditionalProps } from '@local/areas/preview'
-import { JeneseiPalette, IThemePaletteKeys } from '@local/theme'
+import { IThemePaletteKeys, JeneseiPalette } from '@local/theme'
 
+import { createContext, FC, useCallback, useEffect, useState } from 'react'
+
+import { useScreenWidth } from '../context-screen-width'
 import {
   AppContextProps,
   ProviderAppOutlet,
@@ -16,7 +17,6 @@ import {
   ProviderAppProps,
   ProviderAppWrapper
 } from '.'
-import { useScreenWidth } from '../context-screen-width'
 
 export const AppContext = createContext<AppContextProps | null>(null)
 
@@ -116,7 +116,7 @@ export const ProviderApp: FC<ProviderAppProps> = props => {
               </ProviderAppOutletLeftAside>
             ) : null}
 
-            <ProviderAppOutletChildren $main={props.main}>{props.children}</ProviderAppOutletChildren>
+            <ProviderAppOutletChildren $isScrollOutlet={props.isScrollOutlet} $main={props.main}>{props.children}</ProviderAppOutletChildren>
 
             {props.rightAside?.length && props.rightAside?.length?.[screenActual] ? (
               <ProviderAppOutletRightAside $rightAside={props.rightAside}>

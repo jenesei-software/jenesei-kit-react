@@ -47,7 +47,7 @@ const defaultHeader = (
     <Typography
       sx={{
         default: {
-          variant: 'h1',
+          variant: 'h5',
           wrap: 'nowrap'
         }
       }}
@@ -68,7 +68,7 @@ const defaultFooter = (
     <Typography
       sx={{
         default: {
-          variant: 'h1'
+          variant: 'h5'
         }
       }}
     >
@@ -141,7 +141,9 @@ const defaultChildren = (
     sx={theme => ({
       default: {
         backgroundColor: theme.palette.whiteStandard,
-        padding: '10px'
+        padding: '10px',
+        flexDirection: 'column',
+        height: 'fit-content'
       },
       tablet: {
         backgroundColor: theme.palette.whiteJanice,
@@ -229,7 +231,7 @@ export const Default: Story = {
         </Typography>
       )
     },
-    defaultBgColor: 'black40',
+    defaultBgColor: 'whiteStandard',
     isScrollOutlet: false,
     defaultTitle: 'Storybook?',
     defaultDescription: 'Description from Storybook?',
@@ -252,8 +254,8 @@ export const Default: Story = {
     leftAside: {
       component: defaultLeftAside,
       length: {
-        default: '80px',
-        tablet: '60px',
+        default: '180px',
+        tablet: '160px',
         mobile: null
       }
     },
@@ -268,8 +270,8 @@ export const Default: Story = {
     rightAside: {
       component: defaultRightAside,
       length: {
-        default: '80px',
-        tablet: '60px',
+        default: '180px',
+        tablet: '160px',
         mobile: null
       }
     },
