@@ -61,7 +61,9 @@ export const DatePicker = (props: DatePickerProps) => {
   const getNextSegment = useCallback(
     (currentSegment: string): 'DD' | 'MM' | 'YYYY' | null => {
       const currentIndex = segmentOrder.indexOf(currentSegment);
-      return currentIndex < segmentOrder.length - 1 ? (segmentOrder[currentIndex + 1] as 'DD' | 'MM' | 'YYYY') : null;
+      return currentIndex < segmentOrder.length - 1
+        ? (segmentOrder[currentIndex + 1] as 'DD' | 'MM' | 'YYYY')
+        : (segmentOrder[0] as 'DD' | 'MM' | 'YYYY');
     },
     [segmentOrder],
   );
@@ -69,11 +71,13 @@ export const DatePicker = (props: DatePickerProps) => {
   const getPrevSegment = useCallback(
     (currentSegment: string): 'DD' | 'MM' | 'YYYY' | null => {
       const currentIndex = segmentOrder.indexOf(currentSegment);
-      return currentIndex > 0 ? (segmentOrder[currentIndex - 1] as 'DD' | 'MM' | 'YYYY') : null;
+      return currentIndex > 0
+        ? (segmentOrder[currentIndex - 1] as 'DD' | 'MM' | 'YYYY')
+        : (segmentOrder[segmentOrder.length - 1] as 'DD' | 'MM' | 'YYYY');
     },
     [segmentOrder],
   );
-
+  console.log("getNextSegment('YYYY')", getNextSegment('YYYY'));
   const dataDate = useMemo(() => {
     const result = {
       MM: {
@@ -382,57 +386,53 @@ export const DatePicker = (props: DatePickerProps) => {
         e.preventDefault();
         e.stopPropagation();
       }
-      // if (nextValue.length === 4) {
-      //   // Проверяем и применяем дату
-      //   const day = inputDay ? Number(inputDay) : NaN;
-      //   const month = inputMonth ? Number(inputMonth) : NaN;
-      //   const year = Number(nextValue);
-
-      //   if (!Number.isNaN(day) && !Number.isNaN(month) && !Number.isNaN(year)) {
-      //     const m = moment.utc(`${day}.${month}.${year}`, 'D.M.YYYY', true).startOf('day');
-      //     if (m.isValid()) {
-      //       onChangeDate(m.valueOf(), false, true);
-      //     } else {
-      //       setIsError(true);
-      //       setTimeout(() => {
-      //         setIsError(false);
-      //         setInputDay(null);
-      //         setInputMonth(null);
-      //         setInputYear(null);
-      //         setActiveSegment('day');
-      //       }, 1000);
-      //     }
-      //   }
-      // }
       if (key === 'Tab') {
         e.preventDefault();
         if (activeSegment) dataDate.default[activeSegment].onNext();
       }
 
-      // if (key === 'Backspace' || key === 'Delete') {
-      //   e.preventDefault();
-      //   if (activeSegment === 'day') {
-      //     if (!inputDay || inputDay.length <= 0) {
-      //       setInputDay(null);
-      //     } else {
-      //       setInputDay(inputDay.slice(0, -1));
-      //     }
-      //   } else if (activeSegment === 'month') {
-      //     if (!inputMonth || inputMonth.length <= 0) {
-      //       setInputMonth(null);
-      //       setActiveSegment('day');
-      //     } else {
-      //       setInputMonth(inputMonth.slice(0, -1));
-      //     }
-      //   } else if (activeSegment === 'year') {
-      //     if (!inputYear || inputYear.length <= 0) {
-      //       setInputYear(null);
-      //       setActiveSegment('month');
-      //     } else {
-      //       setInputYear(inputYear.slice(0, -1));
-      //     }
-      //   }
-      // }
+      if (key === 'Backspace' || key === 'Delete') {
+        if (activeSegment === 'DD') {
+          if (inputDay !== null) {
+            const current = inputDay.toString();
+            if (current.length === 1) {
+              setInputDay(null);
+            } else {
+              const newValue = current.slice(0, -1);
+              setInputDay(Number(newValue));
+            }
+          } else {
+            if (activeSegment) dataDate.default[activeSegment].onPrev();
+          }
+        } else if (activeSegment === 'MM') {
+          if (inputMonth !== null) {
+            const current = inputMonth.toString();
+            if (current.length === 1) {
+              setInputMonth(null);
+            } else {
+              const newValue = current.slice(0, -1);
+              setInputMonth(Number(newValue));
+            }
+          } else {
+            if (activeSegment) dataDate.default[activeSegment].onPrev();
+          }
+        } else if (activeSegment === 'YYYY') {
+          if (inputYear !== null) {
+            const current = inputYear.toString();
+            if (current.length === 1) {
+              setInputYear(null);
+            } else {
+              const newValue = current.slice(0, -1);
+              setInputYear(Number(newValue));
+            }
+          } else {
+            if (activeSegment) dataDate.default[activeSegment].onPrev();
+          }
+        }
+
+        e.preventDefault();
+        e.stopPropagation();
+      }
 
       if (key === 'ArrowLeft' || key === 'ArrowDown') {
         e.preventDefault();
@@ -459,18 +459,13 @@ export const DatePicker = (props: DatePickerProps) => {
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
-    console.log('DatePicker useEffect', props.value);
-    const valueMoment = props.value ? moment(props.value).utc() : moment.utc();
-    if (props.value !== null && props.value !== undefined) {
+    const valueMoment = props.value ? moment(props.value).utc() : null;
+    if (valueMoment) {
       setInputDay(valueMoment.date());
       setInputMonth(valueMoment.month() + 1);
       setInputYear(valueMoment.year());
-    } else {
-      setInputDay(null);
-      setInputMonth(null);
-      setInputYear(null);
+      onChangeDate(valueMoment.valueOf(), false, false);
     }
-    onChangeDate(valueMoment.valueOf(), false, false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.value, isOpen]);
 
@@ -481,9 +476,23 @@ export const DatePicker = (props: DatePickerProps) => {
       setActiveSegment(null);
     }
   }, [isOpen]);
-  // useEffect(() => {
-  //   console.log('DatePicker useEffect activeSegment', activeSegment);
-  // }, [activeSegment]);
+  useEffect(() => {
+    if (inputDay !== null && inputMonth !== null && inputYear !== null) {
+      // Проверяем и применяем дату
+      const day = inputDay ?? NaN;
+      const month = inputMonth ?? NaN;
+      const year = inputYear ?? NaN;
+      if (!Number.isNaN(day) && !Number.isNaN(month) && !Number.isNaN(year)) {
+        const m = moment.utc(`${day}.${month}.${year}`, 'D.M.YYYY', true).startOf('day');
+        if (m.isValid()) {
+          console.log('onChangeDate', m);
+          onChangeDate(m.valueOf(), false, true);
+        } else {
+          if (activeSegment === null) setIsError(true);
+        }
+      }
+    }
+  }, [activeSegment, inputDay, inputMonth, inputYear, onChangeDate]);
   return (
     <>
       <DateWrapper
