@@ -49,7 +49,7 @@ const SelectWrapperAll: FC = () => {
         >
           Single, language
         </Typography>
-        <SelectLanguage size='medium' genre='blackBorder' value={valueLanguage} onChange={handleSelectChangeLanguage} />
+        <SelectLanguage size='medium' genre='grayBorder' value={valueLanguage} onChange={handleSelectChangeLanguage} />
       </WrapperBig>
       <WrapperBig sx={{ default: { flexDirection: 'column' } }}>
         <Typography
@@ -64,7 +64,7 @@ const SelectWrapperAll: FC = () => {
         </Typography>
         <SelectMonth
           size='medium'
-          genre='blackBorder'
+          genre='grayBorder'
           value={valueMonth}
           onChange={handleSelectChangeMonth}
           monthsLocale={localeMonths}
@@ -83,7 +83,7 @@ const SelectWrapperAll: FC = () => {
         </Typography>
         <SelectMonths
           size='medium'
-          genre='blackBorder'
+          genre='grayBorder'
           isShowIconSearchClear
           isShowIconFetching
           isShowIconToggle
@@ -110,7 +110,7 @@ const SelectWrapperAll: FC = () => {
         </Typography>
         <SelectYear
           size='medium'
-          genre='blackBorder'
+          genre='grayBorder'
           labelPlaceholder='Year'
           value={valueYear}
           onChange={handleSelectChangeYear}
@@ -131,9 +131,35 @@ const SelectWrapperAll: FC = () => {
         </Typography>
         <SelectYear
           size='medium'
-          genre='blackBorder'
+          genre='grayBorder'
           labelPlaceholder='Year'
           isCenter
+          value={valueYear}
+          onChange={handleSelectChangeYear}
+          startDate={moment.utc().subtract(100, 'years').startOf('year').valueOf()}
+          endDate={moment.utc().startOf('day').valueOf()}
+        />
+      </WrapperBig>
+      <WrapperBig sx={{ default: { flexDirection: 'column' } }}>
+        <Typography
+          sx={{
+            default: {
+              variant: 'h5',
+              color: 'black100',
+            },
+          }}
+        >
+          Single, Year, Error
+        </Typography>
+        <SelectYear
+          size='medium'
+          genre='grayBorder'
+          labelPlaceholder='Year'
+          error={{
+            errorMessage: 'This field is required',
+            isError: true,
+            isErrorAbsolute: false,
+          }}
           value={valueYear}
           onChange={handleSelectChangeYear}
           startDate={moment.utc().subtract(100, 'years').startOf('year').valueOf()}

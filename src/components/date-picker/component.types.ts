@@ -16,7 +16,7 @@ export type DatePickerProps = addErrorProps &
     id?: string;
 
     isDisabled?: boolean;
-
+    isBold?: boolean;
     isMinWidth?: boolean;
 
     isInputEffect?: InputStandardProps['isInputEffect'];
@@ -79,7 +79,9 @@ export type DateWrapperProps = AddDollarSign<
 > &
   StyledInputWrapperProps;
 
-export type DateInputProps = AddDollarSign<Pick<DatePickerProps, 'error' | 'genre' | 'size'> & { isOpen?: boolean }>;
+export type DateInputProps = AddDollarSign<
+  Pick<DatePickerProps, 'error' | 'genre' | 'size' | 'isBold'> & { isOpen?: boolean; isActive?: boolean; isHaveValue?: boolean }
+>;
 
 export type DateStyledOptionProps = AddDollarSign<{
   isSelectedItem?: boolean;

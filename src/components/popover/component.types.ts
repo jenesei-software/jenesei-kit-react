@@ -53,4 +53,5 @@ export type UsePopoverProps = {
 
   onFocus?: () => void;
   onBlur?: () => void;
+  onBlurReference?: () => void;
 };

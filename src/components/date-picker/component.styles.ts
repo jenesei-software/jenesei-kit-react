@@ -1,33 +1,32 @@
-import { addInputPlaceholderNiceNumber, InputIsInputEffect } from '@local/components/input'
-import { getFontSizeStyles } from '@local/components/typography'
-import { addNiceNumber, addOutline, addRemoveOutline, addRemoveScrollbar, addTransition } from '@local/styles/add'
-import { addError } from '@local/styles/error'
-import { addSX } from '@local/styles/sx'
-import { KEY_SIZE_DATA } from '@local/theme/theme'
-import { IThemeSizePropertyDefault } from '@local/theme/theme.interface'
+import { addInputPlaceholderNiceNumber, InputIsInputEffect } from '@local/components/input';
+import { getFontSizeStyles } from '@local/components/typography';
+import { addNiceNumber, addOutline, addRemoveOutline, addRemoveScrollbar, addTransition } from '@local/styles/add';
+import { addError } from '@local/styles/error';
+import { addSX } from '@local/styles/sx';
+import { KEY_SIZE_DATA } from '@local/theme/theme';
+import { IThemeSizePropertyDefault } from '@local/theme/theme.interface';
 
-import { motion } from 'framer-motion'
-import { PatternFormat } from 'react-number-format'
-import styled, { css } from 'styled-components'
+import { motion } from 'framer-motion';
+import styled, { css } from 'styled-components';
 
-import { DateDropdownDayProps, DateDropdownListProps, DateInputProps, DateStyledListProps, DateWrapperProps } from '.'
+import { DateDropdownDayProps, DateDropdownListProps, DateInputProps, DateStyledListProps, DateWrapperProps } from '.';
 
 export const DateWrapper = styled.div<DateWrapperProps>`
   width: 100%;
   position: relative;
   height: fit-content;
-  ${props =>
+  ${(props) =>
     props.$isMinWidth &&
     css`
       width: min-content;
     `}
   ${addSX};
   ${addNiceNumber};
-`
+`;
 
 export const DateDropdownListParent = styled(motion.div)<DateStyledListProps>`
   ${addRemoveScrollbar};
-`
+`;
 
 export const DateDropdownList = styled.div<DateDropdownListProps>`
   list-style: none;
@@ -43,7 +42,7 @@ export const DateDropdownList = styled.div<DateDropdownListProps>`
   ${InputIsInputEffect};
   justify-content: flex-start;
   gap: 10px;
-`
+`;
 
 export const DateDropdownDays = styled.div<{ $rows: number }>`
   display: grid;
@@ -51,26 +50,27 @@ export const DateDropdownDays = styled.div<{ $rows: number }>`
   row-gap: normal;
   gap: 6px;
   grid-template-columns: repeat(7, 28px);
-  grid-template-rows: repeat(${props => props.$rows}, 28px);
+  grid-template-rows: repeat(${(props) => props.$rows}, 28px);
   justify-content: space-between;
-`
+`;
 
 export const DateDropdownDaySize = css<DateDropdownDayProps>`
-  ${props =>
+  ${(props) =>
     props.$size &&
-    DateDropdownDaySizeConstructor({
-      ...KEY_SIZE_DATA[props.$size]
-    })};
+    css`
+      border-radius: ${KEY_SIZE_DATA[props.$size].radius}px;
+      ${(params) => getFontSizeStyles(12, 700, params.theme.font.family)};
+    `};
   position: relative;
   overflow: hidden;
   isolation: isolate;
   user-select: none;
-  background: ${props => props.theme.colors.date[props.$genre].background.rest};
-  border-color: ${props => props.theme.colors.date[props.$genre].border.rest};
-  color: ${props => props.theme.colors.date[props.$genre].color.rest};
+  background: ${(props) => props.theme.colors.date[props.$genre].background.rest};
+  border-color: ${(props) => props.theme.colors.date[props.$genre].border.rest};
+  color: ${(props) => props.theme.colors.date[props.$genre].color.rest};
   border: 1px solid transparent;
-  grid-row: ${props => props.$row};
-  grid-column: ${props => props.$column};
+  grid-row: ${(props) => props.$row};
+  grid-column: ${(props) => props.$column};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -78,7 +78,7 @@ export const DateDropdownDaySize = css<DateDropdownDayProps>`
   height: 100%;
   cursor: pointer;
   &:hover {
-    ${props => css`
+    ${(props) => css`
       background: ${props.theme.colors.date[props.$genre].background.hover};
       border-color: ${props.theme.colors.date[props.$genre].border.hover};
       color: ${props.theme.colors.date[props.$genre].color.hover};
@@ -86,80 +86,92 @@ export const DateDropdownDaySize = css<DateDropdownDayProps>`
   }
   ${addTransition};
 
-  ${props =>
+  ${(props) =>
     props.$isWeekend &&
     css`
       background: ${props.theme.colors.date[props.$genre].background.weekend};
       border-color: ${props.theme.colors.date[props.$genre].border.weekend};
       color: ${props.theme.colors.date[props.$genre].color.weekend};
     `}
-  ${props =>
+  ${(props) =>
     props.$isToday &&
     css`
       background: ${props.theme.colors.date[props.$genre].background.today};
       border-color: ${props.theme.colors.date[props.$genre].border.today};
       color: ${props.theme.colors.date[props.$genre].color.today};
     `}
-    ${props =>
-    props.$isChoice &&
-    css`
+    ${(props) =>
+      props.$isChoice &&
+      css`
       background: ${props.theme.colors.date[props.$genre].background.choice};
       border-color: ${props.theme.colors.date[props.$genre].border.choice};
       color: ${props.theme.colors.date[props.$genre].color.choice};
     `}
-    ${props =>
-    !props.$isCurrentMonth &&
-    css`
+    ${(props) =>
+      !props.$isCurrentMonth &&
+      css`
       opacity: 0.5;
     `}
-  ${params => getFontSizeStyles(12, 700, params.theme.font.family)};
+  ${(params) => getFontSizeStyles(12, 700, params.theme.font.family)};
 
   ${addOutline};
-`
+`;
 export const DateDropdownDaySizeConstructor = (props: IThemeSizePropertyDefault) => css`
   border-radius: ${props.radius}px;
-  ${params => getFontSizeStyles(12, 700, params.theme.font.family)};
-`
+  ${(params) => getFontSizeStyles(12, 700, params.theme.font.family)};
+`;
 
 export const DateDropdownDay = styled.button<DateDropdownDayProps>`
   ${DateDropdownDaySize}
-`
+`;
 export const DateDropdownDayOfWeek = styled.button<DateDropdownDayProps>`
   ${DateDropdownDaySize}
   opacity: 1;
   background-color: transparent;
-`
+`;
 
 /****************************************** Genre *************************************************/
-const DateInputGenre = css<DateInputProps>`
-  ${props => css`
-    color: ${props.theme.colors.input[props.$genre].color.rest};
-    &:active {
-      color: ${props.theme.colors.input[props.$genre].color.rest};
-    }
-    &:focus-visible {
-      color: ${props.theme.colors.input[props.$genre].color.rest};
-    }
+const addDateInputGenre = css<DateInputProps>`
+      background-color: ${(props) => (props.$isActive ? props.theme.palette.black10 : 'transparent')};
+
+        ${(props) => getFontSizeStyles(16, props.$isBold ? 500 : 400, props.theme.font.family, props.theme.font.lineHeight)};
+  ${(props) =>
+    props.$isHaveValue
+      ? css`
+        color: ${props.theme.colors.input[props.$genre].color.rest};
+        &:active {
+          color: ${props.theme.colors.input[props.$genre].color.rest};
+        }
+        &:focus-visible {
+          color: ${props.theme.colors.input[props.$genre].color.rest};
+        }
+    `
+      : css`
+                color: ${props.theme.colors.input[props.$genre].color.placeholder};
   `};
-`
-export const DateInput = styled(PatternFormat)<DateInputProps>`
+`;
+const addDateInputSize = css<DateInputProps>`
+  border-radius: 4px;
+  padding: 2px;
+  min-width: 10px;
+`;
+export const DateInput = styled.div<DateInputProps>`
+  text-align: center;
   resize: none;
   overflow: hidden;
   border: 0px solid;
   background: transparent;
-  padding: 0px !important;
   margin: 0px !important;
   white-space: nowrap;
-  text-align: left;
-  ${props => getFontSizeStyles(16, 400, 'Roboto Mono', props.theme.font.lineHeight)};
-  ${DateInputGenre};
+  ${addDateInputSize};
+  ${addDateInputGenre};
   ${addInputPlaceholderNiceNumber};
   ${addRemoveOutline};
-`
+`;
 
 /****************************************** Genre *************************************************/
-const DateInputWrapperGenre = css<DateInputProps>`
-  ${props => css`
+const addDateInputWrapperGenre = css<DateInputProps>`
+  ${(props) => css`
     background: ${props.theme.colors.input[props.$genre].background.rest};
     border-color: ${props.theme.colors.input[props.$genre].border.rest};
     color: ${props.theme.colors.input[props.$genre].color.rest};
@@ -175,29 +187,30 @@ const DateInputWrapperGenre = css<DateInputProps>`
       background: ${props.theme.colors.input[props.$genre].background.rest};
       border-color: ${props.theme.colors.input[props.$genre].border.rest};
       color: ${props.theme.colors.input[props.$genre].color.rest};
-      outline: 2px solid ${props => props.theme.states.focus};
+      outline: 2px solid ${(props) => props.theme.states.focus};
     }
-    ${props.$isOpen &&
-    css`
+    ${
+      props.$isOpen &&
+      css`
       background: ${props.theme.colors.input[props.$genre].background.rest};
       border-color: ${props.theme.colors.input[props.$genre].border.rest};
       color: ${props.theme.colors.input[props.$genre].color.rest};
-      outline: 2px solid ${props => props.theme.states.focus};
-    `}
+      outline: 2px solid ${(props) => props.theme.states.focus};
+    `
+    }
   `};
-`
+`;
 
 /****************************************** Size *************************************************/
-export const DateInputWrapperSize = css<DateInputProps>`
-  ${props => DateInputWrapperSizeConstructor(KEY_SIZE_DATA[props.$size])};
-`
-export const DateInputWrapperSizeConstructor = (props: IThemeSizePropertyDefault) => css`
-  padding: 0px ${props.padding}px;
-  height: ${props.height}px;
-  min-height: ${props.height}px;
-  max-height: ${props.height}px;
-  border-radius: ${props.radius}px;
-`
+export const addDateInputWrapperSize = css<DateInputProps>`
+  ${(props) => css`
+    padding: 0px ${KEY_SIZE_DATA[props.$size].padding}px;
+    height: ${KEY_SIZE_DATA[props.$size].height}px;
+    min-height: ${KEY_SIZE_DATA[props.$size].height}px;
+    max-height: ${KEY_SIZE_DATA[props.$size].height}px;
+    border-radius: ${KEY_SIZE_DATA[props.$size].radius}px;
+  `}
+`;
 
 export const DateInputWrapper = styled.div<DateInputProps>`
   resize: none;
@@ -211,8 +224,8 @@ export const DateInputWrapper = styled.div<DateInputProps>`
   align-items: center;
   gap: 0px;
 
-  ${DateInputWrapperSize};
-  ${DateInputWrapperGenre};
+  ${addDateInputWrapperSize};
+  ${addDateInputWrapperGenre};
   ${addTransition};
   ${addError};
-`
+`;
