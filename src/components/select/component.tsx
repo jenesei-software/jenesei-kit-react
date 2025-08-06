@@ -628,7 +628,7 @@ export const SelectLanguage: FC<SelectLanguageProps> = (props) => {
   );
 };
 export const SelectMonth: FC<SelectMonthProps> = (props) => {
-  const { value, onChange, startDate, endDate, monthsLocale, isShortLabel } = props;
+  const { value, onChange, dateMin, dateMax, monthsLocale, isShortLabel } = props;
 
   const year = moment(value).utc().year();
 
@@ -638,8 +638,8 @@ export const SelectMonth: FC<SelectMonthProps> = (props) => {
 
       const monthMoment = moment.utc().year(year).month(monthIndex).startOf('month');
       const isDisabled =
-        (startDate && monthMoment.isBefore(moment.utc(startDate), 'month')) ||
-        (endDate && monthMoment.isAfter(moment.utc(endDate), 'month'));
+        (dateMin && monthMoment.isBefore(moment.utc(dateMin), 'month')) ||
+        (dateMax && monthMoment.isAfter(moment.utc(dateMax), 'month'));
 
       return {
         value: monthMoment.valueOf(),
@@ -650,7 +650,7 @@ export const SelectMonth: FC<SelectMonthProps> = (props) => {
         monthValue: monthItem.value,
       };
     });
-  }, [monthsLocale, year, startDate, endDate, isShortLabel]);
+  }, [monthsLocale, year, dateMin, dateMax, isShortLabel]);
 
   const handleSelectChange = (value: ISelectLanguageOption[]) => {
     if (value.length === 0) onChange(null);
@@ -665,7 +665,7 @@ export const SelectMonth: FC<SelectMonthProps> = (props) => {
   return <Select<ISelectLanguageOption> {...props} option={option} value={valueLocal} onChange={handleSelectChange} />;
 };
 export const SelectMonths: FC<SelectMonthsProps> = (props) => {
-  const { value, onChange, startDate, endDate, monthsLocale, isShortLabel } = props;
+  const { value, onChange, dateMin, dateMax, monthsLocale, isShortLabel } = props;
 
   const year = moment(value).utc().year();
 
@@ -675,8 +675,8 @@ export const SelectMonths: FC<SelectMonthsProps> = (props) => {
 
       const monthMoment = moment.utc().year(year).month(monthIndex).startOf('month');
       const isDisabled =
-        (startDate && monthMoment.isBefore(moment.utc(startDate), 'month')) ||
-        (endDate && monthMoment.isAfter(moment.utc(endDate), 'month'));
+        (dateMin && monthMoment.isBefore(moment.utc(dateMin), 'month')) ||
+        (dateMax && monthMoment.isAfter(moment.utc(dateMax), 'month'));
 
       return {
         value: monthMoment.valueOf(),
@@ -687,7 +687,7 @@ export const SelectMonths: FC<SelectMonthsProps> = (props) => {
         monthValue: monthItem.value,
       };
     });
-  }, [monthsLocale, year, startDate, endDate, isShortLabel]);
+  }, [monthsLocale, year, dateMin, dateMax, isShortLabel]);
   const [viewOption, setViewOption] = useState<ISelectLanguageOption[]>(option);
 
   useEffect(() => {
@@ -740,10 +740,10 @@ export const SelectMonths: FC<SelectMonthsProps> = (props) => {
   );
 };
 export const SelectYear: FC<SelectYearProps> = (props) => {
-  const { value, onChange, startDate, endDate, sortOrder = 'desc' } = props;
+  const { value, onChange, dateMin, dateMax, sortOrder = 'desc' } = props;
 
-  const startYear = moment(startDate).utc().year();
-  const endYear = moment(endDate).utc().year();
+  const startYear = moment(dateMin).utc().year();
+  const endYear = moment(dateMax).utc().year();
 
   const option = useMemo(() => {
     const yearArray = Array.from({ length: endYear - startYear + 1 }, (_, index) => {

@@ -114,8 +114,8 @@ const SelectWrapperAll: FC = () => {
           labelPlaceholder='Year'
           value={valueYear}
           onChange={handleSelectChangeYear}
-          startDate={moment.utc().subtract(100, 'years').startOf('year').valueOf()}
-          endDate={moment.utc().startOf('day').valueOf()}
+          dateMin={moment.utc().subtract(100, 'years').startOf('year').valueOf()}
+          dateMax={moment.utc().startOf('day').valueOf()}
         />
       </WrapperBig>
       <WrapperBig sx={{ default: { flexDirection: 'column' } }}>
@@ -136,8 +136,8 @@ const SelectWrapperAll: FC = () => {
           isCenter
           value={valueYear}
           onChange={handleSelectChangeYear}
-          startDate={moment.utc().subtract(100, 'years').startOf('year').valueOf()}
-          endDate={moment.utc().startOf('day').valueOf()}
+          dateMin={moment.utc().subtract(100, 'years').startOf('year').valueOf()}
+          dateMax={moment.utc().startOf('day').valueOf()}
         />
       </WrapperBig>
       <WrapperBig sx={{ default: { flexDirection: 'column' } }}>
@@ -162,8 +162,8 @@ const SelectWrapperAll: FC = () => {
           }}
           value={valueYear}
           onChange={handleSelectChangeYear}
-          startDate={moment.utc().subtract(100, 'years').startOf('year').valueOf()}
-          endDate={moment.utc().startOf('day').valueOf()}
+          dateMin={moment.utc().subtract(100, 'years').startOf('year').valueOf()}
+          dateMax={moment.utc().startOf('day').valueOf()}
         />
       </WrapperBig>
     </WrapperBig>

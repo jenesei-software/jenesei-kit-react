@@ -102,24 +102,24 @@ export type SelectMapThemeProps = Omit<SelectProps<ISelectItem>, 'option' | 'val
   onChange: (theme: MapTheme | null) => void;
 };
 export type SelectMonthProps = Omit<SelectProps<ISelectItem>, 'option' | 'value' | 'onChange'> & {
-  startDate?: number;
-  endDate?: number;
+  dateMin?: number;
+  dateMax?: number;
   value: number | null;
   isShortLabel?: boolean;
   onChange: (value: number | null) => void;
   monthsLocale: MonthItem[];
 };
 export type SelectMonthsProps = Omit<SelectProps<ISelectItem>, 'option' | 'value' | 'onChange'> & {
-  startDate?: number;
-  endDate?: number;
+  dateMin?: number;
+  dateMax?: number;
   value: number[];
   isShortLabel?: boolean;
   onChange: (value: number[]) => void;
   monthsLocale: MonthItem[];
 };
 export type SelectYearProps = Omit<SelectMonthProps, 'monthsLocale'> & {
-  startDate?: number;
-  endDate?: number;
+  dateMin?: number;
+  dateMax?: number;
   sortOrder?: 'asc' | 'desc';
 };
 

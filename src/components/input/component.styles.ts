@@ -103,7 +103,7 @@ export const InputSizeConstructor = (props: IThemeSizePropertyDefault) => css`
 `;
 
 /****************************************** is isInputEffect *************************************************/
-export const InputIsInputEffect = css<Pick<StyledInputProps, '$isInputEffect'>>`
+export const addInputIsInputEffect = css<Pick<StyledInputProps, '$isInputEffect'>>`
   ${(props) =>
     props.$isInputEffect &&
     css`
@@ -127,7 +127,7 @@ export const StyledInputCSS = css<StyledInputProps>`
   ${InputGenre};
   ${addInputPlaceholder};
   ${addDisabled};
-  ${InputIsInputEffect};
+  ${addInputIsInputEffect};
   ${addOutline};
   ${addTransition};
   ${addError};

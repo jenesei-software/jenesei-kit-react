@@ -1,10 +1,9 @@
-import { addInputPlaceholderNiceNumber, InputIsInputEffect } from '@local/components/input';
+import { addInputIsInputEffect } from '@local/components/input';
 import { getFontSizeStyles } from '@local/components/typography';
 import { addNiceNumber, addOutline, addRemoveOutline, addRemoveScrollbar, addTransition } from '@local/styles/add';
 import { addError } from '@local/styles/error';
 import { addSX } from '@local/styles/sx';
 import { KEY_SIZE_DATA } from '@local/theme/theme';
-import { IThemeSizePropertyDefault } from '@local/theme/theme.interface';
 
 import { motion } from 'framer-motion';
 import styled, { css } from 'styled-components';
@@ -39,7 +38,7 @@ export const DateDropdownList = styled.div<DateDropdownListProps>`
   width: 100%;
   padding-top: 6px;
   transform: translateZ(0);
-  ${InputIsInputEffect};
+  ${addInputIsInputEffect};
   justify-content: flex-start;
   gap: 10px;
 `;
@@ -54,7 +53,7 @@ export const DateDropdownDays = styled.div<{ $rows: number }>`
   justify-content: space-between;
 `;
 
-export const DateDropdownDaySize = css<DateDropdownDayProps>`
+export const addDateDropdownDaySize = css<DateDropdownDayProps>`
   ${(props) =>
     props.$size &&
     css`
@@ -78,7 +77,9 @@ export const DateDropdownDaySize = css<DateDropdownDayProps>`
   height: 100%;
   cursor: pointer;
   &:hover {
-    ${(props) => css`
+    ${(props) =>
+      !props.$isDisabled &&
+      css`
       background: ${props.theme.colors.date[props.$genre].background.hover};
       border-color: ${props.theme.colors.date[props.$genre].border.hover};
       color: ${props.theme.colors.date[props.$genre].color.hover};
@@ -108,6 +109,14 @@ export const DateDropdownDaySize = css<DateDropdownDayProps>`
       color: ${props.theme.colors.date[props.$genre].color.choice};
     `}
     ${(props) =>
+      props.$isDisabled &&
+      css`
+        background: ${props.theme.colors.date[props.$genre].background.weekend};
+      border-color: ${props.theme.colors.date[props.$genre].border.weekend};
+      color: ${props.theme.colors.date[props.$genre].color.weekend};
+      opacity: 0.5;
+    `}
+    ${(props) =>
       !props.$isCurrentMonth &&
       css`
       opacity: 0.5;
@@ -116,16 +125,12 @@ export const DateDropdownDaySize = css<DateDropdownDayProps>`
 
   ${addOutline};
 `;
-export const DateDropdownDaySizeConstructor = (props: IThemeSizePropertyDefault) => css`
-  border-radius: ${props.radius}px;
-  ${(params) => getFontSizeStyles(12, 700, params.theme.font.family)};
-`;
 
 export const DateDropdownDay = styled.button<DateDropdownDayProps>`
-  ${DateDropdownDaySize}
+  ${addDateDropdownDaySize}
 `;
 export const DateDropdownDayOfWeek = styled.button<DateDropdownDayProps>`
-  ${DateDropdownDaySize}
+  ${addDateDropdownDaySize}
   opacity: 1;
   background-color: transparent;
 `;
@@ -139,9 +144,6 @@ const addDateInputGenre = css<DateInputProps>`
     props.$isHaveValue
       ? css`
         color: ${props.theme.colors.input[props.$genre].color.rest};
-        &:active {
-          color: ${props.theme.colors.input[props.$genre].color.rest};
-        }
         &:focus-visible {
           color: ${props.theme.colors.input[props.$genre].color.rest};
         }
@@ -165,7 +167,6 @@ export const DateInput = styled.div<DateInputProps>`
   white-space: nowrap;
   ${addDateInputSize};
   ${addDateInputGenre};
-  ${addInputPlaceholderNiceNumber};
   ${addRemoveOutline};
 `;
 
@@ -181,13 +182,6 @@ const addDateInputWrapperGenre = css<DateInputProps>`
       background: ${props.theme.colors.input[props.$genre].background.hover};
       border-color: ${props.theme.colors.input[props.$genre].border.hover};
       color: ${props.theme.colors.input[props.$genre].color.hover};
-    }
-    &:has(:focus-visible),
-    &:has(:active) {
-      background: ${props.theme.colors.input[props.$genre].background.rest};
-      border-color: ${props.theme.colors.input[props.$genre].border.rest};
-      color: ${props.theme.colors.input[props.$genre].color.rest};
-      outline: 2px solid ${(props) => props.theme.states.focus};
     }
     ${
       props.$isOpen &&
