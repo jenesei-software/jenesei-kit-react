@@ -1,8 +1,8 @@
-import { PropsWithChildren, ReactElement } from 'react'
-
 import { PreviewAdditionalProps } from '@local/areas/preview'
 import { IThemePaletteKeys } from '@local/theme'
 import { AddDollarSign } from '@local/types'
+
+import { PropsWithChildren, ReactElement } from 'react'
 
 import { ScreenWidthProps } from '../context-screen-width'
 
@@ -89,4 +89,4 @@ export type ProviderAppElementProps = Partial<
   AddDollarSign<Pick<ProviderAppProps, 'notification' | 'header' | 'nav' | 'footer' | 'leftAside' | 'rightAside'>>
 >
 
-export type ProviderAppOutletChildrenProps = AddDollarSign<Pick<ProviderAppProps, 'main'>>
+export type ProviderAppOutletChildrenProps = AddDollarSign<Pick<ProviderAppProps, 'main' | 'isScrollOutlet'>>

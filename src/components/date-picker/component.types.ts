@@ -1,22 +1,26 @@
 import { InputStandardProps, StyledInputProps, StyledInputWrapperProps } from '@local/components/input';
-import { addErrorProps } from '@local/styles/error';
+import { addErrorProps, ErrorMessageProps } from '@local/styles/error';
 import { addSXProps } from '@local/styles/sx';
 import { IThemeGenreDate, IThemeSize } from '@local/theme';
 import { AddDollarSign } from '@local/types';
 
 import { SelectMonthProps } from '../select';
 
-export type DatePickerMode = 'DD.MM.YYYY' | 'MM.DD.YYYY' | 'YYYY.MM.DD';
-export type DatePickerProps = addErrorProps &
-  addSXProps & {
-    endDate?: number;
+export type DatePickerMode = DatePickerVariant[];
+export enum DatePickerVariant {
+  DD = 'DD',
+  MM = 'MM',
+  YYYY = 'YYYY',
+}
 
+export type CommonDatePickerProps = addErrorProps &
+  addSXProps & {
     genre: TDateGenre;
 
     id?: string;
 
     isDisabled?: boolean;
-
+    isBold?: boolean;
     isMinWidth?: boolean;
 
     isInputEffect?: InputStandardProps['isInputEffect'];
@@ -31,6 +35,8 @@ export type DatePickerProps = addErrorProps &
       inputs: InputItem;
     };
 
+    notValidDate?: Omit<ErrorMessageProps, 'size' | 'isError'>;
+
     mode?: DatePickerMode;
 
     name?: string;
@@ -43,10 +49,25 @@ export type DatePickerProps = addErrorProps &
 
     size: IThemeSize;
 
-    startDate?: number;
+    dateMax?: number;
 
-    value: number | null;
+    dateMin?: number;
+
+    dateDefault: number;
   };
+
+type ControlledValue = {
+  value: number | null | undefined;
+
+  defaultValue?: never;
+};
+
+type UncontrolledValue = {
+  defaultValue: number | null | undefined;
+
+  value?: never;
+};
+export type DatePickerProps = CommonDatePickerProps & (ControlledValue | UncontrolledValue);
 
 export type TDateGenre = keyof IThemeGenreDate;
 
@@ -79,7 +100,13 @@ export type DateWrapperProps = AddDollarSign<
 > &
   StyledInputWrapperProps;
 
-export type DateInputProps = AddDollarSign<Pick<DatePickerProps, 'error' | 'genre' | 'size'> & { isOpen?: boolean }>;
+export type DateInputProps = AddDollarSign<
+  Pick<DatePickerProps, 'error' | 'genre' | 'size' | 'isBold'> & {
+    isOpen?: boolean;
+    isActive?: boolean;
+    isHaveValue?: boolean;
+  }
+>;
 
 export type DateStyledOptionProps = AddDollarSign<{
   isSelectedItem?: boolean;
@@ -100,6 +127,7 @@ export type DateDropdownDayProps = AddDollarSign<
       column: number;
       isChoice?: boolean;
       isCurrentMonth?: boolean;
+      isDisabled?: boolean;
     }
 >;
 

@@ -28,7 +28,7 @@ export default defineConfig(() => {
       !isStorybook &&
         dts({
           include: ['src/'],
-          // exclude: ['src/declaration/styled-components.d.ts'],
+          exclude: ['src/declaration/styled-components.d.ts'],
           rollupTypes: true,
           insertTypesEntry: true,
           tsconfigPath: './tsconfig.json',

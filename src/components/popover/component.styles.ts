@@ -1,10 +1,10 @@
-import { motion } from 'framer-motion'
-import styled, { css } from 'styled-components'
-
 import { addSXTypography, getFontSizeStyles } from '@local/components/typography'
 import { addAlwaysOutline } from '@local/styles/add'
 import { addSX } from '@local/styles/sx'
 import { IThemeSizePropertyDefault, KEY_SIZE_DATA } from '@local/theme'
+
+import { motion } from 'framer-motion'
+import styled, { css } from 'styled-components'
 
 import { StyledPopoverProps } from '.'
 

@@ -24,11 +24,6 @@ const addSelectWrapperGenre = css<SelectWrapperProps>`
     background: ${props.theme.colors.input[props.$genre].background.rest};
     border-color: ${props.theme.colors.input[props.$genre].border.rest};
     color: ${props.theme.colors.input[props.$genre].color.rest};
-    &:active {
-      background: ${props.theme.colors.input[props.$genre].background.rest};
-      border-color: ${props.theme.colors.input[props.$genre].border.rest};
-      color: ${props.theme.colors.input[props.$genre].color.rest};
-    }
     ${
       !props.$isNotShowHoverStyle &&
       css`
@@ -39,11 +34,14 @@ const addSelectWrapperGenre = css<SelectWrapperProps>`
       }
     `
     }
-    &:focus-visible {
+      ${
+        props.$isOpen &&
+        css`
       background: ${props.theme.colors.input[props.$genre].background.rest};
       border-color: ${props.theme.colors.input[props.$genre].border.rest};
       color: ${props.theme.colors.input[props.$genre].color.rest};
-    }
+    `
+      }
   `};
 `;
 const addSelectWrapperSize = css<SelectWrapperProps>`

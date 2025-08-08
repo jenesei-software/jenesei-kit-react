@@ -43,7 +43,7 @@ export const addInputPlaceholder = css<StyledInputProps>`
     opacity: 1;
   }
 `;
-export const InputPlaceholderNiceNumber = css<StyledInputProps>`
+export const addInputPlaceholderNiceNumber = css<StyledInputProps>`
   &::placeholder,
   &::-webkit-input-placeholder {
     ${(props) => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Roboto Mono', props.theme.font.lineHeight)};
@@ -103,7 +103,7 @@ export const InputSizeConstructor = (props: IThemeSizePropertyDefault) => css`
 `;
 
 /****************************************** is isInputEffect *************************************************/
-export const InputIsInputEffect = css<Pick<StyledInputProps, '$isInputEffect'>>`
+export const addInputIsInputEffect = css<Pick<StyledInputProps, '$isInputEffect'>>`
   ${(props) =>
     props.$isInputEffect &&
     css`
@@ -127,7 +127,7 @@ export const StyledInputCSS = css<StyledInputProps>`
   ${InputGenre};
   ${addInputPlaceholder};
   ${addDisabled};
-  ${InputIsInputEffect};
+  ${addInputIsInputEffect};
   ${addOutline};
   ${addTransition};
   ${addError};

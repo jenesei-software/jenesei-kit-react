@@ -1,24 +1,25 @@
-import type { Meta } from '@storybook/react-vite'
-import moment from 'moment'
-import { FC } from 'react'
-import 'styled-components'
+import type { Meta } from '@storybook/react-vite';
+import moment from 'moment';
+import { FC, useState } from 'react';
+import 'styled-components';
 
-import { DatePicker as DatePickerComponent } from '@local/components/date-picker'
-import { Typography } from '@local/components/typography'
-import { localeInput, localeMonths, localeWeeks } from '@local/consts'
+import { DatePicker as DatePickerComponent } from '@local/components/date-picker';
+import { Typography } from '@local/components/typography';
+import { localeInput, localeMonths, localeWeeks } from '@local/consts';
 
-import { WrapperBig } from './tools'
+import { WrapperBig } from './tools';
 
 const meta: Meta<typeof DatePickerComponent> = {
   component: DatePickerComponent,
-  title: 'Component/DatePicker'
-}
+  title: 'Component/DatePicker',
+};
 
-export default meta
+export default meta;
 
 const DatePickerWrapperAll: FC = () => {
-
-
+  const [valueOne, setValueOne] = useState<number | null>(null);
+  const [valueTwo, setValueTwo] = useState<number | null>(null);
+  const [valueThree, setValueThree] = useState<number | null>(null);
   return (
     <WrapperBig sx={{ default: { flexDirection: 'row' } }}>
       <WrapperBig sx={{ default: { flexDirection: 'column' } }}>
@@ -30,24 +31,29 @@ const DatePickerWrapperAll: FC = () => {
             },
           }}
         >
-          Other - Past hundred years
+          Other - Past hundred years, blackBorder
         </Typography>
         <DatePickerComponent
           genre='blackBorder'
+          notValidDate={{
+            errorMessage: 'Not valid date',
+          }}
           locale={{
             months: localeMonths,
             weeks: localeWeeks,
-            inputs: localeInput
+            inputs: localeInput,
           }}
-          value={null}
+          value={valueOne}
           size='medium'
           labelPlaceholder='Select date please'
-          startDate={moment.utc().subtract(100, 'years').startOf('year').valueOf()}
-          endDate={moment.utc().startOf('day').valueOf()}
+          dateMin={moment.utc().subtract(100, 'years').startOf('year').valueOf()}
+          dateMax={moment.utc().startOf('day').valueOf()}
+          dateDefault={moment.utc().startOf('day').valueOf()}
           onChange={(timestamp) => {
-            console.log('onChange', timestamp)
-          }} />
-
+            console.log('onChange', timestamp);
+            setValueOne(timestamp);
+          }}
+        />
       </WrapperBig>
       <WrapperBig sx={{ default: { flexDirection: 'column' } }}>
         <Typography
@@ -61,21 +67,26 @@ const DatePickerWrapperAll: FC = () => {
           Other - Last hundred year 18 years ago
         </Typography>
         <DatePickerComponent
-          genre='blackBorder'
+          genre='gray'
+          notValidDate={{
+            errorMessage: 'Not valid date',
+          }}
           locale={{
             months: localeMonths,
             weeks: localeWeeks,
-            inputs: localeInput
+            inputs: localeInput,
           }}
-          value={null}
+          value={valueTwo}
           size='medium'
           labelPlaceholder='Select date please'
-          startDate={moment.utc().subtract(118, 'years').startOf('year').valueOf()}
-          endDate={moment.utc().subtract(18, 'years').valueOf()}
+          dateMin={moment.utc().subtract(118, 'years').startOf('year').valueOf()}
+          dateMax={moment.utc().subtract(18, 'years').valueOf()}
+          dateDefault={moment.utc().subtract(18, 'years').valueOf()}
           onChange={(timestamp) => {
-            console.log('onChange', timestamp)
-          }} />
-
+            console.log('onChange', timestamp);
+            setValueTwo(timestamp);
+          }}
+        />
       </WrapperBig>
       <WrapperBig sx={{ default: { flexDirection: 'column' } }}>
         <Typography
@@ -89,26 +100,31 @@ const DatePickerWrapperAll: FC = () => {
           Other - Next three months
         </Typography>
         <DatePickerComponent
-          genre='blackBorder'
+          genre='grayBorder'
+          notValidDate={{
+            errorMessage: 'Not valid date',
+          }}
           locale={{
             months: localeMonths,
             weeks: localeWeeks,
-            inputs: localeInput
+            inputs: localeInput,
           }}
-          value={null}
+          value={valueThree}
           size='medium'
           labelPlaceholder='Select date please'
-          startDate={moment.utc().startOf('day').valueOf()}
-          endDate={moment.utc().add(3, 'months').startOf('day').valueOf()}
+          dateMin={moment.utc().startOf('day').valueOf()}
+          dateMax={moment.utc().add(3, 'months').startOf('day').valueOf()}
+          dateDefault={moment.utc().startOf('day').valueOf()}
           onChange={(timestamp) => {
-            console.log('onChange', timestamp)
-          }} />
-
+            console.log('onChange', timestamp);
+            setValueThree(timestamp);
+          }}
+        />
       </WrapperBig>
     </WrapperBig>
-  )
-}
+  );
+};
 
 export const DatePicker = {
   render: () => <DatePickerWrapperAll />,
-}
+};

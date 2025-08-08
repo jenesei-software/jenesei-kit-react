@@ -1,6 +1,6 @@
-import styled, { css } from 'styled-components'
-
 import { Stack } from '@local/components/stack'
+
+import styled, { css } from 'styled-components'
 
 import { StyledScrollProps } from '.'
 

@@ -9,6 +9,7 @@ export const WrapperBig: FC<PropsWithChildren & addSXProps> = (props) => {
       sx={(theme) => ({
         ...(typeof props.sx === 'object' ? props.sx : props.sx?.(theme)),
         default: {
+          position: 'relative',
           borderRadius: '8px',
           padding: '16px',
           border: '1px dashed',
@@ -33,6 +34,7 @@ export const WrapperMin: FC<PropsWithChildren & addSXProps> = (props) => {
       sx={(theme) => ({
         ...(typeof props.sx === 'object' ? props.sx : props.sx?.(theme)),
         default: {
+          position: 'relative',
           borderRadius: '8px',
           padding: '8px',
           border: '1px dashed',
