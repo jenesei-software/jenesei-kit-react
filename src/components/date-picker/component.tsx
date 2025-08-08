@@ -243,25 +243,31 @@ export const DatePicker = (props: DatePickerProps) => {
 
   const refSelectMonth = useRef<HTMLElement>(null);
   const refSelectYear = useRef<HTMLElement>(null);
+  const refHiddenInput = useRef<HTMLInputElement>(null);
 
   const sizePadding = useMemo(() => KEY_SIZE_DATA[props.size].padding, [props.size]);
 
+  const onFocusPopover = useCallback(() => {
+    props.onFocus?.();
+    setActiveSegment(DatePickerVariant.DD);
+  }, [props.onFocus]);
+  const onBlurPopover = useCallback(() => {
+    props.onBlur?.();
+  }, [props.onBlur]);
+  const onBlurReference = useCallback(() => {
+    setActiveSegment(null);
+  }, []);
   const { isOpen, close, refReference, refFloating, floatingStyles, open } = usePopover({
     placement: 'bottom-start',
     offset: sizePadding,
     mode: 'independence',
     isClickOutside: true,
+    refsExcludeBlur: [],
     refsExcludeClickOutside: [refSelectMonth, refSelectYear],
     isDisabled: props?.isDisabled,
-    onFocus() {
-      props.onFocus?.();
-    },
-    onBlur() {
-      props.onBlur?.();
-    },
-    onBlurReference() {
-      setActiveSegment(null);
-    },
+    onFocus: onFocusPopover,
+    onBlur: onBlurPopover,
+    onBlurReference: onBlurReference,
   });
 
   const onChangeDate = useCallback(
@@ -456,14 +462,6 @@ export const DatePicker = (props: DatePickerProps) => {
   }, [props.dateDefault]);
 
   useEffect(() => {
-    if (isOpen) {
-      setActiveSegment(DatePickerVariant.DD);
-    } else {
-      setActiveSegment(null);
-    }
-  }, [isOpen]);
-
-  useEffect(() => {
     onChange(valueMoment ? valueMoment.valueOf() : null);
   }, [valueMoment, onChange]);
 
@@ -501,13 +499,13 @@ export const DatePicker = (props: DatePickerProps) => {
     }
   }, [input.DD, input.MM, input.YYYY]);
 
-  const refHiddenInput = useRef<HTMLInputElement>(null);
   const prevValueRef = useRef('');
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     if (isOpen && refHiddenInput.current) {
       refHiddenInput.current.focus();
     }
-  }, [isOpen]);
+  }, [isOpen, activeSegment]);
 
   return (
     <>
@@ -519,11 +517,13 @@ export const DatePicker = (props: DatePickerProps) => {
         $isMinWidth={props?.isMinWidth}
         $radius={sizeRadius}
         $parentListHeight={height}
+        tabIndex={-1}
       >
         <DateInputWrapper
           ref={refReference as RefObject<HTMLDivElement | null>}
           $genre={props.genre}
           $size={props.size}
+          tabIndex={-1}
           $error={
             isError
               ? {
@@ -543,7 +543,7 @@ export const DatePicker = (props: DatePickerProps) => {
             type='tel'
             inputMode='numeric'
             tabIndex={0}
-            style={{ position: 'absolute', opacity: 0, left: -9999 }}
+            style={{ position: 'absolute', left: -9999, opacity: 0 }}
             onKeyDown={handleKeyDown}
             onChange={(e) => {
               const value = e.target.value;
@@ -575,9 +575,6 @@ export const DatePicker = (props: DatePickerProps) => {
             }}
             onFocus={() => {
               open();
-            }}
-            onBlur={() => {
-              close;
             }}
           />
           {!isHasValue && props.labelPlaceholder && !isOpen ? (
