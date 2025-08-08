@@ -281,7 +281,17 @@ export const DatePicker = (props: DatePickerProps) => {
     (e: KeyboardEvent<HTMLInputElement>) => {
       const key = e.key;
 
-      const allowedKeys = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Backspace', 'Delete', 'Tab'];
+      const allowedKeys = [
+        'ArrowLeft',
+        'ArrowRight',
+        'ArrowUp',
+        'ArrowDown',
+        'Backspace',
+        'Delete',
+        'Tab',
+        'Enter',
+        'Escape',
+      ];
 
       const isDigit = /^\d$/.test(key);
       const isAllowed = isDigit || allowedKeys.includes(key) || e.ctrlKey || e.metaKey;
@@ -300,9 +310,19 @@ export const DatePicker = (props: DatePickerProps) => {
             let nextValue: string;
 
             if (current.length >= 2) {
+              // если уже два символа — заменяем полностью
               nextValue = digit;
             } else {
-              nextValue = current + digit;
+              // пробуем добавить цифру
+              const potential = current + digit;
+              const potentialParsed = Number(potential);
+
+              // если при добавлении получится >31 или 0 — считаем, что ввод начинается заново
+              if (potentialParsed > 31 || potentialParsed === 0) {
+                nextValue = digit;
+              } else {
+                nextValue = potential;
+              }
             }
 
             const parsed = Number(nextValue);
@@ -362,6 +382,11 @@ export const DatePicker = (props: DatePickerProps) => {
             dataDate.default[activeSegment].onNext();
           }
         }
+        if (key === 'Enter') {
+          close();
+          e.preventDefault();
+          e.stopPropagation();
+        }
         if (key === 'Backspace' || key === 'Delete') {
           if (activeSegment === DatePickerVariant.DD) {
             if (input.DD !== null) {
@@ -414,7 +439,7 @@ export const DatePicker = (props: DatePickerProps) => {
         }
       }
     },
-    [activeSegment, input.DD, input.MM, input.YYYY, dataDate.default],
+    [activeSegment, input.DD, input.MM, input.YYYY, dataDate.default, close],
   );
   const onNextMonth = useCallback(() => {
     const newDate = (valueMoment ?? dateDefaultMoment).clone().add(1, 'month');
@@ -476,6 +501,14 @@ export const DatePicker = (props: DatePickerProps) => {
     }
   }, [input.DD, input.MM, input.YYYY]);
 
+  const refHiddenInput = useRef<HTMLInputElement>(null);
+  const prevValueRef = useRef('');
+  useEffect(() => {
+    if (isOpen && refHiddenInput.current) {
+      refHiddenInput.current.focus();
+    }
+  }, [isOpen]);
+
   return (
     <>
       <DateWrapper
@@ -486,11 +519,9 @@ export const DatePicker = (props: DatePickerProps) => {
         $isMinWidth={props?.isMinWidth}
         $radius={sizeRadius}
         $parentListHeight={height}
-        tabIndex={-1}
       >
         <DateInputWrapper
           ref={refReference as RefObject<HTMLDivElement | null>}
-          tabIndex={0}
           $genre={props.genre}
           $size={props.size}
           $error={
@@ -506,11 +537,49 @@ export const DatePicker = (props: DatePickerProps) => {
           onClick={() => {
             open();
           }}
-          onKeyDown={handleKeyDown}
-          onFocus={() => {
-            open();
-          }}
         >
+          <input
+            ref={refHiddenInput}
+            type='tel'
+            inputMode='numeric'
+            tabIndex={0}
+            style={{ position: 'absolute', opacity: 0, left: -9999 }}
+            onKeyDown={handleKeyDown}
+            onChange={(e) => {
+              const value = e.target.value;
+              const prevValue = prevValueRef.current;
+
+              const newChar = value.length > prevValue.length ? value.slice(-1) : null;
+
+              prevValueRef.current = value;
+
+              if (newChar && /^\d$/.test(newChar)) {
+                handleKeyDown({
+                  key: newChar,
+                  preventDefault: () => {},
+                  stopPropagation: () => {},
+                } as unknown as KeyboardEvent<HTMLInputElement>);
+              }
+
+              if (value.length < prevValue.length) {
+                handleKeyDown({
+                  key: 'Backspace',
+                  preventDefault: () => {},
+                  stopPropagation: () => {},
+                } as unknown as KeyboardEvent<HTMLInputElement>);
+              }
+
+              if (newChar === '\n') {
+                close();
+              }
+            }}
+            onFocus={() => {
+              open();
+            }}
+            onBlur={() => {
+              close;
+            }}
+          />
           {!isHasValue && props.labelPlaceholder && !isOpen ? (
             <Typography
               sx={{ default: { size: 16, line: 1, isNoUserSelect: true } }}
