@@ -639,9 +639,10 @@ export const DatePicker = (props: DatePickerProps) => {
           <DateDropdownDays $rows={rows}>
             {daysInWeek.map((e, index) => (
               <DateDropdownDayOfWeek
+                tabIndex={-1}
+                type='button'
                 $isToday={false}
                 $isWeekend={false}
-                type='button'
                 $genre={props.genre}
                 $size={props.size}
                 $row={daysInMonth[0]?.weekOfMonth - 1}
@@ -668,6 +669,7 @@ export const DatePicker = (props: DatePickerProps) => {
                     }
                   }
                 }}
+                tabIndex={day.isDisabled ? -1 : 0}
                 $isToday={day.isToday}
                 $isWeekend={day.isWeekend}
                 $isChoice={day.value === valueMoment?.valueOf()}

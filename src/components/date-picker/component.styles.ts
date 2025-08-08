@@ -28,19 +28,15 @@ export const DateDropdownListParent = styled(motion.div)<DateStyledListProps>`
 `;
 
 export const DateDropdownList = styled.div<DateDropdownListProps>`
-  list-style: none;
-
   position: relative;
-
   display: flex;
   flex-direction: column;
-  overflow: hidden;
   width: 100%;
   padding-top: 6px;
   transform: translateZ(0);
-  ${addInputIsInputEffect};
   justify-content: flex-start;
   gap: 10px;
+  ${addInputIsInputEffect};
 `;
 
 export const DateDropdownDays = styled.div<{ $rows: number }>`
