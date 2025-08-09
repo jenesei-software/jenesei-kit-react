@@ -229,5 +229,6 @@ export const addDateInputButtonSize = css<ButtonProps>`
 `;
 export const DateInputButton = styled(Button)`
     position: absolute;
+    height: max-content;
     ${addDateInputButtonSize};
 `;
