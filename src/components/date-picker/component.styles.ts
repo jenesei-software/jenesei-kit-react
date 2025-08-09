@@ -1,6 +1,14 @@
 import { addInputIsInputEffect } from '@local/components/input';
 import { getFontSizeStyles } from '@local/components/typography';
-import { addNiceNumber, addOutline, addOutlineChildren, addRemoveOutline, addRemoveScrollbar, addTransition } from '@local/styles/add';
+import {
+  addDisabled,
+  addNiceNumber,
+  addOutline,
+  addOutlineChildren,
+  addRemoveOutline,
+  addRemoveScrollbar,
+  addTransition,
+} from '@local/styles/add';
 import { addError } from '@local/styles/error';
 import { addSX } from '@local/styles/sx';
 import { KEY_SIZE_DATA } from '@local/theme/theme';
@@ -196,7 +204,7 @@ const addDateInputWrapperGenre = css<DateInputProps>`
 /****************************************** Size *************************************************/
 export const addDateInputWrapperSize = css<DateInputProps>`
   ${(props) => css`
-    padding: 0px ${KEY_SIZE_DATA[props.$size].padding}px;
+    padding: ${props.$isShowPlaceholder ? `0px ${KEY_SIZE_DATA[props.$size].padding}px` : `0px ${KEY_SIZE_DATA[props.$size].padding}px 0px ${KEY_SIZE_DATA[props.$size].padding - 2}px`};
     height: ${KEY_SIZE_DATA[props.$size].height}px;
     min-height: ${KEY_SIZE_DATA[props.$size].height}px;
     max-height: ${KEY_SIZE_DATA[props.$size].height}px;
@@ -216,6 +224,7 @@ export const DateInputWrapper = styled.div<DateInputProps>`
   align-items: center;
   gap: 0px;
 
+  ${addDisabled};
   ${addDateInputWrapperSize};
   ${addDateInputWrapperGenre};
   ${addTransition};
@@ -229,6 +238,6 @@ export const addDateInputButtonSize = css<ButtonProps>`
 `;
 export const DateInputButton = styled(Button)`
     position: absolute;
-    height: max-content;
+    height: max-content !important;
     ${addDateInputButtonSize};
 `;

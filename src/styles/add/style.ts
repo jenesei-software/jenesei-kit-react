@@ -82,11 +82,11 @@ export const addOutline = css`
     outline: 2px solid ${(props) => props.theme.states.focus};
   }
 `;
-export const addOutlineChildren = css<{ $isReadOnly?: boolean }>`
+export const addOutlineChildren = css<{ $isReadOnly?: boolean; $isDisabled?: boolean }>`
   outline: 2px solid transparent;
   outline-offset: 1px;
   ${(props) =>
-    !props.$isReadOnly &&
+    (!props.$isReadOnly && !props.$isDisabled) &&
     css`
       &:has(:focus-visible) {
         outline: 2px solid ${(props) => props.theme.states.focus};
