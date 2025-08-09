@@ -1,4 +1,4 @@
-import { pluginUpdateReadmePD } from '@jenesei-software/jenesei-plugin-vite'
+import { pluginUpdateIcons, pluginUpdateReadmePD } from '@jenesei-software/jenesei-plugin-vite'
 import react from '@vitejs/plugin-react'
 import path, { resolve } from 'path'
 import process from 'process'
@@ -12,6 +12,9 @@ export default defineConfig(() => {
   const isStorybook = process.env.NODE_ENV === 'storybook'
 
   console.log('isStorybookBuild: ', String(isStorybook))
+  const sizesBackgroundTransparent = [57, 64, 72, 76, 114, 120, 144, 152, 180, 192, 256, 384, 512]
+  const sizesBackgroundWhite = []
+  const sizesFavicon = [64]
 
   return {
     resolve: {
@@ -20,6 +23,14 @@ export default defineConfig(() => {
       }
     },
     plugins: [
+      isStorybook && pluginUpdateIcons({
+        pathInputFile: path.resolve(__dirname, '.storybook-public/logos/logo-jenesei-kit-react.png'),
+        pathOutputDirectory: path.resolve(__dirname, '.storybook-public/icons'),
+        prefix: 'icon',
+        sizesBackgroundTransparent: sizesBackgroundTransparent,
+        sizesBackgroundWhite: sizesBackgroundWhite,
+        sizesFavicon: sizesFavicon
+      }),
       pluginUpdateReadmePD({
         insertionPoint: '# IMPORTANT',
         pathReadme: resolve(__dirname, 'README.md'),
