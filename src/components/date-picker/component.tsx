@@ -265,7 +265,7 @@ export const DatePicker = (props: DatePickerProps) => {
     mode: 'independence',
     isClickOutside: true,
     refsExcludeClickOutside: [refSelectMonth, refSelectYear],
-    isDisabled: props?.isDisabled,
+    isDisabled: props?.isDisabled || props?.isReadOnly,
     onFocus: onFocusPopover,
     onBlur: onBlurPopover,
     onBlurReference: onBlurReference,
@@ -487,6 +487,8 @@ export const DatePicker = (props: DatePickerProps) => {
           setIsError(true);
         }
       }
+    } else {
+      setIsError(false);
     }
   }, [input.DD, input.MM, input.YYYY, onChange]);
 
@@ -499,6 +501,17 @@ export const DatePicker = (props: DatePickerProps) => {
     }
   }, [activeSegment]);
 
+  const isShowPlaceholder = useMemo(() => {
+    return !!(
+      !isInputFocused &&
+      !isHasValue &&
+      props.labelPlaceholder &&
+      !isOpen &&
+      !input.DD &&
+      !input.MM &&
+      !input.YYYY
+    );
+  }, [isInputFocused, isHasValue, isOpen, props.labelPlaceholder, input.DD, input.MM, input.YYYY]);
   return (
     <>
       <DateWrapper
@@ -515,6 +528,9 @@ export const DatePicker = (props: DatePickerProps) => {
           ref={refReference as RefObject<HTMLDivElement | null>}
           $genre={props.genre}
           $size={props.size}
+          $isShowPlaceholder={isShowPlaceholder}
+          $isDisabled={props?.isDisabled}
+          $isReadOnly={props?.isReadOnly}
           tabIndex={-1}
           $error={
             isError
@@ -535,6 +551,7 @@ export const DatePicker = (props: DatePickerProps) => {
             type='tel'
             inputMode='numeric'
             tabIndex={0}
+            disabled={props?.isDisabled || props?.isReadOnly}
             style={{ position: 'absolute', left: -9999, opacity: 0 }}
             onKeyDown={handleKeyDown}
             onChange={(e) => {
@@ -576,7 +593,7 @@ export const DatePicker = (props: DatePickerProps) => {
               }
             }}
           />
-          {!isInputFocused && !isHasValue && props.labelPlaceholder && !isOpen ? (
+          {isShowPlaceholder ? (
             <Typography
               sx={{ default: { size: 16, line: 1, isNoUserSelect: true } }}
               sxStandard={(theme) => ({
@@ -598,6 +615,7 @@ export const DatePicker = (props: DatePickerProps) => {
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
+                    if (props?.isDisabled || props?.isReadOnly) return;
                     date.setActive();
                   }}
                 >
@@ -619,6 +637,7 @@ export const DatePicker = (props: DatePickerProps) => {
             isRadius
             isOnlyIcon
             icons={[{ name: 'Calendar', type: 'id' }]}
+            isDisabled={props?.isDisabled || props?.isReadOnly}
             onFocus={(e) => {
               e.preventDefault();
               e.stopPropagation();

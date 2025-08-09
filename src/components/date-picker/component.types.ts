@@ -102,10 +102,11 @@ export type DateWrapperProps = AddDollarSign<
   StyledInputWrapperProps;
 
 export type DateInputProps = AddDollarSign<
-  Pick<DatePickerProps, 'error' | 'genre' | 'size' | 'isBold' | 'isReadOnly'> & {
+  Pick<DatePickerProps, 'error' | 'genre' | 'size' | 'isBold' | 'isReadOnly' | 'isDisabled'> & {
     isOpen?: boolean;
     isActive?: boolean;
     isHaveValue?: boolean;
+    isShowPlaceholder?: boolean;
   }
 >;
 
