@@ -33,7 +33,7 @@ const DatePickerWrapperAll: FC = () => {
         >
           Other - Past hundred years, blackBorder
         </Typography>
-        {/* <DatePickerComponent
+        <DatePickerComponent
           genre='blackBorder'
           notValidDate={{
             errorMessage: 'Not valid date',
@@ -53,7 +53,7 @@ const DatePickerWrapperAll: FC = () => {
             console.log('onChange', timestamp);
             setValueOne(timestamp);
           }}
-        /> */}
+        />
       </WrapperBig>
       <WrapperBig sx={{ default: { flexDirection: 'column' } }}>
         <Typography
@@ -99,7 +99,7 @@ const DatePickerWrapperAll: FC = () => {
         >
           Other - Next three months
         </Typography>
-        {/* <DatePickerComponent
+        <DatePickerComponent
           genre='grayBorder'
           notValidDate={{
             errorMessage: 'Not valid date',
@@ -119,7 +119,7 @@ const DatePickerWrapperAll: FC = () => {
             console.log('onChange', timestamp);
             setValueThree(timestamp);
           }}
-        /> */}
+        />
       </WrapperBig>
     </WrapperBig>
   );
