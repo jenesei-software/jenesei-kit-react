@@ -2,7 +2,6 @@ import { autoUpdate, flip, offset, shift, useFloating } from '@floating-ui/react
 import { AnimatePresence } from 'framer-motion';
 import {
   FC,
-  FocusEvent as ReactFocusEvent,
   Ref,
   useCallback,
   useEffect,
