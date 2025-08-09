@@ -18,6 +18,7 @@ import {
   DateDropdownDays,
   DateDropdownList,
   DateInput,
+  DateInputButton,
   DateInputWrapper,
   DatePickerMode,
   DatePickerProps,
@@ -88,6 +89,7 @@ export const DatePicker = (props: DatePickerProps) => {
         onNext: () => setActiveSegment(getNextSegment(DatePickerVariant.MM)),
         onPrev: () => setActiveSegment(getPrevSegment(DatePickerVariant.MM)),
         isLast: mode[mode.length - 1] === DatePickerVariant.MM,
+        isFirst: mode[0] === DatePickerVariant.MM,
         type: DatePickerVariant.MM,
         value: input.MM,
         setValue: (value: number | null) => setInput((prevValue) => ({ ...prevValue, [DatePickerVariant.MM]: value })),
@@ -98,6 +100,7 @@ export const DatePicker = (props: DatePickerProps) => {
         nextSegment: getNextSegment(DatePickerVariant.DD),
         preSegment: getPrevSegment(DatePickerVariant.DD),
         isLast: mode[mode.length - 1] === DatePickerVariant.DD,
+        isFirst: mode[0] === DatePickerVariant.DD,
         onNext: () => setActiveSegment(getNextSegment(DatePickerVariant.DD)),
         onPrev: () => setActiveSegment(getPrevSegment(DatePickerVariant.DD)),
         type: DatePickerVariant.DD,
@@ -110,6 +113,7 @@ export const DatePicker = (props: DatePickerProps) => {
         nextSegment: getNextSegment(DatePickerVariant.YYYY),
         preSegment: getPrevSegment(DatePickerVariant.YYYY),
         isLast: mode[mode.length - 1] === DatePickerVariant.YYYY,
+        isFirst: mode[0] === DatePickerVariant.YYYY,
         onNext: () => setActiveSegment(getNextSegment(DatePickerVariant.YYYY)),
         onPrev: () => setActiveSegment(getPrevSegment(DatePickerVariant.YYYY)),
         type: DatePickerVariant.YYYY,
@@ -249,7 +253,6 @@ export const DatePicker = (props: DatePickerProps) => {
 
   const onFocusPopover = useCallback(() => {
     props.onFocus?.();
-    setActiveSegment(DatePickerVariant.DD);
   }, [props.onFocus]);
   const onBlurPopover = useCallback(() => {
     props.onBlur?.();
@@ -257,12 +260,11 @@ export const DatePicker = (props: DatePickerProps) => {
   const onBlurReference = useCallback(() => {
     setActiveSegment(null);
   }, []);
-  const { isOpen, close, refReference, refFloating, floatingStyles, open } = usePopover({
+  const { isOpen, refReference, refFloating, floatingStyles, close, toggle } = usePopover({
     placement: 'bottom-start',
     offset: sizePadding,
     mode: 'independence',
     isClickOutside: true,
-    refsExcludeBlur: [],
     refsExcludeClickOutside: [refSelectMonth, refSelectYear],
     isDisabled: props?.isDisabled,
     onFocus: onFocusPopover,
@@ -287,17 +289,7 @@ export const DatePicker = (props: DatePickerProps) => {
     (e: KeyboardEvent<HTMLInputElement>) => {
       const key = e.key;
 
-      const allowedKeys = [
-        'ArrowLeft',
-        'ArrowRight',
-        'ArrowUp',
-        'ArrowDown',
-        'Backspace',
-        'Delete',
-        'Tab',
-        'Enter',
-        'Escape',
-      ];
+      const allowedKeys = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Backspace', 'Delete', 'Tab', 'Enter'];
 
       const isDigit = /^\d$/.test(key);
       const isAllowed = isDigit || allowedKeys.includes(key) || e.ctrlKey || e.metaKey;
@@ -386,10 +378,11 @@ export const DatePicker = (props: DatePickerProps) => {
           if (!dataDate.default[activeSegment].isLast) {
             e.preventDefault();
             dataDate.default[activeSegment].onNext();
+          } else {
+            refHiddenInput?.current?.blur();
           }
         }
         if (key === 'Enter') {
-          close();
           e.preventDefault();
           e.stopPropagation();
         }
@@ -445,7 +438,7 @@ export const DatePicker = (props: DatePickerProps) => {
         }
       }
     },
-    [activeSegment, input.DD, input.MM, input.YYYY, dataDate.default, close],
+    [activeSegment, input.DD, input.MM, input.YYYY, dataDate.default],
   );
   const onNextMonth = useCallback(() => {
     const newDate = (valueMoment ?? dateDefaultMoment).clone().add(1, 'month');
@@ -500,12 +493,12 @@ export const DatePicker = (props: DatePickerProps) => {
   }, [input.DD, input.MM, input.YYYY]);
 
   const prevValueRef = useRef('');
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+
   useEffect(() => {
-    if (isOpen && refHiddenInput.current) {
-      refHiddenInput.current.focus();
+    if (activeSegment) {
+      refHiddenInput?.current?.focus();
     }
-  }, [isOpen, activeSegment]);
+  }, [activeSegment]);
 
   return (
     <>
@@ -528,14 +521,14 @@ export const DatePicker = (props: DatePickerProps) => {
             isError
               ? {
                   isError: true,
-                  size: props?.error?.size,
+                  size: props?.error?.size ?? props.size,
                   ...props.notValidDate,
                 }
               : props.error
           }
           $isOpen={isOpen}
           onClick={() => {
-            open();
+            setActiveSegment(DatePickerVariant.DD);
           }}
         >
           <input
@@ -569,12 +562,12 @@ export const DatePicker = (props: DatePickerProps) => {
                 } as unknown as KeyboardEvent<HTMLInputElement>);
               }
 
-              if (newChar === '\n') {
-                close();
-              }
+              // if (newChar === '\n') {
+              //   close();
+              // }
             }}
             onFocus={() => {
-              open();
+              if (!activeSegment) setActiveSegment(DatePickerVariant.DD);
             }}
           />
           {!isHasValue && props.labelPlaceholder && !isOpen ? (
@@ -596,7 +589,11 @@ export const DatePicker = (props: DatePickerProps) => {
                   $isActive={activeSegment === date.type}
                   $genre={props.genre}
                   $size={props.size}
-                  onClick={() => date.setActive()}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    date.setActive();
+                  }}
                 >
                   {date.value != null
                     ? String(date.value).padStart(date.type === DatePickerVariant.YYYY ? 1 : 2, '0')
@@ -608,6 +605,25 @@ export const DatePicker = (props: DatePickerProps) => {
               </Fragment>
             ))
           )}
+          <DateInputButton
+            genre={props.genre}
+            size='small'
+            isWidthAsHeight
+            isFullSize
+            isRadius
+            isOnlyIcon
+            icons={[{ name: 'Calendar', type: 'id' }]}
+            onFocus={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setActiveSegment(null);
+            }}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              toggle();
+            }}
+          />
         </DateInputWrapper>
       </DateWrapper>
       <Popover
@@ -753,7 +769,7 @@ export const DatePicker = (props: DatePickerProps) => {
           {...(isError
             ? {
                 isError: true,
-                size: props?.error?.size,
+                size: props?.error?.size ?? props.size,
                 ...props.notValidDate,
               }
             : props.error)}

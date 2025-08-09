@@ -102,6 +102,7 @@ export const Button: FC<ButtonProps> = (props) => {
       type={props.type ?? 'button'}
       className={props.className}
       onClick={handleClick}
+      onFocus={props.onFocus}
       onMouseDown={props.onMouseDown}
       ref={ref as Ref<HTMLButtonElement>}
       $sx={props.sx}
