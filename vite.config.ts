@@ -1,15 +1,17 @@
-import { pluginUpdateReadmePD } from '@jenesei-software/jenesei-plugin-vite';
-import react from '@vitejs/plugin-react';
-import path, { resolve } from 'path';
-import process from 'process';
-import { defineConfig } from 'vite';
-import dts from 'vite-plugin-dts';
-import tsconfigPaths from 'vite-tsconfig-paths';
+import { pluginUpdateIcons, pluginUpdateReadmePD } from '@jenesei-software/jenesei-plugin-vite'
+import react from '@vitejs/plugin-react'
+import path, { resolve } from 'path'
+import process from 'process'
+import { defineConfig } from 'vite'
+import dts from 'vite-plugin-dts'
+import tsconfigPaths from 'vite-tsconfig-paths'
 
 import { peerDependencies } from './package.json';
 
 export default defineConfig(() => {
-  const isStorybook = process.env.NODE_ENV === 'storybook';
+  const isStorybook = process.env.NODE_ENV === 'storybook'
+
+  console.log('isStorybookBuild: ', String(isStorybook))
 
   return {
     resolve: {
@@ -18,6 +20,14 @@ export default defineConfig(() => {
       },
     },
     plugins: [
+      isStorybook && pluginUpdateIcons({
+        pathInputFile: path.resolve(__dirname, '.storybook-public/logos/logo-jenesei-kit-react.png'),
+        pathOutputDirectory: path.resolve(__dirname, '.storybook-public/icons'),
+        prefix: 'icon',
+        sizesBackgroundTransparent: sizesBackgroundTransparent,
+        sizesBackgroundWhite: sizesBackgroundWhite,
+        sizesFavicon: sizesFavicon
+      }),
       pluginUpdateReadmePD({
         insertionPoint: '# IMPORTANT',
         pathReadme: resolve(__dirname, 'README.md'),
