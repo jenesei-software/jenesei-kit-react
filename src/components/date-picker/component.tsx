@@ -572,6 +572,11 @@ export const DatePicker = (props: DatePickerProps) => {
             onFocus={() => {
               if (!activeSegment) setActiveSegment(DatePickerVariant.DD);
             }}
+            onBlur={() => {
+              if (!isOpen) {
+                props.onBlur?.();
+              }
+            }}
           />
           {!isHasValue && props.labelPlaceholder && !isOpen ? (
             <Typography
