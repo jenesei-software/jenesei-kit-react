@@ -50,6 +50,7 @@ export type UsePopoverProps = {
   placement: Placement;
 
   refsExcludeClickOutside?: Ref<HTMLElement | null>[];
+  refsExcludeBlur?: Ref<HTMLElement | null>[];
 
   onFocus?: () => void;
   onBlur?: () => void;

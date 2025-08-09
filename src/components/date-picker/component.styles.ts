@@ -1,6 +1,6 @@
 import { addInputIsInputEffect } from '@local/components/input';
 import { getFontSizeStyles } from '@local/components/typography';
-import { addNiceNumber, addOutline, addRemoveOutline, addRemoveScrollbar, addTransition } from '@local/styles/add';
+import { addNiceNumber, addOutline, addOutlineChildren, addRemoveOutline, addRemoveScrollbar, addTransition } from '@local/styles/add';
 import { addError } from '@local/styles/error';
 import { addSX } from '@local/styles/sx';
 import { KEY_SIZE_DATA } from '@local/theme/theme';
@@ -8,6 +8,7 @@ import { KEY_SIZE_DATA } from '@local/theme/theme';
 import { motion } from 'framer-motion';
 import styled, { css } from 'styled-components';
 
+import { Button, ButtonProps } from '../button';
 import { DateDropdownDayProps, DateDropdownListProps, DateInputProps, DateStyledListProps, DateWrapperProps } from '.';
 
 export const DateWrapper = styled.div<DateWrapperProps>`
@@ -179,6 +180,7 @@ const addDateInputWrapperGenre = css<DateInputProps>`
       border-color: ${props.theme.colors.input[props.$genre].border.hover};
       color: ${props.theme.colors.input[props.$genre].color.hover};
     }
+    ${addOutlineChildren};
     ${
       props.$isOpen &&
       css`
@@ -218,4 +220,14 @@ export const DateInputWrapper = styled.div<DateInputProps>`
   ${addDateInputWrapperGenre};
   ${addTransition};
   ${addError};
+`;
+
+export const addDateInputButtonSize = css<ButtonProps>`
+  ${(props) => css`
+    right:${KEY_SIZE_DATA[props.size].padding}px;
+  `}
+`;
+export const DateInputButton = styled(Button)`
+    position: absolute;
+    ${addDateInputButtonSize};
 `;

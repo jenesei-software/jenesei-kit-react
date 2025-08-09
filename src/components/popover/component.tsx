@@ -1,6 +1,15 @@
 import { autoUpdate, flip, offset, shift, useFloating } from '@floating-ui/react';
 import { AnimatePresence } from 'framer-motion';
-import { FC, Ref, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import {
+  FC,
+  Ref,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import ReactDOM from 'react-dom';
 
 import { DEFAULT_POPOVER_CLOSE_DELAY, DEFAULT_POPOVER_OFFSET, PopoverProps, PopoverWrapper, UsePopoverProps } from '.';
@@ -47,10 +56,15 @@ export const Popover: FC<PopoverProps> = (props) => {
 
 export const usePopover = (props: UsePopoverProps) => {
   const { onFocus, onBlur, onBlurReference } = props;
+
+  // Состояние открытия поповера
   const [isOpen, setIsOpen] = useState(false);
+  // Минимальная ширина поповера (нужна, если хотим, чтобы ширина совпадала с референсом)
   const [minWidth, setMinWidth] = useState<number | undefined>(undefined);
+  // Флаг, был ли поповер когда-либо открыт (чтобы onBlur не вызывался при первом рендере)
   const [wasEverOpen, setWasEverOpen] = useState(false);
 
+  // Позиционирование через floating-ui
   const {
     refs,
     floatingStyles,
@@ -63,20 +77,30 @@ export const usePopover = (props: UsePopoverProps) => {
     whileElementsMounted: autoUpdate,
   });
 
+  // Сохраняем обработчик клика вне поповера (чтобы можно было удалить при cleanup)
   const clickOutsideHandler = useRef<((e: MouseEvent) => void) | null>(null);
+  // Таймаут для закрытия при hover-режиме
   const hoverCloseTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  // Отступ для hover-зоны (чтобы не закрывался мгновенно при небольших движениях мыши)
   const hoverOffset = useMemo(
     () => props.hoverOffset ?? props.offset ?? DEFAULT_POPOVER_OFFSET,
     [props.hoverOffset, props.offset],
   );
+  // Задержка перед закрытием при hover
   const hoverCloseDelay = useMemo(() => props.hoverCloseDelay ?? DEFAULT_POPOVER_CLOSE_DELAY, [props.hoverCloseDelay]);
 
+  /**
+   * Навешиваем обработчики на reference-элемент в зависимости от режима:
+   * - click / clickOpen → открытие/переключение по клику
+   * - hover → открытие/закрытие при наведении
+   */
   useEffect(() => {
     if (props.isDisabled) return;
     const refEl = refs.reference.current;
     if (!refEl) return;
 
+    // Режим клика
     if ((props.mode === 'click' || props.mode === 'clickOpen') && refEl instanceof HTMLElement) {
       const handleClick = () => {
         if (props.mode === 'click') {
@@ -90,6 +114,8 @@ export const usePopover = (props: UsePopoverProps) => {
       return () => {
         refEl.removeEventListener('click', handleClick);
       };
+
+      // Режим ховера
     } else if (props.mode === 'hover' && refEl instanceof HTMLElement) {
       const handleMouseEnter = () => {
         setIsOpen(true);
@@ -98,6 +124,7 @@ export const usePopover = (props: UsePopoverProps) => {
         if (hoverCloseTimeout.current) clearTimeout(hoverCloseTimeout.current);
         hoverCloseTimeout.current = setTimeout(() => setIsOpen(false), hoverCloseDelay);
       };
+
       refEl.addEventListener('mouseenter', handleMouseEnter);
       refEl.addEventListener('mouseleave', handleMouseLeave);
       return () => {
@@ -108,16 +135,28 @@ export const usePopover = (props: UsePopoverProps) => {
     }
   }, [props.mode, refs.reference, hoverCloseDelay, props.isDisabled]);
 
+  // Автоматическое обновление позиции, пока поповер открыт
   useEffect(() => {
     if (!isOpen || !refs.reference.current || !refs.floating.current || props.isDisabled) return;
 
     const cleanup = autoUpdate(refs.reference.current, refs.floating.current, update);
+
+    return () => cleanup();
+  }, [isOpen, refs.reference, refs.floating, update, props.isDisabled]);
+
+  /**
+   * Логика закрытия поповера при клике вне него
+   */
+  useEffect(() => {
+    if (!isOpen || !refs.reference.current || !refs.floating.current || props.isDisabled) return;
 
     if (props.isClickOutside) {
       clickOutsideHandler.current = (e: MouseEvent) => {
         const refEl = refs.reference.current;
         const floatingEl = refs.floating.current;
         const otherRefs = props.refsExcludeClickOutside || [];
+
+        // Проверяем, что клик не по поповеру, не по reference и не по исключенным ref'ам
         if (
           refEl instanceof HTMLElement &&
           floatingEl instanceof HTMLElement &&
@@ -138,7 +177,6 @@ export const usePopover = (props: UsePopoverProps) => {
     }
 
     return () => {
-      cleanup();
       if (clickOutsideHandler.current) {
         document.removeEventListener('mousedown', clickOutsideHandler.current);
         clickOutsideHandler.current = null;
@@ -147,16 +185,12 @@ export const usePopover = (props: UsePopoverProps) => {
         clearTimeout(hoverCloseTimeout.current);
       }
     };
-  }, [
-    isOpen,
-    refs.reference,
-    refs.floating,
-    update,
-    props.isClickOutside,
-    props.isDisabled,
-    props.refsExcludeClickOutside,
-  ]);
+  }, [isOpen, refs.reference, refs.floating, props.isClickOutside, props.isDisabled, props.refsExcludeClickOutside]);
 
+  /**
+   * Поддержка режима "плавающего hover"
+   * Закрывает поповер, если мышь ушла за пределы reference+floating с отступом
+   */
   useEffect(() => {
     if (!isOpen || !props.isFloatingHover || !refs.reference.current || !refs.floating.current || props.isDisabled)
       return;
@@ -171,6 +205,7 @@ export const usePopover = (props: UsePopoverProps) => {
       const refRect = refEl.getBoundingClientRect();
       const floatingRect = floatingEl.getBoundingClientRect();
 
+      // Находим, внутри ли курсор reference или floating с учётом отступа
       const isInsideRef =
         mouseX >= refRect.left - hoverOffset &&
         mouseX <= refRect.right + hoverOffset &&
@@ -184,11 +219,13 @@ export const usePopover = (props: UsePopoverProps) => {
         mouseY <= floatingRect.bottom + hoverOffset;
 
       if (isInsideRef || isInsideFloating) {
+        // Если вернулись внутрь — отменяем закрытие
         if (hoverCloseTimeout.current) {
           clearTimeout(hoverCloseTimeout.current);
           hoverCloseTimeout.current = null;
         }
       } else {
+        // Если вышли — запускаем таймер на закрытие
         if (hoverCloseTimeout.current) clearTimeout(hoverCloseTimeout.current);
         hoverCloseTimeout.current = setTimeout(() => setIsOpen(false), hoverCloseDelay);
       }
@@ -204,12 +241,16 @@ export const usePopover = (props: UsePopoverProps) => {
     };
   }, [isOpen, props.isFloatingHover, refs.reference, refs.floating, hoverOffset, hoverCloseDelay, props.isDisabled]);
 
+  /**
+   * Устанавливаем минимальную ширину поповера, равную reference (если включено isWidthAsContent)
+   */
   useLayoutEffect(() => {
     if (!props.isWidthAsContent || !refs.reference.current) return;
     const rect = refs.reference.current.getBoundingClientRect();
     setMinWidth(rect.width);
   }, [props.isWidthAsContent, refs.reference]);
 
+  // Методы управления открытием
   const open = useCallback(() => {
     if (props.isDisabled) return;
     setIsOpen(true);
@@ -223,6 +264,7 @@ export const usePopover = (props: UsePopoverProps) => {
     setIsOpen((prev) => !prev);
   }, [props.isDisabled]);
 
+  // Объединяем стили floating-ui с дополнительными ограничениями по ширине
   const combinedStyles = useMemo(() => {
     return {
       ...floatingStyles,
@@ -231,6 +273,10 @@ export const usePopover = (props: UsePopoverProps) => {
     };
   }, [floatingStyles, props.isWidthAsContent, minWidth]);
 
+  /**
+   * Вызываем onFocus при открытии
+   * и запоминаем, что поповер хоть раз был открыт
+   */
   useEffect(() => {
     if (isOpen) {
       onFocus?.();
@@ -238,19 +284,25 @@ export const usePopover = (props: UsePopoverProps) => {
     }
   }, [isOpen, onFocus]);
 
+  /**
+   * Вызываем onBlur при первом закрытии после открытия
+   */
   useEffect(() => {
     if (!isOpen && wasEverOpen) {
       onBlur?.();
     }
   }, [isOpen, wasEverOpen, onBlur]);
 
+  /**
+   * Закрытие при потере фокуса (focusin вне поповера + reference)
+   * (но не на исключённые элементы)
+   */
   useEffect(() => {
     if (!isOpen || props.isDisabled) return;
 
     const handleFocusIn = (e: FocusEvent) => {
       const refEl = refs.reference.current;
       const floatingEl = refs.floating.current;
-
       const otherRefs = props.refsExcludeClickOutside || [];
 
       const isInside =
@@ -275,13 +327,25 @@ export const usePopover = (props: UsePopoverProps) => {
     };
   }, [isOpen, refs.reference, refs.floating, props.refsExcludeClickOutside, props.isDisabled]);
 
+  /**
+   * Вызываем onBlurReference, если фокус ушёл с reference-элемента
+   * (но не на исключённые элементы)
+   */
   useEffect(() => {
     if (!refs.reference.current || props.isDisabled || !onBlurReference) return;
 
     const refEl = refs.reference.current;
+    const otherRefs = props.refsExcludeBlur || [];
 
     const handleBlur = (e: FocusEvent) => {
-      if (refEl instanceof HTMLElement && !refEl.contains(e.relatedTarget as Node)) {
+      if (
+        refEl instanceof HTMLElement &&
+        !refEl.contains(e.relatedTarget as Node) &&
+        !otherRefs.some((ref) => {
+          if (ref && 'current' in ref && ref.current && ref.current instanceof HTMLElement)
+            return ref.current.contains(e.relatedTarget as Node);
+        })
+      ) {
         onBlurReference();
       }
     };
@@ -291,8 +355,35 @@ export const usePopover = (props: UsePopoverProps) => {
     return () => {
       if (refEl instanceof HTMLElement) refEl.removeEventListener('blur', handleBlur, true);
     };
-  }, [refs.reference, props.isDisabled, onBlurReference]);
+  }, [refs.reference, props.isDisabled, onBlurReference, props.refsExcludeBlur]);
+
+  /**
+   * Функция возвращает true или false в зависимости от состояния от FocusEvent который находится внутри или снаружи
+   */
+  const getIsInside = useCallback(
+    (target: Node | null) => {
+      if (!target) return false; // если relatedTarget null, значит фокус ушёл вне окна — закрываем
+
+      const refEl = refs.reference.current;
+      const floatingEl = refs.floating.current;
+      const otherRefs = props.refsExcludeBlur || [];
+
+      return (
+        (refEl instanceof HTMLElement && refEl.contains(target)) ||
+        (floatingEl instanceof HTMLElement && floatingEl.contains(target)) ||
+        otherRefs.some((ref) => {
+          if (ref && 'current' in ref && ref.current && ref.current instanceof HTMLElement) {
+            return ref.current.contains(target);
+          }
+          return false;
+        })
+      );
+    },
+    [refs.reference, refs.floating, props.refsExcludeBlur],
+  );
+  // Возвращаем наружу API для использования поповера
   return {
+    getIsInside,
     isOpen,
     setIsOpen,
     open,

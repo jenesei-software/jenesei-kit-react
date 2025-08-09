@@ -1,9 +1,9 @@
-import React, { PropsWithChildren, Ref } from 'react'
-
 import { IconItemProps } from '@local/components/icon'
 import { addSXProps, addSXStyleProps } from '@local/styles/sx'
 import { IThemeGenre, IThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
+
+import React, { PropsWithChildren, Ref } from 'react'
 
 import { addSXTypographyProps, addSXTypographyStyleProps } from '../typography'
 
@@ -53,6 +53,7 @@ type ButtonPropsDefault = PropsWithChildren & {
 
   isFullSize?: boolean
 
+  onFocus?: (event: React.FocusEvent<HTMLButtonElement, Element>) => void
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
   onMouseDown?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
   type?: 'button' | 'submit' | 'reset'
