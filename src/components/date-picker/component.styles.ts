@@ -188,7 +188,7 @@ const addDateInputWrapperGenre = css<DateInputProps>`
       border-color: ${props.theme.colors.input[props.$genre].border.hover};
       color: ${props.theme.colors.input[props.$genre].color.hover};
     }
-    ${addOutlineChildren};
+    /* ${addOutlineChildren}; */
     ${
       props.$isOpen &&
       css`

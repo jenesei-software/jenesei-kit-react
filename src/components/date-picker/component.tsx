@@ -48,6 +48,20 @@ export const DatePicker = (props: DatePickerProps) => {
     [DatePickerVariant.YYYY]: null,
   });
 
+  const isHasInput = useMemo(() => {
+    return (
+      input[DatePickerVariant.DD] !== null ||
+      input[DatePickerVariant.MM] !== null ||
+      input[DatePickerVariant.YYYY] !== null
+    );
+  }, [input]);
+  const onClearInput = useCallback(() => {
+    setInput({
+      [DatePickerVariant.DD]: null,
+      [DatePickerVariant.MM]: null,
+      [DatePickerVariant.YYYY]: null,
+    });
+  }, []);
   const [activeSegment, setActiveSegment] = useState<DatePickerVariant | null>(null);
   const [isError, setIsError] = useState(false);
 
@@ -219,36 +233,36 @@ export const DatePicker = (props: DatePickerProps) => {
     days.sort((a, b) => a.value - b.value);
     return days;
   }, [valueMoment, dateDefaultMoment, props.dateMax, props.dateMin]);
+
   const rows = useMemo(() => countSevens(daysInMonth.length) + 1, [daysInMonth]);
   const height = useMemo(
     () => 40 + rows * 28 + (rows - 1) * 6 + KEY_SIZE_DATA[props.size].padding * 2,
     [props.size, rows],
   );
+
   const sizeRadius = useMemo(() => KEY_SIZE_DATA[props.size].radius, [props.size]);
+  const sizePadding = useMemo(() => KEY_SIZE_DATA[props.size].padding, [props.size]);
 
   const isHasValue = useMemo(() => {
     return valueMoment !== null;
   }, [valueMoment]);
-
   const isBlockNextMonth = useMemo(() => {
     const nextMonth = (valueMoment ?? dateDefaultMoment).clone().add(1, 'month').startOf('month');
-
     const isBeforeEndDate = props.dateMax ? nextMonth.isAfter(moment.utc(props.dateMax), 'month') : false;
     return isBeforeEndDate;
   }, [valueMoment, props.dateMax, dateDefaultMoment]);
-
   const isBlockPrevMonth = useMemo(() => {
     const prevMonth = (valueMoment ?? dateDefaultMoment).clone().subtract(1, 'month').startOf('month');
-
     const isAfterStartDate = props.dateMin ? prevMonth.isBefore(moment.utc(props.dateMin), 'month') : false;
     return isAfterStartDate;
   }, [valueMoment, props.dateMin, dateDefaultMoment]);
 
+  const [isInputFocused, setIsInputFocused] = useState(false);
+
+  const refPrevValue = useRef('');
   const refSelectMonth = useRef<HTMLElement>(null);
   const refSelectYear = useRef<HTMLElement>(null);
   const refHiddenInput = useRef<HTMLInputElement>(null);
-
-  const sizePadding = useMemo(() => KEY_SIZE_DATA[props.size].padding, [props.size]);
 
   const onFocusPopover = useCallback(() => {
     props.onFocus?.();
@@ -270,6 +284,10 @@ export const DatePicker = (props: DatePickerProps) => {
     onBlur: onBlurPopover,
     onBlurReference: onBlurReference,
   });
+
+  const isShowPlaceholder = useMemo(() => {
+    return !!(!isInputFocused && !isHasValue && props.labelPlaceholder && !isOpen && !isHasInput && !activeSegment);
+  }, [isInputFocused, isHasValue, isOpen, props.labelPlaceholder, isHasInput, activeSegment]);
 
   const onChangeDate = useCallback(
     (timestamp: number) => {
@@ -304,74 +322,7 @@ export const DatePicker = (props: DatePickerProps) => {
         if (isDigit) {
           const digit = key;
 
-          if (activeSegment === DatePickerVariant.DD) {
-            const current = input.DD !== null ? input.DD.toString() : '';
-            let nextValue: string;
-
-            if (current.length >= 2) {
-              // если уже два символа — заменяем полностью
-              nextValue = digit;
-            } else {
-              // пробуем добавить цифру
-              const potential = current + digit;
-              const potentialParsed = Number(potential);
-
-              // если при добавлении получится >31 или 0 — считаем, что ввод начинается заново
-              if (potentialParsed > 31 || potentialParsed === 0) {
-                nextValue = digit;
-              } else {
-                nextValue = potential;
-              }
-            }
-
-            const parsed = Number(nextValue);
-            if (parsed > 31 || parsed === 0) return;
-
-            dataDate.default[activeSegment].setValue(parsed);
-            if (nextValue.length === 2) {
-              dataDate.default[activeSegment].onNext();
-            }
-          } else if (activeSegment === DatePickerVariant.MM) {
-            const currentMonthStr = input.MM !== null ? input.MM.toString() : '';
-            let nextValue: string;
-
-            if (currentMonthStr.length >= 2) {
-              nextValue = digit;
-            } else {
-              const potential = currentMonthStr + digit;
-              const potentialParsed = Number(potential);
-
-              if (potentialParsed > 12) {
-                nextValue = digit;
-              } else {
-                nextValue = potential;
-              }
-            }
-
-            const parsed = Number(nextValue);
-            if (parsed > 12 || parsed === 0) return;
-
-            dataDate.default[activeSegment].setValue(parsed);
-
-            if (nextValue.length === 2 || (nextValue.length === 1 && parsed > 1)) {
-              dataDate.default[activeSegment].onNext();
-            }
-          } else if (activeSegment === DatePickerVariant.YYYY) {
-            const current = input.YYYY !== null ? input.YYYY.toString() : '';
-            let nextValue: string;
-
-            if (current.length >= 4) {
-              if (digit === '0') return;
-              nextValue = digit;
-            } else {
-              nextValue = current + digit;
-            }
-
-            const parsed = Number(nextValue);
-
-            dataDate.default[activeSegment].setValue(parsed);
-          }
-
+          handleDigitKey(digit, activeSegment, input, dataDate);
           e.preventDefault();
           e.stopPropagation();
         }
@@ -392,8 +343,8 @@ export const DatePicker = (props: DatePickerProps) => {
             if (input.DD !== null) {
               const current = input.DD.toString();
               if (current.length === 1) {
-                dataDate.default[activeSegment].setValue(null);
-              } else {
+              dataDate.default[activeSegment].setValue(null);
+            } else {
                 const newValue = current.slice(0, -1);
                 dataDate.default[activeSegment].setValue(Number(newValue));
               }
@@ -420,9 +371,9 @@ export const DatePicker = (props: DatePickerProps) => {
               } else {
                 const newValue = current.slice(0, -1);
                 dataDate.default[activeSegment].setValue(Number(newValue));
-              }
-            } else {
-              dataDate.default[activeSegment].onPrev();
+            }
+          } else {
+            dataDate.default[activeSegment].onPrev();
             }
           }
 
@@ -439,7 +390,7 @@ export const DatePicker = (props: DatePickerProps) => {
         }
       }
     },
-    [activeSegment, input.DD, input.MM, input.YYYY, dataDate.default],
+    [activeSegment, input, dataDate.default, dataDate],
   );
   const onNextMonth = useCallback(() => {
     const newDate = (valueMoment ?? dateDefaultMoment).clone().add(1, 'month');
@@ -459,59 +410,67 @@ export const DatePicker = (props: DatePickerProps) => {
     setValueMoment(props.value || props.defaultValue ? moment(props.value ?? props.defaultValue).utc() : null);
   }, [props.value, props.defaultValue]);
 
-  useEffect(() => {
-    if (input.DD !== null && input.MM !== null && input.YYYY !== null) {
+  const getValidateInput = useCallback(
+    (
+      input: Record<DatePickerVariant, number | null>,
+      onSuccess?: (value: number) => void,
+      onFailure?: () => void,
+      onNan?: () => void,
+    ) => {
       const day = input.DD ?? NaN;
       const month = input.MM ?? NaN;
       const year = input.YYYY ?? NaN;
       if (!Number.isNaN(day) && !Number.isNaN(month) && !Number.isNaN(year)) {
         const m = moment.utc(`${day}.${month}.${year}`, 'D.M.YYYY', true).startOf('day');
         if (m.isValid()) {
-          onChangeDate(m.valueOf());
-        }
-      }
-    }
-  }, [input.DD, input.MM, input.YYYY, onChangeDate]);
-
-  useEffect(() => {
-    if (input.DD !== null && input.MM !== null && input.YYYY !== null) {
-      const day = input.DD ?? NaN;
-      const month = input.MM ?? NaN;
-      const year = input.YYYY ?? NaN;
-      if (!Number.isNaN(day) && !Number.isNaN(month) && !Number.isNaN(year)) {
-        const m = moment.utc(`${day}.${month}.${year}`, 'D.M.YYYY', true).startOf('day');
-        if (m.isValid()) {
-          setIsError(false);
+          onSuccess?.(m.valueOf());
         } else {
-          onChange(null);
-          setIsError(true);
+          onFailure?.();
         }
+      } else {
+        onNan?.();
       }
-    } else {
-      setIsError(false);
-    }
-  }, [input.DD, input.MM, input.YYYY, onChange]);
+    },
+    [],
+  );
 
-  const prevValueRef = useRef('');
-  const [isInputFocused, setIsInputFocused] = useState(false);
+  useEffect(() => {
+    getValidateInput(
+      input,
+      (value) => {
+        onChangeDate(value);
+        setIsError(false);
+      },
+      () => {
+        onChange(null);
+        setIsError(true);
+      },
+    );
+  }, [getValidateInput, onChangeDate, onChange, input]);
+
+  useEffect(() => {
+    if (!isOpen && !isInputFocused && isHasInput && !activeSegment) 
+      getValidateInput(
+        input,
+        () => {},
+        () => {
+          onChange(null);
+          onClearInput();
+          setIsError(false);
+        },
+        () => {
+          onChange(null);
+          onClearInput();
+          setIsError(false);
+        },
+      );
+  }, [getValidateInput, onClearInput, input, isOpen, isInputFocused, onChange, isHasInput, activeSegment]);
 
   useEffect(() => {
     if (activeSegment) {
       refHiddenInput?.current?.focus();
     }
   }, [activeSegment]);
-
-  const isShowPlaceholder = useMemo(() => {
-    return !!(
-      !isInputFocused &&
-      !isHasValue &&
-      props.labelPlaceholder &&
-      !isOpen &&
-      !input.DD &&
-      !input.MM &&
-      !input.YYYY
-    );
-  }, [isInputFocused, isHasValue, isOpen, props.labelPlaceholder, input.DD, input.MM, input.YYYY]);
   return (
     <>
       <DateWrapper
@@ -541,9 +500,9 @@ export const DatePicker = (props: DatePickerProps) => {
                 }
               : props.error
           }
-          $isOpen={isOpen}
+          $isOpen={isOpen || !!activeSegment}
           onClick={() => {
-            setActiveSegment(DatePickerVariant.DD);
+            if (!activeSegment) setActiveSegment(DatePickerVariant.DD);
           }}
         >
           <input
@@ -556,11 +515,11 @@ export const DatePicker = (props: DatePickerProps) => {
             onKeyDown={handleKeyDown}
             onChange={(e) => {
               const value = e.target.value;
-              const prevValue = prevValueRef.current;
+              const prevValue = refPrevValue.current;
 
               const newChar = value.length > prevValue.length ? value.slice(-1) : null;
 
-              prevValueRef.current = value;
+              refPrevValue.current = value;
 
               if (newChar && /^\d$/.test(newChar)) {
                 handleKeyDown({
@@ -588,6 +547,7 @@ export const DatePicker = (props: DatePickerProps) => {
             }}
             onBlur={() => {
               setIsInputFocused(false);
+
               if (!isOpen) {
                 props.onBlur?.();
               }
@@ -804,3 +764,97 @@ export const DatePicker = (props: DatePickerProps) => {
     </>
   );
 };
+function handleDigitKey(
+  key: string,
+  activeSegment: DatePickerVariant,
+  input: Record<DatePickerVariant, number | null>,
+  dataDate: { default: Record<DatePickerVariant, { setValue: (value: number) => void; onNext: () => void }> },
+) {
+  const digit = key; // '0'..'9'
+  const seg = activeSegment;
+  const current = input[seg]?.toString() ?? ''; // Преобразуем number в string для работы
+
+  // Вспомогательная проверка
+  const isZero = (s: string) => s === '0';
+  const toNum = (s: string) => Number(s);
+
+  if (seg === DatePickerVariant.DD) {
+    // Дни: максимум 31, ноль недопустим как самостоятельное значение
+    if (current.length >= 2) {
+      // уже два символа — начинаем ввод заново
+      const parsed = toNum(digit);
+      if (parsed === 0 || parsed > 31) return;
+      dataDate.default[seg].setValue(parsed);
+      return;
+    }
+
+    // special-case: если было '0' и пользователь ввёл не '0' — НЕ подставляем '0' перед цифрой,
+    // сохраняем single-digit и считаем ввод завершённым (переходим).
+    if (current.length === 1 && isZero(current)) {
+      const parsed = toNum(digit);
+      if (parsed === 0 || parsed > 31) return;
+      dataDate.default[seg].setValue(parsed); // сохраняем число, а не строку
+      dataDate.default[seg].onNext();
+      return;
+    }
+
+    // обычный путь: добавляем цифру и решаем — перезаписать или дополнить
+    const potential = current + digit;
+    const potentialParsed = toNum(potential);
+
+    // ИСПРАВЛЕНИЕ: если потенциальное значение больше 31, используем только новую цифру и переходим дальше
+    if (potentialParsed > 31) {
+      const parsed = toNum(digit);
+      if (parsed === 0 || parsed > 31) return;
+      dataDate.default[seg].setValue(parsed);
+      dataDate.default[seg].onNext(); // Переходим к следующему сегменту
+      return;
+    }
+
+    // Если потенциальное значение равно 0, используем только новую цифру
+    const nextValue = potentialParsed === 0 ? digit : potential;
+    const parsed = toNum(nextValue);
+    if (parsed === 0 || parsed > 31) return;
+    dataDate.default[seg].setValue(parsed);
+    if (nextValue.length === 2) dataDate.default[seg].onNext();
+
+  } else if (seg === DatePickerVariant.MM) {
+    // Месяцы: максимум 12, ноль недопустим как самостоятельное значение
+    if (current.length >= 2) {
+      const parsed = toNum(digit);
+      if (parsed === 0 || parsed > 12) return;
+      dataDate.default[seg].setValue(parsed);
+      return;
+    }
+
+    if (current.length === 1 && isZero(current)) {
+      const parsed = toNum(digit);
+      if (parsed === 0 || parsed > 12) return;
+      dataDate.default[seg].setValue(parsed); // сохраняем число, а не строку
+      dataDate.default[seg].onNext();
+      return;
+    }
+
+    const potential = current + digit;
+    const potentialParsed = toNum(potential);
+    const nextValue = potentialParsed === 0 || potentialParsed > 12 ? digit : potential;
+
+    const parsed = toNum(nextValue);
+    if (parsed === 0 || parsed > 12) return;
+    dataDate.default[seg].setValue(parsed);
+    if (nextValue.length === 2 || (nextValue.length === 1 && parsed > 1)) {
+      dataDate.default[seg].onNext();
+    }
+
+  } else if (seg === DatePickerVariant.YYYY) {
+    // Год: накапливаем до 4 цифр. Если уже 4 — начинаем заново (как раньше)
+    if (current.length >= 4) {
+      if (digit === '0') return;
+      dataDate.default[seg].setValue(toNum(digit));
+      return;
+    }
+
+    const nextValue = (current + digit).slice(-4);
+    dataDate.default[seg].setValue(toNum(nextValue));
+  }
+}
