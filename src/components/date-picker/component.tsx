@@ -159,7 +159,6 @@ export const DatePicker = (props: DatePickerProps) => {
     const today = moment.utc();
     const startOfMonth = (valueMoment ?? dateDefaultMoment).clone().startOf('month');
     const endOfMonth = (valueMoment ?? dateDefaultMoment).clone().endOf('month');
-
     const days = [];
 
     const dateMin = props.dateMin ? moment.utc(props.dateMin) : null;
@@ -456,12 +455,8 @@ export const DatePicker = (props: DatePickerProps) => {
     setDateDefaultMoment(moment(props.dateDefault).utc());
   }, [props.dateDefault]);
 
-  // useEffect(() => {
-  //   onChange(valueMoment ? valueMoment.valueOf() : null);
-  // }, [valueMoment, onChange]);
-
   useEffect(() => {
-    setValueMoment(moment(props.value ?? props.defaultValue).utc());
+    setValueMoment(props.value || props.defaultValue ? moment(props.value ?? props.defaultValue).utc() : null);
   }, [props.value, props.defaultValue]);
 
   useEffect(() => {
@@ -496,6 +491,7 @@ export const DatePicker = (props: DatePickerProps) => {
   }, [input.DD, input.MM, input.YYYY, onChange]);
 
   const prevValueRef = useRef('');
+  const [isInputFocused, setIsInputFocused] = useState(false);
 
   useEffect(() => {
     if (activeSegment) {
@@ -570,15 +566,17 @@ export const DatePicker = (props: DatePickerProps) => {
               // }
             }}
             onFocus={() => {
+              setIsInputFocused(true);
               if (!activeSegment) setActiveSegment(DatePickerVariant.DD);
             }}
             onBlur={() => {
+              setIsInputFocused(false);
               if (!isOpen) {
                 props.onBlur?.();
               }
             }}
           />
-          {!isHasValue && props.labelPlaceholder && !isOpen ? (
+          {!isInputFocused && !isHasValue && props.labelPlaceholder && !isOpen ? (
             <Typography
               sx={{ default: { size: 16, line: 1, isNoUserSelect: true } }}
               sxStandard={(theme) => ({
