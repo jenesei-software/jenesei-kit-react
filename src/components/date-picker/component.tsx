@@ -277,13 +277,15 @@ export const DatePicker = (props: DatePickerProps) => {
       const momentNewDate = moment(timestamp).utc();
       if (valueMoment?.isSame(momentNewDate, 'day')) return;
       setValueMoment(momentNewDate);
+      onChange(momentNewDate.valueOf());
+
       setInput({
         [DatePickerVariant.DD]: momentNewDate.clone().date(),
         [DatePickerVariant.MM]: momentNewDate.clone().month() + 1,
         [DatePickerVariant.YYYY]: momentNewDate.clone().year(),
       });
     },
-    [valueMoment],
+    [valueMoment, onChange],
   );
   const handleKeyDown = useCallback(
     (e: KeyboardEvent<HTMLInputElement>) => {
@@ -454,9 +456,9 @@ export const DatePicker = (props: DatePickerProps) => {
     setDateDefaultMoment(moment(props.dateDefault).utc());
   }, [props.dateDefault]);
 
-  useEffect(() => {
-    onChange(valueMoment ? valueMoment.valueOf() : null);
-  }, [valueMoment, onChange]);
+  // useEffect(() => {
+  //   onChange(valueMoment ? valueMoment.valueOf() : null);
+  // }, [valueMoment, onChange]);
 
   useEffect(() => {
     setValueMoment(moment(props.value ?? props.defaultValue).utc());
@@ -486,11 +488,12 @@ export const DatePicker = (props: DatePickerProps) => {
         if (m.isValid()) {
           setIsError(false);
         } else {
+          onChange(null);
           setIsError(true);
         }
       }
     }
-  }, [input.DD, input.MM, input.YYYY]);
+  }, [input.DD, input.MM, input.YYYY, onChange]);
 
   const prevValueRef = useRef('');
 
