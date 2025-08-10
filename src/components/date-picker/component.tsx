@@ -450,7 +450,6 @@ export const DatePicker = (props: DatePickerProps) => {
       },
       (isHasInput) => {
         if (!isHasInput) {
-          onChange(null);
           setIsError(false);
         }
       }
