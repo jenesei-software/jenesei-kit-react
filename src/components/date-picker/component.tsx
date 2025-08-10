@@ -343,8 +343,8 @@ export const DatePicker = (props: DatePickerProps) => {
             if (input.DD !== null) {
               const current = input.DD.toString();
               if (current.length === 1) {
-              dataDate.default[activeSegment].setValue(null);
-            } else {
+                dataDate.default[activeSegment].setValue(null);
+              } else {
                 const newValue = current.slice(0, -1);
                 dataDate.default[activeSegment].setValue(Number(newValue));
               }
@@ -371,9 +371,9 @@ export const DatePicker = (props: DatePickerProps) => {
               } else {
                 const newValue = current.slice(0, -1);
                 dataDate.default[activeSegment].setValue(Number(newValue));
-            }
-          } else {
-            dataDate.default[activeSegment].onPrev();
+              }
+            } else {
+              dataDate.default[activeSegment].onPrev();
             }
           }
 
@@ -415,11 +415,14 @@ export const DatePicker = (props: DatePickerProps) => {
       input: Record<DatePickerVariant, number | null>,
       onSuccess?: (value: number) => void,
       onFailure?: () => void,
-      onNan?: () => void,
+      onNan?: (isHasInput: boolean) => void,
     ) => {
       const day = input.DD ?? NaN;
       const month = input.MM ?? NaN;
       const year = input.YYYY ?? NaN;
+      const isHasInput = input[DatePickerVariant.DD] !== null ||
+        input[DatePickerVariant.MM] !== null ||
+        input[DatePickerVariant.YYYY] !== null
       if (!Number.isNaN(day) && !Number.isNaN(month) && !Number.isNaN(year)) {
         const m = moment.utc(`${day}.${month}.${year}`, 'D.M.YYYY', true).startOf('day');
         if (m.isValid()) {
@@ -428,7 +431,7 @@ export const DatePicker = (props: DatePickerProps) => {
           onFailure?.();
         }
       } else {
-        onNan?.();
+        onNan?.(isHasInput);
       }
     },
     [],
@@ -445,14 +448,20 @@ export const DatePicker = (props: DatePickerProps) => {
         onChange(null);
         setIsError(true);
       },
+      (isHasInput) => {
+        if (!isHasInput) {
+          onChange(null);
+          setIsError(false);
+        }
+      }
     );
   }, [getValidateInput, onChangeDate, onChange, input]);
 
   useEffect(() => {
-    if (!isOpen && !isInputFocused && isHasInput && !activeSegment) 
+    if (!isOpen && !isInputFocused && isHasInput && !activeSegment)
       getValidateInput(
         input,
-        () => {},
+        () => { },
         () => {
           onChange(null);
           onClearInput();
@@ -494,10 +503,10 @@ export const DatePicker = (props: DatePickerProps) => {
           $error={
             isError
               ? {
-                  isError: true,
-                  size: props?.error?.size ?? props.size,
-                  ...props.notValidDate,
-                }
+                isError: true,
+                size: props?.error?.size ?? props.size,
+                ...props.notValidDate,
+              }
               : props.error
           }
           $isOpen={isOpen || !!activeSegment}
@@ -524,16 +533,16 @@ export const DatePicker = (props: DatePickerProps) => {
               if (newChar && /^\d$/.test(newChar)) {
                 handleKeyDown({
                   key: newChar,
-                  preventDefault: () => {},
-                  stopPropagation: () => {},
+                  preventDefault: () => { },
+                  stopPropagation: () => { },
                 } as unknown as KeyboardEvent<HTMLInputElement>);
               }
 
               if (value.length < prevValue.length) {
                 handleKeyDown({
                   key: 'Backspace',
-                  preventDefault: () => {},
-                  stopPropagation: () => {},
+                  preventDefault: () => { },
+                  stopPropagation: () => { },
                 } as unknown as KeyboardEvent<HTMLInputElement>);
               }
 
@@ -753,10 +762,10 @@ export const DatePicker = (props: DatePickerProps) => {
         <ErrorMessage
           {...(isError
             ? {
-                isError: true,
-                size: props?.error?.size ?? props.size,
-                ...props.notValidDate,
-              }
+              isError: true,
+              size: props?.error?.size ?? props.size,
+              ...props.notValidDate,
+            }
             : props.error)}
           size={props?.error?.size ?? props.size}
         />
