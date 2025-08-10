@@ -514,6 +514,8 @@ export const DatePicker = (props: DatePickerProps) => {
           }}
         >
           <input
+            name={props.name}
+            id={props.id}
             ref={refHiddenInput}
             type='tel'
             inputMode='numeric'
