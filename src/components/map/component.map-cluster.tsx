@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
-import { MapContainer, TileLayer } from 'react-leaflet'
-import 'react-leaflet-markercluster/styles'
+import { useEffect, useState } from 'react';
+import { MapContainer, TileLayer } from 'react-leaflet';
+import 'react-leaflet-markercluster/styles';
 
 import {
   CustomZoomControl,
@@ -11,26 +11,26 @@ import {
   MapProps,
   MapWrapper,
   MarkerCluster,
-  UpdateMapSettings
-} from '.'
+  UpdateMapSettings,
+} from '.';
 
-import 'leaflet.markercluster/dist/MarkerCluster.Default.css'
-import 'leaflet.markercluster/dist/MarkerCluster.css'
-import 'leaflet/dist/leaflet.css'
+import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
+import 'leaflet.markercluster/dist/MarkerCluster.css';
+import 'leaflet/dist/leaflet.css';
 
-export const Map = <T extends object>(props: MapProps<T>) => {
-  const [theme, setTheme] = useState(props.theme ?? DEFAULT_MAP_CENTER)
-  const [center, setCenter] = useState(props.center)
+export const MapCluster = <T extends object>(props: MapProps<T>) => {
+  const [theme, setTheme] = useState(props.theme ?? DEFAULT_MAP_CENTER);
+  const [center, setCenter] = useState(props.center);
 
   useEffect(() => {
-    setTheme(props.theme)
-  }, [props.theme])
+    setTheme(props.theme);
+  }, [props.theme]);
 
   useEffect(() => {
     if (props.center) {
-      setCenter(props.center)
+      setCenter(props.center);
     }
-  }, [props.center])
+  }, [props.center]);
 
   return (
     center &&
@@ -51,5 +51,5 @@ export const Map = <T extends object>(props: MapProps<T>) => {
         </MapContainer>
       </MapWrapper>
     )
-  )
-}
+  );
+};

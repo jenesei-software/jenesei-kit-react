@@ -1,8 +1,8 @@
-import React from 'react'
-
 import { addSXProps, addSXStyleProps } from '@local/styles/sx'
 import { IThemePaletteKeys, IThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
+
+import React from 'react'
 
 export type IconItemProps<T extends keyof IconTypeMap> = {
   type: T
@@ -132,7 +132,7 @@ export enum ENUM_ICON_LOADING {
   Balls
 }
 export enum ENUM_ICON_REALEBAIL {
-  Map,
+  MapCluster,
   HomeLikes,
   HomeManagement,
   UserSettings,

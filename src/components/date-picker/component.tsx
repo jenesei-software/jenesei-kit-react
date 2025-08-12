@@ -450,7 +450,6 @@ export const DatePicker = (props: DatePickerProps) => {
       },
       (isHasInput) => {
         if (!isHasInput) {
-          onChange(null);
           setIsError(false);
         }
       }
@@ -515,12 +514,23 @@ export const DatePicker = (props: DatePickerProps) => {
           }}
         >
           <input
+            name={props.name}
+            id={props.id}
             ref={refHiddenInput}
             type='tel'
             inputMode='numeric'
             tabIndex={0}
             disabled={props?.isDisabled || props?.isReadOnly}
-            style={{ position: 'absolute', left: -9999, opacity: 0 }}
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              opacity: 0,
+              border: 'none',
+              background: 'transparent'
+            }}
             onKeyDown={handleKeyDown}
             onChange={(e) => {
               const value = e.target.value;

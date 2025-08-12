@@ -1,12 +1,12 @@
-import leaflet from 'leaflet'
+import leaflet from 'leaflet';
 
 export const createClusterIcon = <T extends object>(
   cluster: leaflet.MarkerCluster,
-  getCustomClusterLabel?: (markers: T[]) => string
+  getCustomClusterLabel?: (markers: T[]) => string,
 ) => {
-  const markersCount = cluster.getChildCount()
-  const markers = cluster.getAllChildMarkers()
-  const customLabel = getCustomClusterLabel?.(markers.map(m => (m.options as { options: T }).options))
+  const markersCount = cluster.getChildCount();
+  const markers = cluster.getAllChildMarkers();
+  const customLabel = getCustomClusterLabel?.(markers.map((m) => (m.options as { options: T }).options));
 
   return new leaflet.DivIcon({
     html: `
@@ -41,9 +41,9 @@ export const createClusterIcon = <T extends object>(
       </div>
     `,
     iconSize: new leaflet.Point(42, 42),
-    iconAnchor: [21, 42]
-  })
-}
+    iconAnchor: [21, 42],
+  });
+};
 
 export const customTextIcon = (text: string) =>
   new leaflet.DivIcon({
@@ -80,8 +80,8 @@ export const customTextIcon = (text: string) =>
     `,
     iconSize: new leaflet.Point(42, 42),
     iconAnchor: [21, 42],
-    popupAnchor: [0, -36]
-  })
+    popupAnchor: [0, -36],
+  });
 
 export const customDefaultIcon = () =>
   new leaflet.DivIcon({
@@ -96,5 +96,5 @@ export const customDefaultIcon = () =>
       `,
     iconSize: new leaflet.Point(42, 42),
     iconAnchor: [21, 42],
-    popupAnchor: [0, -36]
-  })
+    popupAnchor: [0, -36],
+  });

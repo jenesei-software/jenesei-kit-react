@@ -1,54 +1,79 @@
-import { ReactNode } from 'react'
-import { PopupProps } from 'react-leaflet'
-import { Styles } from 'styled-components/dist/types'
+import { ReactNode } from 'react';
+import { PopupProps } from 'react-leaflet';
+import { Styles } from 'styled-components/dist/types';
 
 export interface MapProps<T extends object> {
-  center?: [number, number]
-  zoom?: number
-  theme: MapTheme
-  markers: MarkerProps<T>[]
-  getCustomClusterLabel?: (markers: T[]) => string
-  maxBounds?: [[number, number], [number, number]]
-  maxBoundsViscosity?: number
-  maxZoom?: number
-  minZoom?: number
+  markers: MarkerProps<T>[];
+
+  theme: MapTheme;
+
+  center?: [number, number];
+
+  getCustomClusterLabel?: (markers: T[]) => string;
+
+  maxBounds?: [[number, number], [number, number]];
+
+  maxBoundsViscosity?: number;
+
+  maxZoom?: number;
+
+  minZoom?: number;
+
   style?: {
-    popupWrapper?: Styles<object>
-    popupContent?: Styles<object>
-  }
+    popupWrapper?: Styles<object>;
+    popupContent?: Styles<object>;
+  };
+
+  zoom?: number;
 }
 export interface UpdateMapSettingsProps {
-  maxBounds?: [[number, number], [number, number]]
-  center?: [number, number]
-  zoom?: number
+  center?: [number, number];
+
+  maxBounds?: [[number, number], [number, number]];
+
+  zoom?: number;
 }
 export interface MapDotProps {
-  center?: [number, number]
-  onSelect: (coords: [number, number]) => void
-  coords?: [number, number] | null
-  theme: MapTheme
-  zoom?: number
-  maxBounds?: [[number, number], [number, number]]
-  maxBoundsViscosity?: number
-  maxZoom?: number
-  minZoom?: number
+  onSelect: (coords: [number, number]) => void;
+
+  theme: MapTheme;
+
+  center?: [number, number];
+
+  coords?: [number, number] | null;
+
+  maxBounds?: [[number, number], [number, number]];
+
+  maxBoundsViscosity?: number;
+
+  maxZoom?: number;
+
+  minZoom?: number;
+
+  zoom?: number;
 }
 export interface MapTheme {
-  name: string
-  url: string
-  attribution: string
+  attribution: string;
+
+  name: string;
+
+  url: string;
 }
 
 export type MarkerClusterProps<T extends object> = {
-  markers: MarkerProps<T>[]
-} & Pick<MapProps<T>, 'getCustomClusterLabel'>
+  markers: MarkerProps<T>[];
+} & Pick<MapProps<T>, 'getCustomClusterLabel'>;
 export interface MarkerProps<T extends object> {
+  id: string;
+
+  popupContent: ReactNode;
+
   position: {
-    lat: number
-    lng: number
-  }
-  options?: T
-  id: string
-  popupProps?: PopupProps
-  popupContent: ReactNode
+    lat: number;
+    lng: number;
+  };
+
+  options?: T;
+
+  popupProps?: PopupProps;
 }

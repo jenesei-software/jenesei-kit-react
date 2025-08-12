@@ -1,50 +1,50 @@
-import { useCallback, useEffect, useState } from 'react'
-import { useMap } from 'react-leaflet'
+import { useDeepCompareMemoize } from '@local/hooks/use-deep-compare-memoize';
 
-import { useDeepCompareMemoize } from '@local/hooks/use-deep-compare-memoize'
+import { useCallback, useEffect, useState } from 'react';
+import { useMap } from 'react-leaflet';
 
-import { UpdateMapSettingsProps } from '.'
-import { Button } from '../button'
+import { Button } from '../button';
+import { UpdateMapSettingsProps } from '.';
 
 export function UpdateMapSettings(props: UpdateMapSettingsProps) {
-  const map = useMap()
-  const propsMemo = useDeepCompareMemoize(props)
+  const map = useMap();
+  const propsMemo = useDeepCompareMemoize(props);
 
   useEffect(() => {
     if (propsMemo.center && propsMemo.maxBounds && propsMemo.zoom) {
-      map.setMaxBounds(propsMemo.maxBounds)
-      map.setView(propsMemo.center, propsMemo.zoom)
+      map.setMaxBounds(propsMemo.maxBounds);
+      map.setView(propsMemo.center, propsMemo.zoom);
     } else {
       if (propsMemo.center) {
-        map.setView(propsMemo.center, propsMemo.zoom)
+        map.setView(propsMemo.center, propsMemo.zoom);
       }
     }
-  }, [map, propsMemo])
+  }, [map, propsMemo]);
 
-  return null
+  return null;
 }
 
 export function CustomZoomControl() {
-  const map = useMap()
+  const map = useMap();
 
-  const handleZoomOut = useCallback(() => map.zoomOut(), [map])
-  const handleZoomIn = useCallback(() => map.zoomIn(), [map])
-  const [canZoomIn, setCanZoomIn] = useState(true)
-  const [canZoomOut, setCanZoomOut] = useState(true)
+  const handleZoomOut = useCallback(() => map.zoomOut(), [map]);
+  const handleZoomIn = useCallback(() => map.zoomIn(), [map]);
+  const [canZoomIn, setCanZoomIn] = useState(true);
+  const [canZoomOut, setCanZoomOut] = useState(true);
 
   useEffect(() => {
     const updateZoomStatus = () => {
-      setCanZoomIn(map.getZoom() < map.getMaxZoom())
-      setCanZoomOut(map.getZoom() > map.getMinZoom())
-    }
+      setCanZoomIn(map.getZoom() < map.getMaxZoom());
+      setCanZoomOut(map.getZoom() > map.getMinZoom());
+    };
 
-    map.on('zoomend', updateZoomStatus)
-    updateZoomStatus()
+    map.on('zoomend', updateZoomStatus);
+    updateZoomStatus();
 
     return () => {
-      map.off('zoomend', updateZoomStatus)
-    }
-  }, [map])
+      map.off('zoomend', updateZoomStatus);
+    };
+  }, [map]);
   return (
     <div
       style={{
@@ -56,63 +56,67 @@ export function CustomZoomControl() {
         display: 'flex',
         flexDirection: 'column',
         gap: '10px',
-        pointerEvents: 'none'
-      }}
-      onClick={e => {
-        e.preventDefault()
-        e.stopPropagation()
-      }}
-      // onClickCapture={e => {
-      //   e.preventDefault()
-      //   e.stopPropagation()
-      // }}
-      onMouseDown={e => {
-        e.preventDefault()
-        e.stopPropagation()
+        pointerEvents: 'none',
       }}
     >
       <Button
         isHiddenBorder
-        genre="realebail-product"
+        genre='realebail-product'
         isWidthAsHeight
         isHidden={!canZoomIn}
         isDisabled={!canZoomIn}
-        size="small"
+        size='small'
         icons={[
           {
             name: 'Plus',
             type: 'id',
-            size: 'medium'
-          }
+            size: 'medium',
+          },
         ]}
         sx={{
           default: {
-            pointerEvents: 'all'
-          }
+            pointerEvents: 'all',
+          },
         }}
-        onClick={handleZoomIn}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          handleZoomIn();
+        }}
+        onMouseDown={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+        }}
       />
       <Button
         isHiddenBorder
-        genre="realebail-product"
+        genre='realebail-product'
         isHidden={!canZoomOut}
         isDisabled={!canZoomOut}
         isWidthAsHeight
-        size="small"
+        size='small'
         icons={[
           {
             name: 'Minus',
             type: 'id',
-            size: 'medium'
-          }
+            size: 'medium',
+          },
         ]}
         sx={{
           default: {
-            pointerEvents: 'all'
-          }
+            pointerEvents: 'all',
+          },
         }}
-        onClick={handleZoomOut}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          handleZoomOut();
+        }}
+        onMouseDown={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+        }}
       />
     </div>
-  )
+  );
 }
