@@ -275,6 +275,7 @@
   },
   "devDependencies": {
     "@fontsource/inter": "^5.1.0",
+    "@fontsource/manrope": "^5.2.6",
     "@fontsource/roboto": "^5.1.0",
     "@fontsource/roboto-mono": "^5.2.6",
     "@fontsource/work-sans": "^5.2.5",

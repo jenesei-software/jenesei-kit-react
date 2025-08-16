@@ -44,7 +44,7 @@ export const Ripple: FC<RippleProps> = props => {
     setRippleArray([])
   })
 
-  const onMouseDown = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
+  const onMouseUp = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
     if (!event.isTrusted) return
     const rippleContainer = event.currentTarget.getBoundingClientRect()
     const size = rippleContainer.width > rippleContainer.height ? rippleContainer.width : rippleContainer.height
@@ -59,7 +59,7 @@ export const Ripple: FC<RippleProps> = props => {
 
   if (props.isDisabled || props.isHidden) return null
   return (
-    <RippleContainer id={DEFAULT_RIPPLE_ID} $duration={duration} $color={color} onMouseDown={onMouseDown}>
+    <RippleContainer id={DEFAULT_RIPPLE_ID} $duration={duration} $color={color} onMouseUp={onMouseUp}>
       {rippleArray.length > 0 &&
         rippleArray.map((ripple, index) => {
           return (

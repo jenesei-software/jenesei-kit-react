@@ -1,7 +1,7 @@
-import { AnimatePresence } from 'framer-motion'
-import { FC, createContext, memo, useCallback, useMemo, useState } from 'react'
-
 import { Outside } from '@local/areas/outside'
+
+import { AnimatePresence } from 'framer-motion'
+import { createContext, FC, memo, useCallback, useMemo, useState } from 'react'
 
 import {
   DEFAULT_PROVIDER_DIALOG_DURATION_ELEMENT,

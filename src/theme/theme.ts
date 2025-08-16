@@ -27,7 +27,9 @@ export const JeneseiPalette: Record<IThemePaletteKeys, string> = {
   black40: '#00000066', // rgba(0 0 0 / 0.4)
   black10: '#0000001A', // rgba(0 0 0 / 0.1)
   black05: '#0000000D', // rgba(0 0 0 / 0.05)
+  black04: '#0000000A', // rgba(0 0 0 / 0.04)
   blackHelena: '#181818',
+  blackJanice: '#373740',
   grayJanice: '#f2f2f7',
   grayKaren: '#e5e5ea',
   grayMonica: '#c7c7cc',
@@ -37,6 +39,9 @@ export const JeneseiPalette: Record<IThemePaletteKeys, string> = {
   grayStassie: '#8D8D8F',
   grayAdriana: '#90909033',
   grayBarbara: '#EBEEEA',
+  grayStephanie: '#6c7a91',
+  grayTina: '#182433',
+  grayFrances: '#dce1e7',
   whiteStandard: '#ffffff',
   whiteJanice: '#F7FAFF',
   greenGoogle: '#34a853',
@@ -65,10 +70,57 @@ export const JeneseiPalette: Record<IThemePaletteKeys, string> = {
   blueBr: '#0975a6',
   blueKaren: '#2A77EE',
   blueMonica: '#174899',
+  violetStephanie: '#a75afa',
+  violetJanice: '#be83fd',
   amnezia: '#222224'
 }
 
 const ThemeGenre: IThemeGenre = {
+  'bustmarket-gray': {
+    background: {
+      rest: JeneseiPalette.transparent,
+      hover: JeneseiPalette.black04
+    },
+    color: {
+      rest: JeneseiPalette.grayStephanie,
+      hover: JeneseiPalette.grayTina,
+      placeholder: JeneseiPalette.grayTina
+    },
+    border: {
+      rest: JeneseiPalette.transparent,
+      hover: JeneseiPalette.transparent
+    }
+  },
+  'bustmarket-violet': {
+    background: {
+      rest: JeneseiPalette.violetStephanie,
+      hover: JeneseiPalette.violetJanice
+    },
+    color: {
+      rest: JeneseiPalette.whiteStandard,
+      hover: JeneseiPalette.whiteStandard,
+      placeholder: JeneseiPalette.whiteStandard
+    },
+    border: {
+      rest: JeneseiPalette.transparent,
+      hover: JeneseiPalette.transparent
+    }
+  },
+  'bustmarket-white-violet': {
+    background: {
+      rest: JeneseiPalette.whiteStandard,
+      hover: JeneseiPalette.violetJanice
+    },
+    color: {
+      rest: JeneseiPalette.blackJanice,
+      hover: JeneseiPalette.whiteStandard,
+      placeholder: JeneseiPalette.whiteStandard
+    },
+    border: {
+      rest: JeneseiPalette.grayFrances,
+      hover: JeneseiPalette.grayFrances
+    }
+  },
   'realebail-white': {
     background: {
       rest: JeneseiPalette.whiteJanice,
@@ -813,6 +865,7 @@ export const ThemeLight: ITheme = {
     button: '0px 0px 4px 0px rgba(0, 0, 0, 0.25) inset, 0px 4px 4px 0px rgba(0, 0, 0, 0.25)'
   },
   palette: JeneseiPalette,
+  background: JeneseiPalette,
   states: {
     focus: JeneseiPalette.black60,
     danger: JeneseiPalette.redGoogle

@@ -32,6 +32,10 @@ import '@fontsource/work-sans/400.css'
 import '@fontsource/work-sans/500.css'
 import '@fontsource/work-sans/700.css'
 import '@fontsource/work-sans/900.css'
+import '@fontsource/manrope/300.css'
+import '@fontsource/manrope/400.css'
+import '@fontsource/manrope/500.css'
+import '@fontsource/manrope/700.css'
 
 const preview: Preview = {
   decorators: [
@@ -61,7 +65,6 @@ const preview: Preview = {
 
 const Layout = (props: PropsWithChildren) => {
   const { theme } = useBrowserTheme()
-  console.log('Current theme:', theme)
   return (
     <ThemeProvider theme={theme === 'light' ? ThemeLight : ThemeBlack}>
       <ProviderScreenWidth>
