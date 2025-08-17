@@ -395,6 +395,21 @@ const ThemeImageSelect: IThemeGenreImageSelect = {
   },
 };
 const ThemeGenreInput: IThemeGenreInput = {
+  'bustmarket-gray': {
+    background: {
+      rest: JeneseiPalette.whiteStandard,
+      hover: JeneseiPalette.whiteStandard,
+    },
+    color: {
+      rest: JeneseiPalette.grayTina,
+      hover: JeneseiPalette.black80,
+      placeholder: JeneseiPalette.black40,
+    },
+    border: {
+      rest: JeneseiPalette.grayFrances,
+      hover: JeneseiPalette.grayBarbara,
+    },
+  },
   'realebail-white': {
     background: {
       rest: JeneseiPalette.whiteStandard,

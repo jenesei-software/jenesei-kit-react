@@ -21,6 +21,8 @@ type CommonTextAreaProps = addErrorProps &
     minLength?: number;
 
     isDisabled?: boolean;
+    isDisabledOutline?: boolean;
+    isOutlineBoxShadow?: boolean;
     isResize?: boolean;
     isLoading?: boolean;
     isReadOnly?: boolean;
@@ -83,7 +85,10 @@ export type StyledTextAreaProps = AddDollarSign<
 >;
 
 export type TextAreaWrapperProps = AddDollarSign<
-  Pick<TextAreaProps, 'isDisabled' | 'isInputEffect' | 'sx' | 'size' | 'genre' | 'isReadOnly'> & {
+  Pick<
+    TextAreaProps,
+    'isDisabled' | 'isInputEffect' | 'sx' | 'size' | 'genre' | 'isReadOnly' | 'isDisabledOutline' | 'isOutlineBoxShadow'
+  > & {
     lineHeight: number;
   }
 >;

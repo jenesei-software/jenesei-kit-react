@@ -41,6 +41,10 @@ type CommonInputProps = addErrorProps &
     isNiceNumber?: boolean;
 
     isDisabled?: boolean;
+    
+    isDisabledOutline?: boolean;
+
+    isOutlineBoxShadow?: boolean;
 
     isLoading?: boolean;
 
@@ -73,19 +77,22 @@ type CommonInputProps = addErrorProps &
     inputMode?: 'text' | 'none' | 'tel' | 'url' | 'email' | 'numeric' | 'decimal' | 'search';
 
     maxLength?: number;
+
     minLength?: number;
   };
 
 // Контролируемый вариант
 type ControlledValue = {
   value: string | number | null | undefined;
+
   defaultValue?: never;
 };
 
 // Неконтролируемый вариант
 type UncontrolledValue = {
-  value?: never;
   defaultValue: string | number | null | undefined;
+
+  value?: never;
 };
 
 type BaseInputProps = CommonInputProps & (ControlledValue | UncontrolledValue);
@@ -149,6 +156,7 @@ export type StyledInputProps = AddDollarSign<
     | 'isLoading'
     | 'isInputEffect'
     | 'isDisabled'
+    | 'isDisabledOutline'
     | 'postfixChildren'
     | 'prefixChildren'
     | 'isBold'
@@ -156,6 +164,7 @@ export type StyledInputProps = AddDollarSign<
     | 'isNotShowHoverStyle'
     | 'sx'
     | 'isCenter'
+    | 'isOutlineBoxShadow'
   >
 >;
 

@@ -75,25 +75,50 @@ export const addColorTransition = css`
     border-color ${(props) => props.theme.transition.default};
 `;
 
-export const addOutline = css`
-  outline: 2px solid transparent;
-  outline-offset: 1px;
-  &:focus-visible {
-    outline: 2px solid ${(props) => props.theme.states.focus};
-  }
-`;
-export const addOutlineChildren = css<{ $isReadOnly?: boolean; $isDisabled?: boolean }>`
-  outline: 2px solid transparent;
-  outline-offset: 1px;
+export const addOutline = css<{ $isReadOnly?: boolean; $isDisabledOutline?: boolean; $isOutlineBoxShadow?: boolean }>`
   ${(props) =>
-    (!props.$isReadOnly && !props.$isDisabled) &&
+    !props.$isReadOnly && !props.$isDisabledOutline && !props.$isOutlineBoxShadow &&
     css`
+      outline: 2px solid transparent;
+      outline-offset: 1px;
+      &:focus-visible {
+      outline: 2px solid ${(props) => props.theme.states.focus};
+      }
+  `};
+    ${(props) =>
+      !props.$isReadOnly && !props.$isDisabledOutline &&
+      props.$isOutlineBoxShadow &&
+      css`
+      outline: 1px solid transparent;
+      outline-offset: 0px;
+      &:focus-visible {
+        outline: 1px solid #83b7e8;
+        box-shadow: 0 1px 1px rgba(24,36,51, .06), 0 0 0 .25rem rgba(6,111,209, .25);
+      }
+  `};
+`;
+
+export const addOutlineChildren = css<{ $isReadOnly?: boolean; $isDisabledOutline?: boolean; $isOutlineBoxShadow?: boolean }>`
+  ${(props) =>
+    (!props.$isReadOnly && !props.$isDisabledOutline && !props.$isOutlineBoxShadow) &&
+    css`
+      outline: 2px solid transparent;
+      outline-offset: 1px;
       &:has(:focus-visible) {
         outline: 2px solid ${(props) => props.theme.states.focus};
         outline-offset: 1px;
       }
+    `};
+      ${(props) =>
+        (!props.$isReadOnly && !props.$isDisabledOutline && props.$isOutlineBoxShadow) &&
+        css`
+      outline: 1px solid transparent;
+      outline-offset: 0px;
+      &:has(:focus-visible) {
+       outline: 1px solid #83b7e8;
+        box-shadow: 0 1px 1px rgba(24,36,51, .06), 0 0 0 .25rem rgba(6,111,209, .25);
+      }
     `}
- 
 `;
 export const addAlwaysOutline = css<{ $isShowAlwaysOutline?: boolean }>`
   ${(props) =>

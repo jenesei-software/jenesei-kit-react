@@ -54,6 +54,8 @@ export const TextArea = (props: TextAreaProps) => {
       <TextAreaWrapper
         $isInputEffect={props.isInputEffect}
         $isDisabled={props.isDisabled}
+        $isDisabledOutline={props.isDisabledOutline}
+        $isOutlineBoxShadow={props.isOutlineBoxShadow}
         $sx={props.sx}
         $genre={props.genre}
         $size={props.size}

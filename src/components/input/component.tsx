@@ -63,6 +63,8 @@ export const Input = (props: InputProps) => {
             $size={props.size}
             $isBold={props.isBold}
             $isDisabled={props.isDisabled}
+            $isDisabledOutline={props.isDisabled ?? props.isDisabledOutline}
+            $isOutlineBoxShadow={props.isOutlineBoxShadow}
             $isCenter={props.isCenter}
             disabled={props.isDisabled}
             readOnly={props.isReadOnly}
@@ -95,6 +97,8 @@ export const Input = (props: InputProps) => {
             $size={props.size}
             $isBold={props.isBold}
             $isDisabled={props.isDisabled}
+            $isDisabledOutline={props.isDisabled ?? props.isDisabledOutline}
+            $isOutlineBoxShadow={props.isOutlineBoxShadow}
             $isCenter={props.isCenter}
             disabled={props.isDisabled}
             readOnly={props.isReadOnly}
@@ -131,6 +135,8 @@ export const Input = (props: InputProps) => {
             $size={props.size}
             $isBold={props.isBold}
             $isDisabled={props.isDisabled}
+            $isDisabledOutline={props.isDisabled ?? props.isDisabledOutline}
+            $isOutlineBoxShadow={props.isOutlineBoxShadow}
             $isCenter={props.isCenter}
             disabled={props.isDisabled}
             readOnly={props.isReadOnly}
