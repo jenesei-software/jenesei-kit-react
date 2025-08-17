@@ -1,56 +1,50 @@
-import { Button, ButtonLink } from '@local/components/button';
+import { Button } from '@local/components/button';
+import { Stack } from '@local/components/stack';
 
 import { Link } from '@tanstack/react-router';
 import { motion } from 'framer-motion';
 import { FC } from 'react';
+import styled from 'styled-components';
 
 import { SharedProps } from '.';
 
 export const Shared: FC<SharedProps> = (props) => {
   return (
-    <nav style={nav}>
+    <Stack sx={props.sx}>
       <ul style={tabsContainer}>
         {props.option.map((item) => (
-          <motion.li
-            key={item.id}
-            initial={false}
-            animate={{
-              backgroundColor: item.id === props.value ? '#eee' : '#eee0',
-            }}
-            style={tab}
-            onClick={() => props.onSelected?.(item.id)}
-          >
-            {props.isLink & ('link' in item) ? (
+          <motion.li key={item.id} initial={false} style={tab} onClick={() => props.onSelected?.(item.id)}>
+            {(props.isLink ?? false) && 'link' in item ? (
               <Link {...item.link}>
-                <Button {...item} />
+                <Button
+                  {...(item.id === props.value
+                    ? item.selected
+                      ? { ...item.default, ...item.selected }
+                      : item.default
+                    : item.default)}
+                />
               </Link>
             ) : (
-              <Button {...item} />
+              <Button
+                {...(item.id === props.value
+                  ? item.selected
+                    ? { ...item.default, ...item.selected }
+                    : item.default
+                  : item.default)}
+              />
             )}
-            {item.id === props.value ? <motion.div style={underline} layoutId='underline' id='underline' /> : null}
+            {item.id === props.value ? <Underline layoutId='underline' id='underline' /> : null}
           </motion.li>
         ))}
       </ul>
-    </nav>
+    </Stack>
   );
-};
-
-const nav: React.CSSProperties = {
-  background: '#fdfdfd',
-  padding: '5px 5px 0',
-  borderRadius: '10px',
-  borderBottomLeftRadius: 0,
-  borderBottomRightRadius: 0,
-  borderBottom: '1px solid #eeeeee',
-  height: 44,
 };
 
 const tabsStyles: React.CSSProperties = {
   listStyle: 'none',
   padding: 0,
   margin: 0,
-  fontWeight: 500,
-  fontSize: 14,
 };
 
 const tabsContainer: React.CSSProperties = {
@@ -61,46 +55,16 @@ const tabsContainer: React.CSSProperties = {
 
 const tab: React.CSSProperties = {
   ...tabsStyles,
-  borderRadius: 5,
-  borderBottomLeftRadius: 0,
-  borderBottomRightRadius: 0,
-  width: '100%',
-  padding: '10px 15px',
   position: 'relative',
-  background: 'white',
-  cursor: 'pointer',
-  height: 24,
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  flex: 1,
-  minWidth: 0,
-  userSelect: 'none',
-  color: '#0f1115',
+  // display: 'contents',
 };
 
-const underline: React.CSSProperties = {
-  position: 'absolute',
-  bottom: -2,
-  left: 0,
-  right: 0,
-  height: 2,
-  background: 'var(--accent)',
-};
-
-/**
- * ==============   Data   ================
- */
-
-const allIngredients = [
-  { icon: '🍅', label: 'Tomato' },
-  { icon: '🥬', label: 'Lettuce' },
-  { icon: '🧀', label: 'Cheese' },
-  { icon: '🥕', label: 'Carrot' },
-  { icon: '🍌', label: 'Banana' },
-  { icon: '🫐', label: 'Blueberries' },
-  { icon: '🥂', label: 'Champers?' },
-];
-
-const [tomato, lettuce, cheese] = allIngredients;
-const tabs = [tomato, lettuce, cheese];
+const Underline = styled(motion.div)`
+  position: absolute;
+  width: 100%;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  background: ${(props) => props.theme.palette.violetJanice};
+`;

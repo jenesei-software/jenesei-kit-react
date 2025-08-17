@@ -172,6 +172,7 @@ export type IThemeGenreName =
   | 'realebail-product'
   | 'realebail-gray'
   | 'realebail-white'
+  | 'bustmarket-gray-violet'
   | 'bustmarket-gray'
   | 'bustmarket-violet'
   | 'bustmarket-white-violet';
@@ -193,6 +194,7 @@ export type IThemeGenre = Record<
     | 'realebail-gray'
     | 'realebail-white'
     | 'bustmarket-gray'
+    | 'bustmarket-gray-violet'
     | 'bustmarket-violet'
     | 'bustmarket-white-violet'
   >,

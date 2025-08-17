@@ -1,19 +1,20 @@
 import { ButtonProps } from '@local/components/button';
+import { addSXProps } from '@local/index';
 
 import { LinkProps } from '@tanstack/react-router';
 
-type BaseSharedProps = {
+type BaseSharedProps = addSXProps & {
   value?: string;
   onSelected?: (tab: string) => void;
 };
 type TabsLink = {
   isLink?: true;
-  option: (ButtonProps & { id: string; link: LinkProps })[];
+  option: { default: ButtonProps; selected?: Partial<ButtonProps>; id: string; link: LinkProps }[];
 };
 
 type TabsButton = {
-  isLink?: never;
-  option: (ButtonProps & { id: string })[];
+  isLink?: never | false;
+  option: { default: ButtonProps; selected?: Partial<ButtonProps>; id: string }[];
 };
 
 export type SharedProps = BaseSharedProps & (TabsLink | TabsButton);

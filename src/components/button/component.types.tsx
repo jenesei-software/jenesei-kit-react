@@ -27,6 +27,7 @@ type ButtonPropsDefault = PropsWithChildren & {
     | (Omit<IconItemProps<'loading'>, 'size'> & { isHidden?: boolean; size?: IconItemProps<'loading'>['size'] })
     | (Omit<IconItemProps<'realebail'>, 'size'> & { isHidden?: boolean; size?: IconItemProps<'realebail'>['size'] })
     | (Omit<IconItemProps<'logo'>, 'size'> & { isHidden?: boolean; size?: IconItemProps<'logo'>['size'] })
+    | (Omit<IconItemProps<'bustmarket'>, 'size'> & { isHidden?: boolean; size?: IconItemProps<'logo'>['size'] })
   )[];
 
   isDisabled?: boolean;

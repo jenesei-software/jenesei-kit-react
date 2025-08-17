@@ -1,26 +1,26 @@
-import { addSXProps, addSXStyleProps } from '@local/styles/sx'
-import { IThemePaletteKeys, IThemeSize } from '@local/theme'
-import { AddDollarSign } from '@local/types'
+import { addSXProps, addSXStyleProps } from '@local/styles/sx';
+import { IThemePaletteKeys, IThemeSize } from '@local/theme';
+import { AddDollarSign } from '@local/types';
 
-import React from 'react'
+import React from 'react';
 
 export type IconItemProps<T extends keyof IconTypeMap> = {
-  type: T
-  name: IconTypeMap[T]
-  className?: string
-  onClick?: (event: React.MouseEvent<SVGSVGElement>) => void
-  size: IThemeSize | '100%'
-  primaryColor?: IThemePaletteKeys
-  secondColor?: IThemePaletteKeys
-  turn?: number
-  order?: number
-  tabIndex?: number
-} & addSXProps
+  type: T;
+  name: IconTypeMap[T];
+  className?: string;
+  onClick?: (event: React.MouseEvent<SVGSVGElement>) => void;
+  size: IThemeSize | '100%';
+  primaryColor?: IThemePaletteKeys;
+  secondColor?: IThemePaletteKeys;
+  turn?: number;
+  order?: number;
+  tabIndex?: number;
+} & addSXProps;
 
 export type StyledIconIdItemProps = AddDollarSign<
   Pick<IconItemProps<'id'>, 'size' | 'turn' | 'order'> & { color?: IThemePaletteKeys }
 > &
-  addSXStyleProps
+  addSXStyleProps;
 
 export enum ENUM_ICON_ID {
   Close,
@@ -117,40 +117,51 @@ export enum ENUM_ICON_ID {
   Lock,
   Unlock,
   Resources,
-  Language
+  Language,
 }
 export enum ENUM_ICON_CHECKBOX {
   Radio,
   Square,
   Arrow,
-  Heart
+  Heart,
 }
 export enum ENUM_ICON_LOADING {
   Line,
   Circle,
   Blocks,
-  Balls
+  Balls,
 }
 export enum ENUM_ICON_REALEBAIL {
   MapCluster,
   HomeLikes,
   HomeManagement,
   UserSettings,
-  User
+  User,
 }
 export enum ENUM_ICON_LOGO {
-  Jenesei
+  Jenesei,
+  BustMarket
 }
-export type TIconIdNameString = keyof typeof ENUM_ICON_ID
-export type TIconCheckboxNameString = keyof typeof ENUM_ICON_CHECKBOX
-export type TIconLoadingNameString = keyof typeof ENUM_ICON_LOADING
-export type TIconRealEbailNameString = keyof typeof ENUM_ICON_REALEBAIL
-export type TIconLogoNameString = keyof typeof ENUM_ICON_LOGO
+export enum ENUM_ICON_BUSTMARKET {
+  Card,
+  Delivery,
+  Heart,
+  Reviews,
+  Search,
+  Menu
+}
+export type TIconIdNameString = keyof typeof ENUM_ICON_ID;
+export type TIconCheckboxNameString = keyof typeof ENUM_ICON_CHECKBOX;
+export type TIconLoadingNameString = keyof typeof ENUM_ICON_LOADING;
+export type TIconRealEbailNameString = keyof typeof ENUM_ICON_REALEBAIL;
+export type TIconLogoNameString = keyof typeof ENUM_ICON_LOGO;
+export type TIconBustMarketNameString = keyof typeof ENUM_ICON_BUSTMARKET;
 
 export type IconTypeMap = {
-  id: TIconIdNameString
-  checkbox: TIconCheckboxNameString
-  loading: TIconLoadingNameString
-  realebail: TIconRealEbailNameString
-  logo: TIconLogoNameString
-}
+  id: TIconIdNameString;
+  checkbox: TIconCheckboxNameString;
+  loading: TIconLoadingNameString;
+  realebail: TIconRealEbailNameString;
+  logo: TIconLogoNameString;
+  bustmarket: TIconBustMarketNameString;
+};

@@ -17,6 +17,8 @@ export const Gray: Story = {
     children: 'Gray',
     type: 'button',
     genre: 'bustmarket-gray',
+    isWhileTapEffect: true,
+    isDisabledRipple: true,
     size: 'medium',
     sx: {
       default: {
@@ -57,6 +59,26 @@ export const WhiteViolet: Story = {
     children: 'White Violet',
     type: 'button',
     genre: 'bustmarket-white-violet',
+    size: 'medium',
+    sx: {
+      default: {
+        width: 'auto'
+      }
+    },
+    sxTypography: {
+      default: {
+        family: 'Manrope',
+        weight: 400,
+        size: 14,
+      }
+    }
+  }
+}
+export const GrayViolet: Story = {
+  args: {
+    children: 'Gray Violet',
+    type: 'button',
+    genre: 'bustmarket-gray-violet',
     size: 'medium',
     sx: {
       default: {
