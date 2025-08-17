@@ -33,8 +33,12 @@ const InputWrapperAll: FC = () => {
           Variety - standard
         </Typography>
         <InputComponent
-          placeholder='Standard'
-          genre='blackBorder'
+          isOutlineBoxShadow
+          font={{
+            family: 'Manrope',
+          }}
+          placeholder='Дмитрий Петров'
+          genre='bustmarket-gray'
           size='medium'
           value={valueStandard}
           variety='standard'

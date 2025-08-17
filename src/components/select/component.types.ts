@@ -1,3 +1,4 @@
+import { addFontProps } from '@local/styles/add';
 import { addErrorProps } from '@local/styles/error';
 import { addSXProps } from '@local/styles/sx';
 import { IThemeGenreSelect, IThemeSize } from '@local/theme';
@@ -23,6 +24,7 @@ export interface ISelectItem {
 }
 
 export type SelectProps<T extends ISelectItem> = addErrorProps &
+  addFontProps &
   addSXProps & {
     id?: string;
 
@@ -130,7 +132,7 @@ export type SelectWrapperProps = AddDollarSign<
 >;
 
 export type DropdownListOptionProps = AddDollarSign<
-  Pick<SelectProps<ISelectItem>, 'genre' | 'size' | 'isCenter' | 'isNotShowHoverStyle' | 'isBold'> & {
+  Pick<SelectProps<ISelectItem>, 'genre' | 'size' | 'isCenter' | 'isNotShowHoverStyle' | 'isBold' | 'font'> & {
     item?: ISelectItem;
     isChecked?: boolean;
     isShowScroll?: boolean;
@@ -145,7 +147,7 @@ export type DropdownListOptionIconProps = AddDollarSign<
 
 export type ContainerDropdownListOptionProps<T extends ISelectItem> = Pick<
   SelectProps<T>,
-  'genre' | 'size' | 'isCenter' | 'isNotShowHoverStyle' | 'isBold' | 'isShowDropdownOptionIcon'
+  'genre' | 'size' | 'isCenter' | 'isNotShowHoverStyle' | 'isBold' | 'isShowDropdownOptionIcon' | 'font'
 > & {
   item: T;
 

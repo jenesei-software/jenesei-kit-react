@@ -1,6 +1,5 @@
 import { Icon } from '@local/components/icon';
-import { getFontSizeStyles } from '@local/components/typography';
-import { addRemoveOutline } from '@local/styles/add';
+import { addFont, addRemoveOutline } from '@local/styles/add';
 import { addError } from '@local/styles/error';
 import { addSX } from '@local/styles/sx';
 import { KEY_SIZE_DATA } from '@local/theme/theme';
@@ -166,7 +165,6 @@ const addDropdownListOptionSize = css<DropdownListOptionProps>`
   }
 `;
 export const DropdownListOption = styled.li<DropdownListOptionProps>`
-  ${(props) => getFontSizeStyles(16, props.$isBold ? 500 : 400, props.theme.font.family, props.theme.font.lineHeight)};
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -175,6 +173,7 @@ export const DropdownListOption = styled.li<DropdownListOptionProps>`
   user-select: none;
   flex-shrink: 0;
   opacity: ${(props) => (props.$item?.isDisabled ? 0.5 : 1)};
+  ${addFont};
   ${addDropdownListOptionGenre};
   ${addDropdownListOptionSize};
   ${addRemoveOutline};

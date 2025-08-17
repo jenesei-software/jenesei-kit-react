@@ -1,10 +1,9 @@
 import { addInputIsInputEffect } from '@local/components/input';
-import { getFontSizeStyles } from '@local/components/typography';
 import {
   addDisabled,
+  addFont,
   addNiceNumber,
   addOutline,
-  addOutlineChildren,
   addRemoveOutline,
   addRemoveScrollbar,
   addTransition,
@@ -63,7 +62,6 @@ export const addDateDropdownDaySize = css<DateDropdownDayProps>`
     props.$size &&
     css`
       border-radius: ${KEY_SIZE_DATA[props.$size].radius}px;
-      ${(params) => getFontSizeStyles(12, 700, params.theme.font.family)};
     `};
   position: relative;
   overflow: hidden;
@@ -126,8 +124,8 @@ export const addDateDropdownDaySize = css<DateDropdownDayProps>`
       css`
       opacity: 0.5;
     `}
-  ${(params) => getFontSizeStyles(12, 700, params.theme.font.family)};
-
+    
+  ${addFont};
   ${addOutline};
 `;
 
@@ -142,9 +140,7 @@ export const DateDropdownDayOfWeek = styled.button<DateDropdownDayProps>`
 
 /****************************************** Genre *************************************************/
 const addDateInputGenre = css<DateInputProps>`
-      background-color: ${(props) => (props.$isActive ? props.theme.palette.black10 : 'transparent')};
-
-        ${(props) => getFontSizeStyles(16, props.$isBold ? 500 : 400, props.theme.font.family, props.theme.font.lineHeight)};
+  background-color: ${(props) => (props.$isActive ? props.theme.palette.black10 : 'transparent')};
   ${(props) =>
     props.$isHaveValue
       ? css`
@@ -154,8 +150,8 @@ const addDateInputGenre = css<DateInputProps>`
         }
     `
       : css`
-                color: ${props.theme.colors.input[props.$genre].color.placeholder};
-  `};
+          color: ${props.theme.colors.input[props.$genre].color.placeholder};
+        `};
 `;
 const addDateInputSize = css<DateInputProps>`
   border-radius: 4px;
@@ -170,6 +166,7 @@ export const DateInput = styled.div<DateInputProps>`
   background: transparent;
   margin: 0px !important;
   white-space: nowrap;
+  ${addFont};
   ${addDateInputSize};
   ${addDateInputGenre};
   ${addRemoveOutline};
@@ -188,7 +185,6 @@ const addDateInputWrapperGenre = css<DateInputProps>`
       border-color: ${props.theme.colors.input[props.$genre].border.hover};
       color: ${props.theme.colors.input[props.$genre].color.hover};
     }
-    /* ${addOutlineChildren}; */
     ${
       props.$isOpen &&
       css`

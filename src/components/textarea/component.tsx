@@ -54,6 +54,8 @@ export const TextArea = (props: TextAreaProps) => {
       <TextAreaWrapper
         $isInputEffect={props.isInputEffect}
         $isDisabled={props.isDisabled}
+        $isDisabledOutline={props.isDisabled ?? props.isDisabledOutline}
+        $isOutlineBoxShadow={props.isOutlineBoxShadow}
         $sx={props.sx}
         $genre={props.genre}
         $size={props.size}
@@ -65,6 +67,12 @@ export const TextArea = (props: TextAreaProps) => {
         <StyledTextArea
           tabIndex={0}
           ref={ref}
+          $font={{
+            size: props.font?.size ?? 16,
+            weight: props.font?.weight ?? (props.isBold ? 500 : 400),
+            family: props.font?.family ?? theme.font.family,
+            height: props.font?.height ?? `${lineHeight}px`,
+          }}
           $lineHeight={lineHeight}
           $isResize={props.isResize}
           $error={props.error}
@@ -96,7 +104,17 @@ export const TextArea = (props: TextAreaProps) => {
           }}
         />
       </TextAreaWrapper>
-      {props?.error ? <ErrorMessage {...props.error} size={props?.error.size ?? props.size} /> : null}
+      {props?.error ? (
+        <ErrorMessage
+          {...props.error}
+          size={props?.error.size ?? props.size}
+          font={{
+            size: 12,
+            weight: 400,
+            family: props.font?.family ?? theme.font.family,
+          }}
+        />
+      ) : null}
     </>
   );
 };

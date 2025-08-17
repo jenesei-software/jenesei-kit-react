@@ -1,3 +1,4 @@
+import { addFontProps, addOutlineProps, addOutlinePropsDollar } from '@local/styles/add';
 import { addErrorProps } from '@local/styles/error';
 import { addSXProps } from '@local/styles/sx';
 import { IThemeGenreInput, IThemeSize } from '@local/theme';
@@ -15,6 +16,8 @@ import {
 import { NumberFormatValues, NumericFormatProps, PatternFormatProps } from 'react-number-format';
 
 type CommonInputProps = addErrorProps &
+  addFontProps &
+  addOutlineProps &
   addSXProps & {
     ref?: Ref<HTMLInputElement | null>;
 
@@ -44,8 +47,6 @@ type CommonInputProps = addErrorProps &
 
     isLoading?: boolean;
 
-    isReadOnly?: boolean;
-
     isInputEffect?: boolean;
 
     isRequired?: boolean;
@@ -73,19 +74,22 @@ type CommonInputProps = addErrorProps &
     inputMode?: 'text' | 'none' | 'tel' | 'url' | 'email' | 'numeric' | 'decimal' | 'search';
 
     maxLength?: number;
+
     minLength?: number;
   };
 
 // Контролируемый вариант
 type ControlledValue = {
   value: string | number | null | undefined;
+
   defaultValue?: never;
 };
 
 // Неконтролируемый вариант
 type UncontrolledValue = {
-  value?: never;
   defaultValue: string | number | null | undefined;
+
+  value?: never;
 };
 
 type BaseInputProps = CommonInputProps & (ControlledValue | UncontrolledValue);
@@ -156,8 +160,10 @@ export type StyledInputProps = AddDollarSign<
     | 'isNotShowHoverStyle'
     | 'sx'
     | 'isCenter'
+    | 'font'
   >
->;
+> &
+  addOutlinePropsDollar;
 
 export type StyledInputWrapperProps = AddDollarSign<
   Pick<InputProps, 'isDisabled' | 'isInputEffect' | 'sx' | 'size' | 'isWidthAsHeight'>

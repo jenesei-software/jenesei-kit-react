@@ -1,3 +1,4 @@
+import { addFontProps } from '@local/styles/add';
 import { addErrorStylesProps } from '@local/styles/error';
 import { addSXProps, addSXStyleProps } from '@local/styles/sx';
 import { IThemeSize } from '@local/theme';
@@ -21,10 +22,12 @@ export type PopoverProps = PropsWithChildren & {
   size?: IThemeSize;
   genre?: TButtonGenre;
 } & addSXProps &
+  addFontProps &
   addSXTypographyProps;
 
 export type StyledPopoverProps = AddDollarSign<
-  Pick<PopoverProps, 'maxWidth' | 'maxHeight' | 'size' | 'isShowAlwaysOutline'> & Required<Pick<PopoverProps, 'genre'>>
+  Pick<PopoverProps, 'maxWidth' | 'maxHeight' | 'size' | 'isShowAlwaysOutline'> &
+    Required<Pick<PopoverProps, 'genre' | 'font'>>
 > &
   addSXStyleProps &
   addErrorStylesProps &

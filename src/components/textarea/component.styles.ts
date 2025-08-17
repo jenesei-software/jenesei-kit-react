@@ -1,5 +1,10 @@
-import { getFontSizeStyles } from '@local/components/typography';
-import { addDisabled, addOutlineChildren, addRemoveOutline, addTransitionWithoutSize } from '@local/styles/add';
+import {
+  addDisabled,
+  addFont,
+  addOutlineChildren,
+  addRemoveOutline,
+  addTransitionWithoutSize,
+} from '@local/styles/add';
 import { addError } from '@local/styles/error';
 import { addSX } from '@local/styles/sx';
 import { KEY_SIZE_DATA } from '@local/theme';
@@ -70,12 +75,12 @@ export const TextAreaWrapper = styled.div<TextAreaWrapperProps>`
 const addTextAreaPlaceholder = css<StyledTextAreaProps>`
   &::placeholder,
   &::-webkit-input-placeholder {
-    ${(props) => getFontSizeStyles(16, props.$isBold ? 500 : 400, props.theme.font.family, props.theme.font.lineHeight)};
+    ${addFont};
     color: ${(props) => props.theme.colors.input[props.$genre].color.placeholder};
     opacity: 1;
   }
   &:-ms-input-placeholder {
-    ${(props) => getFontSizeStyles(16, props.$isBold ? 500 : 400, props.theme.font.family, props.theme.font.lineHeight)};
+    ${addFont};
     color: ${(props) => props.theme.colors.input[props.$genre].color.placeholder};
     opacity: 1;
   }
@@ -112,8 +117,8 @@ export const addTextArea = css<StyledTextAreaProps>`
   text-overflow: ellipsis;
   height: auto;
   background-color: transparent;
-  ${(props) => getFontSizeStyles(16, props.$isBold ? 500 : 400, props.theme.font.family, `${props.$lineHeight}px`)};
 
+  ${addFont};
   ${addTextAreaGenre};
   ${addTextAreaIsResize};
   ${addTextAreaPlaceholder};

@@ -420,9 +420,10 @@ export const DatePicker = (props: DatePickerProps) => {
       const day = input.DD ?? NaN;
       const month = input.MM ?? NaN;
       const year = input.YYYY ?? NaN;
-      const isHasInput = input[DatePickerVariant.DD] !== null ||
+      const isHasInput =
+        input[DatePickerVariant.DD] !== null ||
         input[DatePickerVariant.MM] !== null ||
-        input[DatePickerVariant.YYYY] !== null
+        input[DatePickerVariant.YYYY] !== null;
       if (!Number.isNaN(day) && !Number.isNaN(month) && !Number.isNaN(year)) {
         const m = moment.utc(`${day}.${month}.${year}`, 'D.M.YYYY', true).startOf('day');
         if (m.isValid()) {
@@ -452,7 +453,7 @@ export const DatePicker = (props: DatePickerProps) => {
         if (!isHasInput) {
           setIsError(false);
         }
-      }
+      },
     );
   }, [getValidateInput, onChangeDate, onChange, input]);
 
@@ -460,7 +461,7 @@ export const DatePicker = (props: DatePickerProps) => {
     if (!isOpen && !isInputFocused && isHasInput && !activeSegment)
       getValidateInput(
         input,
-        () => { },
+        () => {},
         () => {
           onChange(null);
           onClearInput();
@@ -502,10 +503,10 @@ export const DatePicker = (props: DatePickerProps) => {
           $error={
             isError
               ? {
-                isError: true,
-                size: props?.error?.size ?? props.size,
-                ...props.notValidDate,
-              }
+                  isError: true,
+                  size: props?.error?.size ?? props.size,
+                  ...props.notValidDate,
+                }
               : props.error
           }
           $isOpen={isOpen || !!activeSegment}
@@ -529,7 +530,7 @@ export const DatePicker = (props: DatePickerProps) => {
               height: '100%',
               opacity: 0,
               border: 'none',
-              background: 'transparent'
+              background: 'transparent',
             }}
             onKeyDown={handleKeyDown}
             onChange={(e) => {
@@ -543,16 +544,16 @@ export const DatePicker = (props: DatePickerProps) => {
               if (newChar && /^\d$/.test(newChar)) {
                 handleKeyDown({
                   key: newChar,
-                  preventDefault: () => { },
-                  stopPropagation: () => { },
+                  preventDefault: () => {},
+                  stopPropagation: () => {},
                 } as unknown as KeyboardEvent<HTMLInputElement>);
               }
 
               if (value.length < prevValue.length) {
                 handleKeyDown({
                   key: 'Backspace',
-                  preventDefault: () => { },
-                  stopPropagation: () => { },
+                  preventDefault: () => {},
+                  stopPropagation: () => {},
                 } as unknown as KeyboardEvent<HTMLInputElement>);
               }
 
@@ -591,6 +592,12 @@ export const DatePicker = (props: DatePickerProps) => {
                   $isActive={activeSegment === date.type}
                   $genre={props.genre}
                   $size={props.size}
+                  $font={{
+                    size: props.font?.size ?? 16,
+                    weight: props.font?.weight ?? (props.isBold ? 500 : 400),
+                    family: props.font?.family ?? theme.font.family,
+                    height: props.font?.height ?? theme.font.lineHeight,
+                  }}
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
@@ -725,6 +732,11 @@ export const DatePicker = (props: DatePickerProps) => {
           <DateDropdownDays $rows={rows}>
             {daysInWeek.map((e, index) => (
               <DateDropdownDayOfWeek
+                $font={{
+                  size: 12,
+                  weight: 700,
+                  family: props.font?.family ?? theme.font.family,
+                }}
                 tabIndex={-1}
                 type='button'
                 $isToday={false}
@@ -740,8 +752,16 @@ export const DatePicker = (props: DatePickerProps) => {
             ))}
             {daysInMonth.map((day) => (
               <DateDropdownDay
+                $font={{
+                  size: 12,
+                  weight: 700,
+                  family: props.font?.family ?? theme.font.family,
+                }}
                 type='button'
                 $isDisabled={day.isDisabled}
+                $isDisabledOutline={day.isDisabled ??  props.isDisabledOutline}
+                $isOutlineBoxShadow={props.isOutlineBoxShadow}
+                $isReadOnly={props.isReadOnly}
                 $genre={props.genre}
                 $size={props.size}
                 $row={day?.weekOfMonth + 1}
@@ -772,12 +792,17 @@ export const DatePicker = (props: DatePickerProps) => {
         <ErrorMessage
           {...(isError
             ? {
-              isError: true,
-              size: props?.error?.size ?? props.size,
-              ...props.notValidDate,
-            }
+                isError: true,
+                size: props?.error?.size ?? props.size,
+                ...props.notValidDate,
+              }
             : props.error)}
           size={props?.error?.size ?? props.size}
+          font={{
+            size: 12,
+            weight: 400,
+            family: props.font?.family ?? theme.font.family,
+          }}
         />
       ) : null}
     </>
@@ -836,7 +861,6 @@ function handleDigitKey(
     if (parsed === 0 || parsed > 31) return;
     dataDate.default[seg].setValue(parsed);
     if (nextValue.length === 2) dataDate.default[seg].onNext();
-
   } else if (seg === DatePickerVariant.MM) {
     // Месяцы: максимум 12, ноль недопустим как самостоятельное значение
     if (current.length >= 2) {
@@ -864,7 +888,6 @@ function handleDigitKey(
     if (nextValue.length === 2 || (nextValue.length === 1 && parsed > 1)) {
       dataDate.default[seg].onNext();
     }
-
   } else if (seg === DatePickerVariant.YYYY) {
     // Год: накапливаем до 4 цифр. Если уже 4 — начинаем заново (как раньше)
     if (current.length >= 4) {

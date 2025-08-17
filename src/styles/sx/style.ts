@@ -1,4 +1,4 @@
-import { CSSObject, DefaultTheme, css } from 'styled-components'
+import { CSSObject, css, DefaultTheme } from 'styled-components'
 
 import { addSXStyleProps } from '.'
 

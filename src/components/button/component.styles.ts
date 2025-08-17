@@ -1,34 +1,36 @@
-import { motion } from 'framer-motion'
-import styled, { css } from 'styled-components'
+import { addRippleDefault } from '@local/components/ripple';
+import { addSXTypography } from '@local/components/typography';
+import { addFont, addOutline, addTransition } from '@local/styles/add';
+import { addSX } from '@local/styles/sx';
+import { IThemeSizePropertyDefault, KEY_SIZE_DATA } from '@local/theme';
 
-import { addRippleDefault } from '@local/components/ripple'
-import { addSXTypography, getFontSizeStyles } from '@local/components/typography'
-import { addOutline, addTransition } from '@local/styles/add'
-import { addSX } from '@local/styles/sx'
-import { IThemeSizePropertyDefault, KEY_SIZE_DATA } from '@local/theme'
+import { motion } from 'framer-motion';
+import styled, { css } from 'styled-components';
 
-import { StyledDollarButtonIconsWrapperProps, StyledDollarButtonProps } from '.'
+import { StyledDollarButtonIconsWrapperProps, StyledDollarButtonProps } from '.';
 
 /****************************************** Genre *************************************************/
 const ButtonGenre = css<StyledDollarButtonProps>`
-  ${props => css`
+  ${(props) => css`
     background: ${props.theme.colors.button[props.$genre].background.rest};
     border-color: ${props.theme.colors.button[props.$genre].border.rest};
     color: ${props.theme.colors.button[props.$genre].color.rest};
     &:hover {
-      ${(!props.$isHidden || props.$isNotHoverEffect) &&
-      css`
+      ${
+        (!props.$isHidden || props.$isNotHoverEffect) &&
+        css`
         background: ${props.theme.colors.button[props.$genre].background.hover};
         border-color: ${props.theme.colors.button[props.$genre].border.hover};
         color: ${props.theme.colors.button[props.$genre].color.hover};
-      `}
+      `
+      }
     }
   `};
-`
+`;
 
 /****************************************** Disabled *************************************************/
 const ButtonDisabled = css<StyledDollarButtonProps>`
-  ${props =>
+  ${(props) =>
     props.$isHidden
       ? css`
           opacity: 0.5;
@@ -38,34 +40,34 @@ const ButtonDisabled = css<StyledDollarButtonProps>`
       : css`
           opacity: 1;
         `}
-`
+`;
 /****************************************** is HiddenBorder *************************************************/
 const ButtonIsHiddenBorder = css<StyledDollarButtonProps>`
-  ${props =>
+  ${(props) =>
     props.$isHiddenBorder &&
     css`
       border: 0px transparent !important;
     `}
-`
+`;
 /****************************************** is Radius *************************************************/
 const ButtonIsRadius = css<StyledDollarButtonProps>`
-  ${props =>
+  ${(props) =>
     props.$isRadius &&
     css`
       border-radius: 100px;
     `}
-`
+`;
 /****************************************** is PlaystationEffect *************************************************/
 const ButtonIsPlaystationEffect = css<StyledDollarButtonProps>`
-  ${props =>
+  ${(props) =>
     props.$isPlaystationEffect &&
     css`
       box-shadow: ${props.theme.effects.button};
     `}
-`
+`;
 /****************************************** Icons Wrapper *************************************************/
 export const StyledButtonIconsWrapper = styled.div<StyledDollarButtonIconsWrapperProps>`
-  ${props =>
+  ${(props) =>
     props.$isIconGroup
       ? css`
           display: flex;
@@ -76,24 +78,24 @@ export const StyledButtonIconsWrapper = styled.div<StyledDollarButtonIconsWrappe
       : css`
           display: contents;
         `}
-`
+`;
 
 /****************************************** Size *************************************************/
 export const ButtonSize = css<StyledDollarButtonProps>`
-  ${props =>
+  ${(props) =>
     ButtonSizeConstructor({
       ...KEY_SIZE_DATA[props.$size],
       isFullSize: props.$isFullSize,
       isWidthAsHeight: props.$isWidthAsHeight,
-      isMinWidthAsContent: props.$isMinWidthAsContent
+      isMinWidthAsContent: props.$isMinWidthAsContent,
     })};
-`
+`;
 export const ButtonSizeConstructor = (
   props: IThemeSizePropertyDefault & {
-    isFullSize?: boolean
-    isWidthAsHeight?: boolean
-    isMinWidthAsContent?: boolean
-  }
+    isFullSize?: boolean;
+    isWidthAsHeight?: boolean;
+    isMinWidthAsContent?: boolean;
+  },
 ) => css`
   height: fit-content;
   min-height: ${props.height}px;
@@ -101,7 +103,6 @@ export const ButtonSizeConstructor = (
   padding: 2px ${props.padding}px;
   border-radius: ${props.radius}px;
   gap: ${props.padding - 2}px;
-  ${params => getFontSizeStyles(props.font, 700, params.theme.font.family)};
   ${() =>
     props.isFullSize &&
     css`
@@ -109,28 +110,32 @@ export const ButtonSizeConstructor = (
       width: 100%;
       border-radius: 0px;
     `};
-  ${props.isWidthAsHeight &&
-  css`
+  ${
+    props.isWidthAsHeight &&
+    css`
     width: ${props.height}px;
     min-width: ${props.height}px;
     padding: 0px;
-  `};
-  ${props.isMinWidthAsContent &&
-  css`
+  `
+  };
+  ${
+    props.isMinWidthAsContent &&
+    css`
     min-width: max-content;
-  `};
-`
+  `
+  };
+`;
 /****************************************** Border *************************************************/
 const ButtonBorder = css`
   border: 1px solid transparent;
-`
+`;
 
 /****************************************** Flex *************************************************/
 const ButtonFlex = css<StyledDollarButtonProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-`
+`;
 /****************************************** Styled *************************************************/
 export const StyledButton = styled(motion.button)<StyledDollarButtonProps>`
   cursor: pointer;
@@ -146,7 +151,8 @@ export const StyledButton = styled(motion.button)<StyledDollarButtonProps>`
   ${ButtonFlex};
   ${addRippleDefault};
   ${addTransition};
+  ${addFont};
   ${addOutline};
   ${addSXTypography};
   ${addSX};
-`
+`;

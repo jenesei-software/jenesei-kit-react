@@ -1,3 +1,6 @@
+import { TypographyDataProps } from '@local/components/typography';
+import { AddDollarSign } from '@local/types';
+
 import { css } from 'styled-components';
 
 export const addRemoveScrollbar = css`
@@ -15,7 +18,7 @@ export const addRemoveScrollbar = css`
   &::-webkit-scrollbar-vertical {
     display: none;
   }
-
+  
   &::-webkit-scrollbar-thumb {
     display: none;
   }
@@ -39,6 +42,32 @@ export const addTransition = css`
     grid-template-areas ${(props) => props.theme.transition.default},
     grid-template-rows ${(props) => props.theme.transition.default},
     grid-template-columns ${(props) => props.theme.transition.default};
+`;
+
+export type addFontProps = {
+  font?: FontSizeStylesProps;
+};
+export type FontSizeStylesProps = {
+  size?: TypographyDataProps['size'];
+  weight?: TypographyDataProps['weight'];
+  family?: TypographyDataProps['family'];
+  height?: TypographyDataProps['height'];
+};
+
+export const addFont = css<AddDollarSign<addFontProps>>`
+  font-family: ${(props) => (props.$font?.family ? props.$font.family : 'inherit')};
+  font-style: normal;
+  line-height: ${(props) => (props.$font?.height ? props.$font.height : props.theme.font.lineHeight)};
+  ${(props) =>
+    props.$font?.size &&
+    css` 
+    font-size: ${props.$font?.size}px;
+    `}
+      ${(props) =>
+        props.$font?.weight &&
+        css` 
+        font-weight: ${props.$font?.weight};
+    `}
 `;
 
 export const addTransitionWithoutSize = css`
@@ -75,25 +104,63 @@ export const addColorTransition = css`
     border-color ${(props) => props.theme.transition.default};
 `;
 
-export const addOutline = css`
-  outline: 2px solid transparent;
-  outline-offset: 1px;
-  &:focus-visible {
-    outline: 2px solid ${(props) => props.theme.states.focus};
-  }
-`;
-export const addOutlineChildren = css<{ $isReadOnly?: boolean; $isDisabled?: boolean }>`
-  outline: 2px solid transparent;
-  outline-offset: 1px;
+export type addOutlineProps = {
+  isReadOnly?: boolean;
+  isDisabledOutline?: boolean;
+  isOutlineBoxShadow?: boolean;
+};
+
+export type addOutlinePropsDollar = AddDollarSign<addOutlineProps>;
+
+export const addOutline = css<addOutlinePropsDollar>`
+  outline: 0px solid transparent;
   ${(props) =>
-    (!props.$isReadOnly && !props.$isDisabled) &&
+    !props.$isReadOnly &&
+    !props.$isDisabledOutline &&
+    !props.$isOutlineBoxShadow &&
     css`
+      outline: 2px solid transparent;
+      outline-offset: 1px;
+      &:focus-visible {
+      outline: 2px solid ${(props) => props.theme.states.focus};
+      }
+  `};
+    ${(props) =>
+      !props.$isReadOnly &&
+      !props.$isDisabledOutline &&
+      props.$isOutlineBoxShadow &&
+      css`
+      outline: 1px solid transparent;
+      outline-offset: 0px;
+      &:focus-visible {
+        outline: 1px solid #83b7e8;
+        box-shadow: 0 1px 1px rgba(24,36,51, .06), 0 0 0 .25rem rgba(6,111,209, .25);
+      }
+  `};
+`;
+
+export const addOutlineChildren = css<addOutlinePropsDollar>`
+  outline: 0px solid transparent;
+  ${(props) =>
+    (!props.$isReadOnly && !props.$isDisabledOutline && !props.$isOutlineBoxShadow) &&
+    css`
+      outline: 2px solid transparent;
+      outline-offset: 1px;
       &:has(:focus-visible) {
         outline: 2px solid ${(props) => props.theme.states.focus};
         outline-offset: 1px;
       }
+    `};
+      ${(props) =>
+        (!props.$isReadOnly && !props.$isDisabledOutline && props.$isOutlineBoxShadow) &&
+        css`
+      outline: 1px solid transparent;
+      outline-offset: 0px;
+      &:has(:focus-visible) {
+       outline: 1px solid #83b7e8;
+        box-shadow: 0 1px 1px rgba(24,36,51, .06), 0 0 0 .25rem rgba(6,111,209, .25);
+      }
     `}
- 
 `;
 export const addAlwaysOutline = css<{ $isShowAlwaysOutline?: boolean }>`
   ${(props) =>

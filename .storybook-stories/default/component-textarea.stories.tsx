@@ -63,6 +63,7 @@ const AllWrapper: FC = () => {
             TextAreaComponent, fix size, minRows = 1
           </Typography>
           <TextAreaComponent
+            isOutlineBoxShadow
             minRows={1}
             placeholder='Type here...'
             genre='blackBorder'

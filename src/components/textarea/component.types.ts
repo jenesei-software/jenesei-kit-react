@@ -1,3 +1,4 @@
+import { addFontProps } from '@local/styles/add';
 import { addErrorProps } from '@local/styles/error';
 import { addSXProps } from '@local/styles/sx';
 import { IThemeGenreTextArea, IThemeSize } from '@local/theme';
@@ -6,6 +7,7 @@ import { AddDollarSign } from '@local/types';
 import { FocusEvent, KeyboardEventHandler, RefObject } from 'react';
 
 type CommonTextAreaProps = addErrorProps &
+  addFontProps &
   addSXProps & {
     name?: string;
     autoComplete?: string;
@@ -21,6 +23,8 @@ type CommonTextAreaProps = addErrorProps &
     minLength?: number;
 
     isDisabled?: boolean;
+    isDisabledOutline?: boolean;
+    isOutlineBoxShadow?: boolean;
     isResize?: boolean;
     isLoading?: boolean;
     isReadOnly?: boolean;
@@ -76,14 +80,17 @@ export type TextAreaGenre = keyof IThemeGenreTextArea;
 export type StyledTextAreaProps = AddDollarSign<
   Pick<
     TextAreaProps,
-    'genre' | 'size' | 'error' | 'isLoading' | 'isInputEffect' | 'isDisabled' | 'isBold' | 'isResize'
+    'genre' | 'size' | 'error' | 'isLoading' | 'isInputEffect' | 'isDisabled' | 'isBold' | 'isResize' | 'font'
   > & {
     lineHeight: number;
   }
 >;
 
 export type TextAreaWrapperProps = AddDollarSign<
-  Pick<TextAreaProps, 'isDisabled' | 'isInputEffect' | 'sx' | 'size' | 'genre' | 'isReadOnly'> & {
+  Pick<
+    TextAreaProps,
+    'isDisabled' | 'isInputEffect' | 'sx' | 'size' | 'genre' | 'isReadOnly' | 'isDisabledOutline' | 'isOutlineBoxShadow'
+  > & {
     lineHeight: number;
   }
 >;

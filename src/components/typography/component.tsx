@@ -14,9 +14,21 @@ const TypographyWithRef = (props: TypographyProps) => {
       style: props.style,
       className: props.className,
       $sx: props.sxStandard,
+      $isDisabledOutline: props.isDisabledOutline,
+      $isOutlineBoxShadow: props.isOutlineBoxShadow,
+      $isReadOnly: props.isReadOnly,
       onClick: props.onClick ? props.onClick : () => {},
     }),
-    [props.sx, props.style, props.className, props.sxStandard, props.onClick],
+    [
+      props.sx,
+      props.style,
+      props.className,
+      props.sxStandard,
+      props.onClick,
+      props.isDisabledOutline,
+      props.isOutlineBoxShadow,
+      props.isReadOnly,
+    ],
   );
 
   const screenSX = useMemo(() => props.sx?.[screenActual] ?? props.sx?.default, [props.sx, screenActual]);

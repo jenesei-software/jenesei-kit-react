@@ -6,6 +6,7 @@ import { useMergeRefs } from '@floating-ui/react';
 import { useVirtualizer } from '@tanstack/react-virtual';
 import moment from 'moment';
 import { FC, KeyboardEvent, memo, Ref, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useTheme } from 'styled-components';
 
 import { Button } from '../button';
 import { Icon } from '../icon';
@@ -248,6 +249,15 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
     }
   }, [isHaveValue, isOpen, onChangeShowSearch]);
 
+  const theme = useTheme();
+  const font = useMemo(() => {
+    return {
+      size: props.font?.size ?? 16,
+      weight: props.font?.weight ?? (props.isBold ? 500 : 400),
+      family: props.font?.family ?? theme.font.family,
+      height: props.font?.height,
+    };
+  }, [props.font, theme.font.family, props.isBold]);
   return (
     <>
       <SelectWrapper
@@ -444,6 +454,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
                   $isNotShowHoverStyle={props.isNotShowHoverStyle}
                   $genre={props.genre}
                   $size={props.size}
+                  $font={font}
                   $isBold={props.isBold}
                   $isChecked={isAll}
                   style={{ position: 'relative', minHeight: `${sizeHeight}px` }}
@@ -462,6 +473,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
                   $isNotShowHoverStyle={props.isNotShowHoverStyle}
                   $genre={props.genre}
                   $size={props.size}
+                  $font={font}
                   $isBold={props.isBold}
                   $isChecked={isAll}
                   $isShowScroll={isShowScroll}
@@ -488,6 +500,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
                   $isNotShowHoverStyle={props.isNotShowHoverStyle}
                   $genre={props.genre}
                   $size={props.size}
+                  $font={font}
                   $isBold={props.isBold}
                   $isChecked={isAll}
                   $isShowScroll={isShowScroll}
@@ -517,6 +530,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
                     item={item}
                     genre={props.genre}
                     size={props.size}
+                    font={font}
                     isBold={props.isBold}
                     isNotShowHoverStyle={props.isNotShowHoverStyle}
                     isCenter={props.isCenter}
@@ -529,7 +543,17 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
           ) : null}
         </DropdownListParent>
       </Popover>
-      {props?.error ? <ErrorMessage {...props.error} size={props?.error.size ?? props.size} /> : null}
+      {props?.error ? (
+        <ErrorMessage
+          {...props.error}
+          size={props?.error.size ?? props.size}
+          font={{
+            size: 12,
+            weight: 400,
+            family: props.font?.family ?? theme.font.family,
+          }}
+        />
+      ) : null}
     </>
   );
 };
@@ -543,6 +567,7 @@ const ContainerDropdownListOptionComponent = <T extends object & ISelectItem>(
       props.onClick();
     }
   };
+
   return (
     <DropdownListOption
       tabIndex={0}
@@ -560,6 +585,7 @@ const ContainerDropdownListOptionComponent = <T extends object & ISelectItem>(
       $item={props.item}
       $genre={props.genre}
       $size={props.size}
+      $font={props.font}
       $isBold={props.isBold}
       $isChecked={props.isChecked}
       $isShowScroll={props.isShowScroll}
