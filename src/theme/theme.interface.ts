@@ -211,7 +211,7 @@ export type IThemeGenreInput = Record<
   IThemeGenreTypeDefault
 >;
 export type IThemeGenreRange = Record<
-  Extract<IThemeGenreName, 'gray' | 'grayBorder' | 'blackBorder' | 'realebail-white'>,
+  Extract<IThemeGenreName, 'gray' | 'grayBorder' | 'blackBorder' | 'realebail-white' | 'bustmarket-gray'>,
   IThemeGenreTypeRange
 >;
 export type IThemeGenreImageSelect = Record<

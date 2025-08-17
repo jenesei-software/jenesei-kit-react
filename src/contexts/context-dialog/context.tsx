@@ -141,6 +141,9 @@ const DialogElement = (props: DialogElementProps) => {
         style={{
           zIndex: -props.index!
         }}
+        $isDisabledOutline={props.props?.propsDialog?.isDisabledOutline}
+        $isOutlineBoxShadow={props.props?.propsDialog?.isOutlineBoxShadow}
+        $isReadOnly={props.props?.propsDialog?.isReadOnly}
         $propsDialog={props.props?.propsDialog}
       >
         {props.content?.(props.props, props.remove, isAnimating)}

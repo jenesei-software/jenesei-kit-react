@@ -1,4 +1,5 @@
 import { IconItemProps } from '@local/components/icon';
+import { addFontProps, addOutlineProps, addOutlinePropsDollar } from '@local/styles/add';
 import { addSXProps, addSXStyleProps } from '@local/styles/sx';
 import { IThemeGenre, IThemeSize } from '@local/theme';
 import { AddDollarSign } from '@local/types';
@@ -59,6 +60,7 @@ type ButtonPropsDefault = PropsWithChildren & {
   onMouseDown?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   type?: 'button' | 'submit' | 'reset';
 } & addSXProps &
+  addFontProps & addOutlineProps &
   addSXTypographyProps;
 
 export type ButtonPropsStandard = ButtonPropsDefault & {
@@ -84,9 +86,10 @@ export type StyledDollarButtonProps = AddDollarSign<
     | 'size'
     | 'isFullSize'
     | 'isNotHoverEffect'
+    | 'font'
   >
 > &
-  addSXStyleProps &
+  addSXStyleProps & addOutlinePropsDollar &
   addSXTypographyStyleProps;
 
 export type StyledDollarButtonIconsWrapperProps = AddDollarSign<

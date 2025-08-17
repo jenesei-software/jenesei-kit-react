@@ -8,6 +8,7 @@ import {
   TIconRealEbailNameString,
 } from '@local/components/icon';
 import { Ripple } from '@local/components/ripple';
+import { KEY_SIZE_DATA } from '@local/theme';
 
 import { useMergeRefs } from '@floating-ui/react';
 import { FC, Ref, useMemo, useRef } from 'react';
@@ -93,6 +94,12 @@ export const Button: FC<ButtonProps> = (props) => {
 
   return (
     <StyledButton
+      $font={{
+        size: props.font?.size ?? KEY_SIZE_DATA[props.size].font,
+        weight: props.font?.weight ?? 700,
+        family: props.font?.family ?? theme.font.family,
+        height: props.font?.height,
+      }}
       $isNotHoverEffect={props.isNotHoverEffect}
       whileTap={props.isWhileTapEffect ? { scale: 0.9, transition: { duration: 0.01 } } : {}}
       id={props.id}
@@ -101,6 +108,9 @@ export const Button: FC<ButtonProps> = (props) => {
       $genre={props.genre}
       $size={props.size}
       $isDisabled={props.isDisabled}
+      $isDisabledOutline={props.isDisabled ?? props.isDisabledOutline}
+      $isOutlineBoxShadow={props.isOutlineBoxShadow}
+      $isReadOnly={props.isReadOnly}
       $isMinWidthAsContent={props.isMinWidthAsContent}
       $isWidthAsHeight={props.isWidthAsHeight}
       $isRadius={props.isRadius}

@@ -1,3 +1,4 @@
+import { addFontProps, addOutlineProps, addOutlinePropsDollar } from '@local/styles/add';
 import { addErrorProps } from '@local/styles/error';
 import { addSXProps } from '@local/styles/sx';
 import { IThemeGenreInput, IThemeSize } from '@local/theme';
@@ -15,6 +16,8 @@ import {
 import { NumberFormatValues, NumericFormatProps, PatternFormatProps } from 'react-number-format';
 
 type CommonInputProps = addErrorProps &
+  addFontProps &
+  addOutlineProps &
   addSXProps & {
     ref?: Ref<HTMLInputElement | null>;
 
@@ -41,14 +44,8 @@ type CommonInputProps = addErrorProps &
     isNiceNumber?: boolean;
 
     isDisabled?: boolean;
-    
-    isDisabledOutline?: boolean;
-
-    isOutlineBoxShadow?: boolean;
 
     isLoading?: boolean;
-
-    isReadOnly?: boolean;
 
     isInputEffect?: boolean;
 
@@ -156,7 +153,6 @@ export type StyledInputProps = AddDollarSign<
     | 'isLoading'
     | 'isInputEffect'
     | 'isDisabled'
-    | 'isDisabledOutline'
     | 'postfixChildren'
     | 'prefixChildren'
     | 'isBold'
@@ -164,9 +160,10 @@ export type StyledInputProps = AddDollarSign<
     | 'isNotShowHoverStyle'
     | 'sx'
     | 'isCenter'
-    | 'isOutlineBoxShadow'
+    | 'font'
   >
->;
+> &
+  addOutlinePropsDollar;
 
 export type StyledInputWrapperProps = AddDollarSign<
   Pick<InputProps, 'isDisabled' | 'isInputEffect' | 'sx' | 'size' | 'isWidthAsHeight'>

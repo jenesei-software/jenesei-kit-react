@@ -1,95 +1,97 @@
-import { SXProps } from '@local/styles/sx'
+import { addOutlineProps, addOutlinePropsDollar } from '@local/styles/add';
+import { SXProps } from '@local/styles/sx';
 import {
   IThemeDevice,
   IThemeFontFamily,
   IThemePaletteKeys,
   IThemeTypographyHeading,
-  IThemeTypographyWeight
-} from '@local/theme'
-import { AddDollarSign } from '@local/types'
+  IThemeTypographyWeight,
+} from '@local/theme';
+import { AddDollarSign } from '@local/types';
 
-import { CSSProperties, PropsWithChildren, Ref } from 'react'
+import { CSSProperties, PropsWithChildren, Ref } from 'react';
 
-import { TooltipProps } from '../tooltip'
+import { TooltipProps } from '../tooltip';
 
 type TypographyDefaultProps = {
-  align?: CSSProperties['textAlign']
+  align?: CSSProperties['textAlign'];
 
-  color?: IThemePaletteKeys
+  color?: IThemePaletteKeys;
 
-  cursor?: CSSProperties['cursor']
+  cursor?: CSSProperties['cursor'];
 
-  decoration?: CSSProperties['textDecoration']
+  decoration?: CSSProperties['textDecoration'];
 
-  family?: IThemeFontFamily
+  family?: IThemeFontFamily;
 
-  flex?: string
+  flex?: string;
 
-  height?: number | string
+  height?: number | string;
 
-  isHoverUnderlining?: boolean
+  isHoverUnderlining?: boolean;
 
-  letterSpacing?: CSSProperties['letterSpacing']
+  letterSpacing?: CSSProperties['letterSpacing'];
 
-  line?: number
+  line?: number;
 
-  overflow?: CSSProperties['overflow']
+  overflow?: CSSProperties['overflow'];
 
-  shadow?: 'shadowPulse'
+  shadow?: 'shadowPulse';
 
-  transform?: CSSProperties['textTransform']
+  transform?: CSSProperties['textTransform'];
 
-  weight?: IThemeTypographyWeight
+  weight?: IThemeTypographyWeight;
 
-  wrap?: CSSProperties['textWrap']
+  wrap?: CSSProperties['textWrap'];
 
-  isNoUserSelect?: boolean
-}
+  isNoUserSelect?: boolean;
+};
 
 export type TypographyDataProps = TypographyDefaultProps & {
-  size?: number
-}
+  size?: number;
+};
 
 type TypographyVariantProps = TypographyDefaultProps & {
-  variant: IThemeTypographyHeading
-}
+  variant: IThemeTypographyHeading;
+};
 
-export type TypographyAllProps = TypographyDataProps | TypographyVariantProps
+export type TypographyAllProps = TypographyDataProps | TypographyVariantProps;
 
 export type TypographySXProps = {
-  default: TypographyAllProps
+  default: TypographyAllProps;
 } & {
-  [K in IThemeDevice]?: TypographyAllProps
-}
+  [K in IThemeDevice]?: TypographyAllProps;
+};
 
 export type TypographyProps = PropsWithChildren & {
-  onClick?: () => void
-  className?: string
-  style?: CSSProperties
-  href?: string
+  onClick?: () => void;
+  className?: string;
+  style?: CSSProperties;
+  href?: string;
 
-  isParagraph?: boolean
-  isAnchor?: boolean
-  isSpan?: boolean
+  isParagraph?: boolean;
+  isAnchor?: boolean;
+  isSpan?: boolean;
 
-  ref?: Ref<HTMLElement | HTMLHeadingElement | HTMLAnchorElement | null>
+  ref?: Ref<HTMLElement | HTMLHeadingElement | HTMLAnchorElement | null>;
 
-  sx: TypographySXProps
+  sx: TypographySXProps;
 
-  sxStandard?: SXProps
-}
+  sxStandard?: SXProps;
+} & addOutlineProps;
 
 export type addSXTypographyProps = {
-  sxTypography?: TypographySXProps
-}
-export type addSXTypographyStyleProps = AddDollarSign<addSXTypographyProps>
+  sxTypography?: TypographySXProps;
+};
+export type addSXTypographyStyleProps = AddDollarSign<addSXTypographyProps>;
 
 export type TypographyCSSProps = AddDollarSign<{
-  sxTypography: TypographySXProps
-  sx?: SXProps
-}>
+  sxTypography: TypographySXProps;
+  sx?: SXProps;
+}> &
+  addOutlinePropsDollar;
 
 export type TypographyTooltipProps = {
-  typography: TypographyProps
-  tooltip: Omit<TooltipProps, 'children' | 'content'>
-} & PropsWithChildren
+  typography: TypographyProps;
+  tooltip: Omit<TooltipProps, 'children' | 'content'>;
+} & PropsWithChildren;

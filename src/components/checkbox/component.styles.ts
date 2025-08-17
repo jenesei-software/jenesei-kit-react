@@ -1,6 +1,6 @@
 import { Icon } from '@local/components/icon';
-import { addSXTypography, getFontSizeStyles } from '@local/components/typography';
-import { addDisabled, addOutline, addTransition } from '@local/styles/add';
+import { addSXTypography } from '@local/components/typography';
+import { addDisabled, addFont, addOutline, addTransition } from '@local/styles/add';
 import { addError } from '@local/styles/error';
 import { addSX } from '@local/styles/sx';
 import { IThemeSizePropertyDefault, KEY_SIZE_DATA } from '@local/theme';
@@ -23,7 +23,6 @@ export const CheckboxSizeConstructor = (
   min-height: ${props.height}px;
   border-radius: ${props.radius}px;
   gap: ${props.padding - 2}px;
-  ${(params) => getFontSizeStyles(props.font, 700, params.theme.font.family)};
   padding: ${props.padding - 4}px;
   ${
     props.isWidthAsHeight &&
@@ -88,6 +87,7 @@ export const CheckboxWrapper = styled.button<StyledCheckboxProps>`
   ${CheckboxSize};
   ${addCheckboxDisabled}
   ${addOutline};
+  ${addFont};
   ${addError};
   ${addSXTypography};
   ${addSX};

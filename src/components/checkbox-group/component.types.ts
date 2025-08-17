@@ -1,41 +1,43 @@
-import { CheckboxProps } from '@local/components/checkbox'
-import { addSXProps, addSXStyleProps } from '@local/styles/sx'
-import { AddDollarSign } from '@local/types'
+import { CheckboxProps } from '@local/components/checkbox';
+import { addFontProps } from '@local/styles/add';
+import { addSXProps, addSXStyleProps } from '@local/styles/sx';
+import { AddDollarSign } from '@local/types';
 
 export interface ICheckboxValue {
-  label: string | number
-  value: string | number
+  label: string | number;
+  value: string | number;
 }
 
 export type CheckboxGroupProps<T extends ICheckboxValue> = {
-  checkboxGenre: CheckboxProps['genre']
+  checkboxGenre: CheckboxProps['genre'];
 
-  checkBoxView: CheckboxProps['view']
+  checkBoxView: CheckboxProps['view'];
 
-  checkboxSX?: CheckboxProps['sx']
+  checkboxSX?: CheckboxProps['sx'];
 
-  checkboxIsHiddenBorder?: CheckboxProps['isHiddenBorder']
+  checkboxIsHiddenBorder?: CheckboxProps['isHiddenBorder'];
 
-  className?: string
+  className?: string;
 
-  childrenField?: keyof T
+  childrenField?: keyof T;
 
-  isClickOnlyIcon?: boolean
+  isClickOnlyIcon?: boolean;
 
-  size: CheckboxProps['size']
+  size: CheckboxProps['size'];
 
-  labelField?: keyof T
+  labelField?: keyof T;
 
-  multiple?: boolean
+  multiple?: boolean;
 
-  onChange?: (props: T[]) => void
+  onChange?: (props: T[]) => void;
 
-  options: T[]
+  options: T[];
 
-  value: T[]
+  value: T[];
 
-  valueField: keyof T
-} & addSXProps
+  valueField: keyof T;
+} & addSXProps &
+  addFontProps;
 
-export type CheckboxGroupWrapperProps = AddDollarSign<Pick<CheckboxGroupProps<ICheckboxValue>, 'size'>> &
-  addSXStyleProps
+export type CheckboxGroupWrapperProps = AddDollarSign<Pick<CheckboxGroupProps<ICheckboxValue>, 'size' | 'font'>> &
+  addSXStyleProps;

@@ -1,4 +1,5 @@
 import { InputStandardProps, StyledInputProps, StyledInputWrapperProps } from '@local/components/input';
+import { addFontProps, addOutlineProps, addOutlinePropsDollar } from '@local/styles/add';
 import { addErrorProps, ErrorMessageProps } from '@local/styles/error';
 import { addSXProps } from '@local/styles/sx';
 import { IThemeGenreDate, IThemeSize } from '@local/theme';
@@ -14,7 +15,9 @@ export enum DatePickerVariant {
 }
 
 export type CommonDatePickerProps = addErrorProps &
-  addSXProps & {
+  addSXProps &
+  addFontProps &
+  addOutlineProps & {
     genre: TDateGenre;
 
     id?: string;
@@ -22,7 +25,6 @@ export type CommonDatePickerProps = addErrorProps &
     isDisabled?: boolean;
     isBold?: boolean;
     isMinWidth?: boolean;
-    isReadOnly?: boolean;
 
     isInputEffect?: InputStandardProps['isInputEffect'];
 
@@ -102,7 +104,7 @@ export type DateWrapperProps = AddDollarSign<
   StyledInputWrapperProps;
 
 export type DateInputProps = AddDollarSign<
-  Pick<DatePickerProps, 'error' | 'genre' | 'size' | 'isBold' | 'isReadOnly' | 'isDisabled'> & {
+  Pick<DatePickerProps, 'error' | 'genre' | 'size' | 'isBold' | 'isReadOnly' | 'isDisabled' | 'font'> & {
     isOpen?: boolean;
     isActive?: boolean;
     isHaveValue?: boolean;
@@ -123,7 +125,7 @@ export type DateDropdownListProps = AddDollarSign<
 >;
 
 export type DateDropdownDayProps = AddDollarSign<
-  Pick<DatePickerProps, 'genre' | 'size'> &
+  Pick<DatePickerProps, 'genre' | 'size' | 'font'> &
     Pick<DateDayProps, 'isToday' | 'isWeekend'> & {
       row: number;
       column: number;
@@ -131,7 +133,8 @@ export type DateDropdownDayProps = AddDollarSign<
       isCurrentMonth?: boolean;
       isDisabled?: boolean;
     }
->;
+> &
+  addOutlinePropsDollar;
 
 export type MonthItem = {
   localeLong: string;

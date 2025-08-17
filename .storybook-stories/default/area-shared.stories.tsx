@@ -180,6 +180,7 @@ export const Shared: Story = {
           genre: 'bustmarket-gray-violet',
         },
         default: {
+          isOutlineBoxShadow: true,
           icons: [
             {
               order: -1,

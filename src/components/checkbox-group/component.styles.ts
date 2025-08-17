@@ -1,19 +1,18 @@
-import styled, { css } from 'styled-components'
+import { addFont } from '@local/styles/add';
+import { addSX } from '@local/styles/sx';
+import { IThemeSizePropertyDefault, KEY_SIZE_DATA } from '@local/theme';
 
-import { getFontSizeStyles } from '@local/components/typography'
-import { addSX } from '@local/styles/sx'
-import { IThemeSizePropertyDefault, KEY_SIZE_DATA } from '@local/theme'
+import styled, { css } from 'styled-components';
 
-import { CheckboxGroupWrapperProps } from '.'
+import { CheckboxGroupWrapperProps } from '.';
 
 /****************************************** Size *************************************************/
 export const CheckboxGroupSize = css<CheckboxGroupWrapperProps>`
-  ${props => CheckboxGroupSizeConstructor(KEY_SIZE_DATA[props.$size])};
-`
+  ${(props) => CheckboxGroupSizeConstructor(KEY_SIZE_DATA[props.$size])};
+`;
 export const CheckboxGroupSizeConstructor = (props: IThemeSizePropertyDefault) => css`
   gap: ${props.padding - 2}px;
-  ${params => getFontSizeStyles(props.font, 700, params.theme.font.family)};
-`
+`;
 
 /****************************************** Default *************************************************/
 export const CheckboxGroupWrapper = styled.div<CheckboxGroupWrapperProps>`
@@ -21,19 +20,20 @@ export const CheckboxGroupWrapper = styled.div<CheckboxGroupWrapperProps>`
   flex-direction: column;
   align-items: stretch;
   ${CheckboxGroupSize};
+  ${addFont};
   ${addSX};
-`
+`;
 
 export const CheckboxGroupItem = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-`
+`;
 
 export const CheckboxGroupLabel = styled.div`
   user-select: none;
-`
+`;
 
 export const CheckboxChildren = styled.div`
   user-select: none;
-`
+`;

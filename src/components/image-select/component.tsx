@@ -306,7 +306,17 @@ export const ImageSelect = (props: ImageSelectProps) => {
           </Button>
         </Stack>
       </ImageSelectWrapper>
-      {props?.error ? <ErrorMessage {...props.error} size={props?.error.size ?? props.size} /> : null}
+      {props?.error ? (
+        <ErrorMessage
+          {...props.error}
+          size={props?.error.size ?? props.size}
+          font={{
+            size: 12,
+            weight: 400,
+            family: theme.font.family,
+          }}
+        />
+      ) : null}
     </>
   );
 };

@@ -34,6 +34,9 @@ const InputWrapperAll: FC = () => {
         </Typography>
         <InputComponent
           isOutlineBoxShadow
+          font={{
+            family: 'Manrope',
+          }}
           placeholder='Дмитрий Петров'
           genre='bustmarket-gray'
           size='medium'

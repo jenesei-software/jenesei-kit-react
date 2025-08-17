@@ -2,6 +2,7 @@ import { ErrorMessage } from '@local/styles/error';
 
 import { useCallback } from 'react';
 import { NumberFormatValues } from 'react-number-format';
+import { useTheme } from 'styled-components';
 
 import {
   InputPostfixChildren,
@@ -30,7 +31,7 @@ export const Input = (props: InputProps) => {
     },
     [props],
   );
-
+  const theme = useTheme();
   return (
     <>
       <StyledInputWrapper
@@ -61,11 +62,18 @@ export const Input = (props: InputProps) => {
             $prefixChildren={props?.prefixChildren}
             $genre={props.genre}
             $size={props.size}
+            $font={{
+              size: props.font?.size ?? 16,
+              weight: props.font?.weight ?? (props.isBold ? 500 : 400),
+              family: props.font?.family ?? theme.font.family,
+              height: props.font?.height ?? theme.font.lineHeight,
+            }}
             $isBold={props.isBold}
             $isDisabled={props.isDisabled}
             $isDisabledOutline={props.isDisabled ?? props.isDisabledOutline}
             $isOutlineBoxShadow={props.isOutlineBoxShadow}
             $isCenter={props.isCenter}
+            $isReadOnly={props.isReadOnly}
             disabled={props.isDisabled}
             readOnly={props.isReadOnly}
             required={props.isRequired}
@@ -95,10 +103,17 @@ export const Input = (props: InputProps) => {
             $prefixChildren={props?.prefixChildren}
             $genre={props.genre}
             $size={props.size}
+            $font={{
+              size: props.font?.size ?? 16,
+              weight: props.font?.weight ?? (props.isBold ? 500 : 400),
+              family: props.font?.family ?? 'Roboto Mono',
+              height: props.font?.height ?? theme.font.lineHeight,
+            }}
             $isBold={props.isBold}
             $isDisabled={props.isDisabled}
             $isDisabledOutline={props.isDisabled ?? props.isDisabledOutline}
             $isOutlineBoxShadow={props.isOutlineBoxShadow}
+            $isReadOnly={props.isReadOnly}
             $isCenter={props.isCenter}
             disabled={props.isDisabled}
             readOnly={props.isReadOnly}
@@ -133,10 +148,17 @@ export const Input = (props: InputProps) => {
             $prefixChildren={props?.prefixChildren}
             $genre={props.genre}
             $size={props.size}
+            $font={{
+              size: props.font?.size ?? 16,
+              weight: props.font?.weight ?? (props.isBold ? 500 : 400),
+              family: props.font?.family ?? theme.font.family,
+              height: props.font?.height ?? theme.font.lineHeight,
+            }}
             $isBold={props.isBold}
             $isDisabled={props.isDisabled}
             $isDisabledOutline={props.isDisabled ?? props.isDisabledOutline}
             $isOutlineBoxShadow={props.isOutlineBoxShadow}
+            $isReadOnly={props.isReadOnly}
             $isCenter={props.isCenter}
             disabled={props.isDisabled}
             readOnly={props.isReadOnly}
@@ -174,7 +196,17 @@ export const Input = (props: InputProps) => {
           </InputPostfixChildren>
         )}
       </StyledInputWrapper>
-      {props?.error ? <ErrorMessage {...props.error} size={props?.error.size ?? props.size} /> : null}
+      {props?.error ? (
+        <ErrorMessage
+          {...props.error}
+          size={props?.error.size ?? props.size}
+          font={{
+            size: 12,
+            weight: 400,
+            family: props.font?.family ?? theme.font.family,
+          }}
+        />
+      ) : null}
     </>
   );
 };

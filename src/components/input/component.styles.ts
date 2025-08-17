@@ -1,5 +1,4 @@
-import { getFontSizeStyles } from '@local/components/typography';
-import { addDisabled, addNiceNumber, addOutline, addTransition } from '@local/styles/add';
+import { addDisabled, addFont, addNiceNumber, addOutline, addTransition } from '@local/styles/add';
 import { addError } from '@local/styles/error';
 import { addSX } from '@local/styles/sx';
 import { IThemeSizePropertyDefault, KEY_SIZE_DATA } from '@local/theme';
@@ -33,12 +32,12 @@ export const StyledInputWrapper = styled.div<StyledInputWrapperProps>`
 export const addInputPlaceholder = css<StyledInputProps>`
   &::placeholder,
   &::-webkit-input-placeholder {
-    ${(props) => getFontSizeStyles(16, props.$isBold ? 500 : 400, props.theme.font.family, props.theme.font.lineHeight)};
+    ${addFont};
     color: ${(props) => props.theme.colors.input[props.$genre].color.placeholder};
     opacity: 1;
   }
   &:-ms-input-placeholder {
-    ${(props) => getFontSizeStyles(16, props.$isBold ? 500 : 400, props.theme.font.family, props.theme.font.lineHeight)};
+    ${addFont};
     color: ${(props) => props.theme.colors.input[props.$genre].color.placeholder};
     opacity: 1;
   }
@@ -46,14 +45,14 @@ export const addInputPlaceholder = css<StyledInputProps>`
 export const addInputPlaceholderNiceNumber = css<StyledInputProps>`
   &::placeholder,
   &::-webkit-input-placeholder {
-    ${(props) => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Roboto Mono', props.theme.font.lineHeight)};
+    ${addFont};
     color: ${(props) => props.theme.colors.input[props.$genre].color.placeholder};
     opacity: 1;
     ${addNiceNumber};
     background: transparent;
   }
   &:-ms-input-placeholder {
-    ${(props) => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Roboto Mono', props.theme.font.lineHeight)};
+    ${addFont};
     color: ${(props) => props.theme.colors.input[props.$genre].color.placeholder};
     opacity: 1;
     ${addNiceNumber};
@@ -121,8 +120,8 @@ export const StyledInputCSS = css<StyledInputProps>`
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  ${(props) => getFontSizeStyles(16, props.$isBold ? 500 : 400, props.theme.font.family, props.theme.font.lineHeight)};
 
+  ${addFont};
   ${InputSize};
   ${InputGenre};
   ${addInputPlaceholder};

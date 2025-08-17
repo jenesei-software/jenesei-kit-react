@@ -9,6 +9,6 @@ export type InputOTPProps = {
   onComplete?: (otp: string) => void;
   onFocus?: (event?: FocusEvent<HTMLElement>) => void;
   onBlur?: (event?: FocusEvent<HTMLElement>) => void;
-} & Pick<InputStandardProps, 'size' | 'genre' | 'id' | 'sx' | 'error' | 'onChange'>;
+} & Pick<InputStandardProps, 'size' | 'genre' | 'id' | 'sx' | 'error' | 'onChange' | 'font'>;
 
 export type InputOTPWrapperProps = AddDollarSign<Pick<InputOTPProps, 'size' | 'sx' | 'error'>>;

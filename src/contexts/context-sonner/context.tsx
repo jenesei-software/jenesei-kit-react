@@ -1,10 +1,10 @@
-import { AnimatePresence, motion } from 'framer-motion'
-import { FC, createContext, memo, useCallback, useMemo, useState } from 'react'
-import { useTheme } from 'styled-components'
-import { v4 as uuidv4 } from 'uuid'
+import { Button } from '@local/components/button';
+import { Icon } from '@local/components/icon';
 
-import { Button } from '@local/components/button'
-import { Icon } from '@local/components/icon'
+import { AnimatePresence, motion } from 'framer-motion';
+import { createContext, FC, memo, useCallback, useMemo, useState } from 'react';
+import { useTheme } from 'styled-components';
+import { v4 as uuidv4 } from 'uuid';
 
 import {
   DEFAULT_PROVIDER_SONNER_BUTTON,
@@ -25,140 +25,140 @@ import {
   SonnerElementProps,
   SonnerElementWrapper,
   SonnerIcon,
-  SonnerLayout
-} from '.'
+  SonnerLayout,
+} from '.';
 
-export const SonnerContext = createContext<SonnerContextProps | null>(null)
+export const SonnerContext = createContext<SonnerContextProps | null>(null);
 
-export const ProviderSonner: FC<ProviderSonnerProps> = props => {
+export const ProviderSonner: FC<ProviderSonnerProps> = (props) => {
   const memoVisibleToasts: ProviderSonnerProps['visibleToasts'] = useMemo(
     () => props.visibleToasts,
-    [props.visibleToasts]
-  )
+    [props.visibleToasts],
+  );
   const memoDefaultDescription: ProviderSonnerProps['default']['description'] = useMemo(
     () => props?.default?.description,
-    [props?.default?.description]
-  )
+    [props?.default?.description],
+  );
   const memoDefaultTitle: ProviderSonnerProps['default']['title'] = useMemo(
     () => props?.default?.title,
-    [props?.default?.title]
-  )
+    [props?.default?.title],
+  );
   const memoDefaultButton: ProviderSonnerProps['default']['button'] = useMemo(
     () => props?.default?.button,
-    [props?.default?.button]
-  )
+    [props?.default?.button],
+  );
   const memoDefaultHidingTime: ProviderSonnerProps['default']['hidingTime'] = useMemo(
     () => props?.default?.hidingTime,
-    [props?.default?.hidingTime]
-  )
+    [props?.default?.hidingTime],
+  );
   const memoDefaultHidingMode: ProviderSonnerProps['default']['hidingMode'] = useMemo(
     () => props?.default?.hidingMode ?? 'clickOnButton',
-    [props?.default?.hidingMode]
-  )
+    [props?.default?.hidingMode],
+  );
   const memoDefaultGenre = useMemo(
     () => props?.default?.genre ?? DEFAULT_PROVIDER_SONNER_GENRE,
-    [props?.default?.genre]
-  )
+    [props?.default?.genre],
+  );
 
-  const isTop = useMemo(() => props.position.includes('top'), [props.position])
+  const isTop = useMemo(() => props.position.includes('top'), [props.position]);
 
-  const [contentHistory, setContentHistory] = useState<SonnerContentProps[]>([])
+  const [contentHistory, setContentHistory] = useState<SonnerContentProps[]>([]);
 
-  const [isHovered, setIsHovered] = useState(false)
+  const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = useCallback(() => {
-    setIsHovered(true)
-  }, [])
+    setIsHovered(true);
+  }, []);
 
   const handleMouseLeave = useCallback(() => {
-    setIsHovered(false)
-  }, [])
+    setIsHovered(false);
+  }, []);
 
   const remove: SonnerContextProps['remove'] = useCallback(
-    id => {
-      setContentHistory(prev => {
-        const itemToRemove = prev.find(item => item.id === id)
+    (id) => {
+      setContentHistory((prev) => {
+        const itemToRemove = prev.find((item) => item.id === id);
 
-        if (!itemToRemove) return prev
+        if (!itemToRemove) return prev;
 
-        const indexToRemove = itemToRemove.index
+        const indexToRemove = itemToRemove.index;
 
         const updatedHistory = prev
-          .filter(item => item.id !== id)
-          .map(item => ({
+          .filter((item) => item.id !== id)
+          .map((item) => ({
             ...item,
-            index: item.index > indexToRemove ? item.index - 1 : item.index
-          }))
+            index: item.index > indexToRemove ? item.index - 1 : item.index,
+          }));
 
-        if (updatedHistory.length === 0) handleMouseLeave()
+        if (updatedHistory.length === 0) handleMouseLeave();
 
-        return updatedHistory
-      })
+        return updatedHistory;
+      });
     },
-    [handleMouseLeave]
-  )
+    [handleMouseLeave],
+  );
 
   const toast: SonnerContextProps['toast'] = useCallback(
-    content => {
-      const id = content.id ?? uuidv4()
+    (content) => {
+      const id = content.id ?? uuidv4();
 
-      const hidingTime = content.hidingTime ?? memoDefaultHidingTime
+      const hidingTime = content.hidingTime ?? memoDefaultHidingTime;
 
-      setContentHistory(prev => {
-        const existingIndex = prev.findIndex(item => item.id === id)
+      setContentHistory((prev) => {
+        const existingIndex = prev.findIndex((item) => item.id === id);
 
-        let updatedHistory
+        let updatedHistory;
         if (existingIndex !== -1) {
           // Replace existing item
-          updatedHistory = [...prev]
-          updatedHistory[existingIndex] = { ...content, id, index: prev[existingIndex].index }
+          updatedHistory = [...prev];
+          updatedHistory[existingIndex] = { ...content, id, index: prev[existingIndex].index };
         } else {
           // Add new item
-          updatedHistory = prev.map(item => ({
+          updatedHistory = prev.map((item) => ({
             ...item,
-            index: item.index + 1
-          }))
-          const newContent = { ...content, id, index: 0 }
-          updatedHistory.unshift(newContent)
+            index: item.index + 1,
+          }));
+          const newContent = { ...content, id, index: 0 };
+          updatedHistory.unshift(newContent);
         }
 
-        return updatedHistory
-      })
+        return updatedHistory;
+      });
 
       if (hidingTime !== undefined) {
         setTimeout(() => {
-          remove(id)
-        }, hidingTime)
+          remove(id);
+        }, hidingTime);
       }
     },
-    [memoDefaultHidingTime, remove]
-  )
+    [memoDefaultHidingTime, remove],
+  );
   const promise: SonnerContextProps['promise'] = useCallback(
     <T,>(
       promise: Promise<T>,
       expectation: Omit<SonnerContentProps, 'index'>,
-      localToast: (success: T | undefined, error: unknown | undefined) => Omit<SonnerContentProps, 'index'>
+      localToast: (success: T | undefined, error: unknown | undefined) => Omit<SonnerContentProps, 'index'>,
     ) => {
-      const id = uuidv4()
-      toast({ ...expectation, id, isLoading: true })
+      const id = uuidv4();
+      toast({ ...expectation, id, isLoading: true });
 
       return promise
-        .then(result => {
-          toast({ ...localToast(result, undefined), id })
+        .then((result) => {
+          toast({ ...localToast(result, undefined), id });
         })
-        .catch(error => {
-          toast({ ...localToast(undefined, error), id })
-        })
+        .catch((error) => {
+          toast({ ...localToast(undefined, error), id });
+        });
     },
-    [toast]
-  )
+    [toast],
+  );
   const handleOnClick = useCallback(
     (id: SonnerContentStandardProps['id']) => {
-      remove(id)
+      remove(id);
     },
-    [remove]
-  )
-  const theme = useTheme()
+    [remove],
+  );
+  const theme = useTheme();
   return (
     <SonnerContext.Provider value={{ toast, promise, remove, contentHistory }}>
       <SonnerLayout
@@ -169,18 +169,18 @@ export const ProviderSonner: FC<ProviderSonnerProps> = props => {
         onMouseLeave={handleMouseLeave}
       >
         <AnimatePresence>
-          {contentHistory.map(content => {
-            const index = content.index
-            const isMoreThanLastViewIndexPlusOne = memoVisibleToasts ? index > memoVisibleToasts : false
-            const isMoreThanLastViewIndex = memoVisibleToasts ? index > memoVisibleToasts - 1 : false
-            const isLastViewIndex = memoVisibleToasts ? index == memoVisibleToasts - 1 : false
-            const localGenre = content.genre ?? memoDefaultGenre
-            const buttonGenre = theme.colors.sonner[localGenre].button.genre
-            const hidingMode = content.hidingMode ?? memoDefaultHidingMode
+          {contentHistory.map((content) => {
+            const index = content.index;
+            const isMoreThanLastViewIndexPlusOne = memoVisibleToasts ? index > memoVisibleToasts : false;
+            const isMoreThanLastViewIndex = memoVisibleToasts ? index > memoVisibleToasts - 1 : false;
+            const isLastViewIndex = memoVisibleToasts ? index == memoVisibleToasts - 1 : false;
+            const localGenre = content.genre ?? memoDefaultGenre;
+            const buttonGenre = theme.colors.sonner[localGenre].button.genre;
+            const hidingMode = content.hidingMode ?? memoDefaultHidingMode;
 
-            const localContent = 'content' in content ? content.content : false
-            const localTitle = 'title' in content ? content.title : false
-            const localDescription = 'description' in content ? content.description : false
+            const localContent = 'content' in content ? content.content : false;
+            const localTitle = 'title' in content ? content.title : false;
+            const localDescription = 'description' in content ? content.description : false;
             return (
               <MemoizedSonnerElement
                 isMoreThanLastViewIndexPlusOne={isMoreThanLastViewIndexPlusOne}
@@ -202,14 +202,14 @@ export const ProviderSonner: FC<ProviderSonnerProps> = props => {
                 button={content.button ?? memoDefaultButton ?? DEFAULT_PROVIDER_SONNER_BUTTON}
                 handleOnClick={handleOnClick}
               />
-            )
+            );
           })}
         </AnimatePresence>
       </SonnerLayout>
       {props.children}
     </SonnerContext.Provider>
-  )
-}
+  );
+};
 
 const SonnerElement = (props: SonnerElementProps) => {
   return (
@@ -225,7 +225,7 @@ const SonnerElement = (props: SonnerElementProps) => {
             : DEFAULT_PROVIDER_SONNER_Y
           : !props.isTop
             ? DEFAULT_PROVIDER_SONNER_Y
-            : -DEFAULT_PROVIDER_SONNER_Y
+            : -DEFAULT_PROVIDER_SONNER_Y,
       }}
       animate={{
         y: 0,
@@ -242,10 +242,10 @@ const SonnerElement = (props: SonnerElementProps) => {
           ? props.isHovered || props.index === 0
             ? `0px`
             : `-${DEFAULT_PROVIDER_SONNER_MARGIN_BOTTOM}px`
-          : '0px'
+          : '0px',
       }}
       style={{
-        zIndex: -props.index
+        zIndex: -props.index,
       }}
       whileInView={{ opacity: props.isMoreThanLastViewIndex ? 0 : 1 }}
       exit={{ opacity: 0, y: !props.isTop ? DEFAULT_PROVIDER_SONNER_Y : -DEFAULT_PROVIDER_SONNER_Y }}
@@ -258,9 +258,9 @@ const SonnerElement = (props: SonnerElementProps) => {
         {(props.isLoading || props.icon) && (
           <SonnerIcon>
             {props.isLoading ? (
-              <Icon size="medium" type="loading" name="Line" />
+              <Icon size='medium' type='loading' name='Line' />
             ) : (
-              props.icon && <Icon name={props.icon} type="id" size={'medium'} />
+              props.icon && <Icon name={props.icon} type='id' size={'medium'} />
             )}
           </SonnerIcon>
         )}
@@ -269,9 +269,27 @@ const SonnerElement = (props: SonnerElementProps) => {
             props.content
           ) : (
             <>
-              {props.title && <SonnerContentTitle $genre={props.genre}>{props.title}</SonnerContentTitle>}
+              {props.title && (
+                <SonnerContentTitle
+                  $genre={props.genre}
+                  $font={{
+                    size: 14,
+                    weight: 700,
+                  }}
+                >
+                  {props.title}
+                </SonnerContentTitle>
+              )}
               {props.description && (
-                <SonnerContentDescription $genre={props.genre}>{props.description}</SonnerContentDescription>
+                <SonnerContentDescription
+                  $font={{
+                    size: 12,
+                    weight: 400,
+                  }}
+                  $genre={props.genre}
+                >
+                  {props.description}
+                </SonnerContentDescription>
               )}
             </>
           )}
@@ -281,7 +299,7 @@ const SonnerElement = (props: SonnerElementProps) => {
           <SonnerButtonWrapper>
             <Button
               genre={props.buttonGenre}
-              size="small"
+              size='small'
               onClick={() => props.hidingMode === 'clickOnButton' && props.handleOnClick(props.id, 'clickOnButton')}
             >
               {props.button.content}
@@ -290,6 +308,6 @@ const SonnerElement = (props: SonnerElementProps) => {
         )}
       </SonnerElementWrapper>
     </motion.div>
-  )
-}
-const MemoizedSonnerElement = memo(SonnerElement)
+  );
+};
+const MemoizedSonnerElement = memo(SonnerElement);
