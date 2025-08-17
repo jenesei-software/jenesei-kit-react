@@ -2,6 +2,7 @@ import { JeneseiPalette } from '@local/theme/theme';
 
 import { useMemo } from 'react';
 
+import IconBustMarketJSON from './component-bustmarket.json';
 import IconCheckboxJSON from './component-checkbox.json';
 import IconIdJSON from './component-id.json';
 import IconLoadingJSON from './component-loading.json';
@@ -11,6 +12,7 @@ import {
   IconItemProps,
   IconTypeMap,
   StyledSVG,
+  TIconBustMarketNameString,
   TIconCheckboxNameString,
   TIconIdNameString,
   TIconLoadingNameString,
@@ -25,6 +27,9 @@ export const Icon = <T extends keyof IconTypeMap>(props: IconItemProps<T>) => {
     switch (props.type) {
       case 'id':
         icon = IconIdJSON[props.name as TIconIdNameString];
+        break;
+      case 'bustmarket':
+        icon = IconBustMarketJSON[props.name as TIconBustMarketNameString];
         break;
       case 'realebail':
         icon = IconRealEbailJSON[props.name as TIconRealEbailNameString];
@@ -72,7 +77,7 @@ export const Icon = <T extends keyof IconTypeMap>(props: IconItemProps<T>) => {
         ))
       : null;
 
-  const contentLoadings = props.type === 'loading' ? (icon as string) : null;
+  const isFull = props.type === 'loading' || props.type === 'bustmarket' ? (icon as string) : null;
 
   return (
     <StyledSVG
@@ -88,7 +93,7 @@ export const Icon = <T extends keyof IconTypeMap>(props: IconItemProps<T>) => {
       className={props.className}
       onClick={props.onClick}
       tabIndex={props.tabIndex}
-      dangerouslySetInnerHTML={contentLoadings ? { __html: contentLoadings } : undefined}
+      dangerouslySetInnerHTML={isFull ? { __html: isFull } : undefined}
     >
       {contentPaths}
     </StyledSVG>

@@ -1,4 +1,4 @@
-import { FC, createContext, useCallback, useEffect, useState } from 'react'
+import { createContext, FC, useCallback, useEffect, useState } from 'react'
 
 import { BrowserTheme, BrowserThemeContextProps, BrowserThemeMode, ProviderBrowserThemeProps } from '.'
 

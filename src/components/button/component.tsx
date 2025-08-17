@@ -1,5 +1,6 @@
 import {
   Icon,
+  TIconBustMarketNameString,
   TIconCheckboxNameString,
   TIconIdNameString,
   TIconLoadingNameString,
@@ -36,6 +37,15 @@ export const Button: FC<ButtonProps> = (props) => {
               key={`${icon.type}-${icon.name}-${index}`}
               name={icon?.name as TIconLogoNameString}
               type='logo'
+              size={icon?.size ?? props.size}
+              turn={icon.turn}
+              order={icon.order}
+            />
+          ) : icon?.type === 'bustmarket' ? (
+            <Icon
+              key={`${icon.type}-${icon.name}-${index}`}
+              name={icon?.name as TIconBustMarketNameString}
+              type='bustmarket'
               size={icon?.size ?? props.size}
               turn={icon.turn}
               order={icon.order}
@@ -84,7 +94,7 @@ export const Button: FC<ButtonProps> = (props) => {
   return (
     <StyledButton
       $isNotHoverEffect={props.isNotHoverEffect}
-      whileTap={props.isWhileTapEffect ? { scale: 0.9, transition: { duration: 0.02 } } : {}}
+      whileTap={props.isWhileTapEffect ? { scale: 0.9, transition: { duration: 0.01 } } : {}}
       id={props.id}
       tabIndex={props.tabIndex ?? 0}
       $isFullSize={props.isFullSize}

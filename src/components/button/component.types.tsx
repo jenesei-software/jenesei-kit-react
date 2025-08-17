@@ -1,25 +1,25 @@
-import { IconItemProps } from '@local/components/icon'
-import { addSXProps, addSXStyleProps } from '@local/styles/sx'
-import { IThemeGenre, IThemeSize } from '@local/theme'
-import { AddDollarSign } from '@local/types'
+import { IconItemProps } from '@local/components/icon';
+import { addSXProps, addSXStyleProps } from '@local/styles/sx';
+import { IThemeGenre, IThemeSize } from '@local/theme';
+import { AddDollarSign } from '@local/types';
 
-import React, { PropsWithChildren, Ref } from 'react'
+import React, { PropsWithChildren, Ref } from 'react';
 
-import { addSXTypographyProps, addSXTypographyStyleProps } from '../typography'
+import { addSXTypographyProps, addSXTypographyStyleProps } from '../typography';
 
-export type TButtonGenre = keyof IThemeGenre
+export type TButtonGenre = keyof IThemeGenre;
 
 type ButtonPropsDefault = PropsWithChildren & {
-  size: IThemeSize
-  genre: TButtonGenre
+  size: IThemeSize;
+  genre: TButtonGenre;
 
-  id?: string
+  id?: string;
 
-  tabIndex?: number
+  tabIndex?: number;
 
-  ref?: Ref<HTMLElement | null>
+  ref?: Ref<HTMLElement | null>;
 
-  className?: string
+  className?: string;
 
   icons?: (
     | (Omit<IconItemProps<'id'>, 'size'> & { isHidden?: boolean; size?: IconItemProps<'id'>['size'] })
@@ -27,48 +27,49 @@ type ButtonPropsDefault = PropsWithChildren & {
     | (Omit<IconItemProps<'loading'>, 'size'> & { isHidden?: boolean; size?: IconItemProps<'loading'>['size'] })
     | (Omit<IconItemProps<'realebail'>, 'size'> & { isHidden?: boolean; size?: IconItemProps<'realebail'>['size'] })
     | (Omit<IconItemProps<'logo'>, 'size'> & { isHidden?: boolean; size?: IconItemProps<'logo'>['size'] })
-  )[]
+    | (Omit<IconItemProps<'bustmarket'>, 'size'> & { isHidden?: boolean; size?: IconItemProps<'logo'>['size'] })
+  )[];
 
-  isDisabled?: boolean
+  isDisabled?: boolean;
 
-  isDisabledRipple?: boolean
+  isDisabledRipple?: boolean;
 
-  isHidden?: boolean
+  isHidden?: boolean;
 
-  isOnlyIcon?: boolean
+  isOnlyIcon?: boolean;
 
-  isWhileTapEffect?: boolean
+  isWhileTapEffect?: boolean;
 
-  isWidthAsHeight?: boolean
+  isWidthAsHeight?: boolean;
 
-  isMinWidthAsContent?: boolean
+  isMinWidthAsContent?: boolean;
 
-  isRadius?: boolean
+  isRadius?: boolean;
 
-  isHiddenBorder?: boolean
+  isHiddenBorder?: boolean;
 
-  isPlaystationEffect?: boolean
+  isPlaystationEffect?: boolean;
 
-  isNotHoverEffect?: boolean
+  isNotHoverEffect?: boolean;
 
-  isFullSize?: boolean
+  isFullSize?: boolean;
 
-  onFocus?: (event: React.FocusEvent<HTMLButtonElement, Element>) => void
-  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
-  onMouseDown?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
-  type?: 'button' | 'submit' | 'reset'
+  onFocus?: (event: React.FocusEvent<HTMLButtonElement, Element>) => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  onMouseDown?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  type?: 'button' | 'submit' | 'reset';
 } & addSXProps &
-  addSXTypographyProps
+  addSXTypographyProps;
 
 export type ButtonPropsStandard = ButtonPropsDefault & {
-  isIconGroup?: false
-}
+  isIconGroup?: false;
+};
 export type ButtonPropsIconGroup = ButtonPropsDefault & {
-  isIconGroup?: true
-  iconGroupOrder?: number
-}
+  isIconGroup?: true;
+  iconGroupOrder?: number;
+};
 
-export type ButtonProps = ButtonPropsStandard | ButtonPropsIconGroup
+export type ButtonProps = ButtonPropsStandard | ButtonPropsIconGroup;
 export type StyledDollarButtonProps = AddDollarSign<
   Pick<
     ButtonProps,
@@ -86,8 +87,8 @@ export type StyledDollarButtonProps = AddDollarSign<
   >
 > &
   addSXStyleProps &
-  addSXTypographyStyleProps
+  addSXTypographyStyleProps;
 
 export type StyledDollarButtonIconsWrapperProps = AddDollarSign<
   Pick<ButtonProps, 'isIconGroup' | 'size'> & Pick<ButtonPropsIconGroup, 'iconGroupOrder'>
->
+>;

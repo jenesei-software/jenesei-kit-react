@@ -30,6 +30,6 @@
       "@local/*": ["src/*"]
     }
   },
-  "include": ["src", ".storybook-stories", ".storybook-stories/default", ".storybook-stories/realebail", ".storybook"],
+  "include": ["src", ".storybook-stories", ".storybook-stories/default",".storybook-stories/bustmarket", ".storybook-stories/realebail", ".storybook"],
   "exclude": ["node_modules"]
 }
