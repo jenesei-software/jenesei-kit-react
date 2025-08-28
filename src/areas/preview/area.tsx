@@ -1,6 +1,5 @@
 import { Icon } from '@local/components/icon';
 import { Stack, StackMotion } from '@local/components/stack';
-import { useDeepCompareMemoize } from '@local/hooks/use-deep-compare-memoize';
 
 import { AnimatePresence } from 'framer-motion';
 import { FC, useEffect, useMemo, useState } from 'react';
@@ -10,10 +9,9 @@ import { PreviewProps } from '.';
 export const Preview: FC<PreviewProps> = (props) => {
   const [visible, setVisible] = useState(props.defaultVisible ?? true);
 
-  const propsMemo = useDeepCompareMemoize(props);
-  const propsVisible = useMemo(() => ('visible' in propsMemo ? propsMemo.visible : null), [propsMemo]);
-  const propsTime = useMemo(() => ('time' in propsMemo ? propsMemo.time : null), [propsMemo]);
-  const propsMinTime = useMemo(() => ('minTime' in propsMemo ? propsMemo.minTime : null), [propsMemo]);
+  const propsVisible = useMemo(() => ('visible' in props ? props.visible : null), [props]);
+  const propsTime = useMemo(() => ('time' in props ? props.time : null), [props]);
+  const propsMinTime = useMemo(() => ('minTime' in props ? props.minTime : null), [props]);
 
   useEffect(() => {
     if (propsTime !== null) {
