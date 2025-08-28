@@ -1,7 +1,7 @@
 import { addSXProps } from '@local/styles/sx';
 import { AddDollarSign } from '@local/types';
 
-import { AnimationProps, DraggableProps, LayoutProps } from 'framer-motion';
+import { AnimationProps, DraggableProps, FocusHandlers, HoverHandlers, LayoutProps, TapHandlers } from 'framer-motion';
 import { CSSProperties, DragEvent, DragEventHandler, PropsWithChildren, Ref } from 'react';
 
 export interface StackProps extends addSXProps, PropsWithChildren {
@@ -23,6 +23,9 @@ export interface StackProps extends addSXProps, PropsWithChildren {
 export type StackMotionProps = StackProps &
   LayoutProps &
   AnimationProps &
+  HoverHandlers &
+  TapHandlers &
+  FocusHandlers &
   DraggableProps & {
     style?: CSSProperties;
   };

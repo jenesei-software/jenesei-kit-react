@@ -25,9 +25,9 @@ export const StackMotion: FC<StackMotionProps> = (props) => {
     <StyledStackMotion
       ref={ref}
       style={style}
-      onClick={props.onClick}
-      onDrop={props.onDrop}
-      onDragOver={props.onDragOver}
+      onClick={onClick}
+      onDrop={onDrop}
+      onDragOver={onDragOver}
       className={className}
       $sx={sx}
       $isHover={isHover}
