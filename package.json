@@ -1,15 +1,23 @@
 {
   "author": "Cyril Strone",
   "name": "@jenesei-software/jenesei-kit-react",
-  "version": "1.3.10",
+  "version": "1.3.11",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jenesei-software/jenesei-kit-react.git"
   },
   "license": "MIT",
   "type": "module",
-  "files": ["build"],
-  "keywords": ["react", "ui", "tanstack", "framer-motion", "styled-components"],
+  "files": [
+    "build"
+  ],
+  "keywords": [
+    "react",
+    "ui",
+    "tanstack",
+    "framer-motion",
+    "styled-components"
+  ],
   "exports": {
     ".": {
       "types": "./build/index.d.ts",
