@@ -1,15 +1,15 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components';
 
-import { addColorTransition } from '@local/styles/add'
-import { addSX } from '@local/styles/sx'
-import { KEY_SIZE_DATA } from '@local/theme'
+import { addColorTransition } from '@local/styles/add';
+import { addSX } from '@local/styles/sx';
+import { KEY_SIZE_DATA } from '@local/theme';
 
-import { StyledIconIdItemProps } from '.'
+import { StyledIconIdItemProps } from '.';
 
 export const StyledSVG = styled.svg<StyledIconIdItemProps>`
-  color: ${props => (props.$color ? props.theme.palette[props.$color] : 'inherit')};
+  color: ${(props) => (props.$color ? props.theme.palette[props.$color] : 'inherit')};
 
-  ${props => css`
+  ${(props) => css`
     height: ${props.$size !== '100%' ? `${KEY_SIZE_DATA[props.$size].heightIcon}px` : '100%'};
     min-height: ${props.$size !== '100%' ? `${KEY_SIZE_DATA[props.$size].heightIcon}px` : '100%'};
 
@@ -18,7 +18,7 @@ export const StyledSVG = styled.svg<StyledIconIdItemProps>`
 
     transform: rotate(${props.$turn || 0}deg);
   `}
-  ${props =>
+  ${(props) =>
     props.$order !== undefined &&
     css`
       order: ${props.$order};
@@ -28,4 +28,4 @@ export const StyledSVG = styled.svg<StyledIconIdItemProps>`
     ${addColorTransition};
   }
   ${addSX};
-`
+`;

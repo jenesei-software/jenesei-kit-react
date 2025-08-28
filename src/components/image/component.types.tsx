@@ -1,23 +1,23 @@
-import { ReactNode } from 'react'
+import { ReactNode } from 'react';
 
-import { addSXProps, addSXStyleProps } from '@local/styles/sx'
+import { addSXProps, addSXStyleProps } from '@local/styles/sx';
 
 export interface ImageProps {
-  alt: string
+  alt: string;
 
-  componentFallback?: ReactNode
+  componentFallback?: ReactNode;
 
-  componentLoading?: ReactNode
+  componentLoading?: ReactNode;
 
-  isShowBeforeImage?: boolean
+  isShowBeforeImage?: boolean;
 
-  src?: string
+  src?: string;
 
-  sxImage?: addSXProps['sx']
+  sxImage?: addSXProps['sx'];
 
-  sxStack?: addSXProps['sx']
+  sxStack?: addSXProps['sx'];
 }
 
 export type ImageIMGProps = {
-  $isPending: boolean
-} & addSXStyleProps
+  $isPending: boolean;
+} & addSXStyleProps;

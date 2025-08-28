@@ -1,8 +1,8 @@
-import { FC } from 'react'
+import { FC } from 'react';
 
-import { StackMotionProps, StackProps, StyledStack, StyledStackMotion } from '.'
+import { StackMotionProps, StackProps, StyledStack, StyledStackMotion } from '.';
 
-export const Stack: FC<StackProps> = props => {
+export const Stack: FC<StackProps> = (props) => {
   return (
     <StyledStack
       ref={props.ref}
@@ -16,25 +16,25 @@ export const Stack: FC<StackProps> = props => {
     >
       {props.children}
     </StyledStack>
-  )
-}
+  );
+};
 
-export const StackMotion: FC<StackMotionProps> = props => {
+export const StackMotion: FC<StackMotionProps> = (props) => {
+  const { style, className, isHover, isRipple, onClick, onDrop, onDragOver, ref, sx } = props;
   return (
     <StyledStackMotion
-      ref={props.ref}
-      layout={props.layout}
-      initial={props.initial}
-      animate={props.animate}
-      exit={props.exit}
-      transition={props.transition}
+      ref={ref}
+      style={style}
       onClick={props.onClick}
-      className={props.className}
-      $sx={props.sx}
-      $isHover={props.isHover}
-      $isRipple={props.isRipple}
+      onDrop={props.onDrop}
+      onDragOver={props.onDragOver}
+      className={className}
+      $sx={sx}
+      $isHover={isHover}
+      $isRipple={isRipple}
+      {...props}
     >
       {props.children}
     </StyledStackMotion>
-  )
-}
+  );
+};

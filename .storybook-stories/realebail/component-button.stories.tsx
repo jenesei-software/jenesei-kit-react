@@ -1,16 +1,16 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import 'styled-components'
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import 'styled-components';
 
-import { Button } from '@local/components/button'
+import { Button } from '@local/components/button';
 
 const meta: Meta<typeof Button> = {
   component: Button,
-  title: 'RealEbail/Button'
-}
+  title: 'RealEbail/Button',
+};
 
-export default meta
+export default meta;
 
-type Story = StoryObj<typeof Button>
+type Story = StoryObj<typeof Button>;
 
 export const Product: Story = {
   args: {
@@ -20,17 +20,17 @@ export const Product: Story = {
     size: 'medium',
     sx: {
       default: {
-        width: 'auto'
-      }
+        width: 'auto',
+      },
     },
     sxTypography: {
       default: {
         weight: 400,
-        family: 'Work Sans'
-      }
-    }
-  }
-}
+        family: 'Work Sans',
+      },
+    },
+  },
+};
 export const Gray: Story = {
   args: {
     children: 'Click',
@@ -39,14 +39,14 @@ export const Gray: Story = {
     size: 'medium',
     sx: {
       default: {
-        width: 'auto'
-      }
+        width: 'auto',
+      },
     },
     sxTypography: {
       default: {
         weight: 400,
-        family: 'Work Sans'
-      }
-    }
-  }
-}
+        family: 'Work Sans',
+      },
+    },
+  },
+};

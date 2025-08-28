@@ -1,2 +1,2 @@
-export * from './style'
-export * from './style.types'
+export * from './style';
+export * from './style.types';

@@ -1,4 +1,4 @@
-import { create } from 'storybook/theming'
+import { create } from 'storybook/theming';
 
 export default create({
   base: 'light',
@@ -27,5 +27,5 @@ export default create({
   inputBg: '#ffffff',
   inputBorder: '#10162F',
   inputTextColor: '#10162F',
-  inputBorderRadius: 2
-})
+  inputBorderRadius: 2,
+});

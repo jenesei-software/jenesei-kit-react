@@ -1,6 +1,6 @@
-import { useContext } from 'react'
+import { useContext } from 'react';
 
-import { CookieContext, CookieContextProps } from '.'
+import { CookieContext, CookieContextProps } from '.';
 
 /**
  * Custom hook to access the CookieContext.
@@ -10,9 +10,9 @@ import { CookieContext, CookieContextProps } from '.'
  *
  */
 export const useCookie = (): CookieContextProps => {
-  const context = useContext(CookieContext)
+  const context = useContext(CookieContext);
   if (!context) {
-    throw new Error('useCookie must be used within an ProviderCookie')
+    throw new Error('useCookie must be used within an ProviderCookie');
   }
-  return context
-}
+  return context;
+};

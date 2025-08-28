@@ -1,18 +1,18 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import 'styled-components'
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import 'styled-components';
 
-import { Stack } from '@local/components/stack'
-import { Typography } from '@local/components/typography'
-import { ProviderApp } from '@local/contexts/context-app'
+import { Stack } from '@local/components/stack';
+import { Typography } from '@local/components/typography';
+import { ProviderApp } from '@local/contexts/context-app';
 
 const meta: Meta<typeof ProviderApp> = {
   component: ProviderApp,
-  title: 'Context/App'
-}
+  title: 'Context/App',
+};
 
-export default meta
+export default meta;
 
-type Story = StoryObj<typeof ProviderApp>
+type Story = StoryObj<typeof ProviderApp>;
 
 const defaultNotification = (
   <div
@@ -20,146 +20,146 @@ const defaultNotification = (
       backgroundColor: 'darkgoldenrod',
       padding: '2px',
       height: '100%',
-      width: '100%'
+      width: '100%',
     }}
   >
     <Typography
       sx={{
         default: {
           variant: 'h8',
-          wrap: 'nowrap'
-        }
+          wrap: 'nowrap',
+        },
       }}
     >
       Notification
     </Typography>
   </div>
-)
+);
 const defaultHeader = (
   <div
     style={{
       backgroundColor: 'lightblue',
       padding: '10px',
       height: '100%',
-      width: '100%'
+      width: '100%',
     }}
   >
     <Typography
       sx={{
         default: {
           variant: 'h5',
-          wrap: 'nowrap'
-        }
+          wrap: 'nowrap',
+        },
       }}
     >
       Header
     </Typography>
   </div>
-)
+);
 const defaultFooter = (
   <div
     style={{
       backgroundColor: 'lightcoral',
       padding: '10px',
       height: '100%',
-      width: '100%'
+      width: '100%',
     }}
   >
     <Typography
       sx={{
         default: {
-          variant: 'h5'
-        }
+          variant: 'h5',
+        },
       }}
     >
       Footer
     </Typography>
   </div>
-)
+);
 const defaultLeftAside = (
   <div
     style={{
       backgroundColor: 'lightgreen',
       padding: '10px',
       height: '100%',
-      width: '100%'
+      width: '100%',
     }}
   >
     <Typography
       sx={{
         default: {
-          variant: 'h6'
-        }
+          variant: 'h6',
+        },
       }}
     >
       Left Aside
     </Typography>
   </div>
-)
+);
 const defaultRightAside = (
   <div
     style={{
       backgroundColor: 'lightyellow',
       padding: '10px',
       height: '100%',
-      width: '100%'
+      width: '100%',
     }}
   >
     <Typography
       sx={{
         default: {
-          variant: 'h6'
-        }
+          variant: 'h6',
+        },
       }}
     >
       Right Aside
     </Typography>
   </div>
-)
+);
 const defaultNav = (
   <div
     style={{
       backgroundColor: 'beige',
       padding: '10px',
       height: '100%',
-      width: '100%'
+      width: '100%',
     }}
   >
     <Typography
       sx={{
         default: {
-          variant: 'h6'
-        }
+          variant: 'h6',
+        },
       }}
     >
       Nav
     </Typography>
   </div>
-)
+);
 const defaultChildren = (
   <Stack
-    sx={theme => ({
+    sx={(theme) => ({
       default: {
         backgroundColor: theme.palette.whiteStandard,
         padding: '10px',
         flexDirection: 'column',
-        height: 'fit-content'
+        height: 'fit-content',
       },
       tablet: {
         backgroundColor: theme.palette.whiteJanice,
-        padding: '10px'
+        padding: '10px',
       },
       mobile: {
         backgroundColor: theme.palette.grayMonica,
-        padding: '10px'
-      }
+        padding: '10px',
+      },
     })}
   >
     <Typography
       sx={{
         default: {
-          variant: 'h1'
-        }
+          variant: 'h1',
+        },
       }}
     >
       Title H1
@@ -167,8 +167,8 @@ const defaultChildren = (
     <Typography
       sx={{
         default: {
-          variant: 'h2'
-        }
+          variant: 'h2',
+        },
       }}
     >
       Title H2
@@ -176,8 +176,8 @@ const defaultChildren = (
     <Typography
       sx={{
         default: {
-          variant: 'h3'
-        }
+          variant: 'h3',
+        },
       }}
     >
       Title H3
@@ -185,8 +185,8 @@ const defaultChildren = (
     <Typography
       sx={{
         default: {
-          variant: 'h4'
-        }
+          variant: 'h4',
+        },
       }}
     >
       Title H4
@@ -194,8 +194,8 @@ const defaultChildren = (
     <Typography
       sx={{
         default: {
-          variant: 'h5'
-        }
+          variant: 'h5',
+        },
       }}
     >
       Title H5
@@ -203,14 +203,14 @@ const defaultChildren = (
     <Typography
       sx={{
         default: {
-          variant: 'h6'
-        }
+          variant: 'h6',
+        },
       }}
     >
       Title H6
     </Typography>
   </Stack>
-)
+);
 
 export const Default: Story = {
   args: {
@@ -223,13 +223,13 @@ export const Default: Story = {
           sx={{
             default: {
               variant: 'h6',
-              weight: 700
-            }
+              weight: 700,
+            },
           }}
         >
           Loading
         </Typography>
-      )
+      ),
     },
     defaultBgColor: 'whiteStandard',
     isScrollOutlet: false,
@@ -240,55 +240,55 @@ export const Default: Story = {
       length: {
         default: '20px',
         tablet: '20px',
-        mobile: null
-      }
+        mobile: null,
+      },
     },
     header: {
       component: defaultHeader,
       length: {
         default: '80px',
         tablet: '60px',
-        mobile: '40px'
-      }
+        mobile: '40px',
+      },
     },
     leftAside: {
       component: defaultLeftAside,
       length: {
         default: '180px',
         tablet: '160px',
-        mobile: null
-      }
+        mobile: null,
+      },
     },
     nav: {
       component: defaultNav,
       length: {
         default: '80px',
         tablet: '60px',
-        mobile: '40px'
-      }
+        mobile: '40px',
+      },
     },
     rightAside: {
       component: defaultRightAside,
       length: {
         default: '180px',
         tablet: '160px',
-        mobile: null
-      }
+        mobile: null,
+      },
     },
     footer: {
       component: defaultFooter,
       length: {
         default: '80px',
         tablet: '60px',
-        mobile: '40px'
-      }
+        mobile: '40px',
+      },
     },
-    children: defaultChildren
-  }
-}
+    children: defaultChildren,
+  },
+};
 
 export const AsideDifferentTop: Story = {
-  render: args => <ProviderApp {...args} />,
+  render: (args) => <ProviderApp {...args} />,
   args: {
     defaultBgColor: 'black40',
     isScrollOutlet: true,
@@ -297,50 +297,50 @@ export const AsideDifferentTop: Story = {
       length: {
         default: '80px',
         tablet: '60px',
-        mobile: '40px'
-      }
+        mobile: '40px',
+      },
     },
     nav: {
       component: defaultNav,
       length: {
         default: '80px',
         tablet: '60px',
-        mobile: '40px'
-      }
+        mobile: '40px',
+      },
     },
     leftAside: {
       component: defaultLeftAside,
       length: {
         default: '80px',
         tablet: '60px',
-        mobile: null
+        mobile: null,
       },
-      isTopNav: true
+      isTopNav: true,
     },
     rightAside: {
       component: defaultRightAside,
       length: {
         default: '80px',
         tablet: '60px',
-        mobile: null
+        mobile: null,
       },
       isTopFooter: true,
-      isTopHeader: true
+      isTopHeader: true,
     },
     footer: {
       component: defaultFooter,
       length: {
         default: '80px',
         tablet: '60px',
-        mobile: '40px'
-      }
+        mobile: '40px',
+      },
     },
-    children: defaultChildren
-  }
-}
+    children: defaultChildren,
+  },
+};
 
 export const WithoutAsides: Story = {
-  render: args => <ProviderApp {...args} />,
+  render: (args) => <ProviderApp {...args} />,
   args: {
     defaultBgColor: 'black50',
     isScrollOutlet: false,
@@ -349,17 +349,17 @@ export const WithoutAsides: Story = {
       length: {
         default: '80px',
         tablet: '60px',
-        mobile: '40px'
-      }
+        mobile: '40px',
+      },
     },
     footer: {
       component: defaultFooter,
       length: {
         default: '80px',
         tablet: '60px',
-        mobile: null
-      }
+        mobile: null,
+      },
     },
-    children: defaultChildren
-  }
-}
+    children: defaultChildren,
+  },
+};

@@ -8,16 +8,8 @@
   },
   "license": "MIT",
   "type": "module",
-  "files": [
-    "build"
-  ],
-  "keywords": [
-    "react",
-    "ui",
-    "tanstack",
-    "framer-motion",
-    "styled-components"
-  ],
+  "files": ["build"],
+  "keywords": ["react", "ui", "tanstack", "framer-motion", "styled-components"],
   "exports": {
     ".": {
       "types": "./build/index.d.ts",
@@ -270,8 +262,9 @@
     "build:library": "tsc && vite build",
     "build:main": "tsc && vite build",
     "storybook": "storybook dev -p 3030",
-    "eslint": "eslint \"src/**/*.{ts,tsx,js,jsx}\"",
-    "prettier": "prettier --write \"src/**/*.{ts,tsx}\""
+    "biome:lint": "biome lint .",
+    "biome:format": "biome format --write src",
+    "changelog": "conventional-changelog -p eslint -i CHANGELOG.md -s -r 0"
   },
   "devDependencies": {
     "@fontsource/inter": "^5.1.0",

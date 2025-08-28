@@ -1,61 +1,61 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import { FC, useCallback, useState } from 'react'
-import 'styled-components'
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { FC, useCallback, useState } from 'react';
+import 'styled-components';
 
-import { Accordion, AccordionProps } from '@local/components/accordion'
-import { Button } from '@local/components/button'
-import { Stack } from '@local/components/stack'
-import { Typography } from '@local/components/typography'
+import { Accordion, AccordionProps } from '@local/components/accordion';
+import { Button } from '@local/components/button';
+import { Stack } from '@local/components/stack';
+import { Typography } from '@local/components/typography';
 
 const meta: Meta<typeof Accordion> = {
   component: Accordion,
-  title: 'Component/Accordion'
-}
+  title: 'Component/Accordion',
+};
 
-export default meta
+export default meta;
 
-type Story = StoryObj<typeof Accordion>
+type Story = StoryObj<typeof Accordion>;
 
-const MultiLevelAccordionWrapper: FC<AccordionProps> = props => {
-  const [expanded, setExpanded] = useState<boolean>(false)
-  const [expandedTwo, setExpandedTwo] = useState<boolean>(false)
-  const [expandedThree, setExpandedThree] = useState<boolean>(false)
+const MultiLevelAccordionWrapper: FC<AccordionProps> = (props) => {
+  const [expanded, setExpanded] = useState<boolean>(false);
+  const [expandedTwo, setExpandedTwo] = useState<boolean>(false);
+  const [expandedThree, setExpandedThree] = useState<boolean>(false);
 
   const changeExpanded = useCallback(() => {
-    setExpanded(prevState => !prevState)
-  }, [])
+    setExpanded((prevState) => !prevState);
+  }, []);
 
   const onClickSummary = useCallback(() => {
-    changeExpanded()
-  }, [changeExpanded])
+    changeExpanded();
+  }, [changeExpanded]);
 
   const onClickIcon = useCallback(() => {
-    changeExpanded()
-  }, [changeExpanded])
+    changeExpanded();
+  }, [changeExpanded]);
 
   const changeExpandedTwo = useCallback(() => {
-    setExpandedTwo(prevState => !prevState)
-  }, [])
+    setExpandedTwo((prevState) => !prevState);
+  }, []);
 
   const onClickSummaryTwo = useCallback(() => {
-    changeExpandedTwo()
-  }, [changeExpandedTwo])
+    changeExpandedTwo();
+  }, [changeExpandedTwo]);
 
   const onClickIconTwo = useCallback(() => {
-    changeExpandedTwo()
-  }, [changeExpandedTwo])
+    changeExpandedTwo();
+  }, [changeExpandedTwo]);
 
   const changeExpandedThree = useCallback(() => {
-    setExpandedThree(prevState => !prevState)
-  }, [])
+    setExpandedThree((prevState) => !prevState);
+  }, []);
 
   const onClickSummaryThree = useCallback(() => {
-    changeExpandedThree()
-  }, [changeExpandedThree])
+    changeExpandedThree();
+  }, [changeExpandedThree]);
 
   const onClickIconThree = useCallback(() => {
-    changeExpandedThree()
-  }, [changeExpandedThree])
+    changeExpandedThree();
+  }, [changeExpandedThree]);
   return (
     <Accordion
       {...props}
@@ -69,8 +69,8 @@ const MultiLevelAccordionWrapper: FC<AccordionProps> = props => {
             default: {
               gap: '10px',
               flexDirection: 'column',
-              paddingTop: '6px'
-            }
+              paddingTop: '6px',
+            },
           })}
         >
           <Accordion
@@ -79,8 +79,8 @@ const MultiLevelAccordionWrapper: FC<AccordionProps> = props => {
                 sx={{
                   default: {
                     justifyContent: 'space-between',
-                    width: '100%'
-                  }
+                    width: '100%',
+                  },
                 }}
                 genre={'productBorder'}
                 size={'medium'}
@@ -88,8 +88,8 @@ const MultiLevelAccordionWrapper: FC<AccordionProps> = props => {
                   {
                     type: 'id',
                     name: 'Folder',
-                    turn: expandedTwo ? 180 : 0
-                  }
+                    turn: expandedTwo ? 180 : 0,
+                  },
                 ]}
               >
                 Show more
@@ -101,16 +101,16 @@ const MultiLevelAccordionWrapper: FC<AccordionProps> = props => {
                   default: {
                     gap: '10px',
                     flexDirection: 'column',
-                    paddingTop: '6px'
-                  }
+                    paddingTop: '6px',
+                  },
                 })}
               >
                 <Button
                   sx={{
                     default: {
                       justifyContent: 'flex-start',
-                      width: '100%'
-                    }
+                      width: '100%',
+                    },
                   }}
                   genre={'gray'}
                   size={'medium'}
@@ -121,8 +121,8 @@ const MultiLevelAccordionWrapper: FC<AccordionProps> = props => {
                   sx={{
                     default: {
                       justifyContent: 'flex-start',
-                      width: '100%'
-                    }
+                      width: '100%',
+                    },
                   }}
                   genre={'black'}
                   size={'medium'}
@@ -133,8 +133,8 @@ const MultiLevelAccordionWrapper: FC<AccordionProps> = props => {
                   sx={{
                     default: {
                       justifyContent: 'flex-start',
-                      width: '100%'
-                    }
+                      width: '100%',
+                    },
                   }}
                   genre={'greenTransparent'}
                   size={'medium'}
@@ -150,9 +150,9 @@ const MultiLevelAccordionWrapper: FC<AccordionProps> = props => {
               sx: {
                 default: {
                   padding: '0px',
-                  width: '100%'
-                }
-              }
+                  width: '100%',
+                },
+              },
             }}
           />
           <Accordion
@@ -161,8 +161,8 @@ const MultiLevelAccordionWrapper: FC<AccordionProps> = props => {
                 sx={{
                   default: {
                     justifyContent: 'flex-start',
-                    width: '100%'
-                  }
+                    width: '100%',
+                  },
                 }}
                 genre={'grayBorder'}
                 size={'medium'}
@@ -176,16 +176,16 @@ const MultiLevelAccordionWrapper: FC<AccordionProps> = props => {
                   default: {
                     gap: '10px',
                     flexDirection: 'column',
-                    paddingTop: '6px'
-                  }
+                    paddingTop: '6px',
+                  },
                 })}
               >
                 <Button
                   sx={{
                     default: {
                       justifyContent: 'flex-start',
-                      width: '100%'
-                    }
+                      width: '100%',
+                    },
                   }}
                   genre={'gray'}
                   size={'medium'}
@@ -196,8 +196,8 @@ const MultiLevelAccordionWrapper: FC<AccordionProps> = props => {
                   sx={{
                     default: {
                       justifyContent: 'flex-start',
-                      width: '100%'
-                    }
+                      width: '100%',
+                    },
                   }}
                   genre={'black'}
                   size={'medium'}
@@ -208,8 +208,8 @@ const MultiLevelAccordionWrapper: FC<AccordionProps> = props => {
                   sx={{
                     default: {
                       justifyContent: 'flex-start',
-                      width: '100%'
-                    }
+                      width: '100%',
+                    },
                   }}
                   genre={'greenTransparent'}
                   size={'medium'}
@@ -225,31 +225,31 @@ const MultiLevelAccordionWrapper: FC<AccordionProps> = props => {
               sx: {
                 default: {
                   padding: '0px',
-                  width: '100%'
-                }
-              }
+                  width: '100%',
+                },
+              },
             }}
           />
         </Stack>
       }
     />
-  )
-}
+  );
+};
 
-const OneLevelAccordionWrapper: FC<AccordionProps> = props => {
-  const [expanded, setExpanded] = useState<boolean>(false)
+const OneLevelAccordionWrapper: FC<AccordionProps> = (props) => {
+  const [expanded, setExpanded] = useState<boolean>(false);
 
   const changeExpanded = useCallback(() => {
-    setExpanded(prevState => !prevState)
-  }, [])
+    setExpanded((prevState) => !prevState);
+  }, []);
 
   const onClickSummary = useCallback(() => {
-    changeExpanded()
-  }, [changeExpanded])
+    changeExpanded();
+  }, [changeExpanded]);
 
   const onClickIcon = useCallback(() => {
-    changeExpanded()
-  }, [changeExpanded])
+    changeExpanded();
+  }, [changeExpanded]);
   return (
     <Accordion
       {...props}
@@ -263,16 +263,16 @@ const OneLevelAccordionWrapper: FC<AccordionProps> = props => {
             default: {
               gap: '10px',
               flexDirection: 'column',
-              paddingTop: '6px'
-            }
+              paddingTop: '6px',
+            },
           })}
         >
           <Button
             sx={{
               default: {
                 justifyContent: 'flex-start',
-                width: '100%'
-              }
+                width: '100%',
+              },
             }}
             genre={'gray'}
             size={'medium'}
@@ -283,8 +283,8 @@ const OneLevelAccordionWrapper: FC<AccordionProps> = props => {
             sx={{
               default: {
                 justifyContent: 'flex-start',
-                width: '100%'
-              }
+                width: '100%',
+              },
             }}
             genre={'black'}
             size={'medium'}
@@ -295,8 +295,8 @@ const OneLevelAccordionWrapper: FC<AccordionProps> = props => {
             sx={{
               default: {
                 justifyContent: 'flex-start',
-                width: '100%'
-              }
+                width: '100%',
+              },
             }}
             genre={'greenTransparent'}
             size={'medium'}
@@ -306,11 +306,11 @@ const OneLevelAccordionWrapper: FC<AccordionProps> = props => {
         </Stack>
       }
     />
-  )
-}
+  );
+};
 
 export const OneLevel: Story = {
-  render: args => <OneLevelAccordionWrapper {...args} />,
+  render: (args) => <OneLevelAccordionWrapper {...args} />,
   args: {
     isAccordionIcon: true,
     accordionSummary: (
@@ -319,16 +319,16 @@ export const OneLevel: Story = {
           default: {
             padding: '10px',
             width: '200px',
-            cursor: 'pointer'
-          }
+            cursor: 'pointer',
+          },
         }}
       >
         <Typography
           sx={{
             default: {
               variant: 'h4',
-              isHoverUnderlining: true
-            }
+              isHoverUnderlining: true,
+            },
           }}
         >
           Show
@@ -340,15 +340,15 @@ export const OneLevel: Story = {
         default: {
           padding: '0px',
           width: '100%',
-          maxWidth: '300px'
-        }
-      }
-    }
-  }
-}
+          maxWidth: '300px',
+        },
+      },
+    },
+  },
+};
 
 export const MultiLevel: Story = {
-  render: args => <MultiLevelAccordionWrapper {...args} />,
+  render: (args) => <MultiLevelAccordionWrapper {...args} />,
   args: {
     isAccordionIcon: true,
     accordionSummary: (
@@ -357,16 +357,16 @@ export const MultiLevel: Story = {
           default: {
             padding: '10px',
             width: '200px',
-            cursor: 'pointer'
-          }
+            cursor: 'pointer',
+          },
         }}
       >
         <Typography
           sx={{
             default: {
               variant: 'h4',
-              isHoverUnderlining: true
-            }
+              isHoverUnderlining: true,
+            },
           }}
         >
           MultiLevel
@@ -378,9 +378,9 @@ export const MultiLevel: Story = {
         default: {
           padding: '0px',
           width: '100%',
-          maxWidth: '300px'
-        }
-      }
-    }
-  }
-}
+          maxWidth: '300px',
+        },
+      },
+    },
+  },
+};

@@ -1,9 +1,9 @@
-import { Preview, PreviewAdditionalProps } from '@local/areas/preview'
-import { IThemePaletteKeys, JeneseiPalette } from '@local/theme'
+import { Preview, PreviewAdditionalProps } from '@local/areas/preview';
+import { IThemePaletteKeys, JeneseiPalette } from '@local/theme';
 
-import { createContext, FC, useCallback, useEffect, useState } from 'react'
+import { createContext, FC, useCallback, useEffect, useState } from 'react';
 
-import { useScreenWidth } from '../context-screen-width'
+import { useScreenWidth } from '../context-screen-width';
 import {
   AppContextProps,
   ProviderAppOutlet,
@@ -15,10 +15,10 @@ import {
   ProviderAppOutletNotification,
   ProviderAppOutletRightAside,
   ProviderAppProps,
-  ProviderAppWrapper
-} from '.'
+  ProviderAppWrapper,
+} from '.';
 
-export const AppContext = createContext<AppContextProps | null>(null)
+export const AppContext = createContext<AppContextProps | null>(null);
 
 /**
  * ProviderApp component is a context context that manages various application-level states
@@ -44,18 +44,18 @@ export const AppContext = createContext<AppContextProps | null>(null)
  *
  * @returns {JSX.Element} The rendered ProviderApp component.
  */
-export const ProviderApp: FC<ProviderAppProps> = props => {
-  const { bgColor, changeBgColor, historyBgColor, setDefaultBgColor } = useBgColor(props.defaultBgColor)
+export const ProviderApp: FC<ProviderAppProps> = (props) => {
+  const { bgColor, changeBgColor, historyBgColor, setDefaultBgColor } = useBgColor(props.defaultBgColor);
   const { statusBarColor, changeStatusBarColor, historyStatusBarColor, setDefaultStatusBarColor } = useStatusBarColor(
-    props.defaultStatusBarColor
-  )
-  const { bgImage, changeBgImage, historyBgImage, setDefaultBgImage } = useBgImage(props.defaultBgImage || null)
-  const { title, changeTitle, setHistoryTitle, setDefaultTitle } = useTitle(props.defaultTitle || null)
+    props.defaultStatusBarColor,
+  );
+  const { bgImage, changeBgImage, historyBgImage, setDefaultBgImage } = useBgImage(props.defaultBgImage || null);
+  const { title, changeTitle, setHistoryTitle, setDefaultTitle } = useTitle(props.defaultTitle || null);
   const { description, changeDescription, historyDescription, setDefaultDescription } = useDescription(
-    props.defaultDescription
-  )
-  const { changePreview, previewProps } = usePreview(props.defaultPreview)
-  const { screenActual } = useScreenWidth()
+    props.defaultDescription,
+  );
+  const { changePreview, previewProps } = usePreview(props.defaultPreview);
+  const { screenActual } = useScreenWidth();
 
   return (
     <AppContext.Provider
@@ -75,14 +75,14 @@ export const ProviderApp: FC<ProviderAppProps> = props => {
         setDefaultBgColor,
         setDefaultBgImage,
         setDefaultTitle,
-        setDefaultDescription
+        setDefaultDescription,
       }}
     >
       <title>{title}</title>
-      <meta name="description" content={description} />
-      <meta name="theme-color" content={JeneseiPalette[statusBarColor]} />
-      <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-      <meta name="mobile-web-app-capable" content="yes" />
+      <meta name='description' content={description} />
+      <meta name='theme-color' content={JeneseiPalette[statusBarColor]} />
+      <meta name='apple-mobile-web-app-status-bar-style' content='default' />
+      <meta name='mobile-web-app-capable' content='yes' />
       <Preview {...previewProps}>
         <ProviderAppWrapper $bgColor={bgColor} $bgImage={bgImage}>
           <ProviderAppOutlet
@@ -116,7 +116,9 @@ export const ProviderApp: FC<ProviderAppProps> = props => {
               </ProviderAppOutletLeftAside>
             ) : null}
 
-            <ProviderAppOutletChildren $isScrollOutlet={props.isScrollOutlet} $main={props.main}>{props.children}</ProviderAppOutletChildren>
+            <ProviderAppOutletChildren $isScrollOutlet={props.isScrollOutlet} $main={props.main}>
+              {props.children}
+            </ProviderAppOutletChildren>
 
             {props.rightAside?.length && props.rightAside?.length?.[screenActual] ? (
               <ProviderAppOutletRightAside $rightAside={props.rightAside}>
@@ -133,229 +135,229 @@ export const ProviderApp: FC<ProviderAppProps> = props => {
         </ProviderAppWrapper>
       </Preview>
     </AppContext.Provider>
-  )
-}
+  );
+};
 
 /**
  * Custom hook to manage preview properties.
  */
 const usePreview = (defaultPreview: ProviderAppProps['defaultPreview']) => {
-  const [previewProps, setPreviewProps] = useState(defaultPreview || { visible: true, defaultVisible: true })
+  const [previewProps, setPreviewProps] = useState(defaultPreview || { visible: true, defaultVisible: true });
 
   const changePreview = useCallback((newPreviewProps: PreviewAdditionalProps) => {
-    setPreviewProps(newPreviewProps)
-  }, [])
+    setPreviewProps(newPreviewProps);
+  }, []);
 
   useEffect(() => {
-    if (defaultPreview) setPreviewProps(defaultPreview)
-  }, [defaultPreview])
+    if (defaultPreview) setPreviewProps(defaultPreview);
+  }, [defaultPreview]);
 
-  return { previewProps, changePreview }
-}
+  return { previewProps, changePreview };
+};
 
 /**
  * Custom hook to manage background color state with history tracking.
  */
 type BgColorState = {
-  bgColor: IThemePaletteKeys
-  bgColorHistory: IThemePaletteKeys[]
-  bgColorIndex: number
-}
+  bgColor: IThemePaletteKeys;
+  bgColorHistory: IThemePaletteKeys[];
+  bgColorIndex: number;
+};
 
 export const useBgColor = (defaultColor: IThemePaletteKeys) => {
   const [state, setState] = useState<BgColorState>({
     bgColor: defaultColor,
     bgColorHistory: [defaultColor],
-    bgColorIndex: 0
-  })
+    bgColorIndex: 0,
+  });
 
   const changeBgColor = useCallback((color: IThemePaletteKeys) => {
-    setState(prev => {
-      const newHistory = [...prev.bgColorHistory.slice(0, prev.bgColorIndex + 1), color]
+    setState((prev) => {
+      const newHistory = [...prev.bgColorHistory.slice(0, prev.bgColorIndex + 1), color];
       return {
         bgColor: color,
         bgColorHistory: newHistory,
-        bgColorIndex: newHistory.length - 1
-      }
-    })
-  }, [])
+        bgColorIndex: newHistory.length - 1,
+      };
+    });
+  }, []);
 
   const historyBgColor = useCallback((steps: number) => {
-    setState(prev => {
-      const newIndex = prev.bgColorIndex + steps
+    setState((prev) => {
+      const newIndex = prev.bgColorIndex + steps;
       if (newIndex >= 0 && newIndex < prev.bgColorHistory.length) {
         return {
           ...prev,
           bgColor: prev.bgColorHistory[newIndex],
-          bgColorIndex: newIndex
-        }
+          bgColorIndex: newIndex,
+        };
       }
-      return prev
-    })
-  }, [])
+      return prev;
+    });
+  }, []);
 
   const setDefaultBgColor = useCallback(() => {
     setState({
       bgColor: defaultColor,
       bgColorHistory: [defaultColor],
-      bgColorIndex: 0
-    })
-  }, [defaultColor])
+      bgColorIndex: 0,
+    });
+  }, [defaultColor]);
 
   useEffect(() => {
     setState({
       bgColor: defaultColor,
       bgColorHistory: [defaultColor],
-      bgColorIndex: 0
-    })
-  }, [defaultColor])
+      bgColorIndex: 0,
+    });
+  }, [defaultColor]);
 
   return {
     bgColor: state.bgColor,
     changeBgColor,
     historyBgColor,
     setDefaultBgColor,
-    bgColorIndex: state.bgColorIndex
-  }
-}
+    bgColorIndex: state.bgColorIndex,
+  };
+};
 
 /**
  * Custom hook to manage the status bar color with history tracking.
  */
 type StatusBarColorState = {
-  statusBarColor: IThemePaletteKeys
-  statusBarColorHistory: IThemePaletteKeys[]
-  statusBarColorIndex: number
-}
+  statusBarColor: IThemePaletteKeys;
+  statusBarColorHistory: IThemePaletteKeys[];
+  statusBarColorIndex: number;
+};
 
 export const useStatusBarColor = (defaultColor: IThemePaletteKeys) => {
   const [state, setState] = useState<StatusBarColorState>({
     statusBarColor: defaultColor,
     statusBarColorHistory: [defaultColor],
-    statusBarColorIndex: 0
-  })
+    statusBarColorIndex: 0,
+  });
 
   const changeStatusBarColor = useCallback((color: IThemePaletteKeys) => {
-    setState(prev => {
-      const newHistory = [...prev.statusBarColorHistory.slice(0, prev.statusBarColorIndex + 1), color]
+    setState((prev) => {
+      const newHistory = [...prev.statusBarColorHistory.slice(0, prev.statusBarColorIndex + 1), color];
       return {
         statusBarColor: color,
         statusBarColorHistory: newHistory,
-        statusBarColorIndex: newHistory.length - 1
-      }
-    })
-  }, [])
+        statusBarColorIndex: newHistory.length - 1,
+      };
+    });
+  }, []);
 
   const historyStatusBarColor = useCallback((steps: number) => {
-    setState(prev => {
-      const newIndex = prev.statusBarColorIndex + steps
+    setState((prev) => {
+      const newIndex = prev.statusBarColorIndex + steps;
       if (newIndex >= 0 && newIndex < prev.statusBarColorHistory.length) {
         return {
           ...prev,
           statusBarColor: prev.statusBarColorHistory[newIndex],
-          statusBarColorIndex: newIndex
-        }
+          statusBarColorIndex: newIndex,
+        };
       }
-      return prev
-    })
-  }, [])
+      return prev;
+    });
+  }, []);
 
   const setDefaultStatusBarColor = useCallback(() => {
     setState({
       statusBarColor: defaultColor,
       statusBarColorHistory: [defaultColor],
-      statusBarColorIndex: 0
-    })
-  }, [defaultColor])
+      statusBarColorIndex: 0,
+    });
+  }, [defaultColor]);
 
   useEffect(() => {
     setState({
       statusBarColor: defaultColor,
       statusBarColorHistory: [defaultColor],
-      statusBarColorIndex: 0
-    })
-  }, [defaultColor])
+      statusBarColorIndex: 0,
+    });
+  }, [defaultColor]);
 
   return {
     statusBarColor: state.statusBarColor,
     changeStatusBarColor,
     historyStatusBarColor,
     setDefaultStatusBarColor,
-    statusBarColorIndex: state.statusBarColorIndex
-  }
-}
+    statusBarColorIndex: state.statusBarColorIndex,
+  };
+};
 
 /**
  * Custom hook to manage background images with history.
  */
 type BgImageState = {
-  bgImage: string | null
-  bgImageHistory: (string | null)[]
-  bgImageIndex: number
-}
+  bgImage: string | null;
+  bgImageHistory: (string | null)[];
+  bgImageIndex: number;
+};
 
 export const useBgImage = (defaultImage: string | null) => {
   const [state, setState] = useState<BgImageState>({
     bgImage: defaultImage,
     bgImageHistory: [defaultImage],
-    bgImageIndex: 0
-  })
+    bgImageIndex: 0,
+  });
 
   const changeBgImage = useCallback((image: string | null) => {
-    setState(prev => {
-      const newHistory = [...prev.bgImageHistory.slice(0, prev.bgImageIndex + 1), image]
+    setState((prev) => {
+      const newHistory = [...prev.bgImageHistory.slice(0, prev.bgImageIndex + 1), image];
       return {
         bgImage: image,
         bgImageHistory: newHistory,
-        bgImageIndex: newHistory.length - 1
-      }
-    })
-  }, [])
+        bgImageIndex: newHistory.length - 1,
+      };
+    });
+  }, []);
 
   const historyBgImage = useCallback((steps: number) => {
-    setState(prev => {
-      const newIndex = prev.bgImageIndex + steps
+    setState((prev) => {
+      const newIndex = prev.bgImageIndex + steps;
       if (newIndex >= 0 && newIndex < prev.bgImageHistory.length) {
         return {
           ...prev,
           bgImage: prev.bgImageHistory[newIndex],
-          bgImageIndex: newIndex
-        }
+          bgImageIndex: newIndex,
+        };
       }
-      return prev
-    })
-  }, [])
+      return prev;
+    });
+  }, []);
 
   const setDefaultBgImage = useCallback(() => {
     setState({
       bgImage: defaultImage,
       bgImageHistory: [defaultImage],
-      bgImageIndex: 0
-    })
-  }, [defaultImage])
+      bgImageIndex: 0,
+    });
+  }, [defaultImage]);
 
   useEffect(() => {
     setState({
       bgImage: defaultImage,
       bgImageHistory: [defaultImage],
-      bgImageIndex: 0
-    })
-  }, [defaultImage])
+      bgImageIndex: 0,
+    });
+  }, [defaultImage]);
 
   return {
     bgImage: state.bgImage,
     changeBgImage,
     historyBgImage,
     setDefaultBgImage,
-    bgImageIndex: state.bgImageIndex
-  }
-}
+    bgImageIndex: state.bgImageIndex,
+  };
+};
 
 type TitleState = {
-  title: string | null
-  titleHistory: (string | null)[]
-  titleIndex: number
-}
+  title: string | null;
+  titleHistory: (string | null)[];
+  titleIndex: number;
+};
 /**
  * Custom hook to manage the document title with history tracking.
  */
@@ -363,49 +365,49 @@ const useTitle = (defaultTitle: string | null) => {
   const [state, setState] = useState<TitleState>({
     title: defaultTitle,
     titleHistory: [defaultTitle],
-    titleIndex: 0
-  })
+    titleIndex: 0,
+  });
 
   const changeTitle = useCallback((newTitle: string | null) => {
-    setState(prev => {
-      const newHistory = [...prev.titleHistory.slice(0, prev.titleIndex + 1), newTitle]
+    setState((prev) => {
+      const newHistory = [...prev.titleHistory.slice(0, prev.titleIndex + 1), newTitle];
       return {
         title: newTitle,
         titleHistory: newHistory,
-        titleIndex: newHistory.length - 1
-      }
-    })
-  }, [])
+        titleIndex: newHistory.length - 1,
+      };
+    });
+  }, []);
 
   const setHistoryTitle = useCallback((steps: number) => {
-    setState(prev => {
-      const newIndex = prev.titleIndex + steps
+    setState((prev) => {
+      const newIndex = prev.titleIndex + steps;
       if (newIndex >= 0 && newIndex < prev.titleHistory.length) {
         return {
           ...prev,
           title: prev.titleHistory[newIndex],
-          titleIndex: newIndex
-        }
+          titleIndex: newIndex,
+        };
       }
-      return prev
-    })
-  }, [])
+      return prev;
+    });
+  }, []);
 
   const setDefaultTitle = useCallback(() => {
     setState({
       title: defaultTitle,
       titleHistory: [defaultTitle],
-      titleIndex: 0
-    })
-  }, [defaultTitle])
+      titleIndex: 0,
+    });
+  }, [defaultTitle]);
 
   useEffect(() => {
     setState({
       title: defaultTitle,
       titleHistory: [defaultTitle],
-      titleIndex: 0
-    })
-  }, [defaultTitle])
+      titleIndex: 0,
+    });
+  }, [defaultTitle]);
 
   return {
     title: state.title,
@@ -413,72 +415,72 @@ const useTitle = (defaultTitle: string | null) => {
     titleHistory: state.titleHistory,
     changeTitle,
     setHistoryTitle,
-    setDefaultTitle
-  }
-}
+    setDefaultTitle,
+  };
+};
 
 /**
  * Custom hook to manage a description with history tracking.
  */
 type DescriptionState = {
-  description: string
-  descriptionHistory: string[]
-  descriptionIndex: number
-}
+  description: string;
+  descriptionHistory: string[];
+  descriptionIndex: number;
+};
 
 export const useDescription = (defaultDescription: string) => {
   const [state, setState] = useState<DescriptionState>({
     description: defaultDescription,
     descriptionHistory: [defaultDescription],
-    descriptionIndex: 0
-  })
+    descriptionIndex: 0,
+  });
 
   const changeDescription = useCallback((newDescription: string) => {
-    setState(prev => {
-      const newHistory = [...prev.descriptionHistory.slice(0, prev.descriptionIndex + 1), newDescription]
+    setState((prev) => {
+      const newHistory = [...prev.descriptionHistory.slice(0, prev.descriptionIndex + 1), newDescription];
       return {
         description: newDescription,
         descriptionHistory: newHistory,
-        descriptionIndex: newHistory.length - 1
-      }
-    })
-  }, [])
+        descriptionIndex: newHistory.length - 1,
+      };
+    });
+  }, []);
 
   const historyDescription = useCallback((steps: number) => {
-    setState(prev => {
-      const newIndex = prev.descriptionIndex + steps
+    setState((prev) => {
+      const newIndex = prev.descriptionIndex + steps;
       if (newIndex >= 0 && newIndex < prev.descriptionHistory.length) {
         return {
           ...prev,
           description: prev.descriptionHistory[newIndex],
-          descriptionIndex: newIndex
-        }
+          descriptionIndex: newIndex,
+        };
       }
-      return prev
-    })
-  }, [])
+      return prev;
+    });
+  }, []);
 
   const setDefaultDescription = useCallback(() => {
     setState({
       description: defaultDescription,
       descriptionHistory: [defaultDescription],
-      descriptionIndex: 0
-    })
-  }, [defaultDescription])
+      descriptionIndex: 0,
+    });
+  }, [defaultDescription]);
 
   useEffect(() => {
     setState({
       description: defaultDescription,
       descriptionHistory: [defaultDescription],
-      descriptionIndex: 0
-    })
-  }, [defaultDescription])
+      descriptionIndex: 0,
+    });
+  }, [defaultDescription]);
 
   return {
     description: state.description,
     changeDescription,
     historyDescription,
     setDefaultDescription,
-    descriptionIndex: state.descriptionIndex
-  }
-}
+    descriptionIndex: state.descriptionIndex,
+  };
+};

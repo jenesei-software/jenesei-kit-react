@@ -1,56 +1,56 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import { FC, useState } from 'react'
-import 'styled-components'
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { FC, useState } from 'react';
+import 'styled-components';
 
-import { Scroll as ScrollComponent, ScrollProps } from '@local/areas/scroll'
-import { Button } from '@local/components/button'
-import { Stack } from '@local/components/stack'
-import { Typography } from '@local/components/typography'
+import { Scroll as ScrollComponent, ScrollProps } from '@local/areas/scroll';
+import { Button } from '@local/components/button';
+import { Stack } from '@local/components/stack';
+import { Typography } from '@local/components/typography';
 
 const meta: Meta<typeof ScrollComponent> = {
   component: ScrollComponent,
-  title: 'Area/Scroll'
-}
+  title: 'Area/Scroll',
+};
 
-export default meta
-type Story = StoryObj<typeof ScrollComponent>
+export default meta;
+type Story = StoryObj<typeof ScrollComponent>;
 
-const ScrollWrapper: FC<ScrollProps> = props => {
-  const [content, setContent] = useState<boolean>(false)
+const ScrollWrapper: FC<ScrollProps> = (props) => {
+  const [content, setContent] = useState<boolean>(false);
 
   const toggleContent = () => {
-    setContent(prev => !prev)
-  }
+    setContent((prev) => !prev);
+  };
 
   return (
     <ScrollComponent
       {...props}
-      sx={theme => ({
+      sx={(theme) => ({
         default: {
           width: '300px',
           padding: '12px',
           boxSizing: 'content-box',
-          backgroundColor: theme.palette.black40
-        }
+          backgroundColor: theme.palette.black40,
+        },
       })}
     >
       <Button isMinWidthAsContent onClick={toggleContent} size={'small'} genre={'gray'}>
         Toggle Content
       </Button>
       <Stack
-        sx={theme => ({
+        sx={(theme) => ({
           default: {
             width: '100px',
             height: '100px',
-            backgroundColor: theme.palette.whiteStandard
-          }
+            backgroundColor: theme.palette.whiteStandard,
+          },
         })}
       >
         <Typography
           sx={{
             default: {
-              variant: 'h7'
-            }
+              variant: 'h7',
+            },
           }}
         >
           One
@@ -58,20 +58,20 @@ const ScrollWrapper: FC<ScrollProps> = props => {
       </Stack>
       {content && (
         <Stack
-          sx={theme => ({
+          sx={(theme) => ({
             default: {
               width: '1000px',
               minWidth: '1000px',
               height: '100px',
-              backgroundColor: theme.palette.whiteStandard
-            }
+              backgroundColor: theme.palette.whiteStandard,
+            },
           })}
         >
           <Typography
             sx={{
               default: {
-                variant: 'h7'
-              }
+                variant: 'h7',
+              },
             }}
           >
             Two
@@ -79,10 +79,10 @@ const ScrollWrapper: FC<ScrollProps> = props => {
         </Stack>
       )}
     </ScrollComponent>
-  )
-}
+  );
+};
 
 export const Scroll: Story = {
-  render: args => <ScrollWrapper {...args} />,
-  args: { horizontal: true }
-}
+  render: (args) => <ScrollWrapper {...args} />,
+  args: { horizontal: true },
+};

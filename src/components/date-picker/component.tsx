@@ -759,7 +759,7 @@ export const DatePicker = (props: DatePickerProps) => {
                 }}
                 type='button'
                 $isDisabled={day.isDisabled}
-                $isDisabledOutline={day.isDisabled ??  props.isDisabledOutline}
+                $isDisabledOutline={day.isDisabled ?? props.isDisabledOutline}
                 $isOutlineBoxShadow={props.isOutlineBoxShadow}
                 $isReadOnly={props.isReadOnly}
                 $genre={props.genre}

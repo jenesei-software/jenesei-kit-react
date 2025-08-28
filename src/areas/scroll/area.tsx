@@ -1,8 +1,8 @@
-import { FC } from 'react'
+import { FC } from 'react';
 
-import { ScrollProps, StyledScroll } from '.'
+import { ScrollProps, StyledScroll } from '.';
 
-export const Scroll: FC<ScrollProps> = props => {
+export const Scroll: FC<ScrollProps> = (props) => {
   return (
     <StyledScroll
       {...props}
@@ -13,5 +13,5 @@ export const Scroll: FC<ScrollProps> = props => {
     >
       {props.children}
     </StyledScroll>
-  )
-}
+  );
+};

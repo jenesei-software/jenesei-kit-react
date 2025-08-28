@@ -1,26 +1,26 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import { FC } from 'react'
-import 'styled-components'
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { FC } from 'react';
+import 'styled-components';
 
-import { Button } from '@local/components/button'
-import { Stack } from '@local/components/stack'
-import { Typography } from '@local/components/typography'
-import { ProviderDialog, ProviderDialogProps, useDialog } from '@local/contexts/context-dialog'
+import { Button } from '@local/components/button';
+import { Stack } from '@local/components/stack';
+import { Typography } from '@local/components/typography';
+import { ProviderDialog, ProviderDialogProps, useDialog } from '@local/contexts/context-dialog';
 
 const meta: Meta<typeof ProviderDialog> = {
   component: ProviderDialog,
-  title: 'Context/Dialog'
-}
+  title: 'Context/Dialog',
+};
 
-export default meta
+export default meta;
 
-type Story = StoryObj<typeof ProviderDialog>
+type Story = StoryObj<typeof ProviderDialog>;
 
 const ProviderDialogWrapper: FC<ProviderDialogProps> = () => {
-  return <ProviderDialogWrapperDouble />
-}
+  return <ProviderDialogWrapperDouble />;
+};
 const ProviderDialogWrapperDouble: FC = () => {
-  const { add, remove } = useDialog()
+  const { add, remove } = useDialog();
 
   const handleAdd = () => {
     add({
@@ -30,39 +30,39 @@ const ProviderDialogWrapperDouble: FC = () => {
             <Typography
               sx={{
                 default: {
-                  variant: 'h6'
-                }
+                  variant: 'h6',
+                },
               }}
             >
               test
             </Typography>
           </Stack>
-        )
-      }
-    })
-  }
+        );
+      },
+    });
+  };
   return (
     <Stack
       sx={{
         default: {
           padding: '12px',
-          gap: '8px'
-        }
+          gap: '8px',
+        },
       }}
     >
-      <Button onClick={handleAdd} genre="black" size="medium">
+      <Button onClick={handleAdd} genre='black' size='medium'>
         Add Dialog!
       </Button>
-      <Button onClick={remove} genre="black" size="medium">
+      <Button onClick={remove} genre='black' size='medium'>
         Remove Dialog!
       </Button>
     </Stack>
-  )
-}
+  );
+};
 
 export const Dialog: Story = {
-  render: args => <ProviderDialogWrapper {...args} />,
+  render: (args) => <ProviderDialogWrapper {...args} />,
   args: {
-    zIndex: 100
-  }
-}
+    zIndex: 100,
+  },
+};

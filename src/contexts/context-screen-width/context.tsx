@@ -1,67 +1,67 @@
-import { FC, createContext, useEffect, useMemo, useState } from 'react'
-import { useTheme } from 'styled-components'
+import { FC, createContext, useEffect, useMemo, useState } from 'react';
+import { useTheme } from 'styled-components';
 
-import { ProviderScreenWidthProps, ScreenWidthContextProps, Screens } from '.'
+import { ProviderScreenWidthProps, ScreenWidthContextProps, Screens } from '.';
 
-export const ScreenWidthContext = createContext<ScreenWidthContextProps | null>(null)
+export const ScreenWidthContext = createContext<ScreenWidthContextProps | null>(null);
 
-export const ProviderScreenWidth: FC<ProviderScreenWidthProps> = props => {
-  const theme = useTheme()
-  const [screenWidth, setScreenWidth] = useState<Screens>('default')
+export const ProviderScreenWidth: FC<ProviderScreenWidthProps> = (props) => {
+  const theme = useTheme();
+  const [screenWidth, setScreenWidth] = useState<Screens>('default');
 
   const screens: ScreenWidthContextProps['screens'] = useMemo(() => {
     const allSizes = Object.entries(theme.screens).map(([key]) => {
       return {
         isScreen: screenWidth === key,
-        value: key as Screens
-      }
-    })
-    return allSizes
-  }, [screenWidth, theme.screens])
+        value: key as Screens,
+      };
+    });
+    return allSizes;
+  }, [screenWidth, theme.screens]);
 
   const screenActual: ScreenWidthContextProps['screenActual'] = useMemo(() => {
-    const find = screens.find(item => item.isScreen)
-    return find?.value ?? 'default'
-  }, [screens])
+    const find = screens.find((item) => item.isScreen);
+    return find?.value ?? 'default';
+  }, [screens]);
 
   useEffect(() => {
     const sortedScreens = Object.entries(theme.screens)
       .map(([key, value]) => ({
         key: key as Screens,
-        bp: (value as { width: number }).width
+        bp: (value as { width: number }).width,
       }))
-      .sort((a, b) => a.bp - b.bp)
+      .sort((a, b) => a.bp - b.bp);
 
     const queries = sortedScreens.map(({ key, bp }) => {
-      return { key, mq: window.matchMedia(`(max-width: ${bp}px)`) }
-    })
+      return { key, mq: window.matchMedia(`(max-width: ${bp}px)`) };
+    });
     const updateScreen = () => {
       for (const { key, mq } of queries) {
         if (mq.matches) {
-          setScreenWidth(key)
-          return
+          setScreenWidth(key);
+          return;
         }
       }
       // На всякий случай fallback
-      setScreenWidth('default')
-    }
+      setScreenWidth('default');
+    };
 
-    queries.forEach(({ mq }) => mq.addEventListener('change', updateScreen))
-    updateScreen()
+    queries.forEach(({ mq }) => mq.addEventListener('change', updateScreen));
+    updateScreen();
 
     return () => {
-      queries.forEach(({ mq }) => mq.removeEventListener('change', updateScreen))
-    }
-  }, [theme.screens])
+      queries.forEach(({ mq }) => mq.removeEventListener('change', updateScreen));
+    };
+  }, [theme.screens]);
   return (
     <ScreenWidthContext.Provider
       value={{
         screens,
         screenActual,
-        screenWidth
+        screenWidth,
       }}
     >
       {props.children}
     </ScreenWidthContext.Provider>
-  )
-}
+  );
+};

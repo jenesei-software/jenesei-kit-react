@@ -1,17 +1,17 @@
-import { useCallback, useRef } from 'react'
+import { useCallback, useRef } from 'react';
 
 export const useDebouncedCallback = (callback: () => void, delay: number = 300) => {
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const debouncedCallback = useCallback(() => {
-    if (timeoutRef.current) return
+    if (timeoutRef.current) return;
 
-    callback()
+    callback();
 
     timeoutRef.current = setTimeout(() => {
-      timeoutRef.current = null
-    }, delay)
-  }, [callback, delay])
+      timeoutRef.current = null;
+    }, delay);
+  }, [callback, delay]);
 
-  return debouncedCallback
-}
+  return debouncedCallback;
+};

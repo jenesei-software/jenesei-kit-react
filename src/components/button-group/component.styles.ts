@@ -1,8 +1,8 @@
-import { css, styled } from 'styled-components'
+import { css, styled } from 'styled-components';
 
-import { addSX } from '@local/styles/sx'
+import { addSX } from '@local/styles/sx';
 
-import { StyledButtonGroupProps } from '.'
+import { StyledButtonGroupProps } from '.';
 
 /****************************************** Position *************************************************/
 const ButtonGroupWrapperPositionHorizontal = css`
@@ -27,7 +27,7 @@ const ButtonGroupWrapperPositionHorizontal = css`
       }
     }
   }
-`
+`;
 
 const ButtonGroupWrapperPositionVertical = css`
   display: flex;
@@ -49,7 +49,7 @@ const ButtonGroupWrapperPositionVertical = css`
       }
     }
   }
-`
+`;
 
 export const ButtonGroupWrapper = styled.div<StyledButtonGroupProps>`
   & #jenesei-button {
@@ -57,7 +57,7 @@ export const ButtonGroupWrapper = styled.div<StyledButtonGroupProps>`
       z-index: 1;
     }
   }
-  ${props =>
+  ${(props) =>
     props.$position === 'horizontal' ? ButtonGroupWrapperPositionHorizontal : ButtonGroupWrapperPositionVertical};
   ${addSX};
-`
+`;

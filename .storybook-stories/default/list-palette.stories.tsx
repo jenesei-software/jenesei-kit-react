@@ -1,11 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import { FC } from 'react'
-import 'styled-components'
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { FC } from 'react';
+import 'styled-components';
 
-import { Stack } from '@local/components/stack'
-import { JeneseiPalette } from '@local/theme'
+import { Stack } from '@local/components/stack';
+import { JeneseiPalette } from '@local/theme';
 
-import { WrapperBig } from './tools'
+import { WrapperBig } from './tools';
 
 const PaletteWrapper: FC = () => {
   return (
@@ -13,7 +13,7 @@ const PaletteWrapper: FC = () => {
       {Object.entries(JeneseiPalette).map(([key, color]) => (
         <Stack
           key={key}
-          sx={theme => ({
+          sx={(theme) => ({
             default: {
               backgroundColor: color,
               borderRadius: '4px',
@@ -24,8 +24,8 @@ const PaletteWrapper: FC = () => {
               height: '64px',
               minWidth: '160px',
               border: '1px dashed',
-              borderColor: theme.palette.blueHover
-            }
+              borderColor: theme.palette.blueHover,
+            },
           })}
         >
           {color}
@@ -34,15 +34,15 @@ const PaletteWrapper: FC = () => {
         </Stack>
       ))}
     </WrapperBig>
-  )
-}
+  );
+};
 const meta: Meta = {
   component: PaletteWrapper,
-  title: 'List/Palette'
-}
+  title: 'List/Palette',
+};
 
-export default meta
+export default meta;
 
-type Story = StoryObj
+type Story = StoryObj;
 
-export const Palette: Story = {}
+export const Palette: Story = {};

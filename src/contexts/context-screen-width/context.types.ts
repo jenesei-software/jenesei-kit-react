@@ -1,20 +1,20 @@
-import { PropsWithChildren } from 'react'
+import { PropsWithChildren } from 'react';
 
-import { IThemeScreen, IThemeDevice } from '@local/theme'
+import { IThemeScreen, IThemeDevice } from '@local/theme';
 
-export type ProviderScreenWidthProps = PropsWithChildren
+export type ProviderScreenWidthProps = PropsWithChildren;
 
-export type Screens = keyof IThemeScreen
+export type Screens = keyof IThemeScreen;
 
 export interface ScreenWidthContextProps {
-  screenWidth: Screens
+  screenWidth: Screens;
   screens: {
-    value: Screens
-    isScreen: boolean
-  }[]
-  screenActual: Screens
+    value: Screens;
+    isScreen: boolean;
+  }[];
+  screenActual: Screens;
 }
 
 export type ScreenWidthProps<T> = {
-  [K in IThemeDevice]?: T
-}
+  [K in IThemeDevice]?: T;
+};

@@ -1,16 +1,16 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import 'styled-components'
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import 'styled-components';
 
-import { Button } from '@local/components/button'
+import { Button } from '@local/components/button';
 
 const meta: Meta<typeof Button> = {
   component: Button,
-  title: 'BustMarket/Button'
-}
+  title: 'BustMarket/Button',
+};
 
-export default meta
+export default meta;
 
-type Story = StoryObj<typeof Button>
+type Story = StoryObj<typeof Button>;
 
 export const Gray: Story = {
   args: {
@@ -22,18 +22,18 @@ export const Gray: Story = {
     size: 'medium',
     sx: {
       default: {
-        width: 'auto'
-      }
+        width: 'auto',
+      },
     },
     sxTypography: {
       default: {
         family: 'Manrope',
         weight: 400,
         size: 14,
-      }
-    }
-  }
-}
+      },
+    },
+  },
+};
 export const Violet: Story = {
   args: {
     children: 'Violet',
@@ -42,18 +42,18 @@ export const Violet: Story = {
     size: 'medium',
     sx: {
       default: {
-        width: 'auto'
-      }
+        width: 'auto',
+      },
     },
     sxTypography: {
       default: {
         family: 'Manrope',
         weight: 400,
         size: 14,
-      }
-    }
-  }
-}
+      },
+    },
+  },
+};
 export const WhiteViolet: Story = {
   args: {
     children: 'White Violet',
@@ -62,18 +62,18 @@ export const WhiteViolet: Story = {
     size: 'medium',
     sx: {
       default: {
-        width: 'auto'
-      }
+        width: 'auto',
+      },
     },
     sxTypography: {
       default: {
         family: 'Manrope',
         weight: 400,
         size: 14,
-      }
-    }
-  }
-}
+      },
+    },
+  },
+};
 export const GrayViolet: Story = {
   args: {
     children: 'Gray Violet',
@@ -82,15 +82,15 @@ export const GrayViolet: Story = {
     size: 'medium',
     sx: {
       default: {
-        width: 'auto'
-      }
+        width: 'auto',
+      },
     },
     sxTypography: {
       default: {
         family: 'Manrope',
         weight: 400,
         size: 14,
-      }
-    }
-  }
-}
+      },
+    },
+  },
+};

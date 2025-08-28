@@ -1,48 +1,48 @@
-import { FC, createContext, useEffect, useState } from 'react'
+import { FC, createContext, useEffect, useState } from 'react';
 
-import { usePermission } from '@local/contexts/context-permission'
+import { usePermission } from '@local/contexts/context-permission';
 
-import { GeolocationContextProps, ProviderGeolocationProps } from '.'
+import { GeolocationContextProps, ProviderGeolocationProps } from '.';
 
-export const GeolocationContext = createContext<GeolocationContextProps | null>(null)
+export const GeolocationContext = createContext<GeolocationContextProps | null>(null);
 
-export const ProviderGeolocation: FC<ProviderGeolocationProps> = props => {
-  const { geolocationPermission, requestGeolocationPermission } = usePermission()
+export const ProviderGeolocation: FC<ProviderGeolocationProps> = (props) => {
+  const { geolocationPermission, requestGeolocationPermission } = usePermission();
 
-  const [location, setLocation] = useState<GeolocationPosition | null>(null)
-  const [error, setError] = useState<GeolocationPositionError | null>(null)
+  const [location, setLocation] = useState<GeolocationPosition | null>(null);
+  const [error, setError] = useState<GeolocationPositionError | null>(null);
 
   useEffect(() => {
     const handleSuccess = (position: GeolocationPosition) => {
-      setLocation(position)
-    }
+      setLocation(position);
+    };
 
     const handleError = (error: GeolocationPositionError) => {
-      setError(error)
-    }
+      setError(error);
+    };
 
     if (geolocationPermission === 'granted') {
-      navigator.geolocation.getCurrentPosition(handleSuccess, handleError)
+      navigator.geolocation.getCurrentPosition(handleSuccess, handleError);
     }
-  }, [geolocationPermission, props.isAskEntrance, requestGeolocationPermission])
+  }, [geolocationPermission, props.isAskEntrance, requestGeolocationPermission]);
 
   useEffect(() => {
     if (props.isAskEntrance) {
       if (geolocationPermission !== 'granted') {
-        requestGeolocationPermission()
+        requestGeolocationPermission();
       }
     }
-  }, [geolocationPermission, props.isAskEntrance, requestGeolocationPermission])
+  }, [geolocationPermission, props.isAskEntrance, requestGeolocationPermission]);
   return (
     <GeolocationContext.Provider
       value={{
         requestGeolocationPermission,
         geolocationPermission,
         location,
-        error
+        error,
       }}
     >
       {props.children}
     </GeolocationContext.Provider>
-  )
-}
+  );
+};

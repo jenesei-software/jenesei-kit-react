@@ -140,7 +140,7 @@ export enum ENUM_ICON_REALEBAIL {
 }
 export enum ENUM_ICON_LOGO {
   Jenesei,
-  BustMarket
+  BustMarket,
 }
 export enum ENUM_ICON_BUSTMARKET {
   Card,
@@ -148,7 +148,7 @@ export enum ENUM_ICON_BUSTMARKET {
   Heart,
   Reviews,
   Search,
-  Menu
+  Menu,
 }
 export type TIconIdNameString = keyof typeof ENUM_ICON_ID;
 export type TIconCheckboxNameString = keyof typeof ENUM_ICON_CHECKBOX;

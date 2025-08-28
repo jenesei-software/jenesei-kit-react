@@ -1,21 +1,21 @@
-import { FC } from 'react'
+import { FC } from 'react';
 
-import { StackMotion, StackProps } from '@local/components/stack'
+import { StackMotion, StackProps } from '@local/components/stack';
 
-export const Smooth: FC<StackProps> = props => {
+export const Smooth: FC<StackProps> = (props) => {
   return (
     <StackMotion
       transition={{
         layout: {
           duration: 0.3,
           ease: 'easeInOut',
-          type: 'spring'
-        }
+          type: 'spring',
+        },
       }}
       layout
       {...props}
     >
       {props.children}
     </StackMotion>
-  )
-}
+  );
+};

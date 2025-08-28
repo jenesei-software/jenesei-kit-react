@@ -60,7 +60,8 @@ type ButtonPropsDefault = PropsWithChildren & {
   onMouseDown?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   type?: 'button' | 'submit' | 'reset';
 } & addSXProps &
-  addFontProps & addOutlineProps &
+  addFontProps &
+  addOutlineProps &
   addSXTypographyProps;
 
 export type ButtonPropsStandard = ButtonPropsDefault & {
@@ -89,7 +90,8 @@ export type StyledDollarButtonProps = AddDollarSign<
     | 'font'
   >
 > &
-  addSXStyleProps & addOutlinePropsDollar &
+  addSXStyleProps &
+  addOutlinePropsDollar &
   addSXTypographyStyleProps;
 
 export type StyledDollarButtonIconsWrapperProps = AddDollarSign<

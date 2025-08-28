@@ -1,16 +1,16 @@
-import { AddDollarSign } from '@local/types'
+import { AddDollarSign } from '@local/types';
 
 export interface RippleProps {
-  duration?: number
-  color?: string
-  isDisabled?: boolean
-  isHidden?: boolean
+  duration?: number;
+  color?: string;
+  isDisabled?: boolean;
+  isHidden?: boolean;
 }
 
 export interface RippleArrayElement {
-  x: number
-  y: number
-  size: number
+  x: number;
+  y: number;
+  size: number;
 }
 
-export type RippleContainerProps = AddDollarSign<RippleProps>
+export type RippleContainerProps = AddDollarSign<RippleProps>;
