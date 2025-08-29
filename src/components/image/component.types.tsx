@@ -1,6 +1,6 @@
-import { ReactNode } from 'react';
-
 import { addSXProps, addSXStyleProps } from '@local/styles/sx';
+
+import { ReactNode } from 'react';
 
 export interface ImageProps {
   alt: string;
