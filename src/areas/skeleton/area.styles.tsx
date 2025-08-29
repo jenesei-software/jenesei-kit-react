@@ -1,5 +1,4 @@
 import { Stack } from '@local/components/stack';
-import { addTransition } from '@local/styles/add';
 
 import styled, { css, keyframes } from 'styled-components';
 
