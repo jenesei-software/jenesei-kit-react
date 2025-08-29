@@ -57,6 +57,8 @@ export const StyledSkeleton = styled(Stack)<StyledSkeletonProps>`
   `}
   & > * {
     opacity: ${(props) => (!props.$visible ? 0 : 1)};
-    ${addTransition};
+    transition:
+      outline 0s,
+      opacity ${(props) => props.theme.transition.default};
   }
 `;
