@@ -1,7 +1,8 @@
-import { FC, Ref, memo } from 'react';
-
 import { Typography } from '@local/components/typography';
 
+import { FC, memo, Ref } from 'react';
+
+import { usePopover } from '../popover';
 import {
   DEFAULT_TOOLTIP_OFFSET_FALLBACK,
   DEFAULT_TOOLTIP_PLACEMENT_FALLBACK,
@@ -9,10 +10,9 @@ import {
   TooltipContainer,
   TooltipProps,
 } from '.';
-import { usePopover } from '../popover';
 
 export const Tooltip: FC<TooltipProps> = memo((props) => {
-  if (props.isDisabled) return <>{props.children}</>;
+  if (props.isDisabled) return <TooltipContainer sx={props.sx}>{props.children}</TooltipContainer>;
 
   return <TooltipContent {...props} />;
 });

@@ -1,6 +1,6 @@
-import styled, { css } from 'styled-components';
-
 import { IThemeSizePropertyDefault, KEY_SIZE_DATA } from '@local/theme';
+
+import styled, { css } from 'styled-components';
 
 import { Popover, PopoverProps } from '../popover';
 import { Stack } from '../stack';
