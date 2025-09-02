@@ -1,6 +1,6 @@
-import React, { FC, useCallback } from 'react';
-
 import { Stack } from '@local/components/stack';
+
+import React, { FC, useCallback } from 'react';
 
 import {
   AccordionDetails,

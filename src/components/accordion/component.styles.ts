@@ -1,7 +1,7 @@
-import styled, { css } from 'styled-components';
-
 import { Icon } from '@local/components/icon';
 import { addTransition } from '@local/styles/add';
+
+import styled, { css } from 'styled-components';
 
 import { AccordionDetailsProps, AccordionStyledIconProps, AccordionSummaryContentProps } from '.';
 

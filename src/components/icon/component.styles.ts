@@ -1,8 +1,8 @@
-import styled, { css } from 'styled-components';
-
 import { addColorTransition } from '@local/styles/add';
 import { addSX } from '@local/styles/sx';
 import { KEY_SIZE_DATA } from '@local/theme';
+
+import styled, { css } from 'styled-components';
 
 import { StyledIconIdItemProps } from '.';
 

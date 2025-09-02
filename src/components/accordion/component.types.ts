@@ -1,16 +1,23 @@
-import { ReactNode } from 'react';
-
 import { StackProps } from '@local/components/stack';
 import { AddDollarSign } from '@local/types';
 
+import { ReactNode } from 'react';
+
 export interface AccordionProps {
-  wrapperProps: StackProps;
-  accordionSummary: ReactNode;
   accordionDetails: ReactNode;
+
+  accordionSummary: ReactNode;
+
   expanded: boolean;
+
+  wrapperProps: StackProps;
+
   isAccordionIcon?: boolean;
-  onClickSummary?: () => void;
+
   onClickIcon?: () => void;
+
+  onClickSummary?: () => void;
+
   triggerUpdate?: unknown[];
 }
 

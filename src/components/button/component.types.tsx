@@ -1,4 +1,4 @@
-import { IconItemProps } from '@local/components/icon';
+import { addIconsGetIconComponentsProps } from '@local/components/icon';
 import { addFontProps, addOutlineProps, addOutlinePropsDollar } from '@local/styles/add';
 import { addSXProps, addSXStyleProps } from '@local/styles/sx';
 import { IThemeGenre, IThemeSize } from '@local/theme';
@@ -22,14 +22,7 @@ type ButtonPropsDefault = PropsWithChildren & {
 
   className?: string;
 
-  icons?: (
-    | (Omit<IconItemProps<'id'>, 'size'> & { isHidden?: boolean; size?: IconItemProps<'id'>['size'] })
-    | (Omit<IconItemProps<'checkbox'>, 'size'> & { isHidden?: boolean; size?: IconItemProps<'checkbox'>['size'] })
-    | (Omit<IconItemProps<'loading'>, 'size'> & { isHidden?: boolean; size?: IconItemProps<'loading'>['size'] })
-    | (Omit<IconItemProps<'realebail'>, 'size'> & { isHidden?: boolean; size?: IconItemProps<'realebail'>['size'] })
-    | (Omit<IconItemProps<'logo'>, 'size'> & { isHidden?: boolean; size?: IconItemProps<'logo'>['size'] })
-    | (Omit<IconItemProps<'bustmarket'>, 'size'> & { isHidden?: boolean; size?: IconItemProps<'logo'>['size'] })
-  )[];
+  icons?: addIconsGetIconComponentsProps;
 
   isDisabled?: boolean;
 

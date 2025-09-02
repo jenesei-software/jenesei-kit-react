@@ -92,6 +92,15 @@ const IconWrapperAll: FC = () => {
               primaryColor='black100'
             />
           ))}
+          {Object.keys(ENUM_ICON_LOADING).map((item) => (
+            <IconComponent
+              key={item}
+              type={'loading'}
+              name={item as keyof typeof ENUM_ICON_LOADING}
+              size={'large'}
+              primaryColor='blueBr'
+            />
+          ))}
         </WrapperMin>
       </WrapperBig>
       <WrapperBig sx={{ default: { flexDirection: 'column' } }}>

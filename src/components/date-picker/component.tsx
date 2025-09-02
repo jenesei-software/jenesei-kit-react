@@ -524,8 +524,9 @@ export const DatePicker = (props: DatePickerProps) => {
             disabled={props?.isDisabled || props?.isReadOnly}
             style={{
               position: 'absolute',
+               left: '-100dvw',
               top: 0,
-              left: 0,
+              // left: 0,
               width: '100%',
               height: '100%',
               opacity: 0,

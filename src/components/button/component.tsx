@@ -1,12 +1,4 @@
-import {
-  Icon,
-  TIconBustMarketNameString,
-  TIconCheckboxNameString,
-  TIconIdNameString,
-  TIconLoadingNameString,
-  TIconLogoNameString,
-  TIconRealEbailNameString,
-} from '@local/components/icon';
+import { getIconComponents } from '@local/components/icon';
 import { Ripple } from '@local/components/ripple';
 import { KEY_SIZE_DATA } from '@local/theme';
 
@@ -20,66 +12,7 @@ export const Button: FC<ButtonProps> = (props) => {
   const theme = useTheme();
 
   const iconComponents = useMemo(
-    () =>
-      (props.icons ?? [])
-        ?.filter((icon) => !icon.isHidden)
-        ?.map((icon, index) =>
-          icon?.type === 'id' ? (
-            <Icon
-              key={`${icon.type}-${icon.name}-${index}`}
-              name={icon?.name as TIconIdNameString}
-              type='id'
-              size={icon?.size ?? props.size}
-              turn={icon.turn}
-              order={icon.order}
-            />
-          ) : icon?.type === 'logo' ? (
-            <Icon
-              key={`${icon.type}-${icon.name}-${index}`}
-              name={icon?.name as TIconLogoNameString}
-              type='logo'
-              size={icon?.size ?? props.size}
-              turn={icon.turn}
-              order={icon.order}
-            />
-          ) : icon?.type === 'bustmarket' ? (
-            <Icon
-              key={`${icon.type}-${icon.name}-${index}`}
-              name={icon?.name as TIconBustMarketNameString}
-              type='bustmarket'
-              size={icon?.size ?? props.size}
-              turn={icon.turn}
-              order={icon.order}
-            />
-          ) : icon?.type === 'checkbox' ? (
-            <Icon
-              key={`${icon.type}-${icon.name}-${index}`}
-              name={icon?.name as TIconCheckboxNameString}
-              type='checkbox'
-              size={icon?.size ?? props.size}
-              turn={icon.turn}
-              order={icon.order}
-            />
-          ) : icon?.type === 'loading' ? (
-            <Icon
-              key={`${icon.type}-${icon.name}-${index}`}
-              name={icon?.name as TIconLoadingNameString}
-              type='loading'
-              size={icon?.size ?? props.size}
-              turn={icon.turn}
-              order={icon.order}
-            />
-          ) : icon?.type === 'realebail' ? (
-            <Icon
-              key={`${icon.type}-${icon.name}-${index}`}
-              name={icon?.name as TIconRealEbailNameString}
-              type='realebail'
-              size={icon?.size ?? props.size}
-              turn={icon.turn}
-              order={icon.order}
-            />
-          ) : null,
-        ),
+    () => getIconComponents({ icons: props.icons ?? [], size: props.size }),
     [props.icons, props.size],
   );
 
