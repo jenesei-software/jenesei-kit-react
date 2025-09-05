@@ -1,15 +1,9 @@
 import type { Meta } from '@storybook/react-vite';
 import 'styled-components';
 
-import {
-  ENUM_ICON_CHECKBOX,
-  ENUM_ICON_ID,
-  ENUM_ICON_LOADING,
-  ENUM_ICON_LOGO,
-  Icon as IconComponent,
-} from '@local/components/icon';
+import { Icon as IconComponent } from '@local/components/icon';
 import { Typography } from '@local/components/typography';
-import { IThemePaletteKeys, JeneseiPalette } from '@local/theme';
+import { IThemePaletteKeys, JeneseiPalette, ThemeLight } from '@local/theme';
 
 import { FC } from 'react';
 
@@ -37,14 +31,8 @@ const IconWrapperAll: FC = () => {
           ID
         </Typography>
         <WrapperMin>
-          {Object.keys(ENUM_ICON_ID).map((item) => (
-            <IconComponent
-              key={item}
-              type={'id'}
-              name={item as keyof typeof ENUM_ICON_ID}
-              size={'large'}
-              primaryColor='black100'
-            />
+          {ThemeLight.icon.map.id.map((item) => (
+            <IconComponent key={item} type='id' name={item} size={'large'} primaryColor='black100' />
           ))}
         </WrapperMin>
       </WrapperBig>
@@ -60,14 +48,8 @@ const IconWrapperAll: FC = () => {
           Checkbox
         </Typography>
         <WrapperMin>
-          {Object.keys(ENUM_ICON_CHECKBOX).map((item) => (
-            <IconComponent
-              key={item}
-              type={'checkbox'}
-              name={item as keyof typeof ENUM_ICON_CHECKBOX}
-              size={'large'}
-              primaryColor='black100'
-            />
+          {ThemeLight.icon.map.checkbox.map((item) => (
+            <IconComponent key={item} type={'checkbox'} name={item} size={'large'} primaryColor='black100' />
           ))}
         </WrapperMin>
       </WrapperBig>
@@ -83,23 +65,11 @@ const IconWrapperAll: FC = () => {
           Loading
         </Typography>
         <WrapperMin>
-          {Object.keys(ENUM_ICON_LOADING).map((item) => (
-            <IconComponent
-              key={item}
-              type={'loading'}
-              name={item as keyof typeof ENUM_ICON_LOADING}
-              size={'large'}
-              primaryColor='black100'
-            />
+          {ThemeLight.icon.map.loading.map((item) => (
+            <IconComponent key={item} type={'loading'} name={item} size={'large'} primaryColor='black100' />
           ))}
-          {Object.keys(ENUM_ICON_LOADING).map((item) => (
-            <IconComponent
-              key={item}
-              type={'loading'}
-              name={item as keyof typeof ENUM_ICON_LOADING}
-              size={'large'}
-              primaryColor='blueBr'
-            />
+          {ThemeLight.icon.map.loading.map((item) => (
+            <IconComponent key={item} type={'loading'} name={item} size={'large'} primaryColor='blueBr' />
           ))}
         </WrapperMin>
       </WrapperBig>
@@ -115,14 +85,8 @@ const IconWrapperAll: FC = () => {
           Logo
         </Typography>
         <WrapperMin>
-          {Object.keys(ENUM_ICON_LOGO).map((item) => (
-            <IconComponent
-              key={item}
-              type={'logo'}
-              name={item as keyof typeof ENUM_ICON_LOGO}
-              size={'large'}
-              primaryColor='black100'
-            />
+          {ThemeLight.icon.map.logo.map((item) => (
+            <IconComponent key={item} type={'logo'} name={item} size={'large'} primaryColor='black100' />
           ))}
         </WrapperMin>
       </WrapperBig>

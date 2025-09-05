@@ -317,6 +317,15 @@ export type IThemePaletteKeys =
   | 'inherit'
   | 'currentColor';
 export interface ITheme {
+  icon: {
+    mapType: ('id' | 'checkbox' | 'loading' | 'realebail' | 'logo' | 'bustmarket')[];
+    map: Record<ITheme['icon']['mapType'][number], string[]>;
+    getIconId: (props: {
+      type: keyof ITheme['icon']['map'];
+      name: ITheme['icon']['map'][keyof ITheme['icon']['map']][number];
+    }) => string;
+    getSpriteUrl: (props: { type: keyof ITheme['icon']['map'] }) => string;
+  };
   states: {
     focus: string;
     danger: string;

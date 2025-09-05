@@ -1,12 +1,15 @@
 import { useMemo } from 'react';
+import { DefaultTheme, useTheme } from 'styled-components';
 
-import { IconItemProps, IconTypeMap, StyledSVG, useLazyInjectSprite } from '.';
+import { IconItemProps, StyledSVG, useLazyInjectSprite } from '.';
 
-const VERSION = "1.3.15";
-
-export const Icon = <T extends keyof IconTypeMap>(props: IconItemProps<T>) => {
-  const iconHref = useMemo(() => `#${props.type}-${props.name}`, [props.name, props.type]);
-  const spriteUrl = useMemo(() => `https://jenesei.ru/assets/${props.type}.svg?v=${VERSION}`, [props.type]);
+export const Icon = <T extends keyof DefaultTheme['icon']['map']>(props: IconItemProps<T>) => {
+  const theme = useTheme();
+  const iconId = useMemo(
+    () => theme.icon.getIconId({ type: props.type, name: props.name }),
+    [props.name, props.type, theme.icon.getIconId],
+  );
+  const spriteUrl = useMemo(() => theme.icon.getSpriteUrl({ type: props.type }), [props.type, theme.icon.getSpriteUrl]);
   const loaded = useLazyInjectSprite(spriteUrl);
 
   if (!loaded) return null;
@@ -26,7 +29,7 @@ export const Icon = <T extends keyof IconTypeMap>(props: IconItemProps<T>) => {
       onClick={props.onClick}
       tabIndex={props.tabIndex}
     >
-      <use href={iconHref} />
+      <use href={iconId} />
     </StyledSVG>
   );
 };

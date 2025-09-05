@@ -1,4 +1,3 @@
-import { TIconIdNameString } from '@local/components/icon';
 import { addFontProps } from '@local/styles/add';
 import { ITheme, IThemeGenre } from '@local/theme/theme.interface';
 import { AddDollarSign } from '@local/types';

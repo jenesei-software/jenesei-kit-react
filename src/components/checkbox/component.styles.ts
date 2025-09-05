@@ -98,18 +98,18 @@ export const StyledIcon = styled(Icon)<StyledIconProps>`
   ${(props) =>
     props.$checked
       ? css`
-          & .check {
+          & [data-check='true'] {
             color: inherit;
           }
-          & .uncheck {
+          & [data-check='false'] {
             color: transparent;
           }
         `
       : css`
-          & .check {
+          & [data-check='true'] {
             color: transparent;
           }
-          & .uncheck {
+          & [data-check='false'] {
             color: inherit;
           }
         `}

@@ -4,9 +4,9 @@ import { KEY_SIZE_DATA } from '@local/theme';
 
 import styled, { css } from 'styled-components';
 
-import { StyledIconIdItemProps } from '.';
+import { StyledIconItemProps } from '.';
 
-export const StyledSVG = styled.svg<StyledIconIdItemProps>`
+export const StyledSVG = styled.svg<StyledIconItemProps>`
   color: ${(props) => (props.$color ? props.theme.palette[props.$color] : 'inherit')};
 
   ${(props) => css`

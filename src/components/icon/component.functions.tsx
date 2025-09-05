@@ -1,24 +1,16 @@
 import { useEffect, useState } from 'react';
+import { DefaultTheme } from 'styled-components';
 
-import {
-  getIconComponentsProps,
-  Icon,
-  TIconBustMarketNameString,
-  TIconCheckboxNameString,
-  TIconIdNameString,
-  TIconLoadingNameString,
-  TIconLogoNameString,
-  TIconRealEbailNameString,
-} from '.';
+import { getIconComponentsProps, Icon } from '.';
 
-export const getIconComponents: getIconComponentsProps = (props) =>
-  (props.icons ?? [])
+export function getIconComponents<T extends keyof DefaultTheme['icon']['map']>(props: getIconComponentsProps<T>) {
+  return (props.icons ?? [])
     ?.filter((icon) => !icon.isHidden)
     ?.map((icon, index) =>
       icon?.type === 'id' ? (
         <Icon
           key={`${icon.type}-${icon.name}-${index}`}
-          name={icon?.name as TIconIdNameString}
+          name={icon?.name}
           type='id'
           size={icon?.size ?? props.size}
           turn={icon.turn}
@@ -27,7 +19,7 @@ export const getIconComponents: getIconComponentsProps = (props) =>
       ) : icon?.type === 'logo' ? (
         <Icon
           key={`${icon.type}-${icon.name}-${index}`}
-          name={icon?.name as TIconLogoNameString}
+          name={icon?.name}
           type='logo'
           size={icon?.size ?? props.size}
           turn={icon.turn}
@@ -36,7 +28,7 @@ export const getIconComponents: getIconComponentsProps = (props) =>
       ) : icon?.type === 'bustmarket' ? (
         <Icon
           key={`${icon.type}-${icon.name}-${index}`}
-          name={icon?.name as TIconBustMarketNameString}
+          name={icon?.name}
           type='bustmarket'
           size={icon?.size ?? props.size}
           turn={icon.turn}
@@ -45,7 +37,7 @@ export const getIconComponents: getIconComponentsProps = (props) =>
       ) : icon?.type === 'checkbox' ? (
         <Icon
           key={`${icon.type}-${icon.name}-${index}`}
-          name={icon?.name as TIconCheckboxNameString}
+          name={icon?.name}
           type='checkbox'
           size={icon?.size ?? props.size}
           turn={icon.turn}
@@ -54,7 +46,7 @@ export const getIconComponents: getIconComponentsProps = (props) =>
       ) : icon?.type === 'loading' ? (
         <Icon
           key={`${icon.type}-${icon.name}-${index}`}
-          name={icon?.name as TIconLoadingNameString}
+          name={icon?.name}
           type='loading'
           size={icon?.size ?? props.size}
           turn={icon.turn}
@@ -63,7 +55,7 @@ export const getIconComponents: getIconComponentsProps = (props) =>
       ) : icon?.type === 'realebail' ? (
         <Icon
           key={`${icon.type}-${icon.name}-${index}`}
-          name={icon?.name as TIconRealEbailNameString}
+          name={icon?.name}
           type='realebail'
           size={icon?.size ?? props.size}
           turn={icon.turn}
@@ -71,7 +63,7 @@ export const getIconComponents: getIconComponentsProps = (props) =>
         />
       ) : null,
     );
-
+}
 export function useInjectSprites(urls: string[]) {
   useEffect(() => {
     const containers: HTMLDivElement[] = [];
