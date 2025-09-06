@@ -1,6 +1,14 @@
 import { getContrastYIQ } from '@local/functions';
 
 import {
+  ThemeMapBustmarket,
+  ThemeMapCheckbox,
+  ThemeMapId,
+  ThemeMapLoading,
+  ThemeMapLogo,
+  ThemeMapRealebail,
+} from './theme.interface';
+import {
   ITheme,
   IThemeGenre,
   IThemeGenreDate,
@@ -14,14 +22,7 @@ import {
   IThemeSize,
   IThemeSizePropertyDefault,
   IThemeSizePropertyToggle,
-  ThemeMapBustmarket,
-  ThemeMapCheckbox,
-  ThemeMapId,
-  ThemeMapLoading,
-  ThemeMapLogo,
-  ThemeMapRealebail,
 } from '.';
-
 export const JeneseiPalette: Record<IThemePaletteKeys, string> = {
   currentColor: 'currentColor',
   inherit: 'inherit',
