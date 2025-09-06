@@ -17,12 +17,12 @@ const meta: Meta<typeof DatePickerComponent> = {
 export default meta;
 
 const DatePickerWrapperAll: FC = () => {
-  const [valueOne, setValueOne] = useState<number | null>(null);
+  const [valueOne, setValueOne] = useState<number | null>(moment.utc().startOf('day').valueOf());
   const [valueTwo, setValueTwo] = useState<number | null>(null);
   const [valueThree, setValueThree] = useState<number | null>(null);
   return (
     <WrapperBig sx={{ default: { flexDirection: 'row' } }}>
-      <WrapperBig sx={{ default: { flexDirection: 'column' } }}>
+      <WrapperBig sx={{ default: { flexDirection: 'column', color: 'black' } }}>
         <Typography
           sx={{
             default: {
@@ -33,7 +33,9 @@ const DatePickerWrapperAll: FC = () => {
         >
           Other - Past hundred years, blackBorder
         </Typography>
+        valueOne : {valueOne}
         <DatePickerComponent
+          isOutlineBoxShadow
           genre='blackBorder'
           notValidDate={{
             errorMessage: 'Not valid date',

@@ -408,6 +408,13 @@ export const DatePicker = (props: DatePickerProps) => {
 
   useEffect(() => {
     setValueMoment(props.value || props.defaultValue ? moment(props.value ?? props.defaultValue).utc() : null);
+    if (props.value) {
+      setInput({
+        [DatePickerVariant.DD]: moment(props.value).utc().date(),
+        [DatePickerVariant.MM]: moment(props.value).utc().month() + 1,
+        [DatePickerVariant.YYYY]: moment(props.value).utc().year(),
+      });
+    }
   }, [props.value, props.defaultValue]);
 
   const getValidateInput = useCallback(
@@ -513,7 +520,7 @@ export const DatePicker = (props: DatePickerProps) => {
           }
           $isOpen={isOpen || !!activeSegment}
           onClick={() => {
-            if (!activeSegment) setActiveSegment(DatePickerVariant.DD);
+            if (!activeSegment && !props?.isReadOnly) setActiveSegment(DatePickerVariant.DD);
           }}
         >
           <input
@@ -526,7 +533,7 @@ export const DatePicker = (props: DatePickerProps) => {
             disabled={props?.isDisabled || props?.isReadOnly}
             style={{
               position: 'absolute',
-               left: '-100dvw',
+              left: '-100dvw',
               top: 0,
               // left: 0,
               width: '100%',
