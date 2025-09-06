@@ -12,6 +12,7 @@ export default defineConfig(() => {
   const isStorybook = process.env.NODE_ENV === 'storybook';
 
   console.log('isStorybookBuild: ', String(isStorybook));
+
   const sizesBackgroundTransparent = [57, 64, 72, 76, 114, 120, 144, 152, 180, 192, 256, 384, 512];
   const sizesBackgroundWhite = [];
   const sizesFavicon = [64];
@@ -42,7 +43,6 @@ export default defineConfig(() => {
       !isStorybook &&
         dts({
           include: ['src/'],
-          exclude: ['src/declaration/styled-components.d.ts'],
           rollupTypes: true,
           insertTypesEntry: true,
           tsconfigPath: './tsconfig.json',
