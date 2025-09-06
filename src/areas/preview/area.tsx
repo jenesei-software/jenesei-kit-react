@@ -80,7 +80,7 @@ export const Preview: FC<PreviewProps> = (props) => {
               },
             }}
           >
-            <Icon size='100%' type='loading' primaryColor='blueFocus' name='Line' />
+            <Icon size='100%' type='loading' color='blueFocus' name='Line' />
           </Stack>
           {props.content && (
             <Stack

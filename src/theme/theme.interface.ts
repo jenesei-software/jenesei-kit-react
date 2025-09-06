@@ -316,13 +316,119 @@ export type IThemePaletteKeys =
   | 'amnezia'
   | 'inherit'
   | 'currentColor';
+
+export const ThemeMapId = [
+  'Close',
+  'Biometry',
+  'Qr',
+  'Search',
+  'Folder',
+  'Wallet',
+  'Graph',
+  'Bookmark',
+  'Browser',
+  'Category',
+  'Home',
+  'Notification',
+  'Chat',
+  'Heart',
+  'Paper',
+  'Plus',
+  'Minus',
+  'PaperPlus',
+  'PaperNegative',
+  'PaperFail',
+  'PaperDownload',
+  'PaperUpload',
+  'Send',
+  'Password',
+  'Swap',
+  'Work',
+  'Arrow1',
+  'Arrow2',
+  'Arrow3',
+  'Arrow4',
+  'ArrowMini1',
+  'ArrowMini2',
+  'Scan',
+  'Activity',
+  'Calendar',
+  'Message',
+  'PlusMini',
+  'ChartMini',
+  'Game',
+  'Bag1',
+  'Bag2',
+  'TicketStar',
+  'MoreCircle',
+  'MoreSquare',
+  'Discount',
+  'Buy',
+  'Web',
+  'InfoMini',
+  'DangerMini',
+  'CloseMini',
+  'TickMini',
+  'Video',
+  'Discovery',
+  'Location',
+  'Document',
+  'Setting',
+  'Time',
+  'VolumeUp',
+  'VolumeDown',
+  'VolumeOff',
+  'Star',
+  'Select',
+  'Ticket',
+  'Camera',
+  'Profile',
+  'AddUser',
+  'TwoUser',
+  'ThreeUser',
+  'Login',
+  'Logout',
+  'Download',
+  'Upload',
+  'Voice1',
+  'Voice2',
+  'Delete',
+  'Edit',
+  'PlayMini',
+  'ShieldDone',
+  'ShieldFail',
+  'Show',
+  'Hide',
+  'Filter1',
+  'Filter2',
+  'Image',
+  'Call',
+  'Calling',
+  'CallMissed',
+  'CallSilent',
+  'Lock',
+  'Unlock',
+  'Resources',
+  'Language',
+] as const;
+export const ThemeMapCheckbox = ['Radio', 'Square', 'Arrow', 'Heart'] as const;
+export const ThemeMapLoading = ['Line', 'Circle', 'Blocks', 'Balls'] as const;
+export const ThemeMapRealebail = ['MapCluster', 'HomeLikes', 'HomeManagement', 'UserSettings', 'User'] as const;
+export const ThemeMapLogo = ['Jenesei', 'BustMarket'] as const;
+export const ThemeMapBustmarket = ['Card', 'Delivery', 'Heart', 'Reviews', 'Search', 'Menu'] as const;
 export interface ITheme {
   icon: {
-    mapType: ('id' | 'checkbox' | 'loading' | 'realebail' | 'logo' | 'bustmarket')[];
-    map: Record<ITheme['icon']['mapType'][number], string[]>;
-    getIconId: (props: {
-      type: keyof ITheme['icon']['map'];
-      name: ITheme['icon']['map'][keyof ITheme['icon']['map']][number];
+    map: {
+      id: typeof ThemeMapId;
+      checkbox: typeof ThemeMapCheckbox;
+      loading: typeof ThemeMapLoading;
+      realebail: typeof ThemeMapRealebail;
+      logo: typeof ThemeMapLogo;
+      bustmarket: typeof ThemeMapBustmarket;
+    };
+    getIconId: <T extends keyof ITheme['icon']['map']>(props: {
+      type: T;
+      name: ITheme['icon']['map'][T][number];
     }) => string;
     getSpriteUrl: (props: { type: keyof ITheme['icon']['map'] }) => string;
   };

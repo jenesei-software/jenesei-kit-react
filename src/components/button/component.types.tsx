@@ -1,4 +1,4 @@
-import { addIconsGetIconComponentsProps } from '@local/components/icon';
+import { addIconProps } from '@local/components/icon';
 import { addFontProps, addOutlineProps, addOutlinePropsDollar } from '@local/styles/add';
 import { addSXProps, addSXStyleProps } from '@local/styles/sx';
 import { IThemeGenre, IThemeSize } from '@local/theme';
@@ -22,7 +22,7 @@ type ButtonPropsDefault = PropsWithChildren & {
 
   className?: string;
 
-  icons?: addIconsGetIconComponentsProps;
+  icons?: addIconProps[];
 
   isDisabled?: boolean;
 

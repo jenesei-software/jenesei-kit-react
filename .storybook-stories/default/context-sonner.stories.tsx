@@ -38,7 +38,10 @@ const ProviderSonnerWrapperDouble: FC = () => {
         title: 'Офигенчик! Офигенчик! Офигенчик!',
         description: 'Данные загрузились! Данные загрузились! Данные загрузились! Данные загрузились!',
         genre: 'greenTransparent',
-        icon: 'Activity',
+        icon: {
+          type: 'loading',
+          name: 'Blocks',
+        },
       }),
     );
   };

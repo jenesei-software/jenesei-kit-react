@@ -56,6 +56,26 @@ const ButtonWrapper: FC = () => {
         <ButtonComponent size='medium' genre='yellowTransparent'>
           yellowTransparent
         </ButtonComponent>
+        <ButtonComponent
+          size='medium'
+          genre='yellowTransparent'
+          icons={[
+            {
+              type: 'id',
+              name: 'Biometry',
+              order: 1,
+            },
+            {
+              type: 'loading',
+              name: 'Blocks',
+              order: -1,
+            },
+          ]}
+          isDisabledRipple
+          isWhileTapEffect
+        >
+          yellowTransparent
+        </ButtonComponent>
       </WrapperMin>
       <WrapperMin>
         <ButtonComponent size='large' genre='black'>

@@ -1,68 +1,13 @@
 import { useEffect, useState } from 'react';
-import { DefaultTheme } from 'styled-components';
 
 import { getIconComponentsProps, Icon } from '.';
 
-export function getIconComponents<T extends keyof DefaultTheme['icon']['map']>(props: getIconComponentsProps<T>) {
+export function getIconComponents(props: getIconComponentsProps) {
   return (props.icons ?? [])
     ?.filter((icon) => !icon.isHidden)
-    ?.map((icon, index) =>
-      icon?.type === 'id' ? (
-        <Icon
-          key={`${icon.type}-${icon.name}-${index}`}
-          name={icon?.name}
-          type='id'
-          size={icon?.size ?? props.size}
-          turn={icon.turn}
-          order={icon.order}
-        />
-      ) : icon?.type === 'logo' ? (
-        <Icon
-          key={`${icon.type}-${icon.name}-${index}`}
-          name={icon?.name}
-          type='logo'
-          size={icon?.size ?? props.size}
-          turn={icon.turn}
-          order={icon.order}
-        />
-      ) : icon?.type === 'bustmarket' ? (
-        <Icon
-          key={`${icon.type}-${icon.name}-${index}`}
-          name={icon?.name}
-          type='bustmarket'
-          size={icon?.size ?? props.size}
-          turn={icon.turn}
-          order={icon.order}
-        />
-      ) : icon?.type === 'checkbox' ? (
-        <Icon
-          key={`${icon.type}-${icon.name}-${index}`}
-          name={icon?.name}
-          type='checkbox'
-          size={icon?.size ?? props.size}
-          turn={icon.turn}
-          order={icon.order}
-        />
-      ) : icon?.type === 'loading' ? (
-        <Icon
-          key={`${icon.type}-${icon.name}-${index}`}
-          name={icon?.name}
-          type='loading'
-          size={icon?.size ?? props.size}
-          turn={icon.turn}
-          order={icon.order}
-        />
-      ) : icon?.type === 'realebail' ? (
-        <Icon
-          key={`${icon.type}-${icon.name}-${index}`}
-          name={icon?.name}
-          type='realebail'
-          size={icon?.size ?? props.size}
-          turn={icon.turn}
-          order={icon.order}
-        />
-      ) : null,
-    );
+    ?.map((icon, index) => (
+      <Icon key={`${icon.type}-${icon.name}-${index}`} size={icon?.size ?? props.size} {...icon} />
+    ));
 }
 export function useInjectSprites(urls: string[]) {
   useEffect(() => {

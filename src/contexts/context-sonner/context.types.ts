@@ -1,3 +1,4 @@
+import { addIconProps } from '@local/components/icon';
 import { addFontProps } from '@local/styles/add';
 import { ITheme, IThemeGenre } from '@local/theme/theme.interface';
 import { AddDollarSign } from '@local/types';
@@ -55,7 +56,7 @@ export type SonnerContentProps = SonnerContentContentProps | SonnerContentStanda
 type SonnerContentDefaultProps = {
   hidingMode?: 'clickOnSonner' | 'clickOnButton';
   hidingTime?: number;
-  icon?: TIconIdNameString;
+  icon?: addIconProps;
   id?: string;
   genre?: keyof ITheme['colors']['sonner'];
   isLoading?: boolean;

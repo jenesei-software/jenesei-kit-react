@@ -1,15 +1,15 @@
-import { AnimatePresence, Variants } from 'framer-motion';
-import { FC, useMemo } from 'react';
-
 import { useImageSlider } from '@local/hooks/use-image-slider';
 import { KEY_SIZE_DATA } from '@local/theme';
 
-import { ImageSliderProps, SliderDot, SliderImage } from '.';
+import { AnimatePresence, Variants } from 'framer-motion';
+import { FC, useMemo } from 'react';
+
 import { Button } from '../button';
 import { Icon } from '../icon';
 import { Image } from '../image';
 import { Stack, StackMotion } from '../stack';
 import { Typography } from '../typography';
+import { ImageSliderProps, SliderDot, SliderImage } from '.';
 
 export const ImageSlider: FC<ImageSliderProps> = (props) => {
   const { onIndexChange } = props;
@@ -79,7 +79,7 @@ export const ImageSlider: FC<ImageSliderProps> = (props) => {
             },
           }}
         >
-          <Icon size='large' type='loading' primaryColor='blueFocus' name='Line' />
+          <Icon size='large' type='loading' color='blueFocus' name='Line' />
         </Stack>
       ) : !isLengthZero ? (
         <Stack

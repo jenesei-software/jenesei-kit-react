@@ -7,7 +7,7 @@ export default create({
   brandImage: '/icons/icon-180x180.png',
   brandTarget: '_blank',
 
-  colorPrimary: '#395295',
+  color: '#395295',
   colorSecondary: '#4195D2',
 
   appBg: '#ffffff',

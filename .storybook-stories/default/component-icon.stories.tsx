@@ -32,7 +32,7 @@ const IconWrapperAll: FC = () => {
         </Typography>
         <WrapperMin>
           {ThemeLight.icon.map.id.map((item) => (
-            <IconComponent key={item} type='id' name={item} size={'large'} primaryColor='black100' />
+            <IconComponent key={item} type='id' name={item} size={'large'} color='black100' />
           ))}
         </WrapperMin>
       </WrapperBig>
@@ -49,7 +49,7 @@ const IconWrapperAll: FC = () => {
         </Typography>
         <WrapperMin>
           {ThemeLight.icon.map.checkbox.map((item) => (
-            <IconComponent key={item} type={'checkbox'} name={item} size={'large'} primaryColor='black100' />
+            <IconComponent key={item} type={'checkbox'} name={item} size={'large'} color='black100' />
           ))}
         </WrapperMin>
       </WrapperBig>
@@ -66,10 +66,10 @@ const IconWrapperAll: FC = () => {
         </Typography>
         <WrapperMin>
           {ThemeLight.icon.map.loading.map((item) => (
-            <IconComponent key={item} type={'loading'} name={item} size={'large'} primaryColor='black100' />
+            <IconComponent key={item} type={'loading'} name={item} size={'large'} color='black100' />
           ))}
           {ThemeLight.icon.map.loading.map((item) => (
-            <IconComponent key={item} type={'loading'} name={item} size={'large'} primaryColor='blueBr' />
+            <IconComponent key={item} type={'loading'} name={item} size={'large'} color='blueBr' />
           ))}
         </WrapperMin>
       </WrapperBig>
@@ -86,7 +86,7 @@ const IconWrapperAll: FC = () => {
         </Typography>
         <WrapperMin>
           {ThemeLight.icon.map.logo.map((item) => (
-            <IconComponent key={item} type={'logo'} name={item} size={'large'} primaryColor='black100' />
+            <IconComponent key={item} type={'logo'} name={item} size={'large'} color='black100' />
           ))}
         </WrapperMin>
       </WrapperBig>
@@ -108,7 +108,7 @@ const IconWrapperAll: FC = () => {
               type={'logo'}
               name={'Jenesei'}
               size={'large'}
-              primaryColor={item as IThemePaletteKeys}
+              color={item as IThemePaletteKeys}
             />
           ))}
         </WrapperMin>
@@ -136,7 +136,7 @@ const IconWrapperAll: FC = () => {
             >
               small
             </Typography>
-            <IconComponent type={'logo'} name={'Jenesei'} size={'small'} primaryColor='black100' />
+            <IconComponent type={'logo'} name={'Jenesei'} size={'small'} color='black100' />
           </WrapperMin>
           <WrapperMin sx={{ default: { flexDirection: 'column' } }}>
             <Typography
@@ -149,7 +149,7 @@ const IconWrapperAll: FC = () => {
             >
               mediumSmall
             </Typography>
-            <IconComponent type={'logo'} name={'Jenesei'} size={'mediumSmall'} primaryColor='black100' />
+            <IconComponent type={'logo'} name={'Jenesei'} size={'mediumSmall'} color='black100' />
           </WrapperMin>
           <WrapperMin sx={{ default: { flexDirection: 'column' } }}>
             <Typography
@@ -162,7 +162,7 @@ const IconWrapperAll: FC = () => {
             >
               medium
             </Typography>
-            <IconComponent type={'logo'} name={'Jenesei'} size={'medium'} primaryColor='black100' />
+            <IconComponent type={'logo'} name={'Jenesei'} size={'medium'} color='black100' />
           </WrapperMin>
           <WrapperMin sx={{ default: { flexDirection: 'column' } }}>
             <Typography
@@ -175,7 +175,7 @@ const IconWrapperAll: FC = () => {
             >
               largeMedium
             </Typography>
-            <IconComponent type={'logo'} name={'Jenesei'} size={'largeMedium'} primaryColor='black100' />
+            <IconComponent type={'logo'} name={'Jenesei'} size={'largeMedium'} color='black100' />
           </WrapperMin>
           <WrapperMin sx={{ default: { flexDirection: 'column' } }}>
             <Typography
@@ -188,7 +188,7 @@ const IconWrapperAll: FC = () => {
             >
               large
             </Typography>
-            <IconComponent type={'logo'} name={'Jenesei'} size={'large'} primaryColor='black100' />
+            <IconComponent type={'logo'} name={'Jenesei'} size={'large'} color='black100' />
           </WrapperMin>
           <WrapperMin sx={{ default: { flexDirection: 'column' } }}>
             <Typography
@@ -202,7 +202,7 @@ const IconWrapperAll: FC = () => {
               100%
             </Typography>
             <WrapperMin sx={{ default: { width: '100px', height: '100px' } }}>
-              <IconComponent type={'logo'} name={'Jenesei'} size={'100%'} primaryColor='black100' />
+              <IconComponent type={'logo'} name={'Jenesei'} size={'100%'} color='black100' />
             </WrapperMin>
           </WrapperMin>
         </WrapperBig>
@@ -252,7 +252,7 @@ const IconWrapperAll: FC = () => {
             >
               Turn
             </Typography>
-            <IconComponent type={'logo'} name={'Jenesei'} size={'medium'} primaryColor='black100' turn={90} />
+            <IconComponent type={'logo'} name={'Jenesei'} size={'medium'} color='black100' turn={90} />
           </WrapperMin>
         </WrapperBig>
       </WrapperBig>

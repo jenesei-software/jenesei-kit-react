@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
-import { DefaultTheme, useTheme } from 'styled-components';
+import { useTheme } from 'styled-components';
 
 import { IconItemProps, StyledSVG, useLazyInjectSprite } from '.';
 
-export const Icon = <T extends keyof DefaultTheme['icon']['map']>(props: IconItemProps<T>) => {
+export const Icon = (props: IconItemProps) => {
   const theme = useTheme();
   const iconId = useMemo(
     () => theme.icon.getIconId({ type: props.type, name: props.name }),
@@ -23,7 +23,7 @@ export const Icon = <T extends keyof DefaultTheme['icon']['map']>(props: IconIte
       $size={props.size}
       $turn={props.turn}
       $order={props.order}
-      $color={props.primaryColor || undefined}
+      $color={props.color || undefined}
       $sx={props.sx}
       className={props.className}
       onClick={props.onClick}

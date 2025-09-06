@@ -47,6 +47,7 @@ const ProviderDialogWrapperDouble: FC = () => {
         default: {
           padding: '12px',
           gap: '8px',
+          minHeight: '200dvh',
         },
       }}
     >

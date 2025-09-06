@@ -173,7 +173,7 @@ export const ProviderSonner: FC<ProviderSonnerProps> = (props) => {
             const index = content.index;
             const isMoreThanLastViewIndexPlusOne = memoVisibleToasts ? index > memoVisibleToasts : false;
             const isMoreThanLastViewIndex = memoVisibleToasts ? index > memoVisibleToasts - 1 : false;
-            const isLastViewIndex = memoVisibleToasts ? index == memoVisibleToasts - 1 : false;
+            const isLastViewIndex = memoVisibleToasts ? index === memoVisibleToasts - 1 : false;
             const localGenre = content.genre ?? memoDefaultGenre;
             const buttonGenre = theme.colors.sonner[localGenre].button.genre;
             const hidingMode = content.hidingMode ?? memoDefaultHidingMode;
@@ -260,7 +260,7 @@ const SonnerElement = (props: SonnerElementProps) => {
             {props.isLoading ? (
               <Icon size='medium' type='loading' name='Line' />
             ) : (
-              props.icon && <Icon name={props.icon} type='id' size={'medium'} />
+              props.icon && <Icon {...props.icon} size={props.icon.size ?? 'medium'} />
             )}
           </SonnerIcon>
         )}

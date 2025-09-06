@@ -124,5 +124,6 @@ export const SonnerContentDescription = styled.div<SonnerContentDescriptionProps
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  font-size: ${(props) => props.$font.size};
 `;
 export const SonnerButtonWrapper = styled.div``;
