@@ -1,4 +1,3 @@
-import { Icon } from '@local/components/icon';
 import { addSXTypography } from '@local/components/typography';
 import { addDisabled, addFont, addOutline, addTransition } from '@local/styles/add';
 import { addError } from '@local/styles/error';
@@ -8,7 +7,7 @@ import { IThemeSizePropertyDefault, KEY_SIZE_DATA } from '@local/theme';
 import styled, { css } from 'styled-components';
 
 import { addRippleDefault } from '../ripple';
-import { StyledCheckboxProps, StyledIconProps } from '.';
+import { StyledCheckboxProps } from '.';
 
 /****************************************** Size *************************************************/
 export const CheckboxSize = css<StyledCheckboxProps>`
@@ -91,26 +90,4 @@ export const CheckboxWrapper = styled.button<StyledCheckboxProps>`
   ${addError};
   ${addSXTypography};
   ${addSX};
-`;
-
-/****************************************** Styled *************************************************/
-export const StyledIcon = styled(Icon)<StyledIconProps>`
-  ${(props) =>
-    props.$checked
-      ? css`
-          & #check {
-            color: inherit;
-          }
-          & #uncheck {
-            color: transparent;
-          }
-        `
-      : css`
-          & #check {
-            color: transparent;
-          }
-          & #uncheck {
-            color: inherit;
-          }
-        `}
 `;

@@ -1,8 +1,8 @@
-import { AnimatePresence, motion, useInView } from 'framer-motion'
-import { ReactNode, useRef } from 'react'
+import { AnimatePresence, motion, useInView } from 'framer-motion';
+import { ReactNode, useRef } from 'react';
 
 export function WordsPullUp({ text }: { text: string }) {
-  const splittedText = text.split(' ')
+  const splittedText = text.split(' ');
 
   const pullupVariant = {
     initial: { y: 20, opacity: 0 },
@@ -10,12 +10,12 @@ export function WordsPullUp({ text }: { text: string }) {
       y: 0,
       opacity: 1,
       transition: {
-        delay: i * 0.1
-      }
-    })
-  }
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true })
+        delay: i * 0.1,
+      },
+    }),
+  };
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
   return (
     <>
       {splittedText.map((current, i) => (
@@ -23,7 +23,7 @@ export function WordsPullUp({ text }: { text: string }) {
           key={i}
           ref={ref}
           variants={pullupVariant}
-          initial="initial"
+          initial='initial'
           animate={isInView ? 'animate' : ''}
           custom={i}
         >
@@ -32,12 +32,12 @@ export function WordsPullUp({ text }: { text: string }) {
         </motion.div>
       ))}
     </>
-  )
+  );
 }
 
 export function TypingEffect({ text }: { text: string }) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true })
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
   return (
     <span ref={ref} style={{ display: 'inline-block' }}>
       {text.split('').map((letter, index) => (
@@ -51,12 +51,12 @@ export function TypingEffect({ text }: { text: string }) {
         </motion.span>
       ))}
     </span>
-  )
+  );
 }
 
 export function GradualSpacing({ text }: { text: string }) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true })
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
   return (
     <>
       <AnimatePresence>
@@ -66,7 +66,7 @@ export function GradualSpacing({ text }: { text: string }) {
             key={i}
             initial={{ opacity: 0, x: -18 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            exit="hidden"
+            exit='hidden'
             transition={{ duration: 0.5, delay: i * 0.1 }}
           >
             {char === ' ' ? <span>&nbsp;</span> : char}
@@ -74,12 +74,12 @@ export function GradualSpacing({ text }: { text: string }) {
         ))}
       </AnimatePresence>
     </>
-  )
+  );
 }
 
 export function BlurIn({ children }: { children: ReactNode }) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true })
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
   return (
     <motion.div
       ref={ref}
@@ -90,5 +90,5 @@ export function BlurIn({ children }: { children: ReactNode }) {
     >
       {children}
     </motion.div>
-  )
+  );
 }

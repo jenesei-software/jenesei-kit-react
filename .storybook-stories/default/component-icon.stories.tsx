@@ -1,15 +1,9 @@
 import type { Meta } from '@storybook/react-vite';
 import 'styled-components';
 
-import {
-  ENUM_ICON_CHECKBOX,
-  ENUM_ICON_ID,
-  ENUM_ICON_LOADING,
-  ENUM_ICON_LOGO,
-  Icon as IconComponent,
-} from '@local/components/icon';
+import { Icon as IconComponent } from '@local/components/icon';
 import { Typography } from '@local/components/typography';
-import { IThemePaletteKeys, JeneseiPalette } from '@local/theme';
+import { IThemePaletteKeys, JeneseiPalette, ThemeLight } from '@local/theme';
 
 import { FC } from 'react';
 
@@ -37,14 +31,8 @@ const IconWrapperAll: FC = () => {
           ID
         </Typography>
         <WrapperMin>
-          {Object.keys(ENUM_ICON_ID).map((item) => (
-            <IconComponent
-              key={item}
-              type={'id'}
-              name={item as keyof typeof ENUM_ICON_ID}
-              size={'large'}
-              primaryColor='black100'
-            />
+          {ThemeLight.icon.map.id.map((item) => (
+            <IconComponent key={item} type='id' name={item} size={'large'} color='black100' />
           ))}
         </WrapperMin>
       </WrapperBig>
@@ -60,14 +48,8 @@ const IconWrapperAll: FC = () => {
           Checkbox
         </Typography>
         <WrapperMin>
-          {Object.keys(ENUM_ICON_CHECKBOX).map((item) => (
-            <IconComponent
-              key={item}
-              type={'checkbox'}
-              name={item as keyof typeof ENUM_ICON_CHECKBOX}
-              size={'large'}
-              primaryColor='black100'
-            />
+          {ThemeLight.icon.map.checkbox.map((item) => (
+            <IconComponent key={item} type={'checkbox'} name={item} size={'large'} color='black100' />
           ))}
         </WrapperMin>
       </WrapperBig>
@@ -83,14 +65,11 @@ const IconWrapperAll: FC = () => {
           Loading
         </Typography>
         <WrapperMin>
-          {Object.keys(ENUM_ICON_LOADING).map((item) => (
-            <IconComponent
-              key={item}
-              type={'loading'}
-              name={item as keyof typeof ENUM_ICON_LOADING}
-              size={'large'}
-              primaryColor='black100'
-            />
+          {ThemeLight.icon.map.loading.map((item) => (
+            <IconComponent key={item} type={'loading'} name={item} size={'large'} color='black100' />
+          ))}
+          {ThemeLight.icon.map.loading.map((item) => (
+            <IconComponent key={item} type={'loading'} name={item} size={'large'} color='blueBr' />
           ))}
         </WrapperMin>
       </WrapperBig>
@@ -106,14 +85,8 @@ const IconWrapperAll: FC = () => {
           Logo
         </Typography>
         <WrapperMin>
-          {Object.keys(ENUM_ICON_LOGO).map((item) => (
-            <IconComponent
-              key={item}
-              type={'logo'}
-              name={item as keyof typeof ENUM_ICON_LOGO}
-              size={'large'}
-              primaryColor='black100'
-            />
+          {ThemeLight.icon.map.logo.map((item) => (
+            <IconComponent key={item} type={'logo'} name={item} size={'large'} color='black100' />
           ))}
         </WrapperMin>
       </WrapperBig>
@@ -135,7 +108,7 @@ const IconWrapperAll: FC = () => {
               type={'logo'}
               name={'Jenesei'}
               size={'large'}
-              primaryColor={item as IThemePaletteKeys}
+              color={item as IThemePaletteKeys}
             />
           ))}
         </WrapperMin>
@@ -163,7 +136,7 @@ const IconWrapperAll: FC = () => {
             >
               small
             </Typography>
-            <IconComponent type={'logo'} name={'Jenesei'} size={'small'} primaryColor='black100' />
+            <IconComponent type={'logo'} name={'Jenesei'} size={'small'} color='black100' />
           </WrapperMin>
           <WrapperMin sx={{ default: { flexDirection: 'column' } }}>
             <Typography
@@ -176,7 +149,7 @@ const IconWrapperAll: FC = () => {
             >
               mediumSmall
             </Typography>
-            <IconComponent type={'logo'} name={'Jenesei'} size={'mediumSmall'} primaryColor='black100' />
+            <IconComponent type={'logo'} name={'Jenesei'} size={'mediumSmall'} color='black100' />
           </WrapperMin>
           <WrapperMin sx={{ default: { flexDirection: 'column' } }}>
             <Typography
@@ -189,7 +162,7 @@ const IconWrapperAll: FC = () => {
             >
               medium
             </Typography>
-            <IconComponent type={'logo'} name={'Jenesei'} size={'medium'} primaryColor='black100' />
+            <IconComponent type={'logo'} name={'Jenesei'} size={'medium'} color='black100' />
           </WrapperMin>
           <WrapperMin sx={{ default: { flexDirection: 'column' } }}>
             <Typography
@@ -202,7 +175,7 @@ const IconWrapperAll: FC = () => {
             >
               largeMedium
             </Typography>
-            <IconComponent type={'logo'} name={'Jenesei'} size={'largeMedium'} primaryColor='black100' />
+            <IconComponent type={'logo'} name={'Jenesei'} size={'largeMedium'} color='black100' />
           </WrapperMin>
           <WrapperMin sx={{ default: { flexDirection: 'column' } }}>
             <Typography
@@ -215,7 +188,7 @@ const IconWrapperAll: FC = () => {
             >
               large
             </Typography>
-            <IconComponent type={'logo'} name={'Jenesei'} size={'large'} primaryColor='black100' />
+            <IconComponent type={'logo'} name={'Jenesei'} size={'large'} color='black100' />
           </WrapperMin>
           <WrapperMin sx={{ default: { flexDirection: 'column' } }}>
             <Typography
@@ -229,7 +202,7 @@ const IconWrapperAll: FC = () => {
               100%
             </Typography>
             <WrapperMin sx={{ default: { width: '100px', height: '100px' } }}>
-              <IconComponent type={'logo'} name={'Jenesei'} size={'100%'} primaryColor='black100' />
+              <IconComponent type={'logo'} name={'Jenesei'} size={'100%'} color='black100' />
             </WrapperMin>
           </WrapperMin>
         </WrapperBig>
@@ -279,7 +252,7 @@ const IconWrapperAll: FC = () => {
             >
               Turn
             </Typography>
-            <IconComponent type={'logo'} name={'Jenesei'} size={'medium'} primaryColor='black100' turn={90} />
+            <IconComponent type={'logo'} name={'Jenesei'} size={'medium'} color='black100' turn={90} />
           </WrapperMin>
         </WrapperBig>
       </WrapperBig>

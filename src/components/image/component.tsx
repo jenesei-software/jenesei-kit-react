@@ -2,6 +2,7 @@ import { Skeleton } from '@local/areas/skeleton';
 import { Stack } from '@local/components/stack';
 
 import { FC, useEffect, useState } from 'react';
+import { useTheme } from 'styled-components';
 
 import { ImageIMG, ImageProps } from '.';
 
@@ -43,10 +44,16 @@ export const Image: FC<ImageProps> = (props) => {
       setIsError(false);
     };
   }, [props.src]);
+  const theme = useTheme();
+  const { default: defaultSx, ...rest } = props?.sxStack
+    ? typeof props?.sxStack === 'function'
+      ? props.sxStack(theme)
+      : props.sxStack
+    : {};
+
   return (
     <Stack
-      sx={(theme) => ({
-        ...props?.sxStack,
+      sx={{
         default: {
           position: 'relative',
           overflow: 'hidden',
@@ -68,13 +75,10 @@ export const Image: FC<ImageProps> = (props) => {
                 },
               }
             : {}),
-          ...(props?.sxStack
-            ? typeof props?.sxStack === 'function'
-              ? props?.sxStack(theme).default
-              : props?.sxStack.default
-            : {}),
+          ...defaultSx,
         },
-      })}
+        ...rest,
+      }}
     >
       {!isError ? (
         props.componentLoading || isPending ? (

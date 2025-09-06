@@ -1,18 +1,19 @@
-import { PropsWithChildren } from 'react'
+import { PropsWithChildren } from 'react';
 
 export interface PermissionContextProps {
-  pushNotificationSupported: boolean
+  geolocationPermission: PermissionState | null;
 
-  isBiometricSupported: boolean
+  isBiometricSupported: boolean;
 
-  // eslint-disable-next-line no-undef
-  notificationPermission: NotificationPermission | null
-  isNotificationPermissionLoading: boolean
-  // eslint-disable-next-line no-undef
-  requestNotificationPermission: () => Promise<NotificationPermission | undefined>
-  // eslint-disable-next-line no-undef
-  geolocationPermission: PermissionState | null
-  requestGeolocationPermission: () => void
+  isNotificationPermissionLoading: boolean;
+
+  notificationPermission: NotificationPermission | null;
+
+  pushNotificationSupported: boolean;
+
+  requestGeolocationPermission: () => void;
+
+  requestNotificationPermission: () => Promise<NotificationPermission | undefined>;
 }
 
-export type ProviderPermissionProps = PropsWithChildren
+export type ProviderPermissionProps = PropsWithChildren;

@@ -1,9 +1,9 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
-import { addError } from '@local/styles/error'
-import { addSX } from '@local/styles/sx'
+import { addError } from '@local/styles/error';
+import { addSX } from '@local/styles/sx';
 
-import { RangeComponentProps, RangeThumbProps, RangeWrapperProps } from '.'
+import { RangeComponentProps, RangeThumbProps, RangeWrapperProps } from '.';
 
 export const RangeWrapper = styled.div<RangeWrapperProps>`
   position: relative;
@@ -14,7 +14,7 @@ export const RangeWrapper = styled.div<RangeWrapperProps>`
   height: 20px;
   ${addError};
   ${addSX};
-`
+`;
 
 export const RangeTrack = styled.div<RangeComponentProps>`
   position: absolute;
@@ -22,7 +22,7 @@ export const RangeTrack = styled.div<RangeComponentProps>`
   width: 100%;
   padding: 0px 10px;
   border-radius: 2px;
-`
+`;
 export const RangeThumb = styled.input<RangeThumbProps>`
   position: absolute;
   width: 100%;
@@ -40,17 +40,17 @@ export const RangeThumb = styled.input<RangeThumbProps>`
     margin: 0;
     padding: 0;
     border-radius: 50%;
-    background: ${props => props.$colorBackground};
-    border: 3px ${props => props.$colorBorder} solid;
+    background: ${(props) => props.$colorBackground};
+    border: 3px ${(props) => props.$colorBorder} solid;
     cursor: pointer;
     -webkit-appearance: none;
     margin-top: 0px;
     transition:
-      transform ${props => props.theme.transition.default},
-      color ${props => props.theme.transition.default},
-      background-color ${props => props.theme.transition.default};
+      transform ${(props) => props.theme.transition.default},
+      color ${(props) => props.theme.transition.default},
+      background-color ${(props) => props.theme.transition.default};
     &:hover {
       transform: scale(1.2);
     }
   }
-`
+`;

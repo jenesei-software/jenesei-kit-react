@@ -1,5 +1,4 @@
 import { Stack } from '@local/components/stack';
-import { addTransition } from '@local/styles/add';
 
 import styled, { css, keyframes } from 'styled-components';
 
@@ -57,6 +56,8 @@ export const StyledSkeleton = styled(Stack)<StyledSkeletonProps>`
   `}
   & > * {
     opacity: ${(props) => (!props.$visible ? 0 : 1)};
-    ${addTransition};
+    transition:
+      outline 0s,
+      opacity ${(props) => props.theme.transition.default};
   }
 `;

@@ -1,21 +1,21 @@
-import { AnimatePresence, Variants } from 'framer-motion'
-import { FC, useMemo } from 'react'
+import { useImageSlider } from '@local/hooks/use-image-slider';
+import { KEY_SIZE_DATA } from '@local/theme';
 
-import { useImageSlider } from '@local/hooks/use-image-slider'
-import { KEY_SIZE_DATA } from '@local/theme'
+import { AnimatePresence, Variants } from 'framer-motion';
+import { FC, useMemo } from 'react';
 
-import { ImageSliderProps, SliderDot, SliderImage } from '.'
-import { Button } from '../button'
-import { Icon } from '../icon'
-import { Image } from '../image'
-import { Stack, StackMotion } from '../stack'
-import { Typography } from '../typography'
+import { Button } from '../button';
+import { Icon } from '../icon';
+import { Image } from '../image';
+import { Stack, StackMotion } from '../stack';
+import { Typography } from '../typography';
+import { ImageSliderProps, SliderDot, SliderImage } from '.';
 
-export const ImageSlider: FC<ImageSliderProps> = props => {
-  const { onIndexChange } = props
-  const images = useMemo(() => props.images, [props.images])
-  const size = useMemo(() => KEY_SIZE_DATA[props.size], [props.size])
-  const br = useMemo(() => `${size.radius}px`, [size.radius])
+export const ImageSlider: FC<ImageSliderProps> = (props) => {
+  const { onIndexChange } = props;
+  const images = useMemo(() => props.images, [props.images]);
+  const size = useMemo(() => KEY_SIZE_DATA[props.size], [props.size]);
+  const br = useMemo(() => `${size.radius}px`, [size.radius]);
 
   const {
     isLengthZero,
@@ -26,7 +26,7 @@ export const ImageSlider: FC<ImageSliderProps> = props => {
     activeImageIndex,
     swipeToImage,
     skipToImage,
-    handleAdd
+    handleAdd,
   } = useImageSlider({
     genre: props.genre,
     size: props.size,
@@ -34,12 +34,12 @@ export const ImageSlider: FC<ImageSliderProps> = props => {
     imageSettings: props.imageSettings,
     locales: props.locales,
     onIndexChange: onIndexChange,
-    children: props.children
-  })
+    children: props.children,
+  });
   return (
     <StackMotion
       {...props.propsStack}
-      sx={theme => ({
+      sx={(theme) => ({
         ...props.propsStack?.sx,
         default: {
           borderRadius: br,
@@ -53,7 +53,7 @@ export const ImageSlider: FC<ImageSliderProps> = props => {
             ? typeof props.propsStack?.sx === 'function'
               ? props.propsStack?.sx(theme).default
               : props.propsStack?.sx.default
-            : {})
+            : {}),
         },
         tablet: {
           maxWidth: '95dvw',
@@ -61,8 +61,8 @@ export const ImageSlider: FC<ImageSliderProps> = props => {
             ? typeof props.propsStack?.sx === 'function'
               ? props.propsStack?.sx(theme).tablet
               : props.propsStack?.sx.tablet
-            : {})
-        }
+            : {}),
+        },
       })}
     >
       {props.isLoading ? (
@@ -75,11 +75,11 @@ export const ImageSlider: FC<ImageSliderProps> = props => {
               overflow: 'hidden',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center'
-            }
+              justifyContent: 'center',
+            },
           }}
         >
-          <Icon size="large" type="loading" primaryColor="blueFocus" name="Line" />
+          <Icon size='large' type='loading' color='blueFocus' name='Line' />
         </Stack>
       ) : !isLengthZero ? (
         <Stack
@@ -88,8 +88,8 @@ export const ImageSlider: FC<ImageSliderProps> = props => {
               width: '100%',
               height: '100%',
               position: 'relative',
-              overflow: 'hidden'
-            }
+              overflow: 'hidden',
+            },
           }}
         >
           <AnimatePresence initial={false} custom={direction}>
@@ -97,25 +97,25 @@ export const ImageSlider: FC<ImageSliderProps> = props => {
               key={activeImageId}
               style={{
                 overflow: 'hidden',
-                borderRadius: br
+                borderRadius: br,
               }}
               custom={direction}
               variants={sliderVariants}
-              initial="initial"
-              animate="active"
-              exit="exit"
+              initial='initial'
+              animate='active'
+              exit='exit'
               transition={sliderTransition}
               {...(!isLengthOne
                 ? {
                     drag: 'x',
                     dragConstraints: { left: 0, right: 0 },
                     dragElastic: 0.5,
-                    onDragEnd: (_, dragInfo) => dragEndHandler(dragInfo)
+                    onDragEnd: (_, dragInfo) => dragEndHandler(dragInfo),
                   }
                 : {})}
             >
               <Image
-                sxStack={theme => ({
+                sxStack={(theme) => ({
                   default: {
                     width: '100%',
                     height: '100%',
@@ -123,8 +123,8 @@ export const ImageSlider: FC<ImageSliderProps> = props => {
                     justifyContent: 'center',
                     backgroundColor: theme.palette.black10,
                     position: 'absolute',
-                    pointerEvents: 'none'
-                  }
+                    pointerEvents: 'none',
+                  },
                 })}
                 alt={images[activeImageIndex]?.imageSrc}
                 src={images[activeImageIndex]?.imageSrc}
@@ -132,8 +132,8 @@ export const ImageSlider: FC<ImageSliderProps> = props => {
                   <Typography
                     sx={{
                       default: {
-                        variant: 'h6'
-                      }
+                        variant: 'h6',
+                      },
                     }}
                   >
                     {props.locales.failedToLoad}
@@ -153,8 +153,8 @@ export const ImageSlider: FC<ImageSliderProps> = props => {
                     position: 'absolute',
                     top: '50%',
                     left: 5,
-                    transform: 'translateY(-50%)'
-                  }
+                    transform: 'translateY(-50%)',
+                  },
                 }}
                 genre={props.genre}
                 size={props.size}
@@ -162,8 +162,8 @@ export const ImageSlider: FC<ImageSliderProps> = props => {
                   {
                     type: 'id',
                     name: 'Arrow4',
-                    turn: 90
-                  }
+                    turn: 90,
+                  },
                 ]}
                 isWidthAsHeight
                 isHiddenBorder
@@ -176,8 +176,8 @@ export const ImageSlider: FC<ImageSliderProps> = props => {
                     position: 'absolute',
                     top: '50%',
                     right: 5,
-                    transform: 'translateY(-50%)'
-                  }
+                    transform: 'translateY(-50%)',
+                  },
                 }}
                 genre={props.genre}
                 size={props.size}
@@ -185,8 +185,8 @@ export const ImageSlider: FC<ImageSliderProps> = props => {
                   {
                     type: 'id',
                     name: 'Arrow4',
-                    turn: -90
-                  }
+                    turn: -90,
+                  },
                 ]}
                 isWidthAsHeight
                 isHiddenBorder
@@ -200,18 +200,18 @@ export const ImageSlider: FC<ImageSliderProps> = props => {
                     bottom: 5,
                     left: '50%',
                     transform: 'translateX(-50%)',
-                    gap: '4px'
-                  }
+                    gap: '4px',
+                  },
                 }}
               >
-                {images.map(i => (
+                {images.map((i) => (
                   <SliderDot
                     onClick={() => skipToImage(i.id)}
                     key={i.id}
                     initial={false}
                     animate={{
                       scale: activeImageId === i.id ? 1.5 : 1,
-                      opacity: activeImageId === i.id ? 1 : 0.5
+                      opacity: activeImageId === i.id ? 1 : 0.5,
                     }}
                   />
                 ))}
@@ -224,16 +224,16 @@ export const ImageSlider: FC<ImageSliderProps> = props => {
               default: {
                 position: 'absolute',
                 bottom: 5,
-                right: 5
-              }
+                right: 5,
+              },
             }}
             genre={props.genre}
             size={props.size}
             icons={[
               {
                 type: 'id',
-                name: 'Activity'
-              }
+                name: 'Activity',
+              },
             ]}
             isWidthAsHeight
             isHiddenBorder
@@ -251,15 +251,15 @@ export const ImageSlider: FC<ImageSliderProps> = props => {
               overflow: 'hidden',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center'
-            }
+              justifyContent: 'center',
+            },
           }}
         >
           <Typography
             sx={{
               default: {
-                variant: 'h6'
-              }
+                variant: 'h6',
+              },
             }}
           >
             {props.locales.noImagesAvailable}
@@ -267,22 +267,22 @@ export const ImageSlider: FC<ImageSliderProps> = props => {
         </Stack>
       )}
     </StackMotion>
-  )
-}
+  );
+};
 const sliderVariants: Variants = {
-  initial: direction => ({
+  initial: (direction) => ({
     x: direction > 0 ? '100%' : '-100%',
     scale: 1,
-    opacity: 0
+    opacity: 0,
   }),
   active: { x: 0, scale: 1, opacity: 1 },
-  exit: direction => ({
+  exit: (direction) => ({
     x: direction > 0 ? '-100%' : '100%',
     scale: 1,
-    opacity: 0.2
-  })
-}
+    opacity: 0.2,
+  }),
+};
 const sliderTransition = {
   duration: 0.3,
-  ease: [0.56, 0.03, 0.12, 1.04]
-}
+  ease: [0.56, 0.03, 0.12, 1.04],
+};

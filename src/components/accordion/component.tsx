@@ -1,6 +1,6 @@
-import React, { FC, useCallback } from 'react'
+import { Stack } from '@local/components/stack';
 
-import { Stack } from '@local/components/stack'
+import React, { FC, useCallback } from 'react';
 
 import {
   AccordionDetails,
@@ -8,24 +8,24 @@ import {
   AccordionStyledIcon,
   AccordionSummary,
   AccordionSummaryContent,
-  AccordionWrapper
-} from '.'
+  AccordionWrapper,
+} from '.';
 
-export const Accordion: FC<AccordionProps> = props => {
+export const Accordion: FC<AccordionProps> = (props) => {
   const onClickSummary = useCallback(() => {
-    if (props.onClickSummary) props.onClickSummary()
-  }, [props])
+    if (props.onClickSummary) props.onClickSummary();
+  }, [props]);
 
   const onClickIcon = useCallback(
     (event: React.MouseEvent<SVGSVGElement>) => {
       if (props.onClickIcon) {
-        event.stopPropagation()
+        event.stopPropagation();
 
-        props.onClickIcon()
+        props.onClickIcon();
       }
     },
-    [props]
-  )
+    [props],
+  );
 
   return (
     <Stack {...props.wrapperProps}>
@@ -38,15 +38,15 @@ export const Accordion: FC<AccordionProps> = props => {
             <AccordionStyledIcon
               $expanded={props.expanded}
               onClick={onClickIcon}
-              name="Arrow1"
-              primaryColor="black100"
-              type="id"
-              size="large"
+              name='Arrow1'
+              color='black100'
+              type='id'
+              size='large'
             />
           )}
         </AccordionSummary>
         <AccordionDetails $expanded={props.expanded}>{props.accordionDetails}</AccordionDetails>
       </AccordionWrapper>
     </Stack>
-  )
-}
+  );
+};

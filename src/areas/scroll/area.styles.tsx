@@ -1,36 +1,44 @@
-import { Stack } from '@local/components/stack'
+import { Stack } from '@local/components/stack';
 
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components';
 
-import { StyledScrollProps } from '.'
+import { StyledScrollProps } from '.';
 
 export const StyledScroll = styled(Stack)<StyledScrollProps>`
   overflow-x: hidden;
   overflow-y: hidden;
 
-  ${props => css`
-    ${props.$horizontal &&
-    css`
+  ${(props) => css`
+    ${
+      props.$horizontal &&
+      css`
       scrollbar-gutter: stable;
       overflow-x: auto;
-    `}
+    `
+    }
 
-    ${props.$vertical &&
-    css`
+    ${
+      props.$vertical &&
+      css`
       scrollbar-gutter: stable;
       overflow-y: auto;
-    `}
+    `
+    }
 
-    ${props.$isAlwaysHorizontal &&
-    css`
+    ${
+      props.$isAlwaysHorizontal &&
+      css`
       scrollbar-gutter: stable;
       overflow-x: scroll;
-    `}
+    `
+    }
 
-    ${props.$isAlwaysVertical &&
-    css`
+    ${
+      props.$isAlwaysVertical &&
+      css`
       scrollbar-gutter: stable;
       overflow-y: scroll;
-    `}
+    `
+    }
   `}
-`
+`;

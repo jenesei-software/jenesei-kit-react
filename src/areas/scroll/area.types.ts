@@ -1,12 +1,12 @@
-import { StackProps } from '@local/components/stack'
-import { AddDollarSign } from '@local/types'
+import { StackProps } from '@local/components/stack';
+import { AddDollarSign } from '@local/types';
 
 type DefaultScrollProps = {
-  vertical?: boolean
-  horizontal?: boolean
-  isAlwaysVertical?: boolean
-  isAlwaysHorizontal?: boolean
-}
+  vertical?: boolean;
+  horizontal?: boolean;
+  isAlwaysVertical?: boolean;
+  isAlwaysHorizontal?: boolean;
+};
 
-export type ScrollProps = StackProps & DefaultScrollProps
-export type StyledScrollProps = StackProps & AddDollarSign<DefaultScrollProps>
+export type ScrollProps = StackProps & DefaultScrollProps;
+export type StyledScrollProps = StackProps & AddDollarSign<DefaultScrollProps>;

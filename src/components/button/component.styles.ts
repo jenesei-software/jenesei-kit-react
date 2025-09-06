@@ -2,15 +2,17 @@ import { addRippleDefault } from '@local/components/ripple';
 import { addSXTypography } from '@local/components/typography';
 import { addFont, addOutline, addTransition } from '@local/styles/add';
 import { addSX } from '@local/styles/sx';
-import { IThemeSizePropertyDefault, KEY_SIZE_DATA } from '@local/theme';
+import { KEY_SIZE_DATA } from '@local/theme';
 
 import { motion } from 'framer-motion';
 import styled, { css } from 'styled-components';
 
 import { StyledDollarButtonIconsWrapperProps, StyledDollarButtonProps } from '.';
 
-/****************************************** Genre *************************************************/
-const ButtonGenre = css<StyledDollarButtonProps>`
+/**
+ * Add
+ */
+const addButtonGenre = css<StyledDollarButtonProps>`
   ${(props) => css`
     background: ${props.theme.colors.button[props.$genre].background.rest};
     border-color: ${props.theme.colors.button[props.$genre].border.rest};
@@ -27,9 +29,7 @@ const ButtonGenre = css<StyledDollarButtonProps>`
     }
   `};
 `;
-
-/****************************************** Disabled *************************************************/
-const ButtonDisabled = css<StyledDollarButtonProps>`
+const addButtonDisabled = css<StyledDollarButtonProps>`
   ${(props) =>
     props.$isHidden
       ? css`
@@ -41,31 +41,84 @@ const ButtonDisabled = css<StyledDollarButtonProps>`
           opacity: 1;
         `}
 `;
-/****************************************** is HiddenBorder *************************************************/
-const ButtonIsHiddenBorder = css<StyledDollarButtonProps>`
+const addButtonIsHiddenBorder = css<StyledDollarButtonProps>`
   ${(props) =>
     props.$isHiddenBorder &&
     css`
       border: 0px transparent !important;
     `}
 `;
-/****************************************** is Radius *************************************************/
-const ButtonIsRadius = css<StyledDollarButtonProps>`
+const addButtonIsRadius = css<StyledDollarButtonProps>`
   ${(props) =>
     props.$isRadius &&
     css`
       border-radius: 100px;
     `}
 `;
-/****************************************** is PlaystationEffect *************************************************/
-const ButtonIsPlaystationEffect = css<StyledDollarButtonProps>`
+const addButtonIsPlaystationEffect = css<StyledDollarButtonProps>`
   ${(props) =>
     props.$isPlaystationEffect &&
     css`
       box-shadow: ${props.theme.effects.button};
     `}
 `;
-/****************************************** Icons Wrapper *************************************************/
+const addButtonSize = css<StyledDollarButtonProps>`
+  height: fit-content;
+  min-height: ${(props) => KEY_SIZE_DATA[props.$size].height}px;
+  max-height: fit-content;
+  padding: 2px ${(props) => KEY_SIZE_DATA[props.$size].padding}px;
+  border-radius: ${(props) => KEY_SIZE_DATA[props.$size].radius}px;
+  gap: ${(props) => KEY_SIZE_DATA[props.$size].padding - 2}px;
+  ${(props) =>
+    props.$isFullSize &&
+    css`
+    height: 100%;
+    width: 100%;
+    border-radius: 0px;
+  `};
+  ${(props) =>
+    props.$isWidthAsHeight &&
+    css`
+  width: ${KEY_SIZE_DATA[props.$size].height}px;
+  min-width: ${KEY_SIZE_DATA[props.$size].height}px;
+  padding: 0px;
+  `};
+  ${(props) =>
+    props.$isMinWidthAsContent &&
+    css`
+  min-width: max-content;
+  `};
+`;
+const addButtonBorder = css`
+  border: 1px solid transparent;
+`;
+const addButtonFlex = css<StyledDollarButtonProps>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+/**
+ * Styled
+ */
+export const StyledButton = styled(motion.button)<StyledDollarButtonProps>`
+  cursor: pointer;
+  user-select: none;
+
+  ${addButtonBorder};
+  ${addButtonSize};
+  ${addButtonGenre};
+  ${addButtonDisabled};
+  ${addButtonIsHiddenBorder};
+  ${addButtonIsRadius};
+  ${addButtonIsPlaystationEffect};
+  ${addButtonFlex};
+  ${addRippleDefault};
+  ${addTransition};
+  ${addFont};
+  ${addOutline};
+  ${addSXTypography};
+  ${addSX};
+`;
 export const StyledButtonIconsWrapper = styled.div<StyledDollarButtonIconsWrapperProps>`
   ${(props) =>
     props.$isIconGroup
@@ -78,81 +131,4 @@ export const StyledButtonIconsWrapper = styled.div<StyledDollarButtonIconsWrappe
       : css`
           display: contents;
         `}
-`;
-
-/****************************************** Size *************************************************/
-export const ButtonSize = css<StyledDollarButtonProps>`
-  ${(props) =>
-    ButtonSizeConstructor({
-      ...KEY_SIZE_DATA[props.$size],
-      isFullSize: props.$isFullSize,
-      isWidthAsHeight: props.$isWidthAsHeight,
-      isMinWidthAsContent: props.$isMinWidthAsContent,
-    })};
-`;
-export const ButtonSizeConstructor = (
-  props: IThemeSizePropertyDefault & {
-    isFullSize?: boolean;
-    isWidthAsHeight?: boolean;
-    isMinWidthAsContent?: boolean;
-  },
-) => css`
-  height: fit-content;
-  min-height: ${props.height}px;
-  max-height: fit-content;
-  padding: 2px ${props.padding}px;
-  border-radius: ${props.radius}px;
-  gap: ${props.padding - 2}px;
-  ${() =>
-    props.isFullSize &&
-    css`
-      height: 100%;
-      width: 100%;
-      border-radius: 0px;
-    `};
-  ${
-    props.isWidthAsHeight &&
-    css`
-    width: ${props.height}px;
-    min-width: ${props.height}px;
-    padding: 0px;
-  `
-  };
-  ${
-    props.isMinWidthAsContent &&
-    css`
-    min-width: max-content;
-  `
-  };
-`;
-/****************************************** Border *************************************************/
-const ButtonBorder = css`
-  border: 1px solid transparent;
-`;
-
-/****************************************** Flex *************************************************/
-const ButtonFlex = css<StyledDollarButtonProps>`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-/****************************************** Styled *************************************************/
-export const StyledButton = styled(motion.button)<StyledDollarButtonProps>`
-  cursor: pointer;
-  user-select: none;
-
-  ${ButtonBorder};
-  ${ButtonSize};
-  ${ButtonGenre};
-  ${ButtonDisabled};
-  ${ButtonIsHiddenBorder};
-  ${ButtonIsRadius};
-  ${ButtonIsPlaystationEffect};
-  ${ButtonFlex};
-  ${addRippleDefault};
-  ${addTransition};
-  ${addFont};
-  ${addOutline};
-  ${addSXTypography};
-  ${addSX};
 `;

@@ -1,15 +1,15 @@
-import { createContext, useCallback, useEffect, useState } from 'react'
+import { createContext, useCallback, useEffect, useState } from 'react';
 
-import { PermissionContextProps, ProviderPermissionProps } from '.'
+import { PermissionContextProps, ProviderPermissionProps } from '.';
 
-export const PermissionContext = createContext<PermissionContextProps | null>(null)
+export const PermissionContext = createContext<PermissionContextProps | null>(null);
 
 export const ProviderPermission = (props: ProviderPermissionProps) => {
-  const { pushNotificationSupported } = usePushNotificationSupported()
-  const { isBiometricSupported } = useBiometricSupported()
+  const { pushNotificationSupported } = usePushNotificationSupported();
+  const { isBiometricSupported } = useBiometricSupported();
   const { notificationPermission, requestNotificationPermission, isNotificationPermissionLoading } =
-    useNotificationPermission()
-  const { geolocationPermission, requestGeolocationPermission } = useGeolocationPermission()
+    useNotificationPermission();
+  const { geolocationPermission, requestGeolocationPermission } = useGeolocationPermission();
 
   return (
     <PermissionContext.Provider
@@ -20,16 +20,16 @@ export const ProviderPermission = (props: ProviderPermissionProps) => {
         requestGeolocationPermission,
         notificationPermission,
         requestNotificationPermission,
-        isNotificationPermissionLoading
+        isNotificationPermissionLoading,
       }}
     >
       {props.children}
     </PermissionContext.Provider>
-  )
-}
+  );
+};
 
 const useBiometricSupported = () => {
-  const [isBiometricSupported, setIsBiometricSupported] = useState(false)
+  const [isBiometricSupported, setIsBiometricSupported] = useState(false);
 
   useEffect(() => {
     const checkBiometricAvailability = async () => {
@@ -38,92 +38,92 @@ const useBiometricSupported = () => {
           window.PublicKeyCredential &&
           typeof window.PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable === 'function'
         ) {
-          const available = await window.PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable()
-          setIsBiometricSupported(available)
+          const available = await window.PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable();
+          setIsBiometricSupported(available);
         } else {
-          setIsBiometricSupported(false)
+          setIsBiometricSupported(false);
         }
       } catch (error) {
-        console.error('Error checking biometric availability:', error)
-        setIsBiometricSupported(false)
+        console.error('Error checking biometric availability:', error);
+        setIsBiometricSupported(false);
       }
-    }
+    };
 
-    checkBiometricAvailability()
-  }, [])
+    checkBiometricAvailability();
+  }, []);
 
-  return { isBiometricSupported }
-}
+  return { isBiometricSupported };
+};
 
 const useGeolocationPermission = () => {
   // eslint-disable-next-line no-undef
-  const [geolocationPermission, setGeolocationPermission] = useState<PermissionState | null>(null)
+  const [geolocationPermission, setGeolocationPermission] = useState<PermissionState | null>(null);
 
   useEffect(() => {
     if ('permissions' in window.navigator) {
-      window.navigator.permissions.query({ name: 'geolocation' }).then(permissionStatus => {
-        setGeolocationPermission(permissionStatus.state)
+      window.navigator.permissions.query({ name: 'geolocation' }).then((permissionStatus) => {
+        setGeolocationPermission(permissionStatus.state);
         permissionStatus.onchange = () => {
-          setGeolocationPermission(permissionStatus.state)
-        }
-      })
+          setGeolocationPermission(permissionStatus.state);
+        };
+      });
     }
-  }, [])
+  }, []);
 
   const requestGeolocationPermission = useCallback(() => {
     if ('geolocation' in window.navigator) {
       window.navigator.geolocation.getCurrentPosition(
         () => setGeolocationPermission('granted'),
-        () => setGeolocationPermission('denied')
-      )
+        () => setGeolocationPermission('denied'),
+      );
     } else {
-      console.warn('Provider Permission. Geolocation is not supported in this browser.')
+      console.warn('Provider Permission. Geolocation is not supported in this browser.');
     }
-  }, [])
+  }, []);
 
-  return { geolocationPermission, requestGeolocationPermission }
-}
+  return { geolocationPermission, requestGeolocationPermission };
+};
 
 const useNotificationPermission = () => {
   // eslint-disable-next-line no-undef
-  const [notificationPermission, setNotificationPermission] = useState<NotificationPermission | null>(null)
-  const [isNotificationPermissionLoading, setIsNotificationPermissionLoading] = useState<boolean>(false)
+  const [notificationPermission, setNotificationPermission] = useState<NotificationPermission | null>(null);
+  const [isNotificationPermissionLoading, setIsNotificationPermissionLoading] = useState<boolean>(false);
 
   const requestNotificationPermission = useCallback(async () => {
-    setIsNotificationPermissionLoading(true)
+    setIsNotificationPermissionLoading(true);
     if ('Notification' in window) {
       try {
-        setIsNotificationPermissionLoading(true)
-        const permission = await window.Notification.requestPermission()
-        setNotificationPermission(permission)
-        setIsNotificationPermissionLoading(false)
-        return permission
+        setIsNotificationPermissionLoading(true);
+        const permission = await window.Notification.requestPermission();
+        setNotificationPermission(permission);
+        setIsNotificationPermissionLoading(false);
+        return permission;
       } catch (error) {
-        console.error('Provider Permission. Failed to request notification permission:', error)
+        console.error('Provider Permission. Failed to request notification permission:', error);
       }
     } else {
-      console.warn('Provider Permission. Notifications are not supported in this browser.')
+      console.warn('Provider Permission. Notifications are not supported in this browser.');
     }
-    setIsNotificationPermissionLoading(false)
-  }, [])
+    setIsNotificationPermissionLoading(false);
+  }, []);
 
   useEffect(() => {
     if ('Notification' in window) {
-      setNotificationPermission(window.Notification.permission)
+      setNotificationPermission(window.Notification.permission);
     }
-  }, [])
+  }, []);
 
-  return { notificationPermission, requestNotificationPermission, isNotificationPermissionLoading }
-}
+  return { notificationPermission, requestNotificationPermission, isNotificationPermissionLoading };
+};
 
 const usePushNotificationSupported = () => {
-  const [pushNotificationSupported, setPushNotificationSupported] = useState<boolean>(false)
+  const [pushNotificationSupported, setPushNotificationSupported] = useState<boolean>(false);
 
   useEffect(() => {
     if ('PushManager' in window) {
-      setPushNotificationSupported(true)
+      setPushNotificationSupported(true);
     }
-  }, [])
+  }, []);
 
-  return { pushNotificationSupported }
-}
+  return { pushNotificationSupported };
+};

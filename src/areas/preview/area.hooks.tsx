@@ -1,26 +1,26 @@
-import { useEffect } from 'react'
+import { useEffect } from 'react';
 
 export const useRemovePreviewLoader = () => {
   useEffect(() => {
-    const loader = document.querySelector('.preview-wrapper') as HTMLElement
+    const loader = document.querySelector('.preview-wrapper') as HTMLElement;
 
     const handleDomReady = () => {
       if (loader) {
-        loader.style.opacity = '0'
+        loader.style.opacity = '0';
         setTimeout(() => {
-          loader.remove()
-        }, 500)
+          loader.remove();
+        }, 500);
       }
-    }
+    };
 
     if (document.readyState === 'complete') {
-      handleDomReady()
+      handleDomReady();
     } else {
-      window.addEventListener('load', handleDomReady)
+      window.addEventListener('load', handleDomReady);
     }
 
     return () => {
-      window.removeEventListener('load', handleDomReady)
-    }
-  }, [])
-}
+      window.removeEventListener('load', handleDomReady);
+    };
+  }, []);
+};

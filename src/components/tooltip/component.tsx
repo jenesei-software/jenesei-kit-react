@@ -1,23 +1,23 @@
-import { FC, Ref, memo } from 'react'
+import { Typography } from '@local/components/typography';
 
-import { Typography } from '@local/components/typography'
+import { FC, memo, Ref } from 'react';
 
+import { usePopover } from '../popover';
 import {
   DEFAULT_TOOLTIP_OFFSET_FALLBACK,
   DEFAULT_TOOLTIP_PLACEMENT_FALLBACK,
   TooltipBox,
   TooltipContainer,
-  TooltipProps
-} from '.'
-import { usePopover } from '../popover'
+  TooltipProps,
+} from '.';
 
-export const Tooltip: FC<TooltipProps> = memo(props => {
-  if (props.isDisabled) return <>{props.children}</>
+export const Tooltip: FC<TooltipProps> = memo((props) => {
+  if (props.isDisabled) return <TooltipContainer sx={props.sx}>{props.children}</TooltipContainer>;
 
-  return <TooltipContent {...props} />
-})
+  return <TooltipContent {...props} />;
+});
 
-export const TooltipContent: FC<TooltipProps> = props => {
+export const TooltipContent: FC<TooltipProps> = (props) => {
   const { isOpen, refReference, refFloating, floatingStyles } = usePopover({
     placement: props.placement ?? DEFAULT_TOOLTIP_PLACEMENT_FALLBACK,
     offset: props.offset ?? DEFAULT_TOOLTIP_OFFSET_FALLBACK,
@@ -26,8 +26,8 @@ export const TooltipContent: FC<TooltipProps> = props => {
     isFloatingHover: props.isFloatingHover ?? true,
     isWidthAsContent: props.isWidthAsContent ?? false,
     hoverCloseDelay: props.hoverCloseDelay ?? undefined,
-    hoverOffset: props.hoverOffset ?? undefined
-  })
+    hoverOffset: props.hoverOffset ?? undefined,
+  });
   return (
     <>
       <TooltipContainer sx={props.sx} ref={refReference as Ref<HTMLDivElement | null>}>
@@ -46,8 +46,8 @@ export const TooltipContent: FC<TooltipProps> = props => {
           sx={
             props.sxTypography ?? {
               default: {
-                size: 14
-              }
+                size: 14,
+              },
             }
           }
         >
@@ -55,7 +55,7 @@ export const TooltipContent: FC<TooltipProps> = props => {
         </Typography>
       </TooltipBox>
     </>
-  )
-}
+  );
+};
 
-Tooltip.displayName = 'Tooltip'
+Tooltip.displayName = 'Tooltip';

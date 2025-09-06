@@ -1,7 +1,7 @@
 {
   "author": "Cyril Strone",
   "name": "@jenesei-software/jenesei-kit-react",
-  "version": "1.3.9-storybook.1",
+  "version": "1.3.16",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jenesei-software/jenesei-kit-react.git"
@@ -270,8 +270,9 @@
     "build:library": "tsc && vite build",
     "build:main": "tsc && vite build",
     "storybook": "storybook dev -p 3030",
-    "eslint": "eslint \"src/**/*.{ts,tsx,js,jsx}\"",
-    "prettier": "prettier --write \"src/**/*.{ts,tsx}\""
+    "biome:lint": "biome lint .",
+    "biome:format": "biome format --write src",
+    "changelog": "conventional-changelog -p eslint -i CHANGELOG.md -s -r 0"
   },
   "devDependencies": {
     "@fontsource/inter": "^5.1.0",

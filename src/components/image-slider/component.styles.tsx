@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion'
-import styled from 'styled-components'
+import { motion } from 'framer-motion';
+import styled from 'styled-components';
 
 export const SliderImage = styled(motion.div)`
   display: flex;
@@ -14,13 +14,13 @@ export const SliderImage = styled(motion.div)`
   &:active {
     cursor: grabbing;
   }
-`
+`;
 
 export const SliderDot = styled(motion.div)`
   width: 6px;
   height: 6px;
-  background-color: ${props => props.theme.palette.whiteStandard};
+  background-color: ${(props) => props.theme.palette.whiteStandard};
   border-radius: 5px;
   opacity: 0.8;
   cursor: pointer;
-`
+`;

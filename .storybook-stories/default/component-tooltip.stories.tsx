@@ -5,7 +5,7 @@ import 'styled-components';
 import { Button } from '@local/components/button';
 import { Stack } from '@local/components/stack';
 import { Tooltip as TooltipComponent } from '@local/components/tooltip';
-import { Typography } from '@local/components/typography';
+import { Typography, TypographyTooltip } from '@local/components/typography';
 import { LoremIpsumText } from '@local/consts';
 
 import { WrapperBig, WrapperMin } from './tools';
@@ -220,6 +220,34 @@ const TooltipWrapper: FC = () => {
             TooltipComponent with long text
           </Button>
         </TooltipComponent>
+      </WrapperBig>
+      <WrapperBig>
+        <TypographyTooltip
+          tooltip={{
+            placement: 'bottom-start',
+            genre: 'black',
+            mode: 'hover',
+            size: 'medium',
+            maxWidth: '150px',
+            sx: {
+              default: {
+                maxWidth: '150px',
+              },
+            },
+          }}
+          typography={{
+            sx: {
+              default: {
+                line: 2,
+                family: 'Inter',
+                size: 16,
+                color: 'black100',
+              },
+            },
+          }}
+        >
+          Цветная капустаЦветная капустаЦветная капустаЦветная капуста
+        </TypographyTooltip>
       </WrapperBig>
     </WrapperBig>
   );

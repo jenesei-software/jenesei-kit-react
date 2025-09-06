@@ -1,6 +1,14 @@
 import { getContrastYIQ } from '@local/functions';
 
 import {
+  ThemeMapBustmarket,
+  ThemeMapCheckbox,
+  ThemeMapId,
+  ThemeMapLoading,
+  ThemeMapLogo,
+  ThemeMapRealebail,
+} from './theme.interface';
+import {
   ITheme,
   IThemeGenre,
   IThemeGenreDate,
@@ -15,7 +23,6 @@ import {
   IThemeSizePropertyDefault,
   IThemeSizePropertyToggle,
 } from '.';
-
 export const JeneseiPalette: Record<IThemePaletteKeys, string> = {
   currentColor: 'currentColor',
   inherit: 'inherit',
@@ -871,7 +878,25 @@ const ThemeGenreSonner: IThemeGenreSonner = {
     },
   },
 };
+const VERSION = '3';
+
 export const ThemeLight: ITheme = {
+  icon: {
+    map: {
+      id: ThemeMapId,
+      checkbox: ThemeMapCheckbox,
+      loading: ThemeMapLoading,
+      realebail: ThemeMapRealebail,
+      logo: ThemeMapLogo,
+      bustmarket: ThemeMapBustmarket,
+    },
+    getIconId(props) {
+      return `#${props.type}-${props.name}`;
+    },
+    getSpriteUrl(props) {
+      return `https://assets.jenesei.ru/icons/${props.type}.svg?v=${VERSION}`;
+    },
+  },
   transition: {
     duration: '0.3s',
     timingFunction: 'ease',

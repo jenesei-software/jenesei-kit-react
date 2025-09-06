@@ -1,4 +1,4 @@
-import { create } from 'storybook/theming'
+import { create } from 'storybook/theming';
 
 export default create({
   base: 'light',
@@ -7,7 +7,7 @@ export default create({
   brandImage: '/icons/icon-180x180.png',
   brandTarget: '_blank',
 
-  colorPrimary: '#395295',
+  color: '#395295',
   colorSecondary: '#4195D2',
 
   appBg: '#ffffff',
@@ -27,5 +27,5 @@ export default create({
   inputBg: '#ffffff',
   inputBorder: '#10162F',
   inputTextColor: '#10162F',
-  inputBorderRadius: 2
-})
+  inputBorderRadius: 2,
+});

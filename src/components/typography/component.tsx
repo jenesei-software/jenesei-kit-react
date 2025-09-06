@@ -1,7 +1,8 @@
 import { useScreenWidth } from '@local/contexts/context-screen-width';
+import { useOverflowing } from '@local/hooks/use-overflowing';
 
 import { createLink, LinkProps } from '@tanstack/react-router';
-import { memo, useEffect, useMemo, useRef, useState } from 'react';
+import { memo, useMemo } from 'react';
 
 import { Tooltip } from '../tooltip';
 import { Title, TypographyCSSProps, TypographyProps, TypographyTooltipProps } from '.';
@@ -85,24 +86,13 @@ const TypographySizeIsAnchor = (props: TypographyProps & LinkProps) => {
 export const TypographyLink = createLink(TypographySizeIsAnchor);
 
 export const TypographyTooltip = memo((props: TypographyTooltipProps) => {
-  const [isOverflowing, setIsOverflowing] = useState(false);
-  const contentRef = useRef<HTMLDivElement>(null);
-
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
-  useEffect(() => {
-    const checkOverflow = () => {
-      if (contentRef.current) {
-        setIsOverflowing(contentRef.current.scrollWidth > contentRef.current.clientWidth);
-      }
-    };
-    checkOverflow();
-    window.addEventListener('resize', checkOverflow);
-    return () => window.removeEventListener('resize', checkOverflow);
-  }, [props.children]);
-
+  const { isDisabled, ref } = useOverflowing<HTMLDivElement>({
+    isCheckSize: props.tooltip.isDisabled !== undefined ? !props.tooltip.isDisabled : true,
+    dependencies: [props.children],
+  });
   return (
-    <Tooltip isDisabled={!isOverflowing} content={props.children} {...props.tooltip}>
-      <TypographyWithRef ref={contentRef} {...props.typography} style={{ position: 'relative' }}>
+    <Tooltip isDisabled={isDisabled} content={props.children} {...props.tooltip}>
+      <TypographyWithRef ref={ref} {...props.typography} style={{ position: 'relative' }}>
         {props.children}
       </TypographyWithRef>
     </Tooltip>
