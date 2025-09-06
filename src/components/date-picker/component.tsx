@@ -499,6 +499,8 @@ export const DatePicker = (props: DatePickerProps) => {
           $isShowPlaceholder={isShowPlaceholder}
           $isDisabled={props?.isDisabled}
           $isReadOnly={props?.isReadOnly}
+          $isDisabledOutline={props?.isDisabledOutline}
+          $isOutlineBoxShadow={props?.isOutlineBoxShadow}
           tabIndex={-1}
           $error={
             isError
