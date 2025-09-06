@@ -1,4 +1,4 @@
-import { addRemoveScrollbar, addTransition } from '@local/styles/add';
+import { addFont, addRemoveScrollbar, addTransition } from '@local/styles/add';
 
 import styled, { css } from 'styled-components';
 
@@ -124,6 +124,6 @@ export const SonnerContentDescription = styled.div<SonnerContentDescriptionProps
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  font-size: ${(props) => props.$font.size};
+  ${addFont};
 `;
 export const SonnerButtonWrapper = styled.div``;

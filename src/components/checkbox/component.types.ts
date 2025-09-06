@@ -1,4 +1,4 @@
-import { IconItemProps, TIconCheckboxNameString } from '@local/components/icon';
+import { addIconProps } from '@local/components/icon';
 import { addFontProps, addOutlineProps, addOutlinePropsDollar } from '@local/styles/add';
 import { addErrorProps, addErrorStylesProps } from '@local/styles/error';
 import { addSXProps, addSXStyleProps } from '@local/styles/sx';
@@ -14,7 +14,10 @@ export type CheckboxProps = PropsWithChildren & {
 
   genre: TCheckboxGenre;
 
-  view: TIconCheckboxNameString;
+  view: {
+    true: addIconProps;
+    false: addIconProps;
+  };
 
   isDisabled?: boolean;
 
@@ -25,10 +28,6 @@ export type CheckboxProps = PropsWithChildren & {
   isHiddenBorder?: boolean;
 
   isNotBackground?: boolean;
-
-  iconOrder?: IconItemProps<'checkbox'>['order'];
-
-  sizeIcon?: IThemeSize;
 
   onChange?: (checked: boolean) => void;
 

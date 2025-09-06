@@ -6,7 +6,7 @@ import { useTheme } from 'styled-components';
 
 import { Icon } from '../icon';
 import { Ripple } from '../ripple';
-import { CheckboxProps, CheckboxWrapper, StyledIcon } from '.';
+import { CheckboxProps, CheckboxWrapper } from '.';
 
 export const Checkbox: FC<CheckboxProps> = (props) => {
   const handleOnClick = useCallback(
@@ -19,18 +19,14 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
   const children = useMemo(
     () => (
       <>
-        <StyledIcon
-          size={props.sizeIcon || props.size}
-          name={props.view}
-          type='checkbox'
-          order={props.iconOrder}
-          $genre={props.genre}
-          $checked={props.checked}
+        <Icon
+          {...(props.checked ? props.view.true : props.view.false)}
+          size={(props.checked ? props.view.true : props.view.false).size ?? props.size}
         />
         {props.children && props.children}
       </>
     ),
-    [props.checked, props.children, props.genre, props.iconOrder, props.size, props.sizeIcon, props.view],
+    [props.checked, props.children, props.size, props.view],
   );
   const LoadingComponent = <Icon size={props.size} type='loading' name='Line' />;
 

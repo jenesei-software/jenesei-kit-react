@@ -1,7 +1,7 @@
+import { Checkbox as CheckboxComponent, CheckboxProps } from '@local/components/checkbox';
+
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { FC, useEffect, useState } from 'react';
-
-import { Checkbox as CheckboxComponent, CheckboxProps } from '@local/components/checkbox';
 
 const meta: Meta<typeof CheckboxComponent> = {
   component: CheckboxComponent,
@@ -25,7 +25,10 @@ export const Checkbox: Story = {
   render: (args) => <CheckboxWrapper {...args} />,
   args: {
     genre: 'gray',
-    view: 'Square',
+    view: {
+      true: { type: 'checkbox', name: 'Square-true' },
+      false: { type: 'checkbox', name: 'Square-false' },
+    },
     checked: true,
     children: 'First',
     size: 'medium',

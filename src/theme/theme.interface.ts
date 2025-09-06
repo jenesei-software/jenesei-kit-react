@@ -411,7 +411,15 @@ export const ThemeMapId = [
   'Resources',
   'Language',
 ] as const;
-export const ThemeMapCheckbox = ['Radio', 'Square', 'Arrow', 'Heart'] as const;
+export const ThemeMapCheckbox = [
+  'Radio-true',
+  'Radio-false',
+  'Square-true',
+  'Square-false',
+  'Heart-true',
+  'Heart-false',
+  'Arrow',
+] as const;
 export const ThemeMapLoading = ['Line', 'Circle', 'Blocks', 'Balls'] as const;
 export const ThemeMapRealebail = ['MapCluster', 'HomeLikes', 'HomeManagement', 'UserSettings', 'User'] as const;
 export const ThemeMapLogo = ['Jenesei', 'BustMarket'] as const;

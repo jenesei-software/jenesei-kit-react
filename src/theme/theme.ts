@@ -877,7 +877,7 @@ const ThemeGenreSonner: IThemeGenreSonner = {
     },
   },
 };
-const VERSION = '2';
+const VERSION = '3';
 
 export const ThemeLight: ITheme = {
   icon: {
