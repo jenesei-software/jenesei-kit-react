@@ -8,6 +8,7 @@ import {
   ThemeMapLogo,
   ThemeMapRealebail,
 } from './theme.interface';
+import { LIBRARY_VERSION } from '..';
 import {
   ITheme,
   IThemeGenre,
@@ -878,7 +879,6 @@ const ThemeGenreSonner: IThemeGenreSonner = {
     },
   },
 };
-const VERSION = '3';
 
 export const ThemeLight: ITheme = {
   icon: {
@@ -894,7 +894,7 @@ export const ThemeLight: ITheme = {
       return `#${props.type}-${props.name}`;
     },
     getSpriteUrl(props) {
-      return `https://assets.jenesei.ru/icons/${props.type}.svg?v=${VERSION}`;
+      return `https://assets.jenesei.ru/icons/${props.type}.svg?v=${LIBRARY_VERSION}`;
     },
   },
   transition: {

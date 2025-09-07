@@ -1,4 +1,4 @@
-import { ImageSupportedFormatsForInput } from '@local/consts';
+import { LIST_IMAGE_SUPPORTED_FORMAT_FOR_INPUT } from '@local/consts';
 import { useImageCrop } from '@local/hooks/use-image-crop';
 import { useImageView } from '@local/hooks/use-image-view';
 import { ErrorMessage } from '@local/styles/error';
@@ -267,7 +267,7 @@ export const ImageSelect = (props: ImageSelectProps) => {
           <input
             ref={refInput}
             type='file'
-            accept={ImageSupportedFormatsForInput}
+            accept={LIST_IMAGE_SUPPORTED_FORMAT_FOR_INPUT}
             multiple
             style={{ display: 'none' }}
             onChange={(e) => {

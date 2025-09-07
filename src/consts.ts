@@ -3,7 +3,7 @@ import { MapTheme } from './components/map';
 import { transformObjectToArray, transformObjectValuesToKeys } from './functions';
 import { ILanguage, IService } from './types';
 
-export const ObjectLanguage: ILanguage = {
+export const OBJECT_LANGUAGE: ILanguage = {
   eng: {
     value: 'eng',
     label: 'English',
@@ -18,7 +18,7 @@ export const ObjectLanguage: ILanguage = {
   },
 };
 
-export const ObjectService: IService = {
+export const OBJECT_SERVICE: IService = {
   jenesei_id: {
     value: 'jenesei_id',
     label: 'Jenesei ID',
@@ -27,18 +27,18 @@ export const ObjectService: IService = {
   },
 };
 
-export const ListLanguage = transformObjectToArray(ObjectLanguage);
-export const KeysLanguage = transformObjectValuesToKeys(ObjectLanguage);
+export const LIST_LANGUAGE = transformObjectToArray(OBJECT_LANGUAGE);
+export const LIST_KEY_LANGUAGE = transformObjectValuesToKeys(OBJECT_LANGUAGE);
 
-export const ListService = transformObjectToArray(ObjectService);
-export const KeysService = transformObjectValuesToKeys(ObjectService);
+export const LIST_SERVICE = transformObjectToArray(OBJECT_SERVICE);
+export const LIST_KEY_SERVICE = transformObjectValuesToKeys(OBJECT_SERVICE);
 
-export const localeInput: InputItem = {
+export const LOCALE_INPUT: InputItem = {
   day: 'ДД',
   month: 'ММ',
   year: 'ГГГГ',
 };
-export const localeMonths: MonthItem[] = [
+export const LOCALE_MONTHS: MonthItem[] = [
   {
     localeLong: 'Январь',
     localeShort: 'Янв',
@@ -100,7 +100,7 @@ export const localeMonths: MonthItem[] = [
     value: 'december',
   },
 ];
-export const localeWeeks: WeekItem[] = [
+export const LOCALE_WEEKS: WeekItem[] = [
   {
     localeLong: 'Monday',
     localeShort: 'Пн',
@@ -137,7 +137,7 @@ export const localeWeeks: WeekItem[] = [
     value: 'su',
   },
 ];
-export const MapThemeList: MapTheme[] = [
+export const LIST_MAP_THEME: MapTheme[] = [
   {
     name: 'Light CARTO',
     url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
@@ -166,8 +166,10 @@ export const MapThemeList: MapTheme[] = [
   },
 ];
 
-export const ImageSupportedFormats = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/avif'] as const;
-export const ImageSupportedFormatsForInput = ['image/*', '.jpeg', '.jpg', '.png', '.webp', 'avif'].join(',');
+export const LIST_IMAGE_SUPPORTED_FORMAT = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/avif'] as const;
+export const LIST_IMAGE_SUPPORTED_FORMAT_FOR_INPUT = ['image/*', '.jpeg', '.jpg', '.png', '.webp', 'avif'].join(',');
 
-export const LoremIpsumText =
+export const LOREM_IPSUM_TEXT =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+
+export const LIBRARY_VERSION = import.meta.env.VITE_APP_VERSION

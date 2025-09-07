@@ -186,13 +186,21 @@ const addDateInputWrapperGenre = css<DateInputProps>`
       color: ${props.theme.colors.input[props.$genre].color.hover};
     }
     ${
-      props.$isOpen &&
-      css`
-      background: ${props.theme.colors.input[props.$genre].background.rest};
-      border-color: ${props.theme.colors.input[props.$genre].border.rest};
-      color: ${props.theme.colors.input[props.$genre].color.rest};
-      outline: 2px solid ${(props) => props.theme.states.focus};
+      props.$isOpen && !props.$isReadOnly && !props.$isDisabledOutline
+        ? props.$isOutlineBoxShadow
+          ? css`
+          outline: 1px solid transparent;
+          outline-offset: 0px;
+          outline: 1px solid #83b7e8;
+          box-shadow: 0 1px 1px rgba(24,36,51, .06), 0 0 0 .25rem rgba(6,111,209, .25);
+      `
+          : css`
+            background: ${props.theme.colors.input[props.$genre].background.rest};
+            border-color: ${props.theme.colors.input[props.$genre].border.rest};
+            color: ${props.theme.colors.input[props.$genre].color.rest};
+            outline: 2px solid ${(props) => props.theme.states.focus};
     `
+        : null
     }
   `};
 `;

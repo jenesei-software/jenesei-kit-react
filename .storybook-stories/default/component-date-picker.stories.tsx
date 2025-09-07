@@ -5,7 +5,7 @@ import 'styled-components';
 
 import { DatePicker as DatePickerComponent } from '@local/components/date-picker';
 import { Typography } from '@local/components/typography';
-import { localeInput, localeMonths, localeWeeks } from '@local/consts';
+import { LOCALE_INPUT, LOCALE_MONTHS, LOCALE_WEEKS } from '@local/consts';
 
 import { WrapperBig } from './tools';
 
@@ -17,12 +17,12 @@ const meta: Meta<typeof DatePickerComponent> = {
 export default meta;
 
 const DatePickerWrapperAll: FC = () => {
-  const [valueOne, setValueOne] = useState<number | null>(null);
+  const [valueOne, setValueOne] = useState<number | null>(moment.utc().startOf('day').valueOf());
   const [valueTwo, setValueTwo] = useState<number | null>(null);
   const [valueThree, setValueThree] = useState<number | null>(null);
   return (
     <WrapperBig sx={{ default: { flexDirection: 'row' } }}>
-      <WrapperBig sx={{ default: { flexDirection: 'column' } }}>
+      <WrapperBig sx={{ default: { flexDirection: 'column', color: 'black' } }}>
         <Typography
           sx={{
             default: {
@@ -33,15 +33,17 @@ const DatePickerWrapperAll: FC = () => {
         >
           Other - Past hundred years, blackBorder
         </Typography>
+        valueOne : {valueOne}
         <DatePickerComponent
+          isOutlineBoxShadow
           genre='blackBorder'
           notValidDate={{
             errorMessage: 'Not valid date',
           }}
           locale={{
-            months: localeMonths,
-            weeks: localeWeeks,
-            inputs: localeInput,
+            months: LOCALE_MONTHS,
+            weeks: LOCALE_WEEKS,
+            inputs: LOCALE_INPUT,
           }}
           value={valueOne}
           size='medium'
@@ -72,9 +74,9 @@ const DatePickerWrapperAll: FC = () => {
             errorMessage: 'Not valid date',
           }}
           locale={{
-            months: localeMonths,
-            weeks: localeWeeks,
-            inputs: localeInput,
+            months: LOCALE_MONTHS,
+            weeks: LOCALE_WEEKS,
+            inputs: LOCALE_INPUT,
           }}
           value={valueTwo}
           size='medium'
@@ -105,9 +107,9 @@ const DatePickerWrapperAll: FC = () => {
             errorMessage: 'Not valid date',
           }}
           locale={{
-            months: localeMonths,
-            weeks: localeWeeks,
-            inputs: localeInput,
+            months: LOCALE_MONTHS,
+            weeks: LOCALE_WEEKS,
+            inputs: LOCALE_INPUT,
           }}
           value={valueThree}
           size='medium'

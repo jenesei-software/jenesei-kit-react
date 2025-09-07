@@ -1,4 +1,4 @@
-import { ImageSupportedFormats } from '.';
+import { LIST_IMAGE_SUPPORTED_FORMAT } from '.';
 
 export type AddDollarSign<T> = {
   [K in keyof T as `$${string & K}`]: T[K];
@@ -16,4 +16,4 @@ export type IService = Record<
   { value: IServiceKeys; label: string; placeholder: string; search: string }
 >;
 
-export type IImageFormat = (typeof ImageSupportedFormats)[number];
+export type IImageFormat = (typeof LIST_IMAGE_SUPPORTED_FORMAT)[number];
