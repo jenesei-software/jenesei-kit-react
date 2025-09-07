@@ -1,4 +1,3 @@
-// export const DEFAULT_PROVIDER_Dialog_SCALE = 0.04
 import { IThemePaletteKeys } from '@local/theme';
 
 export const DEFAULT_PROVIDER_DIALOG_DURATION_ELEMENT = 0.3;

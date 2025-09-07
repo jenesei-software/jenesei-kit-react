@@ -1,16 +1,16 @@
-import { FC, useCallback, useEffect, useMemo, useState } from 'react';
-import Cropper, { Area } from 'react-easy-crop';
-import { useTheme } from 'styled-components';
-
 import { Preview } from '@local/areas/preview';
 import { Button } from '@local/components/button';
 import { ImageSelectItemProps } from '@local/components/image-select';
 import { Pagination, PaginationProps } from '@local/components/pagination';
 import { Stack } from '@local/components/stack';
-import { ImageSupportedFormats } from '@local/consts';
+import { LIST_IMAGE_SUPPORTED_FORMAT } from '@local/consts';
 import { useDialog } from '@local/contexts/context-dialog';
 import { KEY_SIZE_DATA } from '@local/theme';
 import { IImageFormat } from '@local/types';
+
+import { FC, useCallback, useEffect, useMemo, useState } from 'react';
+import Cropper, { Area } from 'react-easy-crop';
+import { useTheme } from 'styled-components';
 
 import { useImageCropAddProps, useImageCropProps } from '.';
 
@@ -71,7 +71,7 @@ export const useImageCrop = (props: useImageCropProps) => {
 };
 
 function getCroppedImg(imageSrc: string, crop: Area, format: string = 'image/png'): Promise<Blob> {
-  const mimeType: IImageFormat = ImageSupportedFormats.includes(format as IImageFormat)
+  const mimeType: IImageFormat = LIST_IMAGE_SUPPORTED_FORMAT.includes(format as IImageFormat)
     ? (format as IImageFormat)
     : 'image/png';
 

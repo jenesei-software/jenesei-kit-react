@@ -6,7 +6,7 @@ import { Button } from '@local/components/button';
 import { Stack } from '@local/components/stack';
 import { Tooltip as TooltipComponent } from '@local/components/tooltip';
 import { Typography, TypographyTooltip } from '@local/components/typography';
-import { LoremIpsumText } from '@local/consts';
+import { LOREM_IPSUM_TEXT } from '@local/consts';
 
 import { WrapperBig, WrapperMin } from './tools';
 
@@ -213,7 +213,7 @@ const TooltipWrapper: FC = () => {
           size='medium'
           genre='blackBorder'
           maxHeight='100px'
-          content={LoremIpsumText}
+          content={LOREM_IPSUM_TEXT}
           isWidthAsContent
         >
           <Button genre='blackBorder' size={'medium'}>

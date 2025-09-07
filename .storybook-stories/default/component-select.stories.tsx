@@ -3,7 +3,7 @@ import { FC, useState } from 'react';
 import 'styled-components';
 
 import { SelectLanguage, SelectMonth, SelectMonths, SelectYear } from '@local/components/select';
-import { localeMonths, Typography } from '@local/index';
+import { LOCALE_MONTHS, Typography } from '@local/index';
 
 import moment from 'moment';
 
@@ -67,7 +67,7 @@ const SelectWrapperAll: FC = () => {
           genre='grayBorder'
           value={valueMonth}
           onChange={handleSelectChangeMonth}
-          monthsLocale={localeMonths}
+          monthsLocale={LOCALE_MONTHS}
         />
       </WrapperBig>
       <WrapperBig sx={{ default: { flexDirection: 'column' } }}>
@@ -94,7 +94,7 @@ const SelectWrapperAll: FC = () => {
           labelPlaceholder='Select or search months'
           value={valueMonths}
           onChange={handleSelectChangeMonths}
-          monthsLocale={localeMonths}
+          monthsLocale={LOCALE_MONTHS}
         />
       </WrapperBig>
       <WrapperBig sx={{ default: { flexDirection: 'column' } }}>

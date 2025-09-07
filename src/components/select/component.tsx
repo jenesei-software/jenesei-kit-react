@@ -1,4 +1,4 @@
-import { ListLanguage, MapThemeList } from '@local/consts';
+import { LIST_LANGUAGE, LIST_MAP_THEME } from '@local/consts';
 import { ErrorMessage } from '@local/styles/error';
 import { KEY_SIZE_DATA } from '@local/theme';
 
@@ -635,7 +635,7 @@ export const ContainerSelectListOption = memo(ContainerSelectListOptionComponent
 export const SelectLanguage: FC<SelectLanguageProps> = (props) => {
   const { value, onChange } = props;
 
-  const option = ListLanguage;
+  const option = LIST_LANGUAGE;
 
   const [viewOption] = useState<ISelectLanguageOption[]>(option);
 
@@ -802,7 +802,7 @@ export const SelectYear: FC<SelectYearProps> = (props) => {
 export const SelectMapTheme: FC<SelectMapThemeProps> = (props) => {
   const { value, onChange } = props;
 
-  const option = useMemo(() => MapThemeList.map((e) => ({ label: e.name, value: e.name, placeholder: e.name })), []);
+  const option = useMemo(() => LIST_MAP_THEME.map((e) => ({ label: e.name, value: e.name, placeholder: e.name })), []);
 
   const [viewOption, setViewOption] = useState<ISelectMapThemeOption[]>(option);
   useEffect(() => {
@@ -810,7 +810,7 @@ export const SelectMapTheme: FC<SelectMapThemeProps> = (props) => {
   }, [option]);
   const handleSelectChange = (value: ISelectMapThemeOption[]) => {
     if (value.length === 0) onChange(null);
-    const findOption = MapThemeList.find((e) => e.name === value[0].value);
+    const findOption = LIST_MAP_THEME.find((e) => e.name === value[0].value);
     onChange(findOption ?? null);
   };
   const valueLocal = useMemo(() => {

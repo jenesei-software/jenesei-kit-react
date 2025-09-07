@@ -5,7 +5,7 @@ import 'styled-components';
 
 import { DatePicker as DatePickerComponent } from '@local/components/date-picker';
 import { Typography } from '@local/components/typography';
-import { localeInput, localeMonths, localeWeeks } from '@local/consts';
+import { LOCALE_INPUT, LOCALE_MONTHS, LOCALE_WEEKS } from '@local/consts';
 
 import { WrapperBig } from './tools';
 
@@ -41,9 +41,9 @@ const DatePickerWrapperAll: FC = () => {
             errorMessage: 'Not valid date',
           }}
           locale={{
-            months: localeMonths,
-            weeks: localeWeeks,
-            inputs: localeInput,
+            months: LOCALE_MONTHS,
+            weeks: LOCALE_WEEKS,
+            inputs: LOCALE_INPUT,
           }}
           value={valueOne}
           size='medium'
@@ -74,9 +74,9 @@ const DatePickerWrapperAll: FC = () => {
             errorMessage: 'Not valid date',
           }}
           locale={{
-            months: localeMonths,
-            weeks: localeWeeks,
-            inputs: localeInput,
+            months: LOCALE_MONTHS,
+            weeks: LOCALE_WEEKS,
+            inputs: LOCALE_INPUT,
           }}
           value={valueTwo}
           size='medium'
@@ -107,9 +107,9 @@ const DatePickerWrapperAll: FC = () => {
             errorMessage: 'Not valid date',
           }}
           locale={{
-            months: localeMonths,
-            weeks: localeWeeks,
-            inputs: localeInput,
+            months: LOCALE_MONTHS,
+            weeks: LOCALE_WEEKS,
+            inputs: LOCALE_INPUT,
           }}
           value={valueThree}
           size='medium'

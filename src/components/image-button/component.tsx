@@ -1,10 +1,10 @@
-import { FC, useCallback, useRef } from 'react';
-
-import { ImageSupportedFormatsForInput } from '@local/consts';
+import { LIST_IMAGE_SUPPORTED_FORMAT_FOR_INPUT } from '@local/consts';
 import { useImageCrop } from '@local/hooks/use-image-crop';
 
-import { ImageButtonProps } from '.';
+import { FC, useCallback, useRef } from 'react';
+
 import { Button } from '../button';
+import { ImageButtonProps } from '.';
 
 export const ImageButton: FC<ImageButtonProps> = (props) => {
   const refInput = useRef<HTMLInputElement | null>(null);
@@ -35,7 +35,7 @@ export const ImageButton: FC<ImageButtonProps> = (props) => {
       <input
         ref={refInput}
         type='file'
-        accept={ImageSupportedFormatsForInput}
+        accept={LIST_IMAGE_SUPPORTED_FORMAT_FOR_INPUT}
         multiple
         style={{ display: 'none' }}
         onChange={(e) => {
