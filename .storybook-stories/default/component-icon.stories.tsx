@@ -32,7 +32,7 @@ const IconWrapperAll: FC = () => {
         </Typography>
         <WrapperMin>
           {ThemeLight.icon.map.id.map((item) => (
-            <IconComponent key={item} type='id' name={item} size={'large'} color='black100' />
+            <IconComponent key={item} type='id' name={item} size={'large'} />
           ))}
         </WrapperMin>
       </WrapperBig>

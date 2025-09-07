@@ -1,4 +1,5 @@
 import { Stack } from '@local/components/stack';
+import { JeneseiPalette } from '@local/theme';
 
 import styled, { css, keyframes } from 'styled-components';
 
@@ -34,17 +35,17 @@ export const StyledSkeleton = styled(Stack)<StyledSkeletonProps>`
           ? css`
             background: linear-gradient(
         90deg,
-        #f6f7f8 25%,
-        #edeef1 50%,
-        #f6f7f8 75%
+          ${props.$color ? JeneseiPalette[props.$color] : props.$isInheritColor ? 'inherit' : '#f6f7f8'} 25%,
+          ${props.$color ? JeneseiPalette[props.$color] : props.$isInheritColor ? 'inherit' :'#edeef1'} 50%,
+          ${props.$color ? JeneseiPalette[props.$color] : props.$isInheritColor ? 'inherit' :'#f6f7f8'} 75%
       );
           `
           : css`
             background: linear-gradient(
         90deg,
-        #edeef1 25%,
-        #f6f7f8 50%,
-        #edeef1 75%
+          ${props.$color ? JeneseiPalette[props.$color] : props.$isInheritColor ? 'inherit' :'#edeef1'} 25%,
+          ${props.$color ? JeneseiPalette[props.$color] : props.$isInheritColor ? 'inherit' :'#f6f7f8'} 50%,
+          ${props.$color ? JeneseiPalette[props.$color] : props.$isInheritColor ? 'inherit' :'#edeef1'} 75%
       );   
           `
       };

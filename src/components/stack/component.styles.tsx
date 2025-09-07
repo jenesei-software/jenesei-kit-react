@@ -1,10 +1,10 @@
+import { addSX } from '@local/styles/sx';
+
 import { motion } from 'framer-motion';
 import styled, { css } from 'styled-components';
 
-import { addSX } from '@local/styles/sx';
-
-import { StyledStackProps } from '.';
 import { addRipple } from '../ripple';
+import { StyledStackProps } from '.';
 
 export const StyledStack = styled.div<StyledStackProps>`
   display: flex;

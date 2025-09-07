@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useTheme } from 'styled-components';
 
-import { IconItemProps, StyledSVG, useLazyInjectSprite } from '.';
+import { IconItemProps, StyledSkeleton, StyledSVG, useLazyInjectSprite } from '.';
 
 export const Icon = (props: IconItemProps) => {
   const theme = useTheme();
@@ -10,9 +10,18 @@ export const Icon = (props: IconItemProps) => {
     [props.name, props.type, theme.icon.getIconId],
   );
   const spriteUrl = useMemo(() => theme.icon.getSpriteUrl({ type: props.type }), [props.type, theme.icon.getSpriteUrl]);
-  const loaded = useLazyInjectSprite(spriteUrl);
+  const { loaded, error } = useLazyInjectSprite(spriteUrl);
 
-  if (!loaded) return null;
+  if (!loaded || error)
+    return (
+      <StyledSkeleton
+        $size={props.size}
+        $order={props.order}
+        color={props.color ?? undefined}
+        className={props.className}
+        visible
+      />
+    );
 
   return (
     <StyledSVG
@@ -23,7 +32,7 @@ export const Icon = (props: IconItemProps) => {
       $size={props.size}
       $turn={props.turn}
       $order={props.order}
-      $color={props.color || undefined}
+      $color={props.color ?? undefined}
       $sx={props.sx}
       className={props.className}
       onClick={props.onClick}
