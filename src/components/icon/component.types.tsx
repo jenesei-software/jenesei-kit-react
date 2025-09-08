@@ -24,7 +24,7 @@ export type StyledIconItemProps = AddDollarSign<
 > &
   addSXStyleProps;
 
-export type StyledSkeletonProps = AddDollarSign<Pick<IconItemProps, 'size' | 'order'>>;
+export type StyledIconSkeletonProps = AddDollarSign<Pick<IconItemProps, 'size' | 'order'>>;
 
 export type addIconProps = {
   [T in keyof DefaultTheme['icon']['map']]: Omit<IconItemProps, 'size'> & {

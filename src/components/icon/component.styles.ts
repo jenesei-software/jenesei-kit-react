@@ -5,9 +5,9 @@ import { KEY_SIZE_DATA } from '@local/theme';
 
 import styled, { css } from 'styled-components';
 
-import { StyledIconItemProps, StyledSkeletonProps } from '.';
+import { StyledIconItemProps, StyledIconSkeletonProps } from '.';
 
-export const StyledSVG = styled.svg<StyledIconItemProps>`
+export const StyledIcon = styled.svg<StyledIconItemProps>`
   color: ${(props) => (props.$color ? props.theme.palette[props.$color] : 'inherit')};
 
   ${(props) => css`
@@ -31,7 +31,7 @@ export const StyledSVG = styled.svg<StyledIconItemProps>`
   ${addSX};
 `;
 
-export const StyledSkeleton = styled(Skeleton)<StyledSkeletonProps>`
+export const StyledIconSkeleton = styled(Skeleton)<StyledIconSkeletonProps>`
   ${(props) => css`
     height: ${props.$size !== '100%' ? `${KEY_SIZE_DATA[props.$size].heightIcon}px` : '100%'};
     min-height: ${props.$size !== '100%' ? `${KEY_SIZE_DATA[props.$size].heightIcon}px` : '100%'};

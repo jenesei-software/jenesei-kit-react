@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useTheme } from 'styled-components';
 
-import { IconItemProps, StyledSkeleton, StyledSVG, useLazyInjectSprite } from '.';
+import { IconItemProps, StyledIcon, StyledIconSkeleton, useLazyInjectSprite } from '.';
 
 export const Icon = (props: IconItemProps) => {
   const theme = useTheme();
@@ -14,7 +14,7 @@ export const Icon = (props: IconItemProps) => {
 
   if (!loaded || error)
     return (
-      <StyledSkeleton
+      <StyledIconSkeleton
         $size={props.size}
         $order={props.order}
         color={props.color ?? undefined}
@@ -24,7 +24,7 @@ export const Icon = (props: IconItemProps) => {
     );
 
   return (
-    <StyledSVG
+    <StyledIcon
       width='24'
       height='24'
       viewBox='0 0 24 24'
@@ -39,6 +39,6 @@ export const Icon = (props: IconItemProps) => {
       tabIndex={props.tabIndex}
     >
       <use href={iconId} />
-    </StyledSVG>
+    </StyledIcon>
   );
 };
