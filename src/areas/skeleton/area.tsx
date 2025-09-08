@@ -24,7 +24,13 @@ export const Skeleton: FC<SkeletonProps> = (props) => {
   }, [props]);
 
   return (
-    <StyledSkeleton {...props} $visible={visible} $type={props.type}>
+    <StyledSkeleton
+      {...props}
+      $visible={visible}
+      $type={props.type}
+      $color={props.color}
+      $isInheritColor={props.isInheritColor}
+    >
       {props.children}
     </StyledSkeleton>
   );

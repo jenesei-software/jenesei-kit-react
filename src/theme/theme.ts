@@ -894,7 +894,7 @@ export const ThemeLight: ITheme = {
       return `#${props.type}-${props.name}`;
     },
     getSpriteUrl(props) {
-      return `https://assets.jenesei.ru/icons/${props.type}.svg?v=${LIBRARY_VERSION}`;
+      return `https://id.assets.jenesei.ru/icons/${props.type}.svg?v=${LIBRARY_VERSION}`;
     },
   },
   transition: {

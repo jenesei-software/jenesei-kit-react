@@ -32,6 +32,7 @@ export function useOverflowing<T extends HTMLElement>(
   // Мемоизированные зависимости для эффекта (глубокое сравнение)
   const dependencies = useDeepCompareMemoize(props?.dependencies);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     // Если не нужно проверять размеры — выходим
     if (!isCheckSize) return;

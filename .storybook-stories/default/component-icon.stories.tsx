@@ -19,7 +19,7 @@ export default meta;
 const IconWrapperAll: FC = () => {
   return (
     <WrapperBig sx={{ default: { flexDirection: 'row' } }}>
-      <WrapperBig sx={{ default: { flexDirection: 'column' } }}>
+      <WrapperBig sx={{ default: { flexDirection: 'column'} }}>
         <Typography
           sx={{
             default: {
@@ -30,9 +30,9 @@ const IconWrapperAll: FC = () => {
         >
           ID
         </Typography>
-        <WrapperMin>
+        <WrapperMin sx={{ default: { color: 'black' } }}>
           {ThemeLight.icon.map.id.map((item) => (
-            <IconComponent key={item} type='id' name={item} size={'large'} color='black100' />
+            <IconComponent key={item} type='id' name={item} size={'large'} />
           ))}
         </WrapperMin>
       </WrapperBig>
@@ -103,13 +103,7 @@ const IconWrapperAll: FC = () => {
         </Typography>
         <WrapperMin>
           {Object.keys(JeneseiPalette).map((item) => (
-            <IconComponent
-              key={item}
-              type={'logo'}
-              name={'Jenesei'}
-              size={'large'}
-              color={item as IThemePaletteKeys}
-            />
+            <IconComponent key={item} type={'logo'} name={'Jenesei'} size={'large'} color={item as IThemePaletteKeys} />
           ))}
         </WrapperMin>
       </WrapperBig>
