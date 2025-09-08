@@ -94,6 +94,14 @@ export const addGridTransition = css`
     grid-template-columns ${(props) => props.theme.transition.default};
 `;
 
+export const addFontSizeTransition = css<{ $isTransitionFontSize?: boolean }>`
+  ${(props) =>
+    props.$isTransitionFontSize &&
+    css`
+      transition: font-size ${(props) => props.theme.transition.default};
+    `}
+`;
+
 export const addColorTransition = css`
   transition:
     outline 0s,

@@ -72,6 +72,7 @@ export type TypographyProps = PropsWithChildren & {
   isParagraph?: boolean;
   isAnchor?: boolean;
   isSpan?: boolean;
+  isTransitionFontSize?: boolean;
 
   ref?: Ref<HTMLElement | HTMLHeadingElement | HTMLAnchorElement | null>;
 
@@ -88,6 +89,7 @@ export type addSXTypographyStyleProps = AddDollarSign<addSXTypographyProps>;
 export type TypographyCSSProps = AddDollarSign<{
   sxTypography: TypographySXProps;
   sx?: SXProps;
+  isTransitionFontSize?: boolean;
 }> &
   addOutlinePropsDollar;
 

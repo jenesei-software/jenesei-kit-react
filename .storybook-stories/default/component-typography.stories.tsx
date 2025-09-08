@@ -42,7 +42,7 @@ const AllWrapper: FC = () => {
             },
           }}
         >
-          {' ' + screenActual + ' '}
+          {` ${screenActual} `}
         </TypographyComponent>
         (size: 14)
       </TypographyComponent>
@@ -55,6 +55,7 @@ const AllWrapper: FC = () => {
         })}
       >
         <TypographyComponent
+          isTransitionFontSize
           sx={{
             default: {
               size: 20,
@@ -64,6 +65,7 @@ const AllWrapper: FC = () => {
           Typography, size, default - 20
         </TypographyComponent>
         <TypographyComponent
+          isTransitionFontSize
           sx={{
             default: {
               size: 20,
@@ -79,6 +81,7 @@ const AllWrapper: FC = () => {
           Typography, size, default - 20, tablet - 16, mobile - 12
         </TypographyComponent>
         <TypographyComponent
+          isTransitionFontSize
           sx={{
             default: {
               size: 18,
