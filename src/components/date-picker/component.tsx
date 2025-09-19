@@ -471,6 +471,7 @@ export const DatePicker = (props: DatePickerProps) => {
         },
         (isHasInput) => {
           if (!isHasInput) {
+            onChange(null);
             setIsError(false);
           }
         },
@@ -516,9 +517,10 @@ export const DatePicker = (props: DatePickerProps) => {
 
   useEffect(() => {
     if (activeSegment) {
+      close()
       refHiddenInput?.current?.focus();
     }
-  }, [activeSegment]);
+  }, [activeSegment, close]);
   return (
     <>
       <DateWrapper
@@ -904,7 +906,7 @@ function handleDigitKey(
     // Месяцы: максимум 12
     if (current.length >= 2) {
       // уже два символа — начинаем ввод заново
-      if (digit === '0') return; // нельзя начинать с 0
+      // if (digit === '0') return; // нельзя начинать с 0
       dataDate.default[seg].setValue(digit);
       return;
     }
@@ -921,14 +923,14 @@ function handleDigitKey(
 
     if (potentialNum > 12) {
       // если получается больше 12, заменяем на новую цифру
-      if (digit === '0') return; // нельзя начинать с 0
+      // if (digit === '0') return; // нельзя начинать с 0
       dataDate.default[seg].setValue(digit);
       return;
     }
 
     if (potentialNum === 0) {
       // если получается 00, заменяем на новую цифру
-      if (digit === '0') return; // нельзя начинать с 0
+      // if (digit === '0') return; // нельзя начинать с 0
       dataDate.default[seg].setValue(digit);
       return;
     }
