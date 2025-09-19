@@ -68,9 +68,9 @@ export const TextArea = (props: TextAreaProps) => {
           tabIndex={0}
           ref={ref}
           $font={{
+            ...props.font,
             size: props.font?.size ?? 16,
             weight: props.font?.weight ?? (props.isBold ? 500 : 400),
-            family: props.font?.family ?? theme.font.family,
             height: props.font?.height ?? `${lineHeight}px`,
           }}
           $lineHeight={lineHeight}

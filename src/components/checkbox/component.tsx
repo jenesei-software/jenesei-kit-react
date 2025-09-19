@@ -38,10 +38,9 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
         $error={props.error}
         $view={props.view}
         $font={{
+          ...props.font,
           size: props.font?.size ?? KEY_SIZE_DATA[props.size].font,
           weight: props.font?.weight ?? 700,
-          family: props.font?.family ?? theme.font.family,
-          height: props.font?.height,
         }}
         $checked={props.checked}
         $isWidthAsHeight={props.isWidthAsHeight}

@@ -9,7 +9,7 @@ on:
         default: "build"
         type: string
       env_property:
-        description: "Environment property to set version in .env file, e.g., VITE_APP_VERSION"
+        description: "Environment property"
         default: "VITE_APP_VERSION"
         required: false
         type: string

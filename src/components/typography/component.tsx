@@ -15,6 +15,7 @@ const TypographyWithRef = (props: TypographyProps) => {
       style: props.style,
       className: props.className,
       $sx: props.sxStandard,
+      $isTransitionFontSize: props.isTransitionFontSize,
       $isDisabledOutline: props.isDisabledOutline,
       $isOutlineBoxShadow: props.isOutlineBoxShadow,
       $isReadOnly: props.isReadOnly,
@@ -29,6 +30,7 @@ const TypographyWithRef = (props: TypographyProps) => {
       props.isDisabledOutline,
       props.isOutlineBoxShadow,
       props.isReadOnly,
+      props.isTransitionFontSize,
     ],
   );
 

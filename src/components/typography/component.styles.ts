@@ -1,4 +1,4 @@
-import { addOutline } from '@local/styles/add';
+import { addFontSizeTransition, addOutline } from '@local/styles/add';
 import { addSX as addSXStandard } from '@local/styles/sx';
 import { JeneseiPalette } from '@local/theme/theme';
 
@@ -86,12 +86,7 @@ function toStyledCSS(value: TypographyAllProps) {
       font-weight: ${value.weight};
     `
     };
-    ${
-      value.height &&
-      css`
-      line-height: ${value.height}px;
-    `
-    };
+    line-height: ${(props) => value.height ?? props.theme.font.lineHeight};
     ${
       value.color &&
       css`
@@ -151,7 +146,6 @@ function toStyledCSS(value: TypographyAllProps) {
         ? value.variant === 'h1'
           ? css`
             font-size: ${(props) => props.theme.font.sizeHeading.h1 * props.theme.font.sizeDefault.default}px;
-            line-height: ${(props) => props.theme.font.lineHeight};
             margin: 0;
             @media (max-width: ${(props) => props.theme.screens.tablet.width}px) {
               font-size: ${(props) => props.theme.font.sizeHeading.h1 * props.theme.font.sizeDefault.tablet}px;
@@ -164,7 +158,6 @@ function toStyledCSS(value: TypographyAllProps) {
           : value.variant === 'h2'
             ? css`
               font-size: ${(props) => props.theme.font.sizeHeading.h2 * props.theme.font.sizeDefault.default}px;
-              line-height: ${(props) => props.theme.font.lineHeight};
               margin: 0;
               @media (max-width: ${(props) => props.theme.screens.tablet.width}px) {
                 font-size: ${(props) => props.theme.font.sizeHeading.h2 * props.theme.font.sizeDefault.tablet}px;
@@ -177,7 +170,6 @@ function toStyledCSS(value: TypographyAllProps) {
             : value.variant === 'h3'
               ? css`
                 font-size: ${(props) => props.theme.font.sizeHeading.h3 * props.theme.font.sizeDefault.default}px;
-                line-height: ${(props) => props.theme.font.lineHeight};
                 margin: 0;
                 @media (max-width: ${(props) => props.theme.screens.tablet.width}px) {
                   font-size: ${(props) => props.theme.font.sizeHeading.h3 * props.theme.font.sizeDefault.tablet}px;
@@ -190,7 +182,6 @@ function toStyledCSS(value: TypographyAllProps) {
               : value.variant === 'h4'
                 ? css`
                   font-size: ${(props) => props.theme.font.sizeHeading.h4 * props.theme.font.sizeDefault.default}px;
-                  line-height: ${(props) => props.theme.font.lineHeight};
                   margin: 0;
                   @media (max-width: ${(props) => props.theme.screens.tablet.width}px) {
                     font-size: ${(props) => props.theme.font.sizeHeading.h4 * props.theme.font.sizeDefault.tablet}px;
@@ -203,7 +194,6 @@ function toStyledCSS(value: TypographyAllProps) {
                 : value.variant === 'h5'
                   ? css`
                     font-size: ${(props) => props.theme.font.sizeHeading.h5 * props.theme.font.sizeDefault.default}px;
-                    line-height: ${(props) => props.theme.font.lineHeight};
                     margin: 0;
                     @media (max-width: ${(props) => props.theme.screens.tablet.width}px) {
                       font-size: ${(props) => props.theme.font.sizeHeading.h5 * props.theme.font.sizeDefault.tablet}px;
@@ -216,7 +206,6 @@ function toStyledCSS(value: TypographyAllProps) {
                   : value.variant === 'h6'
                     ? css`
                       font-size: ${(props) => props.theme.font.sizeHeading.h6 * props.theme.font.sizeDefault.default}px;
-                      line-height: ${(props) => props.theme.font.lineHeight};
                       margin: 0;
                       @media (max-width: ${(props) => props.theme.screens.tablet.width}px) {
                         font-size: ${(props) => props.theme.font.sizeHeading.h6 * props.theme.font.sizeDefault.tablet}px;
@@ -229,7 +218,6 @@ function toStyledCSS(value: TypographyAllProps) {
                     : value.variant === 'h7'
                       ? css`
                         font-size: ${(props) => props.theme.font.sizeHeading.h7 * props.theme.font.sizeDefault.default}px;
-                        line-height: ${(props) => props.theme.font.lineHeight};
                         margin: 0;
                         @media (max-width: ${(props) => props.theme.screens.tablet.width}px) {
                           font-size: ${(props) =>
@@ -245,7 +233,6 @@ function toStyledCSS(value: TypographyAllProps) {
                         ? css`
                           font-size: ${(props) =>
                             props.theme.font.sizeHeading.h8 * props.theme.font.sizeDefault.default}px;
-                          line-height: ${(props) => props.theme.font.lineHeight};
                           margin: 0;
                           @media (max-width: ${(props) => props.theme.screens.tablet.width}px) {
                             font-size: ${(props) =>
@@ -261,7 +248,6 @@ function toStyledCSS(value: TypographyAllProps) {
                           ? css`
                             font-size: ${(props) =>
                               props.theme.font.sizeHeading.h9 * props.theme.font.sizeDefault.default}px;
-                            line-height: ${(props) => props.theme.font.lineHeight};
                             margin: 0;
                             @media (max-width: ${(props) => props.theme.screens.tablet.width}px) {
                               font-size: ${(props) =>
@@ -310,7 +296,7 @@ const TypographyCSS = css<TypographyCSSProps>`
   overflow: visible;
   text-overflow: ellipsis;
   overflow-wrap: anywhere;
-  line-height: ${(props) => props.theme.font.lineHeight};
+  ${addFontSizeTransition};
   ${addSXTypography};
   ${addSXStandard}
 `;

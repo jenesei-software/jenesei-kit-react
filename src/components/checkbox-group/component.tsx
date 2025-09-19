@@ -37,10 +37,9 @@ export const CheckboxGroup = <T extends ICheckboxValue>(props: CheckboxGroupProp
       $sx={props.sx}
       $size={props.size}
       $font={{
+        ...props.font,
         size: props.font?.size ?? KEY_SIZE_DATA[props.size].font,
         weight: props.font?.weight ?? 700,
-        family: props.font?.family ?? theme.font.family,
-        height: props.font?.height,
       }}
     >
       {props.options.map((e, index) => {
