@@ -63,10 +63,9 @@ export const Input = (props: InputProps) => {
             $genre={props.genre}
             $size={props.size}
             $font={{
+              ...props.font,
               size: props.font?.size ?? 16,
               weight: props.font?.weight ?? (props.isBold ? 500 : 400),
-              family: props.font?.family ?? theme.font.family,
-              height: props.font?.height ?? theme.font.lineHeight,
             }}
             $isBold={props.isBold}
             $isDisabled={props.isDisabled}
@@ -104,10 +103,10 @@ export const Input = (props: InputProps) => {
             $genre={props.genre}
             $size={props.size}
             $font={{
+              ...props.font,
               size: props.font?.size ?? 16,
               weight: props.font?.weight ?? (props.isBold ? 500 : 400),
               family: props.font?.family ?? 'Roboto Mono',
-              height: props.font?.height ?? theme.font.lineHeight,
             }}
             $isBold={props.isBold}
             $isDisabled={props.isDisabled}
@@ -149,10 +148,9 @@ export const Input = (props: InputProps) => {
             $genre={props.genre}
             $size={props.size}
             $font={{
+              ...props.font,
               size: props.font?.size ?? 16,
               weight: props.font?.weight ?? (props.isBold ? 500 : 400),
-              family: props.font?.family ?? theme.font.family,
-              height: props.font?.height ?? theme.font.lineHeight,
             }}
             $isBold={props.isBold}
             $isDisabled={props.isDisabled}

@@ -28,10 +28,9 @@ export const Button: FC<ButtonProps> = (props) => {
   return (
     <StyledButton
       $font={{
+        ...props.font,
         size: props.font?.size ?? KEY_SIZE_DATA[props.size].font,
         weight: props.font?.weight ?? 700,
-        family: props.font?.family ?? theme.font.family,
-        height: props.font?.height,
       }}
       $isNotHoverEffect={props.isNotHoverEffect}
       whileTap={props.isWhileTapEffect ? { scale: 0.9, transition: { duration: 0.01 } } : {}}
@@ -62,7 +61,7 @@ export const Button: FC<ButtonProps> = (props) => {
     >
       <Ripple
         color={theme.colors.checkbox[props.genre].color.rest}
-        isDisabled={props.isDisabled ?? props.isDisabledRipple}
+        isDisabled={props.isDisabled || props.isDisabledRipple}
         isHidden={props.isHidden}
       />
 

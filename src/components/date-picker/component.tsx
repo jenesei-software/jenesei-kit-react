@@ -48,7 +48,10 @@ export const DatePicker = (props: DatePickerProps) => {
     [DatePickerVariant.MM]: '',
     [DatePickerVariant.YYYY]: '',
   });
-
+  const refInputValue = useRef(input);
+  useEffect(() => {
+    refInputValue.current = input;
+  }, [input]);
   // Обновляем проверку на наличие input
   const isHasInput = useMemo(() => {
     return (
@@ -95,6 +98,38 @@ export const DatePicker = (props: DatePickerProps) => {
       return currentIndex > 0 ? mode[currentIndex - 1] : mode[mode.length - 1];
     },
     [mode],
+  );
+
+  // Обновляем функцию валидации для работы со строками
+  const getValidateInput = useCallback(
+    (
+      input: Record<DatePickerVariant, string>,
+      onSuccess?: (value: number) => void,
+      onFailure?: () => void,
+      onNan?: (isHasInput: boolean) => void,
+    ) => {
+      const dayStr = input.DD;
+      const monthStr = input.MM;
+      const yearStr = input.YYYY;
+
+      const day = dayStr === '' ? NaN : Number(dayStr);
+      const month = monthStr === '' ? NaN : Number(monthStr);
+      const year = yearStr === '' ? NaN : Number(yearStr);
+
+      const isHasInput = dayStr !== '' || monthStr !== '' || yearStr !== '';
+
+      if (!Number.isNaN(day) && !Number.isNaN(month) && !Number.isNaN(year)) {
+        const m = moment.utc(`${day}.${month}.${year}`, 'D.M.YYYY', true).startOf('day');
+        if (m.isValid()) {
+          onSuccess?.(m.valueOf());
+        } else {
+          onFailure?.();
+        }
+      } else {
+        onNan?.(isHasInput);
+      }
+    },
+    [],
   );
 
   const dataDate = useMemo(() => {
@@ -250,27 +285,54 @@ export const DatePicker = (props: DatePickerProps) => {
   }, [isInputFocused, isHasValue, isOpen, props.labelPlaceholder, isHasInput, activeSegment]);
 
   const onChangeDate = useCallback(
-    (timestamp: number, isAddLeadingZeros: boolean) => {
+    (timestamp: number, isAddLeadingZeros: boolean, isForceInput?: boolean) => {
       const momentNewDate = moment(timestamp).utc();
-      if (valueMoment?.isSame(momentNewDate, 'day')) return;
-      setValueMoment(momentNewDate);
-      onChange(momentNewDate.valueOf());
+      if (!valueMoment?.isSame(momentNewDate, 'day')) {
+        setValueMoment(momentNewDate);
+        onChange(momentNewDate.valueOf());
+      }
 
-      // При установке даты извне форматируем в строки с ведущими нулями
-      setInput({
-        [DatePickerVariant.DD]: isAddLeadingZeros
-          ? momentNewDate.clone().date().toString().padStart(2, '0')
-          : momentNewDate.clone().date().toString(),
-        [DatePickerVariant.MM]: isAddLeadingZeros
-          ? (momentNewDate.clone().month() + 1).toString().padStart(2, '0')
-          : (momentNewDate.clone().month() + 1).toString(),
-        [DatePickerVariant.YYYY]: momentNewDate.clone().year().toString(),
-      });
+      if (!valueMoment?.isSame(momentNewDate, 'day') || isForceInput) {
+        setInput({
+          [DatePickerVariant.DD]: isAddLeadingZeros
+            ? momentNewDate.clone().date().toString().padStart(2, '0')
+            : momentNewDate.clone().date().toString(),
+          [DatePickerVariant.MM]: isAddLeadingZeros
+            ? (momentNewDate.clone().month() + 1).toString().padStart(2, '0')
+            : (momentNewDate.clone().month() + 1).toString(),
+          [DatePickerVariant.YYYY]: momentNewDate.clone().year().toString(),
+        });
+      }
     },
     [valueMoment, onChange],
   );
 
-  const handleKeyDown = useCallback(
+  // const onNextSegment = useCallback(
+  //   (
+  //     newInput: Record<DatePickerVariant, string>,
+  //   ) => {
+  //     if(newInput){
+  //        getValidateInput(
+  //       newInput,
+  //       (value) => {
+  //         onChangeDate(value, true);
+  //         setIsError(false);
+  //       },
+  //       () => {
+  //         setIsError(true);
+  //       },
+  //       () => {
+  //         setIsError(true);
+  //       },
+  //     );
+  //     }else{
+
+  //     }
+
+  //   },
+  //   [getValidateInput, onChangeDate],
+  // );
+  const onKeyDown = useCallback(
     (e: KeyboardEvent<HTMLInputElement>) => {
       const key = e.key;
 
@@ -385,38 +447,6 @@ export const DatePicker = (props: DatePickerProps) => {
     }
   }, [props.value, props.defaultValue]);
 
-  // Обновляем функцию валидации для работы со строками
-  const getValidateInput = useCallback(
-    (
-      input: Record<DatePickerVariant, string>,
-      onSuccess?: (value: number) => void,
-      onFailure?: () => void,
-      onNan?: (isHasInput: boolean) => void,
-    ) => {
-      const dayStr = input.DD;
-      const monthStr = input.MM;
-      const yearStr = input.YYYY;
-
-      const day = dayStr === '' ? NaN : Number(dayStr);
-      const month = monthStr === '' ? NaN : Number(monthStr);
-      const year = yearStr === '' ? NaN : Number(yearStr);
-
-      const isHasInput = dayStr !== '' || monthStr !== '' || yearStr !== '';
-
-      if (!Number.isNaN(day) && !Number.isNaN(month) && !Number.isNaN(year)) {
-        const m = moment.utc(`${day}.${month}.${year}`, 'D.M.YYYY', true).startOf('day');
-        if (m.isValid()) {
-          onSuccess?.(m.valueOf());
-        } else {
-          onFailure?.();
-        }
-      } else {
-        onNan?.(isHasInput);
-      }
-    },
-    [],
-  );
-
   useEffect(() => {
     if (!activeSegment)
       getValidateInput(
@@ -454,6 +484,25 @@ export const DatePicker = (props: DatePickerProps) => {
         },
       );
   }, [getValidateInput, onClearInput, input, isOpen, isInputFocused, onChange, isHasInput, activeSegment]);
+
+  useEffect(() => {
+    if (!activeSegment) return;
+    getValidateInput(
+      refInputValue.current,
+      (value) => {
+        onChangeDate(value, true, true);
+        setIsError(false);
+      },
+      () => {
+        setIsError(true);
+      },
+      (isHasInput) => {
+        if (!isHasInput) {
+          setIsError(false);
+        }
+      },
+    );
+  }, [onChangeDate, getValidateInput, activeSegment]);
 
   useEffect(() => {
     if (activeSegment) {
@@ -514,7 +563,7 @@ export const DatePicker = (props: DatePickerProps) => {
               border: 'none',
               background: 'transparent',
             }}
-            onKeyDown={handleKeyDown}
+            onKeyDown={onKeyDown}
             onChange={(e) => {
               const value = e.target.value;
               const prevValue = refPrevValue.current;
@@ -524,7 +573,7 @@ export const DatePicker = (props: DatePickerProps) => {
               refPrevValue.current = value;
 
               if (newChar && /^\d$/.test(newChar)) {
-                handleKeyDown({
+                onKeyDown({
                   key: newChar,
                   preventDefault: () => {},
                   stopPropagation: () => {},
@@ -532,7 +581,7 @@ export const DatePicker = (props: DatePickerProps) => {
               }
 
               if (value.length < prevValue.length) {
-                handleKeyDown({
+                onKeyDown({
                   key: 'Backspace',
                   preventDefault: () => {},
                   stopPropagation: () => {},
@@ -571,10 +620,9 @@ export const DatePicker = (props: DatePickerProps) => {
                   $genre={props.genre}
                   $size={props.size}
                   $font={{
+                    ...props.font,
                     size: props.font?.size ?? 16,
                     weight: props.font?.weight ?? (props.isBold ? 500 : 400),
-                    family: props.font?.family ?? theme.font.family,
-                    height: props.font?.height ?? theme.font.lineHeight,
                   }}
                   onClick={(e) => {
                     e.preventDefault();
@@ -583,7 +631,6 @@ export const DatePicker = (props: DatePickerProps) => {
                     date.setActive();
                   }}
                 >
-                  {/* Теперь date.value уже строка, не нужно дополнительного форматирования */}
                   {date.value || date.placeholder || ''}
                 </DateInput>
                 {index !== dataDate.sort.length - 1 && (
@@ -598,7 +645,9 @@ export const DatePicker = (props: DatePickerProps) => {
             isWidthAsHeight
             isFullSize
             isRadius
+            isWhileTapEffect
             isOnlyIcon
+            isDisabledRipple
             icons={[{ name: 'Calendar', type: 'id' }]}
             isDisabled={props?.isDisabled || props?.isReadOnly}
             onFocus={(e) => {
@@ -640,6 +689,7 @@ export const DatePicker = (props: DatePickerProps) => {
             <Button
               type='button'
               isRadius
+              isWhileTapEffect
               icons={[
                 {
                   name: 'Arrow2',
@@ -651,7 +701,9 @@ export const DatePicker = (props: DatePickerProps) => {
               genre={props.genre}
               size={'small'}
               onClick={() => !isBlockPrevMonth && onPrevMonth()}
+              isDisabledRipple
               isHidden={isBlockPrevMonth}
+              isDisabled={isBlockPrevMonth}
             />
             <Stack sx={{ default: { gap: '8px' } }}>
               <SelectMonth
@@ -691,6 +743,7 @@ export const DatePicker = (props: DatePickerProps) => {
             </Stack>
             <Button
               type='button'
+              isWhileTapEffect
               onClick={() => !isBlockNextMonth && onNextMonth()}
               isWidthAsHeight
               isRadius
@@ -703,6 +756,8 @@ export const DatePicker = (props: DatePickerProps) => {
               ]}
               genre={props.genre}
               size={'small'}
+              isDisabledRipple
+              isDisabled={isBlockNextMonth}
               isHidden={isBlockNextMonth}
             />
           </Stack>
@@ -710,9 +765,9 @@ export const DatePicker = (props: DatePickerProps) => {
             {daysInWeek.map((e, index) => (
               <DateDropdownDayOfWeek
                 $font={{
+                  ...props.font,
                   size: 12,
                   weight: 700,
-                  family: props.font?.family ?? theme.font.family,
                 }}
                 tabIndex={-1}
                 type='button'
@@ -730,9 +785,9 @@ export const DatePicker = (props: DatePickerProps) => {
             {daysInMonth.map((day) => (
               <DateDropdownDay
                 $font={{
+                  ...props.font,
                   size: 12,
                   weight: 700,
-                  family: props.font?.family ?? theme.font.family,
                 }}
                 type='button'
                 $isDisabled={day.isDisabled}
@@ -758,7 +813,7 @@ export const DatePicker = (props: DatePickerProps) => {
                 $isChoice={day.value === valueMoment?.valueOf()}
                 $isCurrentMonth={day.isCurrentMonth}
               >
-                {!day.isDisabled && <Ripple color={theme.colors.date[props.genre].color.rest} />}
+                <Ripple color={theme.colors.date[props.genre].color.rest} isDisabled={day.isDisabled}/>
                 {day.labelNumber}
               </DateDropdownDay>
             ))}
@@ -791,6 +846,7 @@ function handleDigitKey(
   activeSegment: DatePickerVariant,
   input: Record<DatePickerVariant, string>,
   dataDate: { default: Record<DatePickerVariant, { setValue: (value: string) => void; onNextSegment: () => void }> },
+  // onNextSegment?: (newInput: Record<DatePickerVariant, string>) => void,
 ) {
   const digit = key; // '0'..'9'
   const seg = activeSegment;
@@ -832,6 +888,8 @@ function handleDigitKey(
     // нормальная комбинация
     dataDate.default[seg].setValue(potential);
     dataDate.default[seg].onNextSegment();
+    // const newInput = { ...input, [seg]: potential };
+    // onNextSegment?.(newInput);
   } else if (seg === DatePickerVariant.MM) {
     // Месяцы: максимум 12
     if (current.length >= 2) {
@@ -869,6 +927,8 @@ function handleDigitKey(
     dataDate.default[seg].setValue(potential);
     if (potential.length === 2 || (potential.length === 1 && Number(potential) > 1)) {
       dataDate.default[seg].onNextSegment();
+      // const newInput = { ...input, [seg]: potential };
+      // onNextSegment?.(newInput);
     }
   } else if (seg === DatePickerVariant.YYYY) {
     // Год: накапливаем до 4 цифр

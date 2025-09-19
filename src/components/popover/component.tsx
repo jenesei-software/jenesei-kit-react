@@ -4,12 +4,10 @@ import { autoUpdate, flip, offset, shift, useFloating } from '@floating-ui/react
 import { AnimatePresence } from 'framer-motion';
 import { FC, Ref, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { useTheme } from 'styled-components';
 
 import { DEFAULT_POPOVER_CLOSE_DELAY, DEFAULT_POPOVER_OFFSET, PopoverProps, PopoverWrapper, UsePopoverProps } from '.';
 
 export const Popover: FC<PopoverProps> = (props) => {
-  const theme = useTheme();
   return ReactDOM.createPortal(
     <AnimatePresence>
       {props.isOpen && (
@@ -30,10 +28,9 @@ export const Popover: FC<PopoverProps> = (props) => {
             $isShowAlwaysOutline={props.isShowAlwaysOutline}
             $genre={props.genre ?? 'black'}
             $font={{
+              ...props.font,
               size: props.font?.size ?? KEY_SIZE_DATA[props.size ?? 'medium'].font,
               weight: props.font?.weight ?? 700,
-              family: props.font?.family ?? theme.font.family,
-              height: props.font?.height,
             }}
             className={props.className}
             initial={{ opacity: 0, scale: 0.95 }}
