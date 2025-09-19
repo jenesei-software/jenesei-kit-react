@@ -241,6 +241,13 @@ export const DatePicker = (props: DatePickerProps) => {
   const isHasValue = useMemo(() => {
     return valueMoment !== null;
   }, [valueMoment]);
+
+  const refIsHasValueOnce = useRef(false);
+
+  useEffect(() => {
+    if (isHasValue && !refIsHasValueOnce.current) refIsHasValueOnce.current = true;
+  }, [isHasValue]);
+
   const isBlockNextMonth = useMemo(() => {
     const nextMonth = (valueMoment ?? dateDefaultMoment).clone().add(1, 'month').startOf('month');
     const isBeforeEndDate = props.dateMax ? nextMonth.isAfter(moment.utc(props.dateMax), 'month') : false;
@@ -471,7 +478,10 @@ export const DatePicker = (props: DatePickerProps) => {
         },
         (isHasInput) => {
           if (!isHasInput) {
-            onChange(null);
+            if (refIsHasValueOnce.current) {
+              onChange(null);
+              refIsHasValueOnce.current = false;
+            }
             setIsError(false);
           }
         },
@@ -517,7 +527,7 @@ export const DatePicker = (props: DatePickerProps) => {
 
   useEffect(() => {
     if (activeSegment) {
-      close()
+      close();
       refHiddenInput?.current?.focus();
     }
   }, [activeSegment, close]);
