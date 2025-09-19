@@ -285,22 +285,32 @@ export const DatePicker = (props: DatePickerProps) => {
   }, [isInputFocused, isHasValue, isOpen, props.labelPlaceholder, isHasInput, activeSegment]);
 
   const onChangeDate = useCallback(
-    (timestamp: number, isAddLeadingZeros: boolean, isForceInput?: boolean) => {
+    (timestamp: number, isAddLeadingZeros: boolean, input?: Record<DatePickerVariant, string>) => {
       const momentNewDate = moment(timestamp).utc();
-      if (!valueMoment?.isSame(momentNewDate, 'day')) {
+
+      const dd = momentNewDate.clone().date().toString();
+      const mm = (momentNewDate.clone().month() + 1).toString();
+
+      const ddWithZero = dd.padStart(2, '0');
+      const mmWithZero = mm.padStart(2, '0');
+
+      const yyyy = momentNewDate.clone().year().toString();
+      const ddInput = input?.[DatePickerVariant.DD];
+      const mmInput = input?.[DatePickerVariant.MM];
+      const yyyyInput = input?.[DatePickerVariant.YYYY];
+
+      const isSameInput = ddWithZero === ddInput && mmWithZero === mmInput && yyyyInput === yyyy;
+      const isSameMoment = valueMoment?.isSame(momentNewDate, 'day');
+      if (!isSameMoment) {
         setValueMoment(momentNewDate);
         onChange(momentNewDate.valueOf());
       }
 
-      if (!valueMoment?.isSame(momentNewDate, 'day') || isForceInput) {
+      if (!isSameMoment || input ? !isSameInput : false) {
         setInput({
-          [DatePickerVariant.DD]: isAddLeadingZeros
-            ? momentNewDate.clone().date().toString().padStart(2, '0')
-            : momentNewDate.clone().date().toString(),
-          [DatePickerVariant.MM]: isAddLeadingZeros
-            ? (momentNewDate.clone().month() + 1).toString().padStart(2, '0')
-            : (momentNewDate.clone().month() + 1).toString(),
-          [DatePickerVariant.YYYY]: momentNewDate.clone().year().toString(),
+          [DatePickerVariant.DD]: isAddLeadingZeros ? ddWithZero : dd,
+          [DatePickerVariant.MM]: isAddLeadingZeros ? mmWithZero : mm,
+          [DatePickerVariant.YYYY]: yyyy,
         });
       }
     },
@@ -452,7 +462,7 @@ export const DatePicker = (props: DatePickerProps) => {
       getValidateInput(
         input,
         (value) => {
-          onChangeDate(value, true);
+          onChangeDate(value, true, input);
           setIsError(false);
         },
         () => {
@@ -490,7 +500,7 @@ export const DatePicker = (props: DatePickerProps) => {
     getValidateInput(
       refInputValue.current,
       (value) => {
-        onChangeDate(value, true, true);
+        onChangeDate(value, true, refInputValue.current);
         setIsError(false);
       },
       () => {
@@ -813,7 +823,7 @@ export const DatePicker = (props: DatePickerProps) => {
                 $isChoice={day.value === valueMoment?.valueOf()}
                 $isCurrentMonth={day.isCurrentMonth}
               >
-                <Ripple color={theme.colors.date[props.genre].color.rest} isDisabled={day.isDisabled}/>
+                <Ripple color={theme.colors.date[props.genre].color.rest} isDisabled={day.isDisabled} />
                 {day.labelNumber}
               </DateDropdownDay>
             ))}
