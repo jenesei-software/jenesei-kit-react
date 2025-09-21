@@ -5,6 +5,8 @@ import { addSXProps } from '@local/styles/sx';
 import { IThemeGenreDate, IThemeSize } from '@local/theme';
 import { AddDollarSign } from '@local/types';
 
+import { HTMLInputAutoCompleteAttribute } from 'react';
+
 import { SelectMonthProps } from '../select';
 
 export type DatePickerMode = DatePickerVariant[];
@@ -44,6 +46,10 @@ export type CommonDatePickerProps = addErrorProps &
 
     name?: string;
 
+    ariaLabel?: string;
+
+    autoComplete?: HTMLInputAutoCompleteAttribute | string;
+    
     onBlur?: () => void;
 
     onChange: (timestamp: number | null) => void;

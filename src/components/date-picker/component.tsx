@@ -569,6 +569,8 @@ export const DatePicker = (props: DatePickerProps) => {
         >
           <input
             name={props.name}
+            aria-label={props.ariaLabel ?? props.name}
+            autoComplete={props.autoComplete}
             id={props.id}
             ref={refHiddenInput}
             type='tel'
@@ -588,6 +590,17 @@ export const DatePicker = (props: DatePickerProps) => {
             onKeyDown={onKeyDown}
             onChange={(e) => {
               const value = e.target.value;
+
+              if (isValidDateString(value)) {
+                const [year, month, day] = value.split('-');
+                setInput({
+                  DD: day,
+                  MM: month,
+                  YYYY: year,
+                });
+                return;
+              }
+
               const prevValue = refPrevValue.current;
 
               const newChar = value.length > prevValue.length ? value.slice(-1) : null;
@@ -868,7 +881,6 @@ function handleDigitKey(
   activeSegment: DatePickerVariant,
   input: Record<DatePickerVariant, string>,
   dataDate: { default: Record<DatePickerVariant, { setValue: (value: string) => void; onNextSegment: () => void }> },
-  // onNextSegment?: (newInput: Record<DatePickerVariant, string>) => void,
 ) {
   const digit = key; // '0'..'9'
   const seg = activeSegment;
@@ -964,4 +976,15 @@ function handleDigitKey(
     const nextValue = current + digit;
     dataDate.default[seg].setValue(nextValue);
   }
+}
+
+const DATE_REGEX = /^\d{4}-\d{2}-\d{2}$/;
+
+function isValidDateString(value: string) {
+  if (!DATE_REGEX.test(value)) return false;
+  const [year, month, day] = value.split('-').map(Number);
+
+  const date = new Date(year, month - 1, day);
+  // Проверяем, что дата совпадает (например, 2023-02-31 -> станет 3 марта)
+  return date.getFullYear() === year && date.getMonth() === month - 1 && date.getDate() === day;
 }

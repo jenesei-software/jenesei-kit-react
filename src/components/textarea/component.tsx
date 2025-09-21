@@ -96,6 +96,7 @@ export const TextArea = (props: TextAreaProps) => {
           onFocus={props.onFocus}
           onKeyDown={props.onKeyDown}
           name={props.name}
+          aria-label={props.ariaLabel ?? props.name}
           autoComplete={props.autoComplete}
           id={props.id}
           style={{
