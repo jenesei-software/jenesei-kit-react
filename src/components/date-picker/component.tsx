@@ -591,13 +591,15 @@ export const DatePicker = (props: DatePickerProps) => {
             onChange={(e) => {
               const value = e.target.value;
 
-              if (isValidDateString(value)) {
-                const [year, month, day] = value.split('-');
+              console.log("value",value)
+              const result = parseDateString(value);
+              if (result) {
                 setInput({
-                  DD: day,
-                  MM: month,
-                  YYYY: year,
+                  DD: String(result.day).padStart(2, '0'),
+                  MM: String(result.month).padStart(2, '0'),
+                  YYYY: String(result.year),
                 });
+                if (refHiddenInput.current) refHiddenInput.current.value = '';
                 return;
               }
 
@@ -622,6 +624,7 @@ export const DatePicker = (props: DatePickerProps) => {
                   stopPropagation: () => {},
                 } as unknown as KeyboardEvent<HTMLInputElement>);
               }
+              if (refHiddenInput.current) refHiddenInput.current.value = '';
             }}
             onFocus={() => {
               setIsInputFocused(true);
@@ -978,13 +981,48 @@ function handleDigitKey(
   }
 }
 
-const DATE_REGEX = /^\d{4}-\d{2}-\d{2}$/;
+const ISO_DATE_REGEX = /^\d{4}-\d{2}-\d{2}$/;
+const SLASH_DATE_REGEX = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/;
 
-function isValidDateString(value: string) {
-  if (!DATE_REGEX.test(value)) return false;
-  const [year, month, day] = value.split('-').map(Number);
+function parseDateString(value: string) {
+  // 1. ISO формат (YYYY-MM-DD)
+  if (ISO_DATE_REGEX.test(value)) {
+    const [year, month, day] = value.split('-').map(Number);
+    return validateDate(year, month, day);
+  }
 
+  // 2. Локализованный формат (M/D/YYYY или D/M/YYYY)
+  const match = SLASH_DATE_REGEX.exec(value);
+  if (match) {
+    const [_, p1, p2, p3] = match;
+    const num1 = Number(p1);
+    const num2 = Number(p2);
+    const year = Number(p3);
+
+    // Определяем порядок
+    // Если num1 > 12 → значит это день (D/M/YYYY)
+    let month: number;
+    let day: number;
+
+    if (num1 > 12) {
+      day = num1;
+      month = num2;
+    } else {
+      // По умолчанию считаем M/D/YYYY
+      month = num1;
+      day = num2;
+    }
+
+    return validateDate(year, month, day);
+  }
+
+  return null;
+}
+
+function validateDate(year: number, month: number, day: number) {
   const date = new Date(year, month - 1, day);
-  // Проверяем, что дата совпадает (например, 2023-02-31 -> станет 3 марта)
-  return date.getFullYear() === year && date.getMonth() === month - 1 && date.getDate() === day;
+  if (date.getFullYear() === year && date.getMonth() === month - 1 && date.getDate() === day) {
+    return { year, month, day };
+  }
+  return null;
 }
