@@ -5,14 +5,19 @@ import { addSXProps } from '@local/styles/sx';
 import { IThemeGenreDate, IThemeSize } from '@local/theme';
 import { AddDollarSign } from '@local/types';
 
+import { HTMLInputAutoCompleteAttribute } from 'react';
+
 import { SelectMonthProps } from '../select';
 
 export type DatePickerMode = DatePickerVariant[];
+
 export enum DatePickerVariant {
   DD = 'DD',
   MM = 'MM',
   YYYY = 'YYYY',
 }
+
+export type DatePickerType = 'manual' | 'select' | 'manualAndSelect';
 
 export type CommonDatePickerProps = addErrorProps &
   addSXProps &
@@ -26,6 +31,8 @@ export type CommonDatePickerProps = addErrorProps &
     isBold?: boolean;
     isMinWidth?: boolean;
 
+    isShowClearButton?: boolean;
+    
     isInputEffect?: InputStandardProps['isInputEffect'];
 
     isOnClickClose?: boolean;
@@ -42,8 +49,14 @@ export type CommonDatePickerProps = addErrorProps &
 
     mode?: DatePickerMode;
 
+    type?: DatePickerType;
+
     name?: string;
 
+    ariaLabel?: string;
+
+    autoComplete?: HTMLInputAutoCompleteAttribute | string;
+    
     onBlur?: () => void;
 
     onChange: (timestamp: number | null) => void;

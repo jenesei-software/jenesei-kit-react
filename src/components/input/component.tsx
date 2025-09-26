@@ -84,6 +84,7 @@ export const Input = (props: InputProps) => {
             onFocus={props.onFocus}
             onPaste={props.onPaste}
             name={props.name}
+            aria-label={props.ariaLabel ?? props.name}
             id={props.id}
             onKeyDown={props.onKeyDown}
             inputMode={props.inputMode}
@@ -125,6 +126,7 @@ export const Input = (props: InputProps) => {
             onFocus={props.onFocus}
             onPaste={props.onPaste}
             name={props.name}
+            aria-label={props.ariaLabel ?? props.name}
             id={props.id}
             onKeyDown={props.onKeyDown}
             inputMode={props.inputMode}
@@ -174,6 +176,7 @@ export const Input = (props: InputProps) => {
             onFocus={props.onFocus}
             onPaste={props.onPaste}
             name={props.name}
+            aria-label={props.ariaLabel ?? props.name}
             id={props.id}
             tabIndex={props.tabIndex}
             onKeyDown={props.onKeyDown}

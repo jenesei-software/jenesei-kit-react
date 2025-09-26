@@ -23,6 +23,8 @@ type CommonInputProps = addErrorProps &
 
     name?: string;
 
+    ariaLabel?: string;
+    
     id?: string;
 
     className?: string;

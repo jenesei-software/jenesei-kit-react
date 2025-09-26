@@ -4,13 +4,14 @@ import { addSXProps } from '@local/styles/sx';
 import { IThemeGenreTextArea, IThemeSize } from '@local/theme';
 import { AddDollarSign } from '@local/types';
 
-import { FocusEvent, KeyboardEventHandler, RefObject } from 'react';
+import { FocusEvent, HTMLInputAutoCompleteAttribute, KeyboardEventHandler, RefObject } from 'react';
 
 type CommonTextAreaProps = addErrorProps &
   addFontProps &
   addSXProps & {
     name?: string;
-    autoComplete?: string;
+    ariaLabel?: string;
+    autoComplete?: HTMLInputAutoCompleteAttribute | string;
     id?: string;
     ref?: RefObject<HTMLTextAreaElement | null>;
     className?: string;
