@@ -45,6 +45,7 @@ const DatePickerWrapperAll: FC = () => {
             weeks: LOCALE_WEEKS,
             inputs: LOCALE_INPUT,
           }}
+          type='select'
           value={valueOne}
           size='medium'
           labelPlaceholder='Select date please'
@@ -78,6 +79,7 @@ const DatePickerWrapperAll: FC = () => {
             weeks: LOCALE_WEEKS,
             inputs: LOCALE_INPUT,
           }}
+          type='manual'
           value={valueTwo}
           size='medium'
           labelPlaceholder='Select date please'
@@ -111,7 +113,9 @@ const DatePickerWrapperAll: FC = () => {
             weeks: LOCALE_WEEKS,
             inputs: LOCALE_INPUT,
           }}
+          isShowClearButton
           value={valueThree}
+          type='select'
           size='medium'
           labelPlaceholder='Select date please'
           dateMin={moment.utc().startOf('day').valueOf()}

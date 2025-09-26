@@ -245,3 +245,13 @@ export const DateInputButton = styled(Button)`
     height: max-content !important;
     ${addDateInputButtonSize};
 `;
+export const addDateInputButtonClearSize = css<ButtonProps>`
+  ${(props) => css`
+    right:${KEY_SIZE_DATA[props.size].padding * 2 + KEY_SIZE_DATA[props.size].height}px;
+  `}
+`;
+export const DateInputButtonClear = styled(Button)`
+    position: absolute;
+    height: max-content !important;
+    ${addDateInputButtonClearSize};
+`;

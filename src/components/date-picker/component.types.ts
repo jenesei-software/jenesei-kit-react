@@ -10,11 +10,14 @@ import { HTMLInputAutoCompleteAttribute } from 'react';
 import { SelectMonthProps } from '../select';
 
 export type DatePickerMode = DatePickerVariant[];
+
 export enum DatePickerVariant {
   DD = 'DD',
   MM = 'MM',
   YYYY = 'YYYY',
 }
+
+export type DatePickerType = 'manual' | 'select' | 'manualAndSelect';
 
 export type CommonDatePickerProps = addErrorProps &
   addSXProps &
@@ -28,6 +31,8 @@ export type CommonDatePickerProps = addErrorProps &
     isBold?: boolean;
     isMinWidth?: boolean;
 
+    isShowClearButton?: boolean;
+    
     isInputEffect?: InputStandardProps['isInputEffect'];
 
     isOnClickClose?: boolean;
@@ -43,6 +48,8 @@ export type CommonDatePickerProps = addErrorProps &
     notValidDate?: Omit<ErrorMessageProps, 'size' | 'isError'>;
 
     mode?: DatePickerMode;
+
+    type?: DatePickerType;
 
     name?: string;
 
