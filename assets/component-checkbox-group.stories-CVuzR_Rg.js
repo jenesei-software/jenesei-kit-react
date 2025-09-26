@@ -1,0 +1,6 @@
+import{C as n,j as c,r as o}from"./iframe-CXAkBJcX.js";const b={component:n,title:"Component/CheckboxGroup"},d={checkboxGenre:"gray",checkBoxView:{true:{type:"checkbox",name:"Square-true"},false:{type:"checkbox",name:"Square-false"}},checkboxIsHiddenBorder:!1,multiple:!0,size:"medium",labelField:"label",valueField:"value",sx:{default:{width:"300px"}},checkboxSX:{default:{width:"100%"}}},m=r=>{const[u,l]=o.useState([]),[i]=o.useState([{value:0,label:"First"},{value:1,label:"Second"}]);return c.jsxDEV(n,{...r,value:u,options:i,onChange:p=>l(p)},void 0,!1,{fileName:"/home/runner/work/jenesei-kit-react/jenesei-kit-react/.storybook-stories/default/component-checkbox-group.stories.tsx",lineNumber:48,columnNumber:10},void 0)},e={render:r=>c.jsxDEV(m,{...r},void 0,!1,{fileName:"/home/runner/work/jenesei-kit-react/jenesei-kit-react/.storybook-stories/default/component-checkbox-group.stories.tsx",lineNumber:51,columnNumber:19},void 0),args:{...d}};var t,s,a;e.parameters={...e.parameters,docs:{...(t=e.parameters)==null?void 0:t.docs,source:{originalSource:`{
+  render: args => <CheckboxGroupWrapper {...args} />,
+  args: {
+    ...defaultArgs
+  }
+}`,...(a=(s=e.parameters)==null?void 0:s.docs)==null?void 0:a.source}}};const k=["CheckboxGroup"];export{e as CheckboxGroup,k as __namedExportsOrder,b as default};
