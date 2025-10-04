@@ -4,7 +4,7 @@ import { addSXProps } from '@local/styles/sx';
 import { IThemeGenreTextArea, IThemeSize } from '@local/theme';
 import { AddDollarSign } from '@local/types';
 
-import { FocusEvent, HTMLInputAutoCompleteAttribute, KeyboardEventHandler, RefObject } from 'react';
+import { FocusEvent, HTMLInputAutoCompleteAttribute, KeyboardEventHandler, MouseEventHandler, RefObject } from 'react';
 
 type CommonTextAreaProps = addErrorProps &
   addFontProps &
@@ -36,6 +36,8 @@ type CommonTextAreaProps = addErrorProps &
     onFocus?: (event?: FocusEvent<HTMLTextAreaElement>) => void;
     onBlur?: (event?: FocusEvent<HTMLTextAreaElement>) => void;
     onChange?: (value: string) => void;
+    onClick?: MouseEventHandler<HTMLTextAreaElement>;
+    onMouseDown?: MouseEventHandler<HTMLTextAreaElement>;
     onKeyDown?: KeyboardEventHandler<HTMLTextAreaElement>;
   };
 

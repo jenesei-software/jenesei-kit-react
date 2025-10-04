@@ -5,6 +5,35 @@ import { AnimatePresence } from 'framer-motion';
 import { FC, Ref, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 
+// Утилита для поиска фокусируемых элементов
+const getFocusableElements = (container: HTMLElement): HTMLElement[] => {
+  const focusableSelectors = [
+    'a[href]',
+    'button:not([disabled])',
+    'textarea:not([disabled])',
+    'input:not([disabled])',
+    'select:not([disabled])',
+    '[tabindex]:not([tabindex="-1"])',
+    '[contenteditable="true"]'
+  ].join(',');
+  
+  return Array.from(container.querySelectorAll(focusableSelectors)) as HTMLElement[];
+};
+
+// Утилита для поиска следующего/предыдущего фокусируемого элемента в документе
+const getNextFocusableElement = (currentElement: HTMLElement, backward = false): HTMLElement | null => {
+  const allFocusableElements = getFocusableElements(document.body);
+  const currentIndex = allFocusableElements.indexOf(currentElement);
+  
+  if (currentIndex === -1) return null;
+  
+  if (backward) {
+    return currentIndex > 0 ? allFocusableElements[currentIndex - 1] : null;
+  } else {
+    return currentIndex < allFocusableElements.length - 1 ? allFocusableElements[currentIndex + 1] : null;
+  }
+};
+
 import { DEFAULT_POPOVER_CLOSE_DELAY, DEFAULT_POPOVER_OFFSET, PopoverProps, PopoverWrapper, UsePopoverProps } from '.';
 
 export const Popover: FC<PopoverProps> = (props) => {
@@ -61,6 +90,8 @@ export const usePopover = (props: UsePopoverProps) => {
   const [minWidth, setMinWidth] = useState<number | undefined>(undefined);
   // Флаг, был ли поповер когда-либо открыт (чтобы onBlur не вызывался при первом рендере)
   const [wasEverOpen, setWasEverOpen] = useState(false);
+  // Ссылка на элемент, который был в фокусе до открытия поповера
+  const previousActiveElement = useRef<HTMLElement | null>(null);
 
   // Позиционирование через floating-ui
   const {
@@ -354,6 +385,71 @@ export const usePopover = (props: UsePopoverProps) => {
       if (refEl instanceof HTMLElement) refEl.removeEventListener('blur', handleBlur, true);
     };
   }, [refs.reference, props.isDisabled, onBlurReference, props.refsExcludeBlur]);
+
+  /**
+   * Focus trap - управление фокусом внутри поповера
+   */
+  useEffect(() => {
+    if (!isOpen || !refs.floating.current) return;
+
+    const floatingEl = refs.floating.current as HTMLElement;
+    const refEl = refs.reference.current as HTMLElement;
+
+    // Сохраняем текущий активный элемент
+    previousActiveElement.current = document.activeElement as HTMLElement;
+    
+    // Фокусируем первый доступный элемент в поповере
+    const focusableElements = getFocusableElements(floatingEl);
+    if (focusableElements.length > 0) {
+      focusableElements[0].focus();
+    } else {
+      // Если нет фокусируемых элементов, фокусируем сам поповер
+      floatingEl.focus();
+    }
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab') return;
+
+      const focusableElements = getFocusableElements(floatingEl);
+      if (focusableElements.length === 0) return;
+
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+
+      if (e.shiftKey) {
+        // Shift + Tab - переход назад
+        if (document.activeElement === firstElement) {
+          // Если это первый элемент в поповере, ищем предыдущий элемент в форме
+          e.preventDefault();
+          const prevElement = getNextFocusableElement(refEl, true);
+          if (prevElement) {
+            prevElement.focus();
+          }
+          return;
+        }
+      } else {
+        // Tab - переход вперед
+        if (document.activeElement === lastElement) {
+          // Если это последний элемент в поповере, ищем следующий элемент в форме
+          e.preventDefault();
+          const nextElement = getNextFocusableElement(refEl, false);
+          if (nextElement) {
+            nextElement.focus();
+          }
+          return;
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      // Возвращаем фокус на предыдущий элемент при закрытии
+      // if (previousActiveElement.current) {
+      //   previousActiveElement.current.focus();
+      // }
+    };
+  }, [isOpen, refs.floating, refs.reference.current]);
 
   /**
    * Функция возвращает true или false в зависимости от состояния от FocusEvent который находится внутри или снаружи

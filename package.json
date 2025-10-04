@@ -275,6 +275,7 @@
     "changelog": "conventional-changelog -p eslint -i CHANGELOG.md -s -r 0"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.1.1",
     "@fontsource/inter": "^5.1.0",
     "@fontsource/manrope": "^5.2.6",
     "@fontsource/roboto": "^5.1.0",
@@ -327,7 +328,6 @@
     "uuid": "^11.0.3"
   },
   "dependencies": {
-    "@biomejs/biome": "^2.1.1",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.13.0",
     "@floating-ui/react": "^0.27.12",

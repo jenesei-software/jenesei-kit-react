@@ -37,7 +37,7 @@ const SelectWrapperAll: FC = () => {
     setValueYear(value);
   };
   return (
-    <WrapperBig sx={{ default: { flexDirection: 'column', minWidth: '500px' } }}>
+    <WrapperBig sx={{ default: { flexDirection: 'column', minWidth: '500px', maxWidth: '500px' } }}>
       <WrapperBig sx={{ default: { flexDirection: 'column' } }}>
         <Typography
           sx={{
@@ -49,7 +49,13 @@ const SelectWrapperAll: FC = () => {
         >
           Single, language
         </Typography>
-        <SelectLanguage size='medium' genre='grayBorder' value={valueLanguage} onChange={handleSelectChangeLanguage} />
+        <SelectLanguage
+          isShowDropdownOptionIcon
+          size='medium'
+          genre='grayBorder'
+          value={valueLanguage}
+          onChange={handleSelectChangeLanguage}
+        />
       </WrapperBig>
       <WrapperBig sx={{ default: { flexDirection: 'column' } }}>
         <Typography

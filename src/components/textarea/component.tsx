@@ -95,6 +95,8 @@ export const TextArea = (props: TextAreaProps) => {
           onBlur={props.onBlur}
           onFocus={props.onFocus}
           onKeyDown={props.onKeyDown}
+          onMouseDown={props.onMouseDown}
+          onClick={props.onClick}
           name={props.name}
           aria-label={props.ariaLabel ?? props.name}
           autoComplete={props.autoComplete}
