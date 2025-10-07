@@ -53,6 +53,7 @@ const addSelectWrapperSize = css<SelectWrapperProps>`
   min-height: ${(props) => KEY_SIZE_DATA[props.$size].height}px;
   border-radius: ${(props) => KEY_SIZE_DATA[props.$size].radius}px;
   justify-content: ${(props) => (props.$isCenter ? 'center' : 'flex-start')};
+  
   ${(props) =>
     props.$isOpen &&
     css`

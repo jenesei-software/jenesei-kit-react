@@ -60,6 +60,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
     floatingStyles,
     toggle,
   } = usePopover({
+    isFocusTrap: true,
     placement: 'bottom-start',
     offset: sizePadding,
     mode: 'independence',

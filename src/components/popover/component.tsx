@@ -14,9 +14,9 @@ const getFocusableElements = (container: HTMLElement): HTMLElement[] => {
     'input:not([disabled])',
     'select:not([disabled])',
     '[tabindex]:not([tabindex="-1"])',
-    '[contenteditable="true"]'
+    '[contenteditable="true"]',
   ].join(',');
-  
+
   return Array.from(container.querySelectorAll(focusableSelectors)) as HTMLElement[];
 };
 
@@ -24,9 +24,9 @@ const getFocusableElements = (container: HTMLElement): HTMLElement[] => {
 const getNextFocusableElement = (currentElement: HTMLElement, backward = false): HTMLElement | null => {
   const allFocusableElements = getFocusableElements(document.body);
   const currentIndex = allFocusableElements.indexOf(currentElement);
-  
+
   if (currentIndex === -1) return null;
-  
+
   if (backward) {
     return currentIndex > 0 ? allFocusableElements[currentIndex - 1] : null;
   } else {
@@ -41,7 +41,6 @@ export const Popover: FC<PopoverProps> = (props) => {
     <AnimatePresence>
       {props.isOpen && (
         <div
-          tabIndex={-1}
           ref={props.ref as Ref<HTMLDivElement | null>}
           style={{
             position: 'absolute',
@@ -49,7 +48,9 @@ export const Popover: FC<PopoverProps> = (props) => {
             left: 0,
             ...props.floatingStyles,
             transform: props.floatingStyles.transform,
-            zIndex: 9999,
+            zIndex: 9998,
+            outline: '0px transparent solid !important',
+            border: '0px transparent solid !important',
           }}
         >
           <PopoverWrapper
@@ -390,6 +391,7 @@ export const usePopover = (props: UsePopoverProps) => {
    * Focus trap - управление фокусом внутри поповера
    */
   useEffect(() => {
+    if (!props.isFocusTrap) return;
     if (!isOpen || !refs.floating.current) return;
 
     const floatingEl = refs.floating.current as HTMLElement;
@@ -397,14 +399,29 @@ export const usePopover = (props: UsePopoverProps) => {
 
     // Сохраняем текущий активный элемент
     previousActiveElement.current = document.activeElement as HTMLElement;
-    
+
     // Фокусируем первый доступный элемент в поповере
-    const focusableElements = getFocusableElements(floatingEl);
-    if (focusableElements.length > 0) {
-      focusableElements[0].focus();
-    } else {
-      // Если нет фокусируемых элементов, фокусируем сам поповер
-      floatingEl.focus();
+    const focusFirstInPopover = () => {
+      const elements = getFocusableElements(floatingEl);
+      if (elements.length > 0) {
+        elements[0].focus();
+        return true;
+      }
+      return false;
+    };
+
+    let mutationObserver: MutationObserver | null = null;
+    const hasFocusedInitial = focusFirstInPopover();
+
+    if (!hasFocusedInitial) {
+      mutationObserver = new MutationObserver(() => {
+        if (focusFirstInPopover()) {
+          mutationObserver?.disconnect();
+          mutationObserver = null;
+        }
+      });
+
+      mutationObserver.observe(floatingEl, { childList: true, subtree: true });
     }
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key !== 'Tab') return;
@@ -426,30 +443,34 @@ export const usePopover = (props: UsePopoverProps) => {
           }
           return;
         }
-      } else {
-        // Tab - переход вперед
-        if (document.activeElement === lastElement) {
-          // Если это последний элемент в поповере, ищем следующий элемент в форме
-          e.preventDefault();
-          const nextElement = getNextFocusableElement(refEl, false);
-          if (nextElement) {
-            nextElement.focus();
-          }
-          return;
+        return;
+      }
+
+      // Tab - переход вперед
+      if (document.activeElement === lastElement) {
+        // Если это последний элемент в поповере, ищем следующий элемент в форме
+        e.preventDefault();
+        const nextElement = getNextFocusableElement(refEl, false);
+        if (nextElement) {
+          nextElement.focus();
         }
+        return;
       }
     };
 
     document.addEventListener('keydown', handleKeyDown);
 
     return () => {
+      if (mutationObserver) {
+        mutationObserver.disconnect();
+      }
       document.removeEventListener('keydown', handleKeyDown);
       // Возвращаем фокус на предыдущий элемент при закрытии
       // if (previousActiveElement.current) {
       //   previousActiveElement.current.focus();
       // }
     };
-  }, [isOpen, refs.floating, refs.reference.current]);
+  }, [isOpen, refs.floating, refs.reference.current, props.isFocusTrap]);
 
   /**
    * Функция возвращает true или false в зависимости от состояния от FocusEvent который находится внутри или снаружи

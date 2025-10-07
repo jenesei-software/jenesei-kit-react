@@ -82,6 +82,10 @@ export type StyledPopoverProps = AddDollarSign<
  */
 export type UsePopoverProps = {
   /**
+   * Поддержка фокуса внутри поповера (если true, фокус будет удерживаться внутри поповера).
+   */
+  isFocusTrap?: boolean;
+  /**
    * Delay in ms before closing popover on hover out (default: 100).
    * Задержка в мс перед закрытием поповера при уходе мыши (по умолчанию: 100).
    */
