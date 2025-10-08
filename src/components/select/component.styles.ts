@@ -53,6 +53,7 @@ const addSelectWrapperSize = css<SelectWrapperProps>`
   min-height: ${(props) => KEY_SIZE_DATA[props.$size].height}px;
   border-radius: ${(props) => KEY_SIZE_DATA[props.$size].radius}px;
   justify-content: ${(props) => (props.$isCenter ? 'center' : 'flex-start')};
+  
   ${(props) =>
     props.$isOpen &&
     css`
@@ -181,12 +182,12 @@ export const DropdownListOption = styled.li<DropdownListOptionProps>`
 
 const addDropdownOptionIconSize = css<DropdownListOptionIconProps>`
   right: ${(props) => KEY_SIZE_DATA[props.$size].padding - 6}px;
-  height: ${(props) => KEY_SIZE_DATA[props.$size].height}px;
+  /* height: ${(props) => KEY_SIZE_DATA[props.$size].height}px;
+  width: ${(props) => KEY_SIZE_DATA[props.$size].height}px; */
 `;
 export const DropdownListOptionIcon = styled(Icon)<DropdownListOptionIconProps>`
   position: absolute;
   right: 0;
-  height: 100%;
   align-items: center;
   ${addDropdownOptionIconSize};
   ${addRemoveOutline};

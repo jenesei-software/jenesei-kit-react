@@ -31,6 +31,7 @@ export type SelectProps<T extends ISelectItem> = addErrorProps &
     size: IThemeSize;
     genre: TInputSelect;
 
+    isToggleWhenClickSelectListOption?: boolean;
     isDisabled?: boolean;
     isShowDropdownOptionIcon?: boolean;
     isShowIconToggle?: boolean;

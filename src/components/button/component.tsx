@@ -25,6 +25,8 @@ export const Button: FC<ButtonProps> = (props) => {
 
   const ref = useMergeRefs([refDefault, props.ref]);
 
+  const isInteractive = !props.isDisabled && props.isWhileTapEffect;
+
   return (
     <StyledButton
       $font={{
@@ -33,7 +35,8 @@ export const Button: FC<ButtonProps> = (props) => {
         weight: props.font?.weight ?? 700,
       }}
       $isNotHoverEffect={props.isNotHoverEffect}
-      whileTap={props.isWhileTapEffect ? { scale: 0.9, transition: { duration: 0.01 } } : {}}
+      whileTap={isInteractive ? { scale: 1.1, transition: { duration: 0.08, ease: 'easeOut' } } : undefined}
+      whileHover={isInteractive ? { scale: 0.97, transition: { duration: 0.2, ease: 'easeOut' } } : undefined}
       id={props.id}
       tabIndex={props.tabIndex ?? 0}
       $isFullSize={props.isFullSize}

@@ -17,9 +17,19 @@ const ButtonWrapper: FC = () => {
   return (
     <WrapperBig>
       <WrapperMin>
-        <ButtonComponent size='medium' genre='black' isDisabledRipple isWhileTapEffect>
+        <ButtonComponent isRadius size='medium' genre='black' isDisabledRipple isWhileTapEffect>
           black
         </ButtonComponent>
+        <ButtonComponent
+          isRadius
+          isOnlyIcon
+          isWidthAsHeight
+          icons={[{ type: 'logo', name: 'Jenesei', size: 'large' }]}
+          size='medium'
+          genre='black'
+          isDisabledRipple
+          isWhileTapEffect
+        />
         <ButtonComponent size='medium' genre='blackBorder'>
           blackBorder
         </ButtonComponent>

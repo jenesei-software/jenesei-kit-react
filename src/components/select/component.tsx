@@ -60,6 +60,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
     floatingStyles,
     toggle,
   } = usePopover({
+    isFocusTrap: true,
     placement: 'bottom-start',
     offset: sizePadding,
     mode: 'independence',
@@ -270,12 +271,17 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
         $sx={props.sx}
         $isOpen={isOpen}
         ref={refReference as Ref<HTMLDivElement | null>}
-        onClick={() => {
-          open();
+        onMouseDown={(e) => {
+          e.preventDefault();
+          toggle();
           onChangeShowSearch(true);
         }}
         onFocus={() => {
-          open();
+          // При фокусе через Tab/клавиатуру открываем select
+          if (!isOpen) {
+            open();
+            onChangeShowSearch(true);
+          }
         }}
       >
         {isShowSearch && (
@@ -289,6 +295,9 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
             onChange={(value) => {
               props?.onChangeSearch?.(value);
             }}
+            onMouseDown={(e) => {
+              e.stopPropagation();
+            }}
             value={props.valueSearch}
             placeholder={labelPlaceholder}
           />
@@ -300,6 +309,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
             $isWrapSelectOption={props.isWrapSelectOption}
             onMouseDown={(e) => {
               e.preventDefault();
+              e.stopPropagation();
             }}
             onClick={(e) => {
               e.preventDefault();
@@ -313,7 +323,14 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
                 <ContainerSelectListOption
                   key={`${value.value}-${index}`}
                   isChecked={isChecked}
-                  onClick={() => props.isClearWhenClickSelectListOption && onClick(value)}
+                  onClick={() => {
+                    if (props.isClearWhenClickSelectListOption) {
+                      onClick(value);
+                    }
+                    if (props.isToggleWhenClickSelectListOption) {
+                      toggle();
+                    }
+                  }}
                   item={value}
                   genre={props.genre}
                   size={props.size}
@@ -367,6 +384,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
             $size={props.size}
             onMouseDown={(e) => {
               e.preventDefault();
+              e.stopPropagation();
             }}
           >
             {isShowIconSearchClear && (
@@ -640,8 +658,11 @@ export const SelectLanguage: FC<SelectLanguageProps> = (props) => {
   const [viewOption] = useState<ISelectLanguageOption[]>(option);
 
   const handleSelectChange = (value: ISelectLanguageOption[]) => {
-    if (value.length === 0) onChange(null);
-    onChange(value[0].value.toString());
+    if (value.length === 0) {
+      onChange(null);
+    } else {
+      onChange(value[0].value.toString());
+    }
   };
   const valueLocal = useMemo(() => {
     const findOption = option.find((e) => e.value === value);
