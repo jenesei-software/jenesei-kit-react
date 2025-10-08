@@ -323,7 +323,14 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
                 <ContainerSelectListOption
                   key={`${value.value}-${index}`}
                   isChecked={isChecked}
-                  onClick={() => props.isClearWhenClickSelectListOption && onClick(value)}
+                  onClick={() => {
+                    if (props.isClearWhenClickSelectListOption) {
+                      onClick(value);
+                    }
+                    if (props.isToggleWhenClickSelectListOption) {
+                      toggle();
+                    }
+                  }}
                   item={value}
                   genre={props.genre}
                   size={props.size}

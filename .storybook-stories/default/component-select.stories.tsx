@@ -50,6 +50,7 @@ const SelectWrapperAll: FC = () => {
           Single, language
         </Typography>
         <SelectLanguage
+          isToggleWhenClickSelectListOption
           isShowDropdownOptionIcon
           size='medium'
           genre='grayBorder'
