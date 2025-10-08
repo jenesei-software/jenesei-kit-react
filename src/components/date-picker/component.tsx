@@ -733,6 +733,7 @@ export const DatePicker = (props: DatePickerProps) => {
             />
             <Stack sx={{ default: { gap: '8px' } }}>
               <SelectMonth
+                isToggleWhenClickSelectListOption
                 monthsLocale={props.locale.months}
                 genre={props.genre}
                 size={'small'}
@@ -751,6 +752,7 @@ export const DatePicker = (props: DatePickerProps) => {
                 sx={{ default: { width: '60px' } }}
               />
               <SelectYear
+                isToggleWhenClickSelectListOption
                 genre={props.genre}
                 size={'small'}
                 refFloating={refSelectYear}
