@@ -1,5 +1,4 @@
 import { InputItem, MonthItem, WeekItem } from './components/date-picker';
-import { MapTheme } from './components/map';
 import { transformObjectToArray, transformObjectValuesToKeys } from './functions';
 import { ILanguage, IService } from './types';
 
@@ -135,34 +134,6 @@ export const LOCALE_WEEKS: WeekItem[] = [
     localeLong: 'Sunday',
     localeShort: 'Sun',
     value: 'su',
-  },
-];
-export const LIST_MAP_THEME: MapTheme[] = [
-  {
-    name: 'Light CARTO',
-    url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
-    attribution: '&copy; <a href="https://carto.com/">CARTO</a>',
-  },
-  {
-    name: 'Dark CARTO',
-    url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
-    attribution: '&copy; <a href="https://carto.com/">CARTO</a>',
-  },
-  {
-    name: 'OpenStreetMap',
-    url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-  },
-  {
-    name: 'World Topo MapCluster',
-    url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
-    attribution:
-      'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community',
-  },
-  {
-    name: 'Esri World Imagery',
-    url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, Earthstar Geographics',
   },
 ];
 

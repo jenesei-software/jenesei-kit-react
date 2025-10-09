@@ -17,7 +17,6 @@ export * from '@local/components/image-select';
 export * from '@local/components/image-slider';
 export * from '@local/components/input';
 export * from '@local/components/input-otp';
-export * from '@local/components/map';
 export * from '@local/components/pagination';
 export * from '@local/components/range';
 export * from '@local/components/ripple';

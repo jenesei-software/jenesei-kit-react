@@ -14,7 +14,7 @@ export default defineConfig(() => {
   console.log('isStorybookBuild: ', String(isStorybook));
 
   const sizesBackgroundTransparent = [57, 64, 72, 76, 114, 120, 144, 152, 180, 192, 256, 384, 512];
-  const sizesBackgroundWhite = [];
+  const sizesBackgroundWhite: number[] = [];
   const sizesFavicon = [64];
 
   return {
@@ -84,7 +84,6 @@ export default defineConfig(() => {
           ['component-image-button']: resolve(__dirname, 'src/components/image-button/index.ts'),
           ['component-input']: resolve(__dirname, 'src/components/input/index.ts'),
           ['component-input-otp']: resolve(__dirname, 'src/components/input-otp/index.ts'),
-          ['component-map']: resolve(__dirname, 'src/components/map/index.ts'),
           ['component-pagination']: resolve(__dirname, 'src/components/pagination/index.ts'),
           ['component-ripple']: resolve(__dirname, 'src/components/ripple/index.ts'),
           ['component-select']: resolve(__dirname, 'src/components/select/index.ts'),
