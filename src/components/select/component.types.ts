@@ -7,7 +7,6 @@ import { AddDollarSign } from '@local/types';
 import { FocusEvent, ReactNode, Ref } from 'react';
 
 import { MonthItem } from '../date-picker';
-import { MapTheme } from '../map';
 
 export type TInputSelect = keyof IThemeGenreSelect;
 
@@ -95,15 +94,6 @@ export type SelectLanguageProps = Omit<SelectProps<ISelectItem>, 'option' | 'val
   onChange: (language: string | null) => void;
 };
 
-export interface ISelectMapThemeOption extends ISelectItem {
-  placeholder: string;
-
-  search?: string;
-}
-export type SelectMapThemeProps = Omit<SelectProps<ISelectItem>, 'option' | 'value' | 'onChange'> & {
-  value: MapTheme;
-  onChange: (theme: MapTheme | null) => void;
-};
 export type SelectMonthProps = Omit<SelectProps<ISelectItem>, 'option' | 'value' | 'onChange'> & {
   dateMin?: number;
   dateMax?: number;

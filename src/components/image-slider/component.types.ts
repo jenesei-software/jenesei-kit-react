@@ -1,7 +1,7 @@
-import { ReactNode } from '@tanstack/react-router';
-
 import { useImageSliderProps } from '@local/hooks/use-image-slider';
 import { IThemeSize } from '@local/theme';
+
+import { ReactNode } from 'react';
 
 import { TImageSelectGenre } from '../image-select';
 import { StackProps } from '../stack';

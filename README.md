@@ -62,20 +62,10 @@ declare module '@jenesei-software/jenesei-kit-react/context-local-storage' {
 To work correctly you need to install the following dependencies:
 
 ```bash
-npm install @emotion/styled --save
 npm install @tanstack/react-router --save
 npm install @tanstack/react-virtual --save
 npm install framer-motion --save
-npm install js-cookie --save
-npm install leaflet --save
-npm install leaflet.markercluster --save
-npm install moment --save
 npm install react --save
 npm install react-dom --save
-npm install react-image-webp --save
-npm install react-leaflet --save
-npm install react-leaflet-markercluster --save
 npm install styled-components --save
-npm install styled-reset --save
-npm install uuid --save
 ```

@@ -1,4 +1,4 @@
-import { LIST_LANGUAGE, LIST_MAP_THEME } from '@local/consts';
+import { LIST_LANGUAGE } from '@local/consts';
 import { ErrorMessage } from '@local/styles/error';
 import { KEY_SIZE_DATA } from '@local/theme';
 
@@ -22,11 +22,9 @@ import {
   DropdownListParent,
   ISelectItem,
   ISelectLanguageOption,
-  ISelectMapThemeOption,
   SelectLanguageProps,
   SelectList,
   SelectListOption,
-  SelectMapThemeProps,
   SelectMonthProps,
   SelectMonthsProps,
   SelectProps,
@@ -819,51 +817,4 @@ export const SelectYear: FC<SelectYearProps> = (props) => {
   }, [value, option]);
 
   return <Select<ISelectLanguageOption> {...props} option={option} value={valueLocal} onChange={handleSelectChange} />;
-};
-export const SelectMapTheme: FC<SelectMapThemeProps> = (props) => {
-  const { value, onChange } = props;
-
-  const option = useMemo(() => LIST_MAP_THEME.map((e) => ({ label: e.name, value: e.name, placeholder: e.name })), []);
-
-  const [viewOption, setViewOption] = useState<ISelectMapThemeOption[]>(option);
-  useEffect(() => {
-    setViewOption(option);
-  }, [option]);
-  const handleSelectChange = (value: ISelectMapThemeOption[]) => {
-    if (value.length === 0) onChange(null);
-    const findOption = LIST_MAP_THEME.find((e) => e.name === value[0].value);
-    onChange(findOption ?? null);
-  };
-  const valueLocal = useMemo(() => {
-    const findOption = option.find((e) => e.value === value.name);
-    if (!findOption) return [];
-    return [findOption];
-  }, [value, option]);
-
-  const [search, setSearch] = useState<string>('');
-  const handleSearchChange = useCallback(
-    (value: string) => {
-      setSearch(value);
-
-      if (value === '') {
-        setViewOption(option);
-      } else {
-        const filteredOptions = option.filter((option) =>
-          Object.values(option).some((field) => field?.toString().toLowerCase().includes(value.toLowerCase())),
-        );
-        setViewOption(filteredOptions);
-      }
-    },
-    [option],
-  );
-  return (
-    <Select<ISelectMapThemeOption>
-      {...props}
-      option={viewOption}
-      value={valueLocal}
-      onChange={handleSelectChange}
-      valueSearch={search}
-      onChangeSearch={handleSearchChange}
-    />
-  );
 };
