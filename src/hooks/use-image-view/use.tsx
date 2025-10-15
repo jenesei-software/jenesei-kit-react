@@ -3,47 +3,49 @@ import { Image } from '@local/components/image';
 import { SliderImageProps } from '@local/components/image-slider';
 import { Stack } from '@local/components/stack';
 import { Typography } from '@local/components/typography';
-import { useDialog } from '@local/contexts/context-dialog';
+import { useDialog, useDialogProps } from '@local/contexts/context-dialog';
 import { KEY_SIZE_DATA } from '@local/theme';
 
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import { useImageViewProps } from '.';
 
 export const useImageView = (props: useImageViewProps) => {
   const size = useMemo(() => KEY_SIZE_DATA[props.size], [props.size]);
   const br = useMemo(() => `${size.radius}px`, [size.radius]);
-
-  const { add } = useDialog<{
-    br?: string;
-  }>({
-    br: br,
-    propsDialog: {
-      borderRadius: br,
-      padding: '0',
-      background: 'whiteStandard',
-    },
-  });
-  const handleAdd = useCallback(
-    (image: SliderImageProps) => {
-      add({
-        content: (params, remove) => (
-          <Stack
-            sx={{
-              default: {
-                position: 'relative',
-                overflow: 'hidden',
-                aspectRatio: `${props.imageSettings.aspect * 2} / 2`,
-                width: 'auto',
-                maxWidth: '70dvw',
-                height: '85dvh',
-                borderRadius: params?.br,
-              },
-              tablet: {
-                maxWidth: '95dvw',
-              },
-            }}
-          >
+  const [image, setImage] = useState<SliderImageProps | null>(null);
+  const propsDialog: useDialogProps<{ br?: string; image: SliderImageProps | null }> = useMemo(
+    () => ({
+      propsCustom: {
+        image: image,
+        br: br,
+      },
+      propsDialog: {
+        borderRadius: br,
+        padding: '0',
+        background: 'whiteStandard',
+      },
+      onRemove() {
+        setImage(null);
+      },
+      content: (remove, _isAnimating, params) => (
+        <Stack
+          sx={{
+            default: {
+              position: 'relative',
+              overflow: 'hidden',
+              aspectRatio: `${props.imageSettings.aspect * 2} / 2`,
+              width: 'auto',
+              maxWidth: '70dvw',
+              height: '85dvh',
+              borderRadius: params?.br,
+            },
+            tablet: {
+              maxWidth: '95dvw',
+            },
+          }}
+        >
+          {params?.image ? (
             <Image
               sxStack={(theme) => ({
                 default: {
@@ -62,8 +64,8 @@ export const useImageView = (props: useImageViewProps) => {
                   objectFit: 'contain',
                 },
               }}
-              alt={image?.imageSrc}
-              src={image?.imageSrc}
+              alt={params.image.imageSrc}
+              src={params.image.imageSrc}
               componentFallback={
                 <Typography
                   sx={{
@@ -76,32 +78,43 @@ export const useImageView = (props: useImageViewProps) => {
                 </Typography>
               }
             />
-            <Button
-              sx={{
-                default: {
-                  position: 'absolute',
-                  bottom: 15,
-                  right: 15,
-                },
-              }}
-              genre='realebail-white'
-              size='small'
-              icons={[
-                {
-                  type: 'id',
-                  name: 'Arrow4',
-                },
-              ]}
-              isWidthAsHeight
-              isHiddenBorder
-              isRadius
-              onClick={() => remove?.()}
-            />
-          </Stack>
-        ),
-      });
+          ) : null}
+          <Button
+            sx={{
+              default: {
+                position: 'absolute',
+                bottom: 15,
+                right: 15,
+              },
+            }}
+            genre='realebail-white'
+            size='small'
+            icons={[
+              {
+                type: 'id',
+                name: 'Arrow4',
+              },
+            ]}
+            isWidthAsHeight
+            isHiddenBorder
+            isRadius
+            onClick={() => remove?.()}
+          />
+        </Stack>
+      ),
+    }),
+    [br, props.imageSettings.aspect, props.locale.imageFallback, image],
+  );
+  const { add } = useDialog<{
+    br?: string;
+    image: SliderImageProps | null;
+  }>(propsDialog);
+  const handleAdd = useCallback(
+    (image: SliderImageProps) => {
+      setImage(image);
+      add();
     },
-    [add, props.imageSettings.aspect, props.locale.imageFallback],
+    [add],
   );
   return { handleAdd };
 };

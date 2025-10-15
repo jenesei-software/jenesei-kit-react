@@ -66,31 +66,52 @@ export const useImageSlider = (props: useImageSliderProps) => {
     if (activeImageId) onIndexChange?.(activeImageId);
   }, [activeImageId, onIndexChange]);
 
-  const { add } = useDialog<ComponentHandleAddProps>({
-    br: br,
-    dragEndHandler: dragEndHandler,
-    images: images,
-    children: props.children,
-    activeImageIndex: activeImageIndex,
-    activeImageId: activeImageId,
-    swipeToImage: swipeToImage,
-    skipToImage: skipToImage,
-    direction: direction,
-    aspect: props.imageSettings.aspect,
-    genre: props.genre,
-    size: props.size,
-    failedToLoad: props.locales.failedToLoad,
-    isLengthOne: isLengthOne,
-    propsDialog: {
-      borderRadius: br,
-      padding: '0',
-      background: 'whiteStandard',
-    },
-  });
+  const propsDialog: useDialogProps<ComponentHandleAddProps> = useMemo(
+    () => ({
+      propsCustom: {
+        br: br,
+        dragEndHandler: dragEndHandler,
+        images: images,
+        children: props.children,
+        activeImageIndex: activeImageIndex,
+        activeImageId: activeImageId,
+        swipeToImage: swipeToImage,
+        skipToImage: skipToImage,
+        direction: direction,
+        aspect: props.imageSettings.aspect,
+        genre: props.genre,
+        size: props.size,
+        failedToLoad: props.locales.failedToLoad,
+        isLengthOne: isLengthOne,
+      },
+      propsDialog: {
+        borderRadius: br,
+        padding: '0',
+        background: 'whiteStandard',
+      },
+      content: (remove, _isAnimating, params) => <ComponentHandleAdd params={params} remove={remove} />,
+    }),
+    [
+      br,
+      images,
+      activeImageId,
+      activeImageIndex,
+      direction,
+      dragEndHandler,
+      isLengthOne,
+      props.children,
+      props.genre,
+      props.imageSettings.aspect,
+      props.locales.failedToLoad,
+      props.size,
+      skipToImage,
+      swipeToImage,
+    ],
+  );
+
+  const { add } = useDialog<ComponentHandleAddProps>(propsDialog);
   const handleAdd = useCallback(() => {
-    add({
-      content: (params, remove) => <ComponentHandleAdd params={params} remove={remove} />,
-    });
+    add();
   }, [add]);
 
   return {
@@ -139,7 +160,7 @@ type ComponentHandleAddProps = {
 } & Pick<ImageSliderProps, 'genre' | 'size'>;
 
 const ComponentHandleAdd: FC<{
-  params?: useDialogProps<ComponentHandleAddProps>;
+  params?: ComponentHandleAddProps;
   remove?: () => void;
 }> = ({ params, remove }) => {
   return (

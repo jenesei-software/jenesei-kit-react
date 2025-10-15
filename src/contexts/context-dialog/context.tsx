@@ -14,31 +14,38 @@ import {
   ProviderDialogProps,
 } from '.';
 
-export const DialogContext = createContext<DialogContextProps<object> | null>(null);
+export const DialogContext = createContext<DialogContextProps | null>(null);
 
 export const ProviderDialog: FC<ProviderDialogProps> = (props) => {
-  const [dialogHistory, setDialogHistory] = useState<DialogContentProps<object>[]>([]);
+  const [dialogHistory, setDialogHistory] = useState<DialogContentProps[]>([]);
 
-  const remove: DialogContextProps<object>['remove'] = useCallback((id) => {
+  const remove: DialogContextProps['remove'] = useCallback((id) => {
     setDialogHistory((prev) => {
       const itemToRemove = prev.find((item) => item.id === id);
 
-      if (!itemToRemove) return prev;
+      if (itemToRemove === undefined) return prev;
 
-      const indexToRemove = itemToRemove.index!;
+      const indexToRemove = itemToRemove.index;
+
+      if (indexToRemove === undefined) return prev;
 
       const updatedHistory = prev
         .filter((item) => item.id !== id)
-        .map((item) => ({
-          ...item,
-          index: item.index! > indexToRemove ? item.index! - 1 : item.index,
-        }));
+        .map((item) => {
+          const index = item.index;
+          if (index === undefined) return item;
+
+          return {
+            ...item,
+            index: index > indexToRemove ? index - 1 : item.index,
+          };
+        });
 
       return updatedHistory;
     });
   }, []);
 
-  const update: DialogContextProps<object>['update'] = useCallback((dialog) => {
+  const update: DialogContextProps['update'] = useCallback((dialog) => {
     setDialogHistory((prev) => {
       return prev.map((item) => {
         if (item.id === dialog.id) {
@@ -49,21 +56,27 @@ export const ProviderDialog: FC<ProviderDialogProps> = (props) => {
     });
   }, []);
 
-  const add: DialogContextProps<object>['add'] = useCallback((dialog) => {
+  const add: DialogContextProps['add'] = useCallback((dialog) => {
     const id = dialog.id;
 
     setDialogHistory((prev) => {
       const existingIndex = prev.findIndex((item) => item.id === id);
 
-      let updatedHistory;
+      let updatedHistory: DialogContentProps[];
+
       if (existingIndex !== -1) {
         updatedHistory = [...prev];
         updatedHistory[existingIndex] = { ...dialog, id, index: prev[existingIndex].index };
       } else {
-        updatedHistory = prev.map((item) => ({
-          ...item,
-          index: item.index! + 1,
-        }));
+        updatedHistory = prev.map((item) => {
+          const index = item.index;
+          if (index === undefined) return item;
+
+          return {
+            ...item,
+            index: index + 1,
+          };
+        });
         const newContent = { ...dialog, id, index: 0 };
         updatedHistory.unshift(newContent);
       }
@@ -93,19 +106,13 @@ export const ProviderDialog: FC<ProviderDialogProps> = (props) => {
             transition={{ type: 'spring', duration: DEFAULT_PROVIDER_DIALOG_DURATION_LAYOUT }}
           >
             {dialogHistory.map((dialog) => {
-              const index = dialog.index;
-              const content = dialog.content;
-              const id = dialog.id;
-              const props = dialog.props;
-
               return (
                 <MemoizedDialogElement
-                  index={index}
-                  content={content}
-                  props={props}
-                  key={id}
-                  id={id}
-                  remove={() => remove(id)}
+                  key={dialog.id}
+                  index={dialog.index}
+                  props={dialog.props}
+                  id={dialog.id}
+                  onRemove={dialog.onRemove}
                 />
               );
             })}
@@ -118,10 +125,18 @@ export const ProviderDialog: FC<ProviderDialogProps> = (props) => {
   );
 };
 
-const DialogElement = (props: DialogElementProps) => {
+const DialogElement = <T extends object>(props: DialogElementProps<T>) => {
   const [isAnimating, setIsAnimating] = useState(true);
+  const isRemoveOnOutsideClick = useMemo(
+    () => props.props?.propsDialog?.isRemoveOnOutsideClick ?? true,
+    [props.props?.propsDialog?.isRemoveOnOutsideClick],
+  );
+  const children = useMemo(
+    () => props.props?.content?.(props.onRemove, isAnimating, props.props.propsCustom),
+    [props.props?.content, isAnimating, props?.props?.propsCustom, props.onRemove],
+  );
   return (
-    <Outside onOutsideClick={() => props.remove()}>
+    <Outside onOutsideClick={() => isRemoveOnOutsideClick && props.onRemove?.()}>
       <DialogElementWrapper
         key={props.id}
         initial={{
@@ -141,12 +156,12 @@ const DialogElement = (props: DialogElementProps) => {
         style={{
           zIndex: -props.index!,
         }}
-        $isDisabledOutline={props.props?.propsDialog?.isDisabledOutline}
-        $isOutlineBoxShadow={props.props?.propsDialog?.isOutlineBoxShadow}
-        $isReadOnly={props.props?.propsDialog?.isReadOnly}
+        $isDisabledOutline={props.props?.propsOutline?.isDisabledOutline}
+        $isOutlineBoxShadow={props.props?.propsOutline?.isOutlineBoxShadow}
+        $isReadOnly={props.props?.propsOutline?.isReadOnly}
         $propsDialog={props.props?.propsDialog}
       >
-        {props.content?.(props.props, props.remove, isAnimating)}
+        {children}
       </DialogElementWrapper>
     </Outside>
   );
