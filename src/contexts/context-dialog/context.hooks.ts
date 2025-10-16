@@ -1,6 +1,6 @@
 import { useDeepCompareMemoize } from '@local/hooks/use-deep-compare-memoize';
 
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { DialogContext, DialogContextItemProps, DialogContextProps, useDialogProps } from '.';
@@ -16,36 +16,37 @@ export const useDialogs = (): DialogContextProps => {
 export const useDialog = <T extends object = object>(props?: useDialogProps<T>): DialogContextItemProps => {
   const { add, remove, update } = useDialogs();
   const [id, setId] = useState<string | null>(null);
-
+  const refId = useRef<string | null>(null);
   const propsMemo = useDeepCompareMemoize(props);
 
   const localAdd: DialogContextItemProps['add'] = useCallback(() => {
-    const dialogId = id ?? uuidv4();
+    if (refId.current) return;
+    const dialogId = uuidv4();
     setId(dialogId);
+    refId.current = dialogId;
     add({
       id: dialogId,
       props: propsMemo,
       onRemove: () => {
         remove(dialogId);
-        props?.onRemove?.();
-        setId(null);
+        propsMemo?.onRemove?.();
       },
     });
-  }, [add, propsMemo, id, remove, props?.onRemove]);
+  }, [add, remove, propsMemo]);
 
   const localRemove = useCallback(() => {
-    if (id) {
-      remove(id);
+    if (refId.current) {
       setId(null);
+      remove(refId.current);
+      refId.current = null;
     }
-  }, [id, remove]);
+  }, [remove]);
 
-  
   useEffect(() => {
-    if (id) {
-      update({ id, props: propsMemo });
+    if (refId.current) {
+      update({ id: refId.current, props: propsMemo });
     }
-  }, [id, propsMemo, update]);
+  }, [propsMemo, update]);
 
-  return { add: localAdd, remove: localRemove, id };
+  return { add: localAdd, remove: localRemove, id: id };
 };

@@ -135,7 +135,7 @@ const DialogElement = <T extends object>(props: DialogElementProps<T>) => {
     () => props.props?.content?.(props.onRemove, isAnimating, props.props.propsCustom),
     [props.props?.content, isAnimating, props?.props?.propsCustom, props.onRemove],
   );
-  return (
+  return props.index !== undefined && (
     <Outside onOutsideClick={() => isRemoveOnOutsideClick && props.onRemove?.()}>
       <DialogElementWrapper
         key={props.id}
@@ -154,7 +154,7 @@ const DialogElement = <T extends object>(props: DialogElementProps<T>) => {
           delay: DEFAULT_PROVIDER_DIALOG_DURATION_LAYOUT,
         }}
         style={{
-          zIndex: -props.index!,
+          zIndex: -props.index,
         }}
         $isDisabledOutline={props.props?.propsOutline?.isDisabledOutline}
         $isOutlineBoxShadow={props.props?.propsOutline?.isOutlineBoxShadow}
