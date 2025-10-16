@@ -4,7 +4,7 @@ import { ImageSelectItemProps } from '@local/components/image-select';
 import { Pagination, PaginationProps } from '@local/components/pagination';
 import { Stack } from '@local/components/stack';
 import { LIST_IMAGE_SUPPORTED_FORMAT } from '@local/consts';
-import { useDialog } from '@local/contexts/context-dialog';
+import { useDialog, useDialogProps } from '@local/contexts/context-dialog';
 import { KEY_SIZE_DATA } from '@local/theme';
 import { IImageFormat } from '@local/types';
 
@@ -12,31 +12,44 @@ import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import Cropper, { Area } from 'react-easy-crop';
 import { useTheme } from 'styled-components';
 
+import { useDeepCompareMemoize } from '../use-deep-compare-memoize';
 import { useImageCropAddProps, useImageCropProps } from '.';
 
 export const useImageCrop = (props: useImageCropProps) => {
   const size = useMemo(() => KEY_SIZE_DATA[props.dialog.button.size], [props.dialog.button.size]);
   const br = useMemo(() => `${size.radius}px`, [size.radius]);
+  const [images, setImages] = useState<ImageSelectItemProps[]>([]);
 
-  const { add } = useDialog<useImageCropAddProps>({
-    br: br,
-    imageSettings: props.imageSettings,
-    onSave: props.onSave,
-    dialog: props.dialog,
-    locale: props.locale,
-    propsDialog: {
-      borderRadius: br,
-      padding: '0',
-      background: 'transparent',
-    },
-  });
+  const propsMemo = useDeepCompareMemoize(props);
+  const propsDialog: useDialogProps<useImageCropAddProps> = useMemo(
+    () => ({
+      propsCustom: {
+        images: images,
+        br: br,
+        imageSettings: propsMemo.imageSettings,
+        onSave: propsMemo.onSave,
+        dialog: propsMemo.dialog,
+        locale: propsMemo.locale,
+      },
+      propsDialog: {
+        borderRadius: br,
+        padding: '0',
+        background: 'transparent',
+      },
+      onRemove() {
+        setImages([]);
+      },
+      content: (remove, isAnimating, params) => (
+        <CropperWrapper params={params} remove={remove} isAnimating={isAnimating} />
+      ),
+    }),
+    [br, images, propsMemo.dialog, propsMemo.imageSettings, propsMemo.locale, propsMemo.onSave],
+  );
+  const { add } = useDialog<useImageCropAddProps>(propsDialog);
   const handleAdd = useCallback(
     (images: ImageSelectItemProps[]) => {
-      add({
-        content: (params, remove, isAnimating) => (
-          <CropperWrapper images={images} params={params} remove={remove} isAnimating={isAnimating} />
-        ),
-      });
+      setImages(images);
+      add();
     },
     [add],
   );
@@ -98,7 +111,6 @@ function getCroppedImg(imageSrc: string, crop: Area, format: string = 'image/png
 }
 
 const CropperWrapper: FC<{
-  images: ImageSelectItemProps[];
   params?: useImageCropAddProps;
   remove?: () => void;
   isAnimating?: boolean;
@@ -108,7 +120,7 @@ const CropperWrapper: FC<{
   const [newImagesCroppedArea, setNewImagesCroppedArea] = useState<(Area | null)[]>([]);
 
   const theme = useTheme();
-  const isMulti = useMemo(() => props.images.length > 1, [props.images.length]);
+  const isMulti = useMemo(() => (props?.params?.images ?? [])?.length > 1, [props.params?.images]);
 
   const newImageIndex = useMemo(() => newImages?.[index], [newImages, index]);
 
@@ -118,8 +130,8 @@ const CropperWrapper: FC<{
         images.map(async (image) => {
           const imageCroppedArea = newImagesCroppedArea[image.index] ?? null;
           if (image.isDeleted || !image.isCropped || !image.url || !image.name || !imageCroppedArea) return null;
-          const blob = await getCroppedImg(image.url!, imageCroppedArea, image.format);
-          const croppedFile = new File([blob], image.name!, { type: image.format });
+          const blob = await getCroppedImg(image.url, imageCroppedArea, image.format);
+          const croppedFile = new File([blob], image.name, { type: image.format });
 
           const newImage: ImageSelectItemProps = {
             ...image,
@@ -145,7 +157,7 @@ const CropperWrapper: FC<{
       croppedArea?: Area | null;
       zoom?: number;
     }) => {
-      const image = props.images?.[params.index];
+      const image = props?.params?.images?.[params.index];
       if (image) {
         const newImage: ImageSelectItemProps = {
           ...image,
@@ -166,7 +178,7 @@ const CropperWrapper: FC<{
         });
 
         if (params.isNext) {
-          const newIndex = params.index + 1 >= props.images.length ? 0 : params.index + 1;
+          const newIndex = params.index + 1 >= (props?.params?.images ?? []).length ? 0 : params.index + 1;
           setIndex(newIndex);
         }
 
@@ -175,12 +187,12 @@ const CropperWrapper: FC<{
         }
       }
     },
-    [onSave, props.images],
+    [onSave, props?.params?.images],
   );
   useEffect(() => {
-    setNewImages(props.images);
-    setNewImagesCroppedArea(props.images.map((image) => image.croppedArea ?? null));
-  }, [props.images]);
+    setNewImages(props?.params?.images ?? []);
+    setNewImagesCroppedArea((props?.params?.images ?? []).map((image) => image.croppedArea ?? null));
+  }, [props?.params?.images]);
   useEffect(() => {
     return () => {
       setIndex(0);
@@ -305,7 +317,7 @@ const CropperWrapper: FC<{
           )}
         </Stack>
       </Preview>
-      {isMulti && index !== props.images.length && (
+      {isMulti && index !== props?.params?.images.length && (
         <Button
           sx={{
             default: {
@@ -357,7 +369,7 @@ const CropperWrapper: FC<{
               },
             }}
             lengthData={lengthData}
-            length={props.images.length}
+            length={(props?.params?.images ?? []).length}
             index={index}
             changeIndex={(newIndex) => {
               setIndex(newIndex);

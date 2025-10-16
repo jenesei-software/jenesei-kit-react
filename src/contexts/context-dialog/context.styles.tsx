@@ -1,7 +1,7 @@
+import { addOutline } from '@local/styles/add';
+
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
-
-import { addOutline } from '@local/styles/add';
 
 import {
   DEFAULT_PROVIDER_DIALOG_ELEMENT_BACKGROUND,
@@ -26,7 +26,7 @@ export const DialogLayout = styled(motion.div)<DialogLayoutProps>`
   overflow: hidden;
 `;
 
-export const DialogElementWrapper = styled(motion.dialog)<DialogElementWrapperProps>`
+export const DialogElementWrapper = styled(motion.dialog)<DialogElementWrapperProps<object>>`
   ${addOutline};
   max-width: ${(props) => props.$propsDialog?.maxWidth || DEFAULT_PROVIDER_DIALOG_ELEMENT_MAX_WIDTH};
   max-height: ${(props) => props.$propsDialog?.maxHeight || DEFAULT_PROVIDER_DIALOG_ELEMENT_MAX_HEIGHT};

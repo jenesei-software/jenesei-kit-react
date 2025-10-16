@@ -1,4 +1,4 @@
-import { addOutlineProps, addOutlinePropsDollar } from '@local/styles/add';
+import { addOutlineProps } from '@local/styles/add';
 import { IThemePaletteKeys } from '@local/theme';
 import { AddDollarSign } from '@local/types';
 
@@ -8,40 +8,52 @@ export type ProviderDialogProps = PropsWithChildren & {
   zIndex: number;
 };
 
-export type DialogLayoutProps = AddDollarSign<Pick<ProviderDialogProps, 'zIndex'>>;
-
-export type DialogElementWrapperProps = AddDollarSign<useDialogProps<object>> & addOutlinePropsDollar;
-
-export type DialogContextProps<T extends object> = {
-  add: (dialog: DialogContentProps<useDialogProps<T>>) => void;
-  remove: (id: DialogContentProps<useDialogProps<T>>['id']) => void;
-  update: (dialog: DialogContentProps<useDialogProps<T>>) => void;
-  dialogHistory: DialogContentProps<useDialogProps<T>>[];
+export type DialogContextProps<T extends object = any> = {
+  add: (dialog: DialogContentProps<T>) => void;
+  remove: (id: DialogContentProps<T>['id']) => void;
+  update: (dialog: DialogContentProps<T>) => void;
+  dialogHistory: DialogContentProps<T>[];
 };
 
-export type DialogContextItemProps<T extends object> = {
-  add: (dialog: DialogContentProps<useDialogProps<T>>) => void;
+export type DialogContextItemProps = {
+  add: () => void;
   remove: () => void;
   id: string | null;
 };
 
-export type DialogElementProps = Pick<DialogContentProps<object>, 'id' | 'index' | 'content' | 'props'> &
-  Pick<DialogContextItemProps<object>, 'remove'>;
-
-export type DialogContentProps<T extends object> = {
-  content?: (props?: useDialogProps<T>, remove?: () => void, isAnimating?: boolean) => ReactNode;
+export type DialogContentProps<T extends object = any> = {
   props?: useDialogProps<T>;
   id?: string;
   index?: number;
-};
-export type DialogContentObjectProps = {
-  propsDialog?: {
-    maxWidth?: string;
-    maxHeight?: string;
-    padding?: string;
-    borderRadius?: string;
-    background?: IThemePaletteKeys;
-  } & addOutlineProps;
+  onRemove?: () => void;
 };
 
-export type useDialogProps<T extends object> = DialogContentObjectProps & T;
+export type useDialogProps<T extends object = any> = {
+  content?: DialogContentObjectPropsContent<T>;
+  propsDialog?: DialogContentObjectPropsDialog;
+  propsOutline?: addOutlineProps;
+  propsCustom?: T;
+  onRemove?: () => void;
+};
+
+type DialogContentObjectPropsDialog = {
+  maxWidth?: string;
+  maxHeight?: string;
+  padding?: string;
+  borderRadius?: string;
+  background?: IThemePaletteKeys;
+  isRemoveOnOutsideClick?: boolean;
+};
+type DialogContentObjectPropsContent<T extends object> = (
+  remove?: () => void,
+  isAnimating?: boolean,
+  propsCustom?: T,
+) => ReactNode;
+
+export type DialogElementProps<T extends object> = DialogContentProps<T>;
+
+export type DialogLayoutProps = AddDollarSign<Pick<ProviderDialogProps, 'zIndex'>>;
+
+export type DialogElementWrapperProps<T extends object> = AddDollarSign<
+  addOutlineProps & Pick<useDialogProps<T>, 'propsDialog'>
+>;

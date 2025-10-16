@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import 'styled-components';
 
 import { Button } from '@local/components/button';
 import { Stack } from '@local/components/stack';
 import { Typography } from '@local/components/typography';
-import { ProviderDialog, ProviderDialogProps, useDialog } from '@local/contexts/context-dialog';
+import { ProviderDialog, ProviderDialogProps, useDialog, useDialogProps } from '@local/contexts/context-dialog';
 
 const meta: Meta<typeof ProviderDialog> = {
   component: ProviderDialog,
@@ -20,13 +20,26 @@ const ProviderDialogWrapper: FC<ProviderDialogProps> = () => {
   return <ProviderDialogWrapperDouble />;
 };
 const ProviderDialogWrapperDouble: FC = () => {
-  const { add, remove } = useDialog();
-
-  const handleAdd = () => {
-    add({
-      content: () => {
+  const propsDialog: useDialogProps<{
+    test: string;
+  }> = useMemo(
+    () => ({
+      propsCustom: {
+        test: 'test',
+      },
+      propsDialog: {
+        isRemoveOnOutsideClick: false,
+      },
+      content: (remove, isAnimating, propsCustom) => {
         return (
-          <Stack>
+          <Stack
+            sx={{
+              default: {
+                flexDirection: 'column',
+                gap: '10px',
+              },
+            }}
+          >
             <Typography
               sx={{
                 default: {
@@ -34,12 +47,30 @@ const ProviderDialogWrapperDouble: FC = () => {
                 },
               }}
             >
-              test
+              {propsCustom?.test}
             </Typography>
+            <Typography
+              sx={{
+                default: {
+                  variant: 'h6',
+                },
+              }}
+            >
+              {isAnimating ? ' animating' : ' not animating'}
+            </Typography>
+            <Button onClick={() => remove?.()} genre='black' size='medium'>
+              Remove Dialog!
+            </Button>
           </Stack>
         );
       },
-    });
+    }),
+    [],
+  );
+  const { add, remove } = useDialog(propsDialog);
+
+  const handleAdd = () => {
+    add();
   };
   return (
     <Stack
