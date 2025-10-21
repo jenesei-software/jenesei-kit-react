@@ -1,6 +1,6 @@
-import { FC, createContext, useEffect, useState } from 'react';
-
 import { usePermission } from '@local/contexts/context-permission';
+
+import { createContext, FC, useEffect, useState } from 'react';
 
 import { GeolocationContextProps, ProviderGeolocationProps } from '.';
 

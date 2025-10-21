@@ -1,7 +1,7 @@
 import { Outside } from '@local/areas/outside';
 
 import { AnimatePresence } from 'framer-motion';
-import { createContext, FC, memo, useCallback, useMemo, useState } from 'react';
+import { createContext, FC, memo, useCallback, useEffect, useMemo, useState } from 'react';
 
 import {
   DEFAULT_PROVIDER_DIALOG_DURATION_ELEMENT,
@@ -88,6 +88,11 @@ export const ProviderDialog: FC<ProviderDialogProps> = (props) => {
   const dialogHistoryLength = useMemo(() => dialogHistory.length, [dialogHistory.length]);
   const zIndex = useMemo(() => props.zIndex, [props.zIndex]);
 
+  useEffect(() => {
+    return () => {
+      setDialogHistory([]);
+    };
+  }, []);
   return (
     <DialogContext.Provider value={{ add, remove, update, dialogHistory }}>
       <AnimatePresence>
@@ -135,35 +140,37 @@ const DialogElement = <T extends object>(props: DialogElementProps<T>) => {
     () => props.props?.content?.(props.onRemove, isAnimating, props.props.propsCustom),
     [props.props?.content, isAnimating, props?.props?.propsCustom, props.onRemove],
   );
-  return props.index !== undefined && (
-    <Outside onOutsideClick={() => isRemoveOnOutsideClick && props.onRemove?.()}>
-      <DialogElementWrapper
-        key={props.id}
-        initial={{
-          opacity: 0,
-          scale: 0.8,
-        }}
-        animate={{
-          opacity: 1,
-          scale: 1,
-        }}
-        onAnimationComplete={() => setIsAnimating(false)}
-        transition={{
-          type: 'spring',
-          duration: DEFAULT_PROVIDER_DIALOG_DURATION_ELEMENT,
-          delay: DEFAULT_PROVIDER_DIALOG_DURATION_LAYOUT,
-        }}
-        style={{
-          zIndex: -props.index,
-        }}
-        $isDisabledOutline={props.props?.propsOutline?.isDisabledOutline}
-        $isOutlineBoxShadow={props.props?.propsOutline?.isOutlineBoxShadow}
-        $isReadOnly={props.props?.propsOutline?.isReadOnly}
-        $propsDialog={props.props?.propsDialog}
-      >
-        {children}
-      </DialogElementWrapper>
-    </Outside>
+  return (
+    props.index !== undefined && (
+      <Outside onOutsideClick={() => isRemoveOnOutsideClick && props.onRemove?.()}>
+        <DialogElementWrapper
+          key={props.id}
+          initial={{
+            opacity: 0,
+            scale: 0.8,
+          }}
+          animate={{
+            opacity: 1,
+            scale: 1,
+          }}
+          onAnimationComplete={() => setIsAnimating(false)}
+          transition={{
+            type: 'spring',
+            duration: DEFAULT_PROVIDER_DIALOG_DURATION_ELEMENT,
+            delay: DEFAULT_PROVIDER_DIALOG_DURATION_LAYOUT,
+          }}
+          style={{
+            zIndex: -props.index,
+          }}
+          $isDisabledOutline={props.props?.propsOutline?.isDisabledOutline}
+          $isOutlineBoxShadow={props.props?.propsOutline?.isOutlineBoxShadow}
+          $isReadOnly={props.props?.propsOutline?.isReadOnly}
+          $propsDialog={props.props?.propsDialog}
+        >
+          {children}
+        </DialogElementWrapper>
+      </Outside>
+    )
   );
 };
 const MemoizedDialogElement = memo(DialogElement);

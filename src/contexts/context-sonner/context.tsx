@@ -2,7 +2,7 @@ import { Button } from '@local/components/button';
 import { Icon } from '@local/components/icon';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { createContext, FC, memo, useCallback, useMemo, useState } from 'react';
+import { createContext, FC, memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { useTheme } from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -133,6 +133,7 @@ export const ProviderSonner: FC<ProviderSonnerProps> = (props) => {
     },
     [memoDefaultHidingTime, remove],
   );
+
   const promise: SonnerContextProps['promise'] = useCallback(
     <T,>(
       promise: Promise<T>,
@@ -152,13 +153,21 @@ export const ProviderSonner: FC<ProviderSonnerProps> = (props) => {
     },
     [toast],
   );
+
   const handleOnClick = useCallback(
     (id: SonnerContentStandardProps['id']) => {
       remove(id);
     },
     [remove],
   );
+
   const theme = useTheme();
+
+  useEffect(() => {
+    return () => {
+      setContentHistory([]);
+    };
+  }, []);
   return (
     <SonnerContext.Provider value={{ toast, promise, remove, contentHistory }}>
       <SonnerLayout

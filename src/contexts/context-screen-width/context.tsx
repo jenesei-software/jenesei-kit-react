@@ -1,7 +1,7 @@
-import { FC, createContext, useEffect, useMemo, useState } from 'react';
+import { createContext, FC, useEffect, useMemo, useState } from 'react';
 import { useTheme } from 'styled-components';
 
-import { ProviderScreenWidthProps, ScreenWidthContextProps, Screens } from '.';
+import { ProviderScreenWidthProps, Screens, ScreenWidthContextProps } from '.';
 
 export const ScreenWidthContext = createContext<ScreenWidthContextProps | null>(null);
 

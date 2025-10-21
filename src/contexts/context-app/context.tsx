@@ -94,23 +94,23 @@ export const ProviderApp: FC<ProviderAppProps> = (props) => {
             $leftAside={props.leftAside}
             $rightAside={props.rightAside}
           >
-            {props.notification?.length && props.notification?.length?.[screenActual] ? (
+            {props.notification?.length?.[screenActual] ? (
               <ProviderAppOutletNotification $notification={props.notification}>
                 {props.notification?.component || null}
               </ProviderAppOutletNotification>
             ) : null}
 
-            {props.header?.length && props.header?.length?.[screenActual] ? (
+            {props.header?.length?.[screenActual] ? (
               <ProviderAppOutletHeader $header={props.header}>
                 {props.header?.component || null}
               </ProviderAppOutletHeader>
             ) : null}
 
-            {props.nav?.length && props.nav?.length?.[screenActual] ? (
+            {props.nav?.length?.[screenActual] ? (
               <ProviderAppOutletNav $nav={props.nav}>{props.nav?.component || null}</ProviderAppOutletNav>
             ) : null}
 
-            {props.leftAside?.length && props.leftAside?.length?.[screenActual] ? (
+            {props.leftAside?.length?.[screenActual] ? (
               <ProviderAppOutletLeftAside $leftAside={props.leftAside}>
                 {props.leftAside?.component || null}
               </ProviderAppOutletLeftAside>
@@ -120,13 +120,13 @@ export const ProviderApp: FC<ProviderAppProps> = (props) => {
               {props.children}
             </ProviderAppOutletChildren>
 
-            {props.rightAside?.length && props.rightAside?.length?.[screenActual] ? (
+            {props.rightAside?.length?.[screenActual] ? (
               <ProviderAppOutletRightAside $rightAside={props.rightAside}>
                 {props.rightAside?.component || null}
               </ProviderAppOutletRightAside>
             ) : null}
 
-            {props.footer?.length && props.footer?.length?.[screenActual] ? (
+            {props.footer?.length?.[screenActual] ? (
               <ProviderAppOutletFooter $footer={props.footer}>
                 {props.footer?.component || null}
               </ProviderAppOutletFooter>
