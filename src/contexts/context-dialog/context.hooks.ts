@@ -19,6 +19,14 @@ export const useDialog = <T extends object = object>(props?: useDialogProps<T>):
   const refId = useRef<string | null>(null);
   const propsMemo = useDeepCompareMemoize(props);
 
+  const localRemove = useCallback(() => {
+    if (refId.current) {
+      setId(null);
+      remove(refId.current);
+      refId.current = null;
+    }
+  }, [remove]);
+
   const localAdd: DialogContextItemProps['add'] = useCallback(() => {
     if (refId.current) return;
     const dialogId = uuidv4();
@@ -28,19 +36,11 @@ export const useDialog = <T extends object = object>(props?: useDialogProps<T>):
       id: dialogId,
       props: propsMemo,
       onRemove: () => {
-        remove(dialogId);
+        localRemove();
         propsMemo?.onRemove?.();
       },
     });
-  }, [add, remove, propsMemo]);
-
-  const localRemove = useCallback(() => {
-    if (refId.current) {
-      setId(null);
-      remove(refId.current);
-      refId.current = null;
-    }
-  }, [remove]);
+  }, [add, propsMemo, localRemove]);
 
   useEffect(() => {
     if (refId.current) {

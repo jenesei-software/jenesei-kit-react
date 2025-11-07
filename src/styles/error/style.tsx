@@ -3,12 +3,11 @@ import { IThemeSizePropertyDefault, KEY_SIZE_DATA } from '@local/theme';
 import { FC } from 'react';
 import styled, { css } from 'styled-components';
 
-import { addFont } from '../add';
 import { WordsPullUp } from '../motion';
-import { addSX } from '../sx';
-import { addErrorStylesProps, ErrorMessageProps, ErrorMessagePropsDollar } from '.';
+import { addSX, addSXTypography } from '../sx';
+import { addErrorPropsDollar, ErrorMessageDollarProps, ErrorMessageProps } from '.';
 
-const ErrorMessageSize = css<ErrorMessagePropsDollar>`
+const ErrorMessageSize = css<ErrorMessageDollarProps>`
   ${(props) =>
     props.$size
       ? ErrorMessageSizeConstructor({ ...KEY_SIZE_DATA[props.$size], $isErrorAbsolute: props.$isErrorAbsolute })
@@ -33,15 +32,15 @@ const ErrorMessageSizeConstructor = (
   }
 `;
 
-export const ErrorMessageComponent = styled.div<ErrorMessagePropsDollar>`
+export const ErrorMessageComponent = styled.div<ErrorMessageDollarProps>`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   ${ErrorMessageSize}
-  ${addFont};
+  ${addSXTypography};
   ${addSX}
 `;
-export const addError = css<addErrorStylesProps>`
+export const addError = css<addErrorPropsDollar>`
   ${(props) =>
     props.$error?.isError &&
     css`

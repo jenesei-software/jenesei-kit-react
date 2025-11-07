@@ -1,5 +1,4 @@
-import { addFont } from '@local/styles/add';
-import { addSX } from '@local/styles/sx';
+import { addSX, addSXTypography } from '@local/styles/sx';
 import { IThemeSizePropertyDefault, KEY_SIZE_DATA } from '@local/theme';
 
 import styled, { css } from 'styled-components';
@@ -20,7 +19,7 @@ export const CheckboxGroupWrapper = styled.div<CheckboxGroupWrapperProps>`
   flex-direction: column;
   align-items: stretch;
   ${CheckboxGroupSize};
-  ${addFont};
+  ${addSXTypography};
   ${addSX};
 `;
 

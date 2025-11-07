@@ -78,10 +78,9 @@ const AllWrapper: FC = () => {
             },
           }}
         >
-          Typography, size, default - 20, tablet - 16, mobile - 12
+          Typography, size, default - 20, tablet - 16, mobile - 12, isTransitionFontSize
         </TypographyComponent>
         <TypographyComponent
-          isTransitionFontSize
           sx={{
             default: {
               size: 18,
@@ -236,6 +235,7 @@ const AllWrapper: FC = () => {
         >
           Typography, variant - H9
         </TypographyComponent>
+        <h1>H1, true</h1>
       </WrapperMin>
     </WrapperBig>
   );

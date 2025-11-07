@@ -1,5 +1,5 @@
 import { addIconProps } from '@local/components/icon';
-import { addFontProps } from '@local/styles/add';
+import { addSXTypographyProps } from '@local/index';
 import { ITheme, IThemeGenre } from '@local/theme/theme.interface';
 import { AddDollarSign } from '@local/types';
 
@@ -15,8 +15,8 @@ export type ProviderSonnerProps = PropsWithChildren & {
 
 export type SonnerLayoutProps = Required<AddDollarSign<Pick<ProviderSonnerProps, 'position' | 'gap' | 'zIndex'>>>;
 export type SonnerElementWrapperProps = Required<AddDollarSign<Pick<SonnerContentStandardProps, 'genre'>>>;
-export type SonnerContentTitleProps = Required<AddDollarSign<Pick<SonnerContentStandardProps, 'genre' | 'font'>>>;
-export type SonnerContentDescriptionProps = Required<AddDollarSign<Pick<SonnerContentStandardProps, 'genre' | 'font'>>>;
+export type SonnerContentTitleProps = Required<AddDollarSign<Pick<SonnerContentStandardProps, 'genre' | 'sxTypography'>>>;
+export type SonnerContentDescriptionProps = Required<AddDollarSign<Pick<SonnerContentStandardProps, 'genre' | 'sxTypography'>>>;
 
 export type SonnerContextProps = {
   toast: (content: Omit<SonnerContentStandardProps, 'index'>) => void;
@@ -67,7 +67,7 @@ type SonnerContentDefaultProps = {
       }
     | false;
   index: number;
-} & addFontProps;
+} & addSXTypographyProps;
 
 type SonnerContentContentProps = SonnerContentDefaultProps & {
   content: ReactNode | false;

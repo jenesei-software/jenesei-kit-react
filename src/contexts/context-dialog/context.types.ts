@@ -44,10 +44,14 @@ type DialogContentObjectPropsDialog = {
   background?: IThemePaletteKeys;
   isRemoveOnOutsideClick?: boolean;
 };
+export interface DialogContentObjectPropsContentProps<T extends object = any> {
+  remove?: () => void;
+  isAnimating?: boolean;
+  propsCustom?: T;
+}
+
 type DialogContentObjectPropsContent<T extends object> = (
-  remove?: () => void,
-  isAnimating?: boolean,
-  propsCustom?: T,
+  props: DialogContentObjectPropsContentProps<T>
 ) => ReactNode;
 
 export type DialogElementProps<T extends object> = DialogContentProps<T>;

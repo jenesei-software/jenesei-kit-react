@@ -1,7 +1,6 @@
 import { addInputIsInputEffect } from '@local/components/input';
 import {
   addDisabled,
-  addFont,
   addNiceNumber,
   addOutline,
   addRemoveOutline,
@@ -9,7 +8,7 @@ import {
   addTransition,
 } from '@local/styles/add';
 import { addError } from '@local/styles/error';
-import { addSX } from '@local/styles/sx';
+import { addSX, addSXTypography } from '@local/styles/sx';
 import { KEY_SIZE_DATA } from '@local/theme/theme';
 
 import { motion } from 'framer-motion';
@@ -125,7 +124,7 @@ export const addDateDropdownDaySize = css<DateDropdownDayProps>`
       opacity: 0.5;
     `}
     
-  ${addFont};
+  ${addSXTypography};
   ${addOutline};
 `;
 
@@ -166,7 +165,7 @@ export const DateInput = styled.div<DateInputProps>`
   background: transparent;
   margin: 0px !important;
   white-space: nowrap;
-  ${addFont};
+  ${addSXTypography};
   ${addDateInputSize};
   ${addDateInputGenre};
   ${addRemoveOutline};

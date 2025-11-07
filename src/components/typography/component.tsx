@@ -7,6 +7,7 @@ import { memo, useMemo } from 'react';
 import { Tooltip } from '../tooltip';
 import { Title, TypographyCSSProps, TypographyProps, TypographyTooltipProps } from '.';
 
+//TODO fond and sxTypography fix
 const TypographyWithRef = (props: TypographyProps) => {
   const { screenActual } = useScreenWidth();
   const cssProps: TypographyCSSProps & Pick<TypographyProps, 'onClick' | 'className' | 'style'> = useMemo(
@@ -40,7 +41,6 @@ const TypographyWithRef = (props: TypographyProps) => {
     if (screenSX.variant === 'h7' || screenSX.variant === 'h8' || screenSX.variant === 'h9') {
       return (
         <Title
-          // biome-ignore lint/suspicious/noExplicitAny: <explanation>
           ref={props.ref as any}
           as={props.isAnchor ? 'a' : props.isParagraph ? 'p' : props.isSpan ? 'span' : 'span'}
           href={props.href}
@@ -52,7 +52,6 @@ const TypographyWithRef = (props: TypographyProps) => {
     } else {
       return (
         <Title
-          // biome-ignore lint/suspicious/noExplicitAny: <explanation>
           ref={props.ref as any}
           as={props.isAnchor ? 'a' : props.isParagraph ? 'p' : props.isSpan ? 'span' : screenSX.variant}
           href={props.href}
@@ -66,7 +65,6 @@ const TypographyWithRef = (props: TypographyProps) => {
 
   return (
     <Title
-      // biome-ignore lint/suspicious/noExplicitAny: <explanation>
       ref={props.ref as any}
       as={props.isAnchor ? 'a' : props.isParagraph ? 'p' : props.isSpan ? 'span' : 'span'}
       href={props.href}

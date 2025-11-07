@@ -1,7 +1,7 @@
 import { Icon } from '@local/components/icon';
-import { addFont, addRemoveOutline } from '@local/styles/add';
+import { addRemoveOutline } from '@local/styles/add';
 import { addError } from '@local/styles/error';
-import { addSX } from '@local/styles/sx';
+import { addSX, addSXTypography } from '@local/styles/sx';
 import { KEY_SIZE_DATA } from '@local/theme/theme';
 
 import { motion } from 'framer-motion';
@@ -174,7 +174,7 @@ export const DropdownListOption = styled.li<DropdownListOptionProps>`
   user-select: none;
   flex-shrink: 0;
   opacity: ${(props) => (props.$item?.isDisabled ? 0.5 : 1)};
-  ${addFont};
+  ${addSXTypography};
   ${addDropdownListOptionGenre};
   ${addDropdownListOptionSize};
   ${addRemoveOutline};

@@ -1,7 +1,6 @@
-import { addSXTypography } from '@local/components/typography';
-import { addDisabled, addFont, addOutline, addTransition } from '@local/styles/add';
+import { addDisabled, addOutline, addTransition } from '@local/styles/add';
 import { addError } from '@local/styles/error';
-import { addSX } from '@local/styles/sx';
+import { addSX, addSXTypography } from '@local/styles/sx';
 import { IThemeSizePropertyDefault, KEY_SIZE_DATA } from '@local/theme';
 
 import styled, { css } from 'styled-components';
@@ -86,7 +85,6 @@ export const CheckboxWrapper = styled.button<StyledCheckboxProps>`
   ${CheckboxSize};
   ${addCheckboxDisabled}
   ${addOutline};
-  ${addFont};
   ${addError};
   ${addSXTypography};
   ${addSX};

@@ -29,11 +29,11 @@ export const Button: FC<ButtonProps> = (props) => {
 
   return (
     <StyledButton
-      $font={{
-        ...props.font,
-        size: props.font?.size ?? KEY_SIZE_DATA[props.size].font,
-        weight: props.font?.weight ?? 700,
-      }}
+      // $font={{
+      //   ...props.font,
+      //   size: props.font?.size ?? KEY_SIZE_DATA[props.size].font,
+      //   weight: props.font?.weight ?? 700,
+      // }}
       $isNotHoverEffect={props.isNotHoverEffect}
       whileTap={isInteractive ? { scale: 1.1, transition: { duration: 0.08, ease: 'easeOut' } } : undefined}
       whileHover={isInteractive ? { scale: 0.97, transition: { duration: 0.2, ease: 'easeOut' } } : undefined}
@@ -51,7 +51,14 @@ export const Button: FC<ButtonProps> = (props) => {
       $isRadius={props.isRadius}
       $isHidden={props.isHidden}
       $isPlaystationEffect={props.isPlaystationEffect}
-      $sxTypography={props.sxTypography}
+      $sxTypography={{
+        default: {
+          size: KEY_SIZE_DATA[props.size].font,
+          weight: 700,
+          ...props.sxTypography?.default,
+        },
+        ...props.sxTypography,
+      }}
       $isHiddenBorder={props.isHiddenBorder || props.isPlaystationEffect}
       disabled={props.isDisabled}
       type={props.type ?? 'button'}

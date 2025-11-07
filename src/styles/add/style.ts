@@ -1,4 +1,3 @@
-import { TypographyDataProps } from '@local/components/typography';
 import { AddDollarSign } from '@local/types';
 
 import { css } from 'styled-components';
@@ -42,32 +41,6 @@ export const addTransition = css`
     grid-template-areas ${(props) => props.theme.transition.default},
     grid-template-rows ${(props) => props.theme.transition.default},
     grid-template-columns ${(props) => props.theme.transition.default};
-`;
-
-export type addFontProps = {
-  font?: FontSizeStylesProps;
-};
-export type FontSizeStylesProps = {
-  size?: TypographyDataProps['size'];
-  weight?: TypographyDataProps['weight'];
-  family?: TypographyDataProps['family'];
-  height?: TypographyDataProps['height'];
-};
-
-export const addFont = css<AddDollarSign<addFontProps>>`
-  font-family: ${(props) => (props.$font?.family ? props.$font.family : 'inherit')};
-  font-style: normal;
-  line-height: ${(props) => (props.$font?.height ? props.$font.height : props.theme.font.lineHeight)};
-  ${(props) =>
-    props.$font?.size &&
-    css` 
-    font-size: ${props.$font?.size}px;
-    `}
-      ${(props) =>
-        props.$font?.weight &&
-        css` 
-        font-weight: ${props.$font?.weight};
-    `}
 `;
 
 export const addTransitionWithoutSize = css`

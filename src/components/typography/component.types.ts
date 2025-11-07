@@ -1,5 +1,5 @@
 import { addOutlineProps, addOutlinePropsDollar } from '@local/styles/add';
-import { SXProps } from '@local/styles/sx';
+import { addSXProps } from '@local/styles/sx';
 import {
   IThemeDevice,
   IThemeFontFamily,
@@ -48,7 +48,7 @@ type TypographyDefaultProps = {
 };
 
 export type TypographyDataProps = TypographyDefaultProps & {
-  size?: number;
+  size?: number | string;
 };
 
 type TypographyVariantProps = TypographyDefaultProps & {
@@ -78,17 +78,18 @@ export type TypographyProps = PropsWithChildren & {
 
   sx: TypographySXProps;
 
-  sxStandard?: SXProps;
+  sxStandard?: addSXProps['sx'];
 } & addOutlineProps;
 
 export type addSXTypographyProps = {
   sxTypography?: TypographySXProps;
 };
-export type addSXTypographyStyleProps = AddDollarSign<addSXTypographyProps>;
+
+export type addSXTypographyPropsDollar = AddDollarSign<addSXTypographyProps>;
 
 export type TypographyCSSProps = AddDollarSign<{
   sxTypography: TypographySXProps;
-  sx?: SXProps;
+  sx?: addSXProps['sx'];
   isTransitionFontSize?: boolean;
 }> &
   addOutlinePropsDollar;

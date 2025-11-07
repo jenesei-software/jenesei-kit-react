@@ -1,6 +1,6 @@
-import { addDisabled, addFont, addNiceNumber, addOutline, addTransition } from '@local/styles/add';
+import { addDisabled, addNiceNumber, addOutline, addTransition } from '@local/styles/add';
 import { addError } from '@local/styles/error';
-import { addSX } from '@local/styles/sx';
+import { addSX, addSXTypography } from '@local/styles/sx';
 import { IThemeSizePropertyDefault, KEY_SIZE_DATA } from '@local/theme';
 
 import { motion } from 'framer-motion';
@@ -32,12 +32,12 @@ export const StyledInputWrapper = styled.div<StyledInputWrapperProps>`
 export const addInputPlaceholder = css<StyledInputProps>`
   &::placeholder,
   &::-webkit-input-placeholder {
-    ${addFont};
+    ${addSXTypography};
     color: ${(props) => props.theme.colors.input[props.$genre].color.placeholder};
     opacity: 1;
   }
   &:-ms-input-placeholder {
-    ${addFont};
+    ${addSXTypography};
     color: ${(props) => props.theme.colors.input[props.$genre].color.placeholder};
     opacity: 1;
   }
@@ -45,14 +45,14 @@ export const addInputPlaceholder = css<StyledInputProps>`
 export const addInputPlaceholderNiceNumber = css<StyledInputProps>`
   &::placeholder,
   &::-webkit-input-placeholder {
-    ${addFont};
+    ${addSXTypography};
     color: ${(props) => props.theme.colors.input[props.$genre].color.placeholder};
     opacity: 1;
     ${addNiceNumber};
     background: transparent;
   }
   &:-ms-input-placeholder {
-    ${addFont};
+    ${addSXTypography};
     color: ${(props) => props.theme.colors.input[props.$genre].color.placeholder};
     opacity: 1;
     ${addNiceNumber};
@@ -121,7 +121,7 @@ export const StyledInputCSS = css<StyledInputProps>`
   text-overflow: ellipsis;
   overflow: hidden;
 
-  ${addFont};
+  ${addSXTypography};
   ${InputSize};
   ${InputGenre};
   ${addInputPlaceholder};

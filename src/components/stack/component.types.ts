@@ -2,7 +2,7 @@ import { addSXProps } from '@local/styles/sx';
 import { AddDollarSign } from '@local/types';
 
 import { AnimationProps, DraggableProps, FocusHandlers, HoverHandlers, LayoutProps, TapHandlers } from 'framer-motion';
-import { CSSProperties, DragEvent, DragEventHandler, PropsWithChildren, Ref } from 'react';
+import { CSSProperties, DragEvent, DragEventHandler, JSX, PropsWithChildren, Ref } from 'react';
 
 export interface StackProps extends addSXProps, PropsWithChildren {
   className?: string;
@@ -10,6 +10,8 @@ export interface StackProps extends addSXProps, PropsWithChildren {
   isHover?: boolean;
 
   isRipple?: boolean;
+
+  as?: keyof JSX.IntrinsicElements;
 
   onClick?: () => void;
 

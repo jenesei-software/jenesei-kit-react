@@ -1,4 +1,4 @@
-import { getContrastYIQ } from '@local/functions';
+import { getContrastYIQ, getHasVerticalScroll } from '@local/functions';
 
 import {
   ThemeMapBustmarket,
@@ -957,6 +957,7 @@ export const ThemeLight: ITheme = {
     select: ThemeSelect,
   },
   getContrastYIQ: getContrastYIQ,
+  hasVerticalScroll: getHasVerticalScroll()
 };
 export const ThemeBlack: ITheme = ThemeLight;
 

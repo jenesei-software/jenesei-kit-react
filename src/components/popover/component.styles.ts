@@ -1,6 +1,5 @@
-import { addSXTypography } from '@local/components/typography';
-import { addAlwaysOutline, addFont } from '@local/styles/add';
-import { addSX } from '@local/styles/sx';
+import { addAlwaysOutline } from '@local/styles/add';
+import { addSX, addSXTypography } from '@local/styles/sx';
 import { IThemeSizePropertyDefault, KEY_SIZE_DATA } from '@local/theme';
 
 import { motion } from 'framer-motion';
@@ -38,7 +37,6 @@ export const PopoverWrapper = styled(motion.div)<StyledPopoverProps>`
   max-height: ${(props) => props.$maxHeight || '100%'};
   overflow: auto;
   flex-direction: column;
-  ${addFont};
   ${addPopoverSize};
   ${addAlwaysOutline};
   ${addSXTypography};

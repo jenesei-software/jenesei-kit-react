@@ -136,13 +136,18 @@ const DialogElement = <T extends object>(props: DialogElementProps<T>) => {
     () => props.props?.propsDialog?.isRemoveOnOutsideClick ?? true,
     [props.props?.propsDialog?.isRemoveOnOutsideClick],
   );
+  const onRemove = useCallback(() => {
+    props.props?.onRemove?.();
+    props.onRemove?.();
+  }, [props.onRemove, props.props?.onRemove]);
+
   const children = useMemo(
-    () => props.props?.content?.(props.onRemove, isAnimating, props.props.propsCustom),
-    [props.props?.content, isAnimating, props?.props?.propsCustom, props.onRemove],
+    () => props.props?.content?.({ remove: onRemove, isAnimating: isAnimating, propsCustom: props.props.propsCustom }),
+    [props.props?.content, isAnimating, props?.props?.propsCustom, onRemove],
   );
   return (
     props.index !== undefined && (
-      <Outside onOutsideClick={() => isRemoveOnOutsideClick && props.onRemove?.()}>
+      <Outside onOutsideClick={() => isRemoveOnOutsideClick && onRemove?.()}>
         <DialogElementWrapper
           key={props.id}
           initial={{

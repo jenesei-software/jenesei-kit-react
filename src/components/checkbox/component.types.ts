@@ -1,13 +1,13 @@
 import { addIconProps } from '@local/components/icon';
-import { addFontProps, addOutlineProps, addOutlinePropsDollar } from '@local/styles/add';
-import { addErrorProps, addErrorStylesProps } from '@local/styles/error';
-import { addSXProps, addSXStyleProps } from '@local/styles/sx';
+import { addOutlineProps, addOutlinePropsDollar } from '@local/styles/add';
+import { addErrorProps, addErrorPropsDollar } from '@local/styles/error';
+import { addSXProps, addSXPropsDollar } from '@local/styles/sx';
 import { IThemeGenre, IThemeSize } from '@local/theme';
 import { AddDollarSign } from '@local/types';
 
 import { PropsWithChildren } from 'react';
 
-import { addSXTypographyProps, addSXTypographyStyleProps } from '../typography';
+import { addSXTypographyProps, addSXTypographyPropsDollar } from '../typography';
 
 export type CheckboxProps = PropsWithChildren & {
   checked?: boolean;
@@ -37,26 +37,17 @@ export type CheckboxProps = PropsWithChildren & {
 } & addSXProps &
   addErrorProps &
   addSXTypographyProps &
-  addOutlineProps &
-  addFontProps;
+  addOutlineProps;
 
 export type StyledCheckboxProps = AddDollarSign<
   Pick<
     CheckboxProps,
-    | 'checked'
-    | 'genre'
-    | 'view'
-    | 'isWidthAsHeight'
-    | 'size'
-    | 'isDisabled'
-    | 'isNotBackground'
-    | 'isHiddenBorder'
-    | 'font'
+    'checked' | 'genre' | 'view' | 'isWidthAsHeight' | 'size' | 'isDisabled' | 'isNotBackground' | 'isHiddenBorder'
   >
 > &
-  addSXStyleProps &
-  addErrorStylesProps &
-  addSXTypographyStyleProps &
+  addSXPropsDollar &
+  addErrorPropsDollar &
+  addSXTypographyPropsDollar &
   addOutlinePropsDollar;
 
 export type TCheckboxGenre = keyof IThemeGenre;

@@ -107,7 +107,6 @@ export const ProviderAppOutlet = styled.div<ProviderAppOutletProps>`
 
   overflow-y: auto;
   overflow-x: hidden;
-  scrollbar-gutter: stable;
   
   min-height: 100dvh;
   max-height: 100dvh;

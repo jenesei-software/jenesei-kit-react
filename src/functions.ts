@@ -55,3 +55,8 @@ export function getScrollbarWidth() {
   document.body.removeChild(div);
   return scrollBarWidth;
 }
+
+export function getHasVerticalScroll(): boolean {
+  if (typeof window === 'undefined') return false;
+  return document.documentElement.scrollHeight > window.innerHeight;
+}

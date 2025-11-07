@@ -1,9 +1,20 @@
+// biome-ignore assist/source/organizeImports: <explanation>
+export * from '@local/types';
+export * from '@local/theme';
+export * from '@local/styles/add';
+export * from '@local/styles/error';
+export * from '@local/styles/motion';
+export * from '@local/styles/sx';
+export * from '@local/functions';
+export * from '@local/consts';
+
+export * from '@local/components/typography';
+
 export * from '@local/areas/outside';
 export * from '@local/areas/preview';
 export * from '@local/areas/scroll';
 export * from '@local/areas/skeleton';
 export * from '@local/areas/smooth';
-export * from '@local/components/accordion';
 export * from '@local/components/accordion';
 export * from '@local/components/button';
 export * from '@local/components/button-group';
@@ -26,8 +37,6 @@ export * from '@local/components/stack';
 export * from '@local/components/textarea';
 export * from '@local/components/toggle';
 export * from '@local/components/tooltip';
-export * from '@local/components/typography';
-export * from '@local/consts';
 export * from '@local/contexts/context-app';
 export * from '@local/contexts/context-cookie';
 export * from '@local/contexts/context-dialog';
@@ -36,12 +45,5 @@ export * from '@local/contexts/context-local-storage';
 export * from '@local/contexts/context-permission';
 export * from '@local/contexts/context-screen-width';
 export * from '@local/contexts/context-sonner';
-export * from '@local/functions';
 export * from '@local/hooks/use-debounced-callback';
 export * from '@local/hooks/use-deep-compare-memoize';
-export * from '@local/styles/add';
-export * from '@local/styles/error';
-export * from '@local/styles/motion';
-export * from '@local/styles/sx';
-export * from '@local/theme';
-export * from '@local/types';

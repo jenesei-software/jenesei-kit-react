@@ -1,4 +1,4 @@
-import { addSXProps, addSXStyleProps } from '@local/styles/sx';
+import { addSXProps, addSXPropsDollar } from '@local/styles/sx';
 import { IThemePaletteKeys, IThemeSize } from '@local/theme';
 import { AddDollarSign } from '@local/types';
 
@@ -22,7 +22,7 @@ export type IconItemProps = {
 export type StyledIconItemProps = AddDollarSign<
   Pick<IconItemProps, 'size' | 'turn' | 'order'> & { color?: IThemePaletteKeys }
 > &
-  addSXStyleProps;
+  addSXPropsDollar;
 
 export type StyledIconSkeletonProps = AddDollarSign<Pick<IconItemProps, 'size' | 'order'>>;
 

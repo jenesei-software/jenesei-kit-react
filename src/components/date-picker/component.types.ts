@@ -1,5 +1,6 @@
 import { InputStandardProps, StyledInputProps, StyledInputWrapperProps } from '@local/components/input';
-import { addFontProps, addOutlineProps, addOutlinePropsDollar } from '@local/styles/add';
+import { addSXTypographyProps } from '@local/index';
+import { addOutlineProps, addOutlinePropsDollar } from '@local/styles/add';
 import { addErrorProps, ErrorMessageProps } from '@local/styles/error';
 import { addSXProps } from '@local/styles/sx';
 import { IThemeGenreDate, IThemeSize } from '@local/theme';
@@ -21,8 +22,8 @@ export type DatePickerType = 'manual' | 'select' | 'manualAndSelect';
 
 export type CommonDatePickerProps = addErrorProps &
   addSXProps &
-  addFontProps &
-  addOutlineProps & {
+  addOutlineProps &
+  addSXTypographyProps & {
     genre: TDateGenre;
 
     id?: string;
@@ -32,7 +33,7 @@ export type CommonDatePickerProps = addErrorProps &
     isMinWidth?: boolean;
 
     isShowClearButton?: boolean;
-    
+
     isInputEffect?: InputStandardProps['isInputEffect'];
 
     isOnClickClose?: boolean;
@@ -56,7 +57,7 @@ export type CommonDatePickerProps = addErrorProps &
     ariaLabel?: string;
 
     autoComplete?: HTMLInputAutoCompleteAttribute | string;
-    
+
     onBlur?: () => void;
 
     onChange: (timestamp: number | null) => void;
@@ -117,7 +118,18 @@ export type DateWrapperProps = AddDollarSign<
   StyledInputWrapperProps;
 
 export type DateInputProps = AddDollarSign<
-  Pick<DatePickerProps, 'error' | 'genre' | 'size' | 'isBold' | 'isReadOnly' | 'isDisabledOutline' | 'isOutlineBoxShadow' | 'isDisabled' | 'font'> & {
+  Pick<
+    DatePickerProps,
+    | 'error'
+    | 'genre'
+    | 'size'
+    | 'isBold'
+    | 'isReadOnly'
+    | 'isDisabledOutline'
+    | 'isOutlineBoxShadow'
+    | 'isDisabled'
+    | 'sxTypography'
+  > & {
     isOpen?: boolean;
     isActive?: boolean;
     isHaveValue?: boolean;
@@ -138,7 +150,7 @@ export type DateDropdownListProps = AddDollarSign<
 >;
 
 export type DateDropdownDayProps = AddDollarSign<
-  Pick<DatePickerProps, 'genre' | 'size' | 'font'> &
+  Pick<DatePickerProps, 'genre' | 'size' | 'sxTypography'> &
     Pick<DateDayProps, 'isToday' | 'isWeekend'> & {
       row: number;
       column: number;

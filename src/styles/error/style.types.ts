@@ -1,10 +1,9 @@
+import { addSXTypographyProps } from '@local/index';
 import { addSXProps } from '@local/styles/sx';
 import { IThemeSize } from '@local/theme';
 import { AddDollarSign } from '@local/types';
 
-import { addFontProps } from '../add';
-
-export type ErrorMessagePropsDollar = AddDollarSign<ErrorMessageProps>;
+export type ErrorMessageDollarProps = AddDollarSign<ErrorMessageProps>;
 export type ErrorMessageProps = {
   errorMessage?: string;
 
@@ -13,10 +12,9 @@ export type ErrorMessageProps = {
   isErrorAbsolute?: boolean;
 
   size?: IThemeSize;
-
-  sx?: addSXProps['sx'];
-} & addFontProps;
+} & addSXTypographyProps &
+  addSXProps;
 export interface addErrorProps {
   error?: ErrorMessageProps;
 }
-export type addErrorStylesProps = AddDollarSign<addErrorProps>;
+export type addErrorPropsDollar = AddDollarSign<addErrorProps>;

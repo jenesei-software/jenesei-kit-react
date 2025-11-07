@@ -462,9 +462,11 @@ export interface ITheme {
   font: {
     family: IThemeFontFamily;
     weight: IThemeTypographyWeight;
+    lineHeight: number;
     sizeDefault: Record<IThemeDevice, number>;
     sizeHeading: Record<IThemeTypographyHeading, number>;
-    lineHeight: number;
+    // sizeLineHeight: Record<IThemeTypographyHeading, number>;
+    // sizeWeight: Record<IThemeTypographyWeight, number>;
   };
   palette: Record<IThemePaletteKeys, string>;
   background: Record<IThemePaletteKeys, string>;
@@ -482,4 +484,5 @@ export interface ITheme {
     icon: string;
   };
   getContrastYIQ: (hexcolor: string) => string;
+  hasScrollbar: boolean;
 }
