@@ -1,5 +1,5 @@
-import { Button } from '@local/components/button';
-import { Stack } from '@local/components/stack';
+import { Button } from '@local/components/button/export';
+import { Stack } from '@local/components/stack/export';
 
 import { Link } from '@tanstack/react-router';
 import { motion } from 'framer-motion';

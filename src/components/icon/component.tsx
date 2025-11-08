@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
 import { useTheme } from 'styled-components';
 
-import { IconItemProps, StyledIcon, StyledIconSkeleton, useLazyInjectSprite } from '.';
+import { IconProps, StyledIcon, StyledIconSkeleton, useLazyInjectSprite } from '.';
 
-export const Icon = (props: IconItemProps) => {
+export const Icon = (props: IconProps) => {
   const theme = useTheme();
   const iconId = useMemo(
     () => theme.icon.getIconId({ type: props.type, name: props.name }),

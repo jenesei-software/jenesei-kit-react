@@ -1,8 +1,8 @@
+import { Button } from '@local/components/button/export';
+import { Stack } from '@local/components/stack/export';
+
 import { AnimatePresence, motion } from 'framer-motion';
 import { FC, useCallback, useMemo } from 'react';
-
-import { Button } from '@local/components/button';
-import { Stack } from '@local/components/stack';
 
 import { DEFAULT_COMPONENT_PAGINATION_GAP, PaginationProps } from '.';
 

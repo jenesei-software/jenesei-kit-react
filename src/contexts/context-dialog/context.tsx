@@ -1,4 +1,4 @@
-import { Outside } from '@local/areas/outside';
+import { Outside } from '@local/areas/outside/export';
 
 import { AnimatePresence } from 'framer-motion';
 import { createContext, FC, memo, useCallback, useEffect, useMemo, useState } from 'react';

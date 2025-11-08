@@ -1,0 +1,1 @@
+export { Outside } from './area';

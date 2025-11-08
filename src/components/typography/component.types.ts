@@ -1,67 +1,8 @@
-import { addOutlineProps, addOutlinePropsDollar } from '@local/styles/add';
-import { addSXProps } from '@local/styles/sx';
-import {
-  IThemeDevice,
-  IThemeFontFamily,
-  IThemePaletteKeys,
-  IThemeTypographyHeading,
-  IThemeTypographyWeight,
-} from '@local/theme';
+import { TooltipProps } from '@local/components/tooltip/export';
+import { addOutlineProps, addOutlinePropsDollar, addSXProps, addSXTypographyProps } from '@local/styles/add/export';
 import { AddDollarSign } from '@local/types';
 
 import { CSSProperties, PropsWithChildren, Ref } from 'react';
-
-import { TooltipProps } from '../tooltip';
-
-type TypographyDefaultProps = {
-  align?: CSSProperties['textAlign'];
-
-  color?: IThemePaletteKeys;
-
-  cursor?: CSSProperties['cursor'];
-
-  decoration?: CSSProperties['textDecoration'];
-
-  family?: IThemeFontFamily;
-
-  flex?: string;
-
-  height?: number | string;
-
-  isHoverUnderlining?: boolean;
-
-  letterSpacing?: CSSProperties['letterSpacing'];
-
-  line?: number;
-
-  overflow?: CSSProperties['overflow'];
-
-  shadow?: 'shadowPulse';
-
-  transform?: CSSProperties['textTransform'];
-
-  weight?: IThemeTypographyWeight;
-
-  wrap?: CSSProperties['textWrap'];
-
-  isNoUserSelect?: boolean;
-};
-
-export type TypographyDataProps = TypographyDefaultProps & {
-  size?: number | string;
-};
-
-type TypographyVariantProps = TypographyDefaultProps & {
-  variant: IThemeTypographyHeading;
-};
-
-export type TypographyAllProps = TypographyDataProps | TypographyVariantProps;
-
-export type TypographySXProps = {
-  default: TypographyAllProps;
-} & {
-  [K in IThemeDevice]?: TypographyAllProps;
-};
 
 export type TypographyProps = PropsWithChildren & {
   onClick?: () => void;
@@ -76,19 +17,13 @@ export type TypographyProps = PropsWithChildren & {
 
   ref?: Ref<HTMLElement | HTMLHeadingElement | HTMLAnchorElement | null>;
 
-  sx: TypographySXProps;
+  sx: addSXTypographyProps['sxTypography'];
 
   sxStandard?: addSXProps['sx'];
 } & addOutlineProps;
 
-export type addSXTypographyProps = {
-  sxTypography?: TypographySXProps;
-};
-
-export type addSXTypographyPropsDollar = AddDollarSign<addSXTypographyProps>;
-
-export type TypographyCSSProps = AddDollarSign<{
-  sxTypography: TypographySXProps;
+export type TypographyPropsDollar = AddDollarSign<{
+  sxTypography: addSXTypographyProps['sxTypography'];
   sx?: addSXProps['sx'];
   isTransitionFontSize?: boolean;
 }> &

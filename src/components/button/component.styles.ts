@@ -1,7 +1,6 @@
-import { addRippleDefault } from '@local/components/ripple';
-import { addOutline, addTransition } from '@local/styles/add';
-import { addSX, addSXTypography } from '@local/styles/sx';
-import { KEY_SIZE_DATA } from '@local/theme';
+import { addRippleDefault } from '@local/components/ripple/export';
+import { addOutline, addSX, addSXTypography, addTransition } from '@local/styles/add/export';
+import { KEY_SIZE_DATA } from '@local/styles/theme/export';
 
 import { motion } from 'framer-motion';
 import styled, { css } from 'styled-components';

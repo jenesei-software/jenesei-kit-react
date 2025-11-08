@@ -1,4 +1,4 @@
-import { StackProps } from '@local/components/stack';
+import { StackProps } from '@local/components/stack/export';
 import { AddDollarSign } from '@local/types';
 
 type DefaultScrollProps = {

@@ -1,4 +1,4 @@
-import { ITheme } from '@local/theme';
+import { ITheme } from '@local/styles/theme/export';
 
 import { ProviderSonnerProps } from '.';
 

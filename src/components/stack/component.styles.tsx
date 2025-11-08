@@ -1,9 +1,9 @@
-import { addSX } from '@local/styles/sx';
+import { addRipple } from '@local/components/ripple/export';
+import { addSX } from '@local/styles/add/export';
 
 import { motion } from 'framer-motion';
 import styled, { css } from 'styled-components';
 
-import { addRipple } from '../ripple';
 import { StyledStackProps } from '.';
 
 export const StyledStack = styled.div<StyledStackProps>`

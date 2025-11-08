@@ -1,7 +1,7 @@
-import { FC, PropsWithChildren, useEffect, useRef } from 'react';
+import { Stack } from '@local/components/stack/export';
+import { addSXProps } from '@local/styles/add/export';
 
-import { Stack } from '@local/components/stack';
-import { addSXProps } from '@local/styles/sx';
+import { FC, PropsWithChildren, useEffect, useRef } from 'react';
 
 type OutsideProps = PropsWithChildren &
   addSXProps & {

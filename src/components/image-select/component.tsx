@@ -1,17 +1,18 @@
+import { Button } from '@local/components/button/export';
+import { ErrorMessage } from '@local/components/error/export';
+import { Image } from '@local/components/image/export';
+import { Stack } from '@local/components/stack/export';
+import { Typography } from '@local/components/typography/export';
 import { LIST_IMAGE_SUPPORTED_FORMAT_FOR_INPUT } from '@local/consts';
+import { getSxTypography } from '@local/functions';
 import { useImageCrop } from '@local/hooks/use-image-crop';
 import { useImageView } from '@local/hooks/use-image-view';
-import { ErrorMessage } from '@local/styles/error';
-import { KEY_SIZE_DATA } from '@local/theme';
+import { KEY_SIZE_DATA } from '@local/styles/theme/export';
 
 import { motion } from 'framer-motion';
 import { DragEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTheme } from 'styled-components';
 
-import { Button } from '../button';
-import { Image } from '../image';
-import { Stack } from '../stack';
-import { Typography } from '../typography';
 import { ImageSelectItemProps, ImageSelectListWrapper, ImageSelectProps, ImageSelectWrapper } from '.';
 
 export const ImageSelect = (props: ImageSelectProps) => {
@@ -310,11 +311,10 @@ export const ImageSelect = (props: ImageSelectProps) => {
         <ErrorMessage
           {...props.error}
           size={props?.error.size ?? props.size}
-          font={{
-            size: 12,
+          sxTypography={getSxTypography({
+            size: props.size,
             weight: 400,
-            family: theme.font.family,
-          }}
+          })}
         />
       ) : null}
     </>

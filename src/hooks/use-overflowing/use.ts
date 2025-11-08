@@ -1,9 +1,7 @@
-
+import { useDeepCompareMemoize } from '@local/hooks/use-deep-compare-memoize';
 
 import { RefObject, useEffect, useMemo, useRef, useState } from 'react';
 
-
-import { useDeepCompareMemoize } from '../use-deep-compare-memoize';
 import { useTooltipProps } from '.';
 
 /**
@@ -24,9 +22,7 @@ export function useOverflowing<T extends HTMLElement>(
   const isParentMode = useMemo(() => props?.mode === 'parent', [props?.mode]);
 
   // Состояние переполнения (может быть принудительно задано через props)
-  const [isOverflowing, setIsOverflowing] = useState(
-    props?.isOverflowing !== undefined ? props?.isOverflowing : false
-  );
+  const [isOverflowing, setIsOverflowing] = useState(props?.isOverflowing !== undefined ? props?.isOverflowing : false);
   // ref для отслеживания элемента
   const ref = useRef<T | null>(null);
   // Мемоизированные зависимости для эффекта (глубокое сравнение)

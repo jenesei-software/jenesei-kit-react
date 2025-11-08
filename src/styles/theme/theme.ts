@@ -1,14 +1,6 @@
+import { LIBRARY_VERSION } from '@local/consts';
 import { getContrastYIQ, getHasVerticalScroll } from '@local/functions';
 
-import {
-  ThemeMapBustmarket,
-  ThemeMapCheckbox,
-  ThemeMapId,
-  ThemeMapLoading,
-  ThemeMapLogo,
-  ThemeMapRealebail,
-} from './theme.interface';
-import { LIBRARY_VERSION } from '..';
 import {
   ITheme,
   IThemeGenre,
@@ -23,7 +15,14 @@ import {
   IThemeSize,
   IThemeSizePropertyDefault,
   IThemeSizePropertyToggle,
-} from '.';
+  ThemeMapBustmarket,
+  ThemeMapCheckbox,
+  ThemeMapId,
+  ThemeMapLoading,
+  ThemeMapLogo,
+  ThemeMapRealebail,
+} from './theme.interface';
+
 export const JeneseiPalette: Record<IThemePaletteKeys, string> = {
   currentColor: 'currentColor',
   inherit: 'inherit',
@@ -957,9 +956,9 @@ export const ThemeLight: ITheme = {
     select: ThemeSelect,
   },
   getContrastYIQ: getContrastYIQ,
-  hasVerticalScroll: getHasVerticalScroll()
+  hasScrollbar: getHasVerticalScroll(),
 };
-export const ThemeBlack: ITheme = ThemeLight;
+export const ThemeDark: ITheme = ThemeLight;
 
 export const KEY_SIZE_DATA: Record<IThemeSize, IThemeSizePropertyDefault> = {
   large: {

@@ -1,6 +1,6 @@
-import { css, styled } from 'styled-components';
+import { addSX } from '@local/styles/add/export';
 
-import { addSX } from '@local/styles/sx';
+import { css, styled } from 'styled-components';
 
 import { StyledButtonGroupProps } from '.';
 

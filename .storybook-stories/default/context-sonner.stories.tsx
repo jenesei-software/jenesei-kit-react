@@ -2,9 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { FC } from 'react';
 import 'styled-components';
 
-import { Button } from '@local/components/button';
-import { Stack } from '@local/components/stack';
-import { ProviderSonner, ProviderSonnerProps, useSonner } from '@local/contexts/context-sonner';
+import { Button } from '@local/components/button/export';
+import { Stack } from '@local/components/stack/export';
+import { ProviderSonner, ProviderSonnerProps, useSonner } from '@local/contexts/context-sonner/export';
 
 const meta: Meta<typeof ProviderSonner> = {
   component: ProviderSonner,

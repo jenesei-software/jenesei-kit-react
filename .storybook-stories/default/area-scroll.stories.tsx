@@ -2,10 +2,10 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { FC, useState } from 'react';
 import 'styled-components';
 
-import { Scroll as ScrollComponent, ScrollProps } from '@local/areas/scroll';
-import { Button } from '@local/components/button';
-import { Stack } from '@local/components/stack';
-import { Typography } from '@local/components/typography';
+import { Scroll as ScrollComponent, ScrollProps } from '@local/areas/scroll/export';
+import { Button } from '@local/components/button/export';
+import { Stack } from '@local/components/stack/export';
+import { Typography } from '@local/components/typography/export';
 
 const meta: Meta<typeof ScrollComponent> = {
   component: ScrollComponent,

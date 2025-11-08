@@ -1,18 +1,18 @@
-import { Preview } from '@local/areas/preview';
-import { Button } from '@local/components/button';
-import { ImageSelectItemProps } from '@local/components/image-select';
-import { Pagination, PaginationProps } from '@local/components/pagination';
-import { Stack } from '@local/components/stack';
+import { Preview } from '@local/areas/preview/export';
+import { Button } from '@local/components/button/export';
+import { ImageSelectItemProps } from '@local/components/image-select/export';
+import { Pagination, PaginationProps } from '@local/components/pagination/export';
+import { Stack } from '@local/components/stack/export';
 import { LIST_IMAGE_SUPPORTED_FORMAT } from '@local/consts';
-import { useDialog, useDialogProps } from '@local/contexts/context-dialog';
-import { KEY_SIZE_DATA } from '@local/theme';
+import { useDialog, useDialogProps } from '@local/contexts/context-dialog/export';
+import { useDeepCompareMemoize } from '@local/hooks/use-deep-compare-memoize';
+import { KEY_SIZE_DATA } from '@local/styles/theme/export';
 import { IImageFormat } from '@local/types';
 
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import Cropper, { Area } from 'react-easy-crop';
 import { useTheme } from 'styled-components';
 
-import { useDeepCompareMemoize } from '../use-deep-compare-memoize';
 import { useImageCropAddProps, useImageCropProps } from '.';
 
 export const useImageCrop = (props: useImageCropProps) => {
@@ -146,6 +146,7 @@ const CropperWrapper: FC<{
     },
     [newImagesCroppedArea, props],
   );
+
   const onChange = useCallback(
     async (params: {
       index: number;
@@ -189,10 +190,12 @@ const CropperWrapper: FC<{
     },
     [onSave, props?.params?.images],
   );
+
   useEffect(() => {
     setNewImages(props?.params?.images ?? []);
     setNewImagesCroppedArea((props?.params?.images ?? []).map((image) => image.croppedArea ?? null));
   }, [props?.params?.images]);
+
   useEffect(() => {
     return () => {
       setIndex(0);

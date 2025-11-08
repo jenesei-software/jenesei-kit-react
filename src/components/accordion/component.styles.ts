@@ -1,5 +1,5 @@
-import { Icon } from '@local/components/icon';
-import { addTransition } from '@local/styles/add';
+import { Icon } from '@local/components/icon/export';
+import { addTransition } from '@local/styles/add/export';
 
 import styled, { css } from 'styled-components';
 

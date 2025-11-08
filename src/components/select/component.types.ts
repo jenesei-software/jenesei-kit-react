@@ -1,14 +1,12 @@
-import { addSXTypographyProps } from '@local/index';
-import { addErrorProps } from '@local/styles/error';
-import { addSXProps } from '@local/styles/sx';
-import { IThemeGenreSelect, IThemeSize } from '@local/theme';
+import { DatePickerTranslateMonthProps } from '@local/components/date-picker/export';
+import { addErrorProps } from '@local/components/error/export';
+import { addSXProps, addSXTypographyProps } from '@local/styles/add/export';
+import { ITheme, IThemeSize } from '@local/styles/theme/export';
 import { AddDollarSign } from '@local/types';
 
 import { FocusEvent, ReactNode, Ref } from 'react';
 
-import { MonthItem } from '../date-picker';
-
-export type TInputSelect = keyof IThemeGenreSelect;
+export type TInputSelect = keyof ITheme['colors']['select'];
 
 export interface ISelectItem {
   [key: string]: unknown;
@@ -100,7 +98,7 @@ export type SelectMonthProps = Omit<SelectProps<ISelectItem>, 'option' | 'value'
   value: number | null;
   isShortLabel?: boolean;
   onChange: (value: number | null) => void;
-  monthsLocale: MonthItem[];
+  monthsLocale: DatePickerTranslateMonthProps[];
 };
 export type SelectMonthsProps = Omit<SelectProps<ISelectItem>, 'option' | 'value' | 'onChange'> & {
   dateMin?: number;
@@ -108,7 +106,7 @@ export type SelectMonthsProps = Omit<SelectProps<ISelectItem>, 'option' | 'value
   value: number[];
   isShortLabel?: boolean;
   onChange: (value: number[]) => void;
-  monthsLocale: MonthItem[];
+  monthsLocale: DatePickerTranslateMonthProps[];
 };
 export type SelectYearProps = Omit<SelectMonthProps, 'monthsLocale'> & {
   dateMin?: number;

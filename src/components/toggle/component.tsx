@@ -1,4 +1,4 @@
-import { KEY_SIZE_DATA_TOGGLE } from '@local/theme';
+import { KEY_SIZE_DATA_TOGGLE } from '@local/styles/theme/export';
 
 import { useMemo } from 'react';
 

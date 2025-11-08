@@ -1,12 +1,24 @@
-import { getIconComponents } from '@local/components/icon';
-import { Ripple } from '@local/components/ripple';
-import { KEY_SIZE_DATA } from '@local/theme';
+import { getIconComponents } from '@local/components/icon/export';
+import { Ripple } from '@local/components/ripple/export';
+import { TypographySXProps } from '@local/styles/add/export';
+import { IThemeSize, KEY_SIZE_DATA } from '@local/styles/theme/export';
 
 import { useMergeRefs } from '@floating-ui/react';
 import { FC, Ref, useMemo, useRef } from 'react';
 import { useTheme } from 'styled-components';
 
 import { ButtonProps, StyledButton, StyledButtonIconsWrapper } from '.';
+
+function getSxTypography(props: { size: IThemeSize; weight: number; sx?: TypographySXProps }): TypographySXProps {
+  return {
+    default: {
+      size: KEY_SIZE_DATA[props.size].font,
+      weight: 700,
+      ...props.sx?.default,
+    },
+    ...props.sx,
+  };
+}
 
 export const Button: FC<ButtonProps> = (props) => {
   const theme = useTheme();
@@ -27,13 +39,9 @@ export const Button: FC<ButtonProps> = (props) => {
 
   const isInteractive = !props.isDisabled && props.isWhileTapEffect;
 
+
   return (
     <StyledButton
-      // $font={{
-      //   ...props.font,
-      //   size: props.font?.size ?? KEY_SIZE_DATA[props.size].font,
-      //   weight: props.font?.weight ?? 700,
-      // }}
       $isNotHoverEffect={props.isNotHoverEffect}
       whileTap={isInteractive ? { scale: 1.1, transition: { duration: 0.08, ease: 'easeOut' } } : undefined}
       whileHover={isInteractive ? { scale: 0.97, transition: { duration: 0.2, ease: 'easeOut' } } : undefined}
@@ -51,14 +59,7 @@ export const Button: FC<ButtonProps> = (props) => {
       $isRadius={props.isRadius}
       $isHidden={props.isHidden}
       $isPlaystationEffect={props.isPlaystationEffect}
-      $sxTypography={{
-        default: {
-          size: KEY_SIZE_DATA[props.size].font,
-          weight: 700,
-          ...props.sxTypography?.default,
-        },
-        ...props.sxTypography,
-      }}
+      $sxTypography={getSxTypography({ size: props.size, weight: 700, sx: props.sxTypography })}
       $isHiddenBorder={props.isHiddenBorder || props.isPlaystationEffect}
       disabled={props.isDisabled}
       type={props.type ?? 'button'}

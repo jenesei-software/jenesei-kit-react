@@ -1,11 +1,11 @@
-import { ErrorMessage } from '@local/styles/error';
-import { KEY_SIZE_DATA } from '@local/theme';
+import { ErrorMessage } from '@local/components/error/export';
+import { Icon } from '@local/components/icon/export';
+import { Ripple } from '@local/components/ripple/export';
+import { getSxTypography } from '@local/functions';
 
 import { FC, useCallback, useMemo } from 'react';
 import { useTheme } from 'styled-components';
 
-import { Icon } from '../icon';
-import { Ripple } from '../ripple';
 import { CheckboxProps, CheckboxWrapper } from '.';
 
 export const Checkbox: FC<CheckboxProps> = (props) => {
@@ -37,11 +37,6 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
         $genre={props.genre}
         $error={props.error}
         $view={props.view}
-        $font={{
-          ...props.font,
-          size: props.font?.size ?? KEY_SIZE_DATA[props.size].font,
-          weight: props.font?.weight ?? 700,
-        }}
         $checked={props.checked}
         $isWidthAsHeight={props.isWidthAsHeight}
         $size={props.size}
@@ -49,7 +44,7 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
         $isHiddenBorder={props.isHiddenBorder}
         $isNotBackground={props.isNotBackground}
         $sx={props.sx}
-        $sxTypography={props.sxTypography}
+        $sxTypography={getSxTypography({ size: props.size, weight: 700, sx: props.sxTypography })}
         $isDisabledOutline={props.isDisabled ?? props.isDisabledOutline}
         $isOutlineBoxShadow={props.isOutlineBoxShadow}
         $isReadOnly={props.isReadOnly}
@@ -73,13 +68,9 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
       </CheckboxWrapper>
       {props?.error ? (
         <ErrorMessage
-          {...props.error}
           size={props?.error.size ?? props.size}
-          font={{
-            size: 12,
-            weight: 400,
-            family: props.font?.family ?? theme.font.family,
-          }}
+          sxTypography={getSxTypography({ size: 'medium', weight: 400, sx: props.sxTypography })}
+          {...props.error}
         />
       ) : null}
     </>

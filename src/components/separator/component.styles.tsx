@@ -1,4 +1,4 @@
-import { addSX } from '@local/styles/sx';
+import { addSX } from '@local/styles/add/export';
 
 import styled from 'styled-components';
 

@@ -1,4 +1,4 @@
-import { IThemePaletteKeys } from '@local/theme/theme.interface';
+import { IThemePaletteKeys } from '@local/styles/theme/theme.interface';
 
 import { FC } from 'react';
 

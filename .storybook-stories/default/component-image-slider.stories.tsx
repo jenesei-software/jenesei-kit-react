@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import 'styled-components';
 
-import { Button } from '@local/components/button';
-import { IMAGES, ImageSlider as SliderComponent } from '@local/components/image-slider';
-import { Stack } from '@local/components/stack';
+import { Button } from '@local/components/button/export';
+import { IMAGES, ImageSlider as SliderComponent } from '@local/components/image-slider/export';
+import { Stack } from '@local/components/stack/export';
 
 const meta: Meta<typeof SliderComponent> = {
   component: SliderComponent,

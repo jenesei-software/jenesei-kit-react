@@ -1,45 +1,39 @@
-import { IThemeSizePropertyDefault, KEY_SIZE_DATA } from '@local/theme';
+import { addSX, addSXTypography } from '@local/styles/add/export';
+import { WordsPullUp } from '@local/styles/motion/export';
+import { KEY_SIZE_DATA } from '@local/styles/theme/export';
 
 import { FC } from 'react';
 import styled, { css } from 'styled-components';
 
-import { WordsPullUp } from '../motion';
-import { addSX, addSXTypography } from '../sx';
 import { addErrorPropsDollar, ErrorMessageDollarProps, ErrorMessageProps } from '.';
 
-const ErrorMessageSize = css<ErrorMessageDollarProps>`
+const addErrorMessageSize = css<ErrorMessageDollarProps>`
   ${(props) =>
     props.$size
-      ? ErrorMessageSizeConstructor({ ...KEY_SIZE_DATA[props.$size], $isErrorAbsolute: props.$isErrorAbsolute })
-      : null};
-`;
-const ErrorMessageSizeConstructor = (
-  props: IThemeSizePropertyDefault & { $isErrorAbsolute: ErrorMessageProps['isErrorAbsolute'] },
-) => css`
-  ${
-    props.$isErrorAbsolute
-      ? css`
+      ? props.$isErrorAbsolute
+        ? css`
         position: absolute;
         top: calc(100% + 4px);
-        padding-left: ${props.padding}px;
+        padding-left: ${KEY_SIZE_DATA[props.$size].padding}px;
         color: ${(props) => props.theme.states.danger};
       `
-      : css`
+        : css`
         position: static;
-        padding: 0px ${props.padding}px;
+        padding: 0px ${KEY_SIZE_DATA[props.$size].padding}px;
         color: ${(props) => props.theme.states.danger};
       `
-  }
+      : null}
 `;
 
-export const ErrorMessageComponent = styled.div<ErrorMessageDollarProps>`
+const ErrorMessageComponent = styled.div<ErrorMessageDollarProps>`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  ${ErrorMessageSize}
+  ${addErrorMessageSize};
+  ${addSX};
   ${addSXTypography};
-  ${addSX}
 `;
+
 export const addError = css<addErrorPropsDollar>`
   ${(props) =>
     props.$error?.isError &&
@@ -53,13 +47,14 @@ export const addError = css<addErrorPropsDollar>`
       }
     `};
 `;
+
 export const ErrorMessage: FC<ErrorMessageProps> = (props) => {
   return (
     <>
       {props.errorMessage && props.isError ? (
         <ErrorMessageComponent
           $size={props.size}
-          $font={props.font}
+          $sxTypography={props.sxTypography}
           $sx={props.sx}
           $isErrorAbsolute={props.isErrorAbsolute}
         >

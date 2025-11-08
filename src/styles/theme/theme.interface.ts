@@ -1,4 +1,4 @@
-export interface IThemeGenreTypeDefault {
+interface IThemeGenreTypeDefault {
   background: {
     rest: string;
     hover: string;
@@ -15,7 +15,7 @@ export interface IThemeGenreTypeDefault {
     placeholder: string;
   };
 }
-export interface IThemeGenreTypeRange {
+interface IThemeGenreTypeRange {
   thumb: {
     background: {
       rest: string;
@@ -36,7 +36,7 @@ export interface IThemeGenreTypeRange {
     };
   };
 }
-export interface IThemeGenreTypeSelect {
+interface IThemeGenreTypeSelect {
   background: {
     rest: string;
     hover: string;
@@ -56,7 +56,7 @@ export interface IThemeGenreTypeSelect {
     placeholder: string;
   };
 }
-export interface IThemeGenreTypeImageSelect {
+interface IThemeGenreTypeImageSelect {
   background: {
     rest: string;
     hover: string;
@@ -73,7 +73,7 @@ export interface IThemeGenreTypeImageSelect {
     placeholder: string;
   };
 }
-export interface IThemeGenreTypeToggle {
+interface IThemeGenreTypeToggle {
   active: {
     rest: {
       track: string;
@@ -104,7 +104,7 @@ export interface IThemeGenreTypeToggle {
     };
   };
 }
-export interface IThemeGenreTypeDate {
+interface IThemeGenreTypeDate {
   background: {
     rest: string;
     hover: string;
@@ -133,7 +133,7 @@ export interface IThemeGenreTypeDate {
     line: string;
   };
 }
-export interface IThemeGenreTypeSonner {
+interface IThemeGenreTypeSonner {
   button: {
     genre: keyof IThemeGenre;
   };
@@ -158,7 +158,7 @@ export interface IThemeGenreTypeSonner {
   };
 }
 
-export type IThemeGenreName =
+type IThemeGenreName =
   | 'gray'
   | 'grayBorder'
   | 'black'
@@ -221,10 +221,6 @@ export type IThemeGenreImageSelect = Record<
 export type IThemeGenreSelect = Record<
   Extract<IThemeGenreName, 'gray' | 'grayBorder' | 'blackBorder' | 'realebail-white'>,
   IThemeGenreTypeSelect
->;
-export type IThemeGenreTextArea = Record<
-  Extract<IThemeGenreName, 'gray' | 'grayBorder' | 'blackBorder' | 'realebail-white'>,
-  IThemeGenreTypeDefault
 >;
 export type IThemeGenreDate = Record<
   Extract<IThemeGenreName, 'gray' | 'grayBorder' | 'blackBorder' | 'realebail-white'>,

@@ -1,8 +1,8 @@
-import { Typography } from '@local/components/typography';
+import { usePopover } from '@local/components/popover/export';
+import { Typography } from '@local/components/typography/export';
 
 import { FC, memo, Ref } from 'react';
 
-import { usePopover } from '../popover';
 import {
   DEFAULT_TOOLTIP_OFFSET_FALLBACK,
   DEFAULT_TOOLTIP_PLACEMENT_FALLBACK,

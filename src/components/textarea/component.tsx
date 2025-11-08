@@ -1,4 +1,5 @@
-import { ErrorMessage } from '@local/styles/error';
+import { ErrorMessage } from '@local/components/error/export';
+import { getSxTypography } from '@local/functions';
 
 import { useMergeRefs } from '@floating-ui/react';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
@@ -67,12 +68,11 @@ export const TextArea = (props: TextAreaProps) => {
         <StyledTextArea
           tabIndex={0}
           ref={ref}
-          $font={{
-            ...props.font,
-            size: props.font?.size ?? 16,
-            weight: props.font?.weight ?? (props.isBold ? 500 : 400),
-            height: props.font?.height ?? `${lineHeight}px`,
-          }}
+          $sxTypography={getSxTypography({
+            size: props.size,
+            weight: props.isBold ? 500 : 400,
+            sx: props.sxTypography,
+          })}
           $lineHeight={lineHeight}
           $isResize={props.isResize}
           $error={props.error}
@@ -111,11 +111,11 @@ export const TextArea = (props: TextAreaProps) => {
         <ErrorMessage
           {...props.error}
           size={props?.error.size ?? props.size}
-          font={{
-            size: 12,
+          sxTypography={getSxTypography({
+            size: props.size,
             weight: 400,
-            family: props.font?.family ?? theme.font.family,
-          }}
+            sx: props.sxTypography,
+          })}
         />
       ) : null}
     </>

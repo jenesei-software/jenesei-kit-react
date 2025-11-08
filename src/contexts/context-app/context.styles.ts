@@ -1,9 +1,9 @@
-import { addGridTransition } from '@local/styles/add';
-import { JeneseiPalette } from '@local/theme';
+import { ScreenWidthProps } from '@local/components/context-screen-width';
+import { addGridTransition } from '@local/styles/add/export';
+import { JeneseiPalette } from '@local/styles/theme/export';
 
 import { css, styled } from 'styled-components';
 
-import { ScreenWidthProps } from '../context-screen-width';
 import { ProviderAppOutletChildrenProps, ProviderAppOutletProps, ProviderAppWrapperProps } from '.';
 
 export const ProviderAppWrapper = styled.div<ProviderAppWrapperProps>`

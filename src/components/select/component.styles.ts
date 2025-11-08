@@ -1,13 +1,12 @@
-import { Icon } from '@local/components/icon';
-import { addRemoveOutline } from '@local/styles/add';
-import { addError } from '@local/styles/error';
-import { addSX, addSXTypography } from '@local/styles/sx';
-import { KEY_SIZE_DATA } from '@local/theme/theme';
+import { addError } from '@local/components/error/export';
+import { Icon } from '@local/components/icon/export';
+import { TextArea } from '@local/components/textarea/export';
+import { addRemoveOutline, addSX, addSXTypography } from '@local/styles/add/export';
+import { KEY_SIZE_DATA } from '@local/styles/theme/theme';
 
 import { motion } from 'framer-motion';
 import styled, { css } from 'styled-components';
 
-import { TextArea } from '../textarea';
 import {
   ButtonListProps,
   DropdownListOptionIconProps,

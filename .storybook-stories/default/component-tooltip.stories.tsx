@@ -2,10 +2,10 @@ import type { Meta } from '@storybook/react-vite';
 import { FC } from 'react';
 import 'styled-components';
 
-import { Button } from '@local/components/button';
-import { Stack } from '@local/components/stack';
-import { Tooltip as TooltipComponent } from '@local/components/tooltip';
-import { Typography, TypographyTooltip } from '@local/components/typography';
+import { Button } from '@local/components/button/export';
+import { Stack } from '@local/components/stack/export';
+import { Tooltip as TooltipComponent } from '@local/components/tooltip/export';
+import { Typography, TypographyTooltip } from '@local/components/typography/export';
 import { LOREM_IPSUM_TEXT } from '@local/consts';
 
 import { WrapperBig, WrapperMin } from './tools';

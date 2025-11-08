@@ -1,5 +1,5 @@
-import { ButtonProps } from '@local/components/button';
-import { addSXProps } from '@local/index';
+import { ButtonProps } from '@local/components/button/export';
+import { addSXProps } from '@local/styles/add/export';
 
 import { LinkProps } from '@tanstack/react-router';
 

@@ -1,8 +1,6 @@
-import { addSXTypographyProps } from '@local/index';
-import { addOutlineProps, addOutlinePropsDollar } from '@local/styles/add';
-import { addErrorProps } from '@local/styles/error';
-import { addSXProps } from '@local/styles/sx';
-import { IThemeGenreInput, IThemeSize } from '@local/theme';
+import { addErrorProps } from '@local/components/error/export';
+import { addOutlineProps, addOutlinePropsDollar, addSXProps, addSXTypographyProps } from '@local/styles/add/export';
+import { ITheme, IThemeSize } from '@local/styles/theme/export';
 import { AddDollarSign } from '@local/types';
 
 import {
@@ -145,7 +143,7 @@ export type StyledInputChildrenProps = AddDollarSign<
   Pick<InputProps, 'isDisabled'> & Pick<InputChildrenProps, 'left' | 'right' | 'width'>
 >;
 
-export type TInputGenre = keyof IThemeGenreInput;
+type TInputGenre = keyof ITheme['colors']['input'];
 
 export type StyledInputProps = AddDollarSign<
   Pick<

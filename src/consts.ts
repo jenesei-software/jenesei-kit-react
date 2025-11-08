@@ -1,6 +1,6 @@
-import { InputItem, MonthItem, WeekItem } from './components/date-picker';
+import { DatePickerTranslateInputProps, DatePickerTranslateMonthProps, DatePickerTranslateWeekProps } from './components/date-picker/export';
 import { transformObjectToArray, transformObjectValuesToKeys } from './functions';
-import { IThemeTypographyHeading } from './theme';
+import { IThemeTypographyHeading } from './styles/theme/export';
 import { ILanguage, IService } from './types';
 
 export const OBJECT_LANGUAGE: ILanguage = {
@@ -33,12 +33,12 @@ export const LIST_KEY_LANGUAGE = transformObjectValuesToKeys(OBJECT_LANGUAGE);
 export const LIST_SERVICE = transformObjectToArray(OBJECT_SERVICE);
 export const LIST_KEY_SERVICE = transformObjectValuesToKeys(OBJECT_SERVICE);
 
-export const LOCALE_INPUT: InputItem = {
+export const LOCALE_INPUT: DatePickerTranslateInputProps = {
   day: 'ДД',
   month: 'ММ',
   year: 'ГГГГ',
 };
-export const LOCALE_MONTHS: MonthItem[] = [
+export const LOCALE_MONTHS: DatePickerTranslateMonthProps[] = [
   {
     localeLong: 'Январь',
     localeShort: 'Янв',
@@ -100,7 +100,7 @@ export const LOCALE_MONTHS: MonthItem[] = [
     value: 'december',
   },
 ];
-export const LOCALE_WEEKS: WeekItem[] = [
+export const LOCALE_WEEKS: DatePickerTranslateWeekProps[] = [
   {
     localeLong: 'Monday',
     localeShort: 'Пн',

@@ -1,12 +1,11 @@
+import { addError } from '@local/components/error/export';
 import {
   addDisabled,
   addOutlineChildren,
-  addRemoveOutline,
-  addTransitionWithoutSize,
-} from '@local/styles/add';
-import { addError } from '@local/styles/error';
-import { addSX, addSXTypography } from '@local/styles/sx';
-import { KEY_SIZE_DATA } from '@local/theme';
+  addRemoveOutline,addSX, addSXTypography, 
+  addTransitionWithoutSize
+} from '@local/styles/add/export';
+import { KEY_SIZE_DATA } from '@local/styles/theme/export';
 
 import styled, { css } from 'styled-components';
 

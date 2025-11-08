@@ -1,4 +1,4 @@
-import { Stack } from '@local/components/stack';
+import { Stack } from '@local/components/stack/export';
 
 import React, { FC, useCallback } from 'react';
 

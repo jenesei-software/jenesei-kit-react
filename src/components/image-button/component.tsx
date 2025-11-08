@@ -1,9 +1,9 @@
+import { Button } from '@local/components/button/export';
 import { LIST_IMAGE_SUPPORTED_FORMAT_FOR_INPUT } from '@local/consts';
 import { useImageCrop } from '@local/hooks/use-image-crop';
 
 import { FC, useCallback, useRef } from 'react';
 
-import { Button } from '../button';
 import { ImageButtonProps } from '.';
 
 export const ImageButton: FC<ImageButtonProps> = (props) => {

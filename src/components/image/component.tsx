@@ -1,5 +1,5 @@
-import { Skeleton } from '@local/areas/skeleton';
-import { Stack } from '@local/components/stack';
+import { Skeleton } from '@local/areas/skeleton/export';
+import { Stack } from '@local/components/stack/export';
 
 import { FC, useEffect, useState } from 'react';
 import { useTheme } from 'styled-components';

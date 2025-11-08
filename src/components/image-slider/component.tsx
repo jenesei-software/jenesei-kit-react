@@ -1,14 +1,14 @@
+import { Button } from '@local/components/button/export';
+import { Icon } from '@local/components/icon/export';
+import { Image } from '@local/components/image/export';
+import { Stack, StackMotion } from '@local/components/stack/export';
+import { Typography } from '@local/components/typography/export';
 import { useImageSlider } from '@local/hooks/use-image-slider';
-import { KEY_SIZE_DATA } from '@local/theme';
+import { KEY_SIZE_DATA } from '@local/styles/theme/export';
 
 import { AnimatePresence, Variants } from 'framer-motion';
 import { FC, useMemo } from 'react';
 
-import { Button } from '../button';
-import { Icon } from '../icon';
-import { Image } from '../image';
-import { Stack, StackMotion } from '../stack';
-import { Typography } from '../typography';
 import { ImageSliderProps, SliderDot, SliderImage } from '.';
 
 export const ImageSlider: FC<ImageSliderProps> = (props) => {

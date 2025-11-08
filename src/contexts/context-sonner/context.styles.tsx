@@ -1,5 +1,4 @@
-import { addSXTypography } from '@local/index';
-import { addRemoveScrollbar, addTransition } from '@local/styles/add';
+import { addRemoveScrollbar, addSXTypography, addTransition } from '@local/styles/add/export';
 
 import styled, { css } from 'styled-components';
 

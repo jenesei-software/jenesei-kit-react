@@ -1,17 +1,17 @@
+import { Button } from '@local/components/button/export';
+import { ErrorMessage } from '@local/components/error/export';
+import { Icon } from '@local/components/icon/export';
+import { Popover, usePopover } from '@local/components/popover/export';
+import { Typography } from '@local/components/typography/export';
 import { LIST_LANGUAGE } from '@local/consts';
-import { ErrorMessage } from '@local/styles/error';
-import { KEY_SIZE_DATA } from '@local/theme';
+import { getSxTypography } from '@local/functions';
+import { KEY_SIZE_DATA } from '@local/styles/theme/export';
 
 import { useMergeRefs } from '@floating-ui/react';
 import { useVirtualizer } from '@tanstack/react-virtual';
 import moment from 'moment';
 import { FC, KeyboardEvent, memo, Ref, useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { useTheme } from 'styled-components';
 
-import { Button } from '../button';
-import { Icon } from '../icon';
-import { Popover, usePopover } from '../popover';
-import { Typography } from '../typography';
 import {
   ButtonList,
   ContainerDropdownListOptionProps,
@@ -248,15 +248,13 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
     }
   }, [isHaveValue, isOpen, onChangeShowSearch]);
 
-  const theme = useTheme();
-  const font = useMemo(() => {
-    return {
-      size: props.font?.size ?? 16,
-      weight: props.font?.weight ?? (props.isBold ? 500 : 400),
-      family: props.font?.family ?? theme.font.family,
-      height: props.font?.height,
-    };
-  }, [props.font, theme.font.family, props.isBold]);
+  const sxTypography = useMemo(() => {
+    return getSxTypography({
+      size: props.size,
+      weight: props.isBold ? 500 : 400,
+      sx: props.sxTypography,
+    });
+  }, [props.isBold, props.size, props.sxTypography]);
   return (
     <>
       <SelectWrapper
@@ -470,7 +468,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
                   $isNotShowHoverStyle={props.isNotShowHoverStyle}
                   $genre={props.genre}
                   $size={props.size}
-                  $font={font}
+                  $sxTypography={sxTypography}
                   $isBold={props.isBold}
                   $isChecked={isAll}
                   style={{ position: 'relative', minHeight: `${sizeHeight}px` }}
@@ -489,7 +487,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
                   $isNotShowHoverStyle={props.isNotShowHoverStyle}
                   $genre={props.genre}
                   $size={props.size}
-                  $font={font}
+                  $sxTypography={sxTypography}
                   $isBold={props.isBold}
                   $isChecked={isAll}
                   $isShowScroll={isShowScroll}
@@ -516,7 +514,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
                   $isNotShowHoverStyle={props.isNotShowHoverStyle}
                   $genre={props.genre}
                   $size={props.size}
-                  $font={font}
+                  $sxTypography={sxTypography}
                   $isBold={props.isBold}
                   $isChecked={isAll}
                   $isShowScroll={isShowScroll}
@@ -546,7 +544,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
                     item={item}
                     genre={props.genre}
                     size={props.size}
-                    font={font}
+                    sxTypography={sxTypography}
                     isBold={props.isBold}
                     isNotShowHoverStyle={props.isNotShowHoverStyle}
                     isCenter={props.isCenter}
@@ -561,13 +559,13 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
       </Popover>
       {props?.error ? (
         <ErrorMessage
-          {...props.error}
           size={props?.error.size ?? props.size}
-          font={{
-            size: 12,
+          sxTypography={getSxTypography({
+            size: props.size,
             weight: 400,
-            family: props.font?.family ?? theme.font.family,
-          }}
+            sx: props.sxTypography,
+          })}
+          {...props.error}
         />
       ) : null}
     </>
@@ -601,7 +599,7 @@ const ContainerDropdownListOptionComponent = <T extends object & ISelectItem>(
       $item={props.item}
       $genre={props.genre}
       $size={props.size}
-      $font={props.font}
+      $sxTypography={props.sxTypography}
       $isBold={props.isBold}
       $isChecked={props.isChecked}
       $isShowScroll={props.isShowScroll}

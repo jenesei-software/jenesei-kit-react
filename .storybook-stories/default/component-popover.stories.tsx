@@ -3,10 +3,10 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { FC } from 'react';
 import 'styled-components';
 
-import { Button } from '@local/components/button';
-import { Popover as PopoverComponent, PopoverProps, usePopover } from '@local/components/popover';
-import { Stack } from '@local/components/stack';
-import { Typography } from '@local/components/typography';
+import { Button } from '@local/components/button/export';
+import { Popover as PopoverComponent, PopoverProps, usePopover } from '@local/components/popover/export';
+import { Stack } from '@local/components/stack/export';
+import { Typography } from '@local/components/typography/export';
 
 import { WrapperBig } from './tools';
 

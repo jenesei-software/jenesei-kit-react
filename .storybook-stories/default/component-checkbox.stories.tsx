@@ -1,4 +1,4 @@
-import { Checkbox as CheckboxComponent, CheckboxProps } from '@local/components/checkbox';
+import { Checkbox as CheckboxComponent, CheckboxProps } from '@local/components/checkbox/export';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { FC, useEffect, useState } from 'react';

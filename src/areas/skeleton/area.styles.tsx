@@ -1,5 +1,5 @@
-import { Stack } from '@local/components/stack';
-import { JeneseiPalette } from '@local/theme';
+import { Stack } from '@local/components/stack/export';
+import { JeneseiPalette } from '@local/styles/theme/export';
 
 import styled, { css, keyframes } from 'styled-components';
 

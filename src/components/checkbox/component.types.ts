@@ -1,13 +1,17 @@
-import { addIconProps } from '@local/components/icon';
-import { addOutlineProps, addOutlinePropsDollar } from '@local/styles/add';
-import { addErrorProps, addErrorPropsDollar } from '@local/styles/error';
-import { addSXProps, addSXPropsDollar } from '@local/styles/sx';
-import { IThemeGenre, IThemeSize } from '@local/theme';
+import { addErrorProps, addErrorPropsDollar } from '@local/components/error/export';
+import { addIconProps } from '@local/components/icon/export';
+import {
+  addOutlineProps,
+  addOutlinePropsDollar,
+  addSXProps,
+  addSXPropsDollar,
+  addSXTypographyProps,
+  addSXTypographyPropsDollar,
+} from '@local/styles/add/export';
+import { IThemeGenre, IThemeSize } from '@local/styles/theme/export';
 import { AddDollarSign } from '@local/types';
 
 import { PropsWithChildren } from 'react';
-
-import { addSXTypographyProps, addSXTypographyPropsDollar } from '../typography';
 
 export type CheckboxProps = PropsWithChildren & {
   checked?: boolean;

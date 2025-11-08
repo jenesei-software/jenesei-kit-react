@@ -34,7 +34,7 @@ export function useInjectSprites(urls: string[]) {
     });
 
     return () => {
-      containers.forEach((div) => div.remove());
+      containers.forEach((div) => { div.remove(); });
     };
   }, [urls]);
 }

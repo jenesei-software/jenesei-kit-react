@@ -1,9 +1,12 @@
-import { Button } from '@local/components/button';
-import { Ripple } from '@local/components/ripple';
-import { SelectMonth, SelectYear } from '@local/components/select';
-import { Stack } from '@local/components/stack';
-import { ErrorMessage } from '@local/styles/error';
-import { KEY_SIZE_DATA } from '@local/theme';
+import { Button } from '@local/components/button/export';
+import { ErrorMessage } from '@local/components/error/export';
+import { Popover, usePopover } from '@local/components/popover/export';
+import { Ripple } from '@local/components/ripple/export';
+import { SelectMonth, SelectYear } from '@local/components/select/export';
+import { Stack } from '@local/components/stack/export';
+import { Typography } from '@local/components/typography/export';
+import { getSxTypography } from '@local/functions';
+import { KEY_SIZE_DATA } from '@local/styles/theme/export';
 
 import moment, { Moment } from 'moment';
 import {
@@ -19,8 +22,6 @@ import {
 } from 'react';
 import { useTheme } from 'styled-components';
 
-import { Popover, usePopover } from '../popover';
-import { Typography } from '../typography';
 import {
   DateDayProps,
   DateDropdownDay,
@@ -33,13 +34,13 @@ import {
   DateInputWrapper,
   DatePickerMode,
   DatePickerProps,
+  DatePickerTranslateWeekProps,
   DatePickerType,
   DatePickerVariant,
   DateWrapper,
-  WeekItem,
 } from '.';
 
-const weekOrder: WeekItem['value'][] = ['mo', 'tu', 'we', 'th', 'fr', 'sa', 'su'];
+const weekOrder: DatePickerTranslateWeekProps['value'][] = ['mo', 'tu', 'we', 'th', 'fr', 'sa', 'su'];
 
 export const DatePicker = (props: DatePickerProps) => {
   const { onChange } = props;
@@ -614,11 +615,11 @@ export const DatePicker = (props: DatePickerProps) => {
                   $isActive={activeSegment === date.type}
                   $genre={props.genre}
                   $size={props.size}
-                  $font={{
-                    ...props.font,
-                    size: props.font?.size ?? 16,
-                    weight: props.font?.weight ?? (props.isBold ? 500 : 400),
-                  }}
+                  $sxTypography={getSxTypography({
+                    size: props.size,
+                    weight: props.isBold ? 500 : 400,
+                    sx: props.sxTypography,
+                  })}
                   onClick={(e) => {
                     if (type === 'select') return;
                     e.preventDefault();
@@ -792,11 +793,7 @@ export const DatePicker = (props: DatePickerProps) => {
           <DateDropdownDays $rows={rows}>
             {daysInWeek.map((e, index) => (
               <DateDropdownDayOfWeek
-                $font={{
-                  ...props.font,
-                  size: 12,
-                  weight: 700,
-                }}
+                $sxTypography={getSxTypography({ size: props.size, weight: 700, sx: props.sxTypography })}
                 tabIndex={-1}
                 type='button'
                 $isToday={false}
@@ -812,11 +809,7 @@ export const DatePicker = (props: DatePickerProps) => {
             ))}
             {daysInMonth.map((day) => (
               <DateDropdownDay
-                $font={{
-                  ...props.font,
-                  size: 12,
-                  weight: 700,
-                }}
+                $sxTypography={getSxTypography({ size: props.size, weight: 700, sx: props.sxTypography })}
                 type='button'
                 $isDisabled={day.isDisabled}
                 $isDisabledOutline={day.isDisabled ?? props.isDisabledOutline}
@@ -858,11 +851,7 @@ export const DatePicker = (props: DatePickerProps) => {
               }
             : props.error)}
           size={props?.error?.size ?? props.size}
-          font={{
-            size: 12,
-            weight: 400,
-            family: props.font?.family ?? theme.font.family,
-          }}
+          sxTypography={getSxTypography({ size: props.size, weight: 400, sx: props.sxTypography })}
         />
       ) : null}
     </>

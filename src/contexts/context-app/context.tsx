@@ -1,9 +1,9 @@
-import { Preview, PreviewAdditionalProps } from '@local/areas/preview';
-import { IThemePaletteKeys, JeneseiPalette } from '@local/theme';
+import { Preview, PreviewAdditionalProps } from '@local/areas/preview/export';
+import { useScreenWidth } from '@local/contexts/context-screen-width/export';
+import { IThemePaletteKeys, JeneseiPalette } from '@local/styles/theme/export';
 
 import { createContext, FC, useCallback, useEffect, useState } from 'react';
 
-import { useScreenWidth } from '../context-screen-width';
 import {
   AppContextProps,
   ProviderAppOutlet,

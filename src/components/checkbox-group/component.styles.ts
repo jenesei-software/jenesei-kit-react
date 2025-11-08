@@ -1,16 +1,14 @@
-import { addSX, addSXTypography } from '@local/styles/sx';
-import { IThemeSizePropertyDefault, KEY_SIZE_DATA } from '@local/theme';
+import { addSX, addSXTypography } from '@local/styles/add/export';
+import { KEY_SIZE_DATA } from '@local/styles/theme/export';
 
 import styled, { css } from 'styled-components';
 
 import { CheckboxGroupWrapperProps } from '.';
 
 /****************************************** Size *************************************************/
-export const CheckboxGroupSize = css<CheckboxGroupWrapperProps>`
-  ${(props) => CheckboxGroupSizeConstructor(KEY_SIZE_DATA[props.$size])};
-`;
-export const CheckboxGroupSizeConstructor = (props: IThemeSizePropertyDefault) => css`
-  gap: ${props.padding - 2}px;
+export const addCheckboxGroupSize = css<CheckboxGroupWrapperProps>`
+  ${(props) => css`
+  gap: ${KEY_SIZE_DATA[props.$size].padding - 2}px;`};
 `;
 
 /****************************************** Default *************************************************/
@@ -18,7 +16,7 @@ export const CheckboxGroupWrapper = styled.div<CheckboxGroupWrapperProps>`
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  ${CheckboxGroupSize};
+  ${addCheckboxGroupSize};
   ${addSXTypography};
   ${addSX};
 `;

@@ -2,7 +2,7 @@ import type { Meta } from '@storybook/react-vite';
 import { FC, useState } from 'react';
 import 'styled-components';
 
-import { SelectLanguage, SelectMonth, SelectMonths, SelectYear } from '@local/components/select';
+import { SelectLanguage, SelectMonth, SelectMonths, SelectYear } from '@local/components/select/export';
 import { LOCALE_MONTHS, Typography } from '@local/index';
 
 import moment from 'moment';

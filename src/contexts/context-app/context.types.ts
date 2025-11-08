@@ -1,10 +1,9 @@
-import { PreviewAdditionalProps } from '@local/areas/preview';
-import { IThemePaletteKeys } from '@local/theme';
+import { PreviewAdditionalProps } from '@local/areas/preview/export';
+import { ScreenWidthProps } from '@local/contexts/context-screen-width/export';
+import { IThemePaletteKeys } from '@local/styles/theme/export';
 import { AddDollarSign } from '@local/types';
 
 import { PropsWithChildren, ReactElement } from 'react';
-
-import { ScreenWidthProps } from '../context-screen-width';
 
 export interface ProviderAppProps extends PropsWithChildren {
   defaultPreview?: PreviewAdditionalProps;

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import 'styled-components';
 
-import { Button } from '@local/components/button';
+import { Button } from '@local/components/button/export';
 
 const meta: Meta<typeof Button> = {
   component: Button,

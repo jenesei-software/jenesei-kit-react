@@ -1,5 +1,5 @@
-import { Icon } from '@local/components/icon';
-import { Stack, StackMotion } from '@local/components/stack';
+import { Icon } from '@local/components/icon/export';
+import { Stack, StackMotion } from '@local/components/stack/export';
 
 import { AnimatePresence } from 'framer-motion';
 import { FC, useEffect, useMemo, useState } from 'react';

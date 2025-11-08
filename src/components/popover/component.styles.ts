@@ -1,6 +1,5 @@
-import { addAlwaysOutline } from '@local/styles/add';
-import { addSX, addSXTypography } from '@local/styles/sx';
-import { IThemeSizePropertyDefault, KEY_SIZE_DATA } from '@local/theme';
+import { addAlwaysOutline, addSX, addSXTypography } from '@local/styles/add/export';
+import { KEY_SIZE_DATA } from '@local/styles/theme/export';
 
 import { motion } from 'framer-motion';
 import styled, { css } from 'styled-components';
@@ -20,15 +19,12 @@ const addPopoverGenre = css<StyledPopoverProps>`
 /****************************************** Popover Size *************************************************/
 export const addPopoverSize = css<StyledPopoverProps>`
   ${(props) =>
-    addPopoverSizeConstructor({
-      ...KEY_SIZE_DATA[props.$size ?? 'medium'],
-    })};
-`;
-export const addPopoverSizeConstructor = (props: IThemeSizePropertyDefault) => css`
+    css`
   display: flex;
-  border-radius: ${props.radius}px;
-  padding: ${props.padding}px;
-  gap: ${props.padding - 2}px;
+  border-radius: ${KEY_SIZE_DATA[props.$size ?? 'medium'].radius}px;
+  padding: ${KEY_SIZE_DATA[props.$size ?? 'medium'].padding}px;
+  gap: ${KEY_SIZE_DATA[props.$size ?? 'medium'].padding - 2}px;
+  `};
 `;
 
 /****************************************** Default *************************************************/

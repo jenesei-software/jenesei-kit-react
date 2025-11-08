@@ -1,5 +1,6 @@
-import { Button } from '@local/components/button';
-import { Icon } from '@local/components/icon';
+import { Button } from '@local/components/button/export';
+import { Icon } from '@local/components/icon/export';
+import { getSxTypography } from '@local/functions';
 
 import { AnimatePresence, motion } from 'framer-motion';
 import { createContext, FC, memo, useCallback, useEffect, useMemo, useState } from 'react';
@@ -107,7 +108,7 @@ export const ProviderSonner: FC<ProviderSonnerProps> = (props) => {
       setContentHistory((prev) => {
         const existingIndex = prev.findIndex((item) => item.id === id);
 
-        let updatedHistory;
+        let updatedHistory: SonnerContentProps[];
         if (existingIndex !== -1) {
           // Replace existing item
           updatedHistory = [...prev];
@@ -281,20 +282,20 @@ const SonnerElement = (props: SonnerElementProps) => {
               {props.title && (
                 <SonnerContentTitle
                   $genre={props.genre}
-                  $font={{
-                    size: 14,
+                  $sxTypography={getSxTypography({
+                    size: 'mediumSmall',
                     weight: 700,
-                  }}
+                  })}
                 >
                   {props.title}
                 </SonnerContentTitle>
               )}
               {props.description && (
                 <SonnerContentDescription
-                  $font={{
-                    size: 12,
+                  $sxTypography={getSxTypography({
+                    size: 'mediumSmall',
                     weight: 400,
-                  }}
+                  })}
                   $genre={props.genre}
                 >
                   {props.description}
@@ -304,7 +305,7 @@ const SonnerElement = (props: SonnerElementProps) => {
           )}
         </SonnerContent>
 
-        {props.button && props.button.content && (
+        {props.button && 'content' in props.button && props.button?.content && (
           <SonnerButtonWrapper>
             <Button
               genre={props.buttonGenre}

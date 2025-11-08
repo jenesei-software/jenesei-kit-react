@@ -1,8 +1,9 @@
-import { ErrorMessage } from '@local/styles/error';
+import { ErrorMessage } from '@local/components/error/export';
+import { Input } from '@local/components/input/export';
+import { getSxTypography } from '@local/functions';
 
 import { ClipboardEvent, FocusEvent, KeyboardEvent, useCallback, useRef, useState } from 'react';
 
-import { Input } from '../input';
 import { InputOTPProps, InputOTPWrapper } from '.';
 
 export const InputOTP = (props: InputOTPProps) => {
@@ -37,7 +38,7 @@ export const InputOTP = (props: InputOTPProps) => {
         }
 
         setTimeout(() => {
-          const firstEmpty = newOtp.findIndex((char) => char === '');
+          const firstEmpty = newOtp.indexOf('');
           if (firstEmpty !== -1) {
             inputsRef.current[firstEmpty]?.focus();
           } else if (currentIndex < newOtp.length) {
@@ -164,7 +165,7 @@ export const InputOTP = (props: InputOTPProps) => {
             onKeyDown={(e) => handleKeyDown(index, e)}
             genre={props.genre}
             size={props.size}
-            font={props.font}
+            sxTypography={props.sxTypography}
           />
         ))}
       </InputOTPWrapper>
@@ -172,11 +173,10 @@ export const InputOTP = (props: InputOTPProps) => {
         <ErrorMessage
           {...props.error}
           size={props?.error.size ?? props.size}
-          font={{
-            size: 12,
+          sxTypography={getSxTypography({
+            size: props.size,
             weight: 400,
-            family: props.font?.family,
-          }}
+          })}
         />
       ) : null}
     </>

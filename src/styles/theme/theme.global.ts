@@ -1,8 +1,11 @@
+
+
 import { LIST_TYPOGRAPHY_VARIANTS_DEFAULT } from '@local/consts';
-import { toStyledCSSTypographyHeading } from '@local/styles/sx';
 
 import { createGlobalStyle, css } from 'styled-components';
 import reset from 'styled-reset';
+
+import { toStyledCSSTypographyHeading } from '../add/add';
 
 export const JeneseiGlobalStyles = createGlobalStyle`
   ${reset};   

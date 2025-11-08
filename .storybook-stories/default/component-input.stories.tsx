@@ -2,8 +2,8 @@ import type { Meta } from '@storybook/react-vite';
 import { FC, useState } from 'react';
 import 'styled-components';
 
-import { Input as InputComponent } from '@local/components/input';
-import { Typography } from '@local/components/typography';
+import { Input as InputComponent } from '@local/components/input/export';
+import { Typography } from '@local/components/typography/export';
 
 import { WrapperBig } from './tools';
 
@@ -34,9 +34,6 @@ const InputWrapperAll: FC = () => {
         </Typography>
         <InputComponent
           isOutlineBoxShadow
-          font={{
-            family: 'Manrope',
-          }}
           placeholder='Дмитрий Петров'
           genre='bustmarket-gray'
           size='medium'

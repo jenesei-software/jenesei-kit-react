@@ -1,7 +1,6 @@
-import { addDisabled, addNiceNumber, addOutline, addTransition } from '@local/styles/add';
-import { addError } from '@local/styles/error';
-import { addSX, addSXTypography } from '@local/styles/sx';
-import { IThemeSizePropertyDefault, KEY_SIZE_DATA } from '@local/theme';
+import { addError } from '@local/components/error/export';
+import { addDisabled, addNiceNumber, addOutline, addSX, addSXTypography, addTransition } from '@local/styles/add/export';
+import { KEY_SIZE_DATA } from '@local/styles/theme/export';
 
 import { motion } from 'framer-motion';
 import { NumericFormat, PatternFormat } from 'react-number-format';
@@ -61,7 +60,7 @@ export const addInputPlaceholderNiceNumber = css<StyledInputProps>`
 `;
 
 /****************************************** Genre *************************************************/
-const InputGenre = css<StyledInputProps>`
+const addInputGenre = css<StyledInputProps>`
   ${(props) => css`
     background: ${props.theme.colors.input[props.$genre].background.rest};
     border-color: ${props.theme.colors.input[props.$genre].border.rest};
@@ -90,15 +89,14 @@ const InputGenre = css<StyledInputProps>`
 `;
 
 /****************************************** Size *************************************************/
-export const InputSize = css<StyledInputProps>`
-  ${(props) => InputSizeConstructor(KEY_SIZE_DATA[props.$size])};
-`;
-export const InputSizeConstructor = (props: IThemeSizePropertyDefault) => css`
-  padding: 0px ${props.padding}px;
-  height: ${props.height}px;
-  min-height: ${props.height}px;
-  max-height: ${props.height}px;
-  border-radius: ${props.radius}px;
+export const addInputSize = css<StyledInputProps>`
+  ${(props) => css`
+      padding: 0px ${KEY_SIZE_DATA[props.$size].padding}px;
+    height: ${KEY_SIZE_DATA[props.$size].height}px;
+    min-height: ${KEY_SIZE_DATA[props.$size].height}px;
+    max-height: ${KEY_SIZE_DATA[props.$size].height}px;
+    border-radius: ${KEY_SIZE_DATA[props.$size].radius}px;
+  `};
 `;
 
 /****************************************** is isInputEffect *************************************************/
@@ -122,8 +120,8 @@ export const StyledInputCSS = css<StyledInputProps>`
   overflow: hidden;
 
   ${addSXTypography};
-  ${InputSize};
-  ${InputGenre};
+  ${addInputSize};
+  ${addInputGenre};
   ${addInputPlaceholder};
   ${addDisabled};
   ${addInputIsInputEffect};

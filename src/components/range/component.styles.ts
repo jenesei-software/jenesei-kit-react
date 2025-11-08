@@ -1,7 +1,7 @@
-import styled from 'styled-components';
+import { addError } from '@local/components/error/export';
+import { addSX } from '@local/styles/add/export';
 
-import { addError } from '@local/styles/error';
-import { addSX } from '@local/styles/sx';
+import styled from 'styled-components';
 
 import { RangeComponentProps, RangeThumbProps, RangeWrapperProps } from '.';
 

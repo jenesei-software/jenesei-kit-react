@@ -1,11 +1,11 @@
-import { addSXProps, addSXPropsDollar } from '@local/styles/sx';
-import { IThemePaletteKeys, IThemeSize } from '@local/theme';
+import { addSXProps, addSXPropsDollar } from '@local/styles/add/export';
+import { IThemePaletteKeys, IThemeSize } from '@local/styles/theme/export';
 import { AddDollarSign } from '@local/types';
 
 import React from 'react';
 import { DefaultTheme } from 'styled-components';
 
-export type IconItemProps = {
+export type IconProps = {
   [K in keyof DefaultTheme['icon']['map']]: {
     type: K;
     name: DefaultTheme['icon']['map'][K][number];
@@ -19,19 +19,19 @@ export type IconItemProps = {
   } & addSXProps;
 }[keyof DefaultTheme['icon']['map']];
 
-export type StyledIconItemProps = AddDollarSign<
-  Pick<IconItemProps, 'size' | 'turn' | 'order'> & { color?: IThemePaletteKeys }
+export type StyledIconProps = AddDollarSign<
+  Pick<IconProps, 'size' | 'turn' | 'order'> & { color?: IThemePaletteKeys }
 > &
   addSXPropsDollar;
 
-export type StyledIconSkeletonProps = AddDollarSign<Pick<IconItemProps, 'size' | 'order'>>;
+export type StyledIconSkeletonProps = AddDollarSign<Pick<IconProps, 'size' | 'order'>>;
 
 export type addIconProps = {
-  [T in keyof DefaultTheme['icon']['map']]: Omit<IconItemProps, 'size'> & {
+  [T in keyof DefaultTheme['icon']['map']]: Omit<IconProps, 'size'> & {
     type: T;
     name: DefaultTheme['icon']['map'][T][number];
     isHidden?: boolean;
-    size?: IconItemProps['size'];
+    size?: IconProps['size'];
   };
 }[keyof DefaultTheme['icon']['map']];
 

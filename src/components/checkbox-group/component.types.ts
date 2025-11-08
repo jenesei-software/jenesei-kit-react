@@ -1,14 +1,13 @@
-import { CheckboxProps } from '@local/components/checkbox';
-import { addSXTypographyProps } from '@local/index';
-import { addSXProps, addSXPropsDollar } from '@local/styles/sx';
+import { CheckboxProps } from '@local/components/checkbox/export';
+import { addSXProps, addSXPropsDollar, addSXTypographyProps } from '@local/styles/add/export';
 import { AddDollarSign } from '@local/types';
 
-export interface ICheckboxValue {
+export interface CheckboxGroupValueProps {
   label: string | number;
   value: string | number;
 }
 
-export type CheckboxGroupProps<T extends ICheckboxValue> = {
+export type CheckboxGroupProps<T extends CheckboxGroupValueProps> = {
   checkboxGenre: CheckboxProps['genre'];
 
   checkBoxView: CheckboxProps['view'];
@@ -40,6 +39,6 @@ export type CheckboxGroupProps<T extends ICheckboxValue> = {
   addSXTypographyProps;
 
 export type CheckboxGroupWrapperProps = AddDollarSign<
-  Pick<CheckboxGroupProps<ICheckboxValue>, 'size' | 'sxTypography'>
+  Pick<CheckboxGroupProps<CheckboxGroupValueProps>, 'size' | 'sxTypography'>
 > &
   addSXPropsDollar;

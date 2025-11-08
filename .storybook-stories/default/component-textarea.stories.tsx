@@ -2,9 +2,9 @@ import type { Meta } from '@storybook/react-vite';
 import { FC, useState } from 'react';
 import 'styled-components';
 
-import { Input } from '@local/components/input';
-import { TextArea as TextAreaComponent } from '@local/components/textarea';
-import { Typography } from '@local/components/typography';
+import { Input } from '@local/components/input/export';
+import { TextArea as TextAreaComponent } from '@local/components/textarea/export';
+import { Typography } from '@local/components/typography/export';
 
 import { WrapperBig, WrapperMin } from './tools';
 

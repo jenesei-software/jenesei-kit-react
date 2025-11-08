@@ -1,4 +1,4 @@
-import { addOutline } from '@local/styles/add';
+import { addOutline } from '@local/styles/add/export';
 
 import { motion } from 'framer-motion';
 import styled from 'styled-components';

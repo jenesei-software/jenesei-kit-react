@@ -1,16 +1,15 @@
-import { useScreenWidth } from '@local/contexts/context-screen-width';
+import { Tooltip } from '@local/components/tooltip/export';
+import { useScreenWidth } from '@local/contexts/context-screen-width/export';
 import { useOverflowing } from '@local/hooks/use-overflowing';
 
 import { createLink, LinkProps } from '@tanstack/react-router';
 import { memo, useMemo } from 'react';
 
-import { Tooltip } from '../tooltip';
-import { Title, TypographyCSSProps, TypographyProps, TypographyTooltipProps } from '.';
+import { Title, TypographyProps, TypographyPropsDollar, TypographyTooltipProps } from '.';
 
-//TODO fond and sxTypography fix
 const TypographyWithRef = (props: TypographyProps) => {
   const { screenActual } = useScreenWidth();
-  const cssProps: TypographyCSSProps & Pick<TypographyProps, 'onClick' | 'className' | 'style'> = useMemo(
+  const cssProps: TypographyPropsDollar & Pick<TypographyProps, 'onClick' | 'className' | 'style'> = useMemo(
     () => ({
       $sxTypography: props.sx,
       style: props.style,

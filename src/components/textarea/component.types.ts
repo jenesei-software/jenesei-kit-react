@@ -1,7 +1,6 @@
-import { addSXTypographyProps } from '@local/index';
-import { addErrorProps } from '@local/styles/error';
-import { addSXProps } from '@local/styles/sx';
-import { IThemeGenreTextArea, IThemeSize } from '@local/theme';
+import { addErrorProps } from '@local/components/error/export';
+import { addSXProps, addSXTypographyProps } from '@local/styles/add/export';
+import { ITheme, IThemeSize } from '@local/styles/theme/export';
 import { AddDollarSign } from '@local/types';
 
 import { FocusEvent, HTMLInputAutoCompleteAttribute, KeyboardEventHandler, MouseEventHandler, RefObject } from 'react';
@@ -78,7 +77,7 @@ type FixedTextAreaProps = BaseTextAreaProps & {
 
 export type TextAreaProps = AutoHeightTextAreaProps | ResizableTextAreaProps | FixedTextAreaProps;
 
-export type TextAreaGenre = keyof IThemeGenreTextArea;
+type TextAreaGenre = keyof ITheme['colors']['input'];
 
 export type StyledTextAreaProps = AddDollarSign<
   Pick<

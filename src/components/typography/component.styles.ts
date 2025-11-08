@@ -1,11 +1,10 @@
-import { addFontSizeTransition, addOutline } from '@local/styles/add';
-import { addSX as addSXStandard, addSXTypography } from '@local/styles/sx';
+import { addFontSizeTransition, addOutline, addSX as addSXStandard, addSXTypography } from '@local/styles/add/export';
 
 import styled, { css } from 'styled-components';
 
-import { TypographyCSSProps } from '.';
+import { TypographyPropsDollar } from '.';
 
-const addTypographyCSS = css<TypographyCSSProps>`
+const addTypographyCSS = css<TypographyPropsDollar>`
   font-style: normal;
   position: relative;
   overflow: visible;
@@ -16,7 +15,7 @@ const addTypographyCSS = css<TypographyCSSProps>`
   ${addSXStandard}
 `;
 
-export const Title = styled.span<TypographyCSSProps>`
+export const Title = styled.span<TypographyPropsDollar>`
   ${addTypographyCSS}
   ${addOutline}
 `;

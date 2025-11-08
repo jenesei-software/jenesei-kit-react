@@ -1,6 +1,6 @@
-import { addDisabled, addOutline, addTransition } from '@local/styles/add';
-import { addError } from '@local/styles/error';
-import { KEY_SIZE_DATA_TOGGLE } from '@local/theme';
+import { addError } from '@local/components/error/export';
+import { addDisabled, addOutline, addTransition } from '@local/styles/add/export';
+import { KEY_SIZE_DATA_TOGGLE } from '@local/styles/theme/export';
 
 import { motion } from 'framer-motion';
 import styled, { css } from 'styled-components';

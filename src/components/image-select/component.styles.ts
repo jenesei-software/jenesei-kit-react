@@ -1,13 +1,13 @@
+import { addError } from '@local/components/error/export';
+import { addSX } from '@local/styles/add/export';
+import { KEY_SIZE_DATA } from '@local/styles/theme/export';
+
 import { motion } from 'framer-motion';
 import styled, { css } from 'styled-components';
 
-import { addError } from '@local/styles/error';
-import { addSX } from '@local/styles/sx';
-import { IThemeSizePropertyDefault, KEY_SIZE_DATA } from '@local/theme';
-
 import { ImageSelectWrapperProps } from '.';
 
-const ImageSelectListGenre = css<ImageSelectWrapperProps>`
+const addImageSelectListGenre = css<ImageSelectWrapperProps>`
   ${(props) => css`
     background: ${props.theme.colors.imageSelect[props.$genre].background.rest};
     color: ${props.theme.colors.imageSelect[props.$genre].color.rest};
@@ -21,34 +21,35 @@ const ImageSelectListGenre = css<ImageSelectWrapperProps>`
     }
   `};
 `;
-/****************************************** Size *************************************************/
-export const ImageSelectListSize = css<ImageSelectWrapperProps>`
-  ${(props) => ImageSelectListSizeConstructor(KEY_SIZE_DATA[props.$size])};
+
+const addImageSelectListSize = css<ImageSelectWrapperProps>`
+  ${(props) => css`
+    padding: ${KEY_SIZE_DATA[props.$size].padding}px;
+    border-radius: ${KEY_SIZE_DATA[props.$size].radius}px;
+  `};
 `;
-export const ImageSelectListSizeConstructor = (props: IThemeSizePropertyDefault) => css`
-  padding: ${props.padding}px;
-  border-radius: ${props.radius}px;
+
+const addImageSelectSize = css<ImageSelectWrapperProps>`
+  ${(props) => css`
+    gap: ${KEY_SIZE_DATA[props.$size].padding - 2}px;
+  `};
 `;
-export const ImageSelectSize = css<ImageSelectWrapperProps>`
-  ${(props) => ImageSelectSizeConstructor(KEY_SIZE_DATA[props.$size])};
-`;
-export const ImageSelectSizeConstructor = (props: IThemeSizePropertyDefault) => css`
-  gap: ${props.padding - 2}px;
-`;
+
 export const ImageSelectWrapper = styled.div<ImageSelectWrapperProps>`
   display: flex;
   flex-direction: column;
   width: 100%;
-  ${ImageSelectSize};
+  
+  ${addImageSelectSize};
   ${addError};
   ${addSX};
 `;
 export const ImageSelectListWrapper = styled(motion.div)<ImageSelectWrapperProps>`
   border: 2px dashed;
-
   display: flex;
   flex-direction: column;
   width: 100%;
-  ${ImageSelectListGenre}
-  ${ImageSelectListSize}
+
+  ${addImageSelectListGenre}
+  ${addImageSelectListSize}
 `;

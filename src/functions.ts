@@ -1,3 +1,6 @@
+import { TypographySXProps } from "./styles/add/export";
+import { IThemeSize, KEY_SIZE_DATA } from "./styles/theme/export";
+
 type EnumOption = {
   value: string;
   label: string;
@@ -59,4 +62,15 @@ export function getScrollbarWidth() {
 export function getHasVerticalScroll(): boolean {
   if (typeof window === 'undefined') return false;
   return document.documentElement.scrollHeight > window.innerHeight;
+}
+
+export function getSxTypography(props: { size: IThemeSize; weight: number; sx?: TypographySXProps }): TypographySXProps {
+  return {
+    default: {
+      size: KEY_SIZE_DATA[props.size].font,
+      weight: 700,
+      ...props.sx?.default,
+    },
+    ...props.sx,
+  };
 }
