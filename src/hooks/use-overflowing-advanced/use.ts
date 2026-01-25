@@ -4,7 +4,6 @@ import { RefObject, useEffect, useRef, useState } from 'react';
 
 import { useTooltipProps } from './use.types';
 
-
 export function useOverflowingAdvanced<T extends HTMLElement>(
   props?: useTooltipProps,
 ): {

@@ -2,7 +2,6 @@ import { createContext, useCallback, useEffect, useState } from 'react';
 
 import { PermissionContextProps, ProviderPermissionProps } from './context.types';
 
-
 export const PermissionContext = createContext<PermissionContextProps | null>(null);
 
 export const ProviderPermission = (props: ProviderPermissionProps) => {

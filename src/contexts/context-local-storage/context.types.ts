@@ -10,7 +10,7 @@ export interface ProviderLocalStorageProps extends PropsWithChildren {
   };
 }
 
-export type ValidLocalStorageObject = {}
+export type ValidLocalStorageObject = {};
 
 export interface LocalStorageContextProps {
   getLocalStorage: <K extends keyof ValidLocalStorageObject>(name: K) => ValidLocalStorageObject[K] | undefined;

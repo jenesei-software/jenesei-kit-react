@@ -2,7 +2,6 @@ import { createContext, FC, useCallback, useEffect, useState } from 'react';
 
 import { LocalStorageContextProps, ProviderLocalStorageProps, ValidLocalStorageObject } from './context.types';
 
-
 export const LocalStorageContext = createContext<LocalStorageContextProps | null>(null);
 
 /**
@@ -133,7 +132,7 @@ const useProviderLocalStorage = (props: ProviderLocalStorageProps) => {
       setLocalStorageValues(undefined);
     };
   }, []);
-  
+
   return {
     getLocalStorage,
     setLocalStorage: changeLocalStorage,

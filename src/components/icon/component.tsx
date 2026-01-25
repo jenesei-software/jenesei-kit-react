@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useTheme } from 'styled-components';
 
-import { useLazyInjectSprite } from './component.functions';
+import { useLazyInjectSprite } from './component.hooks';
 import { StyledIcon, StyledIconSkeleton } from './component.styles';
 import { IconProps } from './component.types';
 

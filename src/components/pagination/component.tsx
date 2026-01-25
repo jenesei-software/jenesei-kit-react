@@ -1,5 +1,6 @@
 import { Button } from '@local/components/button';
 import { Stack } from '@local/components/stack';
+import { useResolveSx } from '@local/hooks/use-resolve-sx';
 
 import { AnimatePresence, motion } from 'framer-motion';
 import { FC, useCallback, useMemo } from 'react';
@@ -43,17 +44,20 @@ export const Pagination: FC<PaginationProps> = (props) => {
     return Array.from({ length: end - start }, (_, i) => start + i);
   }, [props.index, props.viewQuantity, props.length]);
 
-  return (
-    <Stack
-      sx={(theme) => ({
-        ...props?.sx,
+  const { resolveSX } = useResolveSx();
+  const sxStack = useMemo(
+    () =>
+      resolveSX(props?.sx, () => ({
         default: {
           height: 'fit-content',
           gap: `${gap}px`,
-          ...(props?.sx ? (typeof props?.sx === 'function' ? props?.sx(theme).default : props?.sx.default) : {}),
         },
-      })}
-    >
+      })),
+    [props.sx, resolveSX, gap],
+  );
+
+  return (
+    <Stack sx={sxStack}>
       <Button
         isDisabled={isDisabledPrevious}
         isHidden={isDisabledPrevious}

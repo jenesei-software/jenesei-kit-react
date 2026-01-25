@@ -5,7 +5,6 @@ import { Stack } from '@local/components/stack';
 
 import { ImageSliderProps } from './component.types';
 
-
 export const IMAGES: ImageSliderProps['images'] = [
   {
     id: 0,

@@ -41,7 +41,7 @@ const getNextFocusableElement = (currentElement: HTMLElement, backward = false):
 
 export const Popover: FC<PopoverProps> = (props) => {
   const theme = useTheme();
-  
+
   return ReactDOM.createPortal(
     <AnimatePresence>
       {props.isOpen && (

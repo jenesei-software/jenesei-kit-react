@@ -9,5 +9,5 @@ export type useImageCropProps = Pick<ImageButtonProps, 'onSave' | 'locale' | 'di
 
 export type useImageCropAddProps = Pick<ImageButtonProps, 'imageSettings' | 'onSave' | 'dialog' | 'locale'> & {
   br?: string;
-  images: ImageSelectItemProps[]
+  images: ImageSelectItemProps[];
 };

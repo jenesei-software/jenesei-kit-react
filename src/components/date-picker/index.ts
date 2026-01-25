@@ -1,2 +1,7 @@
 export { DatePicker } from './component';
-export type { DatePickerProps, DatePickerTranslateInputProps, DatePickerTranslateMonthProps, DatePickerTranslateWeekProps } from './component.types';
+export type {
+  DatePickerProps,
+  DatePickerTranslateInputProps,
+  DatePickerTranslateMonthProps,
+  DatePickerTranslateWeekProps,
+} from './component.types';

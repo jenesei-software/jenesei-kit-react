@@ -58,8 +58,7 @@ export function GradualSpacing({ text }: { text: string }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
   return (
-    <>
-      <AnimatePresence>
+    <AnimatePresence>
         {text.split('').map((char, i) => (
           <motion.p
             ref={ref}
@@ -73,7 +72,6 @@ export function GradualSpacing({ text }: { text: string }) {
           </motion.p>
         ))}
       </AnimatePresence>
-    </>
   );
 }
 

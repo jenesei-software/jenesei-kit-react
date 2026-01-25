@@ -4,6 +4,7 @@ import { useOverflowing } from '@local/hooks/use-overflowing';
 
 import { createLink, LinkProps } from '@tanstack/react-router';
 import { memo, useMemo } from 'react';
+import { useTheme } from 'styled-components';
 
 import { Title } from './component.styles';
 import { TypographyProps, TypographyPropsDollar, TypographyTooltipProps } from './component.types';
@@ -34,8 +35,13 @@ const TypographyWithRef = (props: TypographyProps) => {
       props.isTransitionFontSize,
     ],
   );
-
-  const screenSX = useMemo(() => props.sx?.[screenActual] ?? props.sx?.default, [props.sx, screenActual]);
+  const theme = useTheme();
+  const screenSX = useMemo(
+    () =>
+      (typeof props?.sx === 'function' ? props?.sx(theme) : props?.sx)?.breakpoints?.[screenActual] ??
+      (typeof props?.sx === 'function' ? props?.sx(theme) : props?.sx)?.default,
+    [props.sx, screenActual, theme],
+  );
 
   if (screenSX && 'variant' in screenSX) {
     if (screenSX.variant === 'h7' || screenSX.variant === 'h8' || screenSX.variant === 'h9') {

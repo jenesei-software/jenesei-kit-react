@@ -13,7 +13,7 @@ export interface ProviderCookieProps extends PropsWithChildren {
   };
 }
 
-export type ValidCookieObject = {}
+export type ValidCookieObject = {};
 
 export interface CookieContextProps {
   getCookie: <K extends keyof ValidCookieObject>(name: K) => ValidCookieObject[K] | undefined;

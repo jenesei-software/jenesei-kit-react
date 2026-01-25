@@ -4,7 +4,6 @@ import styled, { css } from 'styled-components';
 
 import { StyledScrollProps } from './area.types';
 
-
 export const StyledScroll = styled(Stack)<StyledScrollProps>`
   overflow-x: hidden;
   overflow-y: hidden;

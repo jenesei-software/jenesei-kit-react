@@ -4,6 +4,7 @@ import { Image } from '@local/components/image';
 import { Stack, StackMotion } from '@local/components/stack';
 import { Typography } from '@local/components/typography';
 import { useImageSlider } from '@local/hooks/use-image-slider';
+import { useResolveSx } from '@local/hooks/use-resolve-sx';
 import { KEY_SIZE_DATA } from '@local/styles/theme';
 
 import { AnimatePresence, Variants } from 'framer-motion';
@@ -37,11 +38,11 @@ export const ImageSlider: FC<ImageSliderProps> = (props) => {
     onIndexChange: onIndexChange,
     children: props.children,
   });
-  return (
-    <StackMotion
-      {...props.propsStack}
-      sx={(theme) => ({
-        ...props.propsStack?.sx,
+
+  const { resolveSX } = useResolveSx();
+  const sxStackMotion = useMemo(
+    () =>
+      resolveSX(props.propsStack?.sx, () => ({
         default: {
           borderRadius: br,
           flexDirection: 'column',
@@ -50,22 +51,16 @@ export const ImageSlider: FC<ImageSliderProps> = (props) => {
           width: 'auto',
           maxWidth: '70dvw',
           height: '85dvh',
-          ...(props.propsStack?.sx
-            ? typeof props.propsStack?.sx === 'function'
-              ? props.propsStack?.sx(theme).default
-              : props.propsStack?.sx.default
-            : {}),
         },
         tablet: {
           maxWidth: '95dvw',
-          ...(props.propsStack?.sx
-            ? typeof props.propsStack?.sx === 'function'
-              ? props.propsStack?.sx(theme).tablet
-              : props.propsStack?.sx.tablet
-            : {}),
         },
-      })}
-    >
+      })),
+    [props.propsStack?.sx, resolveSX, br],
+  );
+
+  return (
+    <StackMotion {...props.propsStack} sx={sxStackMotion}>
       {props.isLoading ? (
         <Stack
           sx={{

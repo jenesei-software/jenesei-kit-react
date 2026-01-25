@@ -7,7 +7,7 @@ export type ProviderScreenWidthProps = PropsWithChildren;
 export type Screens = keyof IThemeScreen;
 
 export interface ScreenWidthContextProps {
-  windowWidth: number
+  windowWidth: number;
   screenWidth: Screens;
   screens: {
     value: Screens;

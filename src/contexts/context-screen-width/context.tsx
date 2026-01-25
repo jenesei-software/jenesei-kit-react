@@ -3,15 +3,12 @@ import { useTheme } from 'styled-components';
 
 import { ProviderScreenWidthProps, Screens, ScreenWidthContextProps } from './context.types';
 
-
 export const ScreenWidthContext = createContext<ScreenWidthContextProps | null>(null);
 
 export const ProviderScreenWidth: FC<ProviderScreenWidthProps> = ({ children }) => {
   const theme = useTheme();
   const [screenWidth, setScreenWidth] = useState<Screens>('default');
-  const [windowWidth, setWindowWidth] = useState<number>(
-    typeof window !== 'undefined' ? window.innerWidth : 0
-  );
+  const [windowWidth, setWindowWidth] = useState<number>(typeof window !== 'undefined' ? window.innerWidth : 0);
 
   const queries = useMemo(() => {
     if (typeof window === 'undefined') return [];
@@ -28,11 +25,11 @@ export const ProviderScreenWidth: FC<ProviderScreenWidthProps> = ({ children }) 
       }));
   }, [theme.screens]);
 
-  const updateScreen = useCallback(()=>{
+  const updateScreen = useCallback(() => {
     if (!queries.length) return;
     const matched = queries.find(({ mq }) => mq.matches);
     setScreenWidth(matched?.key ?? 'default');
-  },[queries.find, queries.length])
+  }, [queries.find, queries.length]);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;

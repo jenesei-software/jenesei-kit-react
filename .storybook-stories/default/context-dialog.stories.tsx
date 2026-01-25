@@ -20,7 +20,6 @@ const ProviderDialogWrapper: FC<ProviderDialogProps> = () => {
   return <ProviderDialogWrapperDouble />;
 };
 const ProviderDialogWrapperDouble: FC = () => {
-  //TODO
   const propsDialog: useDialogProps<{
     test: string;
   }> = useMemo(
@@ -31,7 +30,7 @@ const ProviderDialogWrapperDouble: FC = () => {
       propsDialog: {
         isRemoveOnOutsideClick: false,
       },
-      content: (remove, isAnimating, propsCustom) => {
+      content: (params) => {
         return (
           <Stack
             sx={{
@@ -48,7 +47,7 @@ const ProviderDialogWrapperDouble: FC = () => {
                 },
               }}
             >
-              {propsCustom?.test}
+              {params.propsCustom?.test}
             </Typography>
             <Typography
               sx={{
@@ -57,9 +56,9 @@ const ProviderDialogWrapperDouble: FC = () => {
                 },
               }}
             >
-              {isAnimating ? ' animating' : ' not animating'}
+              {params.isAnimating ? ' animating' : ' not animating'}
             </Typography>
-            <Button onClick={() => remove?.()} genre='black' size='medium'>
+            <Button onClick={() => params.remove?.()} genre='black' size='medium'>
               Remove Dialog!
             </Button>
           </Stack>

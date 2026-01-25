@@ -89,7 +89,7 @@ export const useImageSlider = (props: useImageSliderProps) => {
         padding: '0',
         background: 'whiteStandard',
       },
-      content: (remove, _isAnimating, params) => <ComponentHandleAdd params={params} remove={remove} />,
+      content: (params) => <ComponentHandleAdd params={params.propsCustom} remove={params.remove} />,
     }),
     [
       br,
@@ -175,8 +175,10 @@ const ComponentHandleAdd: FC<{
           height: '85dvh',
           borderRadius: params?.br,
         },
-        tablet: {
-          maxWidth: '95dvw',
+        breakpoints: {
+          tablet: {
+            maxWidth: '95dvw',
+          },
         },
       }}
     >

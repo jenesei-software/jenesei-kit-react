@@ -35,7 +35,7 @@
 // export * from '@local/areas/preview/export';
 // export * from '@local/areas/scroll/export';
 // export * from '@local/areas/shared/export';
-// export * from '@local/areas/skeleton/export'; 
+// export * from '@local/areas/skeleton/export';
 // export * from '@local/areas/smooth/export';
 
 // export * from '@local/contexts/context-app/export';

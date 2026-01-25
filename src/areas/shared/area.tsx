@@ -8,7 +8,6 @@ import styled from 'styled-components';
 
 import { SharedProps } from './area.types';
 
-
 export const Shared: FC<SharedProps> = (props) => {
   return (
     <Stack sx={props.sx}>
@@ -34,7 +33,6 @@ export const Shared: FC<SharedProps> = (props) => {
                   : item.default)}
               />
             )}
-            {/** biome-ignore lint/correctness/useUniqueElementIds: <explanation> */}
             {item.id === props.value ? <Underline layoutId='underline' id='underline' /> : null}
           </motion.li>
         ))}

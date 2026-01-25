@@ -3,7 +3,6 @@ import { useContext } from 'react';
 import { CookieContext } from './context';
 import { CookieContextProps } from './context.types';
 
-
 /**
  * Custom hook to access the CookieContext.
  *

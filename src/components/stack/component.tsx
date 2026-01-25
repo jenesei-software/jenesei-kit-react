@@ -3,7 +3,6 @@ import { FC } from 'react';
 import { StyledStack, StyledStackMotion } from './component.styles';
 import { StackMotionProps, StackProps } from './component.types';
 
-
 export const Stack: FC<StackProps> = (props) => {
   return (
     <StyledStack

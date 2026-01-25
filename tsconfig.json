@@ -37,6 +37,6 @@
     ".storybook-stories/bustmarket",
     ".storybook-stories/realebail",
     ".storybook"
-  ],
+, ".storybook-stories/component-button.stories copy.tsx"  ],
   "exclude": ["node_modules"]
 }

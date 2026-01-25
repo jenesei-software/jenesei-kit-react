@@ -6,7 +6,6 @@ import styled, { css } from 'styled-components';
 
 import { StyledStackProps } from './component.types';
 
-
 export const StyledStack = styled.div<StyledStackProps>`
   display: flex;
   ${addSX}

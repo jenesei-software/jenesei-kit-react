@@ -7,7 +7,6 @@ import { FC, useEffect, useMemo, useState } from 'react';
 
 import { PreviewProps } from './area.types';
 
-
 export const Preview: FC<PreviewProps> = (props) => {
   const [visible, setVisible] = useState(props.defaultVisible ?? true);
 

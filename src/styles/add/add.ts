@@ -10,6 +10,18 @@ function toStyledCSS(value: CSSObject | ((theme: DefaultTheme) => CSSObject), th
   return css(styles);
 }
 
+export function toStyledCSSTypographyHeading(heading: IThemeTypographyHeading) {
+  return css`
+    font-size: ${(props) => props.theme.font.sizeHeading[heading] * props.theme.font.sizeDevice.default}px;
+    @media (max-width: ${(props) => props.theme.screens.tablet.width}px) {
+      font-size: ${(props) => props.theme.font.sizeHeading[heading] * props.theme.font.sizeDevice.tablet}px;
+    }
+    @media (max-width: ${(props) => props.theme.screens.mobile.width}px) {
+      font-size: ${(props) => props.theme.font.sizeHeading[heading] * props.theme.font.sizeDevice.mobile}px;
+    }
+  `;
+}
+
 const toStyledCSSTypography = (value: TypographyAllProps) =>
   css`
     ${
@@ -136,17 +148,6 @@ const toStyledCSSTypography = (value: TypographyAllProps) =>
     ${'variant' in value && value.variant ? toStyledCSSTypographyHeading(value.variant) : null};
   `;
 
-export const toStyledCSSTypographyHeading = (heading: IThemeTypographyHeading) =>
-  css`
-    font-size: ${(props) => props.theme.font.sizeHeading[heading] * props.theme.font.sizeDevice.default}px;
-    @media (max-width: ${(props) => props.theme.screens.tablet.width}px) {
-      font-size: ${(props) => props.theme.font.sizeHeading[heading] * props.theme.font.sizeDevice.tablet}px;
-    }
-    @media (max-width: ${(props) => props.theme.screens.mobile.width}px) {
-      font-size: ${(props) => props.theme.font.sizeHeading[heading] * props.theme.font.sizeDevice.mobile}px;
-    }
-  `;
-
 export const addSX = css<addSXPropsDollar>`
   ${(props) => {
     const sx = typeof props.$sx === 'function' ? props.$sx(props.theme) : props.$sx;
@@ -160,10 +161,13 @@ export const addSX = css<addSXPropsDollar>`
         Object.entries(sx.breakpoints).map((item) => {
           const [breakpoint, style] = item;
           const isThemeDevice = ThemeDevice.find((device) => device === breakpoint);
+          const isDefaultThemeDevice = breakpoint === 'default';
           const query = isThemeDevice
             ? `@media (max-width: ${props.theme.screens[breakpoint as IThemeDevice].width}px)`
             : breakpoint;
-          return css`
+          return isDefaultThemeDevice
+            ? toStyledCSS(style, props.theme)
+            : css`
             ${query} {
               ${toStyledCSS(style, props.theme)}
             }

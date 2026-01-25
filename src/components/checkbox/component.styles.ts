@@ -7,7 +7,6 @@ import styled, { css } from 'styled-components';
 
 import { StyledCheckboxProps } from './component.types';
 
-
 /****************************************** Size *************************************************/
 export const CheckboxSize = css<StyledCheckboxProps>`
   ${(props) => css`
