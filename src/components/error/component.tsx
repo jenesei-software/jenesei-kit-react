@@ -1,11 +1,11 @@
-import { addSX, addSXTypography } from '@local/styles/add/export';
-import { WordsPullUp } from '@local/styles/motion/export';
-import { KEY_SIZE_DATA } from '@local/styles/theme/export';
+import { addSX, addSXTypography } from '@local/styles/add';
+import { WordsPullUp } from '@local/styles/motion';
+import { KEY_SIZE_DATA } from '@local/styles/theme';
 
 import { FC } from 'react';
 import styled, { css } from 'styled-components';
 
-import { addErrorPropsDollar, ErrorMessageDollarProps, ErrorMessageProps } from '.';
+import { addErrorPropsDollar, ErrorMessageDollarProps, ErrorMessageProps } from './component.types';
 
 const addErrorMessageSize = css<ErrorMessageDollarProps>`
   ${(props) =>

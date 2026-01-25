@@ -1,4 +1,3 @@
-export * from './context';
-export * from './context.types';
-export * from './context.hooks';
-export * from './context.functions';
+export { ProviderLocalStorage } from './context';
+export { useLocalStorage } from './context.hooks';
+export type { ValidLocalStorageObject } from './context.types';

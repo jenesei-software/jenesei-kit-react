@@ -1,5 +1,5 @@
-import { addErrorProps, addErrorPropsDollar } from '@local/components/error/export';
-import { addIconProps } from '@local/components/icon/export';
+import { addErrorProps, addErrorPropsDollar } from '@local/components/error';
+import { addIconProps } from '@local/components/icon';
 import {
   addOutlineProps,
   addOutlinePropsDollar,
@@ -7,8 +7,8 @@ import {
   addSXPropsDollar,
   addSXTypographyProps,
   addSXTypographyPropsDollar,
-} from '@local/styles/add/export';
-import { IThemeGenre, IThemeSize } from '@local/styles/theme/export';
+} from '@local/styles/add';
+import { IThemeGenre, IThemeSize } from '@local/styles/theme';
 import { AddDollarSign } from '@local/types';
 
 import { PropsWithChildren } from 'react';

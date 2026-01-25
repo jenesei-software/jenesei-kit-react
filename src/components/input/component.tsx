@@ -1,18 +1,19 @@
-import { ErrorMessage } from '@local/components/error/export';
+import { ErrorMessage } from '@local/components/error';
 import { getSxTypography } from '@local/functions';
 
 import { useCallback } from 'react';
 import { NumberFormatValues } from 'react-number-format';
+import { useTheme } from 'styled-components';
 
 import {
   InputPostfixChildren,
   InputPrefixChildren,
-  InputProps,
   StyledInput,
   StyledInputNumeric,
   StyledInputPattern,
   StyledInputWrapper,
-} from '.';
+} from './component.styles';
+import { InputProps } from './component.types';
 
 export const Input = (props: InputProps) => {
   const handleOnChange = useCallback(
@@ -31,6 +32,7 @@ export const Input = (props: InputProps) => {
     },
     [props],
   );
+  const theme = useTheme();
   return (
     <>
       <StyledInputWrapper
@@ -65,6 +67,7 @@ export const Input = (props: InputProps) => {
               size: props.size,
               weight: props.isBold ? 500 : 400,
               sx: props.sxTypography,
+              theme,
             })}
             $isBold={props.isBold}
             $isDisabled={props.isDisabled}
@@ -106,6 +109,7 @@ export const Input = (props: InputProps) => {
               size: props.size,
               weight: props.isBold ? 500 : 400,
               sx: props.sxTypography,
+              theme,
             })}
             $isBold={props.isBold}
             $isDisabled={props.isDisabled}
@@ -151,6 +155,7 @@ export const Input = (props: InputProps) => {
               size: props.size,
               weight: props.isBold ? 500 : 400,
               sx: props.sxTypography,
+              theme,
             })}
             $isBold={props.isBold}
             $isDisabled={props.isDisabled}
@@ -198,7 +203,7 @@ export const Input = (props: InputProps) => {
       {props?.error ? (
         <ErrorMessage
           size={props?.error.size ?? props.size}
-          sxTypography={getSxTypography({ size: props.size, weight: 400, sx: props.sxTypography })}
+          sxTypography={getSxTypography({ size: props.size, weight: 400, sx: props.sxTypography, theme })}
           {...props.error}
         />
       ) : null}

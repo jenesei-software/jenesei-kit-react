@@ -2,8 +2,8 @@ import type { Meta } from '@storybook/react-vite';
 import { FC } from 'react';
 import 'styled-components';
 
-import { Typography as TypographyComponent } from '@local/components/typography/export';
-import { useScreenWidth } from '@local/contexts/context-screen-width/export';
+import { Typography as TypographyComponent } from '@local/components/typography';
+import { useScreenWidth } from '@local/contexts/context-screen-width';
 
 import { WrapperBig, WrapperMin } from './tools';
 
@@ -70,11 +70,13 @@ const AllWrapper: FC = () => {
             default: {
               size: 20,
             },
-            tablet: {
-              size: 16,
-            },
-            mobile: {
-              size: 12,
+            breakpoints: {
+              tablet: {
+                size: 16,
+              },
+              mobile: {
+                size: 12,
+              },
             },
           }}
         >
@@ -85,11 +87,13 @@ const AllWrapper: FC = () => {
             default: {
               size: 18,
             },
-            tablet: {
-              size: 16,
-            },
-            mobile: {
-              size: 20,
+            breakpoints: {
+              tablet: {
+                size: 16,
+              },
+              mobile: {
+                size: 20,
+              },
             },
           }}
         >

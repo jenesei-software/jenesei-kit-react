@@ -1,11 +1,10 @@
-import { Preview, PreviewAdditionalProps } from '@local/areas/preview/export';
-import { useScreenWidth } from '@local/contexts/context-screen-width/export';
-import { IThemePaletteKeys, JeneseiPalette } from '@local/styles/theme/export';
+import { Preview, PreviewAdditionalProps } from '@local/areas/preview';
+import { useScreenWidth } from '@local/contexts/context-screen-width';
+import { IThemePaletteKeys, JeneseiPalette } from '@local/styles/theme';
 
 import { createContext, FC, useCallback, useEffect, useState } from 'react';
 
 import {
-  AppContextProps,
   ProviderAppOutlet,
   ProviderAppOutletChildren,
   ProviderAppOutletFooter,
@@ -14,9 +13,9 @@ import {
   ProviderAppOutletNav,
   ProviderAppOutletNotification,
   ProviderAppOutletRightAside,
-  ProviderAppProps,
   ProviderAppWrapper,
-} from '.';
+} from './context.styles';
+import { AppContextProps, ProviderAppProps } from './context.types';
 
 export const AppContext = createContext<AppContextProps | null>(null);
 

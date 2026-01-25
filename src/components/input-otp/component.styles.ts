@@ -1,9 +1,9 @@
-import { addSX } from '@local/styles/add/export';
-import { KEY_SIZE_DATA } from '@local/styles/theme/export';
+import { addSX } from '@local/styles/add';
+import { KEY_SIZE_DATA } from '@local/styles/theme';
 
 import styled, { css } from 'styled-components';
 
-import { InputOTPWrapperProps } from '.';
+import { InputOTPWrapperProps } from './component.types';
 
 /****************************************** Size *************************************************/
 export const addInputOTPSize = css<InputOTPWrapperProps>`

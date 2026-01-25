@@ -1,5 +1,5 @@
-import { ButtonProps } from '@local/components/button/export';
-import { addSXProps, addSXPropsDollar } from '@local/styles/add/export';
+import { ButtonProps } from '@local/components/button';
+import { addSXProps, addSXPropsDollar } from '@local/styles/add';
 import { AddDollarSign } from '@local/types';
 
 export type ButtonGroupProps = {

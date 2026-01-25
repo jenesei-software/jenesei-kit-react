@@ -1,5 +1,5 @@
-import { ImageButtonProps } from '@local/components/image-button/export';
-import { ImageSelectItemProps } from '@local/components/image-select/export';
+import { ImageButtonProps } from '@local/components/image-button';
+import { ImageSelectItemProps } from '@local/components/image-select';
 
 import { Ref } from 'react';
 

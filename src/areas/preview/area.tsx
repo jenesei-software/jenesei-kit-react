@@ -1,10 +1,12 @@
-import { Icon } from '@local/components/icon/export';
-import { Stack, StackMotion } from '@local/components/stack/export';
+import { Icon } from '@local/components/icon';
+import { Stack, StackMotion } from '@local/components/stack';
+import { useResolveSx } from '@local/hooks/use-resolve-sx';
 
 import { AnimatePresence } from 'framer-motion';
 import { FC, useEffect, useMemo, useState } from 'react';
 
-import { PreviewProps } from '.';
+import { PreviewProps } from './area.types';
+
 
 export const Preview: FC<PreviewProps> = (props) => {
   const [visible, setVisible] = useState(props.defaultVisible ?? true);
@@ -42,31 +44,41 @@ export const Preview: FC<PreviewProps> = (props) => {
     }
   }, [propsVisible, propsMinTime]);
 
+  const { resolveSX } = useResolveSx();
+  const sxLoader = useMemo(
+    () =>
+      resolveSX(props?.sxLoader, (theme) => ({
+        default: {
+          backgroundColor: theme.palette.whiteStandard,
+          width: '100%',
+          height: '100%',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 1,
+        },
+      })),
+    [props?.sxLoader, resolveSX],
+  );
+  const sxChildren = useMemo(
+    () =>
+      resolveSX(props?.sxChildren, () => ({
+        default: {
+          display: 'contents',
+          zIndex: 0,
+        },
+      })),
+    [resolveSX, props?.sxChildren],
+  );
   return (
     <AnimatePresence>
       {!visible ? (
         <StackMotion
           key='loader'
-          sx={(theme) => ({
-            ...props?.sxLoader,
-            default: {
-              backgroundColor: theme.palette.whiteStandard,
-              width: '100%',
-              height: '100%',
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              zIndex: 1,
-              ...(props?.sxLoader
-                ? typeof props?.sxLoader === 'function'
-                  ? props?.sxLoader(theme).default
-                  : props?.sxLoader.default
-                : {}),
-            },
-          })}
+          sx={sxLoader}
           transition={{ duration: 0.3 }}
           exit={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -99,18 +111,7 @@ export const Preview: FC<PreviewProps> = (props) => {
       {visible ? (
         <StackMotion
           key='children'
-          sx={(theme) => ({
-            ...props?.sxChildren,
-            default: {
-              display: 'contents',
-              zIndex: 0,
-              ...(props?.sxChildren
-                ? typeof props?.sxChildren === 'function'
-                  ? props?.sxChildren(theme).default
-                  : props?.sxChildren.default
-                : {}),
-            },
-          })}
+          sx={sxChildren}
           transition={{ duration: 0.3 }}
           initial={{ opacity: 0 }}
           exit={{ opacity: 0 }}

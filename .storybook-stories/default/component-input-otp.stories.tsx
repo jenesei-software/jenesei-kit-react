@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import 'styled-components';
 
-import { InputOTP as InputOTPComponent, InputOTPProps } from '@local/components/input-otp/export';
+import { InputOTP as InputOTPComponent, InputOTPProps } from '@local/components/input-otp';
 
 import { FC } from 'react';
 

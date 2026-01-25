@@ -1,6 +1,8 @@
 import { FC } from 'react';
 
-import { ScrollProps, StyledScroll } from '.';
+import { StyledScroll } from './area.styles';
+import { ScrollProps } from './area.types';
+
 
 export const Scroll: FC<ScrollProps> = (props) => {
   return (

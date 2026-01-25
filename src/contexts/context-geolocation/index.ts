@@ -1,3 +1,2 @@
-export * from './context';
-export * from './context.types';
-export * from './context.hooks';
+export { ProviderGeolocation } from './context';
+export { useGeolocation } from './context.hooks';

@@ -1,12 +1,13 @@
-import { Button } from '@local/components/button/export';
-import { Stack } from '@local/components/stack/export';
+import { Button } from '@local/components/button';
+import { Stack } from '@local/components/stack';
 
 import { Link } from '@tanstack/react-router';
 import { motion } from 'framer-motion';
 import { FC } from 'react';
 import styled from 'styled-components';
 
-import { SharedProps } from '.';
+import { SharedProps } from './area.types';
+
 
 export const Shared: FC<SharedProps> = (props) => {
   return (
@@ -33,6 +34,7 @@ export const Shared: FC<SharedProps> = (props) => {
                   : item.default)}
               />
             )}
+            {/** biome-ignore lint/correctness/useUniqueElementIds: <explanation> */}
             {item.id === props.value ? <Underline layoutId='underline' id='underline' /> : null}
           </motion.li>
         ))}

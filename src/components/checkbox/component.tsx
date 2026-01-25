@@ -1,12 +1,13 @@
-import { ErrorMessage } from '@local/components/error/export';
-import { Icon } from '@local/components/icon/export';
-import { Ripple } from '@local/components/ripple/export';
+import { ErrorMessage } from '@local/components/error';
+import { Icon } from '@local/components/icon';
+import { Ripple } from '@local/components/ripple';
 import { getSxTypography } from '@local/functions';
 
 import { FC, useCallback, useMemo } from 'react';
 import { useTheme } from 'styled-components';
 
-import { CheckboxProps, CheckboxWrapper } from '.';
+import { CheckboxWrapper } from './component.styles';
+import { CheckboxProps } from './component.types';
 
 export const Checkbox: FC<CheckboxProps> = (props) => {
   const handleOnClick = useCallback(
@@ -44,7 +45,7 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
         $isHiddenBorder={props.isHiddenBorder}
         $isNotBackground={props.isNotBackground}
         $sx={props.sx}
-        $sxTypography={getSxTypography({ size: props.size, weight: 700, sx: props.sxTypography })}
+        $sxTypography={getSxTypography({ size: props.size, weight: 700, sx: props.sxTypography, theme })}
         $isDisabledOutline={props.isDisabled ?? props.isDisabledOutline}
         $isOutlineBoxShadow={props.isOutlineBoxShadow}
         $isReadOnly={props.isReadOnly}
@@ -69,7 +70,7 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
       {props?.error ? (
         <ErrorMessage
           size={props?.error.size ?? props.size}
-          sxTypography={getSxTypography({ size: 'medium', weight: 400, sx: props.sxTypography })}
+          sxTypography={getSxTypography({ size: 'medium', weight: 400, sx: props.sxTypography, theme })}
           {...props.error}
         />
       ) : null}

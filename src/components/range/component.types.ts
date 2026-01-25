@@ -1,4 +1,4 @@
-import { InputStandardProps } from '@local/components/input/export';
+import { InputStandardProps } from '@local/components/input';
 import { AddDollarSign } from '@local/types';
 
 import { FocusEventHandler } from 'react';

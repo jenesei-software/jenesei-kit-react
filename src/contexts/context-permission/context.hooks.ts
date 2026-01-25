@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 
-import { PermissionContext, PermissionContextProps } from '.';
+import { PermissionContext } from './context';
+import { PermissionContextProps } from './context.types';
 
 /**
  * Custom hook to access the PermissionContext.

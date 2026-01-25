@@ -1,4 +1,4 @@
-import { addSXProps } from '@local/styles/add/export';
+import { addSXProps } from '@local/styles/add';
 import { AddDollarSign } from '@local/types';
 
 import { AnimationProps, DraggableProps, FocusHandlers, HoverHandlers, LayoutProps, TapHandlers } from 'framer-motion';

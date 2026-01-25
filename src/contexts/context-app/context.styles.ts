@@ -1,10 +1,10 @@
-import { ScreenWidthProps } from '@local/components/context-screen-width';
-import { addGridTransition } from '@local/styles/add/export';
-import { JeneseiPalette } from '@local/styles/theme/export';
+import { addGridTransition } from '@local/styles/add';
+import { JeneseiPalette } from '@local/styles/theme';
 
 import { css, styled } from 'styled-components';
 
-import { ProviderAppOutletChildrenProps, ProviderAppOutletProps, ProviderAppWrapperProps } from '.';
+import { ProviderAppOutletChildrenProps, ProviderAppOutletProps, ProviderAppWrapperProps } from './context.types';
+import { ScreenWidthProps } from '../context-screen-width';
 
 export const ProviderAppWrapper = styled.div<ProviderAppWrapperProps>`
   display: flex;
@@ -53,6 +53,7 @@ function toStyledAppOutletCSS(props: {
       `${props.notificationHeight} ${props.headerHeight} ${props.navHeight} 1fr ${props.footerHeight}`};
   `;
 }
+
 const addSXAppOutlet = css<ProviderAppOutletProps>`
   ${(props) => {
     const leftAsideWidth = props.$leftAside?.length?.default;
@@ -87,13 +88,12 @@ const addSXAppOutlet = css<ProviderAppOutletProps>`
         return css`
           @media (max-width: ${screenWidth}px) {
             ${toStyledAppOutletCSS({
-              leftAsideWidth: leftAsideWidth && leftAsideWidth[deviceKey] ? leftAsideWidth[deviceKey] : '0px',
-              rightAsideWidth: rightAsideWidth && rightAsideWidth[deviceKey] ? rightAsideWidth[deviceKey] : '0px',
-              notificationHeight:
-                notificationHeight && notificationHeight[deviceKey] ? notificationHeight[deviceKey] : '0px',
-              headerHeight: headerHeight && headerHeight[deviceKey] ? headerHeight[deviceKey] : '0px',
-              navHeight: navHeight && navHeight[deviceKey] ? navHeight[deviceKey] : '0px',
-              footerHeight: footerHeight && footerHeight[deviceKey] ? footerHeight[deviceKey] : '0px',
+              leftAsideWidth: leftAsideWidth?.[deviceKey] ? leftAsideWidth[deviceKey] : '0px',
+              rightAsideWidth: rightAsideWidth?.[deviceKey] ? rightAsideWidth[deviceKey] : '0px',
+              notificationHeight: notificationHeight?.[deviceKey] ? notificationHeight[deviceKey] : '0px',
+              headerHeight: headerHeight?.[deviceKey] ? headerHeight[deviceKey] : '0px',
+              navHeight: navHeight?.[deviceKey] ? navHeight[deviceKey] : '0px',
+              footerHeight: footerHeight?.[deviceKey] ? footerHeight[deviceKey] : '0px',
             })}
           }
         `;

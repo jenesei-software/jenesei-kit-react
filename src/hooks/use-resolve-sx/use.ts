@@ -1,4 +1,4 @@
-import { SXProps, SXPropsWithoutFunc } from '@local/styles/add/export';
+import { SXProps, SXPropsWithoutFunc } from '@local/styles/add';
 
 import { useCallback } from 'react';
 import { useTheme } from 'styled-components';

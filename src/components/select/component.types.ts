@@ -1,7 +1,7 @@
-import { DatePickerTranslateMonthProps } from '@local/components/date-picker/export';
-import { addErrorProps } from '@local/components/error/export';
-import { addSXProps, addSXTypographyProps } from '@local/styles/add/export';
-import { ITheme, IThemeSize } from '@local/styles/theme/export';
+import { DatePickerTranslateMonthProps } from '@local/components/date-picker';
+import { addErrorProps } from '@local/components/error';
+import { addSXProps, addSXTypographyProps } from '@local/styles/add';
+import { ITheme, IThemeSize } from '@local/styles/theme';
 import { AddDollarSign } from '@local/types';
 
 import { FocusEvent, ReactNode, Ref } from 'react';

@@ -1,37 +1,40 @@
-import { Button } from '@local/components/button/export';
-import { ErrorMessage } from '@local/components/error/export';
-import { Icon } from '@local/components/icon/export';
-import { Popover, usePopover } from '@local/components/popover/export';
-import { Typography } from '@local/components/typography/export';
+import { Button } from '@local/components/button';
+import { ErrorMessage } from '@local/components/error';
+import { Icon } from '@local/components/icon';
+import { Popover, usePopover } from '@local/components/popover';
+import { Typography } from '@local/components/typography';
 import { LIST_LANGUAGE } from '@local/consts';
 import { getSxTypography } from '@local/functions';
-import { KEY_SIZE_DATA } from '@local/styles/theme/export';
+import { KEY_SIZE_DATA } from '@local/styles/theme';
 
 import { useMergeRefs } from '@floating-ui/react';
 import { useVirtualizer } from '@tanstack/react-virtual';
 import moment from 'moment';
 import { FC, KeyboardEvent, memo, Ref, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useTheme } from 'styled-components';
 
 import {
   ButtonList,
-  ContainerDropdownListOptionProps,
-  ContainerSelectListOptionProps,
   DropdownList,
   DropdownListOption,
   DropdownListOptionIcon,
   DropdownListParent,
+  SelectList,
+  SelectListOption,
+  SelectTextArea,
+  SelectWrapper,
+} from './component.styles';
+import {
+  ContainerDropdownListOptionProps,
+  ContainerSelectListOptionProps,
   ISelectItem,
   ISelectLanguageOption,
   SelectLanguageProps,
-  SelectList,
-  SelectListOption,
   SelectMonthProps,
   SelectMonthsProps,
   SelectProps,
-  SelectTextArea,
-  SelectWrapper,
   SelectYearProps,
-} from '.';
+} from './component.types';
 
 const DEFAULT_LABEL_SELECT_ALL = 'Select all option';
 const DEFAULT_LABEL_PLACEHOLDER = 'Select an option';
@@ -45,6 +48,8 @@ const DEFAULT_MIN_VIEW_DROPDOWN = 1;
 const DEFAULT_OVERSCAN = 1;
 
 export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) => {
+  const theme = useTheme();
+
   const sizeHeight = useMemo(() => KEY_SIZE_DATA[props.size].height, [props.size]);
   const sizePadding = useMemo(() => KEY_SIZE_DATA[props.size].padding, [props.size]);
   const sizeRadius = useMemo(() => KEY_SIZE_DATA[props.size].radius, [props.size]);
@@ -253,8 +258,9 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
       size: props.size,
       weight: props.isBold ? 500 : 400,
       sx: props.sxTypography,
+      theme,
     });
-  }, [props.isBold, props.size, props.sxTypography]);
+  }, [props.isBold, props.size, props.sxTypography, theme]);
   return (
     <>
       <SelectWrapper
@@ -564,6 +570,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
             size: props.size,
             weight: 400,
             sx: props.sxTypography,
+            theme,
           })}
           {...props.error}
         />

@@ -1,5 +1,5 @@
-import { ButtonProps } from '@local/components/button/export';
-import { addSXProps } from '@local/styles/add/export';
+import { ButtonProps } from '@local/components/button';
+import { addSXProps } from '@local/styles/add';
 
 export type PaginationProps = {
   buttonControl: Pick<ButtonProps, 'size' | 'genre' | 'isRadius' | 'isWidthAsHeight' | 'isPlaystationEffect'>;

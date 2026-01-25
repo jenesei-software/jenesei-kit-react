@@ -1,3 +1,2 @@
-export * from './component';
-export * from './component.styles';
-export * from './component.types';
+export { Toggle } from './component';
+export type { ToggleProps } from './component.types';

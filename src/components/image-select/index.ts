@@ -1,3 +1,2 @@
-export * from './component';
-export * from './component.styles';
-export * from './component.types';
+export { ImageSelect } from './component';
+export type { ImageSelectItemProps, ImageSelectProps, TImageSelectGenre } from './component.types';

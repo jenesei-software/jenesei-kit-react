@@ -1,3 +1,3 @@
-export * from './area.types';
-export * from './area.hooks';
-export * from './area';
+export { Preview } from './area';
+export { useRemovePreviewLoader } from './area.hooks';
+export type { PreviewAdditionalProps, PreviewProps } from './area.types';

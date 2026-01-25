@@ -1,3 +1,2 @@
-export * from './component';
-export * from './component.styles';
-export * from './component.types';
+export { Range } from './component';
+export type { RangeProps } from './component.types';

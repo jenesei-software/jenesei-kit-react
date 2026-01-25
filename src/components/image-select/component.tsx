@@ -1,19 +1,20 @@
-import { Button } from '@local/components/button/export';
-import { ErrorMessage } from '@local/components/error/export';
-import { Image } from '@local/components/image/export';
-import { Stack } from '@local/components/stack/export';
-import { Typography } from '@local/components/typography/export';
+import { Button } from '@local/components/button';
+import { ErrorMessage } from '@local/components/error';
+import { Image } from '@local/components/image';
+import { Stack } from '@local/components/stack';
+import { Typography } from '@local/components/typography';
 import { LIST_IMAGE_SUPPORTED_FORMAT_FOR_INPUT } from '@local/consts';
 import { getSxTypography } from '@local/functions';
 import { useImageCrop } from '@local/hooks/use-image-crop';
 import { useImageView } from '@local/hooks/use-image-view';
-import { KEY_SIZE_DATA } from '@local/styles/theme/export';
+import { KEY_SIZE_DATA } from '@local/styles/theme';
 
 import { motion } from 'framer-motion';
 import { DragEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTheme } from 'styled-components';
 
-import { ImageSelectItemProps, ImageSelectListWrapper, ImageSelectProps, ImageSelectWrapper } from '.';
+import { ImageSelectListWrapper, ImageSelectWrapper } from './component.styles';
+import { ImageSelectItemProps, ImageSelectProps } from './component.types';
 
 export const ImageSelect = (props: ImageSelectProps) => {
   const { onChange } = props;
@@ -314,6 +315,7 @@ export const ImageSelect = (props: ImageSelectProps) => {
           sxTypography={getSxTypography({
             size: props.size,
             weight: 400,
+            theme,
           })}
         />
       ) : null}

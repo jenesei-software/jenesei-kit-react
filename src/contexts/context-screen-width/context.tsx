@@ -1,7 +1,8 @@
 import { createContext, FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { useTheme } from 'styled-components';
 
-import { ProviderScreenWidthProps, Screens, ScreenWidthContextProps } from '.';
+import { ProviderScreenWidthProps, Screens, ScreenWidthContextProps } from './context.types';
+
 
 export const ScreenWidthContext = createContext<ScreenWidthContextProps | null>(null);
 
@@ -45,11 +46,15 @@ export const ProviderScreenWidth: FC<ProviderScreenWidthProps> = ({ children }) 
   useEffect(() => {
     if (!queries.length) return;
 
-    queries.forEach(({ mq }) => mq.addEventListener('change', updateScreen));
+    queries.forEach(({ mq }) => {
+      mq.addEventListener('change', updateScreen);
+    });
     updateScreen(); // первичная инициализация
 
     return () => {
-      queries.forEach(({ mq }) => mq.removeEventListener('change', updateScreen));
+      queries.forEach(({ mq }) => {
+        mq.removeEventListener('change', updateScreen);
+      });
     };
   }, [queries, updateScreen]);
 

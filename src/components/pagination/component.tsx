@@ -1,22 +1,23 @@
-import { Button } from '@local/components/button/export';
-import { Stack } from '@local/components/stack/export';
+import { Button } from '@local/components/button';
+import { Stack } from '@local/components/stack';
 
 import { AnimatePresence, motion } from 'framer-motion';
 import { FC, useCallback, useMemo } from 'react';
 
-import { DEFAULT_COMPONENT_PAGINATION_GAP, PaginationProps } from '.';
+import { DEFAULT_COMPONENT_PAGINATION_GAP } from './component.constants';
+import { PaginationProps } from './component.types';
 
 export const Pagination: FC<PaginationProps> = (props) => {
-  const isDisabledPrevious = useMemo(() => props.index == 0 && !props.isInfinity, [props.index, props.isInfinity]);
+  const isDisabledPrevious = useMemo(() => props.index === 0 && !props.isInfinity, [props.index, props.isInfinity]);
   const isDisabledNext = useMemo(
-    () => props.index == props.length - 1 && !props.isInfinity,
+    () => props.index === props.length - 1 && !props.isInfinity,
     [props.index, props.isInfinity, props.length],
   );
 
   const gap = useMemo(() => props.gap ?? DEFAULT_COMPONENT_PAGINATION_GAP, [props.gap]);
   const lengthData = useMemo(() => props.lengthData ?? {}, [props.lengthData]);
   const handlePrevious = useCallback(() => {
-    if (props.index == 0) {
+    if (props.index === 0) {
       if (props.isInfinity) {
         props.changeIndex(props.length - 1);
       }
@@ -26,7 +27,7 @@ export const Pagination: FC<PaginationProps> = (props) => {
   }, [props]);
 
   const handleNext = useCallback(() => {
-    if (props.index == props.length - 1) {
+    if (props.index === props.length - 1) {
       if (props.isInfinity) {
         props.changeIndex(0);
       }

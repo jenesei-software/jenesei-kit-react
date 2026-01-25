@@ -1,8 +1,8 @@
-import { addFontSizeTransition, addOutline, addSX as addSXStandard, addSXTypography } from '@local/styles/add/export';
+import { addFontSizeTransition, addOutline, addSX as addSXStandard, addSXTypography } from '@local/styles/add';
 
 import styled, { css } from 'styled-components';
 
-import { TypographyPropsDollar } from '.';
+import { TypographyPropsDollar } from './component.types';
 
 const addTypographyCSS = css<TypographyPropsDollar>`
   font-style: normal;

@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { FC } from 'react';
 import 'styled-components';
 
-import { Stack } from '@local/components/stack/export';
-import { JeneseiPalette } from '@local/styles/theme/export';
+import { Stack } from '@local/components/stack';
+import { JeneseiPalette } from '@local/styles/theme';
 
 import { WrapperBig } from './tools';
 

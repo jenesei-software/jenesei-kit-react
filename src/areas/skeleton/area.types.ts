@@ -1,5 +1,5 @@
-import { StackProps } from '@local/components/stack/export';
-import { IThemePaletteKeys } from '@local/styles/theme/export';
+import { StackProps } from '@local/components/stack';
+import { IThemePaletteKeys } from '@local/styles/theme';
 import { AddDollarSign } from '@local/types';
 
 type SkeletonDefaultProps = {

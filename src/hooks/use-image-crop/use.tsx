@@ -1,19 +1,19 @@
-import { Preview } from '@local/areas/preview/export';
-import { Button } from '@local/components/button/export';
-import { ImageSelectItemProps } from '@local/components/image-select/export';
-import { Pagination, PaginationProps } from '@local/components/pagination/export';
-import { Stack } from '@local/components/stack/export';
+import { Preview } from '@local/areas/preview';
+import { Button } from '@local/components/button';
+import { ImageSelectItemProps } from '@local/components/image-select';
+import { Pagination, PaginationProps } from '@local/components/pagination';
+import { Stack } from '@local/components/stack';
 import { LIST_IMAGE_SUPPORTED_FORMAT } from '@local/consts';
-import { useDialog, useDialogProps } from '@local/contexts/context-dialog/export';
+import { useDialog, useDialogProps } from '@local/contexts/context-dialog';
 import { useDeepCompareMemoize } from '@local/hooks/use-deep-compare-memoize';
-import { KEY_SIZE_DATA } from '@local/styles/theme/export';
+import { KEY_SIZE_DATA } from '@local/styles/theme';
 import { IImageFormat } from '@local/types';
 
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import Cropper, { Area } from 'react-easy-crop';
 import { useTheme } from 'styled-components';
 
-import { useImageCropAddProps, useImageCropProps } from '.';
+import { useImageCropAddProps, useImageCropProps } from './use.types';
 
 export const useImageCrop = (props: useImageCropProps) => {
   const size = useMemo(() => KEY_SIZE_DATA[props.dialog.button.size], [props.dialog.button.size]);

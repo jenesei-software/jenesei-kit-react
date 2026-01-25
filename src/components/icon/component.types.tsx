@@ -1,5 +1,5 @@
-import { addSXProps, addSXPropsDollar } from '@local/styles/add/export';
-import { IThemePaletteKeys, IThemeSize } from '@local/styles/theme/export';
+import { addSXProps, addSXPropsDollar } from '@local/styles/add';
+import { IThemePaletteKeys, IThemeSize } from '@local/styles/theme';
 import { AddDollarSign } from '@local/types';
 
 import React from 'react';

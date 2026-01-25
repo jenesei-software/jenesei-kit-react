@@ -1,5 +1,5 @@
-import { Button } from '@local/components/button/export';
-import { Icon } from '@local/components/icon/export';
+import { Button } from '@local/components/button';
+import { Icon } from '@local/components/icon';
 import { getSxTypography } from '@local/functions';
 
 import { AnimatePresence, motion } from 'framer-motion';
@@ -15,19 +15,23 @@ import {
   DEFAULT_PROVIDER_SONNER_SCALE,
   DEFAULT_PROVIDER_SONNER_Y,
   DEFAULT_PROVIDER_SONNER_Z_INDEX,
-  ProviderSonnerProps,
+} from './context.constants';
+import {
   SonnerButtonWrapper,
   SonnerContent,
   SonnerContentDescription,
-  SonnerContentProps,
-  SonnerContentStandardProps,
   SonnerContentTitle,
-  SonnerContextProps,
-  SonnerElementProps,
   SonnerElementWrapper,
   SonnerIcon,
   SonnerLayout,
-} from '.';
+} from './context.styles';
+import {
+  ProviderSonnerProps,
+  SonnerContentProps,
+  SonnerContentStandardProps,
+  SonnerContextProps,
+  SonnerElementProps,
+} from './context.types';
 
 export const SonnerContext = createContext<SonnerContextProps | null>(null);
 
@@ -222,6 +226,8 @@ export const ProviderSonner: FC<ProviderSonnerProps> = (props) => {
 };
 
 const SonnerElement = (props: SonnerElementProps) => {
+  const theme = useTheme();
+
   return (
     <motion.div
       key={props.id}
@@ -285,6 +291,7 @@ const SonnerElement = (props: SonnerElementProps) => {
                   $sxTypography={getSxTypography({
                     size: 'mediumSmall',
                     weight: 700,
+                    theme,
                   })}
                 >
                   {props.title}
@@ -295,6 +302,7 @@ const SonnerElement = (props: SonnerElementProps) => {
                   $sxTypography={getSxTypography({
                     size: 'mediumSmall',
                     weight: 400,
+                    theme,
                   })}
                   $genre={props.genre}
                 >

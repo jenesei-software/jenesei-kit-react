@@ -1,11 +1,11 @@
-import { addError } from '@local/components/error/export';
-import { addSX } from '@local/styles/add/export';
-import { KEY_SIZE_DATA } from '@local/styles/theme/export';
+import { addError } from '@local/components/error';
+import { addSX } from '@local/styles/add';
+import { KEY_SIZE_DATA } from '@local/styles/theme';
 
 import { motion } from 'framer-motion';
 import styled, { css } from 'styled-components';
 
-import { ImageSelectWrapperProps } from '.';
+import { ImageSelectWrapperProps } from './component.types';
 
 const addImageSelectListGenre = css<ImageSelectWrapperProps>`
   ${(props) => css`

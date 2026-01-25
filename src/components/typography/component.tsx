@@ -1,11 +1,12 @@
-import { Tooltip } from '@local/components/tooltip/export';
-import { useScreenWidth } from '@local/contexts/context-screen-width/export';
+import { Tooltip } from '@local/components/tooltip';
+import { useScreenWidth } from '@local/contexts/context-screen-width';
 import { useOverflowing } from '@local/hooks/use-overflowing';
 
 import { createLink, LinkProps } from '@tanstack/react-router';
 import { memo, useMemo } from 'react';
 
-import { Title, TypographyProps, TypographyPropsDollar, TypographyTooltipProps } from '.';
+import { Title } from './component.styles';
+import { TypographyProps, TypographyPropsDollar, TypographyTooltipProps } from './component.types';
 
 const TypographyWithRef = (props: TypographyProps) => {
   const { screenActual } = useScreenWidth();

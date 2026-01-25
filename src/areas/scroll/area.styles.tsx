@@ -1,8 +1,9 @@
-import { Stack } from '@local/components/stack/export';
+import { Stack } from '@local/components/stack';
 
 import styled, { css } from 'styled-components';
 
-import { StyledScrollProps } from '.';
+import { StyledScrollProps } from './area.types';
+
 
 export const StyledScroll = styled(Stack)<StyledScrollProps>`
   overflow-x: hidden;

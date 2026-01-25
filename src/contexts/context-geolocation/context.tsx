@@ -1,8 +1,9 @@
-import { usePermission } from '@local/contexts/context-permission/export';
+import { usePermission } from '@local/contexts/context-permission';
 
 import { createContext, FC, useEffect, useState } from 'react';
 
-import { GeolocationContextProps, ProviderGeolocationProps } from '.';
+import { GeolocationContextProps, ProviderGeolocationProps } from './context.types';
+
 
 export const GeolocationContext = createContext<GeolocationContextProps | null>(null);
 

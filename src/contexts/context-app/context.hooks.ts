@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 
-import { AppContext, AppContextProps } from '.';
+import { AppContext } from './context';
+import { AppContextProps } from './context.types';
 
 /**
  * Custom hook to access the AppContext.

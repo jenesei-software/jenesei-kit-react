@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { FC } from 'react';
 import 'styled-components';
 
-import { ButtonGroup, ButtonGroupProps } from '@local/components/button-group/export';
+import { ButtonGroup, ButtonGroupProps } from '@local/components/button-group';
 
 const meta: Meta<typeof ButtonGroup> = {
   component: ButtonGroup,

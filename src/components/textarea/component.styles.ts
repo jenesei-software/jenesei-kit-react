@@ -1,15 +1,15 @@
-import { addError } from '@local/components/error/export';
+import { addError } from '@local/components/error';
 import {
   addDisabled,
   addOutlineChildren,
   addRemoveOutline,addSX, addSXTypography, 
   addTransitionWithoutSize
-} from '@local/styles/add/export';
-import { KEY_SIZE_DATA } from '@local/styles/theme/export';
+} from '@local/styles/add';
+import { KEY_SIZE_DATA } from '@local/styles/theme';
 
 import styled, { css } from 'styled-components';
 
-import { StyledTextAreaProps, TextAreaWrapperProps } from '.';
+import { StyledTextAreaProps, TextAreaWrapperProps } from './component.types';
 
 /****************************************** Wrapper *************************************************/
 const addTextAreaWrapperGenre = css<TextAreaWrapperProps>`

@@ -1,5 +1,5 @@
-import { addSXProps, addSXTypographyProps } from '@local/styles/add/export';
-import { IThemeSize } from '@local/styles/theme/export';
+import { addSXProps, addSXTypographyProps } from '@local/styles/add';
+import { IThemeSize } from '@local/styles/theme';
 import { AddDollarSign } from '@local/types';
 
 export type ErrorMessageDollarProps = AddDollarSign<ErrorMessageProps>;

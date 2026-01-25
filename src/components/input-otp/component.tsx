@@ -1,16 +1,18 @@
-import { ErrorMessage } from '@local/components/error/export';
-import { Input } from '@local/components/input/export';
+import { ErrorMessage } from '@local/components/error';
+import { Input } from '@local/components/input';
 import { getSxTypography } from '@local/functions';
 
 import { ClipboardEvent, FocusEvent, KeyboardEvent, useCallback, useRef, useState } from 'react';
+import { useTheme } from 'styled-components';
 
-import { InputOTPProps, InputOTPWrapper } from '.';
+import { InputOTPWrapper } from './component.styles';
+import { InputOTPProps } from './component.types';
 
 export const InputOTP = (props: InputOTPProps) => {
   const [otp, setOtp] = useState<string[]>(new Array(props.length).fill(''));
   const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
-
+  const theme = useTheme();
   const handlePaste = useCallback(
     (index: number, e: ClipboardEvent<HTMLInputElement>) => {
       e.preventDefault();
@@ -176,6 +178,7 @@ export const InputOTP = (props: InputOTPProps) => {
           sxTypography={getSxTypography({
             size: props.size,
             weight: 400,
+            theme,
           })}
         />
       ) : null}

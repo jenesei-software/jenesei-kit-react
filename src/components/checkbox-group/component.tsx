@@ -1,20 +1,15 @@
-import { Checkbox } from '@local/components/checkbox/export';
+import { Checkbox } from '@local/components/checkbox';
 import { getSxTypography } from '@local/functions';
 
 import { ReactNode, useCallback } from 'react';
+import { useTheme } from 'styled-components';
 
-import {
-  CheckboxChildren,
-  CheckboxGroupItem,
-  CheckboxGroupLabel,
-  CheckboxGroupProps,
-  CheckboxGroupValueProps,
-  CheckboxGroupWrapper,
-} from '.';
+import { CheckboxChildren, CheckboxGroupItem, CheckboxGroupLabel, CheckboxGroupWrapper } from './component.styles';
+import { CheckboxGroupProps, CheckboxGroupValueProps } from './component.types';
 
 export const CheckboxGroup = <T extends CheckboxGroupValueProps>(props: CheckboxGroupProps<T>) => {
   const createMarkup = (html: string) => ({ __html: html });
-
+  const theme = useTheme();
   const handleCheckboxChange = useCallback(
     (item: T) => {
       const isSelected = props.value.some((selectedItem) => selectedItem[props.valueField] === item[props.valueField]);
@@ -34,7 +29,7 @@ export const CheckboxGroup = <T extends CheckboxGroupValueProps>(props: Checkbox
       className={props.className}
       $sx={props.sx}
       $size={props.size}
-      $sxTypography={getSxTypography({ size: props.size, weight: 700, sx: props.sxTypography })}
+      $sxTypography={getSxTypography({ size: props.size, weight: 700, sx: props.sxTypography, theme })}
     >
       {props.options.map((e, index) => {
         const isChecked = props.value.some((selectedItem) => selectedItem[props.valueField] === e[props.valueField]);
@@ -45,7 +40,7 @@ export const CheckboxGroup = <T extends CheckboxGroupValueProps>(props: Checkbox
               isHiddenBorder={props.checkboxIsHiddenBorder}
               view={props.checkBoxView}
               sx={props.checkboxSX}
-              sxTypography={getSxTypography({ size: props.size, weight: 700, sx: props.sxTypography })}
+              sxTypography={getSxTypography({ size: props.size, weight: 700, sx: props.sxTypography, theme })}
               size={props.size}
               checked={isChecked}
             >

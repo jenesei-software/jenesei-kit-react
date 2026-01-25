@@ -1,5 +1,5 @@
-import { TooltipProps } from '@local/components/tooltip/export';
-import { addOutlineProps, addOutlinePropsDollar, addSXProps, addSXTypographyProps } from '@local/styles/add/export';
+import { TooltipProps } from '@local/components/tooltip';
+import { addOutlineProps, addOutlinePropsDollar, addSXProps, addSXTypographyProps } from '@local/styles/add';
 import { AddDollarSign } from '@local/types';
 
 import { CSSProperties, PropsWithChildren, Ref } from 'react';

@@ -13,8 +13,7 @@ export interface ProviderCookieProps extends PropsWithChildren {
   };
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-export interface ValidCookieObject {}
+export type ValidCookieObject = {}
 
 export interface CookieContextProps {
   getCookie: <K extends keyof ValidCookieObject>(name: K) => ValidCookieObject[K] | undefined;

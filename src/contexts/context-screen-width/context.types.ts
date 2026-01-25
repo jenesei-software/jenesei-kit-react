@@ -1,4 +1,4 @@
-import { IThemeDevice, IThemeScreen } from '@local/styles/theme/export';
+import { IThemeDevice, IThemeScreen } from '@local/styles/theme';
 
 import { PropsWithChildren } from 'react';
 

@@ -1,9 +1,9 @@
-import { addSX, addSXTypography } from '@local/styles/add/export';
-import { KEY_SIZE_DATA } from '@local/styles/theme/export';
+import { addSX, addSXTypography } from '@local/styles/add';
+import { KEY_SIZE_DATA } from '@local/styles/theme';
 
 import styled, { css } from 'styled-components';
 
-import { CheckboxGroupWrapperProps } from '.';
+import { CheckboxGroupWrapperProps } from './component.types';
 
 /****************************************** Size *************************************************/
 export const addCheckboxGroupSize = css<CheckboxGroupWrapperProps>`

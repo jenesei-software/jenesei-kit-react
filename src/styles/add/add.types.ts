@@ -52,40 +52,18 @@ type TypographyVariantProps = TypographyDefaultProps & {
   variant: IThemeTypographyHeading;
 };
 
-export type NormalizedSX = {
-  default?: CSSObject;
-  breakpoints?: Record<string, CSSObject>;
-  horizontal?: CSSObject;
-  vertical?: CSSObject;
-};
+export type TypographyAllProps = TypographyDataProps | TypographyVariantProps;
 
 export type NormalizedSXTypography = {
   default?: TypographyAllProps;
-  breakpoints?: Record<string, TypographyAllProps>;
+  breakpoints?: Record<IThemeDevice | string, TypographyAllProps>;
   horizontal?: TypographyAllProps;
   vertical?: TypographyAllProps;
 };
 
+export type TypographySXProps = NormalizedSXTypography | ((theme: DefaultTheme) => NormalizedSXTypography);
 
-export type TypographyAllProps = TypographyDataProps | TypographyVariantProps;
-
-export type TypographySXProps = {
-  default: TypographyAllProps;
-} & {
-  [K in IThemeDevice]?: TypographyAllProps;
-};
-
-type SXRecord = {
-  [K in IThemeDevice]?: CSSObject;
-};
-
-export type SXProps = SXRecord | ((theme: DefaultTheme) => SXRecord);
-export type SXPropsWithoutFunc = SXRecord;
-
-export interface addSXProps {
-  sx?: SXProps;
-}
-export type addSXPropsDollar = AddDollarSign<addSXProps>;
+export type TypographySXPropsWithoutFunc = NormalizedSXTypography;
 
 export type addSXTypographyProps = {
   sxTypography?: TypographySXProps;
@@ -100,3 +78,19 @@ export type addOutlineProps = {
 };
 
 export type addOutlinePropsDollar = AddDollarSign<addOutlineProps>;
+
+export type NormalizedSX = {
+  default?: CSSObject;
+  breakpoints?: Record<IThemeDevice | string, CSSObject>;
+  horizontal?: CSSObject;
+  vertical?: CSSObject;
+};
+
+export type SXProps = NormalizedSX | ((theme: DefaultTheme) => NormalizedSX);
+
+export type SXPropsWithoutFunc = NormalizedSX;
+
+export interface addSXProps {
+  sx?: SXProps;
+}
+export type addSXPropsDollar = AddDollarSign<addSXProps>;

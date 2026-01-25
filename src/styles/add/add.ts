@@ -1,9 +1,9 @@
-import { keyframeShadowPulse } from '@local/styles/keyframes/export';
-import { IThemeTypographyHeading, JeneseiPalette } from '@local/styles/theme/export';
+import { keyframeShadowPulse } from '@local/styles/keyframes';
+import { IThemeDevice, IThemeTypographyHeading, JeneseiPalette, ThemeDevice } from '@local/styles/theme';
 
 import { CSSObject, css, DefaultTheme } from 'styled-components';
 
-import { addOutlinePropsDollar, addSXPropsDollar, addSXTypographyPropsDollar, NormalizedSX, NormalizedSXTypography, SXProps, TypographyAllProps, TypographySXProps } from './add.types';
+import { addOutlinePropsDollar, addSXPropsDollar, addSXTypographyPropsDollar, TypographyAllProps } from './add.types';
 
 function toStyledCSS(value: CSSObject | ((theme: DefaultTheme) => CSSObject), theme: DefaultTheme) {
   const styles = typeof value === 'function' ? value(theme) : value;
@@ -138,111 +138,53 @@ const toStyledCSSTypography = (value: TypographyAllProps) =>
 
 export const toStyledCSSTypographyHeading = (heading: IThemeTypographyHeading) =>
   css`
-    font-size: ${(props) => props.theme.font.sizeHeading[heading] * props.theme.font.sizeDefault.default}px;
+    font-size: ${(props) => props.theme.font.sizeHeading[heading] * props.theme.font.sizeDevice.default}px;
     @media (max-width: ${(props) => props.theme.screens.tablet.width}px) {
-      font-size: ${(props) => props.theme.font.sizeHeading[heading] * props.theme.font.sizeDefault.tablet}px;
+      font-size: ${(props) => props.theme.font.sizeHeading[heading] * props.theme.font.sizeDevice.tablet}px;
     }
     @media (max-width: ${(props) => props.theme.screens.mobile.width}px) {
-      font-size: ${(props) => props.theme.font.sizeHeading[heading] * props.theme.font.sizeDefault.mobile}px;
+      font-size: ${(props) => props.theme.font.sizeHeading[heading] * props.theme.font.sizeDevice.mobile}px;
     }
   `;
 
-function normalizeSX(raw: SXProps | undefined, theme: DefaultTheme): NormalizedSX {
-  if (!raw) return {};
-
-  const sx = typeof raw === 'function' ? raw(theme) : raw;
-  const result: NormalizedSX = {};
-
-  // базовые стили
-  if (sx.default) {
-    result.default = sx.default;
-  }
-
-  // горизонтально/вертикально
-  // if ('horizontal' in sx) {
-  //   result.horizontal = sx.horizontal;
-  // }
-
-  // if ('vertical' in sx) {
-  //   result.vertical = sx.vertical;
-  // }
-
-  const bp = Object.entries(sx).filter(([key]) => key !== 'default' && key !== 'horizontal' && key !== 'vertical');
-  if (bp.length) {
-    result.breakpoints = {};
-    for (const [keyOne, value] of bp) {
-      const key = keyOne as keyof typeof theme.screens;
-      const width = theme.screens?.[key]?.width;
-      if (!width) continue;
-      result.breakpoints[`@media (max-width: ${width}px)`] = value;
-    }
-  }
-
-  return result;
-}
-
-function normalizeSxTypography(sx: TypographySXProps, theme: DefaultTheme) {
-  const result: NormalizedSXTypography = {};
-
-  if (sx.default) {
-    result.default = sx.default;
-  }
-
-  // if ('horizontal' in sx) {
-  //   result.horizontal = sx.horizontal;
-  // }
-
-  // if ('vertical' in sx) {
-  //   result.vertical = sx.vertical;
-  // }
-
-  const bp = Object.entries(sx).filter(([key]) => key !== 'default' && key !== 'horizontal' && key !== 'vertical');
-  if (bp.length) {
-    result.breakpoints = {};
-    for (const [keyOne, value] of bp) {
-      const key = keyOne as keyof typeof theme.screens;
-      const width = theme.screens[key]?.width;
-      if (!width) continue;
-      result.breakpoints[`@media (max-width: ${width}px)`] = value;
-    }
-  }
-
-  return result;
-}
-
 export const addSX = css<addSXPropsDollar>`
   ${(props) => {
-    const n = normalizeSX(props.$sx, props.theme);
-    if (!n || Object.keys(n).length === 0) return null;
+    const sx = typeof props.$sx === 'function' ? props.$sx(props.theme) : props.$sx;
+    if (!sx || Object.keys(sx).length === 0) return null;
 
     return css`
-      ${n.default && toStyledCSS(n.default, props.theme)}
+      ${sx.default && toStyledCSS(sx.default, props.theme)}
 
       ${
-        n.breakpoints &&
-        Object.entries(n.breakpoints).map(
-          ([query, style]) => css`
+        sx.breakpoints &&
+        Object.entries(sx.breakpoints).map((item) => {
+          const [breakpoint, style] = item;
+          const isThemeDevice = ThemeDevice.find((device) => device === breakpoint);
+          const query = isThemeDevice
+            ? `@media (max-width: ${props.theme.screens[breakpoint as IThemeDevice].width}px)`
+            : breakpoint;
+          return css`
             ${query} {
               ${toStyledCSS(style, props.theme)}
             }
-          `,
-        )
+          `;
+        })
       }
 
       ${
-        n.horizontal &&
+        sx.horizontal &&
         css`
           @media (orientation: landscape) {
-            ${toStyledCSS(n.horizontal, props.theme)}
+            ${toStyledCSS(sx.horizontal, props.theme)}
           }
         `
       }
 
       ${
-        n.vertical &&
+        sx.vertical &&
         css`
           @media (orientation: portrait) {
-            ${toStyledCSS(n.vertical, props.theme)}
+            ${toStyledCSS(sx.vertical, props.theme)}
           }
         `
       }
@@ -252,48 +194,48 @@ export const addSX = css<addSXPropsDollar>`
 
 export const addSXTypography = css<addSXTypographyPropsDollar>`
   ${(props) => {
-    const raw = props.$sxTypography;
-    if (!raw) return null;
-
-    const n = normalizeSxTypography(raw, props.theme);
-
-    if (!n || Object.keys(n).length === 0) return null;
+    const sx = typeof props.$sxTypography === 'function' ? props.$sxTypography(props.theme) : props.$sxTypography;
+    if (!sx || Object.keys(sx).length === 0) return null;
 
     return css`
-      ${n.default && toStyledCSSTypography(n.default)}
+      ${sx.default && toStyledCSSTypography(sx.default)}
 
       ${
-        n.breakpoints &&
-        Object.entries(n.breakpoints).map(
-          ([query, style]) => css`
+        sx.breakpoints &&
+        Object.entries(sx.breakpoints).map((item) => {
+          const [breakpoint, style] = item;
+          const isThemeDevice = ThemeDevice.find((device) => device === breakpoint);
+          const query = isThemeDevice
+            ? `@media (max-width: ${props.theme.screens[breakpoint as IThemeDevice].width}px)`
+            : breakpoint;
+          return css`
             ${query} {
               ${toStyledCSSTypography(style)}
             }
-          `,
-        )
+          `;
+        })
       }
 
       ${
-        n.horizontal &&
+        sx.horizontal &&
         css`
           @media (orientation: landscape) {
-            ${toStyledCSSTypography(n.horizontal)}
+            ${toStyledCSSTypography(sx.horizontal)}
           }
         `
       }
 
       ${
-        n.vertical &&
+        sx.vertical &&
         css`
           @media (orientation: portrait) {
-            ${toStyledCSSTypography(n.vertical)}
+            ${toStyledCSSTypography(sx.vertical)}
           }
         `
       }
     `;
   }}
 `;
-
 
 export const addRemoveScrollbar = css`
   scrollbar-width: none;

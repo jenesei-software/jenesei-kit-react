@@ -1,9 +1,9 @@
-import { addError } from '@local/components/error/export';
-import { addSX } from '@local/styles/add/export';
+import { addError } from '@local/components/error';
+import { addSX } from '@local/styles/add';
 
 import styled from 'styled-components';
 
-import { RangeComponentProps, RangeThumbProps, RangeWrapperProps } from '.';
+import { RangeComponentProps, RangeThumbProps, RangeWrapperProps } from './component.types';
 
 export const RangeWrapper = styled.div<RangeWrapperProps>`
   position: relative;

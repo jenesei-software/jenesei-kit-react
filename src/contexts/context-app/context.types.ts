@@ -1,6 +1,6 @@
-import { PreviewAdditionalProps } from '@local/areas/preview/export';
-import { ScreenWidthProps } from '@local/contexts/context-screen-width/export';
-import { IThemePaletteKeys } from '@local/styles/theme/export';
+import { PreviewAdditionalProps } from '@local/areas/preview';
+import { ScreenWidthProps } from '@local/contexts/context-screen-width';
+import { IThemePaletteKeys } from '@local/styles/theme';
 import { AddDollarSign } from '@local/types';
 
 import { PropsWithChildren, ReactElement } from 'react';

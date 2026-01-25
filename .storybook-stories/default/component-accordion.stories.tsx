@@ -2,10 +2,10 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { FC, useCallback, useState } from 'react';
 import 'styled-components';
 
-import { Accordion, AccordionProps } from '@local/components/accordion/export';
-import { Button } from '@local/components/button/export';
-import { Stack } from '@local/components/stack/export';
-import { Typography } from '@local/components/typography/export';
+import { Accordion, AccordionProps } from '@local/components/accordion';
+import { Button } from '@local/components/button';
+import { Stack } from '@local/components/stack';
+import { Typography } from '@local/components/typography';
 
 const meta: Meta<typeof Accordion> = {
   component: Accordion,

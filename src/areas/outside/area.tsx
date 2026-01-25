@@ -1,5 +1,5 @@
-import { Stack } from '@local/components/stack/export';
-import { addSXProps } from '@local/styles/add/export';
+import { Stack } from '@local/components/stack';
+import { addSXProps } from '@local/styles/add';
 
 import { FC, PropsWithChildren, useEffect, useRef } from 'react';
 

@@ -2,11 +2,11 @@ import type { Preview } from '@storybook/react-vite';
 import { PropsWithChildren } from 'react';
 import { ThemeProvider } from 'styled-components';
 
-import { ProviderBrowserTheme, useBrowserTheme } from '../src/contexts/context-browser-theme/export';
-import { ProviderDialog } from '../src/contexts/context-dialog/export';
-import { ProviderGeolocation } from '../src/contexts/context-geolocation/export';
-import { ProviderPermission } from '../src/contexts/context-permission/export';
-import { ProviderScreenWidth } from '../src/contexts/context-screen-width/export';
+import { ProviderBrowserTheme, useBrowserTheme } from '../src/contexts/context-browser-theme';
+import { ProviderDialog } from '../src/contexts/context-dialog';
+import { ProviderGeolocation } from '../src/contexts/context-geolocation';
+import { ProviderPermission } from '../src/contexts/context-permission';
+import { ProviderScreenWidth } from '../src/contexts/context-screen-width';
 import { JeneseiGlobalStyles, ThemeDark, ThemeLight } from '../src/styles/theme/index';
 
 import '@fontsource/inter/100.css';

@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import 'styled-components';
 
-import { Stack } from '@local/components/stack/export';
-import { Typography } from '@local/components/typography/export';
-import { ProviderApp } from '@local/contexts/context-app/export';
+import { Stack } from '@local/components/stack';
+import { Typography } from '@local/components/typography';
+import { ProviderApp } from '@local/contexts/context-app';
 
 const meta: Meta<typeof ProviderApp> = {
   component: ProviderApp,

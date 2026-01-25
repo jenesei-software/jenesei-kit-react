@@ -1,8 +1,8 @@
-import { ButtonProps } from '@local/components/button/export';
-import { addErrorProps } from '@local/components/error/export';
-import { ImageButtonProps } from '@local/components/image-button/export';
-import { addSXProps } from '@local/styles/add/export';
-import { ITheme, IThemeSize } from '@local/styles/theme/export';
+import { ButtonProps } from '@local/components/button';
+import { addErrorProps } from '@local/components/error';
+import { ImageButtonProps } from '@local/components/image-button';
+import { addSXProps } from '@local/styles/add';
+import { ITheme, IThemeSize } from '@local/styles/theme';
 import { AddDollarSign } from '@local/types';
 
 import { Area } from 'react-easy-crop';

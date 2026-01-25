@@ -3,8 +3,8 @@ import moment from 'moment';
 import { FC, useState } from 'react';
 import 'styled-components';
 
-import { DatePicker as DatePickerComponent } from '@local/components/date-picker/export';
-import { Typography } from '@local/components/typography/export';
+import { DatePicker as DatePickerComponent } from '@local/components/date-picker';
+import { Typography } from '@local/components/typography';
 import { LOCALE_INPUT, LOCALE_MONTHS, LOCALE_WEEKS } from '@local/consts';
 
 import { WrapperBig } from './tools';

@@ -1,14 +1,14 @@
-import { Button } from '@local/components/button/export';
-import { Image } from '@local/components/image/export';
-import { SliderImageProps } from '@local/components/image-slider/export';
-import { Stack } from '@local/components/stack/export';
-import { Typography } from '@local/components/typography/export';
-import { useDialog, useDialogProps } from '@local/contexts/context-dialog/export';
-import { KEY_SIZE_DATA } from '@local/styles/theme/export';
+import { Button } from '@local/components/button';
+import { Image } from '@local/components/image';
+import { SliderImageProps } from '@local/components/image-slider';
+import { Stack } from '@local/components/stack';
+import { Typography } from '@local/components/typography';
+import { useDialog, useDialogProps } from '@local/contexts/context-dialog';
+import { KEY_SIZE_DATA } from '@local/styles/theme';
 
 import { useCallback, useMemo, useState } from 'react';
 
-import { useImageViewProps } from '.';
+import { useImageViewProps } from './use.types';
 
 export const useImageView = (props: useImageViewProps) => {
   const size = useMemo(() => KEY_SIZE_DATA[props.size], [props.size]);

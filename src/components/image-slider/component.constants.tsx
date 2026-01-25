@@ -1,9 +1,10 @@
 import 'styled-components';
 
-import { Button } from '@local/components/button/export';
-import { Stack } from '@local/components/stack/export';
+import { Button } from '@local/components/button';
+import { Stack } from '@local/components/stack';
 
-import { ImageSliderProps } from '.';
+import { ImageSliderProps } from './component.types';
+
 
 export const IMAGES: ImageSliderProps['images'] = [
   {

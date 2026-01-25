@@ -254,7 +254,8 @@ export type IThemeSize = 'large' | 'largeMedium' | 'medium' | 'mediumSmall' | 's
 export type IThemeFontFamily = 'Inter' | 'Roboto' | 'Work Sans' | 'Roboto Mono' | 'Manrope';
 export type IThemeTypographyHeading = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'h7' | 'h8' | 'h9';
 export type IThemeTypographyWeight = 100 | 300 | 400 | 500 | 700 | 900;
-export type IThemeDevice = 'default' | 'tablet' | 'mobile';
+export const ThemeDevice = ['tablet', 'mobile', 'default'] as const;
+export type IThemeDevice = (typeof ThemeDevice)[number];
 export type IThemePaletteKeys =
   | 'transparent'
   | 'black100'
@@ -459,10 +460,8 @@ export interface ITheme {
     family: IThemeFontFamily;
     weight: IThemeTypographyWeight;
     lineHeight: number;
-    sizeDefault: Record<IThemeDevice, number>;
+    sizeDevice: Record<IThemeDevice, number>;
     sizeHeading: Record<IThemeTypographyHeading, number>;
-    // sizeLineHeight: Record<IThemeTypographyHeading, number>;
-    // sizeWeight: Record<IThemeTypographyWeight, number>;
   };
   palette: Record<IThemePaletteKeys, string>;
   background: Record<IThemePaletteKeys, string>;

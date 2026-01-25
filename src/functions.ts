@@ -1,5 +1,7 @@
-import { TypographySXProps } from "./styles/add/export";
-import { IThemeSize, KEY_SIZE_DATA } from "./styles/theme/export";
+import { DefaultTheme } from 'styled-components';
+
+import { TypographySXProps } from './styles/add';
+import { IThemeSize, KEY_SIZE_DATA } from './styles/theme';
 
 type EnumOption = {
   value: string;
@@ -64,13 +66,19 @@ export function getHasVerticalScroll(): boolean {
   return document.documentElement.scrollHeight > window.innerHeight;
 }
 
-export function getSxTypography(props: { size: IThemeSize; weight: number; sx?: TypographySXProps }): TypographySXProps {
+export function getSxTypography(props: {
+  size: IThemeSize;
+  weight: number;
+  sx?: TypographySXProps;
+  theme: DefaultTheme;
+}): TypographySXProps {
+  const sx = typeof props.sx === 'function' ? props.sx(props.theme) : props.sx;
   return {
     default: {
       size: KEY_SIZE_DATA[props.size].font,
       weight: 700,
-      ...props.sx?.default,
+      ...sx?.default,
     },
-    ...props.sx,
+    ...sx,
   };
 }

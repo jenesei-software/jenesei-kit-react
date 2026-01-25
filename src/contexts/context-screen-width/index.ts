@@ -1,3 +1,3 @@
-export * from './context';
-export * from './context.types';
-export * from './context.hooks';
+export { ProviderScreenWidth } from './context';
+export { useScreenWidth } from './context.hooks';
+export type { ScreenWidthProps } from './context.types';

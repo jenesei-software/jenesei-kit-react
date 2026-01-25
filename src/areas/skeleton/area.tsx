@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 
-import { SkeletonProps, StyledSkeleton } from '.';
+import { StyledSkeleton } from './area.styles';
+import { SkeletonProps } from './area.types';
 
 export const Skeleton: FC<SkeletonProps> = (props) => {
   const [visible, setVisible] = useState(props.defaultVisible ?? false);

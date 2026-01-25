@@ -1,6 +1,6 @@
 import { RefObject } from 'react';
 
-export interface useTooltipProps {
+export interface useOverflowingInContainerProps {
   isOverflowing?: boolean;
   isCheckSize?: boolean;
   ref: RefObject<HTMLElement | null>;

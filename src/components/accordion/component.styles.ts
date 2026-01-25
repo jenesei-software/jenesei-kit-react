@@ -1,9 +1,9 @@
-import { Icon } from '@local/components/icon/export';
-import { addTransition } from '@local/styles/add/export';
+import { Icon } from '@local/components/icon';
+import { addTransition } from '@local/styles/add';
 
 import styled, { css } from 'styled-components';
 
-import { AccordionDetailsProps, AccordionStyledIconProps, AccordionSummaryContentProps } from '.';
+import { AccordionDetailsProps, AccordionStyledIconProps, AccordionSummaryContentProps } from './component.types';
 
 export const AccordionWrapper = styled.div`
   display: flex;

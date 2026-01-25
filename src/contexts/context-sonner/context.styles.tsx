@@ -1,4 +1,4 @@
-import { addRemoveScrollbar, addSXTypography, addTransition } from '@local/styles/add/export';
+import { addRemoveScrollbar, addSXTypography, addTransition } from '@local/styles/add';
 
 import styled, { css } from 'styled-components';
 
@@ -7,7 +7,7 @@ import {
   SonnerContentTitleProps,
   SonnerElementWrapperProps,
   SonnerLayoutProps,
-} from '.';
+} from './context.types';
 
 export const SonnerLayout = styled.div<SonnerLayoutProps>`
   position: fixed;

@@ -1,7 +1,8 @@
 import Cookies from 'js-cookie';
 import { createContext, FC, useCallback, useEffect, useState } from 'react';
 
-import { CookieAttributes, CookieContextProps, ProviderCookieProps, ValidCookieObject } from '.';
+import { CookieAttributes, CookieContextProps, ProviderCookieProps, ValidCookieObject } from './context.types';
+
 
 /**
  * Context for managing cookies.

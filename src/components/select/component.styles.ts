@@ -1,7 +1,7 @@
-import { addError } from '@local/components/error/export';
-import { Icon } from '@local/components/icon/export';
-import { TextArea } from '@local/components/textarea/export';
-import { addRemoveOutline, addSX, addSXTypography } from '@local/styles/add/export';
+import { addError } from '@local/components/error';
+import { Icon } from '@local/components/icon';
+import { TextArea } from '@local/components/textarea';
+import { addRemoveOutline, addSX, addSXTypography } from '@local/styles/add';
 import { KEY_SIZE_DATA } from '@local/styles/theme/theme';
 
 import { motion } from 'framer-motion';
@@ -15,7 +15,7 @@ import {
   SelectListOptionProps,
   SelectListProps,
   SelectWrapperProps,
-} from '.';
+} from './component.types';
 
 const addSelectWrapperGenre = css<SelectWrapperProps>`
   ${(props) => css`

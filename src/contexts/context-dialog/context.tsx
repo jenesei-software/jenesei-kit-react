@@ -1,18 +1,11 @@
-import { Outside } from '@local/areas/outside/export';
+import { Outside } from '@local/areas/outside';
 
 import { AnimatePresence } from 'framer-motion';
 import { createContext, FC, memo, useCallback, useEffect, useMemo, useState } from 'react';
 
-import {
-  DEFAULT_PROVIDER_DIALOG_DURATION_ELEMENT,
-  DEFAULT_PROVIDER_DIALOG_DURATION_LAYOUT,
-  DialogContentProps,
-  DialogContextProps,
-  DialogElementProps,
-  DialogElementWrapper,
-  DialogLayout,
-  ProviderDialogProps,
-} from '.';
+import { DEFAULT_PROVIDER_DIALOG_DURATION_ELEMENT, DEFAULT_PROVIDER_DIALOG_DURATION_LAYOUT } from './context.constants';
+import { DialogElementWrapper, DialogLayout } from './context.styles';
+import { DialogContentProps, DialogContextProps, DialogElementProps, ProviderDialogProps } from './context.types';
 
 export const DialogContext = createContext<DialogContextProps | null>(null);
 

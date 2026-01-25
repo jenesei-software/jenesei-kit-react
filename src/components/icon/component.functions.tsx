@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import { getIconComponentsProps, Icon } from '.';
+import { Icon } from './component';
+import { getIconComponentsProps } from './component.types';
 
 export function getIconComponents(props: getIconComponentsProps) {
   return (props.icons ?? [])
@@ -34,7 +35,9 @@ export function useInjectSprites(urls: string[]) {
     });
 
     return () => {
-      containers.forEach((div) => { div.remove(); });
+      containers.forEach((div) => {
+        div.remove();
+      });
     };
   }, [urls]);
 }

@@ -2,10 +2,10 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { FC } from 'react';
 import 'styled-components';
 
+import { PreviewProps } from '@local/areas/preview';
 import { Preview as PreviewComponent } from '@local/areas/preview/area';
-import { PreviewProps } from '@local/areas/preview/export';
-import { Stack } from '@local/components/stack/export';
-import { TypingEffect } from '@local/styles/motion/export';
+import { Stack } from '@local/components/stack';
+import { TypingEffect } from '@local/styles/motion';
 
 const meta: Meta<typeof PreviewComponent> = {
   component: PreviewComponent,

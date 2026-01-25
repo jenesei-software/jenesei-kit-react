@@ -1,11 +1,11 @@
-import { addRippleDefault } from '@local/components/ripple/export';
-import { addOutline, addSX, addSXTypography, addTransition } from '@local/styles/add/export';
-import { KEY_SIZE_DATA } from '@local/styles/theme/export';
+import { addRippleDefault } from '@local/components/ripple';
+import { addOutline, addSX, addSXTypography, addTransition } from '@local/styles/add';
+import { KEY_SIZE_DATA } from '@local/styles/theme';
 
 import { motion } from 'framer-motion';
 import styled, { css } from 'styled-components';
 
-import { StyledButtonIconsWrapperPropsDollar, StyledButtonPropsDollar } from '.';
+import { StyledButtonIconsWrapperPropsDollar, StyledButtonPropsDollar } from './component.types';
 
 /**
  * Add

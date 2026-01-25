@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 
-import { LocalStorageContext, LocalStorageContextProps } from '.';
+import { LocalStorageContext } from './context';
+import { LocalStorageContextProps } from './context.types';
 
 /**
  * Custom hook to access the LocalStorageContext.

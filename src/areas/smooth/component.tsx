@@ -1,4 +1,4 @@
-import { StackMotion, StackProps } from '@local/components/stack/export';
+import { StackMotion, StackProps } from '@local/components/stack';
 
 import { FC } from 'react';
 

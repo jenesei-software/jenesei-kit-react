@@ -1,3 +1,7 @@
+typeof props.propsStack?.sx === 'function'
+Не использовать "."
+Не использовать "export * from ''"
+
 # jenesei-kit-react
 
 This is a frontend library for React from Jenesei Software.

@@ -1,15 +1,16 @@
-import { Button } from '@local/components/button/export';
-import { Icon } from '@local/components/icon/export';
-import { Image } from '@local/components/image/export';
-import { Stack, StackMotion } from '@local/components/stack/export';
-import { Typography } from '@local/components/typography/export';
+import { Button } from '@local/components/button';
+import { Icon } from '@local/components/icon';
+import { Image } from '@local/components/image';
+import { Stack, StackMotion } from '@local/components/stack';
+import { Typography } from '@local/components/typography';
 import { useImageSlider } from '@local/hooks/use-image-slider';
-import { KEY_SIZE_DATA } from '@local/styles/theme/export';
+import { KEY_SIZE_DATA } from '@local/styles/theme';
 
 import { AnimatePresence, Variants } from 'framer-motion';
 import { FC, useMemo } from 'react';
 
-import { ImageSliderProps, SliderDot, SliderImage } from '.';
+import { SliderDot, SliderImage } from './component.styles';
+import { ImageSliderProps } from './component.types';
 
 export const ImageSlider: FC<ImageSliderProps> = (props) => {
   const { onIndexChange } = props;

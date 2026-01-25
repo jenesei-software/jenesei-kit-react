@@ -1,8 +1,10 @@
-import { Button } from '@local/components/button/export';
+import { Button } from '@local/components/button';
 
 import { FC, useId } from 'react';
 
-import { ButtonGroupProps, ButtonGroupWrapper } from '.';
+import { ButtonGroupWrapper } from './component.styles';
+import { ButtonGroupProps } from './component.types';
+
 
 export const ButtonGroup: FC<ButtonGroupProps> = (props) => {
   const groupId = useId();

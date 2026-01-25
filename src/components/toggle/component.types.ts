@@ -1,6 +1,6 @@
-import { addErrorProps, addErrorPropsDollar } from '@local/components/error/export';
-import { addOutlineProps, addOutlinePropsDollar } from '@local/styles/add/export';
-import { ITheme, IThemeSize } from '@local/styles/theme/export';
+import { addErrorProps, addErrorPropsDollar } from '@local/components/error';
+import { addOutlineProps, addOutlinePropsDollar } from '@local/styles/add';
+import { ITheme, IThemeSize } from '@local/styles/theme';
 import { AddDollarSign } from '@local/types';
 
 export type ToggleProps = {

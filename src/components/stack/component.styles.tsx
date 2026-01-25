@@ -1,10 +1,11 @@
-import { addRipple } from '@local/components/ripple/export';
-import { addSX } from '@local/styles/add/export';
+import { addRipple } from '@local/components/ripple';
+import { addSX } from '@local/styles/add';
 
 import { motion } from 'framer-motion';
 import styled, { css } from 'styled-components';
 
-import { StyledStackProps } from '.';
+import { StyledStackProps } from './component.types';
+
 
 export const StyledStack = styled.div<StyledStackProps>`
   display: flex;

@@ -10,8 +10,7 @@ export interface ProviderLocalStorageProps extends PropsWithChildren {
   };
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-export interface ValidLocalStorageObject {}
+export type ValidLocalStorageObject = {}
 
 export interface LocalStorageContextProps {
   getLocalStorage: <K extends keyof ValidLocalStorageObject>(name: K) => ValidLocalStorageObject[K] | undefined;

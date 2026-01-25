@@ -1,8 +1,8 @@
-import { addSX } from '@local/styles/add/export';
+import { addSX } from '@local/styles/add';
 
 import { css, styled } from 'styled-components';
 
-import { StyledButtonGroupProps } from '.';
+import { StyledButtonGroupProps } from './component.types';
 
 /****************************************** Position *************************************************/
 const ButtonGroupWrapperPositionHorizontal = css`

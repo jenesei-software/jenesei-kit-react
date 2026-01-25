@@ -2,7 +2,7 @@ import { useDeepCompareMemoize } from '@local/hooks/use-deep-compare-memoize';
 
 import { RefObject, useEffect, useMemo, useRef, useState } from 'react';
 
-import { useTooltipProps } from '.';
+import { useTooltipProps } from './use.types';
 
 /**
  * Хук для отслеживания переполнения содержимого в элементе (или его родителе).

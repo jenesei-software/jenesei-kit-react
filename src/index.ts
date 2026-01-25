@@ -2,7 +2,7 @@
 // export * from '@local/types';
 // export * from '@local/functions';
 // export * from '@local/consts';
-// export * from '@local/styles/theme/export';
+// export * from '@local/styles/theme';
 // export * from '@local/styles/add/export';
 // export * from '@local/styles/motion/export';
 

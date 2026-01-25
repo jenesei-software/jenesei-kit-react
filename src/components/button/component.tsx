@@ -1,24 +1,13 @@
-import { getIconComponents } from '@local/components/icon/export';
-import { Ripple } from '@local/components/ripple/export';
-import { TypographySXProps } from '@local/styles/add/export';
-import { IThemeSize, KEY_SIZE_DATA } from '@local/styles/theme/export';
+import { getIconComponents } from '@local/components/icon';
+import { Ripple } from '@local/components/ripple';
+import { getSxTypography } from '@local/functions';
 
 import { useMergeRefs } from '@floating-ui/react';
 import { FC, Ref, useMemo, useRef } from 'react';
 import { useTheme } from 'styled-components';
 
-import { ButtonProps, StyledButton, StyledButtonIconsWrapper } from '.';
-
-function getSxTypography(props: { size: IThemeSize; weight: number; sx?: TypographySXProps }): TypographySXProps {
-  return {
-    default: {
-      size: KEY_SIZE_DATA[props.size].font,
-      weight: 700,
-      ...props.sx?.default,
-    },
-    ...props.sx,
-  };
-}
+import { StyledButton, StyledButtonIconsWrapper } from './component.styles';
+import { ButtonProps } from './component.types';
 
 export const Button: FC<ButtonProps> = (props) => {
   const theme = useTheme();
@@ -39,7 +28,6 @@ export const Button: FC<ButtonProps> = (props) => {
 
   const isInteractive = !props.isDisabled && props.isWhileTapEffect;
 
-
   return (
     <StyledButton
       $isNotHoverEffect={props.isNotHoverEffect}
@@ -59,7 +47,7 @@ export const Button: FC<ButtonProps> = (props) => {
       $isRadius={props.isRadius}
       $isHidden={props.isHidden}
       $isPlaystationEffect={props.isPlaystationEffect}
-      $sxTypography={getSxTypography({ size: props.size, weight: 700, sx: props.sxTypography })}
+      $sxTypography={getSxTypography({ size: props.size, weight: 700, sx: props.sxTypography, theme })}
       $isHiddenBorder={props.isHiddenBorder || props.isPlaystationEffect}
       disabled={props.isDisabled}
       type={props.type ?? 'button'}

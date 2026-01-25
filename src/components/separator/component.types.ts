@@ -1,5 +1,5 @@
-import { addSXProps } from '@local/styles/add/export';
-import { IThemePaletteKeys } from '@local/styles/theme/export';
+import { addSXProps } from '@local/styles/add';
+import { IThemePaletteKeys } from '@local/styles/theme';
 import { AddDollarSign } from '@local/types';
 
 export interface SeparatorProps {

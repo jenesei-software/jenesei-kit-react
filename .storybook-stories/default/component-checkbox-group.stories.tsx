@@ -6,7 +6,7 @@ import {
   CheckboxGroup as CheckboxGroupComponent,
   CheckboxGroupProps,
   CheckboxGroupValueProps,
-} from '@local/components/checkbox-group/export';
+} from '@local/components/checkbox-group';
 
 const meta: Meta<typeof CheckboxGroupComponent> = {
   component: CheckboxGroupComponent,

@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { FC, useState } from 'react';
 import 'styled-components';
 
-import { Input } from '@local/components/input/export';
-import { Range as RangeComponent, RangeProps } from '@local/components/range/export';
+import { Input } from '@local/components/input';
+import { Range as RangeComponent, RangeProps } from '@local/components/range';
 
 import { WrapperBig } from './tools';
 

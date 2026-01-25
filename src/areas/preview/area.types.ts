@@ -1,4 +1,4 @@
-import { addSXProps } from '@local/styles/add/export';
+import { addSXProps } from '@local/styles/add';
 
 import { PropsWithChildren, ReactNode } from 'react';
 

@@ -1,11 +1,12 @@
-import { ErrorMessage } from '@local/components/error/export';
+import { ErrorMessage } from '@local/components/error';
 import { getSxTypography } from '@local/functions';
 
 import { useMergeRefs } from '@floating-ui/react';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useTheme } from 'styled-components';
 
-import { StyledTextArea, TextAreaProps, TextAreaWrapper } from '.';
+import { StyledTextArea, TextAreaWrapper } from './component.styles';
+import { TextAreaProps } from './component.types';
 
 export const TextArea = (props: TextAreaProps) => {
   const theme = useTheme();
@@ -14,8 +15,8 @@ export const TextArea = (props: TextAreaProps) => {
   const ref = useMergeRefs([refLocal, props.ref]);
 
   const lineHeight = useMemo(
-    () => theme.font.sizeDefault.default * theme.font.lineHeight,
-    [theme.font.lineHeight, theme.font.sizeDefault.default],
+    () => theme.font.sizeDevice.default * theme.font.lineHeight,
+    [theme.font.lineHeight, theme.font.sizeDevice.default],
   );
   const maxHeight = useMemo(() => (props.maxRows ? props.maxRows * lineHeight : 0), [lineHeight, props.maxRows]);
   const minHeight = useMemo(
@@ -72,6 +73,7 @@ export const TextArea = (props: TextAreaProps) => {
             size: props.size,
             weight: props.isBold ? 500 : 400,
             sx: props.sxTypography,
+            theme,
           })}
           $lineHeight={lineHeight}
           $isResize={props.isResize}
@@ -115,6 +117,7 @@ export const TextArea = (props: TextAreaProps) => {
             size: props.size,
             weight: 400,
             sx: props.sxTypography,
+            theme,
           })}
         />
       ) : null}

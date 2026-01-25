@@ -1,6 +1,7 @@
 import { createContext, FC, useCallback, useEffect, useState } from 'react';
 
-import { LocalStorageContextProps, ProviderLocalStorageProps, ValidLocalStorageObject } from '.';
+import { LocalStorageContextProps, ProviderLocalStorageProps, ValidLocalStorageObject } from './context.types';
+
 
 export const LocalStorageContext = createContext<LocalStorageContextProps | null>(null);
 

@@ -1,5 +1,3 @@
-
-
 import { LIST_TYPOGRAPHY_VARIANTS_DEFAULT } from '@local/consts';
 
 import { createGlobalStyle, css } from 'styled-components';
@@ -30,7 +28,7 @@ export const JeneseiGlobalStyles = createGlobalStyle`
     max-width: 100dvw;
     min-height: 100dvh;
     height: 100%;
-    font-size: ${(props) => props.theme.font.sizeDefault.default}px;
+    font-size: ${(props) => props.theme.font.sizeDevice.default}px;
     font-family: ${(props) => props.theme.font.family}, Inter, system-ui, sans-serif;
     font-weight: ${(props) => props.theme.font.weight};
     font-feature-settings: 'kern' normal;
@@ -87,10 +85,10 @@ export const JeneseiGlobalStyles = createGlobalStyle`
   }
 
   ${LIST_TYPOGRAPHY_VARIANTS_DEFAULT.map(
-  (tag) => css`
+    (tag) => css`
     ${tag} {
       ${toStyledCSSTypographyHeading(tag)}
     }
   `,
-)}
+  )}
 `;

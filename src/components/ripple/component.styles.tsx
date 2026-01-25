@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 
-import { DEFAULT_RIPPLE_ID, RippleContainerProps } from '.';
+import { DEFAULT_RIPPLE_ID } from './component.constants';
+import { RippleContainerProps } from './component.types';
 
 export const RippleContainer = styled.div<RippleContainerProps>`
   position: absolute;

@@ -912,7 +912,7 @@ export const ThemeLight: ITheme = {
     family: 'Inter',
     weight: 400,
     lineHeight: 1.2,
-    sizeDefault: {
+    sizeDevice: {
       default: 16,
       mobile: 12,
       tablet: 14,

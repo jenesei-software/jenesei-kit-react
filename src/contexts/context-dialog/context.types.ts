@@ -1,5 +1,5 @@
-import { addOutlineProps } from '@local/styles/add/export';
-import { IThemePaletteKeys } from '@local/styles/theme/export';
+import { addOutlineProps } from '@local/styles/add';
+import { IThemePaletteKeys } from '@local/styles/theme';
 import { AddDollarSign } from '@local/types';
 
 import { PropsWithChildren, ReactNode } from 'react';
@@ -50,9 +50,7 @@ export interface DialogContentObjectPropsContentProps<T extends object = any> {
   propsCustom?: T;
 }
 
-type DialogContentObjectPropsContent<T extends object> = (
-  props: DialogContentObjectPropsContentProps<T>
-) => ReactNode;
+type DialogContentObjectPropsContent<T extends object> = (props: DialogContentObjectPropsContentProps<T>) => ReactNode;
 
 export type DialogElementProps<T extends object> = DialogContentProps<T>;
 

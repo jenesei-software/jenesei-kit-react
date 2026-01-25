@@ -1,12 +1,12 @@
-import { Button } from '@local/components/button/export';
-import { ErrorMessage } from '@local/components/error/export';
-import { Popover, usePopover } from '@local/components/popover/export';
-import { Ripple } from '@local/components/ripple/export';
-import { SelectMonth, SelectYear } from '@local/components/select/export';
-import { Stack } from '@local/components/stack/export';
-import { Typography } from '@local/components/typography/export';
+import { Button } from '@local/components/button';
+import { ErrorMessage } from '@local/components/error';
+import { Popover, usePopover } from '@local/components/popover';
+import { Ripple } from '@local/components/ripple';
+import { SelectMonth, SelectYear } from '@local/components/select';
+import { Stack } from '@local/components/stack';
+import { Typography } from '@local/components/typography';
 import { getSxTypography } from '@local/functions';
-import { KEY_SIZE_DATA } from '@local/styles/theme/export';
+import { KEY_SIZE_DATA } from '@local/styles/theme';
 
 import moment, { Moment } from 'moment';
 import {
@@ -23,7 +23,6 @@ import {
 import { useTheme } from 'styled-components';
 
 import {
-  DateDayProps,
   DateDropdownDay,
   DateDropdownDayOfWeek,
   DateDropdownDays,
@@ -32,13 +31,16 @@ import {
   DateInputButton,
   DateInputButtonClear,
   DateInputWrapper,
+  DateWrapper,
+} from './component.styles';
+import {
+  DateDayProps,
   DatePickerMode,
   DatePickerProps,
   DatePickerTranslateWeekProps,
   DatePickerType,
   DatePickerVariant,
-  DateWrapper,
-} from '.';
+} from './component.types';
 
 const weekOrder: DatePickerTranslateWeekProps['value'][] = ['mo', 'tu', 'we', 'th', 'fr', 'sa', 'su'];
 
@@ -619,6 +621,7 @@ export const DatePicker = (props: DatePickerProps) => {
                     size: props.size,
                     weight: props.isBold ? 500 : 400,
                     sx: props.sxTypography,
+                    theme,
                   })}
                   onClick={(e) => {
                     if (type === 'select') return;
@@ -793,7 +796,7 @@ export const DatePicker = (props: DatePickerProps) => {
           <DateDropdownDays $rows={rows}>
             {daysInWeek.map((e, index) => (
               <DateDropdownDayOfWeek
-                $sxTypography={getSxTypography({ size: props.size, weight: 700, sx: props.sxTypography })}
+                $sxTypography={getSxTypography({ size: props.size, weight: 700, sx: props.sxTypography, theme })}
                 tabIndex={-1}
                 type='button'
                 $isToday={false}
@@ -809,7 +812,7 @@ export const DatePicker = (props: DatePickerProps) => {
             ))}
             {daysInMonth.map((day) => (
               <DateDropdownDay
-                $sxTypography={getSxTypography({ size: props.size, weight: 700, sx: props.sxTypography })}
+                $sxTypography={getSxTypography({ size: props.size, weight: 700, sx: props.sxTypography, theme })}
                 type='button'
                 $isDisabled={day.isDisabled}
                 $isDisabledOutline={day.isDisabled ?? props.isDisabledOutline}
@@ -851,7 +854,7 @@ export const DatePicker = (props: DatePickerProps) => {
               }
             : props.error)}
           size={props?.error?.size ?? props.size}
-          sxTypography={getSxTypography({ size: props.size, weight: 400, sx: props.sxTypography })}
+          sxTypography={getSxTypography({ size: props.size, weight: 400, sx: props.sxTypography, theme })}
         />
       ) : null}
     </>

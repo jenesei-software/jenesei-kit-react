@@ -1,10 +1,10 @@
-import { addAlwaysOutline, addSX, addSXTypography } from '@local/styles/add/export';
-import { KEY_SIZE_DATA } from '@local/styles/theme/export';
+import { addAlwaysOutline, addSX, addSXTypography } from '@local/styles/add';
+import { KEY_SIZE_DATA } from '@local/styles/theme';
 
 import { motion } from 'framer-motion';
 import styled, { css } from 'styled-components';
 
-import { StyledPopoverProps } from '.';
+import { StyledPopoverProps } from './component.types';
 
 /****************************************** Popover Genre *************************************************/
 const addPopoverGenre = css<StyledPopoverProps>`

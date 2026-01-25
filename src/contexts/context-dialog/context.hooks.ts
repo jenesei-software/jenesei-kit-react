@@ -3,7 +3,9 @@ import { useDeepCompareMemoize } from '@local/hooks/use-deep-compare-memoize';
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import { DialogContext, DialogContextItemProps, DialogContextProps, useDialogProps } from '.';
+import { DialogContext } from './context';
+import { DialogContextItemProps, DialogContextProps, useDialogProps } from './context.types';
+
 
 export const useDialogs = (): DialogContextProps => {
   const context = useContext(DialogContext);

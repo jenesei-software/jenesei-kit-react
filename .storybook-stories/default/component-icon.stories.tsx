@@ -1,9 +1,9 @@
 import type { Meta } from '@storybook/react-vite';
 import 'styled-components';
 
-import { Icon as IconComponent } from '@local/components/icon/export';
-import { Typography } from '@local/components/typography/export';
-import { IThemePaletteKeys, JeneseiPalette, ThemeLight } from '@local/styles/theme/export';
+import { Icon as IconComponent } from '@local/components/icon';
+import { Typography } from '@local/components/typography';
+import { IThemePaletteKeys, JeneseiPalette, ThemeLight } from '@local/styles/theme';
 
 import { FC } from 'react';
 

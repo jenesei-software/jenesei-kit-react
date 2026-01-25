@@ -1,12 +1,12 @@
-import { addError } from '@local/components/error/export';
-import { addDisabled, addNiceNumber, addOutline, addSX, addSXTypography, addTransition } from '@local/styles/add/export';
-import { KEY_SIZE_DATA } from '@local/styles/theme/export';
+import { addError } from '@local/components/error';
+import { addDisabled, addNiceNumber, addOutline, addSX, addSXTypography, addTransition } from '@local/styles/add';
+import { KEY_SIZE_DATA } from '@local/styles/theme';
 
 import { motion } from 'framer-motion';
 import { NumericFormat, PatternFormat } from 'react-number-format';
 import styled, { css } from 'styled-components';
 
-import { StyledInputChildrenProps, StyledInputProps, StyledInputWrapperProps } from '.';
+import { StyledInputChildrenProps, StyledInputProps, StyledInputWrapperProps } from './component.types';
 
 /****************************************** Wrapper *************************************************/
 export const StyledInputWrapper = styled.div<StyledInputWrapperProps>`

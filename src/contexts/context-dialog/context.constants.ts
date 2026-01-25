@@ -1,4 +1,4 @@
-import { IThemePaletteKeys } from '@local/styles/theme/export';
+import { IThemePaletteKeys } from '@local/styles/theme';
 
 export const DEFAULT_PROVIDER_DIALOG_DURATION_ELEMENT = 0.3;
 export const DEFAULT_PROVIDER_DIALOG_DURATION_LAYOUT = 0.4;

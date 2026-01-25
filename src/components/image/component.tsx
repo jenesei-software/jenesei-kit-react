@@ -1,10 +1,11 @@
-import { Skeleton } from '@local/areas/skeleton/export';
-import { Stack } from '@local/components/stack/export';
+import { Skeleton } from '@local/areas/skeleton';
+import { Stack } from '@local/components/stack';
 
 import { FC, useEffect, useState } from 'react';
 import { useTheme } from 'styled-components';
 
-import { ImageIMG, ImageProps } from '.';
+import { ImageIMG } from './component.styles';
+import { ImageProps } from './component.types';
 
 export const Image: FC<ImageProps> = (props) => {
   const [isPending, setIsPending] = useState(true);

@@ -1,5 +1,5 @@
-import { addIconProps } from '@local/components/icon/export';
-import { addSXTypographyProps } from '@local/styles/add/export';
+import { addIconProps } from '@local/components/icon';
+import { addSXTypographyProps } from '@local/styles/add';
 import { ITheme, IThemeGenre } from '@local/styles/theme/theme.interface';
 import { AddDollarSign } from '@local/types';
 

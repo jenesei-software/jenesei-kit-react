@@ -1,7 +1,8 @@
 import { useCallback, useMemo } from 'react';
 import { useTheme } from 'styled-components';
 
-import { RangeProps, RangeThumb, RangeTrack, RangeWrapper } from '.';
+import { RangeThumb, RangeTrack, RangeWrapper } from './component.styles';
+import { RangeProps } from './component.types';
 
 export const Range = (props: RangeProps) => {
   const { onChange } = props;

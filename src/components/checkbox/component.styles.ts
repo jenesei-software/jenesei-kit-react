@@ -1,11 +1,12 @@
-import { addError } from '@local/components/error/export';
-import { addRippleDefault } from '@local/components/ripple/export';
-import { addDisabled, addOutline, addSX, addSXTypography, addTransition } from '@local/styles/add/export';
-import { KEY_SIZE_DATA } from '@local/styles/theme/export';
+import { addError } from '@local/components/error';
+import { addRippleDefault } from '@local/components/ripple';
+import { addDisabled, addOutline, addSX, addSXTypography, addTransition } from '@local/styles/add';
+import { KEY_SIZE_DATA } from '@local/styles/theme';
 
 import styled, { css } from 'styled-components';
 
-import { StyledCheckboxProps } from '.';
+import { StyledCheckboxProps } from './component.types';
+
 
 /****************************************** Size *************************************************/
 export const CheckboxSize = css<StyledCheckboxProps>`
