@@ -1,5 +1,10 @@
-import { InputItem, MonthItem, WeekItem } from './components/date-picker';
+import {
+  DatePickerTranslateInputProps,
+  DatePickerTranslateMonthProps,
+  DatePickerTranslateWeekProps,
+} from './components/date-picker';
 import { transformObjectToArray, transformObjectValuesToKeys } from './functions';
+import { IThemeTypographyHeading } from './styles/theme';
 import { ILanguage, IService } from './types';
 
 export const OBJECT_LANGUAGE: ILanguage = {
@@ -32,12 +37,12 @@ export const LIST_KEY_LANGUAGE = transformObjectValuesToKeys(OBJECT_LANGUAGE);
 export const LIST_SERVICE = transformObjectToArray(OBJECT_SERVICE);
 export const LIST_KEY_SERVICE = transformObjectValuesToKeys(OBJECT_SERVICE);
 
-export const LOCALE_INPUT: InputItem = {
+export const LOCALE_INPUT: DatePickerTranslateInputProps = {
   day: 'ДД',
   month: 'ММ',
   year: 'ГГГГ',
 };
-export const LOCALE_MONTHS: MonthItem[] = [
+export const LOCALE_MONTHS: DatePickerTranslateMonthProps[] = [
   {
     localeLong: 'Январь',
     localeShort: 'Янв',
@@ -99,7 +104,7 @@ export const LOCALE_MONTHS: MonthItem[] = [
     value: 'december',
   },
 ];
-export const LOCALE_WEEKS: WeekItem[] = [
+export const LOCALE_WEEKS: DatePickerTranslateWeekProps[] = [
   {
     localeLong: 'Monday',
     localeShort: 'Пн',
@@ -137,10 +142,18 @@ export const LOCALE_WEEKS: WeekItem[] = [
   },
 ];
 
-export const LIST_IMAGE_SUPPORTED_FORMAT = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/avif'] as const;
+export const LIST_IMAGE_SUPPORTED_FORMAT = [
+  'image/jpeg',
+  'image/jpg',
+  'image/png',
+  'image/webp',
+  'image/avif',
+] as const;
 export const LIST_IMAGE_SUPPORTED_FORMAT_FOR_INPUT = ['image/*', '.jpeg', '.jpg', '.png', '.webp', 'avif'].join(',');
 
 export const LOREM_IPSUM_TEXT =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 
-export const LIBRARY_VERSION = import.meta.env.VITE_APP_VERSION
+export const LIBRARY_VERSION = import.meta.env.VITE_APP_VERSION;
+// export const LIST_TYPOGRAPHY_VARIANTS: IThemeTypographyHeading[] = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'h7','h8','h9', 'subtitle1', 'subtitle2', 'body1', 'body2', 'caption', 'overline'];
+export const LIST_TYPOGRAPHY_VARIANTS_DEFAULT: IThemeTypographyHeading[] = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];

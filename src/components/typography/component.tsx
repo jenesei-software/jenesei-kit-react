@@ -1,15 +1,17 @@
+import { Tooltip } from '@local/components/tooltip';
 import { useScreenWidth } from '@local/contexts/context-screen-width';
 import { useOverflowing } from '@local/hooks/use-overflowing';
 
 import { createLink, LinkProps } from '@tanstack/react-router';
 import { memo, useMemo } from 'react';
+import { useTheme } from 'styled-components';
 
-import { Tooltip } from '../tooltip';
-import { Title, TypographyCSSProps, TypographyProps, TypographyTooltipProps } from '.';
+import { Title } from './component.styles';
+import { TypographyProps, TypographyPropsDollar, TypographyTooltipProps } from './component.types';
 
 const TypographyWithRef = (props: TypographyProps) => {
   const { screenActual } = useScreenWidth();
-  const cssProps: TypographyCSSProps & Pick<TypographyProps, 'onClick' | 'className' | 'style'> = useMemo(
+  const cssProps: TypographyPropsDollar & Pick<TypographyProps, 'onClick' | 'className' | 'style'> = useMemo(
     () => ({
       $sxTypography: props.sx,
       style: props.style,
@@ -33,14 +35,18 @@ const TypographyWithRef = (props: TypographyProps) => {
       props.isTransitionFontSize,
     ],
   );
-
-  const screenSX = useMemo(() => props.sx?.[screenActual] ?? props.sx?.default, [props.sx, screenActual]);
+  const theme = useTheme();
+  const screenSX = useMemo(
+    () =>
+      (typeof props?.sx === 'function' ? props?.sx(theme) : props?.sx)?.breakpoints?.[screenActual] ??
+      (typeof props?.sx === 'function' ? props?.sx(theme) : props?.sx)?.default,
+    [props.sx, screenActual, theme],
+  );
 
   if (screenSX && 'variant' in screenSX) {
     if (screenSX.variant === 'h7' || screenSX.variant === 'h8' || screenSX.variant === 'h9') {
       return (
         <Title
-          // biome-ignore lint/suspicious/noExplicitAny: <explanation>
           ref={props.ref as any}
           as={props.isAnchor ? 'a' : props.isParagraph ? 'p' : props.isSpan ? 'span' : 'span'}
           href={props.href}
@@ -52,7 +58,6 @@ const TypographyWithRef = (props: TypographyProps) => {
     } else {
       return (
         <Title
-          // biome-ignore lint/suspicious/noExplicitAny: <explanation>
           ref={props.ref as any}
           as={props.isAnchor ? 'a' : props.isParagraph ? 'p' : props.isSpan ? 'span' : screenSX.variant}
           href={props.href}
@@ -66,7 +71,6 @@ const TypographyWithRef = (props: TypographyProps) => {
 
   return (
     <Title
-      // biome-ignore lint/suspicious/noExplicitAny: <explanation>
       ref={props.ref as any}
       as={props.isAnchor ? 'a' : props.isParagraph ? 'p' : props.isSpan ? 'span' : 'span'}
       href={props.href}

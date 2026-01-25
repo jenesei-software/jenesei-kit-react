@@ -1,4 +1,4 @@
-export interface IThemeGenreTypeDefault {
+interface IThemeGenreTypeDefault {
   background: {
     rest: string;
     hover: string;
@@ -15,7 +15,7 @@ export interface IThemeGenreTypeDefault {
     placeholder: string;
   };
 }
-export interface IThemeGenreTypeRange {
+interface IThemeGenreTypeRange {
   thumb: {
     background: {
       rest: string;
@@ -36,7 +36,7 @@ export interface IThemeGenreTypeRange {
     };
   };
 }
-export interface IThemeGenreTypeSelect {
+interface IThemeGenreTypeSelect {
   background: {
     rest: string;
     hover: string;
@@ -56,7 +56,7 @@ export interface IThemeGenreTypeSelect {
     placeholder: string;
   };
 }
-export interface IThemeGenreTypeImageSelect {
+interface IThemeGenreTypeImageSelect {
   background: {
     rest: string;
     hover: string;
@@ -73,7 +73,7 @@ export interface IThemeGenreTypeImageSelect {
     placeholder: string;
   };
 }
-export interface IThemeGenreTypeToggle {
+interface IThemeGenreTypeToggle {
   active: {
     rest: {
       track: string;
@@ -104,7 +104,7 @@ export interface IThemeGenreTypeToggle {
     };
   };
 }
-export interface IThemeGenreTypeDate {
+interface IThemeGenreTypeDate {
   background: {
     rest: string;
     hover: string;
@@ -133,7 +133,7 @@ export interface IThemeGenreTypeDate {
     line: string;
   };
 }
-export interface IThemeGenreTypeSonner {
+interface IThemeGenreTypeSonner {
   button: {
     genre: keyof IThemeGenre;
   };
@@ -158,7 +158,7 @@ export interface IThemeGenreTypeSonner {
   };
 }
 
-export type IThemeGenreName =
+type IThemeGenreName =
   | 'gray'
   | 'grayBorder'
   | 'black'
@@ -222,10 +222,6 @@ export type IThemeGenreSelect = Record<
   Extract<IThemeGenreName, 'gray' | 'grayBorder' | 'blackBorder' | 'realebail-white'>,
   IThemeGenreTypeSelect
 >;
-export type IThemeGenreTextArea = Record<
-  Extract<IThemeGenreName, 'gray' | 'grayBorder' | 'blackBorder' | 'realebail-white'>,
-  IThemeGenreTypeDefault
->;
 export type IThemeGenreDate = Record<
   Extract<IThemeGenreName, 'gray' | 'grayBorder' | 'blackBorder' | 'realebail-white'>,
   IThemeGenreTypeDate
@@ -258,7 +254,8 @@ export type IThemeSize = 'large' | 'largeMedium' | 'medium' | 'mediumSmall' | 's
 export type IThemeFontFamily = 'Inter' | 'Roboto' | 'Work Sans' | 'Roboto Mono' | 'Manrope';
 export type IThemeTypographyHeading = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'h7' | 'h8' | 'h9';
 export type IThemeTypographyWeight = 100 | 300 | 400 | 500 | 700 | 900;
-export type IThemeDevice = 'default' | 'tablet' | 'mobile';
+export const ThemeDevice = ['tablet', 'mobile', 'default'] as const;
+export type IThemeDevice = (typeof ThemeDevice)[number];
 export type IThemePaletteKeys =
   | 'transparent'
   | 'black100'
@@ -462,9 +459,9 @@ export interface ITheme {
   font: {
     family: IThemeFontFamily;
     weight: IThemeTypographyWeight;
-    sizeDefault: Record<IThemeDevice, number>;
-    sizeHeading: Record<IThemeTypographyHeading, number>;
     lineHeight: number;
+    sizeDevice: Record<IThemeDevice, number>;
+    sizeHeading: Record<IThemeTypographyHeading, number>;
   };
   palette: Record<IThemePaletteKeys, string>;
   background: Record<IThemePaletteKeys, string>;
@@ -482,4 +479,5 @@ export interface ITheme {
     icon: string;
   };
   getContrastYIQ: (hexcolor: string) => string;
+  hasScrollbar: boolean;
 }

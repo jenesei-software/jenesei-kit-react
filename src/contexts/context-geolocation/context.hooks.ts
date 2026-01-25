@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 
-import { GeolocationContext, GeolocationContextProps } from '.';
+import { GeolocationContext } from './context';
+import { GeolocationContextProps } from './context.types';
 
 export const useGeolocation = (): GeolocationContextProps => {
   const context = useContext(GeolocationContext);

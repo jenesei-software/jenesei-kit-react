@@ -1,6 +1,6 @@
-import { FC, createContext, useCallback, useEffect, useState } from 'react';
+import { createContext, FC, useCallback, useEffect, useState } from 'react';
 
-import { LocalStorageContextProps, ProviderLocalStorageProps, ValidLocalStorageObject } from '.';
+import { LocalStorageContextProps, ProviderLocalStorageProps, ValidLocalStorageObject } from './context.types';
 
 export const LocalStorageContext = createContext<LocalStorageContextProps | null>(null);
 
@@ -87,7 +87,7 @@ const useProviderLocalStorage = (props: ProviderLocalStorageProps) => {
   }, []);
 
   const removeLocalStorageValues = useCallback(() => {
-    if (props.validate && props.validate.validateKeys) {
+    if (props.validate?.validateKeys) {
       props.validate?.validateKeys.forEach((key) => {
         removeLocalStorageValue(String(key) as never);
       });
@@ -97,7 +97,7 @@ const useProviderLocalStorage = (props: ProviderLocalStorageProps) => {
   }, [props.validate, removeLocalStorageValue]);
 
   const checkLocalStorage = useCallback(() => {
-    if (props.validate && props.validate.validateKeys && props.validate.getValidateLocalStorageValue) {
+    if (props.validate?.validateKeys && props.validate.getValidateLocalStorageValue) {
       props.validate?.validateKeys.forEach((key) => {
         const localStorageValue = localStorage.getItem(key);
         if (localStorageValue) {
@@ -126,6 +126,12 @@ const useProviderLocalStorage = (props: ProviderLocalStorageProps) => {
   useEffect(() => {
     checkLocalStorage();
   }, [checkLocalStorage]);
+
+  useEffect(() => {
+    return () => {
+      setLocalStorageValues(undefined);
+    };
+  }, []);
 
   return {
     getLocalStorage,

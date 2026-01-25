@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
-import { FC, createContext, useCallback, useEffect, useState } from 'react';
+import { createContext, FC, useCallback, useEffect, useState } from 'react';
 
-import { CookieAttributes, CookieContextProps, ProviderCookieProps, ValidCookieObject } from '.';
+import { CookieAttributes, CookieContextProps, ProviderCookieProps, ValidCookieObject } from './context.types';
 
 /**
  * Context for managing cookies.
@@ -82,7 +82,7 @@ const useProviderCookie = (props: ProviderCookieProps) => {
   }, []);
 
   const removeCookieValues = useCallback(() => {
-    if (props.validate && props.validate.validateKeys) {
+    if (props.validate?.validateKeys) {
       props.validate?.validateKeys.forEach((key) => {
         removeCookieValue(String(key) as never);
       });
@@ -92,7 +92,7 @@ const useProviderCookie = (props: ProviderCookieProps) => {
   }, [props.validate, removeCookieValue]);
 
   const checkCookie = useCallback(() => {
-    if (props.validate && props.validate.validateKeys && props.validate.getValidateCookieValue) {
+    if (props.validate?.validateKeys && props.validate.getValidateCookieValue) {
       props.validate?.validateKeys.forEach((key) => {
         const cookieValue = Cookies.get(String(key));
         if (cookieValue) {
@@ -122,5 +122,10 @@ const useProviderCookie = (props: ProviderCookieProps) => {
     checkCookie();
   }, [checkCookie]);
 
+  useEffect(() => {
+    return () => {
+      setCookieValues(undefined);
+    };
+  }, []);
   return { getCookie, setCookie: changeCookie, removeCookieValue, removeCookieValues, checkCookie, cookieValues };
 };

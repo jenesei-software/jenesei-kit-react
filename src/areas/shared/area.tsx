@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { FC } from 'react';
 import styled from 'styled-components';
 
-import { SharedProps } from '.';
+import { SharedProps } from './area.types';
 
 export const Shared: FC<SharedProps> = (props) => {
   return (

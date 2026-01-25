@@ -1,7 +1,6 @@
-import { addSXProps } from '@local/styles/sx';
-
-import { ButtonProps } from '../button';
-import { ImageSelectItemProps } from '../image-select';
+import { ButtonProps } from '@local/components/button';
+import { ImageSelectItemProps } from '@local/components/image-select';
+import { addSXProps } from '@local/styles/add';
 
 export interface ImageButtonProps extends addSXProps {
   button: ButtonProps;

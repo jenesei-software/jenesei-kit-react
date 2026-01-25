@@ -1,4 +1,4 @@
-import { addFont, addRemoveScrollbar, addTransition } from '@local/styles/add';
+import { addRemoveScrollbar, addSXTypography, addTransition } from '@local/styles/add';
 
 import styled, { css } from 'styled-components';
 
@@ -7,7 +7,7 @@ import {
   SonnerContentTitleProps,
   SonnerElementWrapperProps,
   SonnerLayoutProps,
-} from '.';
+} from './context.types';
 
 export const SonnerLayout = styled.div<SonnerLayoutProps>`
   position: fixed;
@@ -124,6 +124,6 @@ export const SonnerContentDescription = styled.div<SonnerContentDescriptionProps
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  ${addFont};
+  ${addSXTypography};
 `;
 export const SonnerButtonWrapper = styled.div``;

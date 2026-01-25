@@ -1,8 +1,9 @@
-import { IThemePaletteKeys } from '@local/theme/theme.interface';
+import { IThemePaletteKeys } from '@local/styles/theme/theme.interface';
 
 import { FC } from 'react';
 
-import { SeparatorProps, SeparatorWrapper } from '.';
+import { SeparatorWrapper } from './component.styles';
+import { SeparatorProps } from './component.types';
 
 export const Separator: FC<SeparatorProps> = (props) => {
   const color: IThemePaletteKeys = props.color || 'grayMonica';

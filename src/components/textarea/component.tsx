@@ -1,10 +1,12 @@
-import { ErrorMessage } from '@local/styles/error';
+import { ErrorMessage } from '@local/components/error';
+import { getSxTypography } from '@local/functions';
 
 import { useMergeRefs } from '@floating-ui/react';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useTheme } from 'styled-components';
 
-import { StyledTextArea, TextAreaProps, TextAreaWrapper } from '.';
+import { StyledTextArea, TextAreaWrapper } from './component.styles';
+import { TextAreaProps } from './component.types';
 
 export const TextArea = (props: TextAreaProps) => {
   const theme = useTheme();
@@ -13,8 +15,8 @@ export const TextArea = (props: TextAreaProps) => {
   const ref = useMergeRefs([refLocal, props.ref]);
 
   const lineHeight = useMemo(
-    () => theme.font.sizeDefault.default * theme.font.lineHeight,
-    [theme.font.lineHeight, theme.font.sizeDefault.default],
+    () => theme.font.sizeDevice.default * theme.font.lineHeight,
+    [theme.font.lineHeight, theme.font.sizeDevice.default],
   );
   const maxHeight = useMemo(() => (props.maxRows ? props.maxRows * lineHeight : 0), [lineHeight, props.maxRows]);
   const minHeight = useMemo(
@@ -67,12 +69,12 @@ export const TextArea = (props: TextAreaProps) => {
         <StyledTextArea
           tabIndex={0}
           ref={ref}
-          $font={{
-            ...props.font,
-            size: props.font?.size ?? 16,
-            weight: props.font?.weight ?? (props.isBold ? 500 : 400),
-            height: props.font?.height ?? `${lineHeight}px`,
-          }}
+          $sxTypography={getSxTypography({
+            size: props.size,
+            weight: props.isBold ? 500 : 400,
+            sx: props.sxTypography,
+            theme,
+          })}
           $lineHeight={lineHeight}
           $isResize={props.isResize}
           $error={props.error}
@@ -111,11 +113,12 @@ export const TextArea = (props: TextAreaProps) => {
         <ErrorMessage
           {...props.error}
           size={props?.error.size ?? props.size}
-          font={{
-            size: 12,
+          sxTypography={getSxTypography({
+            size: props.size,
             weight: 400,
-            family: props.font?.family ?? theme.font.family,
-          }}
+            sx: props.sxTypography,
+            theme,
+          })}
         />
       ) : null}
     </>

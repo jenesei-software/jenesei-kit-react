@@ -1,12 +1,10 @@
-import { addSXTypography } from '@local/components/typography';
-import { addAlwaysOutline, addFont } from '@local/styles/add';
-import { addSX } from '@local/styles/sx';
-import { IThemeSizePropertyDefault, KEY_SIZE_DATA } from '@local/theme';
+import { addAlwaysOutline, addSX, addSXTypography } from '@local/styles/add';
+import { KEY_SIZE_DATA } from '@local/styles/theme';
 
 import { motion } from 'framer-motion';
 import styled, { css } from 'styled-components';
 
-import { StyledPopoverProps } from '.';
+import { StyledPopoverProps } from './component.types';
 
 /****************************************** Popover Genre *************************************************/
 const addPopoverGenre = css<StyledPopoverProps>`
@@ -21,15 +19,12 @@ const addPopoverGenre = css<StyledPopoverProps>`
 /****************************************** Popover Size *************************************************/
 export const addPopoverSize = css<StyledPopoverProps>`
   ${(props) =>
-    addPopoverSizeConstructor({
-      ...KEY_SIZE_DATA[props.$size ?? 'medium'],
-    })};
-`;
-export const addPopoverSizeConstructor = (props: IThemeSizePropertyDefault) => css`
+    css`
   display: flex;
-  border-radius: ${props.radius}px;
-  padding: ${props.padding}px;
-  gap: ${props.padding - 2}px;
+  border-radius: ${KEY_SIZE_DATA[props.$size ?? 'medium'].radius}px;
+  padding: ${KEY_SIZE_DATA[props.$size ?? 'medium'].padding}px;
+  gap: ${KEY_SIZE_DATA[props.$size ?? 'medium'].padding - 2}px;
+  `};
 `;
 
 /****************************************** Default *************************************************/
@@ -38,7 +33,6 @@ export const PopoverWrapper = styled(motion.div)<StyledPopoverProps>`
   max-height: ${(props) => props.$maxHeight || '100%'};
   overflow: auto;
   flex-direction: column;
-  ${addFont};
   ${addPopoverSize};
   ${addAlwaysOutline};
   ${addSXTypography};

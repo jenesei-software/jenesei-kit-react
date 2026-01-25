@@ -1,7 +1,8 @@
-import { FC, PropsWithChildren, useEffect, useRef } from 'react';
-
 import { Stack } from '@local/components/stack';
-import { addSXProps } from '@local/styles/sx';
+import { useResolveSx } from '@local/hooks/use-resolve-sx';
+import { addSXProps } from '@local/styles/add';
+
+import { FC, PropsWithChildren, useEffect, useMemo, useRef } from 'react';
 
 type OutsideProps = PropsWithChildren &
   addSXProps & {
@@ -23,17 +24,19 @@ export const Outside: FC<OutsideProps> = (props) => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [props]);
-  return (
-    <Stack
-      sx={(theme) => ({
-        ...props?.sx,
+
+  const { resolveSX } = useResolveSx();
+  const sxStack = useMemo(
+    () =>
+      resolveSX(props?.sx, () => ({
         default: {
           display: 'content',
-          ...(props?.sx ? (typeof props?.sx === 'function' ? props?.sx(theme).default : props?.sx.default) : {}),
         },
-      })}
-      ref={elementRef}
-    >
+      })),
+    [props?.sx, resolveSX],
+  );
+  return (
+    <Stack sx={sxStack} ref={elementRef}>
       {props.children}
     </Stack>
   );

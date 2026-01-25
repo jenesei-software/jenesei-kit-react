@@ -1,5 +1,5 @@
 import { ButtonProps } from '@local/components/button';
-import { addSXProps, addSXStyleProps } from '@local/styles/sx';
+import { addSXProps, addSXPropsDollar } from '@local/styles/add';
 import { AddDollarSign } from '@local/types';
 
 export type ButtonGroupProps = {
@@ -8,4 +8,4 @@ export type ButtonGroupProps = {
   position: 'horizontal' | 'vertical';
 } & addSXProps;
 
-export type StyledButtonGroupProps = AddDollarSign<Pick<ButtonGroupProps, 'position'>> & addSXStyleProps;
+export type StyledButtonGroupProps = AddDollarSign<Pick<ButtonGroupProps, 'position'>> & addSXPropsDollar;

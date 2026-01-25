@@ -1,18 +1,9 @@
 import { Stack } from '@local/components/stack';
-import { JeneseiPalette } from '@local/theme';
+import { JeneseiPalette } from '@local/styles/theme';
 
 import styled, { css, keyframes } from 'styled-components';
 
-import { StyledSkeletonProps } from '.';
-
-// const shimmer = keyframes`
-//   0% {
-//     background-position: -468px 0;
-//   }
-//   100% {
-//     background-position: 468px 0;
-//   }
-// `;
+import { StyledSkeletonProps } from './area.types';
 
 const shimmer = keyframes`
   0% {
@@ -36,16 +27,16 @@ export const StyledSkeleton = styled(Stack)<StyledSkeletonProps>`
             background: linear-gradient(
         90deg,
           ${props.$color ? JeneseiPalette[props.$color] : props.$isInheritColor ? 'inherit' : '#f6f7f8'} 25%,
-          ${props.$color ? JeneseiPalette[props.$color] : props.$isInheritColor ? 'inherit' :'#edeef1'} 50%,
-          ${props.$color ? JeneseiPalette[props.$color] : props.$isInheritColor ? 'inherit' :'#f6f7f8'} 75%
+          ${props.$color ? JeneseiPalette[props.$color] : props.$isInheritColor ? 'inherit' : '#edeef1'} 50%,
+          ${props.$color ? JeneseiPalette[props.$color] : props.$isInheritColor ? 'inherit' : '#f6f7f8'} 75%
       );
           `
           : css`
             background: linear-gradient(
         90deg,
-          ${props.$color ? JeneseiPalette[props.$color] : props.$isInheritColor ? 'inherit' :'#edeef1'} 25%,
-          ${props.$color ? JeneseiPalette[props.$color] : props.$isInheritColor ? 'inherit' :'#f6f7f8'} 50%,
-          ${props.$color ? JeneseiPalette[props.$color] : props.$isInheritColor ? 'inherit' :'#edeef1'} 75%
+          ${props.$color ? JeneseiPalette[props.$color] : props.$isInheritColor ? 'inherit' : '#edeef1'} 25%,
+          ${props.$color ? JeneseiPalette[props.$color] : props.$isInheritColor ? 'inherit' : '#f6f7f8'} 50%,
+          ${props.$color ? JeneseiPalette[props.$color] : props.$isInheritColor ? 'inherit' : '#edeef1'} 75%
       );   
           `
       };

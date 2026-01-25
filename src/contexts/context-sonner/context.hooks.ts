@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 
-import { SonnerContext, SonnerContextProps } from '.';
+import { SonnerContext } from './context';
+import { SonnerContextProps } from './context.types';
 
 export const useSonner = (): SonnerContextProps => {
   const context = useContext(SonnerContext);

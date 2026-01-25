@@ -1,12 +1,10 @@
-import { FocusEventHandler } from 'react';
-
+import { InputStandardProps } from '@local/components/input';
 import { AddDollarSign } from '@local/types';
 
-import { InputStandardProps } from '../input/component.types';
+import { FocusEventHandler } from 'react';
 
 export type RangeProps = {
   values: number[];
-  // colors: string[]
   onChange: (values: number[]) => void;
   step: number;
   min: number;

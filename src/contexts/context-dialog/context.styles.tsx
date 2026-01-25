@@ -9,9 +9,8 @@ import {
   DEFAULT_PROVIDER_DIALOG_ELEMENT_MAX_HEIGHT,
   DEFAULT_PROVIDER_DIALOG_ELEMENT_MAX_WIDTH,
   DEFAULT_PROVIDER_DIALOG_ELEMENT_PADDING,
-  DialogElementWrapperProps,
-  DialogLayoutProps,
-} from '.';
+} from './context.constants';
+import { DialogElementWrapperProps, DialogLayoutProps } from './context.types';
 
 export const DialogLayout = styled(motion.div)<DialogLayoutProps>`
   position: fixed;

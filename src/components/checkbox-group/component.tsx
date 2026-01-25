@@ -1,21 +1,15 @@
 import { Checkbox } from '@local/components/checkbox';
-import { KEY_SIZE_DATA } from '@local/theme';
+import { getSxTypography } from '@local/functions';
 
 import { ReactNode, useCallback } from 'react';
 import { useTheme } from 'styled-components';
 
-import {
-  CheckboxChildren,
-  CheckboxGroupItem,
-  CheckboxGroupLabel,
-  CheckboxGroupProps,
-  CheckboxGroupWrapper,
-  ICheckboxValue,
-} from '.';
+import { CheckboxChildren, CheckboxGroupItem, CheckboxGroupLabel, CheckboxGroupWrapper } from './component.styles';
+import { CheckboxGroupProps, CheckboxGroupValueProps } from './component.types';
 
-export const CheckboxGroup = <T extends ICheckboxValue>(props: CheckboxGroupProps<T>) => {
+export const CheckboxGroup = <T extends CheckboxGroupValueProps>(props: CheckboxGroupProps<T>) => {
   const createMarkup = (html: string) => ({ __html: html });
-
+  const theme = useTheme();
   const handleCheckboxChange = useCallback(
     (item: T) => {
       const isSelected = props.value.some((selectedItem) => selectedItem[props.valueField] === item[props.valueField]);
@@ -30,17 +24,12 @@ export const CheckboxGroup = <T extends ICheckboxValue>(props: CheckboxGroupProp
     [props],
   );
 
-  const theme = useTheme();
   return (
     <CheckboxGroupWrapper
       className={props.className}
       $sx={props.sx}
       $size={props.size}
-      $font={{
-        ...props.font,
-        size: props.font?.size ?? KEY_SIZE_DATA[props.size].font,
-        weight: props.font?.weight ?? 700,
-      }}
+      $sxTypography={getSxTypography({ size: props.size, weight: 700, sx: props.sxTypography, theme })}
     >
       {props.options.map((e, index) => {
         const isChecked = props.value.some((selectedItem) => selectedItem[props.valueField] === e[props.valueField]);
@@ -51,14 +40,9 @@ export const CheckboxGroup = <T extends ICheckboxValue>(props: CheckboxGroupProp
               isHiddenBorder={props.checkboxIsHiddenBorder}
               view={props.checkBoxView}
               sx={props.checkboxSX}
+              sxTypography={getSxTypography({ size: props.size, weight: 700, sx: props.sxTypography, theme })}
               size={props.size}
               checked={isChecked}
-              font={{
-                size: props.font?.size ?? KEY_SIZE_DATA[props.size].font,
-                weight: props.font?.weight ?? 700,
-                family: props.font?.family ?? theme.font.family,
-                height: props.font?.height,
-              }}
             >
               {props.labelField && e?.[props.labelField] !== undefined && (
                 <CheckboxGroupLabel dangerouslySetInnerHTML={createMarkup(e[props.labelField] as string)} />

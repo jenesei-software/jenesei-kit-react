@@ -1,4 +1,4 @@
-import { addSXProps, addSXStyleProps } from '@local/styles/sx';
+import { addSXProps, addSXPropsDollar } from '@local/styles/add';
 
 import { ReactNode } from 'react';
 
@@ -20,4 +20,4 @@ export interface ImageProps {
 
 export type ImageIMGProps = {
   $isPending: boolean;
-} & addSXStyleProps;
+} & addSXPropsDollar;

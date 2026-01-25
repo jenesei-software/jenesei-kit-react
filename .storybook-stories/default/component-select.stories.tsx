@@ -3,7 +3,8 @@ import { FC, useState } from 'react';
 import 'styled-components';
 
 import { SelectLanguage, SelectMonth, SelectMonths, SelectYear } from '@local/components/select';
-import { LOCALE_MONTHS, Typography } from '@local/index';
+import { Typography } from '@local/components/typography';
+import { LOCALE_MONTHS } from '@local/consts';
 
 import moment from 'moment';
 

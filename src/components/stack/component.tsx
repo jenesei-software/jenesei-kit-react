@@ -1,10 +1,12 @@
 import { FC } from 'react';
 
-import { StackMotionProps, StackProps, StyledStack, StyledStackMotion } from '.';
+import { StyledStack, StyledStackMotion } from './component.styles';
+import { StackMotionProps, StackProps } from './component.types';
 
 export const Stack: FC<StackProps> = (props) => {
   return (
     <StyledStack
+      as={props.as}
       ref={props.ref}
       onClick={props.onClick}
       onDrop={props.onDrop}
@@ -23,6 +25,7 @@ export const StackMotion: FC<StackMotionProps> = (props) => {
   const { style, className, isHover, isRipple, onClick, onDrop, onDragOver, ref, sx } = props;
   return (
     <StyledStackMotion
+      as={props.as}
       ref={ref}
       style={style}
       onClick={onClick}

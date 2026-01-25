@@ -1,9 +1,14 @@
-import { KEY_SIZE_DATA } from '@local/theme';
+import { getSxTypography } from '@local/functions';
 
 import { autoUpdate, flip, offset, shift, useFloating } from '@floating-ui/react';
 import { AnimatePresence } from 'framer-motion';
 import { FC, Ref, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
+import { useTheme } from 'styled-components';
+
+import { DEFAULT_POPOVER_CLOSE_DELAY, DEFAULT_POPOVER_OFFSET } from './component.constants';
+import { PopoverWrapper } from './component.styles';
+import { PopoverProps, UsePopoverProps } from './component.types';
 
 // Утилита для поиска фокусируемых элементов
 const getFocusableElements = (container: HTMLElement): HTMLElement[] => {
@@ -34,9 +39,9 @@ const getNextFocusableElement = (currentElement: HTMLElement, backward = false):
   }
 };
 
-import { DEFAULT_POPOVER_CLOSE_DELAY, DEFAULT_POPOVER_OFFSET, PopoverProps, PopoverWrapper, UsePopoverProps } from '.';
-
 export const Popover: FC<PopoverProps> = (props) => {
+  const theme = useTheme();
+
   return ReactDOM.createPortal(
     <AnimatePresence>
       {props.isOpen && (
@@ -57,11 +62,12 @@ export const Popover: FC<PopoverProps> = (props) => {
             tabIndex={-1}
             $isShowAlwaysOutline={props.isShowAlwaysOutline}
             $genre={props.genre ?? 'black'}
-            $font={{
-              ...props.font,
-              size: props.font?.size ?? KEY_SIZE_DATA[props.size ?? 'medium'].font,
-              weight: props.font?.weight ?? 700,
-            }}
+            $sxTypography={getSxTypography({
+              size: props.size ?? 'medium',
+              weight: 700,
+              sx: props.sxTypography,
+              theme,
+            })}
             className={props.className}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -69,7 +75,6 @@ export const Popover: FC<PopoverProps> = (props) => {
             transition={{ duration: 0.2 }}
             $sx={props.sx}
             $size={props.size}
-            $sxTypography={props.sxTypography}
             $maxHeight={props.maxHeight}
             $maxWidth={props.maxWidth}
           >
@@ -372,8 +377,10 @@ export const usePopover = (props: UsePopoverProps) => {
         refEl instanceof HTMLElement &&
         !refEl.contains(e.relatedTarget as Node) &&
         !otherRefs.some((ref) => {
-          if (ref && 'current' in ref && ref.current && ref.current instanceof HTMLElement)
+          if (ref && 'current' in ref && ref.current && ref.current instanceof HTMLElement) {
             return ref.current.contains(e.relatedTarget as Node);
+          }
+          return false;
         })
       ) {
         onBlurReference();

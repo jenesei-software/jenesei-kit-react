@@ -1,36 +1,29 @@
-import { addSXTypography } from '@local/components/typography';
-import { addDisabled, addFont, addOutline, addTransition } from '@local/styles/add';
-import { addError } from '@local/styles/error';
-import { addSX } from '@local/styles/sx';
-import { IThemeSizePropertyDefault, KEY_SIZE_DATA } from '@local/theme';
+import { addError } from '@local/components/error';
+import { addRippleDefault } from '@local/components/ripple';
+import { addDisabled, addOutline, addSX, addSXTypography, addTransition } from '@local/styles/add';
+import { KEY_SIZE_DATA } from '@local/styles/theme';
 
 import styled, { css } from 'styled-components';
 
-import { addRippleDefault } from '../ripple';
-import { StyledCheckboxProps } from '.';
+import { StyledCheckboxProps } from './component.types';
 
 /****************************************** Size *************************************************/
 export const CheckboxSize = css<StyledCheckboxProps>`
-  ${(props) => CheckboxSizeConstructor({ ...KEY_SIZE_DATA[props.$size], isWidthAsHeight: props.$isWidthAsHeight })};
-`;
-export const CheckboxSizeConstructor = (
-  props: IThemeSizePropertyDefault & {
-    isWidthAsHeight?: boolean;
-  },
-) => css`
-  height: ${props.height}px;
-  min-height: ${props.height}px;
-  border-radius: ${props.radius}px;
-  gap: ${props.padding - 2}px;
-  padding: ${props.padding - 4}px;
+  ${(props) => css`
+  height: ${KEY_SIZE_DATA[props.$size].height}px;
+  min-height: ${KEY_SIZE_DATA[props.$size].height}px;
+  border-radius: ${KEY_SIZE_DATA[props.$size].radius}px;
+  gap: ${KEY_SIZE_DATA[props.$size].padding - 2}px;
+  padding: ${KEY_SIZE_DATA[props.$size].padding - 4}px;
   ${
-    props.isWidthAsHeight &&
+    props.$isWidthAsHeight &&
     css`
-    width: ${props.height}px;
-    min-width: ${props.height}px;
+    width: ${KEY_SIZE_DATA[props.$size].height}px;
+    min-width: ${KEY_SIZE_DATA[props.$size].height}px;
     padding: 0px;
   `
   };
+  `};
 `;
 
 /****************************************** Genre *************************************************/
@@ -86,7 +79,6 @@ export const CheckboxWrapper = styled.button<StyledCheckboxProps>`
   ${CheckboxSize};
   ${addCheckboxDisabled}
   ${addOutline};
-  ${addFont};
   ${addError};
   ${addSXTypography};
   ${addSX};

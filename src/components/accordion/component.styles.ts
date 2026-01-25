@@ -3,7 +3,7 @@ import { addTransition } from '@local/styles/add';
 
 import styled, { css } from 'styled-components';
 
-import { AccordionDetailsProps, AccordionStyledIconProps, AccordionSummaryContentProps } from '.';
+import { AccordionDetailsProps, AccordionStyledIconProps, AccordionSummaryContentProps } from './component.types';
 
 export const AccordionWrapper = styled.div`
   display: flex;

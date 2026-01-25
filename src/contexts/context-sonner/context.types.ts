@@ -1,6 +1,6 @@
 import { addIconProps } from '@local/components/icon';
-import { addFontProps } from '@local/styles/add';
-import { ITheme, IThemeGenre } from '@local/theme/theme.interface';
+import { addSXTypographyProps } from '@local/styles/add';
+import { ITheme, IThemeGenre } from '@local/styles/theme/theme.interface';
 import { AddDollarSign } from '@local/types';
 
 import { PropsWithChildren, ReactNode } from 'react';
@@ -15,15 +15,18 @@ export type ProviderSonnerProps = PropsWithChildren & {
 
 export type SonnerLayoutProps = Required<AddDollarSign<Pick<ProviderSonnerProps, 'position' | 'gap' | 'zIndex'>>>;
 export type SonnerElementWrapperProps = Required<AddDollarSign<Pick<SonnerContentStandardProps, 'genre'>>>;
-export type SonnerContentTitleProps = Required<AddDollarSign<Pick<SonnerContentStandardProps, 'genre' | 'font'>>>;
-export type SonnerContentDescriptionProps = Required<AddDollarSign<Pick<SonnerContentStandardProps, 'genre' | 'font'>>>;
+export type SonnerContentTitleProps = Required<
+  AddDollarSign<Pick<SonnerContentStandardProps, 'genre' | 'sxTypography'>>
+>;
+export type SonnerContentDescriptionProps = Required<
+  AddDollarSign<Pick<SonnerContentStandardProps, 'genre' | 'sxTypography'>>
+>;
 
 export type SonnerContextProps = {
   toast: (content: Omit<SonnerContentStandardProps, 'index'>) => void;
   promise: <T>(
     promise: Promise<T>,
     expectation: Omit<SonnerContentStandardProps, 'index'>,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     toast: (success: T | undefined, error: any | undefined) => Omit<SonnerContentProps, 'index'>,
   ) => void;
   remove: (id: SonnerContentDefaultProps['id']) => void;
@@ -67,7 +70,7 @@ type SonnerContentDefaultProps = {
       }
     | false;
   index: number;
-} & addFontProps;
+} & addSXTypographyProps;
 
 type SonnerContentContentProps = SonnerContentDefaultProps & {
   content: ReactNode | false;

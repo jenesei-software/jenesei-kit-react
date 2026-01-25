@@ -1,9 +1,7 @@
+import { PopoverProps, UsePopoverProps } from '@local/components/popover';
+import { addSXProps, addSXTypographyProps } from '@local/styles/add';
+
 import { PropsWithChildren, ReactNode } from 'react';
-
-import { addSXProps } from '@local/styles/sx';
-
-import { PopoverProps, UsePopoverProps } from '../popover';
-import { addSXTypographyProps } from '../typography';
 
 export type TooltipProps = PropsWithChildren &
   Pick<PopoverProps, 'genre' | 'size' | 'maxHeight' | 'maxWidth'> & {

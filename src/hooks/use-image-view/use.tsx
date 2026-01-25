@@ -4,11 +4,11 @@ import { SliderImageProps } from '@local/components/image-slider';
 import { Stack } from '@local/components/stack';
 import { Typography } from '@local/components/typography';
 import { useDialog, useDialogProps } from '@local/contexts/context-dialog';
-import { KEY_SIZE_DATA } from '@local/theme';
+import { KEY_SIZE_DATA } from '@local/styles/theme';
 
 import { useCallback, useMemo, useState } from 'react';
 
-import { useImageViewProps } from '.';
+import { useImageViewProps } from './use.types';
 
 export const useImageView = (props: useImageViewProps) => {
   const size = useMemo(() => KEY_SIZE_DATA[props.size], [props.size]);
@@ -28,7 +28,7 @@ export const useImageView = (props: useImageViewProps) => {
       onRemove() {
         setImage(null);
       },
-      content: (remove, _isAnimating, params) => (
+      content: (params) => (
         <Stack
           sx={{
             default: {
@@ -38,14 +38,16 @@ export const useImageView = (props: useImageViewProps) => {
               width: 'auto',
               maxWidth: '70dvw',
               height: '85dvh',
-              borderRadius: params?.br,
+              borderRadius: params?.propsCustom?.br,
             },
-            tablet: {
-              maxWidth: '95dvw',
+            breakpoints: {
+              tablet: {
+                maxWidth: '95dvw',
+              },
             },
           }}
         >
-          {params?.image ? (
+          {params?.propsCustom?.image ? (
             <Image
               sxStack={(theme) => ({
                 default: {
@@ -64,8 +66,8 @@ export const useImageView = (props: useImageViewProps) => {
                   objectFit: 'contain',
                 },
               }}
-              alt={params.image.imageSrc}
-              src={params.image.imageSrc}
+              alt={params.propsCustom?.image.imageSrc}
+              src={params.propsCustom?.image.imageSrc}
               componentFallback={
                 <Typography
                   sx={{
@@ -98,7 +100,7 @@ export const useImageView = (props: useImageViewProps) => {
             isWidthAsHeight
             isHiddenBorder
             isRadius
-            onClick={() => remove?.()}
+            onClick={() => params.remove?.()}
           />
         </Stack>
       ),

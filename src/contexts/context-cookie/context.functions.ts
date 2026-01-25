@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 
-import { CookieAttributes } from '.';
+import { CookieAttributes } from './context.types';
 
 export function getFromCookie<T>(key: string): T | null {
   const item = Cookies.get(key);

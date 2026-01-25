@@ -1,10 +1,9 @@
+import { TImageSelectGenre } from '@local/components/image-select';
+import { StackProps } from '@local/components/stack';
 import { useImageSliderProps } from '@local/hooks/use-image-slider';
-import { IThemeSize } from '@local/theme';
+import { IThemeSize } from '@local/styles/theme';
 
 import { ReactNode } from 'react';
-
-import { TImageSelectGenre } from '../image-select';
-import { StackProps } from '../stack';
 
 export type ImageSliderProps = {
   genre: TImageSelectGenre;

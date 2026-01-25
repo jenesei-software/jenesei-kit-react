@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 
-import { BrowserThemeContext, BrowserThemeContextProps } from '.';
+import { BrowserThemeContext } from './context';
+import { BrowserThemeContextProps } from './context.types';
 
 export const useBrowserTheme = (): BrowserThemeContextProps => {
   const context = useContext(BrowserThemeContext);

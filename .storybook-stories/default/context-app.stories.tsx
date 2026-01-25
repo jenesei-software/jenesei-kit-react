@@ -145,13 +145,15 @@ const defaultChildren = (
         flexDirection: 'column',
         height: 'fit-content',
       },
-      tablet: {
-        backgroundColor: theme.palette.whiteJanice,
-        padding: '10px',
-      },
-      mobile: {
-        backgroundColor: theme.palette.grayMonica,
-        padding: '10px',
+      breakpoints: {
+        tablet: {
+          backgroundColor: theme.palette.whiteJanice,
+          padding: '10px',
+        },
+        mobile: {
+          backgroundColor: theme.palette.grayMonica,
+          padding: '10px',
+        },
       },
     })}
   >

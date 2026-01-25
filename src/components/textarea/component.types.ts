@@ -1,13 +1,12 @@
-import { addFontProps } from '@local/styles/add';
-import { addErrorProps } from '@local/styles/error';
-import { addSXProps } from '@local/styles/sx';
-import { IThemeGenreTextArea, IThemeSize } from '@local/theme';
+import { addErrorProps } from '@local/components/error';
+import { addSXProps, addSXTypographyProps } from '@local/styles/add';
+import { ITheme, IThemeSize } from '@local/styles/theme';
 import { AddDollarSign } from '@local/types';
 
 import { FocusEvent, HTMLInputAutoCompleteAttribute, KeyboardEventHandler, MouseEventHandler, RefObject } from 'react';
 
 type CommonTextAreaProps = addErrorProps &
-  addFontProps &
+  addSXTypographyProps &
   addSXProps & {
     name?: string;
     ariaLabel?: string;
@@ -78,12 +77,12 @@ type FixedTextAreaProps = BaseTextAreaProps & {
 
 export type TextAreaProps = AutoHeightTextAreaProps | ResizableTextAreaProps | FixedTextAreaProps;
 
-export type TextAreaGenre = keyof IThemeGenreTextArea;
+type TextAreaGenre = keyof ITheme['colors']['input'];
 
 export type StyledTextAreaProps = AddDollarSign<
   Pick<
     TextAreaProps,
-    'genre' | 'size' | 'error' | 'isLoading' | 'isInputEffect' | 'isDisabled' | 'isBold' | 'isResize' | 'font'
+    'genre' | 'size' | 'error' | 'isLoading' | 'isInputEffect' | 'isDisabled' | 'isBold' | 'isResize' | 'sxTypography'
   > & {
     lineHeight: number;
   }

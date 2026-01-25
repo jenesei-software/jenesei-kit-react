@@ -1,7 +1,6 @@
-import { addFontProps, addOutlineProps, addOutlinePropsDollar } from '@local/styles/add';
-import { addErrorProps } from '@local/styles/error';
-import { addSXProps } from '@local/styles/sx';
-import { IThemeGenreInput, IThemeSize } from '@local/theme';
+import { addErrorProps } from '@local/components/error';
+import { addOutlineProps, addOutlinePropsDollar, addSXProps, addSXTypographyProps } from '@local/styles/add';
+import { ITheme, IThemeSize } from '@local/styles/theme';
 import { AddDollarSign } from '@local/types';
 
 import {
@@ -16,7 +15,7 @@ import {
 import { NumberFormatValues, NumericFormatProps, PatternFormatProps } from 'react-number-format';
 
 type CommonInputProps = addErrorProps &
-  addFontProps &
+  addSXTypographyProps &
   addOutlineProps &
   addSXProps & {
     ref?: Ref<HTMLInputElement | null>;
@@ -24,7 +23,7 @@ type CommonInputProps = addErrorProps &
     name?: string;
 
     ariaLabel?: string;
-    
+
     id?: string;
 
     className?: string;
@@ -144,7 +143,7 @@ export type StyledInputChildrenProps = AddDollarSign<
   Pick<InputProps, 'isDisabled'> & Pick<InputChildrenProps, 'left' | 'right' | 'width'>
 >;
 
-export type TInputGenre = keyof IThemeGenreInput;
+type TInputGenre = keyof ITheme['colors']['input'];
 
 export type StyledInputProps = AddDollarSign<
   Pick<
@@ -162,7 +161,7 @@ export type StyledInputProps = AddDollarSign<
     | 'isNotShowHoverStyle'
     | 'sx'
     | 'isCenter'
-    | 'font'
+    | 'sxTypography'
   >
 > &
   addOutlinePropsDollar;

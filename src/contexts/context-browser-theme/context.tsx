@@ -1,6 +1,6 @@
 import { createContext, FC, useCallback, useEffect, useState } from 'react';
 
-import { BrowserTheme, BrowserThemeContextProps, BrowserThemeMode, ProviderBrowserThemeProps } from '.';
+import { BrowserTheme, BrowserThemeContextProps, BrowserThemeMode, ProviderBrowserThemeProps } from './context.types';
 
 export const BrowserThemeContext = createContext<BrowserThemeContextProps | null>(null);
 

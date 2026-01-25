@@ -1,12 +1,16 @@
 import { addIconProps } from '@local/components/icon';
-import { addFontProps, addOutlineProps, addOutlinePropsDollar } from '@local/styles/add';
-import { addSXProps, addSXStyleProps } from '@local/styles/sx';
-import { IThemeGenre, IThemeSize } from '@local/theme';
+import {
+  addOutlineProps,
+  addOutlinePropsDollar,
+  addSXProps,
+  addSXPropsDollar,
+  addSXTypographyProps,
+  addSXTypographyPropsDollar,
+} from '@local/styles/add';
+import { IThemeGenre, IThemeSize } from '@local/styles/theme';
 import { AddDollarSign } from '@local/types';
 
 import React, { PropsWithChildren, Ref } from 'react';
-
-import { addSXTypographyProps, addSXTypographyStyleProps } from '../typography';
 
 export type TButtonGenre = keyof IThemeGenre;
 
@@ -53,7 +57,6 @@ type ButtonPropsDefault = PropsWithChildren & {
   onMouseDown?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   type?: 'button' | 'submit' | 'reset';
 } & addSXProps &
-  addFontProps &
   addOutlineProps &
   addSXTypographyProps;
 
@@ -66,7 +69,7 @@ export type ButtonPropsIconGroup = ButtonPropsDefault & {
 };
 
 export type ButtonProps = ButtonPropsStandard | ButtonPropsIconGroup;
-export type StyledDollarButtonProps = AddDollarSign<
+export type StyledButtonPropsDollar = AddDollarSign<
   Pick<
     ButtonProps,
     | 'genre'
@@ -80,13 +83,12 @@ export type StyledDollarButtonProps = AddDollarSign<
     | 'size'
     | 'isFullSize'
     | 'isNotHoverEffect'
-    | 'font'
   >
 > &
-  addSXStyleProps &
+  addSXPropsDollar &
   addOutlinePropsDollar &
-  addSXTypographyStyleProps;
+  addSXTypographyPropsDollar;
 
-export type StyledDollarButtonIconsWrapperProps = AddDollarSign<
+export type StyledButtonIconsWrapperPropsDollar = AddDollarSign<
   Pick<ButtonProps, 'isIconGroup' | 'size'> & Pick<ButtonPropsIconGroup, 'iconGroupOrder'>
 >;

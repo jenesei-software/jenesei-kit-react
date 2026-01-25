@@ -1,15 +1,18 @@
-import { ErrorMessage } from '@local/styles/error';
+import { ErrorMessage } from '@local/components/error';
+import { Input } from '@local/components/input';
+import { getSxTypography } from '@local/functions';
 
 import { ClipboardEvent, FocusEvent, KeyboardEvent, useCallback, useRef, useState } from 'react';
+import { useTheme } from 'styled-components';
 
-import { Input } from '../input';
-import { InputOTPProps, InputOTPWrapper } from '.';
+import { InputOTPWrapper } from './component.styles';
+import { InputOTPProps } from './component.types';
 
 export const InputOTP = (props: InputOTPProps) => {
   const [otp, setOtp] = useState<string[]>(new Array(props.length).fill(''));
   const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
-
+  const theme = useTheme();
   const handlePaste = useCallback(
     (index: number, e: ClipboardEvent<HTMLInputElement>) => {
       e.preventDefault();
@@ -37,7 +40,7 @@ export const InputOTP = (props: InputOTPProps) => {
         }
 
         setTimeout(() => {
-          const firstEmpty = newOtp.findIndex((char) => char === '');
+          const firstEmpty = newOtp.indexOf('');
           if (firstEmpty !== -1) {
             inputsRef.current[firstEmpty]?.focus();
           } else if (currentIndex < newOtp.length) {
@@ -164,7 +167,7 @@ export const InputOTP = (props: InputOTPProps) => {
             onKeyDown={(e) => handleKeyDown(index, e)}
             genre={props.genre}
             size={props.size}
-            font={props.font}
+            sxTypography={props.sxTypography}
           />
         ))}
       </InputOTPWrapper>
@@ -172,11 +175,11 @@ export const InputOTP = (props: InputOTPProps) => {
         <ErrorMessage
           {...props.error}
           size={props?.error.size ?? props.size}
-          font={{
-            size: 12,
+          sxTypography={getSxTypography({
+            size: props.size,
             weight: 400,
-            family: props.font?.family,
-          }}
+            theme,
+          })}
         />
       ) : null}
     </>

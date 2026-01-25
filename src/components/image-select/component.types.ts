@@ -1,13 +1,13 @@
-import { Area } from 'react-easy-crop';
-
 import { ButtonProps } from '@local/components/button';
+import { addErrorProps } from '@local/components/error';
 import { ImageButtonProps } from '@local/components/image-button';
-import { addErrorProps } from '@local/styles/error';
-import { addSXProps } from '@local/styles/sx';
-import { IThemeGenreImageSelect, IThemeSize } from '@local/theme';
+import { addSXProps } from '@local/styles/add';
+import { ITheme, IThemeSize } from '@local/styles/theme';
 import { AddDollarSign } from '@local/types';
 
-export type TImageSelectGenre = keyof IThemeGenreImageSelect;
+import { Area } from 'react-easy-crop';
+
+export type TImageSelectGenre = keyof ITheme['colors']['imageSelect'];
 
 export type ImageSelectItemProps = {
   crop?: {

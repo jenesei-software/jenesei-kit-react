@@ -1,47 +1,40 @@
-import { IThemeSizePropertyDefault, KEY_SIZE_DATA } from '@local/theme';
+import { addSX, addSXTypography } from '@local/styles/add';
+import { WordsPullUp } from '@local/styles/motion';
+import { KEY_SIZE_DATA } from '@local/styles/theme';
 
 import { FC } from 'react';
 import styled, { css } from 'styled-components';
 
-import { addFont } from '../add';
-import { WordsPullUp } from '../motion';
-import { addSX } from '../sx';
-import { addErrorStylesProps, ErrorMessageProps, ErrorMessagePropsDollar } from '.';
+import { addErrorPropsDollar, ErrorMessageDollarProps, ErrorMessageProps } from './component.types';
 
-const ErrorMessageSize = css<ErrorMessagePropsDollar>`
+const addErrorMessageSize = css<ErrorMessageDollarProps>`
   ${(props) =>
     props.$size
-      ? ErrorMessageSizeConstructor({ ...KEY_SIZE_DATA[props.$size], $isErrorAbsolute: props.$isErrorAbsolute })
-      : null};
-`;
-const ErrorMessageSizeConstructor = (
-  props: IThemeSizePropertyDefault & { $isErrorAbsolute: ErrorMessageProps['isErrorAbsolute'] },
-) => css`
-  ${
-    props.$isErrorAbsolute
-      ? css`
+      ? props.$isErrorAbsolute
+        ? css`
         position: absolute;
         top: calc(100% + 4px);
-        padding-left: ${props.padding}px;
+        padding-left: ${KEY_SIZE_DATA[props.$size].padding}px;
         color: ${(props) => props.theme.states.danger};
       `
-      : css`
+        : css`
         position: static;
-        padding: 0px ${props.padding}px;
+        padding: 0px ${KEY_SIZE_DATA[props.$size].padding}px;
         color: ${(props) => props.theme.states.danger};
       `
-  }
+      : null}
 `;
 
-export const ErrorMessageComponent = styled.div<ErrorMessagePropsDollar>`
+const ErrorMessageComponent = styled.div<ErrorMessageDollarProps>`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  ${ErrorMessageSize}
-  ${addFont};
-  ${addSX}
+  ${addErrorMessageSize};
+  ${addSX};
+  ${addSXTypography};
 `;
-export const addError = css<addErrorStylesProps>`
+
+export const addError = css<addErrorPropsDollar>`
   ${(props) =>
     props.$error?.isError &&
     css`
@@ -54,13 +47,14 @@ export const addError = css<addErrorStylesProps>`
       }
     `};
 `;
+
 export const ErrorMessage: FC<ErrorMessageProps> = (props) => {
   return (
     <>
       {props.errorMessage && props.isError ? (
         <ErrorMessageComponent
           $size={props.size}
-          $font={props.font}
+          $sxTypography={props.sxTypography}
           $sx={props.sx}
           $isErrorAbsolute={props.isErrorAbsolute}
         >

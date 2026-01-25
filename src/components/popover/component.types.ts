@@ -1,14 +1,10 @@
-import { addFontProps } from '@local/styles/add';
-import { addErrorStylesProps } from '@local/styles/error';
-import { addSXProps, addSXStyleProps } from '@local/styles/sx';
-import { IThemeSize } from '@local/theme';
+import { addErrorPropsDollar } from '@local/components/error';
+import { addSXProps, addSXPropsDollar, addSXTypographyProps, addSXTypographyPropsDollar } from '@local/styles/add';
+import { ITheme, IThemeSize } from '@local/styles/theme';
 import { AddDollarSign } from '@local/types';
 
 import { Placement } from '@floating-ui/react';
 import { CSSProperties, PropsWithChildren, Ref } from 'react';
-
-import { TButtonGenre } from '../button';
-import { addSXTypographyProps, addSXTypographyStyleProps } from '../typography';
 
 /**
  * Props for the Popover component. / Свойства компонента Popover.
@@ -63,18 +59,16 @@ export type PopoverProps = PropsWithChildren & {
    * Visual genre/style of the popover (e.g. 'black', 'primary').
    * Визуальный стиль поповера (например, 'black', 'primary').
    */
-  genre?: TButtonGenre;
+  genre?: keyof ITheme['colors']['button'];
 } & addSXProps &
-  addFontProps &
   addSXTypographyProps;
 
 export type StyledPopoverProps = AddDollarSign<
-  Pick<PopoverProps, 'maxWidth' | 'maxHeight' | 'size' | 'isShowAlwaysOutline'> &
-    Required<Pick<PopoverProps, 'genre' | 'font'>>
+  Pick<PopoverProps, 'maxWidth' | 'maxHeight' | 'size' | 'isShowAlwaysOutline'> & Required<Pick<PopoverProps, 'genre'>>
 > &
-  addSXStyleProps &
-  addErrorStylesProps &
-  addSXTypographyStyleProps;
+  addSXPropsDollar &
+  addErrorPropsDollar &
+  addSXTypographyPropsDollar;
 
 /**
  * Props for the usePopover hook (popover logic and behavior).

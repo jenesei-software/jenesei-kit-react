@@ -1,4 +1,2 @@
-export * from './component.types';
-export * from './component.styles';
-export * from './component';
-export * from './component.constants';
+export { Tooltip } from './component';
+export type { TooltipProps } from './component.types';

@@ -1,9 +1,8 @@
-import { IThemeSizePropertyDefault, KEY_SIZE_DATA } from '@local/theme';
+import { Popover, PopoverProps } from '@local/components/popover';
+import { Stack } from '@local/components/stack';
+import { KEY_SIZE_DATA } from '@local/styles/theme';
 
 import styled, { css } from 'styled-components';
-
-import { Popover, PopoverProps } from '../popover';
-import { Stack } from '../stack';
 
 export const TooltipContainer = styled(Stack)`
   display: flex;
@@ -13,19 +12,16 @@ export const TooltipContainer = styled(Stack)`
 
 export const addTooltipBoxSize = css<PopoverProps>`
   ${(props) =>
-    addTooltipBoxSizeConstructor({
-      ...KEY_SIZE_DATA[props.size ?? 'medium'],
-    })};
-`;
-export const addTooltipBoxSizeConstructor = (props: IThemeSizePropertyDefault) => css`
-  gap: 0px;
-  padding: ${props.padding}px ${props.padding}px 0px ${props.padding}px;
-  :after {
-    content: '';
-    display: block;
-    height: ${props.padding}px;
-    width: 100%;
-  }
+    css`
+      gap: 0px;
+      padding: ${KEY_SIZE_DATA[props.size ?? 'medium'].padding}px ${KEY_SIZE_DATA[props.size ?? 'medium'].padding}px 0px ${KEY_SIZE_DATA[props.size ?? 'medium'].padding}px;
+      :after {
+        content: '';
+        display: block;
+        height: ${KEY_SIZE_DATA[props.size ?? 'medium'].padding}px;
+        width: 100%;
+      }
+   `};
 `;
 
 /****************************************** TooltipBox *************************************************/

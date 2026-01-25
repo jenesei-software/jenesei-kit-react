@@ -1,8 +1,8 @@
-import { addSX } from '@local/styles/sx';
+import { addSX } from '@local/styles/add';
 
 import styled from 'styled-components';
 
-import { SeparatorWrapperProps } from '.';
+import { SeparatorWrapperProps } from './component.types';
 
 const DEFAULT_SEPARATOR_SIZE = '1px';
 

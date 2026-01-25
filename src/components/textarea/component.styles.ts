@@ -1,17 +1,17 @@
+import { addError } from '@local/components/error';
 import {
   addDisabled,
-  addFont,
   addOutlineChildren,
   addRemoveOutline,
+  addSX,
+  addSXTypography,
   addTransitionWithoutSize,
 } from '@local/styles/add';
-import { addError } from '@local/styles/error';
-import { addSX } from '@local/styles/sx';
-import { KEY_SIZE_DATA } from '@local/theme';
+import { KEY_SIZE_DATA } from '@local/styles/theme';
 
 import styled, { css } from 'styled-components';
 
-import { StyledTextAreaProps, TextAreaWrapperProps } from '.';
+import { StyledTextAreaProps, TextAreaWrapperProps } from './component.types';
 
 /****************************************** Wrapper *************************************************/
 const addTextAreaWrapperGenre = css<TextAreaWrapperProps>`
@@ -75,12 +75,12 @@ export const TextAreaWrapper = styled.div<TextAreaWrapperProps>`
 const addTextAreaPlaceholder = css<StyledTextAreaProps>`
   &::placeholder,
   &::-webkit-input-placeholder {
-    ${addFont};
+    ${addSXTypography};
     color: ${(props) => props.theme.colors.input[props.$genre].color.placeholder};
     opacity: 1;
   }
   &:-ms-input-placeholder {
-    ${addFont};
+    ${addSXTypography};
     color: ${(props) => props.theme.colors.input[props.$genre].color.placeholder};
     opacity: 1;
   }
@@ -118,7 +118,7 @@ export const addTextArea = css<StyledTextAreaProps>`
   height: auto;
   background-color: transparent;
 
-  ${addFont};
+  ${addSXTypography};
   ${addTextAreaGenre};
   ${addTextAreaIsResize};
   ${addTextAreaPlaceholder};

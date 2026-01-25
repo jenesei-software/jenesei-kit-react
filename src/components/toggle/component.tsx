@@ -1,8 +1,9 @@
-import { KEY_SIZE_DATA_TOGGLE } from '@local/theme';
+import { KEY_SIZE_DATA_TOGGLE } from '@local/styles/theme';
 
 import { useMemo } from 'react';
 
-import { ToggleCenter, ToggleProps, ToggleWrapper } from '.';
+import { ToggleCenter, ToggleWrapper } from './component.styles';
+import { ToggleProps } from './component.types';
 
 export const Toggle = (props: ToggleProps) => {
   const toggleVariants = useMemo(

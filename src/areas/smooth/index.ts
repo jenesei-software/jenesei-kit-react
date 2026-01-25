@@ -1,1 +1,1 @@
-export * from './component';
+export { Smooth } from './component';

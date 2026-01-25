@@ -1,8 +1,8 @@
-import { FC, createContext, useEffect, useState } from 'react';
-
 import { usePermission } from '@local/contexts/context-permission';
 
-import { GeolocationContextProps, ProviderGeolocationProps } from '.';
+import { createContext, FC, useEffect, useState } from 'react';
+
+import { GeolocationContextProps, ProviderGeolocationProps } from './context.types';
 
 export const GeolocationContext = createContext<GeolocationContextProps | null>(null);
 
@@ -12,6 +12,7 @@ export const ProviderGeolocation: FC<ProviderGeolocationProps> = (props) => {
   const [location, setLocation] = useState<GeolocationPosition | null>(null);
   const [error, setError] = useState<GeolocationPositionError | null>(null);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     const handleSuccess = (position: GeolocationPosition) => {
       setLocation(position);

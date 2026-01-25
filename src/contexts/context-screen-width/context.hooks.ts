@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 
-import { ScreenWidthContext, ScreenWidthContextProps } from '.';
+import { ScreenWidthContext } from './context';
+import { ScreenWidthContextProps } from './context.types';
 
 export const useScreenWidth = (): ScreenWidthContextProps => {
   const context = useContext(ScreenWidthContext);

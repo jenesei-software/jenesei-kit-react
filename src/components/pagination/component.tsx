@@ -1,22 +1,24 @@
+import { Button } from '@local/components/button';
+import { Stack } from '@local/components/stack';
+import { useResolveSx } from '@local/hooks/use-resolve-sx';
+
 import { AnimatePresence, motion } from 'framer-motion';
 import { FC, useCallback, useMemo } from 'react';
 
-import { Button } from '@local/components/button';
-import { Stack } from '@local/components/stack';
-
-import { DEFAULT_COMPONENT_PAGINATION_GAP, PaginationProps } from '.';
+import { DEFAULT_COMPONENT_PAGINATION_GAP } from './component.constants';
+import { PaginationProps } from './component.types';
 
 export const Pagination: FC<PaginationProps> = (props) => {
-  const isDisabledPrevious = useMemo(() => props.index == 0 && !props.isInfinity, [props.index, props.isInfinity]);
+  const isDisabledPrevious = useMemo(() => props.index === 0 && !props.isInfinity, [props.index, props.isInfinity]);
   const isDisabledNext = useMemo(
-    () => props.index == props.length - 1 && !props.isInfinity,
+    () => props.index === props.length - 1 && !props.isInfinity,
     [props.index, props.isInfinity, props.length],
   );
 
   const gap = useMemo(() => props.gap ?? DEFAULT_COMPONENT_PAGINATION_GAP, [props.gap]);
   const lengthData = useMemo(() => props.lengthData ?? {}, [props.lengthData]);
   const handlePrevious = useCallback(() => {
-    if (props.index == 0) {
+    if (props.index === 0) {
       if (props.isInfinity) {
         props.changeIndex(props.length - 1);
       }
@@ -26,7 +28,7 @@ export const Pagination: FC<PaginationProps> = (props) => {
   }, [props]);
 
   const handleNext = useCallback(() => {
-    if (props.index == props.length - 1) {
+    if (props.index === props.length - 1) {
       if (props.isInfinity) {
         props.changeIndex(0);
       }
@@ -42,17 +44,20 @@ export const Pagination: FC<PaginationProps> = (props) => {
     return Array.from({ length: end - start }, (_, i) => start + i);
   }, [props.index, props.viewQuantity, props.length]);
 
-  return (
-    <Stack
-      sx={(theme) => ({
-        ...props?.sx,
+  const { resolveSX } = useResolveSx();
+  const sxStack = useMemo(
+    () =>
+      resolveSX(props?.sx, () => ({
         default: {
           height: 'fit-content',
           gap: `${gap}px`,
-          ...(props?.sx ? (typeof props?.sx === 'function' ? props?.sx(theme).default : props?.sx.default) : {}),
         },
-      })}
-    >
+      })),
+    [props.sx, resolveSX, gap],
+  );
+
+  return (
+    <Stack sx={sxStack}>
       <Button
         isDisabled={isDisabledPrevious}
         isHidden={isDisabledPrevious}

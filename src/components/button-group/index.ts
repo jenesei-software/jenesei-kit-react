@@ -1,3 +1,2 @@
-export * from './component.types';
-export * from './component.styles';
-export * from './component';
+export { ButtonGroup } from './component';
+export type { ButtonGroupProps } from './component.types';

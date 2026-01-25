@@ -1,13 +1,13 @@
-import { MutableRefObject, useEffect, useMemo, useRef, useState } from 'react';
+import { RefObject, useEffect, useMemo, useRef, useState } from 'react';
 
-import { useTooltipProps } from '.';
+import { useOverflowingInContainerProps } from './use.types';
 
 export function useOverflowingInContainer<T extends HTMLElement>(
-  props?: useTooltipProps,
+  props?: useOverflowingInContainerProps,
 ): {
   isDisabled: boolean;
   isOverflowing: boolean;
-  ref: MutableRefObject<T | null>;
+  ref: RefObject<T | null>;
 } {
   const { ref } = props || {};
   const isCheckSize = useMemo(() => props?.isCheckSize ?? true, [props?.isCheckSize]);

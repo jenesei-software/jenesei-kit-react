@@ -1,3 +1,2 @@
-export * from './component.types';
-export * from './component.styles';
-export * from './component';
+export { Button } from './component';
+export type { ButtonProps } from './component.types';

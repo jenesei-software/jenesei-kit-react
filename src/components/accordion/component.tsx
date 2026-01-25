@@ -4,12 +4,12 @@ import React, { FC, useCallback } from 'react';
 
 import {
   AccordionDetails,
-  AccordionProps,
   AccordionStyledIcon,
   AccordionSummary,
   AccordionSummaryContent,
   AccordionWrapper,
-} from '.';
+} from './component.styles';
+import { AccordionProps } from './component.types';
 
 export const Accordion: FC<AccordionProps> = (props) => {
   const onClickSummary = useCallback(() => {

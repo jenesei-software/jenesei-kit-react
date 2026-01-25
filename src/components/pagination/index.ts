@@ -1,3 +1,2 @@
-export * from './component';
-export * from './component.types';
-export * from './component.constants';
+export { Pagination } from './component';
+export type { PaginationProps } from './component.types';

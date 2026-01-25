@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 
-import { CookieContext, CookieContextProps } from '.';
+import { CookieContext } from './context';
+import { CookieContextProps } from './context.types';
 
 /**
  * Custom hook to access the CookieContext.

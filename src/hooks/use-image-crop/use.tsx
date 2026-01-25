@@ -5,15 +5,15 @@ import { Pagination, PaginationProps } from '@local/components/pagination';
 import { Stack } from '@local/components/stack';
 import { LIST_IMAGE_SUPPORTED_FORMAT } from '@local/consts';
 import { useDialog, useDialogProps } from '@local/contexts/context-dialog';
-import { KEY_SIZE_DATA } from '@local/theme';
+import { useDeepCompareMemoize } from '@local/hooks/use-deep-compare-memoize';
+import { KEY_SIZE_DATA } from '@local/styles/theme';
 import { IImageFormat } from '@local/types';
 
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import Cropper, { Area } from 'react-easy-crop';
 import { useTheme } from 'styled-components';
 
-import { useDeepCompareMemoize } from '../use-deep-compare-memoize';
-import { useImageCropAddProps, useImageCropProps } from '.';
+import { useImageCropAddProps, useImageCropProps } from './use.types';
 
 export const useImageCrop = (props: useImageCropProps) => {
   const size = useMemo(() => KEY_SIZE_DATA[props.dialog.button.size], [props.dialog.button.size]);
@@ -39,8 +39,8 @@ export const useImageCrop = (props: useImageCropProps) => {
       onRemove() {
         setImages([]);
       },
-      content: (remove, isAnimating, params) => (
-        <CropperWrapper params={params} remove={remove} isAnimating={isAnimating} />
+      content: (params) => (
+        <CropperWrapper params={params.propsCustom} remove={params.remove} isAnimating={params.isAnimating} />
       ),
     }),
     [br, images, propsMemo.dialog, propsMemo.imageSettings, propsMemo.locale, propsMemo.onSave],
@@ -146,6 +146,7 @@ const CropperWrapper: FC<{
     },
     [newImagesCroppedArea, props],
   );
+
   const onChange = useCallback(
     async (params: {
       index: number;
@@ -189,10 +190,12 @@ const CropperWrapper: FC<{
     },
     [onSave, props?.params?.images],
   );
+
   useEffect(() => {
     setNewImages(props?.params?.images ?? []);
     setNewImagesCroppedArea((props?.params?.images ?? []).map((image) => image.croppedArea ?? null));
   }, [props?.params?.images]);
+
   useEffect(() => {
     return () => {
       setIndex(0);
@@ -238,8 +241,10 @@ const CropperWrapper: FC<{
           borderRadius: props.params?.br,
           backgroundColor: theme.palette.whiteStandard,
         },
-        tablet: {
-          maxWidth: '95dvw',
+        breakpoints: {
+          tablet: {
+            maxWidth: '95dvw',
+          },
         },
       })}
     >
@@ -364,8 +369,10 @@ const CropperWrapper: FC<{
           <Pagination
             sx={{
               default: {},
-              mobile: {
-                justifyContent: 'space-between',
+              breakpoints: {
+                mobile: {
+                  justifyContent: 'space-between',
+                },
               },
             }}
             lengthData={lengthData}
@@ -406,8 +413,10 @@ const CropperWrapper: FC<{
             default: {
               gap: '10px',
             },
-            mobile: {
-              justifyContent: 'center',
+            breakpoints: {
+              mobile: {
+                justifyContent: 'center',
+              },
             },
           }}
         >

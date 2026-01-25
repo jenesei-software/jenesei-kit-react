@@ -1,6 +1,6 @@
-import { FC } from 'react';
-
 import { StackMotion, StackProps } from '@local/components/stack';
+
+import { FC } from 'react';
 
 export const Smooth: FC<StackProps> = (props) => {
   return (

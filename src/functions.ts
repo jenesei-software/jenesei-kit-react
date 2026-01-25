@@ -1,3 +1,8 @@
+import { DefaultTheme } from 'styled-components';
+
+import { TypographySXProps } from './styles/add';
+import { IThemeSize, KEY_SIZE_DATA } from './styles/theme';
+
 type EnumOption = {
   value: string;
   label: string;
@@ -54,4 +59,26 @@ export function getScrollbarWidth() {
   const scrollBarWidth = div.offsetWidth - div.clientWidth;
   document.body.removeChild(div);
   return scrollBarWidth;
+}
+
+export function getHasVerticalScroll(): boolean {
+  if (typeof window === 'undefined') return false;
+  return document.documentElement.scrollHeight > window.innerHeight;
+}
+
+export function getSxTypography(props: {
+  size: IThemeSize;
+  weight: number;
+  sx?: TypographySXProps;
+  theme: DefaultTheme;
+}): TypographySXProps {
+  const sx = typeof props.sx === 'function' ? props.sx(props.theme) : props.sx;
+  return {
+    default: {
+      size: KEY_SIZE_DATA[props.size].font,
+      weight: 700,
+      ...sx?.default,
+    },
+    ...sx,
+  };
 }

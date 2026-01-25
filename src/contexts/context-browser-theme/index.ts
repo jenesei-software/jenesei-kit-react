@@ -1,3 +1,2 @@
-export * from './context';
-export * from './context.types';
-export * from './context.hooks';
+export { ProviderBrowserTheme } from './context';
+export { useBrowserTheme } from './context.hooks';

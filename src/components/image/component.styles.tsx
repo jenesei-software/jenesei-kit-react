@@ -1,9 +1,8 @@
-import { addTransition } from '@local/styles/add';
-import { addSX } from '@local/styles/sx';
+import { addSX, addTransition } from '@local/styles/add';
 
 import styled from 'styled-components';
 
-import { ImageIMGProps } from '.';
+import { ImageIMGProps } from './component.types';
 
 export const ImageIMG = styled.img<ImageIMGProps>`
   position: absolute;

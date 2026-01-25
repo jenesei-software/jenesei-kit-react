@@ -1,6 +1,6 @@
-import { ITheme } from '@local/theme';
+import { ITheme } from '@local/styles/theme';
 
-import { ProviderSonnerProps } from '.';
+import { ProviderSonnerProps } from './context.types';
 
 export const DEFAULT_PROVIDER_SONNER_Z_INDEX = 100;
 export const DEFAULT_PROVIDER_SONNER_SCALE = 0.04;

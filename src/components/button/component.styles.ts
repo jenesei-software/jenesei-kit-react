@@ -1,18 +1,16 @@
 import { addRippleDefault } from '@local/components/ripple';
-import { addSXTypography } from '@local/components/typography';
-import { addFont, addOutline, addTransition } from '@local/styles/add';
-import { addSX } from '@local/styles/sx';
-import { KEY_SIZE_DATA } from '@local/theme';
+import { addOutline, addSX, addSXTypography, addTransition } from '@local/styles/add';
+import { KEY_SIZE_DATA } from '@local/styles/theme';
 
 import { motion } from 'framer-motion';
 import styled, { css } from 'styled-components';
 
-import { StyledDollarButtonIconsWrapperProps, StyledDollarButtonProps } from '.';
+import { StyledButtonIconsWrapperPropsDollar, StyledButtonPropsDollar } from './component.types';
 
 /**
  * Add
  */
-const addButtonGenre = css<StyledDollarButtonProps>`
+const addButtonGenre = css<StyledButtonPropsDollar>`
   ${(props) => css`
     background: ${props.theme.colors.button[props.$genre].background.rest};
     border-color: ${props.theme.colors.button[props.$genre].border.rest};
@@ -29,7 +27,7 @@ const addButtonGenre = css<StyledDollarButtonProps>`
     }
   `};
 `;
-const addButtonDisabled = css<StyledDollarButtonProps>`
+const addButtonDisabled = css<StyledButtonPropsDollar>`
   ${(props) =>
     props.$isHidden
       ? css`
@@ -41,28 +39,28 @@ const addButtonDisabled = css<StyledDollarButtonProps>`
           opacity: 1;
         `}
 `;
-const addButtonIsHiddenBorder = css<StyledDollarButtonProps>`
+const addButtonIsHiddenBorder = css<StyledButtonPropsDollar>`
   ${(props) =>
     props.$isHiddenBorder &&
     css`
       border: 0px transparent !important;
     `}
 `;
-const addButtonIsRadius = css<StyledDollarButtonProps>`
+const addButtonIsRadius = css<StyledButtonPropsDollar>`
   ${(props) =>
     props.$isRadius &&
     css`
       border-radius: 100px;
     `}
 `;
-const addButtonIsPlaystationEffect = css<StyledDollarButtonProps>`
+const addButtonIsPlaystationEffect = css<StyledButtonPropsDollar>`
   ${(props) =>
     props.$isPlaystationEffect &&
     css`
       box-shadow: ${props.theme.effects.button};
     `}
 `;
-const addButtonSize = css<StyledDollarButtonProps>`
+const addButtonSize = css<StyledButtonPropsDollar>`
   height: fit-content;
   min-height: ${(props) => KEY_SIZE_DATA[props.$size].height}px;
   max-height: fit-content;
@@ -86,13 +84,13 @@ const addButtonSize = css<StyledDollarButtonProps>`
   ${(props) =>
     props.$isMinWidthAsContent &&
     css`
-  min-width: max-content;
-  `};
+        min-width: max-content;
+      `};
 `;
 const addButtonBorder = css`
   border: 1px solid transparent;
 `;
-const addButtonFlex = css<StyledDollarButtonProps>`
+const addButtonFlex = css<StyledButtonPropsDollar>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -100,7 +98,7 @@ const addButtonFlex = css<StyledDollarButtonProps>`
 /**
  * Styled
  */
-export const StyledButton = styled(motion.button)<StyledDollarButtonProps>`
+export const StyledButton = styled(motion.button)<StyledButtonPropsDollar>`
   cursor: pointer;
   user-select: none;
 
@@ -114,12 +112,12 @@ export const StyledButton = styled(motion.button)<StyledDollarButtonProps>`
   ${addButtonFlex};
   ${addRippleDefault};
   ${addTransition};
-  ${addFont};
   ${addOutline};
   ${addSXTypography};
   ${addSX};
 `;
-export const StyledButtonIconsWrapper = styled.div<StyledDollarButtonIconsWrapperProps>`
+
+export const StyledButtonIconsWrapper = styled.div<StyledButtonIconsWrapperPropsDollar>`
   ${(props) =>
     props.$isIconGroup
       ? css`

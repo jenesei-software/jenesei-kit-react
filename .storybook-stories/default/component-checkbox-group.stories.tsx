@@ -5,7 +5,7 @@ import 'styled-components';
 import {
   CheckboxGroup as CheckboxGroupComponent,
   CheckboxGroupProps,
-  ICheckboxValue,
+  CheckboxGroupValueProps,
 } from '@local/components/checkbox-group';
 
 const meta: Meta<typeof CheckboxGroupComponent> = {
@@ -16,7 +16,7 @@ const meta: Meta<typeof CheckboxGroupComponent> = {
 export default meta;
 type Story = StoryObj<typeof CheckboxGroupComponent>;
 
-const defaultArgs: Partial<CheckboxGroupProps<ICheckboxValue>> = {
+const defaultArgs: Partial<CheckboxGroupProps<CheckboxGroupValueProps>> = {
   checkboxGenre: 'gray',
   checkBoxView: {
     true: { type: 'checkbox', name: 'Square-true' },
@@ -39,9 +39,9 @@ const defaultArgs: Partial<CheckboxGroupProps<ICheckboxValue>> = {
   },
 };
 
-const CheckboxGroupWrapper: FC<CheckboxGroupProps<ICheckboxValue>> = (props) => {
-  const [value, setValue] = useState<ICheckboxValue[]>([]);
-  const [options] = useState<ICheckboxValue[]>([
+const CheckboxGroupWrapper: FC<CheckboxGroupProps<CheckboxGroupValueProps>> = (props) => {
+  const [value, setValue] = useState<CheckboxGroupValueProps[]>([]);
+  const [options] = useState<CheckboxGroupValueProps[]>([
     { value: 0, label: 'First' },
     { value: 1, label: 'Second' },
   ]);

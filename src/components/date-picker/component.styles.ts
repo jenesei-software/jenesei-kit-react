@@ -1,22 +1,28 @@
+import { Button, ButtonProps } from '@local/components/button';
+import { addError } from '@local/components/error';
 import { addInputIsInputEffect } from '@local/components/input';
 import {
   addDisabled,
-  addFont,
   addNiceNumber,
   addOutline,
   addRemoveOutline,
   addRemoveScrollbar,
+  addSX,
+  addSXTypography,
   addTransition,
 } from '@local/styles/add';
-import { addError } from '@local/styles/error';
-import { addSX } from '@local/styles/sx';
-import { KEY_SIZE_DATA } from '@local/theme/theme';
+import { KEY_SIZE_DATA } from '@local/styles/theme/theme';
 
 import { motion } from 'framer-motion';
 import styled, { css } from 'styled-components';
 
-import { Button, ButtonProps } from '../button';
-import { DateDropdownDayProps, DateDropdownListProps, DateInputProps, DateStyledListProps, DateWrapperProps } from '.';
+import {
+  DateDropdownDayProps,
+  DateDropdownListProps,
+  DateInputProps,
+  DateStyledListProps,
+  DateWrapperProps,
+} from './component.types';
 
 export const DateWrapper = styled.div<DateWrapperProps>`
   width: 100%;
@@ -125,7 +131,7 @@ export const addDateDropdownDaySize = css<DateDropdownDayProps>`
       opacity: 0.5;
     `}
     
-  ${addFont};
+  ${addSXTypography};
   ${addOutline};
 `;
 
@@ -166,7 +172,7 @@ export const DateInput = styled.div<DateInputProps>`
   background: transparent;
   margin: 0px !important;
   white-space: nowrap;
-  ${addFont};
+  ${addSXTypography};
   ${addDateInputSize};
   ${addDateInputGenre};
   ${addRemoveOutline};

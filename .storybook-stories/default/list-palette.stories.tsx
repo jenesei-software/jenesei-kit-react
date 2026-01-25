@@ -3,7 +3,7 @@ import { FC } from 'react';
 import 'styled-components';
 
 import { Stack } from '@local/components/stack';
-import { JeneseiPalette } from '@local/theme';
+import { JeneseiPalette } from '@local/styles/theme';
 
 import { WrapperBig } from './tools';
 

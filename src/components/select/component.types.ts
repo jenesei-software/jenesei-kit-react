@@ -1,14 +1,12 @@
-import { addFontProps } from '@local/styles/add';
-import { addErrorProps } from '@local/styles/error';
-import { addSXProps } from '@local/styles/sx';
-import { IThemeGenreSelect, IThemeSize } from '@local/theme';
+import { DatePickerTranslateMonthProps } from '@local/components/date-picker';
+import { addErrorProps } from '@local/components/error';
+import { addSXProps, addSXTypographyProps } from '@local/styles/add';
+import { ITheme, IThemeSize } from '@local/styles/theme';
 import { AddDollarSign } from '@local/types';
 
 import { FocusEvent, ReactNode, Ref } from 'react';
 
-import { MonthItem } from '../date-picker';
-
-export type TInputSelect = keyof IThemeGenreSelect;
+export type TInputSelect = keyof ITheme['colors']['select'];
 
 export interface ISelectItem {
   [key: string]: unknown;
@@ -23,7 +21,7 @@ export interface ISelectItem {
 }
 
 export type SelectProps<T extends ISelectItem> = addErrorProps &
-  addFontProps &
+  addSXTypographyProps &
   addSXProps & {
     id?: string;
 
@@ -100,7 +98,7 @@ export type SelectMonthProps = Omit<SelectProps<ISelectItem>, 'option' | 'value'
   value: number | null;
   isShortLabel?: boolean;
   onChange: (value: number | null) => void;
-  monthsLocale: MonthItem[];
+  monthsLocale: DatePickerTranslateMonthProps[];
 };
 export type SelectMonthsProps = Omit<SelectProps<ISelectItem>, 'option' | 'value' | 'onChange'> & {
   dateMin?: number;
@@ -108,7 +106,7 @@ export type SelectMonthsProps = Omit<SelectProps<ISelectItem>, 'option' | 'value
   value: number[];
   isShortLabel?: boolean;
   onChange: (value: number[]) => void;
-  monthsLocale: MonthItem[];
+  monthsLocale: DatePickerTranslateMonthProps[];
 };
 export type SelectYearProps = Omit<SelectMonthProps, 'monthsLocale'> & {
   dateMin?: number;
@@ -123,7 +121,7 @@ export type SelectWrapperProps = AddDollarSign<
 >;
 
 export type DropdownListOptionProps = AddDollarSign<
-  Pick<SelectProps<ISelectItem>, 'genre' | 'size' | 'isCenter' | 'isNotShowHoverStyle' | 'isBold' | 'font'> & {
+  Pick<SelectProps<ISelectItem>, 'genre' | 'size' | 'isCenter' | 'isNotShowHoverStyle' | 'isBold' | 'sxTypography'> & {
     item?: ISelectItem;
     isChecked?: boolean;
     isShowScroll?: boolean;
@@ -138,7 +136,7 @@ export type DropdownListOptionIconProps = AddDollarSign<
 
 export type ContainerDropdownListOptionProps<T extends ISelectItem> = Pick<
   SelectProps<T>,
-  'genre' | 'size' | 'isCenter' | 'isNotShowHoverStyle' | 'isBold' | 'isShowDropdownOptionIcon' | 'font'
+  'genre' | 'size' | 'isCenter' | 'isNotShowHoverStyle' | 'isBold' | 'isShowDropdownOptionIcon' | 'sxTypography'
 > & {
   item: T;
 

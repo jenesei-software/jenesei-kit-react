@@ -7,7 +7,7 @@ import { ProviderDialog } from '../src/contexts/context-dialog';
 import { ProviderGeolocation } from '../src/contexts/context-geolocation';
 import { ProviderPermission } from '../src/contexts/context-permission';
 import { ProviderScreenWidth } from '../src/contexts/context-screen-width';
-import { JeneseiGlobalStyles, ThemeBlack, ThemeLight } from '../src/theme/index';
+import { JeneseiGlobalStyles, ThemeDark, ThemeLight } from '../src/styles/theme/index';
 
 import '@fontsource/inter/100.css';
 import '@fontsource/inter/300.css';
@@ -66,7 +66,7 @@ const preview: Preview = {
 const Layout = (props: PropsWithChildren) => {
   const { theme } = useBrowserTheme();
   return (
-    <ThemeProvider theme={theme === 'light' ? ThemeLight : ThemeBlack}>
+    <ThemeProvider theme={theme === 'light' ? ThemeLight : ThemeDark}>
       <ProviderScreenWidth>
         <JeneseiGlobalStyles />
         <ProviderDialog zIndex={1000}>{props.children}</ProviderDialog>

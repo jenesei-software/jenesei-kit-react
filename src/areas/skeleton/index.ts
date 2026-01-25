@@ -1,3 +1,2 @@
-export * from './area.styles';
-export * from './area';
-export * from './area.types';
+export { Skeleton } from './area';
+export type { SkeletonProps } from './area.types';

@@ -1,8 +1,9 @@
 import { Button } from '@local/components/button';
 import { Icon } from '@local/components/icon';
+import { getSxTypography } from '@local/functions';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { createContext, FC, memo, useCallback, useMemo, useState } from 'react';
+import { createContext, FC, memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { useTheme } from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -14,19 +15,23 @@ import {
   DEFAULT_PROVIDER_SONNER_SCALE,
   DEFAULT_PROVIDER_SONNER_Y,
   DEFAULT_PROVIDER_SONNER_Z_INDEX,
-  ProviderSonnerProps,
+} from './context.constants';
+import {
   SonnerButtonWrapper,
   SonnerContent,
   SonnerContentDescription,
-  SonnerContentProps,
-  SonnerContentStandardProps,
   SonnerContentTitle,
-  SonnerContextProps,
-  SonnerElementProps,
   SonnerElementWrapper,
   SonnerIcon,
   SonnerLayout,
-} from '.';
+} from './context.styles';
+import {
+  ProviderSonnerProps,
+  SonnerContentProps,
+  SonnerContentStandardProps,
+  SonnerContextProps,
+  SonnerElementProps,
+} from './context.types';
 
 export const SonnerContext = createContext<SonnerContextProps | null>(null);
 
@@ -107,7 +112,7 @@ export const ProviderSonner: FC<ProviderSonnerProps> = (props) => {
       setContentHistory((prev) => {
         const existingIndex = prev.findIndex((item) => item.id === id);
 
-        let updatedHistory;
+        let updatedHistory: SonnerContentProps[];
         if (existingIndex !== -1) {
           // Replace existing item
           updatedHistory = [...prev];
@@ -133,6 +138,7 @@ export const ProviderSonner: FC<ProviderSonnerProps> = (props) => {
     },
     [memoDefaultHidingTime, remove],
   );
+
   const promise: SonnerContextProps['promise'] = useCallback(
     <T,>(
       promise: Promise<T>,
@@ -152,13 +158,21 @@ export const ProviderSonner: FC<ProviderSonnerProps> = (props) => {
     },
     [toast],
   );
+
   const handleOnClick = useCallback(
     (id: SonnerContentStandardProps['id']) => {
       remove(id);
     },
     [remove],
   );
+
   const theme = useTheme();
+
+  useEffect(() => {
+    return () => {
+      setContentHistory([]);
+    };
+  }, []);
   return (
     <SonnerContext.Provider value={{ toast, promise, remove, contentHistory }}>
       <SonnerLayout
@@ -212,6 +226,8 @@ export const ProviderSonner: FC<ProviderSonnerProps> = (props) => {
 };
 
 const SonnerElement = (props: SonnerElementProps) => {
+  const theme = useTheme();
+
   return (
     <motion.div
       key={props.id}
@@ -272,20 +288,22 @@ const SonnerElement = (props: SonnerElementProps) => {
               {props.title && (
                 <SonnerContentTitle
                   $genre={props.genre}
-                  $font={{
-                    size: 14,
+                  $sxTypography={getSxTypography({
+                    size: 'mediumSmall',
                     weight: 700,
-                  }}
+                    theme,
+                  })}
                 >
                   {props.title}
                 </SonnerContentTitle>
               )}
               {props.description && (
                 <SonnerContentDescription
-                  $font={{
-                    size: 12,
+                  $sxTypography={getSxTypography({
+                    size: 'mediumSmall',
                     weight: 400,
-                  }}
+                    theme,
+                  })}
                   $genre={props.genre}
                 >
                   {props.description}
@@ -295,7 +313,7 @@ const SonnerElement = (props: SonnerElementProps) => {
           )}
         </SonnerContent>
 
-        {props.button && props.button.content && (
+        {props.button && 'content' in props.button && props.button?.content && (
           <SonnerButtonWrapper>
             <Button
               genre={props.buttonGenre}

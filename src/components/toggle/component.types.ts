@@ -1,19 +1,17 @@
+import { addErrorProps, addErrorPropsDollar } from '@local/components/error';
 import { addOutlineProps, addOutlinePropsDollar } from '@local/styles/add';
-import { addErrorProps, addErrorStylesProps } from '@local/styles/error';
-import { IThemeGenreToggle, IThemeSize } from '@local/theme';
+import { ITheme, IThemeSize } from '@local/styles/theme';
 import { AddDollarSign } from '@local/types';
 
 export type ToggleProps = {
   value: boolean;
   onChange?: (checked: boolean) => void;
   isDisabled?: boolean;
-  genre: TToggleGenre;
+  genre: keyof ITheme['colors']['toggle'];
   size: IThemeSize;
 } & addErrorProps &
   addOutlineProps;
 
-export type TToggleGenre = keyof IThemeGenreToggle;
-
 export type StyledToggleProps = AddDollarSign<Pick<ToggleProps, 'genre' | 'isDisabled' | 'value' | 'size'>> &
-  addErrorStylesProps &
+  addErrorPropsDollar &
   addOutlinePropsDollar;

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.1.1/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.3.12/schema.json",
   "formatter": {
     "enabled": true,
     "formatWithErrors": false,
@@ -22,6 +22,9 @@
   "linter": {
     "enabled": true,
     "rules": {
+      "nursery": {
+        "noImportCycles": "error"
+      },
       "suspicious": {
         "noArrayIndexKey": "off"
       },

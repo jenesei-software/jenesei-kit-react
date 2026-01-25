@@ -1,23 +1,22 @@
+import { addSX } from '@local/styles/add';
+import { KEY_SIZE_DATA } from '@local/styles/theme';
+
 import styled, { css } from 'styled-components';
 
-import { addSX } from '@local/styles/sx';
-import { IThemeSizePropertyDefault, KEY_SIZE_DATA } from '@local/theme';
-
-import { InputOTPWrapperProps } from '.';
+import { InputOTPWrapperProps } from './component.types';
 
 /****************************************** Size *************************************************/
-export const InputOTPSize = css<InputOTPWrapperProps>`
-  ${(props) => InputOTPSizeConstructor({ ...KEY_SIZE_DATA[props.$size], ...props })};
-`;
-export const InputOTPSizeConstructor = (props: IThemeSizePropertyDefault & InputOTPWrapperProps) => css`
-  gap: ${props.padding - 2}px;
+export const addInputOTPSize = css<InputOTPWrapperProps>`
+  ${(props) => css`
+  gap: ${KEY_SIZE_DATA[props.$size].padding - 2}px;
   width: 100%;
+  `}
 `;
 
 export const InputOTPWrapper = styled.div<InputOTPWrapperProps>`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  ${InputOTPSize};
+  ${addInputOTPSize};
   ${addSX};
 `;

@@ -1,4 +1,2 @@
-export * from './context.functions';
-export * from './context';
-export * from './context.types';
-export * from './context.hooks';
+export { ProviderPermission } from './context';
+export { usePermission } from './context.hooks';

@@ -1,13 +1,12 @@
 import { Skeleton } from '@local/areas/skeleton';
-import { addColorTransition } from '@local/styles/add';
-import { addSX } from '@local/styles/sx';
-import { KEY_SIZE_DATA } from '@local/theme';
+import { addColorTransition, addSX } from '@local/styles/add';
+import { KEY_SIZE_DATA } from '@local/styles/theme';
 
 import styled, { css } from 'styled-components';
 
-import { StyledIconItemProps, StyledIconSkeletonProps } from '.';
+import { StyledIconProps, StyledIconSkeletonProps } from './component.types';
 
-export const StyledIcon = styled.svg<StyledIconItemProps>`
+export const StyledIcon = styled.svg<StyledIconProps>`
   color: ${(props) => (props.$color ? props.theme.palette[props.$color] : 'inherit')};
 
   ${(props) => css`

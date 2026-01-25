@@ -4,12 +4,12 @@ import { ImageSliderProps, SliderDot, SliderImage } from '@local/components/imag
 import { Stack } from '@local/components/stack';
 import { Typography } from '@local/components/typography';
 import { useDialog, useDialogProps } from '@local/contexts/context-dialog';
-import { KEY_SIZE_DATA } from '@local/theme';
+import { KEY_SIZE_DATA } from '@local/styles/theme';
 
 import { AnimatePresence, PanInfo, Variants } from 'framer-motion';
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 
-import { useImageSliderProps } from '.';
+import { useImageSliderProps } from './use.types';
 
 export const useImageSlider = (props: useImageSliderProps) => {
   const { onIndexChange } = props;
@@ -89,7 +89,7 @@ export const useImageSlider = (props: useImageSliderProps) => {
         padding: '0',
         background: 'whiteStandard',
       },
-      content: (remove, _isAnimating, params) => <ComponentHandleAdd params={params} remove={remove} />,
+      content: (params) => <ComponentHandleAdd params={params.propsCustom} remove={params.remove} />,
     }),
     [
       br,
@@ -175,8 +175,10 @@ const ComponentHandleAdd: FC<{
           height: '85dvh',
           borderRadius: params?.br,
         },
-        tablet: {
-          maxWidth: '95dvw',
+        breakpoints: {
+          tablet: {
+            maxWidth: '95dvw',
+          },
         },
       }}
     >

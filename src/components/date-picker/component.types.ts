@@ -1,13 +1,11 @@
+import { addErrorProps } from '@local/components/error';
 import { InputStandardProps, StyledInputProps, StyledInputWrapperProps } from '@local/components/input';
-import { addFontProps, addOutlineProps, addOutlinePropsDollar } from '@local/styles/add';
-import { addErrorProps, ErrorMessageProps } from '@local/styles/error';
-import { addSXProps } from '@local/styles/sx';
-import { IThemeGenreDate, IThemeSize } from '@local/theme';
+import { SelectMonthProps } from '@local/components/select';
+import { addOutlineProps, addOutlinePropsDollar, addSXProps, addSXTypographyProps } from '@local/styles/add';
+import { ITheme, IThemeSize } from '@local/styles/theme';
 import { AddDollarSign } from '@local/types';
 
 import { HTMLInputAutoCompleteAttribute } from 'react';
-
-import { SelectMonthProps } from '../select';
 
 export type DatePickerMode = DatePickerVariant[];
 
@@ -21,8 +19,8 @@ export type DatePickerType = 'manual' | 'select' | 'manualAndSelect';
 
 export type CommonDatePickerProps = addErrorProps &
   addSXProps &
-  addFontProps &
-  addOutlineProps & {
+  addOutlineProps &
+  addSXTypographyProps & {
     genre: TDateGenre;
 
     id?: string;
@@ -32,7 +30,7 @@ export type CommonDatePickerProps = addErrorProps &
     isMinWidth?: boolean;
 
     isShowClearButton?: boolean;
-    
+
     isInputEffect?: InputStandardProps['isInputEffect'];
 
     isOnClickClose?: boolean;
@@ -41,11 +39,11 @@ export type CommonDatePickerProps = addErrorProps &
 
     locale: {
       months: SelectMonthProps['monthsLocale'];
-      weeks: WeekItem[];
-      inputs: InputItem;
+      weeks: DatePickerTranslateWeekProps[];
+      inputs: DatePickerTranslateInputProps;
     };
 
-    notValidDate?: Omit<ErrorMessageProps, 'size' | 'isError'>;
+    notValidDate?: Omit<addErrorProps['error'], 'size' | 'isError'>;
 
     mode?: DatePickerMode;
 
@@ -56,7 +54,7 @@ export type CommonDatePickerProps = addErrorProps &
     ariaLabel?: string;
 
     autoComplete?: HTMLInputAutoCompleteAttribute | string;
-    
+
     onBlur?: () => void;
 
     onChange: (timestamp: number | null) => void;
@@ -85,7 +83,7 @@ type UncontrolledValue = {
 };
 export type DatePickerProps = CommonDatePickerProps & (ControlledValue | UncontrolledValue);
 
-export type TDateGenre = keyof IThemeGenreDate;
+export type TDateGenre = keyof ITheme['colors']['date'];
 
 export interface DateDayProps {
   dayOfWeek: number;
@@ -117,7 +115,18 @@ export type DateWrapperProps = AddDollarSign<
   StyledInputWrapperProps;
 
 export type DateInputProps = AddDollarSign<
-  Pick<DatePickerProps, 'error' | 'genre' | 'size' | 'isBold' | 'isReadOnly' | 'isDisabledOutline' | 'isOutlineBoxShadow' | 'isDisabled' | 'font'> & {
+  Pick<
+    DatePickerProps,
+    | 'error'
+    | 'genre'
+    | 'size'
+    | 'isBold'
+    | 'isReadOnly'
+    | 'isDisabledOutline'
+    | 'isOutlineBoxShadow'
+    | 'isDisabled'
+    | 'sxTypography'
+  > & {
     isOpen?: boolean;
     isActive?: boolean;
     isHaveValue?: boolean;
@@ -138,7 +147,7 @@ export type DateDropdownListProps = AddDollarSign<
 >;
 
 export type DateDropdownDayProps = AddDollarSign<
-  Pick<DatePickerProps, 'genre' | 'size' | 'font'> &
+  Pick<DatePickerProps, 'genre' | 'size' | 'sxTypography'> &
     Pick<DateDayProps, 'isToday' | 'isWeekend'> & {
       row: number;
       column: number;
@@ -149,7 +158,7 @@ export type DateDropdownDayProps = AddDollarSign<
 > &
   addOutlinePropsDollar;
 
-export type MonthItem = {
+export type DatePickerTranslateMonthProps = {
   localeLong: string;
 
   localeShort: string;
@@ -168,14 +177,14 @@ export type MonthItem = {
     | 'november'
     | 'december';
 };
-export type WeekItem = {
+export type DatePickerTranslateWeekProps = {
   localeLong: string;
 
   localeShort: string;
 
   value: 'mo' | 'tu' | 'we' | 'th' | 'fr' | 'sa' | 'su';
 };
-export type InputItem = {
+export type DatePickerTranslateInputProps = {
   day: string;
 
   month: string;

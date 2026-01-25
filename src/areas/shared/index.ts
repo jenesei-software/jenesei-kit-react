@@ -1,2 +1,2 @@
-export * from './area';
-export * from './area.types';
+export { Shared } from './area';
+export type { SharedProps } from './area.types';

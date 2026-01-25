@@ -1,10 +1,10 @@
+import { Button } from '@local/components/button';
 import { LIST_IMAGE_SUPPORTED_FORMAT_FOR_INPUT } from '@local/consts';
 import { useImageCrop } from '@local/hooks/use-image-crop';
 
 import { FC, useCallback, useRef } from 'react';
 
-import { Button } from '../button';
-import { ImageButtonProps } from '.';
+import { ImageButtonProps } from './component.types';
 
 export const ImageButton: FC<ImageButtonProps> = (props) => {
   const refInput = useRef<HTMLInputElement | null>(null);
