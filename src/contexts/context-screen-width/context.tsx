@@ -1,40 +1,51 @@
-import { createContext, FC, useCallback, useEffect, useMemo, useState } from 'react';
-import { useTheme } from 'styled-components';
+import { ThemeGlobal } from '@local/styles/theme/theme.vanilla-extract';
 
-import { ProviderScreenWidthProps, Screens, ScreenWidthContextProps } from './context.types';
+import { createContext, FC, useCallback, useEffect, useMemo, useState } from 'react';
+
+import { ProviderScreenWidthProps, ScreenWidthContextProps } from './context.types';
 
 export const ScreenWidthContext = createContext<ScreenWidthContextProps | null>(null);
 
 export const ProviderScreenWidth: FC<ProviderScreenWidthProps> = ({ children }) => {
-  const theme = useTheme();
-  const [screenWidth, setScreenWidth] = useState<Screens>('default');
+  const [breakpoint, setBreakpoint] = useState<ScreenWidthContextProps['breakpoint']>('default');
+  const [orientation, setOrientation] = useState<ScreenWidthContextProps['orientation']>(
+    typeof window !== 'undefined' && window.innerWidth > window.innerHeight ? 'horizontal' : 'vertical',
+  );
+
   const [windowWidth, setWindowWidth] = useState<number>(typeof window !== 'undefined' ? window.innerWidth : 0);
 
   const queries = useMemo(() => {
     if (typeof window === 'undefined') return [];
 
-    return Object.entries(theme.screens)
-      .map(([key, value]) => ({
-        key: key as Screens,
-        bp: (value as { width: number }).width,
-      }))
+    return Object.entries(ThemeGlobal.screen.breakpoint)
+      .map(([key, value]) => {
+        const widthValue = (value as { width: string }).width;
+        const bp = parseInt(widthValue.replace(/\D/g, ''), 10);
+        return {
+          key: key as keyof typeof ThemeGlobal.screen.breakpoint,
+          bp,
+        };
+      })
       .sort((a, b) => a.bp - b.bp)
       .map(({ key, bp }) => ({
         key,
         mq: window.matchMedia(`(max-width: ${bp}px)`),
       }));
-  }, [theme.screens]);
+  }, []);
 
-  const updateScreen = useCallback(() => {
+  const updateBreakpoint = useCallback(() => {
     if (!queries.length) return;
     const matched = queries.find(({ mq }) => mq.matches);
-    setScreenWidth(matched?.key ?? 'default');
+    setBreakpoint(matched?.key ?? 'default');
   }, [queries.find, queries.length]);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+      setOrientation(window.innerWidth > window.innerHeight ? 'horizontal' : 'vertical');
+    };
 
-    const handleResize = () => setWindowWidth(window.innerWidth);
     window.addEventListener('resize', handleResize);
 
     return () => window.removeEventListener('resize', handleResize);
@@ -44,33 +55,22 @@ export const ProviderScreenWidth: FC<ProviderScreenWidthProps> = ({ children }) 
     if (!queries.length) return;
 
     queries.forEach(({ mq }) => {
-      mq.addEventListener('change', updateScreen);
+      mq.addEventListener('change', updateBreakpoint);
     });
-    updateScreen(); // первичная инициализация
+    updateBreakpoint();
 
     return () => {
       queries.forEach(({ mq }) => {
-        mq.removeEventListener('change', updateScreen);
+        mq.removeEventListener('change', updateBreakpoint);
       });
     };
-  }, [queries, updateScreen]);
+  }, [queries, updateBreakpoint]);
 
-  const screens = useMemo<ScreenWidthContextProps['screens']>(() => {
-    return Object.keys(theme.screens).map((key) => ({
-      isScreen: screenWidth === key,
-      value: key as Screens,
-    }));
-  }, [screenWidth, theme.screens]);
-
-  const screenActual = useMemo<ScreenWidthContextProps['screenActual']>(() => {
-    return screens.find((s) => s.isScreen)?.value ?? 'default';
-  }, [screens]);
   return (
     <ScreenWidthContext.Provider
       value={{
-        screens,
-        screenActual,
-        screenWidth,
+        breakpoint,
+        orientation,
         windowWidth,
       }}
     >

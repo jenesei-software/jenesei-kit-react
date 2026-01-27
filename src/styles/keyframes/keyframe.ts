@@ -1,6 +1,7 @@
+import { globalKeyframes } from '@vanilla-extract/css';
 import { keyframes } from 'styled-components';
 
-export const keyframeShadowPulse = keyframes`
+export const keyframeShadowPulseOld = keyframes`
   0% {
     text-shadow: 0 0 0 rgba(0, 0, 0, 0);
   }
@@ -11,3 +12,10 @@ export const keyframeShadowPulse = keyframes`
     text-shadow: 0 0 0 rgba(0, 0, 0, 0);
   }
 `;
+
+export const keyframeShadowPulse = 'keyframeShadowPulse';
+
+globalKeyframes(keyframeShadowPulse, {
+  '0%': { transform: 'rotate(0deg)' },
+  '100%': { transform: 'rotate(360deg)' }
+});

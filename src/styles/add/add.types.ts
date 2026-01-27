@@ -69,6 +69,10 @@ export type addSXTypographyProps = {
   sxTypography?: TypographySXProps;
 };
 
+export type addSXTypographyPropsNew = {
+  sxTypography?: TypographySXPropsWithoutFunc;
+};
+
 export type addSXTypographyPropsDollar = AddDollarSign<addSXTypographyProps>;
 
 export type addOutlineProps = {

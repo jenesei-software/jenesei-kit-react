@@ -82,7 +82,7 @@ export const JeneseiPalette: Record<IThemePaletteKeys, string> = {
   amnezia: '#222224',
 };
 
-const ThemeGenre: IThemeGenre = {
+export const ThemeGenre: IThemeGenre = {
   'bustmarket-gray-violet': {
     background: {
       rest: JeneseiPalette.transparent,
@@ -478,7 +478,7 @@ const ThemeGenreInput: IThemeGenreInput = {
     },
   },
 };
-const ThemeGenreRange: IThemeGenreRange = {
+export const ThemeGenreRange: IThemeGenreRange = {
   'bustmarket-gray': {
     track: {
       background: {
@@ -913,7 +913,6 @@ export const ThemeLight: ITheme = {
     weight: 400,
     lineHeight: 1.2,
     sizeDevice: {
-      default: 16,
       mobile: 12,
       tablet: 14,
     },
@@ -930,7 +929,6 @@ export const ThemeLight: ITheme = {
     },
   },
   screens: {
-    default: { width: 1920 },
     tablet: { width: 1290 },
     mobile: { width: 850 },
   },

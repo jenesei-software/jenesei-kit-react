@@ -1,4 +1,4 @@
-import { IThemeDevice, IThemeScreen } from '@local/styles/theme';
+import { IThemeScreen } from '@local/styles/theme/theme.vanilla-extract';
 
 import { PropsWithChildren } from 'react';
 
@@ -8,14 +8,6 @@ export type Screens = keyof IThemeScreen;
 
 export interface ScreenWidthContextProps {
   windowWidth: number;
-  screenWidth: Screens;
-  screens: {
-    value: Screens;
-    isScreen: boolean;
-  }[];
-  screenActual: Screens;
+  breakpoint: keyof IThemeScreen['breakpoint'];
+  orientation: keyof IThemeScreen['orientation'];
 }
-
-export type ScreenWidthProps<T> = {
-  [K in IThemeDevice]?: T;
-};

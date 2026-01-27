@@ -254,7 +254,7 @@ export type IThemeSize = 'large' | 'largeMedium' | 'medium' | 'mediumSmall' | 's
 export type IThemeFontFamily = 'Inter' | 'Roboto' | 'Work Sans' | 'Roboto Mono' | 'Manrope';
 export type IThemeTypographyHeading = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'h7' | 'h8' | 'h9';
 export type IThemeTypographyWeight = 100 | 300 | 400 | 500 | 700 | 900;
-export const ThemeDevice = ['tablet', 'mobile', 'default'] as const;
+export const ThemeDevice = ['tablet', 'mobile'] as const;
 export type IThemeDevice = (typeof ThemeDevice)[number];
 export type IThemePaletteKeys =
   | 'transparent'

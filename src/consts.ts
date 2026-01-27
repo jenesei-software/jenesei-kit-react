@@ -5,7 +5,7 @@ import {
 } from './components/date-picker';
 import { transformObjectToArray, transformObjectValuesToKeys } from './functions';
 import { IThemeTypographyHeading } from './styles/theme';
-import { ILanguage, IService } from './types';
+import { IImageFormat, ILanguage, IService } from './types';
 
 export const OBJECT_LANGUAGE: ILanguage = {
   eng: {
@@ -142,7 +142,7 @@ export const LOCALE_WEEKS: DatePickerTranslateWeekProps[] = [
   },
 ];
 
-export const LIST_IMAGE_SUPPORTED_FORMAT = [
+export const LIST_IMAGE_SUPPORTED_FORMAT: IImageFormat[] = [
   'image/jpeg',
   'image/jpg',
   'image/png',

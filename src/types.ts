@@ -1,5 +1,3 @@
-import { LIST_IMAGE_SUPPORTED_FORMAT } from './consts';
-
 export type AddDollarSign<T> = {
   [K in keyof T as `$${string & K}`]: T[K];
 };
@@ -16,4 +14,4 @@ export type IService = Record<
   { value: IServiceKeys; label: string; placeholder: string; search: string }
 >;
 
-export type IImageFormat = (typeof LIST_IMAGE_SUPPORTED_FORMAT)[number];
+export type IImageFormat = 'image/jpeg' | 'image/jpg' | 'image/png' | 'image/webp' | 'image/avif';
