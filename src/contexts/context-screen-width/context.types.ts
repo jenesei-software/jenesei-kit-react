@@ -1,4 +1,4 @@
-import { IThemeScreen } from '@local/styles/theme/theme.vanilla-extract';
+import { IThemeScreen } from '@local/styles/theme/theme.vanilla-extract.css';
 
 import { PropsWithChildren } from 'react';
 

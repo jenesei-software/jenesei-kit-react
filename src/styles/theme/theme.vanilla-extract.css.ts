@@ -366,7 +366,7 @@ const ThemeComponent = createThemeContract({
   },
 });
 
-export const ThemeGlobal = createGlobalTheme(':root', {
+export const ThemeGlobalValue = {
   transition: {
     duration: '0.3s',
     timingFunction: 'ease',
@@ -386,8 +386,8 @@ export const ThemeGlobal = createGlobalTheme(':root', {
       mobile: { width: '850px', media: `screen and (max-width: 850px)` },
     },
     orientation: {
-      vertical: { width: 'null', media: '@media (orientation: portrait)' },
-      horizontal: { width: 'null', media: '@media (orientation: landscape)' },
+      vertical: { width: 'null', media: 'orientation: portrait' },
+      horizontal: { width: 'null', media: 'orientation: landscape' },
     },
   },
   font: {
@@ -421,7 +421,9 @@ export const ThemeGlobal = createGlobalTheme(':root', {
     focus: JeneseiPalette.black60,
     danger: JeneseiPalette.redGoogle,
   },
-});
+};
+
+export const ThemeGlobal = createGlobalTheme(':root', ThemeGlobalValue);
 
 export const ThemeLight = createTheme(ThemeComponent, {
   colors: {
@@ -432,4 +434,7 @@ export const ThemeLight = createTheme(ThemeComponent, {
 
 export type IThemeGenreTypeRange = typeof ThemeComponent.colors.range;
 export type IThemeGenreTypeButton = typeof ThemeComponent.colors.button;
-export type IThemeScreen = typeof ThemeGlobal.screen;
+export type IThemeScreen = typeof ThemeGlobalValue.screen;
+export type IThemeGlobal = typeof ThemeGlobalValue;
+export type IThemeBreakpointKey = keyof typeof ThemeGlobalValue.screen.breakpoint;
+export type IThemeOrientationKey = keyof typeof ThemeGlobalValue.screen.orientation;

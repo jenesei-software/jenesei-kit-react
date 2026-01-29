@@ -1,4 +1,4 @@
-import { ThemeGlobal } from '@local/styles/theme/theme.vanilla-extract';
+import { ThemeGlobal } from '@local/styles/theme/theme.vanilla-extract.css';
 
 import { createContext, FC, useCallback, useEffect, useMemo, useState } from 'react';
 

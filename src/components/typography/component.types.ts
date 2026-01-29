@@ -1,6 +1,6 @@
 import { TooltipProps } from '@local/components/tooltip';
-import { addOutlineProps, addOutlinePropsDollar, addSXProps, addSXTypographyProps } from '@local/styles/add';
-import { AddDollarSign } from '@local/types';
+import { addOutlineProps } from '@local/styles/add';
+import { addSXPropsNew, addSXTypographyPropsNew } from '@local/styles/add/add.types';
 
 import { CSSProperties, PropsWithChildren, Ref } from 'react';
 
@@ -17,17 +17,10 @@ export type TypographyProps = PropsWithChildren & {
 
   ref?: Ref<HTMLElement | HTMLHeadingElement | HTMLAnchorElement | null>;
 
-  sx: addSXTypographyProps['sxTypography'];
+  sx: addSXTypographyPropsNew['sxTypography'];
 
-  sxStandard?: addSXProps['sx'];
+  sxStandard?: addSXPropsNew['sx'];
 } & addOutlineProps;
-
-export type TypographyPropsDollar = AddDollarSign<{
-  sxTypography: addSXTypographyProps['sxTypography'];
-  sx?: addSXProps['sx'];
-  isTransitionFontSize?: boolean;
-}> &
-  addOutlinePropsDollar;
 
 export type TypographyTooltipProps = {
   typography: TypographyProps;

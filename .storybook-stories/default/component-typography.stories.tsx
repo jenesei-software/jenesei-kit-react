@@ -15,7 +15,7 @@ const meta: Meta<typeof TypographyComponent> = {
 export default meta;
 
 const AllWrapper: FC = () => {
-  const { screenActual } = useScreenWidth();
+  const { breakpoint } = useScreenWidth();
 
   return (
     <WrapperBig
@@ -42,7 +42,7 @@ const AllWrapper: FC = () => {
             },
           }}
         >
-          {` ${screenActual} `}
+          {` ${breakpoint} `}
         </TypographyComponent>
         (size: 14)
       </TypographyComponent>

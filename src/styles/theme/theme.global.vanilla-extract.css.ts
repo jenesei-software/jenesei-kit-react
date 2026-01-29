@@ -2,7 +2,7 @@ import { LIST_TYPOGRAPHY_VARIANTS_DEFAULT } from '@local/consts';
 
 import { globalStyle } from '@vanilla-extract/css';
 
-import { ThemeGlobal } from './theme.vanilla-extract';
+import { ThemeGlobal, ThemeGlobalValue } from './theme.vanilla-extract.css.ts';
 
 globalStyle('#storybook-root', {
   display: 'flex',
@@ -52,7 +52,7 @@ globalStyle('body', {
 
 globalStyle('body:has(.LayoutModal)', {
   '@media': {
-    [ThemeGlobal.screen.breakpoint.tablet.media]: {
+    [ThemeGlobalValue.screen.breakpoint.tablet.media]: {
       overflow: 'hidden',
     },
   },
@@ -84,17 +84,17 @@ globalStyle('::-webkit-scrollbar-thumb', {
 
 LIST_TYPOGRAPHY_VARIANTS_DEFAULT.forEach((tag) => {
   globalStyle(tag, {
-    fontSize: `calc(${ThemeGlobal.font.sizeHeading[tag]} * ${ThemeGlobal.font.sizeDevice.default}px)`,
+    fontSize: `calc(${ThemeGlobalValue.font.sizeHeading[tag]} * ${ThemeGlobalValue.font.sizeDevice.default}px)`,
 
     '@media': Object.fromEntries(
-      Object.entries(ThemeGlobal.screen.breakpoint)
-        .filter(([label]) => label !== 'default' && label !== 'vertical' && label !== 'horizontal')
+      Object.entries(ThemeGlobalValue.screen.breakpoint)
+        .filter(([label]) => label !== 'default')
         .map(([label, size]) => {
           const key = label as keyof typeof ThemeGlobal.font.sizeDevice;
           return [
             size.media,
             {
-              fontSize: `calc(${ThemeGlobal.font.sizeHeading[tag]} * ${ThemeGlobal.font.sizeDevice[key]}px)`,
+              fontSize: `calc(${ThemeGlobalValue.font.sizeHeading[tag]} * ${ThemeGlobalValue.font.sizeDevice[key]}px)`,
             },
           ] as const;
         }),

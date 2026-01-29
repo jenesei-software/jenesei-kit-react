@@ -1,95 +1,72 @@
 import { Tooltip } from '@local/components/tooltip';
 import { useScreenWidth } from '@local/contexts/context-screen-width';
 import { useOverflowing } from '@local/hooks/use-overflowing';
+import { sxTypography } from '@local/styles/add/add.vanilla-extract.css';
 
-import { createLink, LinkProps } from '@tanstack/react-router';
 import { memo, useMemo } from 'react';
-import { useTheme } from 'styled-components';
 
-import { Title } from './component.styles';
-import { TypographyProps, TypographyPropsDollar, TypographyTooltipProps } from './component.types';
+import { TypographyProps, TypographyTooltipProps } from './component.types';
 
 const TypographyWithRef = (props: TypographyProps) => {
-  const { screenActual } = useScreenWidth();
-  const cssProps: TypographyPropsDollar & Pick<TypographyProps, 'onClick' | 'className' | 'style'> = useMemo(
-    () => ({
-      $sxTypography: props.sx,
-      style: props.style,
-      className: props.className,
-      $sx: props.sxStandard,
-      $isTransitionFontSize: props.isTransitionFontSize,
-      $isDisabledOutline: props.isDisabledOutline,
-      $isOutlineBoxShadow: props.isOutlineBoxShadow,
-      $isReadOnly: props.isReadOnly,
-      onClick: props.onClick ? props.onClick : () => {},
-    }),
-    [
-      props.sx,
-      props.style,
-      props.className,
-      props.sxStandard,
-      props.onClick,
-      props.isDisabledOutline,
-      props.isOutlineBoxShadow,
-      props.isReadOnly,
-      props.isTransitionFontSize,
-    ],
-  );
-  const theme = useTheme();
-  const screenSX = useMemo(
-    () =>
-      (typeof props?.sx === 'function' ? props?.sx(theme) : props?.sx)?.breakpoints?.[screenActual] ??
-      (typeof props?.sx === 'function' ? props?.sx(theme) : props?.sx)?.default,
-    [props.sx, screenActual, theme],
-  );
+  const { breakpoint } = useScreenWidth();
+
+  const screenSX = useMemo(() => props.sx?.breakpoints?.[breakpoint] ?? props.sx?.default, [props.sx, breakpoint]);
 
   if (screenSX && 'variant' in screenSX) {
     if (screenSX.variant === 'h7' || screenSX.variant === 'h8' || screenSX.variant === 'h9') {
       return (
-        <Title
+        <Text
           ref={props.ref as any}
           as={props.isAnchor ? 'a' : props.isParagraph ? 'p' : props.isSpan ? 'span' : 'span'}
-          href={props.href}
-          {...cssProps}
+          className={sxTypography.getStyles({
+            sxTypography: props.sx,
+          })}
+          style={sxTypography.getVars({
+            sxTypography: props.sx,
+          })}
         >
           {props.children}
-        </Title>
+        </Text>
       );
     } else {
       return (
-        <Title
+        <Text
           ref={props.ref as any}
           as={props.isAnchor ? 'a' : props.isParagraph ? 'p' : props.isSpan ? 'span' : screenSX.variant}
           href={props.href}
-          {...cssProps}
+          className={sxTypography.getStyles({
+            sxTypography: props.sx,
+          })}
+          style={sxTypography.getVars({
+            sxTypography: props.sx,
+          })}
         >
           {props.children}
-        </Title>
+        </Text>
       );
     }
   }
 
   return (
-    <Title
+    <Text
       ref={props.ref as any}
       as={props.isAnchor ? 'a' : props.isParagraph ? 'p' : props.isSpan ? 'span' : 'span'}
       href={props.href}
-      {...cssProps}
+      className={sxTypography.getStyles({
+        sxTypography: props.sx,
+      })}
+      style={sxTypography.getVars({
+        sxTypography: props.sx,
+      })}
     >
       {props.children}
-    </Title>
+    </Text>
   );
 };
 
 export const Typography = (props: TypographyProps) => {
   return <TypographyWithRef {...props} />;
 };
-
-const TypographySizeIsAnchor = (props: TypographyProps & LinkProps) => {
-  return <TypographyWithRef isAnchor {...props} ref={props.ref} href={props.href} />;
-};
-
-export const TypographyLink = createLink(TypographySizeIsAnchor);
 
 export const TypographyTooltip = memo((props: TypographyTooltipProps) => {
   const { isDisabled, ref } = useOverflowing<HTMLDivElement>({
@@ -107,4 +84,16 @@ export const TypographyTooltip = memo((props: TypographyTooltipProps) => {
 
 TypographyTooltip.displayName = 'TypographyTooltip';
 TypographyWithRef.displayName = 'TypographyWithRef';
-TypographySizeIsAnchor.displayName = 'TypographySizeIsAnchor';
+
+type Props = {
+  as?: React.ElementType;
+  children: React.ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
+  ref?: React.Ref<any>;
+  href?: string;
+};
+
+function Text({ as: Component = 'span', children }: Props) {
+  return <Component>{children}</Component>;
+}

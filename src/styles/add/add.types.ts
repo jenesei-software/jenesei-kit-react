@@ -10,6 +10,8 @@ import { AddDollarSign } from '@local/types';
 import { CSSProperties } from 'react';
 import { CSSObject, DefaultTheme } from 'styled-components';
 
+import { IThemeGlobal } from '../theme/theme.vanilla-extract.css.ts';
+
 type TypographyDefaultProps = {
   align?: CSSProperties['textAlign'];
 
@@ -63,14 +65,12 @@ export type NormalizedSXTypography = {
 
 export type TypographySXProps = NormalizedSXTypography | ((theme: DefaultTheme) => NormalizedSXTypography);
 
-export type TypographySXPropsWithoutFunc = NormalizedSXTypography;
-
 export type addSXTypographyProps = {
   sxTypography?: TypographySXProps;
 };
 
 export type addSXTypographyPropsNew = {
-  sxTypography?: TypographySXPropsWithoutFunc;
+  sxTypography?: NormalizedSXTypography;
 };
 
 export type addSXTypographyPropsDollar = AddDollarSign<addSXTypographyProps>;
@@ -97,4 +97,9 @@ export type SXPropsWithoutFunc = NormalizedSX;
 export interface addSXProps {
   sx?: SXProps;
 }
+
+export interface addSXPropsNew {
+  sx?: NormalizedSX | ((theme: IThemeGlobal) => NormalizedSX);
+}
+
 export type addSXPropsDollar = AddDollarSign<addSXProps>;

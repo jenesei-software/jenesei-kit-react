@@ -1,4 +1,3 @@
-import { keyframeShadowPulseOld } from '@local/styles/keyframes';
 import { IThemeDevice, IThemeTypographyHeading, JeneseiPalette, ThemeDevice } from '@local/styles/theme';
 
 import { CSSObject, css, DefaultTheme } from 'styled-components';
@@ -24,13 +23,6 @@ export function toStyledCSSTypographyHeading(heading: IThemeTypographyHeading) {
 
 const toStyledCSSTypography = (value: TypographyAllProps) =>
   css`
-    ${
-      value.shadow &&
-      value.shadow === 'shadowPulse' &&
-      css`
-      animation: ${keyframeShadowPulseOld} 2s infinite;
-    `
-    };
     ${
       value.letterSpacing &&
       css`

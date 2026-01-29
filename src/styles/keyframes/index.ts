@@ -1,1 +1,1 @@
-export { keyframeShadowPulse, keyframeShadowPulseOld } from './keyframe';
+export { keyframeShadowPulse } from './keyframe.css';

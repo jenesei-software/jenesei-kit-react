@@ -1,4 +1,5 @@
 import { pluginUpdateIcons, pluginUpdateReadmePD } from '@jenesei-software/jenesei-plugin-vite';
+import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 import react from '@vitejs/plugin-react';
 import path, { resolve } from 'path';
 import { defineConfig } from 'vite';
@@ -24,6 +25,7 @@ export default defineConfig(() => {
       },
     },
     plugins: [
+      isStorybook && vanillaExtractPlugin(),
       isStorybook &&
         pluginUpdateIcons({
           pathInputFile: path.resolve(__dirname, '.storybook-public/logos/logo-jenesei-kit-react.png'),
