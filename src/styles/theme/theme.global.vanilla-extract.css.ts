@@ -1,8 +1,8 @@
-import { LIST_TYPOGRAPHY_VARIANTS_DEFAULT } from '@local/consts';
-
 import { globalStyle } from '@vanilla-extract/css';
 
-import { ThemeGlobal, ThemeGlobalValue } from './theme.vanilla-extract.css.ts';
+import { ThemeGlobal } from './theme.vanilla-extract.css.ts';
+import { addRipple, addRippleDefault } from '../add/add.ts';
+import { addHover, addOutline, addRemoveOutline, addSxTypographyRecipe } from '../add/add.vanilla-extract.css.ts';
 
 globalStyle('#storybook-root', {
   display: 'flex',
@@ -15,9 +15,9 @@ globalStyle('.sb-show-main.sb-main-padded', {
   padding: '0',
 });
 
-globalStyle('*', {
-  boxSizing: 'border-box',
-});
+// globalStyle('*', {
+//   boxSizing: 'border-box',
+// });
 
 globalStyle('html', {
   display: 'flex',
@@ -50,13 +50,13 @@ globalStyle('body', {
   flex: '1',
 });
 
-globalStyle('body:has(.LayoutModal)', {
-  '@media': {
-    [ThemeGlobalValue.screen.breakpoint.tablet.media]: {
-      overflow: 'hidden',
-    },
-  },
-});
+// globalStyle('body:has(.LayoutModal)', {
+//   '@media': {
+//     [ThemeGlobalValue.screen.breakpoint.tablet.media]: {
+//       overflow: 'hidden',
+//     },
+//   },
+// });
 
 globalStyle("input[type='checkbox'], input[type='radio']", {
   appearance: 'none',
@@ -67,37 +67,48 @@ globalStyle("input[type='time']::-webkit-calendar-picker-indicator", {
   background: 'none',
 });
 
-globalStyle('::-webkit-scrollbar', {
+globalStyle('html::-webkit-scrollbar', {
   width: ThemeGlobal.scrollbar.width,
   height: ThemeGlobal.scrollbar.width,
 });
 
-globalStyle('::-webkit-scrollbar-track', {
+globalStyle('html::-webkit-scrollbar-track', {
   background: ThemeGlobal.scrollbar.background,
 });
 
-globalStyle('::-webkit-scrollbar-thumb', {
+globalStyle('html::-webkit-scrollbar-thumb', {
   background: ThemeGlobal.scrollbar.thumb,
   border: ThemeGlobal.scrollbar.thumbBorder,
   backgroundClip: 'padding-box',
 });
 
-LIST_TYPOGRAPHY_VARIANTS_DEFAULT.forEach((tag) => {
-  globalStyle(tag, {
-    fontSize: `calc(${ThemeGlobalValue.font.sizeHeading[tag]} * ${ThemeGlobalValue.font.sizeDevice.default}px)`,
+globalStyle(`${addRipple} *:not(#${ThemeGlobal.id.ripple})`, {
+  userSelect: 'none',
+  pointerEvents: 'none',
+});
 
-    '@media': Object.fromEntries(
-      Object.entries(ThemeGlobalValue.screen.breakpoint)
-        .filter(([label]) => label !== 'default')
-        .map(([label, size]) => {
-          const key = label as keyof typeof ThemeGlobal.font.sizeDevice;
-          return [
-            size.media,
-            {
-              fontSize: `calc(${ThemeGlobalValue.font.sizeHeading[tag]} * ${ThemeGlobalValue.font.sizeDevice[key]}px)`,
-            },
-          ] as const;
-        }),
-    ),
-  });
+globalStyle(`${addRippleDefault} *:not(#${ThemeGlobal.id.ripple})`, {
+  userSelect: 'none',
+  pointerEvents: 'none',
+});
+
+globalStyle(`${addOutline({ isOutline: 'default' })}:focus-visible`, {
+  outline: `2px solid ${ThemeGlobal.state.focus}`,
+});
+
+globalStyle(`${addOutline({ isOutline: 'boxShadow' })}:focus-visible`, {
+  outline: '1px solid #83b7e8',
+  boxShadow: '0 1px 1px rgba(24,36,51,0.06), 0 0 0 .25rem rgba(6,111,209,0.25)',
+});
+
+globalStyle(`${addRemoveOutline}:focus-visible`, {
+  outline: `0px solid ${ThemeGlobal.state.focus} !important`,
+});
+
+globalStyle(`${addHover}:hover`, {
+  backgroundColor: `${ThemeGlobal.palette.black05}`,
+});
+
+globalStyle(`${addSxTypographyRecipe({ isHoverUnderlining: true })}:hover`, {
+  textDecoration: 'underline',
 });

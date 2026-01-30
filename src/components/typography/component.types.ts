@@ -13,7 +13,6 @@ export type TypographyProps = PropsWithChildren & {
   isParagraph?: boolean;
   isAnchor?: boolean;
   isSpan?: boolean;
-  isTransitionFontSize?: boolean;
 
   ref?: Ref<HTMLElement | HTMLHeadingElement | HTMLAnchorElement | null>;
 

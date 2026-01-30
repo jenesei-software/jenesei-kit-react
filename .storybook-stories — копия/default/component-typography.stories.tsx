@@ -55,20 +55,20 @@ const AllWrapper: FC = () => {
         })}
       >
         <TypographyComponent
+          isTransitionFontSize
           sx={{
             default: {
               size: 20,
-              isTransitionFontSize: true,
             },
           }}
         >
           Typography, size, default - 20
         </TypographyComponent>
         <TypographyComponent
+          isTransitionFontSize
           sx={{
             default: {
               size: 20,
-              isTransitionFontSize: true,
             },
             breakpoints: {
               tablet: {

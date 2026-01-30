@@ -1,99 +1,51 @@
 import { Tooltip } from '@local/components/tooltip';
-import { useScreenWidth } from '@local/contexts/context-screen-width';
 import { useOverflowing } from '@local/hooks/use-overflowing';
-import { sxTypography } from '@local/styles/add/add.vanilla-extract.css';
+import { useResponsiveParams } from '@local/hooks/use-responsive-sx/use';
+import { TypographyAllProps } from '@local/styles/add/add.types';
+import { addSxTypography } from '@local/styles/add/add.vanilla-extract';
 
-import { memo, useMemo } from 'react';
+import { ElementType, useMemo } from 'react';
 
 import { TypographyProps, TypographyTooltipProps } from './component.types';
 
-const TypographyWithRef = (props: TypographyProps) => {
-  const { breakpoint } = useScreenWidth();
+export const Typography = (props: TypographyProps) => {
+  const params = useResponsiveParams<TypographyAllProps>(props.sx);
 
-  const screenSX = useMemo(() => props.sx?.breakpoints?.[breakpoint] ?? props.sx?.default, [props.sx, breakpoint]);
-
-  if (screenSX && 'variant' in screenSX) {
-    if (screenSX.variant === 'h7' || screenSX.variant === 'h8' || screenSX.variant === 'h9') {
-      return (
-        <Text
-          ref={props.ref as any}
-          as={props.isAnchor ? 'a' : props.isParagraph ? 'p' : props.isSpan ? 'span' : 'span'}
-          className={sxTypography.getStyles({
-            sxTypography: props.sx,
-          })}
-          style={sxTypography.getVars({
-            sxTypography: props.sx,
-          })}
-        >
-          {props.children}
-        </Text>
-      );
-    } else {
-      return (
-        <Text
-          ref={props.ref as any}
-          as={props.isAnchor ? 'a' : props.isParagraph ? 'p' : props.isSpan ? 'span' : screenSX.variant}
-          href={props.href}
-          className={sxTypography.getStyles({
-            sxTypography: props.sx,
-          })}
-          style={sxTypography.getVars({
-            sxTypography: props.sx,
-          })}
-        >
-          {props.children}
-        </Text>
-      );
-    }
-  }
+  const { className, style, Component } = useMemo(() => {
+    return {
+      className: addSxTypography.className(params?.params ?? {}),
+      style: addSxTypography.style(params?.params ?? {}),
+      Component: props.isAnchor
+        ? 'a'
+        : props.isParagraph
+          ? 'p'
+          : props.isSpan
+            ? 'span'
+            : params?.params && 'variant' in params.params
+              ? params?.params.variant === 'h7' || params.params.variant === 'h8' || params.params.variant === 'h9'
+                ? 'span'
+                : params?.params.variant
+              : ('span' as ElementType),
+    };
+  }, [params, props.isAnchor, props.isParagraph, props.isSpan]);
 
   return (
-    <Text
-      ref={props.ref as any}
-      as={props.isAnchor ? 'a' : props.isParagraph ? 'p' : props.isSpan ? 'span' : 'span'}
-      href={props.href}
-      className={sxTypography.getStyles({
-        sxTypography: props.sx,
-      })}
-      style={sxTypography.getVars({
-        sxTypography: props.sx,
-      })}
-    >
+    <Component ref={props.ref} href={props.href} className={className} style={style}>
       {props.children}
-    </Text>
+    </Component>
   );
 };
 
-export const Typography = (props: TypographyProps) => {
-  return <TypographyWithRef {...props} />;
-};
-
-export const TypographyTooltip = memo((props: TypographyTooltipProps) => {
+export const TypographyTooltip = (props: TypographyTooltipProps) => {
   const { isDisabled, ref } = useOverflowing<HTMLDivElement>({
     isCheckSize: props.tooltip.isDisabled !== undefined ? !props.tooltip.isDisabled : true,
     dependencies: [props.children],
   });
   return (
     <Tooltip isDisabled={isDisabled} content={props.children} {...props.tooltip}>
-      <TypographyWithRef ref={ref} {...props.typography} style={{ position: 'relative' }}>
+      <Typography ref={ref} {...props.typography} style={{ position: 'relative' }}>
         {props.children}
-      </TypographyWithRef>
+      </Typography>
     </Tooltip>
   );
-});
-
-TypographyTooltip.displayName = 'TypographyTooltip';
-TypographyWithRef.displayName = 'TypographyWithRef';
-
-type Props = {
-  as?: React.ElementType;
-  children: React.ReactNode;
-  className?: string;
-  style?: React.CSSProperties;
-  ref?: React.Ref<any>;
-  href?: string;
 };
-
-function Text({ as: Component = 'span', children }: Props) {
-  return <Component>{children}</Component>;
-}

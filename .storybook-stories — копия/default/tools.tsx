@@ -1,6 +1,7 @@
 import { Stack } from '@local/components/stack';
 import { useResponsiveSX } from '@local/hooks/use-responsive-sx/use';
 import { addSXPropsNew } from '@local/styles/add/add.types';
+import { addSx } from '@local/styles/add/add.vanilla-extract.css';
 
 import { FC, PropsWithChildren } from 'react';
 
@@ -8,6 +9,7 @@ export const WrapperBig: FC<PropsWithChildren & addSXPropsNew> = (props) => {
   const screenSX = useResponsiveSX(props.sx);
   return (
     <Stack
+      className={[addSx(screenSX)].join(' ')}
       sx={(theme) => ({
         default: {
           position: 'relative',
@@ -23,7 +25,6 @@ export const WrapperBig: FC<PropsWithChildren & addSXPropsNew> = (props) => {
           overflow: 'hidden',
         },
       })}
-      style={{ ...screenSX?.css }}
     >
       {props.children}
     </Stack>
@@ -33,6 +34,7 @@ export const WrapperMin: FC<PropsWithChildren & addSXPropsNew> = (props) => {
   const screenSX = useResponsiveSX(props.sx);
   return (
     <Stack
+      className={[addSx(screenSX)].join(' ')}
       sx={(theme) => ({
         default: {
           position: 'relative',
@@ -47,7 +49,6 @@ export const WrapperMin: FC<PropsWithChildren & addSXPropsNew> = (props) => {
           gap: '6px',
         },
       })}
-      style={{ ...screenSX?.css }}
     >
       {props.children}
     </Stack>

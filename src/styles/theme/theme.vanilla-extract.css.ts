@@ -2,7 +2,7 @@ import { createGlobalTheme, createTheme, createThemeContract } from '@vanilla-ex
 
 import { JeneseiPalette, ThemeGenre, ThemeGenreRange } from './theme';
 
-const ThemeComponent = createThemeContract({
+export const ThemeComponent = createThemeContract({
   colors: {
     range: {
       'bustmarket-gray': {
@@ -421,9 +421,22 @@ export const ThemeGlobalValue = {
     focus: JeneseiPalette.black60,
     danger: JeneseiPalette.redGoogle,
   },
-};
+  id: {
+    ripple: 'ripple',
+  },
+} as const;
 
-export const ThemeGlobal = createGlobalTheme(':root', ThemeGlobalValue);
+export const ThemeGlobal = createGlobalTheme(':root', {
+  transition: ThemeGlobalValue.transition,
+  scrollbar: ThemeGlobalValue.scrollbar,
+  screen: ThemeGlobalValue.screen,
+  font: ThemeGlobalValue.font,
+  effect: ThemeGlobalValue.effect,
+  palette: ThemeGlobalValue.palette,
+  background: ThemeGlobalValue.background,
+  state: ThemeGlobalValue.state,
+  id: ThemeGlobalValue.id,
+});
 
 export const ThemeLight = createTheme(ThemeComponent, {
   colors: {
@@ -431,10 +444,3 @@ export const ThemeLight = createTheme(ThemeComponent, {
     button: ThemeGenre,
   },
 });
-
-export type IThemeGenreTypeRange = typeof ThemeComponent.colors.range;
-export type IThemeGenreTypeButton = typeof ThemeComponent.colors.button;
-export type IThemeScreen = typeof ThemeGlobalValue.screen;
-export type IThemeGlobal = typeof ThemeGlobalValue;
-export type IThemeBreakpointKey = keyof typeof ThemeGlobalValue.screen.breakpoint;
-export type IThemeOrientationKey = keyof typeof ThemeGlobalValue.screen.orientation;

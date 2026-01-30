@@ -1,3 +1,4 @@
+import { DEFAULT_RIPPLE_ID } from '@local/components/ripple/component.constants';
 import { IThemeDevice, IThemeTypographyHeading, JeneseiPalette, ThemeDevice } from '@local/styles/theme';
 
 import { CSSObject, css, DefaultTheme } from 'styled-components';
@@ -398,4 +399,29 @@ export const addDisabled = css<{ $isDisabled?: boolean }>`
      : css`
           opacity: 1;
         `};
+`;
+
+export const addRipple = css<{ $isRipple?: boolean }>`
+  ${(props) =>
+    props.$isRipple &&
+    css`
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+
+      & *:not(#${DEFAULT_RIPPLE_ID}) {
+        user-select: none;
+        pointer-events: none;
+      }
+    `}
+`;
+export const addRippleDefault = css`
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+
+  & *:not(#${DEFAULT_RIPPLE_ID}) {
+    user-select: none;
+    pointer-events: none;
+  }
 `;

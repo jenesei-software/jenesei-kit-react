@@ -8,9 +8,9 @@ import {
 import { AddDollarSign } from '@local/types';
 
 import { CSSProperties } from 'react';
-import { CSSObject, DefaultTheme } from 'styled-components';
+import { DefaultTheme } from 'styled-components';
 
-import { IThemeGlobal } from '../theme/theme.vanilla-extract.css.ts';
+import { IThemeGlobal } from '../theme/theme.vanilla-extract.types.ts';
 
 type TypographyDefaultProps = {
   align?: CSSProperties['textAlign'];
@@ -23,6 +23,8 @@ type TypographyDefaultProps = {
 
   family?: IThemeFontFamily;
 
+  isTransitionFontSize?: boolean;
+  
   flex?: string;
 
   height?: number | string;
@@ -70,7 +72,7 @@ export type addSXTypographyProps = {
 };
 
 export type addSXTypographyPropsNew = {
-  sxTypography?: NormalizedSXTypography;
+  sxTypography?: NormalizedSXTypography | ((theme: IThemeGlobal) => NormalizedSXTypography);
 };
 
 export type addSXTypographyPropsDollar = AddDollarSign<addSXTypographyProps>;
@@ -83,11 +85,18 @@ export type addOutlineProps = {
 
 export type addOutlinePropsDollar = AddDollarSign<addOutlineProps>;
 
+export type NormalizedParams<A extends unknown> = {
+  default?: A;
+  breakpoints?: Record<IThemeDevice | string, A>;
+  horizontal?: A;
+  vertical?: A;
+};
+
 export type NormalizedSX = {
-  default?: CSSObject;
-  breakpoints?: Record<IThemeDevice | string, CSSObject>;
-  horizontal?: CSSObject;
-  vertical?: CSSObject;
+  default?: CSSProperties;
+  breakpoints?: Record<IThemeDevice | string, CSSProperties>;
+  horizontal?: CSSProperties;
+  vertical?: CSSProperties;
 };
 
 export type SXProps = NormalizedSX | ((theme: DefaultTheme) => NormalizedSX);
@@ -100,6 +109,10 @@ export interface addSXProps {
 
 export interface addSXPropsNew {
   sx?: NormalizedSX | ((theme: IThemeGlobal) => NormalizedSX);
+}
+
+export interface addSXPropsNew2<A extends unknown> {
+  sx?: NormalizedParams<A> | ((theme: IThemeGlobal) => NormalizedParams<A>);
 }
 
 export type addSXPropsDollar = AddDollarSign<addSXProps>;

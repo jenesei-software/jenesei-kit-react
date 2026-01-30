@@ -27,28 +27,3 @@ export const RippleSpan = styled.span<RippleContainerProps>`
     }
   }
 `;
-
-export const addRipple = css<{ $isRipple?: boolean }>`
-  ${(props) =>
-    props.$isRipple &&
-    css`
-      position: relative;
-      overflow: hidden;
-      isolation: isolate;
-
-      & *:not(#${DEFAULT_RIPPLE_ID}) {
-        user-select: none;
-        pointer-events: none;
-      }
-    `}
-`;
-export const addRippleDefault = css`
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-
-  & *:not(#${DEFAULT_RIPPLE_ID}) {
-    user-select: none;
-    pointer-events: none;
-  }
-`;

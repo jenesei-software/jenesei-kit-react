@@ -1,346 +1,320 @@
-import { CSSProperties, createVar, style } from '@vanilla-extract/css';
-import { assignInlineVars } from '@vanilla-extract/dynamic';
+import { createVar, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
-import { addSXPropsNew, addSXTypographyPropsNew, TypographyAllProps } from './add.types';
-import { JeneseiPalette } from '../theme';
-import { IThemeBreakpointKey, IThemeOrientationKey, ThemeGlobalValue } from '../theme/theme.vanilla-extract.css.ts';
+import { keyframeShadowPulse } from '../keyframes/index.ts';
+import { ThemeGlobal } from '../theme/theme.vanilla-extract.css.ts';
 
-function createSXTypography() {
-  const breakpoints: IThemeBreakpointKey[] = Object.keys(ThemeGlobalValue.screen.breakpoint) as IThemeBreakpointKey[];
-  const orientations: IThemeOrientationKey[] = Object.keys(
-    ThemeGlobalValue.screen.orientation,
-  ) as IThemeOrientationKey[];
+// === Scrollbar ===
+export const addRemoveScrollbar = style({
+  scrollbarWidth: 'none',
+  msOverflowStyle: 'none',
+  selectors: {
+    '&::-webkit-scrollbar': { display: 'none' },
+    '&::-webkit-scrollbar-thumb': { display: 'none' },
+    '&::-webkit-scrollbar-track': { display: 'none' },
+  },
+});
 
-  const createVarsSet = () => ({
-    letterSpacing: createVar(),
-    line: createVar(),
-    flex: createVar(),
-    cursor: createVar(),
-    overflow: createVar(),
-    family: createVar(),
-    weight: createVar(),
-    height: createVar(),
-    color: createVar(),
-    align: createVar(),
-    wrap: createVar(),
-    decoration: createVar(),
-    transform: createVar(),
-    size: createVar(),
-    variant: createVar(),
-  });
+// === Transition helpers ===
+export const addTransition = style({
+  transition: [
+    `outline 0s`,
+    `opacity ${ThemeGlobal.transition.default}`,
+    `transform ${ThemeGlobal.transition.default}`,
+    `background-color ${ThemeGlobal.transition.default}`,
+    `height ${ThemeGlobal.transition.default}`,
+    `max-height ${ThemeGlobal.transition.default}`,
+    `width ${ThemeGlobal.transition.default}`,
+    `color ${ThemeGlobal.transition.default}`,
+    `visibility ${ThemeGlobal.transition.default}`,
+    `box-shadow ${ThemeGlobal.transition.default}`,
+    `border-color ${ThemeGlobal.transition.default}`,
+    `left ${ThemeGlobal.transition.default}`,
+    `right ${ThemeGlobal.transition.default}`,
+    `grid-template-areas ${ThemeGlobal.transition.default}`,
+    `grid-template-rows ${ThemeGlobal.transition.default}`,
+    `grid-template-columns ${ThemeGlobal.transition.default}`,
+  ].join(', '),
+});
 
-  const vars = {
-    default: createVarsSet(),
-    breakpoints: Object.fromEntries(
-      breakpoints.filter((bp) => bp !== 'default').map((bp) => [bp, createVarsSet()]),
-    ) as Record<Exclude<IThemeBreakpointKey, 'default'>, ReturnType<typeof createVarsSet>>,
-    orientations: Object.fromEntries(orientations.map((orientation) => [orientation, createVarsSet()])) as Record<
-      Exclude<IThemeOrientationKey, 'default'>,
-      ReturnType<typeof createVarsSet>
-    >,
-  };
+export const addTransitionWithoutSize = style({
+  transition: [
+    `outline 0s`,
+    `opacity ${ThemeGlobal.transition.default}`,
+    `transform ${ThemeGlobal.transition.default}`,
+    `background-color ${ThemeGlobal.transition.default}`,
+    `color ${ThemeGlobal.transition.default}`,
+    `visibility ${ThemeGlobal.transition.default}`,
+    `box-shadow ${ThemeGlobal.transition.default}`,
+    `border-color ${ThemeGlobal.transition.default}`,
+    `left ${ThemeGlobal.transition.default}`,
+    `right ${ThemeGlobal.transition.default}`,
+    `grid-template-areas ${ThemeGlobal.transition.default}`,
+    `grid-template-rows ${ThemeGlobal.transition.default}`,
+    `grid-template-columns ${ThemeGlobal.transition.default}`,
+  ].join(', '),
+});
 
-  const createMediaQueries = (cssProp: keyof CSSProperties, varKey: keyof ReturnType<typeof createVarsSet>) => ({
-    '@media': {
-      ...Object.fromEntries(
-        Object.entries(vars.breakpoints).map(([bp, varSet]) => {
-          const media = ThemeGlobalValue.screen.breakpoint[bp as IThemeBreakpointKey]?.media;
-          return [media, { [cssProp]: varSet[varKey] }];
-        }),
-      ),
-      ...Object.fromEntries(
-        Object.entries(vars.orientations).map(([orientation, varSet]) => {
-          const media = ThemeGlobalValue.screen.orientation[orientation as IThemeOrientationKey]?.media;
-          return [media, { [cssProp]: varSet[varKey] }];
-        }),
-      ),
+export const addGridTransition = style({
+  transition: [
+    `grid-template-areas ${ThemeGlobal.transition.default}`,
+    `grid-template-rows ${ThemeGlobal.transition.default}`,
+    `grid-template-columns ${ThemeGlobal.transition.default}`,
+  ].join(', '),
+});
+
+export const addFontSizeTransition = recipe({
+  variants: {
+    isTransitionFontSize: {
+      true: { transition: `font-size ${ThemeGlobal.transition.default}` },
     },
-  });
+  },
+  defaultVariants: {
+    isTransitionFontSize: false,
+  },
+});
 
-  const createVariant = (cssProp: keyof CSSProperties, varKey: keyof ReturnType<typeof createVarsSet>) => ({
-    true: {
-      [cssProp]: vars.default[varKey],
-      ...createMediaQueries(cssProp, varKey),
-    },
-  });
+export const addColorTransition = style({
+  transition: [
+    `outline 0s`,
+    `opacity ${ThemeGlobal.transition.default}`,
+    `background-color ${ThemeGlobal.transition.default}`,
+    `color ${ThemeGlobal.transition.default}`,
+    `box-shadow ${ThemeGlobal.transition.default}`,
+    `border-color ${ThemeGlobal.transition.default}`,
+  ].join(', '),
+});
 
-  const styles = recipe({
-    variants: {
-      letterSpacing: createVariant('letterSpacing', 'letterSpacing'),
-      flex: createVariant('flex', 'flex'),
-      cursor: createVariant('cursor', 'cursor'),
-      overflow: createVariant('overflow', 'overflow'),
-      family: createVariant('fontFamily', 'family'),
-      weight: createVariant('fontWeight', 'weight'),
-      height: createVariant('lineHeight', 'height'),
-      color: createVariant('color', 'color'),
-      align: createVariant('textAlign', 'align'),
-      wrap: createVariant('textWrap', 'wrap'),
-      decoration: createVariant('textDecoration', 'decoration'),
-      transform: createVariant('textTransform', 'transform'),
-      size: createVariant('fontSize', 'size'),
-
-      line: {
-        single: {
-          textOverflow: 'ellipsis',
-          overflow: 'hidden',
-          whiteSpace: 'nowrap',
-          width: '-webkit-fill-available',
-          maxWidth: 'fit-content',
-        },
-        multi: {
-          wordBreak: 'break-word',
-          whiteSpace: 'normal',
-          textOverflow: 'ellipsis',
-          display: '-webkit-box',
-          overflow: 'hidden',
-          WebkitBoxOrient: 'vertical',
-          WebkitLineClamp: vars.default.line,
-          width: 'fit-content',
-          overflowWrap: 'anywhere',
-          '@media': {
-            ...Object.fromEntries(
-              Object.entries(vars.breakpoints).map(([bp, varSet]) => {
-                const media = ThemeGlobalValue.screen.breakpoint[bp as IThemeBreakpointKey]?.media;
-                return [media, { WebkitLineClamp: varSet.line }];
-              }),
-            ),
-            ...Object.fromEntries(
-              Object.entries(vars.orientations).map(([orientation, varSet]) => {
-                const media = ThemeGlobalValue.screen.orientation[orientation as IThemeOrientationKey]?.media;
-                return [media, { WebkitLineClamp: varSet.line }];
-              }),
-            ),
-          },
-        },
+// === Outline ===
+export const addOutline = recipe({
+  variants: {
+    isOutline: {
+      none: {},
+      default: {
+        outline: `2px solid transparent`,
+        outlineOffset: '1px',
       },
-
-      variant: {
-        true: {
-          fontSize: `calc(${ThemeGlobalValue.font.sizeHeading[vars.default.variant as keyof typeof ThemeGlobalValue.font.sizeHeading]} * ${ThemeGlobalValue.font.sizeDevice.default}px)`,
-          '@media': Object.fromEntries(
-            Object.entries(ThemeGlobalValue.screen.breakpoint)
-              .filter(([label]) => label !== 'default')
-              .map(([label, size]) => {
-                const key = label as keyof typeof ThemeGlobalValue.font.sizeDevice;
-                const varSet = vars.breakpoints[key as Exclude<IThemeBreakpointKey, 'default'>];
-                return [
-                  `screen and (max-width: ${size.width}px)`,
-                  {
-                    fontSize: `calc(${ThemeGlobalValue.font.sizeHeading[varSet.variant as keyof typeof ThemeGlobalValue.font.sizeHeading]} * ${ThemeGlobalValue.font.sizeDevice[key]}px)`,
-                  },
-                ] as const;
-              }),
-          ),
-        },
-      },
-
-      isHoverUnderlining: {
-        true: {
-          selectors: {
-            '&:hover': {
-              textDecoration: 'underline',
-            },
-          },
-        },
-      },
-
-      isNoUserSelect: {
-        true: {
-          userSelect: 'none',
-          WebkitUserSelect: 'none',
-          MozUserSelect: 'none',
-          msUserSelect: 'none',
-        },
+      boxShadow: {
+        outline: '1px solid transparent',
+        outlineOffset: '0px',
       },
     },
-  });
+  },
+  defaultVariants: {
+    isOutline: 'none',
+  },
+});
 
-  const getVarsForBreakpoint = (params: TypographyAllProps, varSet: ReturnType<typeof createVarsSet>) => {
-    return {
-      ...(params.letterSpacing !== undefined && {
-        [varSet.letterSpacing]: `${params.letterSpacing}px`,
-      }),
-      ...(params.flex !== undefined && {
-        [varSet.flex]: params.flex,
-      }),
-      ...(params.cursor !== undefined && {
-        [varSet.cursor]: params.cursor,
-      }),
-      ...(params.overflow !== undefined && {
-        [varSet.overflow]: params.overflow,
-      }),
-      ...(params.line !== undefined && {
-        [varSet.line]: String(params.line),
-      }),
-      ...(params.family !== undefined && {
-        [varSet.family]: params.family,
-      }),
-      ...(params.weight !== undefined && {
-        [varSet.weight]: String(params.weight),
-      }),
-      ...(params.height !== undefined && {
-        [varSet.height]: String(params.height),
-      }),
-      ...(params.color !== undefined && {
-        [varSet.color]: JeneseiPalette[params.color],
-      }),
-      ...(params.align !== undefined && {
-        [varSet.align]: params.align,
-      }),
-      ...(params.wrap !== undefined && {
-        [varSet.wrap]: params.wrap,
-      }),
-      ...(params.decoration !== undefined && {
-        [varSet.decoration]: String(params.decoration),
-      }),
-      ...(params.transform !== undefined && {
-        [varSet.transform]: String(params.transform),
-      }),
-      ...('size' in params &&
-        params.size !== undefined && {
-          [varSet.size]: `${typeof params.size === 'number' ? `${params.size}px` : params.size}`,
-        }),
-      ...('variant' in params &&
-        params.variant !== undefined && {
-          [varSet.variant]: String(params.variant),
-        }),
-    };
-  };
+// === Misc ===
+export const addAlwaysOutline = recipe({
+  variants: {
+    show: { true: { outline: `2px solid ${ThemeGlobal.state.focus}`, outlineOffset: '1px' } },
+  },
+  defaultVariants: { show: false },
+});
 
-  const getVars = (params: addSXTypographyPropsNew) => {
-    const sxTypography = params.sxTypography;
-    if (!sxTypography) return {};
+export const addRemoveOutline = style({
+  outline: '0px solid transparent !important',
+  outlineOffset: '0px !important',
+});
 
-    let result = {};
+export const addNiceNumber = style({
+  fontVariantNumeric: 'tabular-nums',
+  fontFeatureSettings: `'tnum'`,
+});
 
-    if (sxTypography.default) {
-      result = {
-        ...result,
-        ...getVarsForBreakpoint(sxTypography.default, vars.default),
-      };
-    }
+export const addDisabled = recipe({
+  variants: {
+    isDisabled: {
+      true: { opacity: 0.5 },
+      false: { opacity: 1 },
+    },
+  },
+  defaultVariants: { isDisabled: false },
+});
 
-    if (sxTypography.breakpoints) {
-      Object.entries(sxTypography.breakpoints).forEach(([bp, breakpointStyle]) => {
-        if (breakpointStyle && bp in vars.breakpoints) {
-          result = {
-            ...result,
-            ...getVarsForBreakpoint(breakpointStyle, vars.breakpoints[bp as Exclude<IThemeBreakpointKey, 'default'>]),
-          };
-        }
-      });
-    }
-    if (sxTypography.horizontal) {
-      result = {
-        ...result,
-        ...getVarsForBreakpoint(sxTypography.horizontal, vars.orientations.horizontal),
-      };
-    }
+export const addRipple = recipe({
+  variants: {
+    isRipple: {
+      true: {
+        position: 'relative',
+        overflow: 'hidden',
+        isolation: 'isolate',
+      },
+    },
+  },
+  defaultVariants: { isRipple: false },
+});
 
-    if (sxTypography.vertical) {
-      result = {
-        ...result,
-        ...getVarsForBreakpoint(sxTypography.vertical, vars.orientations.vertical),
-      };
-    }
+export const addRippleDefault = style({
+  position: 'relative',
+  overflow: 'hidden',
+  isolation: 'isolate',
+});
 
-    return assignInlineVars(result);
-  };
+export const addHover = recipe({
+  variants: {
+    isHover: {
+      true: {
+        transition: `background-color ${ThemeGlobal.transition.default}, outline 0s`,
+      },
+    },
+  },
+  defaultVariants: { isHover: false },
+});
 
-  const getStyles = (props: addSXTypographyPropsNew) => {
-    const defaultTypography: TypographyAllProps | undefined = props.sxTypography?.default;
+export const addSxTypographyVars = {
+  letterSpacing: createVar(),
+  line: createVar(),
+  flex: createVar(),
+  cursor: createVar(),
+  overflow: createVar(),
+  family: createVar(),
+  weight: createVar(),
+  height: createVar(),
+  color: createVar(),
+  align: createVar(),
+  wrap: createVar(),
+  decoration: createVar(),
+  transform: createVar(),
+  size: createVar(),
+  variant: createVar(),
+};
 
-    if (!defaultTypography) return undefined;
+export const addSxTypographyRecipe = recipe({
+  base: {
+    color: ThemeGlobal.palette.black100,
+    fontFamily: ThemeGlobal.font.family,
+    fontWeight: ThemeGlobal.font.weight,
+    lineHeight: ThemeGlobal.font.lineHeight,
+    padding: 0,
+    margin: 0,
+  },
 
-    return styles({
-      letterSpacing: defaultTypography.letterSpacing != null,
-      flex: defaultTypography.flex != null,
-      cursor: defaultTypography.cursor != null,
-      overflow: defaultTypography.overflow != null,
-      line:
-        defaultTypography.line === 1
-          ? 'single'
-          : defaultTypography.line && defaultTypography.line > 1
-            ? 'multi'
-            : undefined,
-      family: defaultTypography.family != null,
-      weight: defaultTypography.weight != null,
-      height: defaultTypography.height != null,
-      color: defaultTypography.color != null,
-      align: defaultTypography.align != null,
-      wrap: defaultTypography.wrap != null,
-      decoration: defaultTypography.decoration != null,
-      transform: defaultTypography.transform != null,
-      isHoverUnderlining: defaultTypography.isHoverUnderlining === true,
-      isNoUserSelect: defaultTypography.isNoUserSelect === true,
-      size: 'size' in defaultTypography && defaultTypography.size != null,
-      variant: 'variant' in defaultTypography && defaultTypography.variant != null,
-    });
-  };
+  variants: {
+    letterSpacing: {
+      true: {
+        letterSpacing: addSxTypographyVars.letterSpacing,
+      },
+    },
+    flex: {
+      true: {
+        flex: addSxTypographyVars.flex,
+      },
+    },
+    cursor: {
+      true: {
+        cursor: addSxTypographyVars.cursor,
+      },
+    },
+    overflow: {
+      true: {
+        overflow: addSxTypographyVars.overflow,
+      },
+    },
 
-  return { vars, getStyles, getVars };
-}
+    line: {
+      single: {
+        textOverflow: 'ellipsis',
+        overflow: 'hidden',
+        whiteSpace: 'nowrap',
+        width: '-webkit-fill-available',
+        maxWidth: 'fit-content',
+      },
 
-export const sxTypography = createSXTypography();
+      multi: {
+        wordBreak: 'break-word',
+        whiteSpace: 'normal',
+        textOverflow: 'ellipsis',
+        display: '-webkit-box',
+        overflow: 'hidden',
+        WebkitBoxOrient: 'vertical',
+        WebkitLineClamp: addSxTypographyVars.line,
+        width: 'fit-content',
+        overflowWrap: 'anywhere',
+      },
+    },
 
-export function getSX(resolvedSX: addSXPropsNew['sx']) {
-  const sx = typeof resolvedSX === 'function' ? resolvedSX(ThemeGlobalValue) : resolvedSX;
+    family: {
+      true: {
+        fontFamily: addSxTypographyVars.family,
+      },
+    },
 
-  if (!sx || Object.keys(sx).length === 0) return '';
+    weight: {
+      true: {
+        fontWeight: addSxTypographyVars.weight,
+      },
+    },
 
-  const styles: any = {};
+    height: {
+      true: {
+        lineHeight: addSxTypographyVars.height,
+      },
+    },
 
-  if (sx.default) {
-    Object.assign(styles, sx.default);
-  }
+    color: {
+      true: {
+        color: addSxTypographyVars.color,
+      },
+    },
 
-  if (sx.breakpoints) {
-    const mediaQueries: any = {};
+    align: {
+      true: {
+        textAlign: addSxTypographyVars.align,
+      },
+    },
 
-    Object.entries(sx.breakpoints).forEach(([breakpoint, breakpointStyle]) => {
-      if (!breakpointStyle) return;
+    wrap: {
+      true: {
+        whiteSpace: addSxTypographyVars.wrap,
+      },
+    },
 
-      const isThemeDevice = breakpoint in ThemeGlobalValue.screen.breakpoint;
+    decoration: {
+      true: {
+        textDecoration: addSxTypographyVars.decoration,
+      },
+    },
 
-      if (breakpoint === 'default') {
-        Object.assign(styles, breakpointStyle);
-      } else if (isThemeDevice) {
-        const width = ThemeGlobalValue.screen.breakpoint[breakpoint as IThemeBreakpointKey]?.width;
-        if (width) {
-          const query = `screen and (max-width: ${width}px)`;
-          mediaQueries[query] = { ...mediaQueries[query], ...breakpointStyle };
-        }
-      } else {
-        mediaQueries[breakpoint] = { ...mediaQueries[breakpoint], ...breakpointStyle };
-      }
-    });
+    transform: {
+      true: {
+        textTransform: addSxTypographyVars.transform,
+      },
+    },
 
-    if (Object.keys(mediaQueries).length > 0) {
-      styles['@media'] = mediaQueries;
-    }
-  }
+    shadow: {
+      shadowPulse: {
+        animation: `${keyframeShadowPulse} 2s infinite`,
+      },
+    },
+    isHoverUnderlining: {
+      true: {},
+    },
 
-  if (sx.horizontal) {
-    if (!styles['@media']) {
-      styles['@media'] = {};
-    }
-    styles['@media'][ThemeGlobalValue.screen.orientation.horizontal.media] = {
-      ...styles['@media'][ThemeGlobalValue.screen.orientation.horizontal.media],
-      ...sx.horizontal,
-    };
-  }
+    isNoUserSelect: {
+      true: {
+        userSelect: 'none',
+        WebkitUserSelect: 'none',
+        MozUserSelect: 'none',
+        msUserSelect: 'none',
+      },
+    },
 
-  if (sx.vertical) {
-    if (!styles['@media']) {
-      styles['@media'] = {};
-    }
-    styles['@media'][ThemeGlobalValue.screen.orientation.vertical.media] = {
-      ...styles['@media'][ThemeGlobalValue.screen.orientation.vertical.media],
-      ...sx.vertical,
-    };
-  }
+    size: {
+      true: {
+        fontSize: addSxTypographyVars.size,
+      },
+    },
 
-  return style(styles);
-}
+    variant: {
+      true: {
+        fontSize: addSxTypographyVars.variant,
+      },
+    },
+  },
+});
+
+export const addSx = style({
+  display: 'flex',
+});

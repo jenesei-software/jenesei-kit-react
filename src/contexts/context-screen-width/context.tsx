@@ -1,6 +1,6 @@
-import { ThemeGlobal } from '@local/styles/theme/theme.vanilla-extract.css';
+import { ThemeGlobalValue } from '@local/styles/theme/theme.vanilla-extract.css';
 
-import { createContext, FC, useCallback, useEffect, useMemo, useState } from 'react';
+import { createContext, FC, useCallback, useEffect, useRef, useState } from 'react';
 
 import { ProviderScreenWidthProps, ScreenWidthContextProps } from './context.types';
 
@@ -12,17 +12,18 @@ export const ProviderScreenWidth: FC<ProviderScreenWidthProps> = ({ children }) 
     typeof window !== 'undefined' && window.innerWidth > window.innerHeight ? 'horizontal' : 'vertical',
   );
 
-  const [windowWidth, setWindowWidth] = useState<number>(typeof window !== 'undefined' ? window.innerWidth : 0);
+  const queriesRef = useRef<Array<{
+    key: keyof typeof ThemeGlobalValue.screen.breakpoint;
+    mq: MediaQueryList;
+  }> | null>(null);
 
-  const queries = useMemo(() => {
-    if (typeof window === 'undefined') return [];
-
-    return Object.entries(ThemeGlobal.screen.breakpoint)
+  if (queriesRef.current === null && typeof window !== 'undefined') {
+    queriesRef.current = Object.entries(ThemeGlobalValue.screen.breakpoint)
       .map(([key, value]) => {
         const widthValue = (value as { width: string }).width;
         const bp = parseInt(widthValue.replace(/\D/g, ''), 10);
         return {
-          key: key as keyof typeof ThemeGlobal.screen.breakpoint,
+          key: key as keyof typeof ThemeGlobalValue.screen.breakpoint,
           bp,
         };
       })
@@ -31,47 +32,48 @@ export const ProviderScreenWidth: FC<ProviderScreenWidthProps> = ({ children }) 
         key,
         mq: window.matchMedia(`(max-width: ${bp}px)`),
       }));
-  }, []);
+  }
 
   const updateBreakpoint = useCallback(() => {
-    if (!queries.length) return;
-    const matched = queries.find(({ mq }) => mq.matches);
+    if (!queriesRef.current) return;
+    const matched = queriesRef.current.find(({ mq }) => mq.matches);
     setBreakpoint(matched?.key ?? 'default');
-  }, [queries.find, queries.length]);
+  }, []);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
+
     const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-      setOrientation(window.innerWidth > window.innerHeight ? 'horizontal' : 'vertical');
+      const newWidth = window.innerWidth;
+      const newOrientation = newWidth > window.innerHeight ? 'horizontal' : 'vertical';
+
+      setOrientation(newOrientation);
     };
 
     window.addEventListener('resize', handleResize);
-
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   useEffect(() => {
-    if (!queries.length) return;
+    if (!queriesRef.current) return;
 
-    queries.forEach(({ mq }) => {
+    queriesRef.current.forEach(({ mq }) => {
       mq.addEventListener('change', updateBreakpoint);
     });
     updateBreakpoint();
 
     return () => {
-      queries.forEach(({ mq }) => {
+      queriesRef.current?.forEach(({ mq }) => {
         mq.removeEventListener('change', updateBreakpoint);
       });
     };
-  }, [queries, updateBreakpoint]);
+  }, [updateBreakpoint]);
 
   return (
     <ScreenWidthContext.Provider
       value={{
         breakpoint,
         orientation,
-        windowWidth,
       }}
     >
       {children}

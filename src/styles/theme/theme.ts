@@ -80,7 +80,7 @@ export const JeneseiPalette: Record<IThemePaletteKeys, string> = {
   violetStephanie: '#a75afa',
   violetJanice: '#be83fd',
   amnezia: '#222224',
-};
+} as const;
 
 export const ThemeGenre: IThemeGenre = {
   'bustmarket-gray-violet': {

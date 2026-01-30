@@ -82,3 +82,28 @@ export function getSxTypography(props: {
     ...sx,
   };
 }
+
+type AnyObject = Record<string, any>;
+
+export function stringifyCssObject<T extends AnyObject>(obj?: T): AnyObject | undefined {
+  if (!obj) return undefined;
+
+  const result: AnyObject = {};
+
+  for (const key in obj) {
+    const value = obj[key];
+
+    if (value == null) continue;
+
+    if (typeof value === 'object' && !Array.isArray(value)) {
+      const nested = stringifyCssObject(value);
+      if (nested && Object.keys(nested).length > 0) {
+        result[key] = nested;
+      }
+    } else {
+      result[key] = String(value);
+    }
+  }
+
+  return result;
+}

@@ -35,11 +35,12 @@ export default defineConfig(() => {
           sizesBackgroundWhite: sizesBackgroundWhite,
           sizesFavicon: sizesFavicon,
         }),
-      pluginUpdateReadmePD({
-        insertionPoint: '# IMPORTANT',
-        pathReadme: resolve(__dirname, 'README.md'),
-        pathPackageJson: resolve(__dirname, 'package.json'),
-      }),
+      isStorybook &&
+        pluginUpdateReadmePD({
+          insertionPoint: '# IMPORTANT',
+          pathReadme: resolve(__dirname, 'README.md'),
+          pathPackageJson: resolve(__dirname, 'package.json'),
+        }),
       react(),
       tsconfigPaths(),
       !isStorybook &&
