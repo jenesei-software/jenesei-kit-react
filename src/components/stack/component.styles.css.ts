@@ -1,5 +1,5 @@
 import { addSX } from '@local/styles/add';
-import { addRipple } from '@local/styles/add/add';
+import { addRipple } from '@local/styles/add/add.dynamic';
 
 import { motion } from 'framer-motion';
 import styled, { css } from 'styled-components';

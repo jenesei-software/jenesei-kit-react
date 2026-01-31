@@ -1,11 +1,11 @@
 import { Stack } from '@local/components/stack';
-import { useResponsiveSX } from '@local/hooks/use-responsive-sx/use';
-import { addSXPropsNew } from '@local/styles/add/add.types';
+import { useLayout } from '@local/hooks/use-layout-sx/use';
+import { I_SX } from '@local/styles/add/add.types';
 
 import { FC, PropsWithChildren } from 'react';
 
-export const WrapperBig: FC<PropsWithChildren & addSXPropsNew> = (props) => {
-  const screenSX = useResponsiveSX(props.sx);
+export const WrapperBig: FC<PropsWithChildren & I_SX> = (props) => {
+  const styleLayout = useLayout(props?.sx ?? {});
   return (
     <Stack
       sx={(theme) => ({
@@ -23,14 +23,14 @@ export const WrapperBig: FC<PropsWithChildren & addSXPropsNew> = (props) => {
           overflow: 'hidden',
         },
       })}
-      style={{ ...screenSX?.css }}
+      style={styleLayout}
     >
       {props.children}
     </Stack>
   );
 };
-export const WrapperMin: FC<PropsWithChildren & addSXPropsNew> = (props) => {
-  const screenSX = useResponsiveSX(props.sx);
+export const WrapperMin: FC<PropsWithChildren & I_SX> = (props) => {
+  const styleLayout = useLayout(props?.sx ?? {});
   return (
     <Stack
       sx={(theme) => ({
@@ -47,7 +47,7 @@ export const WrapperMin: FC<PropsWithChildren & addSXPropsNew> = (props) => {
           gap: '6px',
         },
       })}
-      style={{ ...screenSX?.css }}
+      style={styleLayout}
     >
       {props.children}
     </Stack>

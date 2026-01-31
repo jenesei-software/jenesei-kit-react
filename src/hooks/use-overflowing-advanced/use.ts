@@ -15,6 +15,7 @@ export function useOverflowingAdvanced<T extends HTMLElement>(
   const [isOverflowing, setIsOverflowing] = useState(false);
   const deps = useDeepCompareMemoize(props?.dependencies);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     if (!props?.isCheckSize) return;
     const el = ref.current;

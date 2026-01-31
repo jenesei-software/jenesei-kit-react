@@ -5,7 +5,7 @@ import { Stack, StackMotion } from '@local/components/stack';
 import { Typography } from '@local/components/typography';
 import { useImageSlider } from '@local/hooks/use-image-slider';
 import { useResolveSx } from '@local/hooks/use-resolve-sx';
-import { KEY_SIZE_DATA } from '@local/styles/theme';
+import { THEME_KEY_SIZE } from '@local/styles/theme';
 
 import { AnimatePresence, Variants } from 'framer-motion';
 import { FC, useMemo } from 'react';
@@ -16,7 +16,7 @@ import { ImageSliderProps } from './component.types';
 export const ImageSlider: FC<ImageSliderProps> = (props) => {
   const { onIndexChange } = props;
   const images = useMemo(() => props.images, [props.images]);
-  const size = useMemo(() => KEY_SIZE_DATA[props.size], [props.size]);
+  const size = useMemo(() => THEME_KEY_SIZE[props.size], [props.size]);
   const br = useMemo(() => `${size.radius}px`, [size.radius]);
 
   const {

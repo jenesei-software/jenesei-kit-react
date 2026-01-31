@@ -1,10 +1,8 @@
 import { Button } from '@local/components/button';
-import { Stack } from '@local/components/stack';
+import { Stack, StackMotion } from '@local/components/stack';
 
-import { Link } from '@tanstack/react-router';
 import { motion } from 'framer-motion';
-import { FC } from 'react';
-import styled from 'styled-components';
+import { CSSProperties, FC } from 'react';
 
 import { SharedProps } from './area.types';
 
@@ -15,15 +13,13 @@ export const Shared: FC<SharedProps> = (props) => {
         {props.option.map((item) => (
           <motion.li key={item.id} initial={false} style={tab} onClick={() => props.onSelected?.(item.id)}>
             {(props.isLink ?? false) && 'link' in item ? (
-              <Link {...item.link}>
-                <Button
-                  {...(item.id === props.value
-                    ? item.selected
-                      ? { ...item.default, ...item.selected }
-                      : item.default
-                    : item.default)}
-                />
-              </Link>
+              <Button
+                {...(item.id === props.value
+                  ? item.selected
+                    ? { ...item.default, ...item.selected }
+                    : item.default
+                  : item.default)}
+              />
             ) : (
               <Button
                 {...(item.id === props.value
@@ -33,7 +29,18 @@ export const Shared: FC<SharedProps> = (props) => {
                   : item.default)}
               />
             )}
-            {item.id === props.value ? <Underline layoutId='underline' id='underline' /> : null}
+            {item.id === props.value ? (
+              <StackMotion
+                layoutId='underline'
+                id='underline'
+                sx={(theme) => ({
+                  default: {
+                    ...underline,
+                    background: theme.palette.violetJanice,
+                  },
+                })}
+              />
+            ) : null}
           </motion.li>
         ))}
       </ul>
@@ -41,30 +48,28 @@ export const Shared: FC<SharedProps> = (props) => {
   );
 };
 
-const tabsStyles: React.CSSProperties = {
+const tabsStyles: CSSProperties = {
   listStyle: 'none',
   padding: 0,
   margin: 0,
 };
 
-const tabsContainer: React.CSSProperties = {
+const tabsContainer: CSSProperties = {
   ...tabsStyles,
   display: 'flex',
   width: '100%',
 };
 
-const tab: React.CSSProperties = {
+const tab: CSSProperties = {
   ...tabsStyles,
   position: 'relative',
-  // display: 'contents',
 };
 
-const Underline = styled(motion.div)`
-  position: absolute;
-  width: 100%;
-  left: 0;
-  right: 0;
-  bottom: -2px;
-  height: 2px;
-  background: ${(props) => props.theme.palette.violetJanice};
-`;
+const underline: CSSProperties = {
+  position: 'absolute',
+  width: '100%',
+  left: 0,
+  right: 0,
+  bottom: -2,
+  height: 2,
+};

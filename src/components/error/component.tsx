@@ -1,6 +1,6 @@
 import { addSX, addSXTypography } from '@local/styles/add';
-import { WordsPullUp } from '@local/styles/motion';
-import { KEY_SIZE_DATA } from '@local/styles/theme';
+import { MotionWordsPullUp } from '@local/styles/motion';
+import { THEME_KEY_SIZE } from '@local/styles/theme';
 
 import { FC } from 'react';
 import styled, { css } from 'styled-components';
@@ -14,12 +14,12 @@ const addErrorMessageSize = css<ErrorMessageDollarProps>`
         ? css`
         position: absolute;
         top: calc(100% + 4px);
-        padding-left: ${KEY_SIZE_DATA[props.$size].padding}px;
+        padding-left: ${THEME_KEY_SIZE[props.$size].padding}px;
         color: ${(props) => props.theme.states.danger};
       `
         : css`
         position: static;
-        padding: 0px ${KEY_SIZE_DATA[props.$size].padding}px;
+        padding: 0px ${THEME_KEY_SIZE[props.$size].padding}px;
         color: ${(props) => props.theme.states.danger};
       `
       : null}
@@ -58,7 +58,7 @@ export const ErrorMessage: FC<ErrorMessageProps> = (props) => {
           $sx={props.sx}
           $isErrorAbsolute={props.isErrorAbsolute}
         >
-          <WordsPullUp text={props.errorMessage} />
+          <MotionWordsPullUp text={props.errorMessage} />
         </ErrorMessageComponent>
       ) : null}
     </>

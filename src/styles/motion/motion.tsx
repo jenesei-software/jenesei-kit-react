@@ -1,7 +1,7 @@
 import { AnimatePresence, motion, useInView } from 'framer-motion';
 import { ReactNode, useRef } from 'react';
 
-export function WordsPullUp({ text }: { text: string }) {
+export function MotionWordsPullUp({ text }: { text: string }) {
   const splittedText = text.split(' ');
 
   const pullupVariant = {
@@ -35,7 +35,7 @@ export function WordsPullUp({ text }: { text: string }) {
   );
 }
 
-export function TypingEffect({ text }: { text: string }) {
+export function MotionTypingEffect({ text }: { text: string }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
   return (
@@ -54,7 +54,7 @@ export function TypingEffect({ text }: { text: string }) {
   );
 }
 
-export function GradualSpacing({ text }: { text: string }) {
+export function MotionGradualSpacing({ text }: { text: string }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
   return (
@@ -75,7 +75,7 @@ export function GradualSpacing({ text }: { text: string }) {
   );
 }
 
-export function BlurIn({ children }: { children: ReactNode }) {
+export function MotionBlurIn({ children }: { children: ReactNode }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
   return (

@@ -1,6 +1,6 @@
 import { addError } from '@local/components/error';
 import { addDisabled, addNiceNumber, addOutline, addSX, addSXTypography, addTransition } from '@local/styles/add';
-import { KEY_SIZE_DATA } from '@local/styles/theme';
+import { THEME_KEY_SIZE } from '@local/styles/theme';
 
 import { motion } from 'framer-motion';
 import { NumericFormat, PatternFormat } from 'react-number-format';
@@ -17,8 +17,8 @@ export const StyledInputWrapper = styled.div<StyledInputWrapperProps>`
   ${(props) =>
     props.$isWidthAsHeight
       ? css`
-          width: ${KEY_SIZE_DATA[props.$size].height}px;
-          min-width: ${KEY_SIZE_DATA[props.$size].height}px;
+          width: ${THEME_KEY_SIZE[props.$size].height}px;
+          min-width: ${THEME_KEY_SIZE[props.$size].height}px;
           & input {
             text-align: center;
           }
@@ -91,11 +91,11 @@ const addInputGenre = css<StyledInputProps>`
 /****************************************** Size *************************************************/
 export const addInputSize = css<StyledInputProps>`
   ${(props) => css`
-      padding: 0px ${KEY_SIZE_DATA[props.$size].padding}px;
-    height: ${KEY_SIZE_DATA[props.$size].height}px;
-    min-height: ${KEY_SIZE_DATA[props.$size].height}px;
-    max-height: ${KEY_SIZE_DATA[props.$size].height}px;
-    border-radius: ${KEY_SIZE_DATA[props.$size].radius}px;
+      padding: 0px ${THEME_KEY_SIZE[props.$size].padding}px;
+    height: ${THEME_KEY_SIZE[props.$size].height}px;
+    min-height: ${THEME_KEY_SIZE[props.$size].height}px;
+    max-height: ${THEME_KEY_SIZE[props.$size].height}px;
+    border-radius: ${THEME_KEY_SIZE[props.$size].radius}px;
   `};
 `;
 

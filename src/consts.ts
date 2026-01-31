@@ -2,10 +2,10 @@ import {
   DatePickerTranslateInputProps,
   DatePickerTranslateMonthProps,
   DatePickerTranslateWeekProps,
-} from './components/date-picker';
-import { transformObjectToArray, transformObjectValuesToKeys } from './functions';
-import { IThemeTypographyHeading } from './styles/theme';
-import { IImageFormat, ILanguage, IService } from './types';
+} from '@local/components/date-picker';
+import { transformObjectToArray, transformObjectValuesToKeys } from '@local/functions';
+import { I_THEME_TYPOGRAPHY_HEADING } from '@local/styles/theme';
+import { IImageFormat, ILanguage, IService } from '@local/types';
 
 export const OBJECT_LANGUAGE: ILanguage = {
   eng: {
@@ -156,4 +156,4 @@ export const LOREM_IPSUM_TEXT =
 
 export const LIBRARY_VERSION = import.meta.env.VITE_APP_VERSION;
 // export const LIST_TYPOGRAPHY_VARIANTS: IThemeTypographyHeading[] = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'h7','h8','h9', 'subtitle1', 'subtitle2', 'body1', 'body2', 'caption', 'overline'];
-export const LIST_TYPOGRAPHY_VARIANTS_DEFAULT: IThemeTypographyHeading[] = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+export const LIST_TYPOGRAPHY_VARIANTS_DEFAULT: I_THEME_TYPOGRAPHY_HEADING[] = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];

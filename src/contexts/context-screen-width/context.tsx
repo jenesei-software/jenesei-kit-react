@@ -1,4 +1,5 @@
-import { ThemeGlobalValue } from '@local/styles/theme/theme.vanilla-extract.css';
+
+import { THEME_GLOBAL_VALUE } from '@local/styles/theme';
 
 import { createContext, FC, useCallback, useEffect, useRef, useState } from 'react';
 
@@ -13,17 +14,17 @@ export const ProviderScreenWidth: FC<ProviderScreenWidthProps> = ({ children }) 
   );
 
   const queriesRef = useRef<Array<{
-    key: keyof typeof ThemeGlobalValue.screen.breakpoint;
+    key: keyof typeof THEME_GLOBAL_VALUE.screen.breakpoint;
     mq: MediaQueryList;
   }> | null>(null);
 
   if (queriesRef.current === null && typeof window !== 'undefined') {
-    queriesRef.current = Object.entries(ThemeGlobalValue.screen.breakpoint)
+    queriesRef.current = Object.entries(THEME_GLOBAL_VALUE.screen.breakpoint)
       .map(([key, value]) => {
         const widthValue = (value as { width: string }).width;
         const bp = parseInt(widthValue.replace(/\D/g, ''), 10);
         return {
-          key: key as keyof typeof ThemeGlobalValue.screen.breakpoint,
+          key: key as keyof typeof THEME_GLOBAL_VALUE.screen.breakpoint,
           bp,
         };
       })

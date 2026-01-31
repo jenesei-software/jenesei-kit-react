@@ -1,4 +1,5 @@
 import { Outside } from '@local/areas/outside';
+import { THEME_GLOBAL_VALUE } from '@local/styles/theme';
 
 import { AnimatePresence } from 'framer-motion';
 import { createContext, FC, memo, useCallback, useEffect, useMemo, useState } from 'react';
@@ -151,6 +152,7 @@ const DialogElement = <T extends object>(props: DialogElementProps<T>) => {
             opacity: 1,
             scale: 1,
           }}
+          class={THEME_GLOBAL_VALUE.id.dialog}
           onAnimationComplete={() => setIsAnimating(false)}
           transition={{
             type: 'spring',

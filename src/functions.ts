@@ -1,7 +1,5 @@
-import { DefaultTheme } from 'styled-components';
-
-import { TypographySXProps } from './styles/add';
-import { IThemeSize, KEY_SIZE_DATA } from './styles/theme';
+import { I_LAYOUT, I_LAYOUT_VALUE } from "./styles/add";
+import { THEME_GLOBAL_VALUE } from "./styles/theme";
 
 type EnumOption = {
   value: string;
@@ -66,22 +64,22 @@ export function getHasVerticalScroll(): boolean {
   return document.documentElement.scrollHeight > window.innerHeight;
 }
 
-export function getSxTypography(props: {
-  size: IThemeSize;
-  weight: number;
-  sx?: TypographySXProps;
-  theme: DefaultTheme;
-}): TypographySXProps {
-  const sx = typeof props.sx === 'function' ? props.sx(props.theme) : props.sx;
-  return {
-    default: {
-      size: KEY_SIZE_DATA[props.size].font,
-      weight: 700,
-      ...sx?.default,
-    },
-    ...sx,
-  };
-}
+// export function getSxTypography(props: {
+//   size: IThemeSize;
+//   weight: number;
+//   sx?: TypographySXProps;
+//   theme: DefaultTheme;
+// }): TypographySXProps {
+//   const sx = typeof props.sx === 'function' ? props.sx(props.theme) : props.sx;
+//   return {
+//     default: {
+//       size: THEME_KEY_SIZE[props.size].font,
+//       weight: 700,
+//       ...sx?.default,
+//     },
+//     ...sx,
+//   };
+// }
 
 type AnyObject = Record<string, any>;
 
@@ -106,4 +104,25 @@ export function stringifyCssObject<T extends AnyObject>(obj?: T): AnyObject | un
   }
 
   return result;
+}
+
+export const getResolveSX = <A extends object>(sxProp?: I_LAYOUT<A>, sxPropBase?: I_LAYOUT<A>): I_LAYOUT_VALUE<A> => {
+  const resolve = (sx?: I_LAYOUT<A>): I_LAYOUT_VALUE<A> =>
+    typeof sx === 'function' ? sx(THEME_GLOBAL_VALUE) : (sx ?? {});
+
+  const base = resolve(sxPropBase);
+  const custom = resolve(sxProp);
+
+  const merged: I_LAYOUT_VALUE<A> = {};
+
+  merged.default = mergeOptionalObjects(base.default, custom.default);
+  merged.breakpoints = mergeOptionalObjects(base.breakpoints, custom.breakpoints);
+  merged.orientations = mergeOptionalObjects(base.orientations, custom.orientations);
+
+  return merged;
+};
+
+function mergeOptionalObjects<T extends object>(base?: T, custom?: T): T | undefined {
+  if (base && custom) return { ...base, ...custom };
+  return base ?? custom;
 }

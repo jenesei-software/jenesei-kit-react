@@ -1,11 +1,10 @@
 import { Stack } from '@local/components/stack';
-import { useResolveSx } from '@local/hooks/use-resolve-sx';
-import { addSXProps } from '@local/styles/add';
+import { I_SX } from '@local/styles/add';
 
-import { FC, PropsWithChildren, useEffect, useMemo, useRef } from 'react';
+import { FC, PropsWithChildren, useEffect, useRef } from 'react';
 
 type OutsideProps = PropsWithChildren &
-  addSXProps & {
+  I_SX & {
     onOutsideClick: (event: MouseEvent) => void;
   };
 
@@ -25,18 +24,8 @@ export const Outside: FC<OutsideProps> = (props) => {
     };
   }, [props]);
 
-  const { resolveSX } = useResolveSx();
-  const sxStack = useMemo(
-    () =>
-      resolveSX(props?.sx, () => ({
-        default: {
-          display: 'content',
-        },
-      })),
-    [props?.sx, resolveSX],
-  );
   return (
-    <Stack sx={sxStack} ref={elementRef}>
+    <Stack sx={props.sx} ref={elementRef}>
       {props.children}
     </Stack>
   );

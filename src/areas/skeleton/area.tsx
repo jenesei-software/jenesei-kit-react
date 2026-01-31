@@ -1,6 +1,8 @@
-import { FC, useEffect, useState } from 'react';
+import { Stack } from '@local/components/stack/component';
+import { dynamicAreaSkeleton } from '@local/styles/add/add.dynamic';
 
-import { StyledSkeleton } from './area.styles';
+import { FC, useEffect, useMemo, useState } from 'react';
+
 import { SkeletonProps } from './area.types';
 
 export const Skeleton: FC<SkeletonProps> = (props) => {
@@ -24,15 +26,32 @@ export const Skeleton: FC<SkeletonProps> = (props) => {
     }
   }, [props]);
 
+  const scrollConfig = useMemo(() => {
+    return {
+      className: [
+        dynamicAreaSkeleton.className({
+          visible: visible,
+          type: props.type,
+          color: props.color,
+          isInheritColor: props.isInheritColor,
+        }),
+        props.className,
+      ].join(' '),
+      style: Object.assign(
+        dynamicAreaSkeleton.style({
+          visible: visible,
+          type: props.type,
+          color: props.color,
+          isInheritColor: props.isInheritColor,
+        }),
+        props.style,
+      ),
+    };
+  }, [props.className, props.style, visible, props.type, props.color, props.isInheritColor]);
+
   return (
-    <StyledSkeleton
-      {...props}
-      $visible={visible}
-      $type={props.type}
-      $color={props.color}
-      $isInheritColor={props.isInheritColor}
-    >
+    <Stack {...props} {...scrollConfig}>
       {props.children}
-    </StyledSkeleton>
+    </Stack>
   );
 };

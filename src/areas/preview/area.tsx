@@ -1,6 +1,6 @@
 import { Icon } from '@local/components/icon';
 import { Stack, StackMotion } from '@local/components/stack';
-import { useResolveSx } from '@local/hooks/use-resolve-sx';
+import { getResolveSX } from '@local/functions';
 
 import { AnimatePresence } from 'framer-motion';
 import { FC, useEffect, useMemo, useState } from 'react';
@@ -43,34 +43,33 @@ export const Preview: FC<PreviewProps> = (props) => {
     }
   }, [propsVisible, propsMinTime]);
 
-  const { resolveSX } = useResolveSx();
   const sxLoader = useMemo(
     () =>
-      resolveSX(props?.sxLoader, (theme) => ({
+      getResolveSX(props?.sxLoader, (theme) => ({
         default: {
           backgroundColor: theme.palette.whiteStandard,
           width: '100%',
           height: '100%',
-          position: 'absolute',
-          top: 0,
-          left: 0,
+          position: 'absolute' as const,
+          top: '0',
+          left: '0',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           zIndex: 1,
         },
       })),
-    [props?.sxLoader, resolveSX],
+    [props?.sxLoader],
   );
   const sxChildren = useMemo(
     () =>
-      resolveSX(props?.sxChildren, () => ({
+      getResolveSX(props?.sxChildren, () => ({
         default: {
           display: 'contents',
           zIndex: 0,
         },
       })),
-    [resolveSX, props?.sxChildren],
+    [props?.sxChildren],
   );
   return (
     <AnimatePresence>

@@ -1,2 +1,2 @@
 export { Skeleton } from './area';
-export type { SkeletonProps } from './area.types';
+export type { SkeletonProps, StyledSkeletonProps } from './area.types';

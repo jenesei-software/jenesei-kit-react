@@ -1,10 +1,10 @@
-import { addSXProps } from '@local/styles/add';
+import { I_SX } from '@local/styles/add';
 
 import { PropsWithChildren, ReactNode } from 'react';
 
 type PreviewDefaultProps = { defaultVisible?: boolean; content?: ReactNode } & {
-  sxLoader?: addSXProps['sx'];
-  sxChildren?: addSXProps['sx'];
+  sxLoader?: I_SX['sx'];
+  sxChildren?: I_SX['sx'];
 };
 
 interface PreviewIsShowProps extends PreviewDefaultProps {

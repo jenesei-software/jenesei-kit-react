@@ -1,7 +1,7 @@
 import { addError } from '@local/components/error';
 import { addRippleDefault } from '@local/components/ripple';
 import { addDisabled, addOutline, addSX, addSXTypography, addTransition } from '@local/styles/add';
-import { KEY_SIZE_DATA } from '@local/styles/theme';
+import { THEME_KEY_SIZE } from '@local/styles/theme';
 
 import styled, { css } from 'styled-components';
 
@@ -10,16 +10,16 @@ import { StyledCheckboxProps } from './component.types';
 /****************************************** Size *************************************************/
 export const CheckboxSize = css<StyledCheckboxProps>`
   ${(props) => css`
-  height: ${KEY_SIZE_DATA[props.$size].height}px;
-  min-height: ${KEY_SIZE_DATA[props.$size].height}px;
-  border-radius: ${KEY_SIZE_DATA[props.$size].radius}px;
-  gap: ${KEY_SIZE_DATA[props.$size].padding - 2}px;
-  padding: ${KEY_SIZE_DATA[props.$size].padding - 4}px;
+  height: ${THEME_KEY_SIZE[props.$size].height}px;
+  min-height: ${THEME_KEY_SIZE[props.$size].height}px;
+  border-radius: ${THEME_KEY_SIZE[props.$size].radius}px;
+  gap: ${THEME_KEY_SIZE[props.$size].padding - 2}px;
+  padding: ${THEME_KEY_SIZE[props.$size].padding - 4}px;
   ${
     props.$isWidthAsHeight &&
     css`
-    width: ${KEY_SIZE_DATA[props.$size].height}px;
-    min-width: ${KEY_SIZE_DATA[props.$size].height}px;
+    width: ${THEME_KEY_SIZE[props.$size].height}px;
+    min-width: ${THEME_KEY_SIZE[props.$size].height}px;
     padding: 0px;
   `
   };

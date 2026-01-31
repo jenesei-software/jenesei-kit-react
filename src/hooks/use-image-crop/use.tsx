@@ -6,7 +6,7 @@ import { Stack } from '@local/components/stack';
 import { LIST_IMAGE_SUPPORTED_FORMAT } from '@local/consts';
 import { useDialog, useDialogProps } from '@local/contexts/context-dialog';
 import { useDeepCompareMemoize } from '@local/hooks/use-deep-compare-memoize';
-import { KEY_SIZE_DATA } from '@local/styles/theme';
+import { THEME_KEY_SIZE } from '@local/styles/theme';
 import { IImageFormat } from '@local/types';
 
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
@@ -16,7 +16,7 @@ import { useTheme } from 'styled-components';
 import { useImageCropAddProps, useImageCropProps } from './use.types';
 
 export const useImageCrop = (props: useImageCropProps) => {
-  const size = useMemo(() => KEY_SIZE_DATA[props.dialog.button.size], [props.dialog.button.size]);
+  const size = useMemo(() => THEME_KEY_SIZE[props.dialog.button.size], [props.dialog.button.size]);
   const br = useMemo(() => `${size.radius}px`, [size.radius]);
   const [images, setImages] = useState<ImageSelectItemProps[]>([]);
 

@@ -4,14 +4,14 @@ import { SliderImageProps } from '@local/components/image-slider';
 import { Stack } from '@local/components/stack';
 import { Typography } from '@local/components/typography';
 import { useDialog, useDialogProps } from '@local/contexts/context-dialog';
-import { KEY_SIZE_DATA } from '@local/styles/theme';
+import { THEME_KEY_SIZE } from '@local/styles/theme';
 
 import { useCallback, useMemo, useState } from 'react';
 
 import { useImageViewProps } from './use.types';
 
 export const useImageView = (props: useImageViewProps) => {
-  const size = useMemo(() => KEY_SIZE_DATA[props.size], [props.size]);
+  const size = useMemo(() => THEME_KEY_SIZE[props.size], [props.size]);
   const br = useMemo(() => `${size.radius}px`, [size.radius]);
   const [image, setImage] = useState<SliderImageProps | null>(null);
   const propsDialog: useDialogProps<{ br?: string; image: SliderImageProps | null }> = useMemo(

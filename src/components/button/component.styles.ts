@@ -1,6 +1,6 @@
 import { addRippleDefault } from '@local/components/ripple';
 import { addOutline, addSX, addSXTypography, addTransition } from '@local/styles/add';
-import { KEY_SIZE_DATA } from '@local/styles/theme';
+import { THEME_KEY_SIZE } from '@local/styles/theme';
 
 import { motion } from 'framer-motion';
 import styled, { css } from 'styled-components';
@@ -62,11 +62,11 @@ const addButtonIsPlaystationEffect = css<StyledButtonPropsDollar>`
 `;
 const addButtonSize = css<StyledButtonPropsDollar>`
   height: fit-content;
-  min-height: ${(props) => KEY_SIZE_DATA[props.$size].height}px;
+  min-height: ${(props) => THEME_KEY_SIZE[props.$size].height}px;
   max-height: fit-content;
-  padding: 2px ${(props) => KEY_SIZE_DATA[props.$size].padding}px;
-  border-radius: ${(props) => KEY_SIZE_DATA[props.$size].radius}px;
-  gap: ${(props) => KEY_SIZE_DATA[props.$size].padding - 2}px;
+  padding: 2px ${(props) => THEME_KEY_SIZE[props.$size].padding}px;
+  border-radius: ${(props) => THEME_KEY_SIZE[props.$size].radius}px;
+  gap: ${(props) => THEME_KEY_SIZE[props.$size].padding - 2}px;
   ${(props) =>
     props.$isFullSize &&
     css`
@@ -77,8 +77,8 @@ const addButtonSize = css<StyledButtonPropsDollar>`
   ${(props) =>
     props.$isWidthAsHeight &&
     css`
-  width: ${KEY_SIZE_DATA[props.$size].height}px;
-  min-width: ${KEY_SIZE_DATA[props.$size].height}px;
+  width: ${THEME_KEY_SIZE[props.$size].height}px;
+  min-width: ${THEME_KEY_SIZE[props.$size].height}px;
   padding: 0px;
   `};
   ${(props) =>
@@ -122,7 +122,7 @@ export const StyledButtonIconsWrapper = styled.div<StyledButtonIconsWrapperProps
     props.$isIconGroup
       ? css`
           display: flex;
-          gap: ${KEY_SIZE_DATA[props.$size].padding - 2}px;
+          gap: ${THEME_KEY_SIZE[props.$size].padding - 2}px;
           align-items: center;
           order: ${props.$iconGroupOrder || 'initial'};
         `

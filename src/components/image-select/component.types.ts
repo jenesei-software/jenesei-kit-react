@@ -37,6 +37,7 @@ export type ImageSelectItemProps = {
 
   zoom?: number;
 };
+
 export type ImageSelectProps = {
   locale: {
     imageFallback: string;

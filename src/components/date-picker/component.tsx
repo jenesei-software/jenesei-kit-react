@@ -6,7 +6,7 @@ import { SelectMonth, SelectYear } from '@local/components/select';
 import { Stack } from '@local/components/stack';
 import { Typography } from '@local/components/typography';
 import { getSxTypography } from '@local/functions';
-import { KEY_SIZE_DATA } from '@local/styles/theme';
+import { THEME_KEY_SIZE } from '@local/styles/theme';
 
 import moment, { Moment } from 'moment';
 import {
@@ -194,8 +194,8 @@ export const DatePicker = (props: DatePickerProps) => {
 
   const rows = useMemo(() => getCountSevens(daysInMonth.length) + 1, [daysInMonth]);
 
-  const sizeRadius = useMemo(() => KEY_SIZE_DATA[props.size].radius, [props.size]);
-  const sizePadding = useMemo(() => KEY_SIZE_DATA[props.size].padding, [props.size]);
+  const sizeRadius = useMemo(() => THEME_KEY_SIZE[props.size].radius, [props.size]);
+  const sizePadding = useMemo(() => THEME_KEY_SIZE[props.size].padding, [props.size]);
 
   const height = useMemo(() => 40 + rows * 28 + (rows - 1) * 6 + sizePadding * 2, [sizePadding, rows]);
 

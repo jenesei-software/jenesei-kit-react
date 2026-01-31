@@ -11,7 +11,7 @@ import {
   addSXTypography,
   addTransition,
 } from '@local/styles/add';
-import { KEY_SIZE_DATA } from '@local/styles/theme/theme';
+import { THEME_KEY_SIZE } from '@local/styles/theme/theme.constants';
 
 import { motion } from 'framer-motion';
 import styled, { css } from 'styled-components';
@@ -67,7 +67,7 @@ export const addDateDropdownDaySize = css<DateDropdownDayProps>`
   ${(props) =>
     props.$size &&
     css`
-      border-radius: ${KEY_SIZE_DATA[props.$size].radius}px;
+      border-radius: ${THEME_KEY_SIZE[props.$size].radius}px;
     `};
   position: relative;
   overflow: hidden;
@@ -214,11 +214,11 @@ const addDateInputWrapperGenre = css<DateInputProps>`
 /****************************************** Size *************************************************/
 export const addDateInputWrapperSize = css<DateInputProps>`
   ${(props) => css`
-    padding: ${props.$isShowPlaceholder ? `0px ${KEY_SIZE_DATA[props.$size].padding}px` : `0px ${KEY_SIZE_DATA[props.$size].padding}px 0px ${KEY_SIZE_DATA[props.$size].padding - 2}px`};
-    height: ${KEY_SIZE_DATA[props.$size].height}px;
-    min-height: ${KEY_SIZE_DATA[props.$size].height}px;
-    max-height: ${KEY_SIZE_DATA[props.$size].height}px;
-    border-radius: ${KEY_SIZE_DATA[props.$size].radius}px;
+    padding: ${props.$isShowPlaceholder ? `0px ${THEME_KEY_SIZE[props.$size].padding}px` : `0px ${THEME_KEY_SIZE[props.$size].padding}px 0px ${THEME_KEY_SIZE[props.$size].padding - 2}px`};
+    height: ${THEME_KEY_SIZE[props.$size].height}px;
+    min-height: ${THEME_KEY_SIZE[props.$size].height}px;
+    max-height: ${THEME_KEY_SIZE[props.$size].height}px;
+    border-radius: ${THEME_KEY_SIZE[props.$size].radius}px;
   `}
 `;
 
@@ -243,7 +243,7 @@ export const DateInputWrapper = styled.div<DateInputProps>`
 
 export const addDateInputButtonSize = css<ButtonProps>`
   ${(props) => css`
-    right:${KEY_SIZE_DATA[props.size].padding}px;
+    right:${THEME_KEY_SIZE[props.size].padding}px;
   `}
 `;
 export const DateInputButton = styled(Button)`
@@ -253,7 +253,7 @@ export const DateInputButton = styled(Button)`
 `;
 export const addDateInputButtonClearSize = css<ButtonProps>`
   ${(props) => css`
-    right:${KEY_SIZE_DATA[props.size].padding * 2 + KEY_SIZE_DATA[props.size].height}px;
+    right:${THEME_KEY_SIZE[props.size].padding * 2 + THEME_KEY_SIZE[props.size].height}px;
   `}
 `;
 export const DateInputButtonClear = styled(Button)`

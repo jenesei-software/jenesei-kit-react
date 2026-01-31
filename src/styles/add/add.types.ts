@@ -1,30 +1,27 @@
 import {
-  IThemeDevice,
-  IThemeFontFamily,
-  IThemePaletteKeys,
-  IThemeTypographyHeading,
-  IThemeTypographyWeight,
+  I_THEME_TYPOGRAPHY_FONT_FAMILY,
+  I_THEME_TYPOGRAPHY_HEADING,
+  I_THEME_TYPOGRAPHY_PALETTE,
+  I_THEME_TYPOGRAPHY_WEIGHT,
 } from '@local/styles/theme';
-import { AddDollarSign } from '@local/types';
 
 import { CSSProperties } from 'react';
-import { DefaultTheme } from 'styled-components';
 
-import { IThemeGlobal } from '../theme/theme.vanilla-extract.types.ts';
+import { I_THEME_BREAKPOINT, I_THEME_GLOBAL, I_THEME_ORIENTATION } from '../theme/theme.types.ts';
 
-type TypographyDefaultProps = {
+type I_TYPOGRAPHY_DEFAULT = {
   align?: CSSProperties['textAlign'];
 
-  color?: IThemePaletteKeys;
+  color?: I_THEME_TYPOGRAPHY_PALETTE;
 
   cursor?: CSSProperties['cursor'];
 
   decoration?: CSSProperties['textDecoration'];
 
-  family?: IThemeFontFamily;
+  family?: I_THEME_TYPOGRAPHY_FONT_FAMILY;
 
   isTransitionFontSize?: boolean;
-  
+
   flex?: string;
 
   height?: number | string;
@@ -41,78 +38,46 @@ type TypographyDefaultProps = {
 
   transform?: CSSProperties['textTransform'];
 
-  weight?: IThemeTypographyWeight;
+  weight?: I_THEME_TYPOGRAPHY_WEIGHT;
 
   wrap?: CSSProperties['textWrap'];
 
   isNoUserSelect?: boolean;
 };
 
-type TypographyDataProps = TypographyDefaultProps & {
+type I_TYPOGRAPHY_SIZE = I_TYPOGRAPHY_DEFAULT & {
   size?: number | string;
 };
 
-type TypographyVariantProps = TypographyDefaultProps & {
-  variant: IThemeTypographyHeading;
+type I_TYPOGRAPHY_VARIANT = I_TYPOGRAPHY_DEFAULT & {
+  variant: I_THEME_TYPOGRAPHY_HEADING;
 };
 
-export type TypographyAllProps = TypographyDataProps | TypographyVariantProps;
+export type I_TYPOGRAPHY = I_TYPOGRAPHY_SIZE | I_TYPOGRAPHY_VARIANT;
+export type I_CONTAINER = CSSProperties;
 
-export type NormalizedSXTypography = {
-  default?: TypographyAllProps;
-  breakpoints?: Record<IThemeDevice | string, TypographyAllProps>;
-  horizontal?: TypographyAllProps;
-  vertical?: TypographyAllProps;
+export type I_LAYOUT_VALUE<A> = {
+  default?: A;
+  breakpoints?: Record<I_THEME_BREAKPOINT, A>;
+  orientations?: Record<I_THEME_ORIENTATION, A>;
 };
 
-export type TypographySXProps = NormalizedSXTypography | ((theme: DefaultTheme) => NormalizedSXTypography);
+export type I_LAYOUT<A> = I_LAYOUT_VALUE<A> | ((theme: I_THEME_GLOBAL) => I_LAYOUT_VALUE<A>);
 
-export type addSXTypographyProps = {
-  sxTypography?: TypographySXProps;
+export type I_TYPOGRAPHY_LAYOUT = I_LAYOUT<I_TYPOGRAPHY>;
+
+export type I_CONTAINER_LAYOUT = I_LAYOUT<I_CONTAINER>;
+
+export type I_SX_TYPOGRAPHY = {
+  sxTypography?: I_TYPOGRAPHY_LAYOUT;
 };
 
-export type addSXTypographyPropsNew = {
-  sxTypography?: NormalizedSXTypography | ((theme: IThemeGlobal) => NormalizedSXTypography);
+export type I_SX = {
+  sx?: I_CONTAINER_LAYOUT;
 };
 
-export type addSXTypographyPropsDollar = AddDollarSign<addSXTypographyProps>;
-
-export type addOutlineProps = {
+export type I_SX_OUTLINE = {
   isReadOnly?: boolean;
   isDisabledOutline?: boolean;
   isOutlineBoxShadow?: boolean;
 };
-
-export type addOutlinePropsDollar = AddDollarSign<addOutlineProps>;
-
-export type NormalizedParams<A extends unknown> = {
-  default?: A;
-  breakpoints?: Record<IThemeDevice | string, A>;
-  horizontal?: A;
-  vertical?: A;
-};
-
-export type NormalizedSX = {
-  default?: CSSProperties;
-  breakpoints?: Record<IThemeDevice | string, CSSProperties>;
-  horizontal?: CSSProperties;
-  vertical?: CSSProperties;
-};
-
-export type SXProps = NormalizedSX | ((theme: DefaultTheme) => NormalizedSX);
-
-export type SXPropsWithoutFunc = NormalizedSX;
-
-export interface addSXProps {
-  sx?: SXProps;
-}
-
-export interface addSXPropsNew {
-  sx?: NormalizedSX | ((theme: IThemeGlobal) => NormalizedSX);
-}
-
-export interface addSXPropsNew2<A extends unknown> {
-  sx?: NormalizedParams<A> | ((theme: IThemeGlobal) => NormalizedParams<A>);
-}
-
-export type addSXPropsDollar = AddDollarSign<addSXProps>;

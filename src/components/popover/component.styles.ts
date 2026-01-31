@@ -1,5 +1,5 @@
 import { addAlwaysOutline, addSX, addSXTypography } from '@local/styles/add';
-import { KEY_SIZE_DATA } from '@local/styles/theme';
+import { THEME_KEY_SIZE } from '@local/styles/theme';
 
 import { motion } from 'framer-motion';
 import styled, { css } from 'styled-components';
@@ -21,9 +21,9 @@ export const addPopoverSize = css<StyledPopoverProps>`
   ${(props) =>
     css`
   display: flex;
-  border-radius: ${KEY_SIZE_DATA[props.$size ?? 'medium'].radius}px;
-  padding: ${KEY_SIZE_DATA[props.$size ?? 'medium'].padding}px;
-  gap: ${KEY_SIZE_DATA[props.$size ?? 'medium'].padding - 2}px;
+  border-radius: ${THEME_KEY_SIZE[props.$size ?? 'medium'].radius}px;
+  padding: ${THEME_KEY_SIZE[props.$size ?? 'medium'].padding}px;
+  gap: ${THEME_KEY_SIZE[props.$size ?? 'medium'].padding - 2}px;
   `};
 `;
 

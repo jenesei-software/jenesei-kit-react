@@ -7,7 +7,7 @@ import {
   addSXTypography,
   addTransitionWithoutSize,
 } from '@local/styles/add';
-import { KEY_SIZE_DATA } from '@local/styles/theme';
+import { THEME_KEY_SIZE } from '@local/styles/theme';
 
 import styled, { css } from 'styled-components';
 
@@ -47,9 +47,9 @@ const addTextAreaWrapperIsInputEffect = css<Pick<TextAreaWrapperProps, '$isInput
 `;
 const addTextAreaWrapperSize = css<TextAreaWrapperProps>`
   ${(props) => css`
-    padding: ${KEY_SIZE_DATA[props.$size].padding - 4}px ${KEY_SIZE_DATA[props.$size].padding}px ${KEY_SIZE_DATA[props.$size].padding - 4}px ${KEY_SIZE_DATA[props.$size].padding}px;
-    border-radius: ${KEY_SIZE_DATA[props.$size].radius}px;
-    min-height: ${KEY_SIZE_DATA[props.$size].height}px;
+    padding: ${THEME_KEY_SIZE[props.$size].padding - 4}px ${THEME_KEY_SIZE[props.$size].padding}px ${THEME_KEY_SIZE[props.$size].padding - 4}px ${THEME_KEY_SIZE[props.$size].padding}px;
+    border-radius: ${THEME_KEY_SIZE[props.$size].radius}px;
+    min-height: ${THEME_KEY_SIZE[props.$size].height}px;
   `};
 `;
 

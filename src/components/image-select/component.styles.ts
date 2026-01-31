@@ -1,6 +1,6 @@
 import { addError } from '@local/components/error';
 import { addSX } from '@local/styles/add';
-import { KEY_SIZE_DATA } from '@local/styles/theme';
+import { THEME_KEY_SIZE } from '@local/styles/theme';
 
 import { motion } from 'framer-motion';
 import styled, { css } from 'styled-components';
@@ -24,14 +24,14 @@ const addImageSelectListGenre = css<ImageSelectWrapperProps>`
 
 const addImageSelectListSize = css<ImageSelectWrapperProps>`
   ${(props) => css`
-    padding: ${KEY_SIZE_DATA[props.$size].padding}px;
-    border-radius: ${KEY_SIZE_DATA[props.$size].radius}px;
+    padding: ${THEME_KEY_SIZE[props.$size].padding}px;
+    border-radius: ${THEME_KEY_SIZE[props.$size].radius}px;
   `};
 `;
 
 const addImageSelectSize = css<ImageSelectWrapperProps>`
   ${(props) => css`
-    gap: ${KEY_SIZE_DATA[props.$size].padding - 2}px;
+    gap: ${THEME_KEY_SIZE[props.$size].padding - 2}px;
   `};
 `;
 

@@ -1,12 +1,10 @@
-import { IThemeScreen } from '@local/styles/theme/theme.vanilla-extract.types';
+import { I_THEME_BREAKPOINT, I_THEME_ORIENTATION } from '@local/styles/theme/theme.types';
 
 import { PropsWithChildren } from 'react';
 
 export type ProviderScreenWidthProps = PropsWithChildren;
 
-export type Screens = keyof IThemeScreen;
-
 export interface ScreenWidthContextProps {
-  breakpoint: keyof IThemeScreen['breakpoint'];
-  orientation: keyof IThemeScreen['orientation'];
+  breakpoint: I_THEME_BREAKPOINT;
+  orientation: I_THEME_ORIENTATION;
 }

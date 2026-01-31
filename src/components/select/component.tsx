@@ -5,7 +5,7 @@ import { Popover, usePopover } from '@local/components/popover';
 import { Typography } from '@local/components/typography';
 import { LIST_LANGUAGE } from '@local/consts';
 import { getSxTypography } from '@local/functions';
-import { KEY_SIZE_DATA } from '@local/styles/theme';
+import { THEME_KEY_SIZE } from '@local/styles/theme';
 
 import { useMergeRefs } from '@floating-ui/react';
 import { useVirtualizer } from '@tanstack/react-virtual';
@@ -50,9 +50,9 @@ const DEFAULT_OVERSCAN = 1;
 export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) => {
   const theme = useTheme();
 
-  const sizeHeight = useMemo(() => KEY_SIZE_DATA[props.size].height, [props.size]);
-  const sizePadding = useMemo(() => KEY_SIZE_DATA[props.size].padding, [props.size]);
-  const sizeRadius = useMemo(() => KEY_SIZE_DATA[props.size].radius, [props.size]);
+  const sizeHeight = useMemo(() => THEME_KEY_SIZE[props.size].height, [props.size]);
+  const sizePadding = useMemo(() => THEME_KEY_SIZE[props.size].padding, [props.size]);
+  const sizeRadius = useMemo(() => THEME_KEY_SIZE[props.size].radius, [props.size]);
 
   const {
     isOpen,

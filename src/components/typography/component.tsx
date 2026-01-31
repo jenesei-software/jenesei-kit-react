@@ -1,30 +1,29 @@
 import { Tooltip } from '@local/components/tooltip';
+import { useLayout } from '@local/hooks/use-layout-sx/use';
 import { useOverflowing } from '@local/hooks/use-overflowing';
-import { useResponsiveParams } from '@local/hooks/use-responsive-sx/use';
-import { TypographyAllProps } from '@local/styles/add/add.types';
-import { addSxTypography } from '@local/styles/add/add.vanilla-extract';
+import { dynamicTypography } from '@local/styles/add';
 
 import { ElementType, useMemo } from 'react';
 
 import { TypographyProps, TypographyTooltipProps } from './component.types';
 
 export const Typography = (props: TypographyProps) => {
-  const params = useResponsiveParams<TypographyAllProps>(props.sx);
+  const params = useLayout(props?.sx ?? {});
 
   const { className, style, Component } = useMemo(() => {
     return {
-      className: addSxTypography.className(params?.params ?? {}),
-      style: addSxTypography.style(params?.params ?? {}),
+      className: dynamicTypography.className(params ?? {}),
+      style: dynamicTypography.style(params ?? {}),
       Component: props.isAnchor
         ? 'a'
         : props.isParagraph
           ? 'p'
           : props.isSpan
             ? 'span'
-            : params?.params && 'variant' in params.params
-              ? params?.params.variant === 'h7' || params.params.variant === 'h8' || params.params.variant === 'h9'
+            : params && 'variant' in params
+              ? params.variant === 'h7' || params.variant === 'h8' || params.variant === 'h9'
                 ? 'span'
-                : params?.params.variant
+                : params.variant
               : ('span' as ElementType),
     };
   }, [params, props.isAnchor, props.isParagraph, props.isSpan]);

@@ -7,7 +7,7 @@ import { LIST_IMAGE_SUPPORTED_FORMAT_FOR_INPUT } from '@local/consts';
 import { getSxTypography } from '@local/functions';
 import { useImageCrop } from '@local/hooks/use-image-crop';
 import { useImageView } from '@local/hooks/use-image-view';
-import { KEY_SIZE_DATA } from '@local/styles/theme';
+import { THEME_KEY_SIZE } from '@local/styles/theme';
 
 import { motion } from 'framer-motion';
 import { DragEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
@@ -19,7 +19,7 @@ import { ImageSelectItemProps, ImageSelectProps } from './component.types';
 export const ImageSelect = (props: ImageSelectProps) => {
   const { onChange } = props;
 
-  const size = useMemo(() => KEY_SIZE_DATA[props.size], [props.size]);
+  const size = useMemo(() => THEME_KEY_SIZE[props.size], [props.size]);
 
   const [images, setImages] = useState<ImageSelectItemProps[]>(props.images || []);
 

@@ -121,15 +121,12 @@ export default defineConfig(() => {
         external: Object.keys(peerDependencies),
         output: {
           globals: {
-            'styled-components': 'styled',
-            'styled-reset': 'reset',
             react: 'React',
             'react-dom': 'ReactDOM',
             moment: 'moment',
             'react-number-format': 'reactNumberFormat',
             '@tanstack/react-virtual': 'reactVirtual',
             'js-cookie': 'Cookies',
-            '@tanstack/react-router': 'reactRouter',
           },
         },
       },

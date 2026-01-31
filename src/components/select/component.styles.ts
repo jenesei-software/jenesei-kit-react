@@ -2,7 +2,7 @@ import { addError } from '@local/components/error';
 import { Icon } from '@local/components/icon';
 import { TextArea } from '@local/components/textarea';
 import { addRemoveOutline, addSX, addSXTypography } from '@local/styles/add';
-import { KEY_SIZE_DATA } from '@local/styles/theme/theme';
+import { THEME_KEY_SIZE } from '@local/styles/theme/theme.constants';
 
 import { motion } from 'framer-motion';
 import styled, { css } from 'styled-components';
@@ -45,12 +45,12 @@ const addSelectWrapperGenre = css<SelectWrapperProps>`
 const addSelectWrapperSize = css<SelectWrapperProps>`
   border: 1px solid;
   width: 100%;
-  padding: ${(props) => KEY_SIZE_DATA[props.$size].padding / 4}px
-    ${(props) => KEY_SIZE_DATA[props.$size].padding - KEY_SIZE_DATA[props.$size].padding / 2.8}px;
-  gap: ${(props) => KEY_SIZE_DATA[props.$size].padding / 2.8}px;
+  padding: ${(props) => THEME_KEY_SIZE[props.$size].padding / 4}px
+    ${(props) => THEME_KEY_SIZE[props.$size].padding - THEME_KEY_SIZE[props.$size].padding / 2.8}px;
+  gap: ${(props) => THEME_KEY_SIZE[props.$size].padding / 2.8}px;
   height: fit-content;
-  min-height: ${(props) => KEY_SIZE_DATA[props.$size].height}px;
-  border-radius: ${(props) => KEY_SIZE_DATA[props.$size].radius}px;
+  min-height: ${(props) => THEME_KEY_SIZE[props.$size].height}px;
+  border-radius: ${(props) => THEME_KEY_SIZE[props.$size].radius}px;
   justify-content: ${(props) => (props.$isCenter ? 'center' : 'flex-start')};
   
   ${(props) =>
@@ -74,7 +74,7 @@ export const SelectWrapper = styled(motion.div)<SelectWrapperProps>`
   ${addSX};
 `;
 const addDropdownListParentSize = css<DropdownListParentProps>`
-  gap: ${(props) => KEY_SIZE_DATA[props.$size].padding / 2.8}px;
+  gap: ${(props) => THEME_KEY_SIZE[props.$size].padding / 2.8}px;
 `;
 export const DropdownListParent = styled(motion.div)<DropdownListParentProps>`
   height: 100%;
@@ -125,7 +125,7 @@ const addDropdownListOptionGenre = css<DropdownListOptionProps>`
   `};
 `;
 const addDropdownListOptionSize = css<DropdownListOptionProps>`
-  padding: 0px ${(props) => KEY_SIZE_DATA[props.$size].padding}px;
+  padding: 0px ${(props) => THEME_KEY_SIZE[props.$size].padding}px;
   width: 100%;
   border: 1px solid;
   border-radius: 0;
@@ -134,20 +134,20 @@ const addDropdownListOptionSize = css<DropdownListOptionProps>`
     ${(props) =>
       props.$isShowScroll
         ? css`
-            border-radius: ${KEY_SIZE_DATA[props.$size].radius}px 0px 0px 0px;
+            border-radius: ${THEME_KEY_SIZE[props.$size].radius}px 0px 0px 0px;
           `
         : css`
-            border-radius: ${KEY_SIZE_DATA[props.$size].radius}px ${KEY_SIZE_DATA[props.$size].radius}px 0px 0px;
+            border-radius: ${THEME_KEY_SIZE[props.$size].radius}px ${THEME_KEY_SIZE[props.$size].radius}px 0px 0px;
           `}
   }
   &:last-child {
     ${(props) =>
       props.$isShowScroll
         ? css`
-            border-radius: 0px 0px 0px ${KEY_SIZE_DATA[props.$size].radius}px;
+            border-radius: 0px 0px 0px ${THEME_KEY_SIZE[props.$size].radius}px;
           `
         : css`
-            border-radius: 0px 0px ${KEY_SIZE_DATA[props.$size].radius}px ${KEY_SIZE_DATA[props.$size].radius}px;
+            border-radius: 0px 0px ${THEME_KEY_SIZE[props.$size].radius}px ${THEME_KEY_SIZE[props.$size].radius}px;
           `}
   }
   &:not(:first-child):not(:last-child) {
@@ -157,10 +157,10 @@ const addDropdownListOptionSize = css<DropdownListOptionProps>`
     ${(props) =>
       props.$isShowScroll
         ? css`
-            border-radius: ${KEY_SIZE_DATA[props.$size].radius}px 0px 0px ${KEY_SIZE_DATA[props.$size].radius}px;
+            border-radius: ${THEME_KEY_SIZE[props.$size].radius}px 0px 0px ${THEME_KEY_SIZE[props.$size].radius}px;
           `
         : css`
-            border-radius: ${KEY_SIZE_DATA[props.$size].radius}px;
+            border-radius: ${THEME_KEY_SIZE[props.$size].radius}px;
           `}
   }
 `;
@@ -180,9 +180,9 @@ export const DropdownListOption = styled.li<DropdownListOptionProps>`
 `;
 
 const addDropdownOptionIconSize = css<DropdownListOptionIconProps>`
-  right: ${(props) => KEY_SIZE_DATA[props.$size].padding - 6}px;
-  /* height: ${(props) => KEY_SIZE_DATA[props.$size].height}px;
-  width: ${(props) => KEY_SIZE_DATA[props.$size].height}px; */
+  right: ${(props) => THEME_KEY_SIZE[props.$size].padding - 6}px;
+  /* height: ${(props) => THEME_KEY_SIZE[props.$size].height}px;
+  width: ${(props) => THEME_KEY_SIZE[props.$size].height}px; */
 `;
 export const DropdownListOptionIcon = styled(Icon)<DropdownListOptionIconProps>`
   position: absolute;
@@ -200,7 +200,7 @@ const addSelectListSize = css<SelectListProps>`
   display: flex;
   flex-direction: row;
   flex-wrap: ${(props) => (props.$isWrapSelectOption ? 'wrap' : 'nowrap')};
-  gap: ${(props) => KEY_SIZE_DATA[props.$size].padding / 2.8}px;
+  gap: ${(props) => THEME_KEY_SIZE[props.$size].padding / 2.8}px;
 `;
 export const SelectList = styled.ul<SelectListProps>`
   list-style: none;
@@ -211,8 +211,8 @@ export const SelectList = styled.ul<SelectListProps>`
 const addButtonListSize = css<ButtonListProps>`
   display: flex;
   flex-direction: row;
-  gap: ${(props) => KEY_SIZE_DATA[props.$size].padding / 2.8}px;
-  padding: ${(props) => KEY_SIZE_DATA[props.$size].padding / 2.8}px ${(props) => KEY_SIZE_DATA[props.$size].padding}px;
+  gap: ${(props) => THEME_KEY_SIZE[props.$size].padding / 2.8}px;
+  padding: ${(props) => THEME_KEY_SIZE[props.$size].padding / 2.8}px ${(props) => THEME_KEY_SIZE[props.$size].padding}px;
 `;
 export const ButtonList = styled.div<ButtonListProps>`
   position: absolute;
@@ -270,8 +270,8 @@ ${(props) =>
     `}
 `;
 const addSelectListOptionSize = css<SelectListOptionProps>`
-  padding: ${(props) => KEY_SIZE_DATA[props.$size].padding / 2.8}px;
-  border-radius: ${(props) => KEY_SIZE_DATA[props.$size].radius}px;
+  padding: ${(props) => THEME_KEY_SIZE[props.$size].padding / 2.8}px;
+  border-radius: ${(props) => THEME_KEY_SIZE[props.$size].radius}px;
 `;
 export const SelectListOption = styled(motion.li)<SelectListOptionProps>`
   display: flex;
@@ -293,6 +293,6 @@ export const SelectTextArea = styled(TextArea)`
   width: 100%;
   max-width: 100%;
   flex-grow: 1;
-  padding: ${(props) => KEY_SIZE_DATA[props.size].padding / 2.8}px 0px ${(props) => KEY_SIZE_DATA[props.size].padding / 2.8}px ${(props) => KEY_SIZE_DATA[props.size].padding / 2.8}px;
+  padding: ${(props) => THEME_KEY_SIZE[props.size].padding / 2.8}px 0px ${(props) => THEME_KEY_SIZE[props.size].padding / 2.8}px ${(props) => THEME_KEY_SIZE[props.size].padding / 2.8}px;
   ${addRemoveOutline};
 `;
