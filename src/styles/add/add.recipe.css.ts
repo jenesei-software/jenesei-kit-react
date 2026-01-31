@@ -1,6 +1,6 @@
 import { recipe } from '@vanilla-extract/recipes';
 
-import { varsAreaSkeleton, varsTypography } from './add.vars.css.ts';
+import { varsAreaSkeleton, varsComponentAccordionSummaryContent, varsTypography } from './add.vars.css.ts';
 import { KEYFRAME_SHADOW_PULSE, THEME_GLOBAL_VALUE } from '../theme/theme.constants.ts';
 import { THEME_GLOBAL } from '../theme/theme.global-theme.css.ts';
 
@@ -319,6 +319,55 @@ export const recipeAreaSkeleton = recipe({
         backgroundSize: '200% 100%',
         animation: `${KEYFRAME_SHADOW_PULSE} 1.5s infinite linear`,
         pointerEvents: 'none',
+      },
+    },
+  },
+});
+
+export const recipeComponentAccordionSummaryContent = recipe({
+  base: {
+    width: '100%',
+  },
+
+  variants: {
+    isAccordionIcon: {
+      true: {
+        width: `calc(100% - ${varsComponentAccordionSummaryContent.iconWidth})`,
+      },
+    },
+  },
+});
+
+export const recipeComponentAccordionDetails = recipe({
+  base: {
+    overflow: 'hidden',
+  },
+
+  variants: {
+    expanded: {
+      true: {
+        maxHeight: '9999px',
+        height: '100%',
+        opacity: 1,
+      },
+    },
+  },
+});
+
+export const recipeComponentAccordionStyledIcon = recipe({
+  base: {
+    padding: '4px',
+    boxSizing: 'content-box',
+    cursor: 'pointer',
+  },
+
+  variants: {
+    expanded: {
+      true: {
+        transform: `rotate(180deg)`,
+      },
+      false: {
+        transform: `rotate(0deg)`,
       },
     },
   },

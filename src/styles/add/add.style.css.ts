@@ -89,3 +89,16 @@ export const styleRippleDefault = style({
 export const styleContainer = style({
   display: 'flex',
 });
+
+export const styleComponentAccordionWrapper = style({
+  display: 'flex',
+  flexDirection: 'column',
+  width: '100%',
+});
+
+export const styleComponentAccordionSummary = style({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  userSelect: 'none',
+});

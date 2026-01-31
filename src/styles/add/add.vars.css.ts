@@ -22,3 +22,7 @@ export const varsAreaSkeleton = {
   color: createVar(),
   opacity: createVar(),
 };
+
+export const varsComponentAccordionSummaryContent = {
+  iconWidth: createVar(),
+};

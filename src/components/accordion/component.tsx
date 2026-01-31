@@ -1,14 +1,12 @@
 import { Stack } from '@local/components/stack';
+import {
+  dynamicComponentAccordionDetails,
+  dynamicComponentAccordionSummaryContent,
+} from '@local/styles/add/add.dynamic';
+import { styleComponentAccordionSummary, styleComponentAccordionWrapper } from '@local/styles/add/add.style.css';
 
 import React, { FC, useCallback } from 'react';
 
-import {
-  AccordionDetails,
-  AccordionStyledIcon,
-  AccordionSummary,
-  AccordionSummaryContent,
-  AccordionWrapper,
-} from './component.styles';
 import { AccordionProps } from './component.types';
 
 export const Accordion: FC<AccordionProps> = (props) => {
@@ -29,11 +27,20 @@ export const Accordion: FC<AccordionProps> = (props) => {
 
   return (
     <Stack {...props.wrapperProps}>
-      <AccordionWrapper>
-        <AccordionSummary onClick={onClickSummary}>
-          <AccordionSummaryContent $isAccordionIcon={props.isAccordionIcon}>
+      <div className={styleComponentAccordionWrapper}>
+        {/** biome-ignore lint/a11y/noStaticElementInteractions: <explanation> */}
+        {/** biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
+        <div onClick={() => onClickSummary()} className={styleComponentAccordionSummary}>
+          <div
+            className={dynamicComponentAccordionSummaryContent.className({
+              isAccordionIcon: props.isAccordionIcon,
+            })}
+            style={dynamicComponentAccordionSummaryContent.style({
+              isAccordionIcon: props.isAccordionIcon,
+            })}
+          >
             {props.accordionSummary}
-          </AccordionSummaryContent>
+          </div>
           {props.isAccordionIcon && (
             <AccordionStyledIcon
               $expanded={props.expanded}
@@ -44,9 +51,11 @@ export const Accordion: FC<AccordionProps> = (props) => {
               size='large'
             />
           )}
-        </AccordionSummary>
-        <AccordionDetails $expanded={props.expanded}>{props.accordionDetails}</AccordionDetails>
-      </AccordionWrapper>
+        </div>
+        <div className={dynamicComponentAccordionDetails.className({ expanded: props.expanded })}>
+          {props.accordionDetails}
+        </div>
+      </div>
     </Stack>
   );
 };

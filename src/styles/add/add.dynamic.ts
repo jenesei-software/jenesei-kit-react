@@ -1,11 +1,18 @@
 import { StyledSkeletonProps } from '@local/areas/skeleton';
+import { AccordionDetailsProps, AccordionSummaryContentProps } from '@local/components/accordion/component.types';
 import { THEME_GLOBAL, THEME_GLOBAL_VALUE } from '@local/styles/theme';
 
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 
-import { recipeAreaSkeleton, recipeFontSizeTransition, recipeTypography } from './add.recipe.css';
+import {
+  recipeAreaSkeleton,
+  recipeComponentAccordionDetails,
+  recipeComponentAccordionSummaryContent,
+  recipeFontSizeTransition,
+  recipeTypography,
+} from './add.recipe.css';
 import { I_TYPOGRAPHY } from './add.types';
-import { varsAreaSkeleton, varsTypography } from './add.vars.css';
+import { varsAreaSkeleton, varsComponentAccordionSummaryContent, varsTypography } from './add.vars.css';
 
 export const dynamicTypography = {
   className: (params: I_TYPOGRAPHY) =>
@@ -108,4 +115,28 @@ export const dynamicAreaSkeleton = {
         [varsAreaSkeleton.opacity]: !params.visible ? '0' : '1',
       }),
     }),
+};
+
+export const dynamicComponentAccordionSummaryContent = {
+  className: (params: AccordionSummaryContentProps) =>
+    [
+      recipeComponentAccordionSummaryContent({
+        isAccordionIcon: params.isAccordionIcon === true,
+      }),
+    ].join(' '),
+  style: (params: AccordionSummaryContentProps) =>
+    assignInlineVars({
+      ...(params.isAccordionIcon === true && {
+        [varsComponentAccordionSummaryContent.iconWidth]: `26px`,
+      }),
+    }),
+};
+
+export const dynamicComponentAccordionDetails = {
+  className: (params: AccordionDetailsProps) =>
+    [
+      recipeComponentAccordionDetails({
+        expanded: params.expanded === true,
+      }),
+    ].join(' '),
 };

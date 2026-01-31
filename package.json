@@ -242,16 +242,8 @@
       "types": "./build/types.d.ts"
     }
   },
-  "files": [
-    "build"
-  ],
-  "keywords": [
-    "react",
-    "ui",
-    "tanstack",
-    "framer-motion",
-    "styled-components"
-  ],
+  "files": ["build"],
+  "keywords": ["react", "ui", "tanstack", "framer-motion", "styled-components"],
   "license": "MIT",
   "name": "@jenesei-software/jenesei-kit-react",
   "repository": {
@@ -262,6 +254,7 @@
     "biome:format": "biome format --write src",
     "biome:lint": "biome lint .",
     "biome:migrate": "biome migrate --write",
+    "biome:update": "biome update --write",
     "build:library": "tsc && vite build",
     "build:main": "tsc && vite build",
     "build:storybook": "cross-env NODE_ENV=storybook storybook build --quiet --disable-telemetry -o build",

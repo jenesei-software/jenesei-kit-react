@@ -1,5 +1,4 @@
 import { StackProps } from '@local/components/stack';
-import { AddDollarSign } from '@local/types';
 
 import { ReactNode } from 'react';
 
@@ -21,8 +20,8 @@ export interface AccordionProps {
   triggerUpdate?: unknown[];
 }
 
-export type AccordionStyledIconProps = AddDollarSign<Pick<AccordionProps, 'expanded'>>;
+export type AccordionStyledIconProps = Pick<AccordionProps, 'expanded'>;
 
-export type AccordionSummaryContentProps = AddDollarSign<Pick<AccordionProps, 'isAccordionIcon'>>;
+export type AccordionSummaryContentProps = Pick<AccordionProps, 'isAccordionIcon'>;
 
-export type AccordionDetailsProps = AddDollarSign<Pick<AccordionProps, 'expanded'>>;
+export type AccordionDetailsProps = Pick<AccordionProps, 'expanded'>;
