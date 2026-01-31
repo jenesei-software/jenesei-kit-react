@@ -1,10 +1,9 @@
-import type { Meta } from '@storybook/react-vite';
-import { FC, useState } from 'react';
-import 'styled-components';
-
 import { Input } from '@local/components/input';
 import { TextArea as TextAreaComponent } from '@local/components/textarea';
 import { Typography } from '@local/components/typography';
+
+import type { Meta } from '@storybook/react-vite';
+import { FC, useState } from 'react';
 
 import { WrapperBig, WrapperMin } from './tools';
 

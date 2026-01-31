@@ -1,12 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { FC, useState } from 'react';
-import 'styled-components';
-
 import {
   CheckboxGroup as CheckboxGroupComponent,
   CheckboxGroupProps,
   CheckboxGroupValueProps,
 } from '@local/components/checkbox-group';
+
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { FC, useState } from 'react';
 
 const meta: Meta<typeof CheckboxGroupComponent> = {
   component: CheckboxGroupComponent,

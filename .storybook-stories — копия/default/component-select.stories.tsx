@@ -1,12 +1,10 @@
-import type { Meta } from '@storybook/react-vite';
-import { FC, useState } from 'react';
-import 'styled-components';
-
 import { SelectLanguage, SelectMonth, SelectMonths, SelectYear } from '@local/components/select';
 import { Typography } from '@local/components/typography';
 import { LOCALE_MONTHS } from '@local/consts';
 
+import type { Meta } from '@storybook/react-vite';
 import moment from 'moment';
+import { FC, useState } from 'react';
 
 import { WrapperBig } from './tools';
 

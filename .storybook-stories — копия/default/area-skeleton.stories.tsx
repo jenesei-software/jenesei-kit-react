@@ -1,10 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { FC } from 'react';
-import 'styled-components';
-
 import { Skeleton as SkeletonComponent, SkeletonProps } from '@local/areas/skeleton';
 import { Stack } from '@local/components/stack';
 import { Typography } from '@local/components/typography';
+
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { FC } from 'react';
 
 const meta: Meta<typeof SkeletonComponent> = {
   component: SkeletonComponent,

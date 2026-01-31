@@ -1,7 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import 'styled-components';
-
 import { ImageSelect as ImageSelectComponent } from '@local/components/image-select';
+
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta: Meta<typeof ImageSelectComponent> = {
   component: ImageSelectComponent,

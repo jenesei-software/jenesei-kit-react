@@ -1,14 +1,14 @@
 import { PreviewAdditionalProps } from '@local/areas/preview';
 import { ScreenWidthProps } from '@local/contexts/context-screen-width';
-import { IThemePaletteKeys } from '@local/styles/theme';
+import { I_THEME_PALETTE } from '@local/styles/theme';
 import { AddDollarSign } from '@local/types';
 
 import { PropsWithChildren, ReactElement } from 'react';
 
 export interface ProviderAppProps extends PropsWithChildren {
   defaultPreview?: PreviewAdditionalProps;
-  defaultBgColor: IThemePaletteKeys;
-  defaultStatusBarColor: IThemePaletteKeys;
+  defaultBgColor: I_THEME_PALETTE;
+  defaultStatusBarColor: I_THEME_PALETTE;
   defaultBgImage?: string;
   defaultTitle: string;
   defaultDescription: string;
@@ -57,8 +57,8 @@ export interface ProviderAppProps extends PropsWithChildren {
 export interface AppContextProps {
   changePreview: (newPreviewProps: PreviewAdditionalProps) => void;
 
-  changeStatusBarColor: (color: IThemePaletteKeys) => void;
-  changeBgColor: (color: IThemePaletteKeys) => void;
+  changeStatusBarColor: (color: I_THEME_PALETTE) => void;
+  changeBgColor: (color: I_THEME_PALETTE) => void;
   changeBgImage: (image: string) => void;
   changeTitle: (title: string) => void;
   changeDescription: (description: string) => void;

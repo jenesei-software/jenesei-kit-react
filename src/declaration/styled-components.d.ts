@@ -1,4 +1,4 @@
-import 'styled-components';
+
 
 import { ITheme } from '@local/styles/theme';
 

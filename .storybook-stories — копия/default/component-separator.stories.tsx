@@ -1,9 +1,8 @@
-import type { Meta } from '@storybook/react-vite';
-import { FC } from 'react';
-import 'styled-components';
-
 import { Separator as SeparatorComponent } from '@local/components/separator';
 import { Typography } from '@local/components/typography';
+
+import type { Meta } from '@storybook/react-vite';
+import { FC } from 'react';
 
 import { WrapperBig, WrapperMin } from './tools';
 

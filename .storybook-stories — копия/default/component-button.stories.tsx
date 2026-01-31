@@ -1,8 +1,7 @@
+import { Button as ButtonComponent } from '@local/components/button';
+
 import type { Meta } from '@storybook/react-vite';
 import { FC } from 'react';
-import 'styled-components';
-
-import { Button as ButtonComponent } from '@local/components/button';
 
 import { WrapperBig, WrapperMin } from './tools';
 

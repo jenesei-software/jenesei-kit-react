@@ -1,7 +1,7 @@
 import { Tooltip } from '@local/components/tooltip';
 import { useLayout } from '@local/hooks/use-layout-sx/use';
 import { useOverflowing } from '@local/hooks/use-overflowing';
-import { dynamicTypography } from '@local/styles/add';
+import { dynamicComponentTypography } from '@local/styles/add';
 
 import { ElementType, useMemo } from 'react';
 
@@ -12,8 +12,8 @@ export const Typography = (props: TypographyProps) => {
 
   const { className, style, Component } = useMemo(() => {
     return {
-      className: dynamicTypography.className(params ?? {}),
-      style: dynamicTypography.style(params ?? {}),
+      className: dynamicComponentTypography.className(params ?? {}),
+      style: dynamicComponentTypography.style(params ?? {}),
       Component: props.isAnchor
         ? 'a'
         : props.isParagraph

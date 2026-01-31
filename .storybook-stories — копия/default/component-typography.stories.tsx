@@ -1,9 +1,8 @@
-import type { Meta } from '@storybook/react-vite';
-import { FC } from 'react';
-import 'styled-components';
-
 import { Typography as TypographyComponent } from '@local/components/typography';
 import { useScreenWidth } from '@local/contexts/context-screen-width';
+
+import type { Meta } from '@storybook/react-vite';
+import { FC } from 'react';
 
 import { WrapperBig, WrapperMin } from './tools';
 

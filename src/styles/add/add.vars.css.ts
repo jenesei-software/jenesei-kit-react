@@ -1,5 +1,7 @@
 import { createVar } from '@vanilla-extract/css';
 
+import { THEME_GLOBAL } from '../theme';
+
 export const varsTypography = {
   letterSpacing: createVar(),
   line: createVar(),
@@ -25,4 +27,16 @@ export const varsAreaSkeleton = {
 
 export const varsComponentAccordionSummaryContent = {
   iconWidth: createVar(),
+};
+
+export const varsComponentStyledIcon = {
+  color: createVar(),
+  heightIcon: createVar(),
+  order: createVar(),
+  turn: createVar(),
+};
+
+export const varsComponentStyledIconSkeleton = {
+  heightIcon: createVar(),
+  order: createVar(),
 };

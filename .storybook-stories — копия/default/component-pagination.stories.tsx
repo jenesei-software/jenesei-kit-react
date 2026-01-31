@@ -1,8 +1,7 @@
+import { Pagination as PaginationComponent, PaginationProps } from '@local/components/pagination';
+
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { FC, useEffect, useState } from 'react';
-import 'styled-components';
-
-import { Pagination as PaginationComponent, PaginationProps } from '@local/components/pagination';
 
 import { WrapperBig } from './tools';
 

@@ -1,10 +1,8 @@
-import type { Meta } from '@storybook/react-vite';
-import 'styled-components';
-
 import { Icon as IconComponent } from '@local/components/icon';
 import { Typography } from '@local/components/typography';
 import { IThemePaletteKeys, JeneseiPalette, ThemeLight } from '@local/styles/theme';
 
+import type { Meta } from '@storybook/react-vite';
 import { FC } from 'react';
 
 import { WrapperBig, WrapperMin } from './tools';

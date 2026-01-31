@@ -2,6 +2,8 @@ import { THEME_GLOBAL } from '@local/styles/theme';
 
 import { style } from '@vanilla-extract/css';
 
+import { varsComponentStyledIcon, varsComponentStyledIconSkeleton } from './add.vars.css';
+
 export const styleRemoveScrollbar = style({
   scrollbarWidth: 'none',
   msOverflowStyle: 'none',
@@ -10,64 +12,6 @@ export const styleRemoveScrollbar = style({
     '&::-webkit-scrollbar-thumb': { display: 'none' },
     '&::-webkit-scrollbar-track': { display: 'none' },
   },
-});
-
-export const styleTransition = style({
-  transition: [
-    `outline 0s`,
-    `opacity ${THEME_GLOBAL.transition.default}`,
-    `transform ${THEME_GLOBAL.transition.default}`,
-    `background-color ${THEME_GLOBAL.transition.default}`,
-    `height ${THEME_GLOBAL.transition.default}`,
-    `max-height ${THEME_GLOBAL.transition.default}`,
-    `width ${THEME_GLOBAL.transition.default}`,
-    `color ${THEME_GLOBAL.transition.default}`,
-    `visibility ${THEME_GLOBAL.transition.default}`,
-    `box-shadow ${THEME_GLOBAL.transition.default}`,
-    `border-color ${THEME_GLOBAL.transition.default}`,
-    `left ${THEME_GLOBAL.transition.default}`,
-    `right ${THEME_GLOBAL.transition.default}`,
-    `grid-template-areas ${THEME_GLOBAL.transition.default}`,
-    `grid-template-rows ${THEME_GLOBAL.transition.default}`,
-    `grid-template-columns ${THEME_GLOBAL.transition.default}`,
-  ].join(', '),
-});
-
-export const styleTransitionWithoutSize = style({
-  transition: [
-    `outline 0s`,
-    `opacity ${THEME_GLOBAL.transition.default}`,
-    `transform ${THEME_GLOBAL.transition.default}`,
-    `background-color ${THEME_GLOBAL.transition.default}`,
-    `color ${THEME_GLOBAL.transition.default}`,
-    `visibility ${THEME_GLOBAL.transition.default}`,
-    `box-shadow ${THEME_GLOBAL.transition.default}`,
-    `border-color ${THEME_GLOBAL.transition.default}`,
-    `left ${THEME_GLOBAL.transition.default}`,
-    `right ${THEME_GLOBAL.transition.default}`,
-    `grid-template-areas ${THEME_GLOBAL.transition.default}`,
-    `grid-template-rows ${THEME_GLOBAL.transition.default}`,
-    `grid-template-columns ${THEME_GLOBAL.transition.default}`,
-  ].join(', '),
-});
-
-export const styleGridTransition = style({
-  transition: [
-    `grid-template-areas ${THEME_GLOBAL.transition.default}`,
-    `grid-template-rows ${THEME_GLOBAL.transition.default}`,
-    `grid-template-columns ${THEME_GLOBAL.transition.default}`,
-  ].join(', '),
-});
-
-export const styleColorTransition = style({
-  transition: [
-    `outline 0s`,
-    `opacity ${THEME_GLOBAL.transition.default}`,
-    `background-color ${THEME_GLOBAL.transition.default}`,
-    `color ${THEME_GLOBAL.transition.default}`,
-    `box-shadow ${THEME_GLOBAL.transition.default}`,
-    `border-color ${THEME_GLOBAL.transition.default}`,
-  ].join(', '),
 });
 
 export const styleRemoveOutline = style({
@@ -101,4 +45,35 @@ export const styleComponentAccordionSummary = style({
   alignItems: 'center',
   justifyContent: 'space-between',
   userSelect: 'none',
+});
+
+export const styleComponentStyledIcon = style([
+  {
+    color: varsComponentStyledIcon.color,
+    height: varsComponentStyledIcon.heightIcon,
+    minHeight: varsComponentStyledIcon.heightIcon,
+    width: varsComponentStyledIcon.heightIcon,
+    minWidth: varsComponentStyledIcon.heightIcon,
+    transform: `rotate(${varsComponentStyledIcon.turn})`,
+    order: varsComponentStyledIcon.order,
+    transition: THEME_GLOBAL.transition.color,
+  },
+  {
+    selectors: {
+      '& path': {
+        transition: THEME_GLOBAL.transition.color,
+      },
+    },
+  },
+]);
+
+export const styleComponentStyledIconSkeleton = style({
+  borderRadius: '100%',
+
+  height: varsComponentStyledIconSkeleton.heightIcon,
+  minHeight: varsComponentStyledIconSkeleton.heightIcon,
+  width: varsComponentStyledIconSkeleton.heightIcon,
+  minWidth: varsComponentStyledIconSkeleton.heightIcon,
+
+  order: varsComponentStyledIconSkeleton.order,
 });

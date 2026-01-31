@@ -1,7 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import 'styled-components';
-
 import { ImageButton } from '@local/components/image-button';
+
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta: Meta<typeof ImageButton> = {
   component: ImageButton,

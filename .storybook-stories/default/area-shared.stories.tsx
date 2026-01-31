@@ -1,9 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { FC, useEffect, useState } from 'react';
-import 'styled-components';
-
 import { SharedProps } from '@local/areas/shared';
 import { Shared as SharedComponent } from '@local/areas/shared/area';
+
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { FC, useEffect, useState } from 'react';
 
 const meta: Meta<typeof SharedComponent> = {
   component: SharedComponent,

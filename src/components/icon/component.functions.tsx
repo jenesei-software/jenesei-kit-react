@@ -1,3 +1,5 @@
+
+
 import { Icon } from './component';
 import { getIconComponentsProps } from './component.types';
 

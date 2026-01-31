@@ -1,9 +1,8 @@
-import type { Meta } from '@storybook/react-vite';
-import { FC, useState } from 'react';
-import 'styled-components';
-
 import { Toggle as ToggleComponent } from '@local/components/toggle';
 import { Typography } from '@local/components/typography';
+
+import type { Meta } from '@storybook/react-vite';
+import { FC, useState } from 'react';
 
 import { WrapperBig, WrapperMin } from './tools';
 

@@ -1,6 +1,7 @@
 import { StyledSkeletonProps } from '@local/areas/skeleton';
 import { AccordionDetailsProps, AccordionSummaryContentProps } from '@local/components/accordion/component.types';
-import { THEME_GLOBAL, THEME_GLOBAL_VALUE } from '@local/styles/theme';
+import { StyledIconProps, StyledIconSkeletonProps } from '@local/components/icon/component.types';
+import { THEME_GLOBAL, THEME_GLOBAL_VALUE, THEME_KEY_SIZE } from '@local/styles/theme';
 
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 
@@ -11,10 +12,17 @@ import {
   recipeFontSizeTransition,
   recipeTypography,
 } from './add.recipe.css';
+import { styleComponentStyledIcon, styleComponentStyledIconSkeleton } from './add.style.css';
 import { I_TYPOGRAPHY } from './add.types';
-import { varsAreaSkeleton, varsComponentAccordionSummaryContent, varsTypography } from './add.vars.css';
+import {
+  varsAreaSkeleton,
+  varsComponentAccordionSummaryContent,
+  varsComponentStyledIcon,
+  varsComponentStyledIconSkeleton,
+  varsTypography,
+} from './add.vars.css';
 
-export const dynamicTypography = {
+export const dynamicComponentTypography = {
   className: (params: I_TYPOGRAPHY) =>
     [
       recipeFontSizeTransition({
@@ -139,4 +147,26 @@ export const dynamicComponentAccordionDetails = {
         expanded: params.expanded === true,
       }),
     ].join(' '),
+};
+
+export const dynamicComponentStyledIcon = {
+  className: () => [styleComponentStyledIcon].join(' '),
+  style: (params: StyledIconProps) =>
+    assignInlineVars({
+      [varsComponentStyledIcon.color]: params.color ? THEME_GLOBAL_VALUE.palette[params.color] : 'inherit',
+      [varsComponentStyledIcon.heightIcon]:
+        params.size !== '100%' ? `${THEME_KEY_SIZE[params.size].heightIcon}px` : '100%',
+      [varsComponentStyledIcon.turn]: params.turn ? `${params.turn}deg` : '0deg',
+      [varsComponentStyledIcon.order]: params.order ? String(params.order) : 'initial',
+    }),
+};
+
+export const dynamicComponentStyledIconSkeleton = {
+  className: () => [styleComponentStyledIconSkeleton].join(' '),
+  style: (params: StyledIconSkeletonProps) =>
+    assignInlineVars({
+      [varsComponentStyledIconSkeleton.heightIcon]:
+        params.size !== '100%' ? `${THEME_KEY_SIZE[params.size].heightIcon}px` : '100%',
+      [varsComponentStyledIconSkeleton.order]: params.order ? String(params.order) : 'initial',
+    }),
 };

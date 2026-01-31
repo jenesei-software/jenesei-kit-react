@@ -1,8 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import 'styled-components';
-
 import { InputOTP as InputOTPComponent, InputOTPProps } from '@local/components/input-otp';
 
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { FC } from 'react';
 
 import { WrapperBig } from './tools';

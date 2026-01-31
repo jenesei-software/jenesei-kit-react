@@ -28,10 +28,11 @@ export type I_THEME_TYPOGRAPHY_HEADING = keyof typeof THEME_GLOBAL_VALUE.font.si
 export type I_THEME_TYPOGRAPHY_WEIGHT = '100' | '300' | '400' | '500' | '700' | '900';
 export type I_THEME_TYPOGRAPHY_PALETTE = keyof typeof THEME_GLOBAL_VALUE.palette;
 export type I_THEME_TYPOGRAPHY_FONT_FAMILY = 'Inter' | 'Roboto' | 'Work Sans' | 'Roboto Mono' | 'Manrope';
-export type I_THEME_TYPOGRAPHY_SIZE = 'large' | 'largeMedium' | 'medium' | 'mediumSmall' | 'small';
+export type I_THEME_SIZE = 'large' | 'largeMedium' | 'medium' | 'mediumSmall' | 'small';
 
 export type I_THEME_GLOBAL = typeof THEME_GLOBAL_VALUE;
 
 export type I_THEME_BREAKPOINT = Exclude<keyof typeof THEME_GLOBAL_VALUE.screen.breakpoint, 'default'>;
 export type I_THEME_PALETTE = keyof typeof THEME_GLOBAL_VALUE.palette;
+
 export type I_THEME_ORIENTATION = keyof typeof THEME_GLOBAL_VALUE.screen.orientation;

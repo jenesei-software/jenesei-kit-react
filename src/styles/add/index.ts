@@ -1,4 +1,4 @@
-export { dynamicTypography } from './add.dynamic';
+export { dynamicComponentTypography } from './add.dynamic';
 export {
   recipeAlwaysOutline,
   recipeAreaScroll,
@@ -10,15 +10,11 @@ export {
   recipeTypography,
 } from './add.recipe.css';
 export {
-  styleColorTransition,
   styleContainer,
-  styleGridTransition,
   styleNiceNumber,
   styleRemoveOutline,
   styleRemoveScrollbar,
   styleRippleDefault,
-  styleTransition,
-  styleTransitionWithoutSize,
 } from './add.style.css';
 export type {
   I_CONTAINER_LAYOUT,

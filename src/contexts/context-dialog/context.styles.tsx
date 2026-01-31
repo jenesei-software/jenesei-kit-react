@@ -1,7 +1,6 @@
 import { addOutline } from '@local/styles/add';
 
 import { motion } from 'framer-motion';
-import styled from 'styled-components';
 
 import {
   DEFAULT_PROVIDER_DIALOG_ELEMENT_BACKGROUND,

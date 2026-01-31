@@ -1,12 +1,11 @@
-import { useMergeRefs } from '@floating-ui/react';
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { FC } from 'react';
-import 'styled-components';
-
 import { Button } from '@local/components/button';
 import { Popover as PopoverComponent, PopoverProps, usePopover } from '@local/components/popover';
 import { Stack } from '@local/components/stack';
 import { Typography } from '@local/components/typography';
+
+import { useMergeRefs } from '@floating-ui/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { FC } from 'react';
 
 import { WrapperBig } from './tools';
 

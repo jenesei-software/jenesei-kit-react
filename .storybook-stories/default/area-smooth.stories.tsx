@@ -1,11 +1,10 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { FC, useState } from 'react';
-import 'styled-components';
-
 import { Smooth as SmoothComponent } from '@local/areas/smooth';
 import { Button } from '@local/components/button';
 import { Stack, StackMotion, StackProps } from '@local/components/stack';
 import { Typography } from '@local/components/typography';
+
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { FC, useState } from 'react';
 
 const meta: Meta<typeof SmoothComponent> = {
   component: SmoothComponent,
