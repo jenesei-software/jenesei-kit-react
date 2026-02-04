@@ -1,5 +1,5 @@
 import { addError } from '@local/components/error';
-import { addSX } from '@local/styles/add';
+import { addSX } from '@local/theme';
 
 import styled from 'styled-components';
 

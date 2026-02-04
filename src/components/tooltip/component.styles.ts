@@ -1,6 +1,6 @@
 import { Popover, PopoverProps } from '@local/components/popover';
 import { Stack } from '@local/components/stack';
-import { THEME_KEY_SIZE } from '@local/styles/theme';
+import { THEME_KEY_SIZE } from '@local/theme';
 
 import styled, { css } from 'styled-components';
 

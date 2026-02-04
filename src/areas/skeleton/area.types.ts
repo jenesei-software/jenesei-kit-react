@@ -1,5 +1,5 @@
 import { StackProps } from '@local/components/stack';
-import { I_THEME_PALETTE } from '@local/styles/theme';
+import { I_THEME_PALETTE } from '@local/theme';
 
 type SkeletonDefaultProps = {
   className?: string;

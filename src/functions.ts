@@ -1,6 +1,4 @@
-import { LIBRARY_VERSION } from './consts';
-import { I_LAYOUT, I_LAYOUT_VALUE } from './styles/add';
-import { THEME_GLOBAL_VALUE } from './styles/theme';
+import { I_LAYOUT, I_LAYOUT_VALUE, THEME_GLOBAL_VALUE } from '@local/theme';
 
 type EnumOption = {
   value: string;

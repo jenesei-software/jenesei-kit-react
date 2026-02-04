@@ -1,5 +1,5 @@
 import { Stack } from '@local/components/stack';
-import { I_SX } from '@local/styles/add';
+import { I_SX } from '@local/theme';
 
 import { FC, PropsWithChildren, useEffect, useRef } from 'react';
 

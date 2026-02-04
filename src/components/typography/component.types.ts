@@ -1,5 +1,5 @@
 import { TooltipProps } from '@local/components/tooltip';
-import { I_SX, I_SX_OUTLINE, I_SX_TYPOGRAPHY } from '@local/styles/add';
+import { I_SX, I_SX_OUTLINE, I_SX_TYPOGRAPHY } from '@local/theme';
 
 import { CSSProperties, PropsWithChildren, Ref } from 'react';
 

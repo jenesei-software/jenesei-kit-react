@@ -1,14 +1,14 @@
 import { Tooltip } from '@local/components/tooltip';
-import { useLayout } from '@local/hooks/use-layout-sx/use';
 import { useOverflowing } from '@local/hooks/use-overflowing';
-import { dynamicComponentTypography } from '@local/styles/add';
+import { useResponsiveLayout } from '@local/hooks/use-responsive-layout/use';
+import { dynamicComponentTypography } from '@local/theme';
 
 import { ElementType, useMemo } from 'react';
 
 import { TypographyProps, TypographyTooltipProps } from './component.types';
 
 export const Typography = (props: TypographyProps) => {
-  const params = useLayout(props?.sx ?? {});
+  const params = useResponsiveLayout(props?.sx ?? {});
 
   const { className, style, Component } = useMemo(() => {
     return {

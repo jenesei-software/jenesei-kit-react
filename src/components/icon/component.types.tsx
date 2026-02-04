@@ -1,5 +1,4 @@
-import { I_SX } from '@local/styles/add';
-import { I_THEME_PALETTE, I_THEME_SIZE } from '@local/styles/theme';
+import { I_SX, I_THEME_PALETTE, I_THEME_SIZE } from '@local/theme';
 
 import React, { CSSProperties } from 'react';
 export type I_ICON_MAP = {

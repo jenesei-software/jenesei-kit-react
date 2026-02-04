@@ -1,34 +1,38 @@
 import { StyledSkeletonProps } from '@local/areas/skeleton';
 import { AccordionDetailsProps, AccordionSummaryContentProps } from '@local/components/accordion/component.types';
 import { StyledIconProps, StyledIconSkeletonProps } from '@local/components/icon/component.types';
-import { THEME_GLOBAL, THEME_GLOBAL_VALUE, THEME_KEY_SIZE } from '@local/styles/theme';
 
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 
+import { THEME_GLOBAL_VALUE, THEME_KEY_SIZE } from './theme.constants';
+import { THEME_GLOBAL } from './theme.global-theme.css';
 import {
   recipeAreaSkeleton,
   recipeComponentAccordionDetails,
   recipeComponentAccordionSummaryContent,
-  recipeFontSizeTransition,
-  recipeTypography,
-} from './add.recipe.css';
-import { styleComponentStyledIcon, styleComponentStyledIconSkeleton } from './add.style.css';
-import { I_TYPOGRAPHY } from './add.types';
+  recipeComponentTypography,
+  recipeCoreTransitionFontSize,
+} from './theme.recipe.css';
+import { styleComponentStyledIcon, styleComponentStyledIconSkeleton } from './theme.style.css';
+import { I_TYPOGRAPHY } from './theme.types';
 import {
   varsAreaSkeleton,
   varsComponentAccordionSummaryContent,
   varsComponentStyledIcon,
   varsComponentStyledIconSkeleton,
-  varsTypography,
-} from './add.vars.css';
+  varsComponentTypography,
+} from './theme.vars.css';
 
+/**
+ * Component/Typography
+ */
 export const dynamicComponentTypography = {
   className: (params: I_TYPOGRAPHY) =>
     [
-      recipeFontSizeTransition({
+      recipeCoreTransitionFontSize({
         isTransitionFontSize: params.isTransitionFontSize === true,
       }),
-      recipeTypography({
+      recipeComponentTypography({
         shadow: params.shadow,
         line: params.line === 1 ? 'single' : params.line && params.line > 1 ? 'multi' : undefined,
         letterSpacing: params.letterSpacing != null,
@@ -52,55 +56,58 @@ export const dynamicComponentTypography = {
   style: (params: I_TYPOGRAPHY) =>
     assignInlineVars({
       ...(params.letterSpacing !== undefined && {
-        [varsTypography.letterSpacing]: `${params.letterSpacing}px`,
+        [varsComponentTypography.letterSpacing]: `${params.letterSpacing}px`,
       }),
       ...(params.flex !== undefined && {
-        [varsTypography.flex]: params.flex,
+        [varsComponentTypography.flex]: params.flex,
       }),
       ...(params.cursor !== undefined && {
-        [varsTypography.cursor]: params.cursor,
+        [varsComponentTypography.cursor]: params.cursor,
       }),
       ...(params.overflow !== undefined && {
-        [varsTypography.overflow]: params.overflow,
+        [varsComponentTypography.overflow]: params.overflow,
       }),
       ...(params.line !== undefined && {
-        [varsTypography.line]: String(params.line),
+        [varsComponentTypography.line]: String(params.line),
       }),
       ...(params.family !== undefined && {
-        [varsTypography.family]: params.family,
+        [varsComponentTypography.family]: params.family,
       }),
       ...(params.weight !== undefined && {
-        [varsTypography.weight]: String(params.weight),
+        [varsComponentTypography.weight]: String(params.weight),
       }),
       ...(params.height !== undefined && {
-        [varsTypography.height]: String(params.height),
+        [varsComponentTypography.height]: String(params.height),
       }),
       ...(params.color !== undefined && {
-        [varsTypography.color]: THEME_GLOBAL_VALUE.palette[params.color],
+        [varsComponentTypography.color]: THEME_GLOBAL_VALUE.palette[params.color],
       }),
       ...(params.align !== undefined && {
-        [varsTypography.align]: params.align,
+        [varsComponentTypography.align]: params.align,
       }),
       ...(params.wrap !== undefined && {
-        [varsTypography.wrap]: params.wrap,
+        [varsComponentTypography.wrap]: params.wrap,
       }),
       ...(params.decoration !== undefined && {
-        [varsTypography.decoration]: String(params.decoration),
+        [varsComponentTypography.decoration]: String(params.decoration),
       }),
       ...(params.transform !== undefined && {
-        [varsTypography.transform]: String(params.transform),
+        [varsComponentTypography.transform]: String(params.transform),
       }),
       ...('size' in params &&
         params.size !== undefined && {
-          [varsTypography.size]: `${typeof params.size === 'number' ? `${params.size}px` : params.size}`,
+          [varsComponentTypography.size]: `${typeof params.size === 'number' ? `${params.size}px` : params.size}`,
         }),
       ...('variant' in params &&
         params.variant !== undefined && {
-          [varsTypography.variant]: THEME_GLOBAL.font.sizeHeading[params.variant],
+          [varsComponentTypography.variant]: THEME_GLOBAL.font.sizeHeading[params.variant],
         }),
     }),
 };
 
+/**
+ * Area/Skeleton
+ */
 export const dynamicAreaSkeleton = {
   className: (params: StyledSkeletonProps) =>
     [
@@ -125,6 +132,9 @@ export const dynamicAreaSkeleton = {
     }),
 };
 
+/**
+ * Component/Accordion
+ */
 export const dynamicComponentAccordionSummaryContent = {
   className: (params: AccordionSummaryContentProps) =>
     [
@@ -149,6 +159,9 @@ export const dynamicComponentAccordionDetails = {
     ].join(' '),
 };
 
+/**
+ * Component/Icon
+ */
 export const dynamicComponentStyledIcon = {
   className: () => [styleComponentStyledIcon].join(' '),
   style: (params: StyledIconProps) =>

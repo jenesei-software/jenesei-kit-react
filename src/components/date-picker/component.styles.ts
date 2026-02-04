@@ -10,8 +10,8 @@ import {
   addSX,
   addSXTypography,
   addTransition,
-} from '@local/styles/add';
-import { THEME_KEY_SIZE } from '@local/styles/theme/theme.constants';
+} from '@local/theme';
+import { THEME_KEY_SIZE } from '@local/theme/theme.constants';
 
 import { motion } from 'framer-motion';
 import styled, { css } from 'styled-components';

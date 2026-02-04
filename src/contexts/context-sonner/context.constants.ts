@@ -1,4 +1,4 @@
-import { I_THEME_SONNER_GENRE } from '@local/styles/theme';
+import { I_THEME_SONNER_GENRE } from '@local/theme';
 
 import { ProviderSonnerProps } from './context.types';
 

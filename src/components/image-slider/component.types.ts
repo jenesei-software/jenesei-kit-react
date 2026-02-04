@@ -1,7 +1,7 @@
 import { TImageSelectGenre } from '@local/components/image-select';
 import { StackProps } from '@local/components/stack';
 import { useImageSliderProps } from '@local/hooks/use-image-slider';
-import { IThemeSize } from '@local/styles/theme';
+import { IThemeSize } from '@local/theme';
 
 import { ReactNode } from 'react';
 

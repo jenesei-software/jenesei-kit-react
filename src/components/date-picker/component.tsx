@@ -6,7 +6,7 @@ import { SelectMonth, SelectYear } from '@local/components/select';
 import { Stack } from '@local/components/stack';
 import { Typography } from '@local/components/typography';
 import { getSxTypography } from '@local/functions';
-import { THEME_KEY_SIZE } from '@local/styles/theme';
+import { THEME_KEY_SIZE } from '@local/theme';
 
 import moment, { Moment } from 'moment';
 import {

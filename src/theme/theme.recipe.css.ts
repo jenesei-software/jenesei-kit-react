@@ -1,10 +1,13 @@
 import { recipe } from '@vanilla-extract/recipes';
 
-import { varsAreaSkeleton, varsComponentAccordionSummaryContent, varsTypography } from './add.vars.css.ts';
-import { KEYFRAME_SHADOW_PULSE, THEME_GLOBAL_VALUE } from '../theme/theme.constants.ts';
-import { THEME_GLOBAL } from '../theme/theme.global-theme.css.ts';
+import { KEYFRAME_SHADOW_PULSE, THEME_GLOBAL_VALUE } from './theme.constants.ts';
+import { THEME_GLOBAL } from './theme.global-theme.css.ts';
+import { varsAreaSkeleton, varsComponentAccordionSummaryContent, varsComponentTypography } from './theme.vars.css.ts';
 
-export const recipeFontSizeTransition = recipe({
+/**
+ * Core
+ */
+export const recipeCoreTransitionFontSize = recipe({
   variants: {
     isTransitionFontSize: {
       true: { transition: `font-size ${THEME_GLOBAL.transition.default}` },
@@ -15,7 +18,7 @@ export const recipeFontSizeTransition = recipe({
   },
 });
 
-export const recipeOutline = recipe({
+export const recipeCoreOutline = recipe({
   variants: {
     isOutline: {
       none: {},
@@ -34,14 +37,14 @@ export const recipeOutline = recipe({
   },
 });
 
-export const recipeAlwaysOutline = recipe({
+export const recipeCoreOutlineAlways = recipe({
   variants: {
     show: { true: { outline: `2px solid ${THEME_GLOBAL.state.focus}`, outlineOffset: '1px' } },
   },
   defaultVariants: { show: false },
 });
 
-export const recipeDisabled = recipe({
+export const recipeCoreDisabled = recipe({
   variants: {
     isDisabled: {
       true: { opacity: 0.5 },
@@ -51,7 +54,7 @@ export const recipeDisabled = recipe({
   defaultVariants: { isDisabled: false },
 });
 
-export const recipeRipple = recipe({
+export const recipeCoreRipple = recipe({
   variants: {
     isRipple: {
       true: {
@@ -64,7 +67,7 @@ export const recipeRipple = recipe({
   defaultVariants: { isRipple: false },
 });
 
-export const recipeHover = recipe({
+export const recipeCoreHover = recipe({
   variants: {
     isHover: {
       true: {
@@ -75,163 +78,7 @@ export const recipeHover = recipe({
   defaultVariants: { isHover: false },
 });
 
-export const recipeTypography = recipe({
-  base: {
-    color: THEME_GLOBAL.palette.black100,
-    fontFamily: THEME_GLOBAL.font.family,
-    fontWeight: THEME_GLOBAL.font.weight,
-    lineHeight: THEME_GLOBAL.font.lineHeight,
-    padding: 0,
-    margin: 0,
-  },
-
-  variants: {
-    letterSpacing: {
-      true: {
-        letterSpacing: varsTypography.letterSpacing,
-      },
-    },
-    flex: {
-      true: {
-        flex: varsTypography.flex,
-      },
-    },
-    cursor: {
-      true: {
-        cursor: varsTypography.cursor,
-      },
-    },
-    overflow: {
-      true: {
-        overflow: varsTypography.overflow,
-      },
-    },
-    line: {
-      single: {
-        textOverflow: 'ellipsis',
-        overflow: 'hidden',
-        whiteSpace: 'nowrap',
-        width: '-webkit-fill-available',
-        maxWidth: 'fit-content',
-      },
-
-      multi: {
-        wordBreak: 'break-word',
-        whiteSpace: 'normal',
-        textOverflow: 'ellipsis',
-        display: '-webkit-box',
-        overflow: 'hidden',
-        WebkitBoxOrient: 'vertical',
-        WebkitLineClamp: varsTypography.line,
-        width: 'fit-content',
-        overflowWrap: 'anywhere',
-      },
-    },
-    family: {
-      true: {
-        fontFamily: varsTypography.family,
-      },
-    },
-    weight: {
-      true: {
-        fontWeight: varsTypography.weight,
-      },
-    },
-    height: {
-      true: {
-        lineHeight: varsTypography.height,
-      },
-    },
-    color: {
-      true: {
-        color: varsTypography.color,
-      },
-    },
-    align: {
-      true: {
-        textAlign: varsTypography.align,
-      },
-    },
-
-    wrap: {
-      true: {
-        whiteSpace: varsTypography.wrap,
-      },
-    },
-
-    decoration: {
-      true: {
-        textDecoration: varsTypography.decoration,
-      },
-    },
-
-    transform: {
-      true: {
-        textTransform: varsTypography.transform,
-      },
-    },
-
-    shadow: {
-      shadowPulse: {
-        animation: `${KEYFRAME_SHADOW_PULSE} 2s infinite`,
-      },
-    },
-
-    isHoverUnderlining: {
-      true: {},
-    },
-
-    isNoUserSelect: {
-      true: {
-        userSelect: 'none',
-        WebkitUserSelect: 'none',
-        MozUserSelect: 'none',
-        msUserSelect: 'none',
-      },
-    },
-
-    size: {
-      true: {
-        fontSize: varsTypography.size,
-      },
-    },
-
-    variant: {
-      true: {
-        fontSize: `calc(${varsTypography.variant} * ${THEME_GLOBAL.font.sizeDevice.default})`,
-
-        '@media': Object.fromEntries(
-          [
-            ...Object.entries(THEME_GLOBAL_VALUE.screen.breakpoint).map(([label, size]) => {
-              const key = label as keyof typeof THEME_GLOBAL.font.sizeDevice;
-              const isUse = size.isUse as string;
-              if (isUse === 'false') return null;
-              return [
-                size.media,
-                {
-                  fontSize: `calc(${varsTypography.variant} * ${THEME_GLOBAL.font.sizeDevice[key]})`,
-                },
-              ] as const;
-            }),
-            ...Object.entries(THEME_GLOBAL_VALUE.screen.orientation).map(([label, size]) => {
-              const key = label as keyof typeof THEME_GLOBAL.font.sizeDevice;
-              const isUse = size.isUse as string;
-              if (isUse === 'false') return null;
-              return [
-                size.media,
-                {
-                  fontSize: `calc(${varsTypography.variant} * ${THEME_GLOBAL.font.sizeDevice[key]})`,
-                },
-              ] as const;
-            }),
-          ].filter((entry) => entry !== null),
-        ),
-      },
-    },
-  },
-});
-
-export const recipeFlex = recipe({
+export const recipeCoreContainer = recipe({
   base: {
     display: 'flex',
   },
@@ -272,6 +119,168 @@ export const recipeFlex = recipe({
   },
 });
 
+/**
+ * Component/Typography
+ */
+export const recipeComponentTypography = recipe({
+  base: {
+    color: THEME_GLOBAL.palette.black100,
+    fontFamily: THEME_GLOBAL.font.family,
+    fontWeight: THEME_GLOBAL.font.weight,
+    lineHeight: THEME_GLOBAL.font.lineHeight,
+    padding: 0,
+    margin: 0,
+  },
+
+  variants: {
+    letterSpacing: {
+      true: {
+        letterSpacing: varsComponentTypography.letterSpacing,
+      },
+    },
+    flex: {
+      true: {
+        flex: varsComponentTypography.flex,
+      },
+    },
+    cursor: {
+      true: {
+        cursor: varsComponentTypography.cursor,
+      },
+    },
+    overflow: {
+      true: {
+        overflow: varsComponentTypography.overflow,
+      },
+    },
+    line: {
+      single: {
+        textOverflow: 'ellipsis',
+        overflow: 'hidden',
+        whiteSpace: 'nowrap',
+        width: '-webkit-fill-available',
+        maxWidth: 'fit-content',
+      },
+
+      multi: {
+        wordBreak: 'break-word',
+        whiteSpace: 'normal',
+        textOverflow: 'ellipsis',
+        display: '-webkit-box',
+        overflow: 'hidden',
+        WebkitBoxOrient: 'vertical',
+        WebkitLineClamp: varsComponentTypography.line,
+        width: 'fit-content',
+        overflowWrap: 'anywhere',
+      },
+    },
+    family: {
+      true: {
+        fontFamily: varsComponentTypography.family,
+      },
+    },
+    weight: {
+      true: {
+        fontWeight: varsComponentTypography.weight,
+      },
+    },
+    height: {
+      true: {
+        lineHeight: varsComponentTypography.height,
+      },
+    },
+    color: {
+      true: {
+        color: varsComponentTypography.color,
+      },
+    },
+    align: {
+      true: {
+        textAlign: varsComponentTypography.align,
+      },
+    },
+
+    wrap: {
+      true: {
+        whiteSpace: varsComponentTypography.wrap,
+      },
+    },
+
+    decoration: {
+      true: {
+        textDecoration: varsComponentTypography.decoration,
+      },
+    },
+
+    transform: {
+      true: {
+        textTransform: varsComponentTypography.transform,
+      },
+    },
+
+    shadow: {
+      shadowPulse: {
+        animation: `${KEYFRAME_SHADOW_PULSE} 2s infinite`,
+      },
+    },
+
+    isHoverUnderlining: {
+      true: {},
+    },
+
+    isNoUserSelect: {
+      true: {
+        userSelect: 'none',
+        WebkitUserSelect: 'none',
+        MozUserSelect: 'none',
+        msUserSelect: 'none',
+      },
+    },
+
+    size: {
+      true: {
+        fontSize: varsComponentTypography.size,
+      },
+    },
+
+    variant: {
+      true: {
+        fontSize: `calc(${varsComponentTypography.variant} * ${THEME_GLOBAL.font.sizeDevice.default})`,
+
+        '@media': Object.fromEntries(
+          [
+            ...Object.entries(THEME_GLOBAL_VALUE.screen.breakpoint).map(([label, size]) => {
+              const key = label as keyof typeof THEME_GLOBAL.font.sizeDevice;
+              const isUse = size.isUse as string;
+              if (isUse === 'false') return null;
+              return [
+                size.media,
+                {
+                  fontSize: `calc(${varsComponentTypography.variant} * ${THEME_GLOBAL.font.sizeDevice[key]})`,
+                },
+              ] as const;
+            }),
+            ...Object.entries(THEME_GLOBAL_VALUE.screen.orientation).map(([label, size]) => {
+              const key = label as keyof typeof THEME_GLOBAL.font.sizeDevice;
+              const isUse = size.isUse as string;
+              if (isUse === 'false') return null;
+              return [
+                size.media,
+                {
+                  fontSize: `calc(${varsComponentTypography.variant} * ${THEME_GLOBAL.font.sizeDevice[key]})`,
+                },
+              ] as const;
+            }),
+          ].filter((entry) => entry !== null),
+        ),
+      },
+    },
+  },
+});
+
+/**
+ * Area/Scroll
+ */
 export const recipeAreaScroll = recipe({
   base: {
     display: 'flex',
@@ -307,6 +316,9 @@ export const recipeAreaScroll = recipe({
   },
 });
 
+/**
+ * Area/Skeleton
+ */
 export const recipeAreaSkeleton = recipe({
   base: {
     background: THEME_GLOBAL.background.transparent,
@@ -324,6 +336,9 @@ export const recipeAreaSkeleton = recipe({
   },
 });
 
+/**
+ * Component/Accordion
+ */
 export const recipeComponentAccordionSummaryContent = recipe({
   base: {
     width: '100%',

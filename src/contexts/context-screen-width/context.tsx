@@ -1,5 +1,5 @@
 
-import { THEME_GLOBAL_VALUE } from '@local/styles/theme';
+import { THEME_GLOBAL_VALUE } from '@local/theme';
 
 import { createContext, FC, useCallback, useEffect, useRef, useState } from 'react';
 

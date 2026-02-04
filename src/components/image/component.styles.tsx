@@ -1,4 +1,4 @@
-import { addSX, addTransition } from '@local/styles/add';
+import { addSX, addTransition } from '@local/theme';
 
 import styled from 'styled-components';
 

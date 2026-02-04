@@ -1,19 +1,22 @@
 import {
-  recipeHover,
-  recipeOutline,
-  recipeRipple,
-  recipeTypography,
-  styleRemoveOutline,
-  styleRippleDefault,
-} from '@local/styles/add';
+  recipeComponentTypography,
+  recipeCoreHover,
+  recipeCoreOutline,
+  recipeCoreRipple,
+  styleCoreRemoveOutline,
+  styleCoreRipple,
+} from '@local/theme';
 
 import { globalKeyframes, globalStyle } from '@vanilla-extract/css';
 
 import { KEYFRAME_SHADOW_PULSE, KEYFRAME_SHIMMER, THEME_GLOBAL_VALUE } from './theme.constants';
+import { dynamicAreaSkeleton } from './theme.dynamic';
 import { THEME_GLOBAL } from './theme.global-theme.css';
-import { dynamicAreaSkeleton } from '../add/add.dynamic';
-import { varsAreaSkeleton } from '../add/add.vars.css';
+import { varsAreaSkeleton } from './theme.vars.css';
 
+/**
+ * Core
+ */
 globalStyle('#storybook-root', {
   display: 'flex',
   maxHeight: '100dvh',
@@ -56,14 +59,6 @@ globalStyle('body', {
   flex: '1',
 });
 
-globalStyle(`body:has(${THEME_GLOBAL_VALUE.id.dialog})`, {
-  '@media': {
-    [THEME_GLOBAL_VALUE.screen.breakpoint.tablet.media]: {
-      overflow: 'hidden',
-    },
-  },
-});
-
 globalStyle("input[type='checkbox'], input[type='radio']", {
   appearance: 'none',
   transform: 'translate(0px)',
@@ -88,42 +83,6 @@ globalStyle('html::-webkit-scrollbar-thumb', {
   backgroundClip: 'padding-box',
 });
 
-globalStyle(`${recipeRipple} *:not(#${THEME_GLOBAL_VALUE.id.ripple})`, {
-  userSelect: 'none',
-  pointerEvents: 'none',
-});
-
-globalStyle(`${styleRippleDefault} *:not(#${THEME_GLOBAL_VALUE.id.ripple})`, {
-  userSelect: 'none',
-  pointerEvents: 'none',
-});
-
-globalStyle(`${recipeOutline({ isOutline: 'default' })}:focus-visible`, {
-  outline: `2px solid ${THEME_GLOBAL.state.focus}`,
-});
-
-globalStyle(`${recipeOutline({ isOutline: 'boxShadow' })}:focus-visible`, {
-  outline: '1px solid #83b7e8',
-  boxShadow: '0 1px 1px rgba(24,36,51,0.06), 0 0 0 .25rem rgba(6,111,209,0.25)',
-});
-
-globalStyle(`${styleRemoveOutline}:focus-visible`, {
-  outline: `0px solid ${THEME_GLOBAL.state.focus} !important`,
-});
-
-globalStyle(`${recipeHover}:hover`, {
-  backgroundColor: `${THEME_GLOBAL.palette.black05}`,
-});
-
-globalStyle(`${recipeTypography({ isHoverUnderlining: true })}:hover`, {
-  textDecoration: 'underline',
-});
-
-globalStyle(`${dynamicAreaSkeleton} > *`, {
-  opacity: `${varsAreaSkeleton.opacity}`,
-  transition: `outline 0s, opacity ${THEME_GLOBAL.transition.default}`,
-});
-
 globalKeyframes(KEYFRAME_SHADOW_PULSE, {
   '0%': {
     textShadow: '0 0 0 rgba(0, 0, 0, 0)',
@@ -143,4 +102,57 @@ globalKeyframes(KEYFRAME_SHIMMER, {
   '100%': {
     backgroundPosition: '-100%',
   },
+});
+
+globalStyle(`${recipeCoreRipple} *:not(#${THEME_GLOBAL_VALUE.id.ripple})`, {
+  userSelect: 'none',
+  pointerEvents: 'none',
+});
+
+globalStyle(`${styleCoreRipple} *:not(#${THEME_GLOBAL_VALUE.id.ripple})`, {
+  userSelect: 'none',
+  pointerEvents: 'none',
+});
+
+globalStyle(`${recipeCoreOutline({ isOutline: 'default' })}:focus-visible`, {
+  outline: `2px solid ${THEME_GLOBAL.state.focus}`,
+});
+
+globalStyle(`${recipeCoreOutline({ isOutline: 'boxShadow' })}:focus-visible`, {
+  outline: '1px solid #83b7e8',
+  boxShadow: '0 1px 1px rgba(24,36,51,0.06), 0 0 0 .25rem rgba(6,111,209,0.25)',
+});
+
+globalStyle(`${styleCoreRemoveOutline}:focus-visible`, {
+  outline: `0px solid ${THEME_GLOBAL.state.focus} !important`,
+});
+
+globalStyle(`${recipeCoreHover}:hover`, {
+  backgroundColor: `${THEME_GLOBAL.palette.black05}`,
+});
+
+/**
+ * Context/Dialog
+ */
+globalStyle(`body:has(${THEME_GLOBAL_VALUE.id.dialog})`, {
+  '@media': {
+    [THEME_GLOBAL_VALUE.screen.breakpoint.tablet.media]: {
+      overflow: 'hidden',
+    },
+  },
+});
+
+/**
+ * Component/Typography
+ */
+globalStyle(`${recipeComponentTypography({ isHoverUnderlining: true })}:hover`, {
+  textDecoration: 'underline',
+});
+
+/**
+ * Area/Skeleton
+ */
+globalStyle(`${dynamicAreaSkeleton} > *`, {
+  opacity: `${varsAreaSkeleton.opacity}`,
+  transition: `outline 0s, opacity ${THEME_GLOBAL.transition.default}`,
 });

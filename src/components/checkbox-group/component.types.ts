@@ -1,5 +1,5 @@
 import { CheckboxProps } from '@local/components/checkbox';
-import { addSXProps, addSXPropsDollar, addSXTypographyProps } from '@local/styles/add';
+import { addSXProps, addSXPropsDollar, addSXTypographyProps } from '@local/theme';
 import { AddDollarSign } from '@local/types';
 
 export interface CheckboxGroupValueProps {

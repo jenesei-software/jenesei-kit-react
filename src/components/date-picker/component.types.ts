@@ -1,8 +1,7 @@
 import { addErrorProps } from '@local/components/error';
 import { InputStandardProps, StyledInputProps, StyledInputWrapperProps } from '@local/components/input';
 import { SelectMonthProps } from '@local/components/select';
-import { addOutlineProps, addOutlinePropsDollar, addSXProps, addSXTypographyProps } from '@local/styles/add';
-import { ITheme, IThemeSize } from '@local/styles/theme';
+import { addOutlineProps, addOutlinePropsDollar, addSXProps, addSXTypographyProps, ITheme, IThemeSize } from '@local/theme';
 import { AddDollarSign } from '@local/types';
 
 import { HTMLInputAutoCompleteAttribute } from 'react';

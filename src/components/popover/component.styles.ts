@@ -1,5 +1,4 @@
-import { addAlwaysOutline, addSX, addSXTypography } from '@local/styles/add';
-import { THEME_KEY_SIZE } from '@local/styles/theme';
+import { addAlwaysOutline, addSX, addSXTypography, THEME_KEY_SIZE } from '@local/theme';
 
 import { motion } from 'framer-motion';
 import styled, { css } from 'styled-components';

@@ -1,9 +1,8 @@
+import { Icon } from '@local/components/icon';
 import { Stack } from '@local/components/stack';
-import {
-  dynamicComponentAccordionDetails,
-  dynamicComponentAccordionSummaryContent,
-} from '@local/styles/add/add.dynamic';
-import { styleComponentAccordionSummary, styleComponentAccordionWrapper } from '@local/styles/add/add.style.css';
+import { dynamicComponentAccordionDetails, dynamicComponentAccordionSummaryContent } from '@local/theme/theme.dynamic';
+import { recipeComponentAccordionStyledIcon } from '@local/theme/theme.recipe.css';
+import { styleComponentAccordionSummary, styleComponentAccordionWrapper } from '@local/theme/theme.style.css';
 
 import React, { FC, useCallback } from 'react';
 
@@ -42,8 +41,10 @@ export const Accordion: FC<AccordionProps> = (props) => {
             {props.accordionSummary}
           </div>
           {props.isAccordionIcon && (
-            <AccordionStyledIcon
-              $expanded={props.expanded}
+            <Icon
+              className={recipeComponentAccordionStyledIcon({
+                expanded: props.expanded,
+              })}
               onClick={onClickIcon}
               name='Arrow1'
               color='black100'

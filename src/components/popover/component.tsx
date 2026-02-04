@@ -2,7 +2,7 @@ import { getSxTypography } from '@local/functions';
 
 import { autoUpdate, flip, offset, shift, useFloating } from '@floating-ui/react';
 import { AnimatePresence } from 'framer-motion';
-import { FC, Ref, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { FC, Ref, useCallback, useEffect, useMemo, useRef, useResponsiveLayoutEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useTheme } from 'styled-components';
 
@@ -279,7 +279,7 @@ export const usePopover = (props: UsePopoverProps) => {
   /**
    * Устанавливаем минимальную ширину поповера, равную reference (если включено isWidthAsContent)
    */
-  useLayoutEffect(() => {
+  useResponsiveLayoutEffect(() => {
     if (!props.isWidthAsContent || !refs.reference.current) return;
     const rect = refs.reference.current.getBoundingClientRect();
     setMinWidth(rect.width);

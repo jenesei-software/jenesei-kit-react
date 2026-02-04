@@ -1,6 +1,6 @@
 import { addIconProps } from '@local/components/icon';
-import { addSXTypographyProps } from '@local/styles/add';
 import { ITheme, IThemeGenre } from '@local/styles/theme/theme.interface';
+import { addSXTypographyProps } from '@local/theme';
 import { AddDollarSign } from '@local/types';
 
 import { PropsWithChildren, ReactNode } from 'react';

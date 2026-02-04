@@ -1,4 +1,4 @@
-import { addSX } from '@local/styles/add';
+import { addSX } from '@local/theme';
 
 import { css, styled } from 'styled-components';
 

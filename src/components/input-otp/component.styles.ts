@@ -1,5 +1,4 @@
-import { addSX } from '@local/styles/add';
-import { THEME_KEY_SIZE } from '@local/styles/theme';
+import { addSX, THEME_KEY_SIZE } from '@local/theme';
 
 import styled, { css } from 'styled-components';
 

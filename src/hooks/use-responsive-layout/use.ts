@@ -1,10 +1,10 @@
 import { useScreenWidth } from '@local/contexts/context-screen-width';
-import { I_LAYOUT } from '@local/styles/add/add.types';
-import { THEME_GLOBAL_VALUE } from '@local/styles/theme';
+import { THEME_GLOBAL_VALUE } from '@local/theme';
+import { I_LAYOUT } from '@local/theme/theme.types';
 
 import { useMemo } from 'react';
 
-export function useLayout<A>(sx: I_LAYOUT<A>) {
+export function useResponsiveLayout<A>(sx: I_LAYOUT<A>) {
   const { breakpoint, orientation } = useScreenWidth();
 
   const resolvedSXMemo = useMemo(() => {
@@ -17,7 +17,7 @@ export function useLayout<A>(sx: I_LAYOUT<A>) {
     const params = {
       ...(resolvedSXMemo.default ?? {}),
 
-      ...(resolvedSXMemo.breakpoints?.[breakpoint] ?? {}),
+      ...(breakpoint !== 'default' ? resolvedSXMemo.breakpoints?.[breakpoint] ?? {} : {}),
 
       ...(resolvedSXMemo.orientations?.[orientation] ?? {}),
     };

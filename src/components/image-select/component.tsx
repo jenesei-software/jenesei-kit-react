@@ -7,7 +7,7 @@ import { LIST_IMAGE_SUPPORTED_FORMAT_FOR_INPUT } from '@local/consts';
 import { getSxTypography } from '@local/functions';
 import { useImageCrop } from '@local/hooks/use-image-crop';
 import { useImageView } from '@local/hooks/use-image-view';
-import { THEME_KEY_SIZE } from '@local/styles/theme';
+import { THEME_KEY_SIZE } from '@local/theme';
 
 import { motion } from 'framer-motion';
 import { DragEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';

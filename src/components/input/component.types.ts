@@ -1,6 +1,5 @@
 import { addErrorProps } from '@local/components/error';
-import { addOutlineProps, addOutlinePropsDollar, addSXProps, addSXTypographyProps } from '@local/styles/add';
-import { ITheme, IThemeSize } from '@local/styles/theme';
+import { addOutlineProps, addOutlinePropsDollar, addSXProps, addSXTypographyProps, ITheme, IThemeSize } from '@local/theme';
 import { AddDollarSign } from '@local/types';
 
 import {

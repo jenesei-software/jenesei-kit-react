@@ -1,11 +1,11 @@
-import React, { FC, useCallback, useLayoutEffect, useMemo, useState } from 'react';
+import React, { FC, useCallback, useMemo, useResponsiveLayoutEffect, useState } from 'react';
 
 import { DEFAULT_RIPPLE_DURATION, DEFAULT_RIPPLE_ID } from './component.constants';
 import { RippleContainer, RippleSpan } from './component.styles';
 import { RippleArrayElement, RippleProps } from './component.types';
 
 const useDebouncedRippleCleanUp = (rippleCount: number, duration: number, cleanUpFunction: () => void) => {
-  useLayoutEffect(() => {
+  useResponsiveLayoutEffect(() => {
     // eslint-disable-next-line no-undef
     let bounce: NodeJS.Timeout | null = null;
     if (rippleCount > 0) {

@@ -1,5 +1,5 @@
 import { Outside } from '@local/areas/outside';
-import { THEME_GLOBAL_VALUE } from '@local/styles/theme';
+import { THEME_GLOBAL_VALUE } from '@local/theme';
 
 import { AnimatePresence } from 'framer-motion';
 import { createContext, FC, memo, useCallback, useEffect, useMemo, useState } from 'react';

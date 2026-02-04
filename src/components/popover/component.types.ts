@@ -1,6 +1,5 @@
 import { addErrorPropsDollar } from '@local/components/error';
-import { addSXProps, addSXPropsDollar, addSXTypographyProps, addSXTypographyPropsDollar } from '@local/styles/add';
-import { ITheme, IThemeSize } from '@local/styles/theme';
+import { addSXProps, addSXPropsDollar, addSXTypographyProps, addSXTypographyPropsDollar, ITheme, IThemeSize } from '@local/theme';
 import { AddDollarSign } from '@local/types';
 
 import { Placement } from '@floating-ui/react';

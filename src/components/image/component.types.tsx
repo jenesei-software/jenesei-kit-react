@@ -1,4 +1,4 @@
-import { addSXProps, addSXPropsDollar } from '@local/styles/add';
+import { addSXProps, addSXPropsDollar } from '@local/theme';
 
 import { ReactNode } from 'react';
 

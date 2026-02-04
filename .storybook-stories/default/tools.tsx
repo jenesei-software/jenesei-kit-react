@@ -1,11 +1,11 @@
 import { Stack } from '@local/components/stack';
-import { useLayout } from '@local/hooks/use-layout-sx/use';
-import { I_SX } from '@local/styles/add/add.types';
+import { useResponsiveLayout } from '@local/hooks/use-responsive-layout/use';
+import { I_SX } from '@local/theme/theme.types';
 
 import { FC, PropsWithChildren } from 'react';
 
 export const WrapperBig: FC<PropsWithChildren & I_SX> = (props) => {
-  const styleLayout = useLayout(props?.sx ?? {});
+  const styleLayout = useResponsiveLayout(props?.sx ?? {});
   return (
     <Stack
       sx={(theme) => ({
@@ -30,7 +30,7 @@ export const WrapperBig: FC<PropsWithChildren & I_SX> = (props) => {
   );
 };
 export const WrapperMin: FC<PropsWithChildren & I_SX> = (props) => {
-  const styleLayout = useLayout(props?.sx ?? {});
+  const styleLayout = useResponsiveLayout(props?.sx ?? {});
   return (
     <Stack
       sx={(theme) => ({

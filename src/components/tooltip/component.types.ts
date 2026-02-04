@@ -1,5 +1,5 @@
 import { PopoverProps, UsePopoverProps } from '@local/components/popover';
-import { addSXProps, addSXTypographyProps } from '@local/styles/add';
+import { addSXProps, addSXTypographyProps } from '@local/theme';
 
 import { PropsWithChildren, ReactNode } from 'react';
 

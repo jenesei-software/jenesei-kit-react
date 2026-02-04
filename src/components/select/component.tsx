@@ -5,7 +5,7 @@ import { Popover, usePopover } from '@local/components/popover';
 import { Typography } from '@local/components/typography';
 import { LIST_LANGUAGE } from '@local/consts';
 import { getSxTypography } from '@local/functions';
-import { THEME_KEY_SIZE } from '@local/styles/theme';
+import { THEME_KEY_SIZE } from '@local/theme';
 
 import { useMergeRefs } from '@floating-ui/react';
 import { useVirtualizer } from '@tanstack/react-virtual';

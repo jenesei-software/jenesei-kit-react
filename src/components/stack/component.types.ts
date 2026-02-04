@@ -1,4 +1,4 @@
-import { I_SX } from '@local/styles/add/add.types';
+import { I_SX } from '@local/theme';
 
 import { AnimationProps, DraggableProps, FocusHandlers, HoverHandlers, LayoutProps, TapHandlers } from 'framer-motion';
 import { CSSProperties, DragEvent, DragEventHandler, JSX, PropsWithChildren, Ref } from 'react';

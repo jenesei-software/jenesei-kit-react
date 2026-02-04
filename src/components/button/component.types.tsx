@@ -1,13 +1,11 @@
 import { addIconProps } from '@local/components/icon';
-import {
+import { 
   addOutlineProps,
   addOutlinePropsDollar,
   addSXProps,
   addSXPropsDollar,
   addSXTypographyProps,
-  addSXTypographyPropsDollar,
-} from '@local/styles/add';
-import { IThemeGenre, IThemeSize } from '@local/styles/theme';
+  addSXTypographyPropsDollar,IThemeGenre, IThemeSize, } from '@local/theme';
 import { AddDollarSign } from '@local/types';
 
 import React, { PropsWithChildren, Ref } from 'react';

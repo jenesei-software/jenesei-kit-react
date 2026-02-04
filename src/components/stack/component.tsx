@@ -1,5 +1,5 @@
-import { useLayout } from '@local/hooks/use-layout-sx';
-import { recipeHover, recipeRipple, styleContainer } from '@local/styles/add';
+import { useResponsiveLayout } from '@local/hooks/use-responsive-layout';
+import { recipeCoreHover, recipeCoreRipple, styleCoreContainer } from '@local/theme';
 
 import { motion } from 'framer-motion';
 import { FC, useMemo } from 'react';
@@ -7,14 +7,14 @@ import { FC, useMemo } from 'react';
 import { StackMotionProps, StackProps } from './component.types';
 
 export const Stack: FC<StackProps> = (props) => {
-  const styleLayout = useLayout(props?.sx ?? {});
+  const styleLayout = useResponsiveLayout(props?.sx ?? {});
 
   const { className, style, Component } = useMemo(() => {
     return {
       className: [
-        styleContainer,
-        recipeRipple({ isRipple: props.isRipple }),
-        recipeHover({ isHover: props.isHover }),
+        styleCoreContainer,
+        recipeCoreRipple({ isRipple: props.isRipple }),
+        recipeCoreHover({ isHover: props.isHover }),
         props.className,
       ].join(' '),
       style: Object.assign({}, styleLayout, props.style),
@@ -44,14 +44,14 @@ export const Stack: FC<StackProps> = (props) => {
 export const StackMotion: FC<StackMotionProps> = (props) => {
   const { isHover, isRipple, onClick, onDrop, onDragOver, ref, sx } = props;
 
-  const styleLayout = useLayout(sx ?? {});
+  const styleLayout = useResponsiveLayout(sx ?? {});
 
   const { className, style, as } = useMemo(() => {
     return {
       className: [
-        styleContainer,
-        recipeRipple({ isRipple: isRipple }),
-        recipeHover({ isHover: isHover }),
+        styleCoreContainer,
+        recipeCoreRipple({ isRipple: isRipple }),
+        recipeCoreHover({ isHover: isHover }),
         props.className,
       ].join(' '),
       style: Object.assign({}, styleLayout, props.style),

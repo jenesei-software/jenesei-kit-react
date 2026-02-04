@@ -1,6 +1,5 @@
-import { addSX, addSXTypography } from '@local/styles/add';
 import { MotionWordsPullUp } from '@local/styles/motion';
-import { THEME_KEY_SIZE } from '@local/styles/theme';
+import { addSX, addSXTypography, THEME_KEY_SIZE } from '@local/theme';
 
 import { FC } from 'react';
 import styled, { css } from 'styled-components';

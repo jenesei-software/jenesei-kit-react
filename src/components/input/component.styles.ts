@@ -1,6 +1,5 @@
 import { addError } from '@local/components/error';
-import { addDisabled, addNiceNumber, addOutline, addSX, addSXTypography, addTransition } from '@local/styles/add';
-import { THEME_KEY_SIZE } from '@local/styles/theme';
+import { addDisabled, addNiceNumber, addOutline, addSX, addSXTypography, addTransition, THEME_KEY_SIZE } from '@local/theme';
 
 import { motion } from 'framer-motion';
 import { NumericFormat, PatternFormat } from 'react-number-format';

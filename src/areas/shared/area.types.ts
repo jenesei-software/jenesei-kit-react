@@ -1,5 +1,5 @@
 import { ButtonProps } from '@local/components/button';
-import { I_SX } from '@local/styles/add';
+import { I_SX } from '@local/theme';
 
 type BaseSharedProps = I_SX & {
   value?: string;

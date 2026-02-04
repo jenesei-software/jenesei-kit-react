@@ -1,10 +1,14 @@
-import { THEME_GLOBAL } from '@local/styles/theme';
+
 
 import { style } from '@vanilla-extract/css';
 
-import { varsComponentStyledIcon, varsComponentStyledIconSkeleton } from './add.vars.css';
+import { THEME_GLOBAL } from './theme.global-theme.css';
+import { varsComponentStyledIcon, varsComponentStyledIconSkeleton } from './theme.vars.css';
 
-export const styleRemoveScrollbar = style({
+/**
+ * Core
+ */
+export const styleCoreRemoveScrollbar = style({
   scrollbarWidth: 'none',
   msOverflowStyle: 'none',
   selectors: {
@@ -14,26 +18,29 @@ export const styleRemoveScrollbar = style({
   },
 });
 
-export const styleRemoveOutline = style({
+export const styleCoreRemoveOutline = style({
   outline: '0px solid transparent !important',
   outlineOffset: '0px !important',
 });
 
-export const styleNiceNumber = style({
+export const styleCoreTabularNumbers = style({
   fontVariantNumeric: 'tabular-nums',
   fontFeatureSettings: `'tnum'`,
 });
 
-export const styleRippleDefault = style({
+export const styleCoreRipple = style({
   position: 'relative',
   overflow: 'hidden',
   isolation: 'isolate',
 });
 
-export const styleContainer = style({
+export const styleCoreContainer = style({
   display: 'flex',
 });
 
+/**
+ * Component/Accordion
+ */
 export const styleComponentAccordionWrapper = style({
   display: 'flex',
   flexDirection: 'column',
@@ -47,6 +54,9 @@ export const styleComponentAccordionSummary = style({
   userSelect: 'none',
 });
 
+/**
+ * Component/Icon
+ */
 export const styleComponentStyledIcon = style([
   {
     color: varsComponentStyledIcon.color,

@@ -1,6 +1,6 @@
 import { Preview, PreviewAdditionalProps } from '@local/areas/preview';
 import { useScreenWidth } from '@local/contexts/context-screen-width';
-import { I_THEME_PALETTE, THEME_PALETTE } from '@local/styles/theme';
+import { I_THEME_PALETTE, THEME_PALETTE } from '@local/theme';
 
 import { createContext, FC, useCallback, useEffect, useState } from 'react';
 

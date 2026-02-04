@@ -1,5 +1,5 @@
 import { Stack } from '@local/components/stack';
-import { recipeAreaScroll } from '@local/styles/add';
+import { recipeAreaScroll } from '@local/theme';
 
 import { FC, useMemo } from 'react';
 

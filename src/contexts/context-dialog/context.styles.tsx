@@ -1,4 +1,4 @@
-import { addOutline } from '@local/styles/add';
+import { addOutline } from '@local/theme';
 
 import { motion } from 'framer-motion';
 

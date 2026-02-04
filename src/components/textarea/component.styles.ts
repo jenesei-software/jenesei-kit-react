@@ -1,13 +1,11 @@
 import { addError } from '@local/components/error';
-import {
+import { 
   addDisabled,
   addOutlineChildren,
   addRemoveOutline,
   addSX,
   addSXTypography,
-  addTransitionWithoutSize,
-} from '@local/styles/add';
-import { THEME_KEY_SIZE } from '@local/styles/theme';
+  addTransitionWithoutSize,THEME_KEY_SIZE, } from '@local/theme';
 
 import styled, { css } from 'styled-components';
 

@@ -1,5 +1,4 @@
-import { addOutlineProps } from '@local/styles/add';
-import { IThemePaletteKeys } from '@local/styles/theme';
+import { addOutlineProps, IThemePaletteKeys } from '@local/theme';
 import { AddDollarSign } from '@local/types';
 
 import { PropsWithChildren, ReactNode } from 'react';

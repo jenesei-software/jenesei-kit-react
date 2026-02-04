@@ -1,4 +1,4 @@
-import { I_SX } from '@local/styles/add';
+import { I_SX } from '@local/theme';
 
 import { PropsWithChildren, ReactNode } from 'react';
 

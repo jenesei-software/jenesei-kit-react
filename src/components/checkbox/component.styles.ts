@@ -1,7 +1,6 @@
 import { addError } from '@local/components/error';
 import { addRippleDefault } from '@local/components/ripple';
-import { addDisabled, addOutline, addSX, addSXTypography, addTransition } from '@local/styles/add';
-import { THEME_KEY_SIZE } from '@local/styles/theme';
+import { addDisabled, addOutline, addSX, addSXTypography, addTransition, THEME_KEY_SIZE } from '@local/theme';
 
 import styled, { css } from 'styled-components';
 

@@ -1,5 +1,5 @@
 import { Stack } from '@local/components/stack/component';
-import { dynamicAreaSkeleton } from '@local/styles/add/add.dynamic';
+import { dynamicAreaSkeleton } from '@local/theme/theme.dynamic';
 
 import { FC, useEffect, useMemo, useState } from 'react';
 

@@ -4,7 +4,7 @@ import { ImageSliderProps, SliderDot, SliderImage } from '@local/components/imag
 import { Stack } from '@local/components/stack';
 import { Typography } from '@local/components/typography';
 import { useDialog, useDialogProps } from '@local/contexts/context-dialog';
-import { THEME_KEY_SIZE } from '@local/styles/theme';
+import { THEME_KEY_SIZE } from '@local/theme';
 
 import { AnimatePresence, PanInfo, Variants } from 'framer-motion';
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';

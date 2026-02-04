@@ -1,8 +1,8 @@
 import { addError } from '@local/components/error';
 import { Icon } from '@local/components/icon';
 import { TextArea } from '@local/components/textarea';
-import { addRemoveOutline, addSX, addSXTypography } from '@local/styles/add';
-import { THEME_KEY_SIZE } from '@local/styles/theme/theme.constants';
+import { addRemoveOutline, addSX, addSXTypography } from '@local/theme';
+import { THEME_KEY_SIZE } from '@local/theme/theme.constants';
 
 import { motion } from 'framer-motion';
 import styled, { css } from 'styled-components';

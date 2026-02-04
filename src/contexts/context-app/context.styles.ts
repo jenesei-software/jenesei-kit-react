@@ -1,5 +1,4 @@
-import { addGridTransition } from '@local/styles/add';
-import { JeneseiPalette } from '@local/styles/theme';
+import { addGridTransition, JeneseiPalette } from '@local/theme';
 
 import { css, styled } from 'styled-components';
 

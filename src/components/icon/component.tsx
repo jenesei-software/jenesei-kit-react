@@ -1,6 +1,6 @@
 import { Skeleton } from '@local/areas/skeleton';
 import { LIBRARY_VERSION } from '@local/consts';
-import { dynamicComponentStyledIcon, dynamicComponentStyledIconSkeleton } from '@local/styles/add/add.dynamic';
+import { dynamicComponentStyledIcon, dynamicComponentStyledIconSkeleton } from '@local/theme/theme.dynamic';
 
 import { useMemo } from 'react';
 

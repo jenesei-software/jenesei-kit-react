@@ -6,7 +6,7 @@ import { Stack } from '@local/components/stack';
 import { LIST_IMAGE_SUPPORTED_FORMAT } from '@local/consts';
 import { useDialog, useDialogProps } from '@local/contexts/context-dialog';
 import { useDeepCompareMemoize } from '@local/hooks/use-deep-compare-memoize';
-import { THEME_KEY_SIZE } from '@local/styles/theme';
+import { THEME_KEY_SIZE } from '@local/theme';
 import { IImageFormat } from '@local/types';
 
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';

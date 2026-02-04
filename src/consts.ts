@@ -4,8 +4,8 @@ import {
   DatePickerTranslateWeekProps,
 } from '@local/components/date-picker';
 import { transformObjectToArray, transformObjectValuesToKeys } from '@local/functions';
-import { I_THEME_TYPOGRAPHY_HEADING } from '@local/styles/theme';
 import { IImageFormat, ILanguage, IService } from '@local/types';
+import { I_THEME_TYPOGRAPHY_HEADING } from '@local/theme';
 
 export const OBJECT_LANGUAGE: ILanguage = {
   eng: {
@@ -155,5 +155,5 @@ export const LOREM_IPSUM_TEXT =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 
 export const LIBRARY_VERSION = import.meta.env.VITE_APP_VERSION;
-// export const LIST_TYPOGRAPHY_VARIANTS: IThemeTypographyHeading[] = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'h7','h8','h9', 'subtitle1', 'subtitle2', 'body1', 'body2', 'caption', 'overline'];
+
 export const LIST_TYPOGRAPHY_VARIANTS_DEFAULT: I_THEME_TYPOGRAPHY_HEADING[] = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];

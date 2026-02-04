@@ -5,7 +5,7 @@ import { Stack, StackMotion } from '@local/components/stack';
 import { Typography } from '@local/components/typography';
 import { useImageSlider } from '@local/hooks/use-image-slider';
 import { useResolveSx } from '@local/hooks/use-resolve-sx';
-import { THEME_KEY_SIZE } from '@local/styles/theme';
+import { THEME_KEY_SIZE } from '@local/theme';
 
 import { AnimatePresence, Variants } from 'framer-motion';
 import { FC, useMemo } from 'react';
