@@ -1,5 +1,4 @@
 import { Scroll as ScrollComponent, ScrollProps } from '@local/areas/scroll';
-import { Button } from '@local/components/button';
 import { Stack } from '@local/components/stack';
 import { Typography } from '@local/components/typography';
 
@@ -25,31 +24,25 @@ const ScrollWrapper: FC<ScrollProps> = (props) => {
     <ScrollComponent
       {...props}
       sx={(theme) => ({
-        default: {
-          width: '300px',
-          padding: '12px',
-          boxSizing: 'content-box',
-          backgroundColor: theme.palette.black40,
-        },
+        width: '300px',
+        padding: '12px',
+        boxSizing: 'content-box',
+        backgroundColor: theme.palette.textPrimary,
       })}
     >
-      <Button isMinWidthAsContent onClick={toggleContent} size={'small'} genre={'gray'}>
+      <button onClick={toggleContent} type='button'>
         Toggle Content
-      </Button>
+      </button>
       <Stack
         sx={(theme) => ({
-          default: {
-            width: '100px',
-            height: '100px',
-            backgroundColor: theme.palette.whiteStandard,
-          },
+          width: '100px',
+          height: '100px',
+          backgroundColor: theme.palette.fillTertiary,
         })}
       >
         <Typography
           sx={{
-            default: {
-              variant: 'h7',
-            },
+            variant: 'title-1',
           }}
         >
           One
@@ -58,19 +51,15 @@ const ScrollWrapper: FC<ScrollProps> = (props) => {
       {content && (
         <Stack
           sx={(theme) => ({
-            default: {
-              width: '1000px',
-              minWidth: '1000px',
-              height: '100px',
-              backgroundColor: theme.palette.whiteStandard,
-            },
+            width: '1000px',
+            minWidth: '1000px',
+            height: '100px',
+            backgroundColor: theme.palette.fillTertiary,
           })}
         >
           <Typography
             sx={{
-              default: {
-                variant: 'h7',
-              },
+              variant: 'title-1',
             }}
           >
             Two

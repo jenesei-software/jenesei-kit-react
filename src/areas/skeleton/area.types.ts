@@ -1,11 +1,15 @@
 import { StackProps } from '@local/components/stack';
-import { I_THEME_PALETTE } from '@local/theme';
+import { I_THEME_PALETTE } from '@local/styles/utils';
+
+import { CSSProperties } from 'react';
 
 type SkeletonDefaultProps = {
   className?: string;
+  style?: CSSProperties;
   defaultVisible?: boolean;
   type?: 'primary' | 'secondary';
   color?: I_THEME_PALETTE;
+  colorLine?: I_THEME_PALETTE;
   isInheritColor?: boolean;
 };
 

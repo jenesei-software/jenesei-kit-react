@@ -17,31 +17,26 @@ const SkeletonWrapper: FC<SkeletonProps> = (props) => {
   return (
     <SkeletonComponent
       {...props}
+      time={4000}
       sx={{
-        default: {
-          overflow: 'auto',
-          width: '300px',
-          height: '300px',
-          borderRadius: '12px',
-        },
+        overflow: 'auto',
+        width: '300px',
+        height: '300px',
+        borderRadius: '12px',
       }}
     >
       <Stack
         sx={(theme) => ({
-          default: {
-            width: '100%',
-            height: '100%',
-            padding: '12px',
-            borderRadius: '6px',
-            backgroundColor: theme.palette.whiteStandard,
-          },
+          width: '100%',
+          height: '100%',
+          padding: '12px',
+          borderRadius: '6px',
+          backgroundColor: theme.palette.accentGray,
         })}
       >
         <Typography
           sx={{
-            default: {
-              variant: 'h7',
-            },
+            variant: 'body',
           }}
         >
           One
@@ -60,48 +55,39 @@ const SkeletonManyWrapper: FC<SkeletonProps> = (props) => {
   return (
     <Stack
       sx={{
-        default: {
-          overflow: 'auto',
-          flexDirection: 'row',
-          gap: '12px',
-        },
+        overflow: 'auto',
+        flexDirection: 'row',
+        gap: '12px',
       }}
     >
       <Stack
         sx={{
-          default: {
-            flexDirection: 'column',
-            gap: '12px',
-          },
+          flexDirection: 'column',
+          gap: '12px',
         }}
       >
         <SkeletonComponent
           {...props}
+          color='productPrimary'
           type='primary'
           sx={() => ({
-            default: {
-              width: '300px',
-              height: '300px',
-              padding: '12px',
-            },
+            width: '300px',
+            height: '300px',
+            padding: '12px',
           })}
         >
           <Stack
             sx={(theme) => ({
-              default: {
-                width: '100%',
-                height: '100%',
-                padding: '12px',
-                borderRadius: '6px',
-                backgroundColor: theme.palette.whiteStandard,
-              },
+              width: '100%',
+              height: '100%',
+              padding: '12px',
+              borderRadius: '6px',
+              backgroundColor: theme.palette.accentRed,
             })}
           >
             <Typography
               sx={{
-                default: {
-                  variant: 'h7',
-                },
+                variant: 'body',
               }}
             >
               One
@@ -110,39 +96,31 @@ const SkeletonManyWrapper: FC<SkeletonProps> = (props) => {
         </SkeletonComponent>
         <Stack
           sx={{
-            default: {
-              flexDirection: 'row',
-              gap: '12px',
-            },
+            flexDirection: 'row',
+            gap: '12px',
           }}
         >
           <SkeletonComponent
             {...props}
             sx={() => ({
-              default: {
-                width: '50px',
-                height: '50px',
-                borderRadius: '100%',
-              },
+              width: '50px',
+              height: '50px',
+              borderRadius: '100%',
             })}
             type='secondary'
           >
             <Stack
               sx={(theme) => ({
-                default: {
-                  width: '100%',
-                  height: '100%',
-                  padding: '12px',
-                  borderRadius: '6px',
-                  backgroundColor: theme.palette.whiteStandard,
-                },
+                width: '100%',
+                height: '100%',
+                padding: '12px',
+                borderRadius: '6px',
+                backgroundColor: theme.palette.accentCyan,
               })}
             >
               <Typography
                 sx={{
-                  default: {
-                    variant: 'h7',
-                  },
+                  variant: 'body',
                 }}
               >
                 One
@@ -152,30 +130,24 @@ const SkeletonManyWrapper: FC<SkeletonProps> = (props) => {
           <SkeletonComponent
             {...props}
             sx={() => ({
-              default: {
-                height: '50px',
-                borderRadius: '6px',
-                flexGrow: 1,
-              },
+              height: '50px',
+              borderRadius: '6px',
+              flexGrow: 1,
             })}
             type='secondary'
           >
             <Stack
               sx={(theme) => ({
-                default: {
-                  width: '100%',
-                  height: '100%',
-                  padding: '12px',
-                  borderRadius: '6px',
-                  backgroundColor: theme.palette.whiteStandard,
-                },
+                width: '100%',
+                height: '100%',
+                padding: '12px',
+                borderRadius: '6px',
+                backgroundColor: theme.palette.accentIndigo,
               })}
             >
               <Typography
                 sx={{
-                  default: {
-                    variant: 'h7',
-                  },
+                  variant: 'sub-headline',
                 }}
               >
                 One
@@ -186,39 +158,31 @@ const SkeletonManyWrapper: FC<SkeletonProps> = (props) => {
       </Stack>
       <Stack
         sx={{
-          default: {
-            flexDirection: 'column',
-            gap: '12px',
-          },
+          flexDirection: 'column',
+          gap: '12px',
         }}
       >
         <SkeletonComponent
           {...props}
           type='primary'
           sx={() => ({
-            default: {
-              width: '300px',
-              height: '300px',
-              padding: '12px',
-            },
+            width: '300px',
+            height: '300px',
+            padding: '12px',
           })}
         >
           <Stack
             sx={(theme) => ({
-              default: {
-                width: '100%',
-                height: '100%',
-                padding: '12px',
-                borderRadius: '6px',
-                backgroundColor: theme.palette.whiteStandard,
-              },
+              width: '100%',
+              height: '100%',
+              padding: '12px',
+              borderRadius: '6px',
+              backgroundColor: theme.palette.accentBrown,
             })}
           >
             <Typography
               sx={{
-                default: {
-                  variant: 'h7',
-                },
+                variant: 'body',
               }}
             >
               One
@@ -227,39 +191,31 @@ const SkeletonManyWrapper: FC<SkeletonProps> = (props) => {
         </SkeletonComponent>
         <Stack
           sx={{
-            default: {
-              flexDirection: 'row',
-              gap: '12px',
-            },
+            flexDirection: 'row',
+            gap: '12px',
           }}
         >
           <SkeletonComponent
             {...props}
             sx={() => ({
-              default: {
-                width: '50px',
-                height: '50px',
-                borderRadius: '100%',
-              },
+              width: '50px',
+              height: '50px',
+              borderRadius: '100%',
             })}
             type='secondary'
           >
             <Stack
               sx={(theme) => ({
-                default: {
-                  width: '100%',
-                  height: '100%',
-                  padding: '12px',
-                  borderRadius: '6px',
-                  backgroundColor: theme.palette.whiteStandard,
-                },
+                width: '100%',
+                height: '100%',
+                padding: '12px',
+                borderRadius: '6px',
+                backgroundColor: theme.palette.accentIndigo,
               })}
             >
               <Typography
                 sx={{
-                  default: {
-                    variant: 'h7',
-                  },
+                  variant: 'body',
                 }}
               >
                 One
@@ -269,30 +225,24 @@ const SkeletonManyWrapper: FC<SkeletonProps> = (props) => {
           <SkeletonComponent
             {...props}
             sx={() => ({
-              default: {
-                height: '50px',
-                borderRadius: '6px',
-                flexGrow: 1,
-              },
+              height: '50px',
+              borderRadius: '6px',
+              flexGrow: 1,
             })}
             type='secondary'
           >
             <Stack
               sx={(theme) => ({
-                default: {
-                  width: '100%',
-                  height: '100%',
-                  padding: '12px',
-                  borderRadius: '6px',
-                  backgroundColor: theme.palette.whiteStandard,
-                },
+                width: '100%',
+                height: '100%',
+                padding: '12px',
+                borderRadius: '6px',
+                backgroundColor: theme.palette.accentBrown,
               })}
             >
               <Typography
                 sx={{
-                  default: {
-                    variant: 'h7',
-                  },
+                  variant: 'body',
                 }}
               >
                 One

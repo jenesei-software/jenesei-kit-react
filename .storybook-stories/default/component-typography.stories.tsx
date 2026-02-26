@@ -1,5 +1,6 @@
 import { Typography as TypographyComponent } from '@local/components/typography';
 import { useScreenWidth } from '@local/contexts/context-screen-width';
+import { useResponsiveLayout } from '@local/hooks/use-responsive-layout';
 
 import type { Meta } from '@storybook/react-vite';
 import { FC } from 'react';
@@ -14,233 +15,230 @@ const meta: Meta<typeof TypographyComponent> = {
 export default meta;
 
 const AllWrapper: FC = () => {
-  const { breakpoint } = useScreenWidth();
-
   return (
     <WrapperBig
       sx={(theme) => ({
-        default: {
-          flexDirection: 'column',
-          color: theme.palette.black100,
-        },
+        flexDirection: 'column',
+        color: theme.palette.accentBlue,
       })}
     >
       <TypographyComponent
         sx={{
-          default: {
-            size: 14,
-          },
+          size: 14,
         }}
       >
         Actual screen is
-        <TypographyComponent
-          sx={{
-            default: {
-              size: 14,
-              color: 'blueGoogle',
-            },
-          }}
-        >
-          {` ${breakpoint} `}
-        </TypographyComponent>
+        <TypographyBreakpoint />
         (size: 14)
       </TypographyComponent>
       <WrapperMin
         sx={(theme) => ({
-          default: {
-            flexDirection: 'column',
-            color: theme.palette.black100,
-          },
+          flexDirection: 'column',
+          color: theme.palette.accentPink,
         })}
       >
         <TypographyComponent
           sx={{
-            default: {
-              size: 20,
-              isTransitionFontSize: true,
-            },
+            size: 20,
           }}
         >
           Typography, size, default - 20
         </TypographyComponent>
-        <TypographyComponent
-          sx={{
-            default: {
-              size: 20,
-              isTransitionFontSize: true,
-            },
-            breakpoints: {
-              tablet: {
-                size: 16,
-              },
-              mobile: {
-                size: 12,
-              },
-            },
-          }}
-        >
-          Typography, size, default - 20, tablet - 16, mobile - 12, isTransitionFontSize
-        </TypographyComponent>
-        <TypographyComponent
-          sx={{
-            default: {
-              size: 18,
-            },
-            breakpoints: {
-              tablet: {
-                size: 16,
-              },
-              mobile: {
-                size: 20,
-              },
-            },
-          }}
-        >
-          Typography, size, default - 18, tablet - 16, mobile - 20
-        </TypographyComponent>
+        <TypographyResponsive />
       </WrapperMin>
       <WrapperMin
         sx={(theme) => ({
-          default: {
-            flexDirection: 'column',
-            color: theme.palette.black100,
-          },
+          flexDirection: 'column',
+          color: theme.palette.accentBrown,
         })}
       >
         <TypographyComponent
           isParagraph
           sx={{
-            default: {
-              variant: 'h2',
-            },
+            variant: 'headline',
           }}
         >
-          Typography, variant - H2, isParagraph
+          Typography, variant - headline, isParagraph
         </TypographyComponent>
         <TypographyComponent
           isAnchor
           href='https://google.com'
           sx={{
-            default: {
-              variant: 'h2',
-            },
+            variant: 'sub-headline',
           }}
         >
-          Typography, variant - H2, isAnchor
+          Typography, variant - sub-headline, isAnchor
         </TypographyComponent>
         <TypographyComponent
           isSpan
           sx={{
-            default: {
-              variant: 'h2',
-            },
+            variant: 'title-1',
           }}
         >
-          Typography, variant - H2, isSpan
+          Typography, variant - title-1, isSpan
         </TypographyComponent>
         <TypographyComponent
           sx={{
-            default: {
-              variant: 'h2',
-              shadow: 'shadowPulse',
-            },
+            variant: 'title-2',
+            shadow: 'shadowPulse',
           }}
         >
-          Typography, variant - H2, shadow - shadowPulse
+          Typography, variant - title-2, shadow - shadowPulse
+        </TypographyComponent>
+        <TypographyComponent
+          sx={{
+            variant: 'title-3',
+            color: 'productPrimary',
+          }}
+        >
+          Typography, variant - title-3, color - productPrimary
         </TypographyComponent>
       </WrapperMin>
       <WrapperMin
         sx={(theme) => ({
-          default: {
-            flexDirection: 'column',
-            color: theme.palette.black100,
-          },
+          flexDirection: 'column',
+          color: theme.palette.accentBrown,
         })}
       >
         <TypographyComponent
           sx={{
-            default: {
-              variant: 'h1',
-            },
+            variant: 'headline',
           }}
         >
-          Typography, variant - H1
+          Headline
         </TypographyComponent>
         <TypographyComponent
           sx={{
-            default: {
-              variant: 'h2',
-            },
+            variant: 'sub-headline',
           }}
         >
-          Typography, variant - H2
+          Subheadline
         </TypographyComponent>
         <TypographyComponent
           sx={{
-            default: {
-              variant: 'h3',
-            },
+            variant: 'title-1',
           }}
         >
-          Typography, variant - H3
+          Title 1
         </TypographyComponent>
         <TypographyComponent
           sx={{
-            default: {
-              variant: 'h4',
-            },
+            variant: 'title-2',
           }}
         >
-          Typography, variant - H4
+          Title 2
         </TypographyComponent>
         <TypographyComponent
           sx={{
-            default: {
-              variant: 'h5',
-            },
+            variant: 'title-3',
           }}
         >
-          Typography, variant - H5
+          Title 3
         </TypographyComponent>
         <TypographyComponent
           sx={{
-            default: {
-              variant: 'h6',
-            },
+            variant: 'title-4',
           }}
         >
-          Typography, variant - H6
+          Title 4
         </TypographyComponent>
         <TypographyComponent
           sx={{
-            default: {
-              variant: 'h7',
-            },
+            variant: 'title-5',
           }}
         >
-          Typography, variant - H7
+          Title 5
         </TypographyComponent>
         <TypographyComponent
           sx={{
-            default: {
-              variant: 'h8',
-            },
+            variant: 'body',
           }}
         >
-          Typography, variant - H8
+          Body
         </TypographyComponent>
         <TypographyComponent
           sx={{
-            default: {
-              variant: 'h9',
-            },
+            variant: 'callout',
           }}
         >
-          Typography, variant - H9
+          Callout
+        </TypographyComponent>
+        <TypographyComponent
+          sx={{
+            variant: 'caption-1',
+          }}
+        >
+          Caption 1
+        </TypographyComponent>
+        <TypographyComponent
+          sx={{
+            variant: 'caption-2',
+          }}
+        >
+          Caption 2
+        </TypographyComponent>
+        <TypographyComponent
+          sx={{
+            variant: 'footnote',
+          }}
+        >
+          Footnote
         </TypographyComponent>
         <h1>H1, true</h1>
       </WrapperMin>
     </WrapperBig>
+  );
+};
+const TypographyBreakpoint: FC = () => {
+  const { breakpoint } = useScreenWidth(['breakpoint']);
+  return (
+    <TypographyComponent
+      sx={{
+        size: 14,
+        color: 'accentGreen',
+      }}
+    >
+      {` ${breakpoint} `}
+    </TypographyComponent>
+  );
+};
+const TypographyResponsive: FC = () => {
+  const sxTypographyOne = useResponsiveLayout({
+    default: {
+      size: 20,
+      isTransitionFontSize: true,
+    },
+    breakpoints: {
+      tablet: {
+        size: 16,
+      },
+      mobile: {
+        size: 12,
+      },
+    },
+  });
+  const sxTypographyTwo = useResponsiveLayout({
+    default: {
+      size: 18,
+    },
+    breakpoints: {
+      tablet: {
+        size: 16,
+      },
+      mobile: {
+        size: 20,
+      },
+    },
+  });
+  return (
+    <>
+      <TypographyComponent sx={sxTypographyOne}>
+        Typography, size, default - 20, tablet - 16, mobile - 12, isTransitionFontSize
+      </TypographyComponent>
+      <TypographyComponent sx={sxTypographyTwo}>
+        Typography, size, default - 18, tablet - 16, mobile - 20
+      </TypographyComponent>
+    </>
   );
 };
 

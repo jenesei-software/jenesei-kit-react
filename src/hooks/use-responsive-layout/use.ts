@@ -1,28 +1,32 @@
 import { useScreenWidth } from '@local/contexts/context-screen-width';
-import { THEME_GLOBAL_VALUE } from '@local/theme';
-import { I_LAYOUT } from '@local/theme/theme.types';
+import { useDeepMemo } from '@local/hooks/use-deep-memo';
+import { CSS_VARS, I_LAYOUT } from '@local/styles/utils';
+import { ILayoutResponsive } from '@local/styles/utils/types';
 
-import { useMemo } from 'react';
+export function useResponsiveLayout<A>(sx: ILayoutResponsive<A>): A | undefined {
+  const { breakpoint, orientation } = useScreenWidth(['breakpoint', 'orientation']);
 
-export function useResponsiveLayout<A>(sx: I_LAYOUT<A>) {
-  const { breakpoint, orientation } = useScreenWidth();
-
-  const resolvedSXMemo = useMemo(() => {
-    return typeof sx === 'function' ? sx(THEME_GLOBAL_VALUE) : sx;
+  const resolvedSX = useDeepMemo(() => {
+    return typeof sx === 'function' ? sx(CSS_VARS) : sx;
   }, [sx]);
 
-  const result = useMemo(() => {
-    if (!resolvedSXMemo) return undefined;
+  const result = useDeepMemo(() => {
+    if (!resolvedSX) return undefined;
 
-    const params = {
-      ...(resolvedSXMemo.default ?? {}),
-
-      ...(breakpoint !== 'default' ? resolvedSXMemo.breakpoints?.[breakpoint] ?? {} : {}),
-
-      ...(resolvedSXMemo.orientations?.[orientation] ?? {}),
-    };
-    return params as A;
-  }, [resolvedSXMemo, breakpoint, orientation]);
+    return {
+      ...(resolvedSX.default ?? {}),
+      ...(breakpoint !== 'default' ? (resolvedSX.breakpoints?.[breakpoint] ?? {}) : {}),
+      ...(resolvedSX.orientations?.[orientation] ?? {}),
+    } as A;
+  }, [resolvedSX, breakpoint, orientation]);
 
   return result;
+}
+
+export function useSX<A>(sx: I_LAYOUT<A>): A | undefined {
+  const resolvedSX = useDeepMemo(() => {
+    return typeof sx === 'function' ? (sx as Function)(CSS_VARS) : sx;
+  }, [sx]);
+
+  return resolvedSX;
 }

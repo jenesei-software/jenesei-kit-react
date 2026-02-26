@@ -1,10 +1,10 @@
 import { Icon } from '@local/components/icon';
 import { Stack, StackMotion } from '@local/components/stack';
-import { getResolveSX } from '@local/functions';
 
 import { AnimatePresence } from 'framer-motion';
 import { FC, useEffect, useMemo, useState } from 'react';
 
+import styles from './area.styles.module.css';
 import { PreviewProps } from './area.types';
 
 export const Preview: FC<PreviewProps> = (props) => {
@@ -43,73 +43,28 @@ export const Preview: FC<PreviewProps> = (props) => {
     }
   }, [propsVisible, propsMinTime]);
 
-  const sxLoader = useMemo(
-    () =>
-      getResolveSX(props?.sxLoader, (theme) => ({
-        default: {
-          backgroundColor: theme.palette.whiteStandard,
-          width: '100%',
-          height: '100%',
-          position: 'absolute' as const,
-          top: '0',
-          left: '0',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          zIndex: 1,
-        },
-      })),
-    [props?.sxLoader],
-  );
-  const sxChildren = useMemo(
-    () =>
-      getResolveSX(props?.sxChildren, () => ({
-        default: {
-          display: 'contents',
-          zIndex: 0,
-        },
-      })),
-    [props?.sxChildren],
-  );
   return (
     <AnimatePresence>
       {!visible ? (
         <StackMotion
           key='loader'
-          sx={sxLoader}
+          sx={props?.sxLoader}
+          className={styles['area-preview-loader']}
           transition={{ duration: 0.3 }}
           exit={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          <Stack
-            sx={{
-              default: {
-                position: 'absolute',
-                width: '8vmin',
-                height: '8vmin',
-              },
-            }}
-          >
-            <Icon size='100%' type='loading' color='blueFocus' name='Line' />
+          <Stack className={styles['area-preview-loader-container-icon']}>
+            <Icon size='100%' type='loading' color='productPrimary' name='Line' />
           </Stack>
-          {props.content && (
-            <Stack
-              sx={{
-                default: {
-                  position: 'relative',
-                  marginTop: '18vmin',
-                },
-              }}
-            >
-              {props.content}
-            </Stack>
-          )}
+          {props.content && <Stack className={styles['area-preview-loader-container-children']}>{props.content}</Stack>}
         </StackMotion>
       ) : null}
       {visible ? (
         <StackMotion
           key='children'
-          sx={sxChildren}
+          sx={props?.sxChildren}
+          className={styles['area-preview-children']}
           transition={{ duration: 0.3 }}
           initial={{ opacity: 0 }}
           exit={{ opacity: 0 }}

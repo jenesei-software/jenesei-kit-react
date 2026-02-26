@@ -12,3 +12,5 @@ export interface BrowserThemeContextProps {
   mode: BrowserThemeMode;
   setMode: (mode: BrowserThemeMode) => void;
 }
+
+export type useBrowserThemeDependenciesProps = (keyof BrowserThemeContextProps)[];

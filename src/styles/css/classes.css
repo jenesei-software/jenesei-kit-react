@@ -1,0 +1,71 @@
+/* remove-scrollbar */
+.u-remove-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.u-remove-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.u-remove-scrollbar::-webkit-scrollbar-thumb {
+  display: none;
+}
+
+.u-remove-scrollbar::-webkit-scrollbar-track {
+  display: none;
+}
+
+/* remove-outline */
+.u-remove-outline {
+  outline: 0 solid transparent !important;
+  outline-offset: 0 !important;
+}
+
+/* tabular numbers */
+.u-tabular-numbers {
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
+}
+
+/* is-ripple */
+.u-is-ripple {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* transitionFontSize */
+.u-transition-font-size {
+  transition: font-size var(--transition-default);
+}
+
+/* outline */
+
+.u-outline-default {
+  outline: 2px solid transparent;
+  outline-offset: 1px;
+}
+
+.u-outline-boxShadow {
+  outline: 1px solid transparent;
+  outline-offset: 0px;
+}
+
+/* outline-always */
+.u-outline-always {
+  outline: 2px solid var(--color-black-60);
+  outline-offset: 1px;
+}
+
+/* is-disabled */
+.u-is-disabled {
+  opacity: 0.5;
+}
+
+/* is-hover */
+.u-is-hover {
+  transition:
+    background-color var(--transition-default),
+    outline 0s;
+}

@@ -28,13 +28,12 @@ const PreviewStackWrapper: FC<PreviewProps> = (props) => {
   return (
     <Stack
       sx={(theme) => ({
-        default: {
-          position: 'relative',
-          width: '200px',
-          height: '200px',
-          backgroundColor: theme.palette.blueFocus,
-          borderRadius: '8px',
-        },
+        position: 'relative',
+        width: '200px',
+        height: '200px',
+        backgroundColor: theme.palette.accentGray,
+        color: theme.palette.textPrimary,
+        borderRadius: '8px',
       })}
     >
       <PreviewComponent {...props} />

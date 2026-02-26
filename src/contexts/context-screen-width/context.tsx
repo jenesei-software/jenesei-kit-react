@@ -1,7 +1,7 @@
+import { CSS_VARS, I_THEME_BREAKPOINT } from '@local/styles/utils';
 
-import { THEME_GLOBAL_VALUE } from '@local/theme';
-
-import { createContext, FC, useCallback, useEffect, useRef, useState } from 'react';
+import { FC, useCallback, useEffect, useRef, useState } from 'react';
+import { createContext } from 'use-context-selector';
 
 import { ProviderScreenWidthProps, ScreenWidthContextProps } from './context.types';
 
@@ -10,21 +10,20 @@ export const ScreenWidthContext = createContext<ScreenWidthContextProps | null>(
 export const ProviderScreenWidth: FC<ProviderScreenWidthProps> = ({ children }) => {
   const [breakpoint, setBreakpoint] = useState<ScreenWidthContextProps['breakpoint']>('default');
   const [orientation, setOrientation] = useState<ScreenWidthContextProps['orientation']>(
-    typeof window !== 'undefined' && window.innerWidth > window.innerHeight ? 'horizontal' : 'vertical',
+    typeof window !== 'undefined' && window.innerWidth > window.innerHeight ? 'landscape' : 'portrait',
   );
 
   const queriesRef = useRef<Array<{
-    key: keyof typeof THEME_GLOBAL_VALUE.screen.breakpoint;
+    key: I_THEME_BREAKPOINT;
     mq: MediaQueryList;
   }> | null>(null);
 
   if (queriesRef.current === null && typeof window !== 'undefined') {
-    queriesRef.current = Object.entries(THEME_GLOBAL_VALUE.screen.breakpoint)
+    queriesRef.current = Object.entries(CSS_VARS.screen.breakpoint)
       .map(([key, value]) => {
-        const widthValue = (value as { width: string }).width;
-        const bp = parseInt(widthValue.replace(/\D/g, ''), 10);
+        const bp = parseInt(value.replace(/\D/g, ''), 10);
         return {
-          key: key as keyof typeof THEME_GLOBAL_VALUE.screen.breakpoint,
+          key: key as keyof typeof CSS_VARS.screen.breakpoint,
           bp,
         };
       })
@@ -46,7 +45,7 @@ export const ProviderScreenWidth: FC<ProviderScreenWidthProps> = ({ children }) 
 
     const handleResize = () => {
       const newWidth = window.innerWidth;
-      const newOrientation = newWidth > window.innerHeight ? 'horizontal' : 'vertical';
+      const newOrientation = newWidth > window.innerHeight ? 'landscape' : 'portrait';
 
       setOrientation(newOrientation);
     };

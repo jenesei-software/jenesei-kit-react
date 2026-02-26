@@ -1,10 +1,13 @@
 import { Skeleton } from '@local/areas/skeleton';
-import { LIBRARY_VERSION } from '@local/consts';
-import { dynamicComponentStyledIcon, dynamicComponentStyledIconSkeleton } from '@local/theme/theme.dynamic';
+import { ICON_VERSION } from '@local/consts';
+import { CSS_VARS } from '@local/styles/utils';
+import { CSS_VARS_RAW } from '@local/styles/utils/constants';
+import { setClasses, setStyles } from '@local/styles/utils/functions';
 
 import { useMemo } from 'react';
 
 import { useLazyInjectSprite } from './component.hooks';
+import styles from './component.styles.module.css';
 import { IconProps } from './component.types';
 
 export const Icon = (props: IconProps) => {
@@ -14,29 +17,32 @@ export const Icon = (props: IconProps) => {
 
   const configSkeleton = useMemo(() => {
     return {
-      className: [dynamicComponentStyledIconSkeleton.className(), props.className].join(' '),
-      style: Object.assign(
-        dynamicComponentStyledIconSkeleton.style({
-          size: props.size,
-          order: props.order,
-        }),
+      className: setClasses([styles['icon-skeleton'], props.className]),
+      style: setStyles([
+        {
+          [CSS_VARS_RAW.component.icon.skeleton.heightIcon]:
+            props.size !== '100%' ? CSS_VARS.size[props.size].heightIcon : '100%',
+          [CSS_VARS_RAW.component.icon.skeleton.order]: props.order ? String(props.order) : 'initial',
+        },
         props.style,
-      ),
+      ]),
     };
   }, [props.className, props.style, props.order, props.size]);
 
   const configIcon = useMemo(() => {
     return {
-      className: [dynamicComponentStyledIcon.className(), props.className].join(' '),
-      style: Object.assign(
-        dynamicComponentStyledIcon.style({
-          size: props.size,
-          order: props.order,
-          color: props.color,
-          turn: props.turn,
-        }),
+      className: setClasses([styles.icon, props.className]),
+
+      style: setStyles([
+        {
+          [CSS_VARS_RAW.component.icon.index.color]: props.color ? CSS_VARS.palette[props.color] : 'inherit',
+          [CSS_VARS_RAW.component.icon.index.heightIcon]:
+            props.size !== '100%' ? CSS_VARS.size[props.size].heightIcon : '100%',
+          [CSS_VARS_RAW.component.icon.index.turn]: props.turn ? `${props.turn}deg` : '0deg',
+          [CSS_VARS_RAW.component.icon.index.order]: props.order ? String(props.order) : 'initial',
+        },
         props.style,
-      ),
+      ]),
     };
   }, [props.className, props.style, props.order, props.size, props.color, props.turn]);
 
@@ -60,7 +66,8 @@ export const Icon = (props: IconProps) => {
       style={configIcon.style}
       onClick={props.onClick}
       onKeyDown={(e) => {
-        if ((e.key === 'Enter' || e.key === ' ') && props.onClick) {
+        if (props.onClick && (e.key === 'Enter' || e.key === ' ')) {
+          e.preventDefault();
           props.onClick(e as any);
         }
       }}
@@ -78,5 +85,5 @@ export function getIconId(props: { type: string; name: string }) {
 }
 
 export function getSpriteUrl(props: { type: string }) {
-  return `https://id.assets.jenesei.ru/icons/${props.type}.svg?v=${LIBRARY_VERSION}`;
+  return `https://cdn.jsdelivr.net/gh/jenesei-software/jenesei-id-assets@${ICON_VERSION}/icons/${props.type}.svg`;
 }

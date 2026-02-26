@@ -1,4 +1,5 @@
-import { createContext, FC, useCallback, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
+import { createContext } from 'use-context-selector';
 
 import { BrowserTheme, BrowserThemeContextProps, BrowserThemeMode, ProviderBrowserThemeProps } from './context.types';
 
@@ -32,5 +33,14 @@ export const ProviderBrowserTheme: FC<ProviderBrowserThemeProps> = (props) => {
       setTheme(mode);
     }
   }, [mode, handleMediaChange]);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
+
+  useEffect(() => {
+    if (props.defaultMode) setMode(props.defaultMode);
+  }, [props.defaultMode]);
+
   return <BrowserThemeContext.Provider value={{ theme, mode, setMode }}>{props.children}</BrowserThemeContext.Provider>;
 };

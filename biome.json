@@ -1,5 +1,9 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.3.13/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.4.2/schema.json",
+  "files": {
+    "ignoreUnknown": false,
+    "includes": ["**", "!coverage", "!node_modules", "!build", "!dist"]
+  },
   "formatter": {
     "enabled": true,
     "formatWithErrors": false,
@@ -22,11 +26,10 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "nursery": {
-        "noImportCycles": "error"
-      },
+      "nursery": {},
       "suspicious": {
-        "noArrayIndexKey": "off"
+        "noArrayIndexKey": "off",
+        "noImportCycles": "error"
       },
       "style": {
         "useImportType": "off"
@@ -38,6 +41,7 @@
     "enabled": true,
     "actions": {
       "source": {
+        "useSortedProperties": "on",
         "organizeImports": {
           "level": "on",
           "options": {

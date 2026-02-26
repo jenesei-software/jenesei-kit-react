@@ -2,7 +2,6 @@ import type { Preview } from '@storybook/react-vite';
 import { PropsWithChildren, StrictMode } from 'react';
 
 import { ProviderBrowserTheme } from '../src/contexts/context-browser-theme';
-import { ProviderDialog } from '../src/contexts/context-dialog';
 import { ProviderGeolocation } from '../src/contexts/context-geolocation';
 import { ProviderPermission } from '../src/contexts/context-permission';
 import { ProviderScreenWidth } from '../src/contexts/context-screen-width';
@@ -34,15 +33,22 @@ import '@fontsource/work-sans/400.css';
 import '@fontsource/work-sans/500.css';
 import '@fontsource/work-sans/700.css';
 import '@fontsource/work-sans/900.css';
+import '@local/styles/css/tokens.css';
+import '@local/styles/css/reset.css';
+import '@local/styles/css/keyframes.css';
+import '@local/styles/css/classes.css';
 
 const preview: Preview = {
   decorators: [
-    (Story) => {
+    (Story, context) => {
+      const bg = context.globals.backgrounds?.value; // 'light' | 'dark' | undefined
+      const sbMode = (bg === 'dark' || bg === 'light' ? bg : 'auto') as 'light' | 'dark' | 'auto';
+
       return (
         <StrictMode>
           <ProviderPermission>
             <ProviderGeolocation>
-              <ProviderBrowserTheme>
+              <ProviderBrowserTheme defaultMode={sbMode}>
                 <Layout>
                   <Story />
                 </Layout>
@@ -65,10 +71,6 @@ const preview: Preview = {
 
 const Layout = (props: PropsWithChildren) => {
   // const { theme } = useBrowserTheme();
-  return (
-    <ProviderScreenWidth>
-      <ProviderDialog zIndex={1000}>{props.children}</ProviderDialog>
-    </ProviderScreenWidth>
-  );
+  return <ProviderScreenWidth>{props.children}</ProviderScreenWidth>;
 };
 export default preview;

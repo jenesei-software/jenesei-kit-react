@@ -1,36 +1,37 @@
-import { useResponsiveLayout } from '@local/hooks/use-responsive-layout';
-import { recipeCoreHover, recipeCoreRipple, styleCoreContainer } from '@local/theme';
+import { useSX } from '@local/hooks/use-responsive-layout';
+import { CSS_CLASS } from '@local/styles/utils';
+import { setClasses, setStyles } from '@local/styles/utils/functions';
 
 import { motion } from 'framer-motion';
 import { FC, useMemo } from 'react';
 
+import styles from './component.styles.module.css';
 import { StackMotionProps, StackProps } from './component.types';
 
 export const Stack: FC<StackProps> = (props) => {
-  const styleLayout = useResponsiveLayout(props?.sx ?? {});
+  const sx = useSX(props?.sx ?? {});
 
   const { className, style, Component } = useMemo(() => {
     return {
-      className: [
-        styleCoreContainer,
-        recipeCoreRipple({ isRipple: props.isRipple }),
-        recipeCoreHover({ isHover: props.isHover }),
+      className: setClasses([
+        styles.stack,
+        props.isRipple && CSS_CLASS.isRipple,
+        props.isHover && CSS_CLASS.isHover,
         props.className,
-      ].join(' '),
-      style: Object.assign({}, styleLayout, props.style),
+      ]),
+      style: setStyles([sx, props.style]),
       Component: props.as ?? 'div',
     };
-  }, [props.as, props.className, props.isHover, props.isRipple, props.style, styleLayout]);
+  }, [props.as, props.className, props.isHover, props.isRipple, props.style, sx]);
 
   return (
     <Component
-      //@ts-ignore
+      //@ts-expect-error
       ref={props.ref}
-      //@ts-ignore
       onClick={props.onClick}
-      //@ts-ignore
+      //@ts-expect-error
       onDrop={props.onDrop}
-      //@ts-ignore
+      //@ts-expect-error
       onDragOver={props.onDragOver}
       className={className}
       style={style}
@@ -42,22 +43,20 @@ export const Stack: FC<StackProps> = (props) => {
 };
 
 export const StackMotion: FC<StackMotionProps> = (props) => {
-  const { isHover, isRipple, onClick, onDrop, onDragOver, ref, sx } = props;
+  const { isHover, isRipple, onClick, onDrop, onDragOver, ref, sx, className, style, ...rest } = props;
+  const sxMemo = useSX(props?.sx ?? {});
 
-  const styleLayout = useResponsiveLayout(sx ?? {});
-
-  const { className, style, as } = useMemo(() => {
+  const {
+    className: className2,
+    style: style2,
+    as,
+  } = useMemo(() => {
     return {
-      className: [
-        styleCoreContainer,
-        recipeCoreRipple({ isRipple: isRipple }),
-        recipeCoreHover({ isHover: isHover }),
-        props.className,
-      ].join(' '),
-      style: Object.assign({}, styleLayout, props.style),
+      className: setClasses([styles.stack, isRipple && CSS_CLASS.isRipple, isHover && CSS_CLASS.isHover, className]),
+      style: setStyles([sxMemo, style]),
       as: props.as ?? 'div',
     };
-  }, [props.as, styleLayout, isHover, isRipple, props.style, props.className]);
+  }, [props.as, isHover, isRipple, className, style, sxMemo]);
 
   return (
     <motion.div
@@ -66,9 +65,9 @@ export const StackMotion: FC<StackMotionProps> = (props) => {
       onClick={onClick}
       onDrop={onDrop}
       onDragOver={onDragOver}
-      className={className}
-      style={style}
-      {...props}
+      className={className2}
+      style={style2}
+      {...rest}
     >
       {props.children}
     </motion.div>

@@ -1,2 +1,2 @@
-export { Typography, TypographyTooltip } from './component';
-export type { TypographyProps, TypographyTooltipProps } from './component.types';
+export { Typography } from './component';
+export type { TypographyProps } from './component.types';

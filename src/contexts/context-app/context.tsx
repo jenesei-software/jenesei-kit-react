@@ -1,6 +1,6 @@
 import { Preview, PreviewAdditionalProps } from '@local/areas/preview';
 import { useScreenWidth } from '@local/contexts/context-screen-width';
-import { I_THEME_PALETTE, THEME_PALETTE } from '@local/theme';
+import { CSS_VARS, I_THEME_PALETTE } from '@local/styles/utils';
 
 import { createContext, FC, useCallback, useEffect, useState } from 'react';
 
@@ -54,7 +54,7 @@ export const ProviderApp: FC<ProviderAppProps> = (props) => {
     props.defaultDescription,
   );
   const { changePreview, previewProps } = usePreview(props.defaultPreview);
-  const { breakpoint } = useScreenWidth();
+  const { breakpoint } = useScreenWidth(['breakpoint']);
 
   return (
     <AppContext.Provider
@@ -79,7 +79,7 @@ export const ProviderApp: FC<ProviderAppProps> = (props) => {
     >
       <title>{title}</title>
       <meta name='description' content={description} />
-      <meta name='theme-color' content={THEME_PALETTE[statusBarColor]} />
+      <meta name='theme-color' content={CSS_VARS.palette[statusBarColor]} />
       <meta name='apple-mobile-web-app-status-bar-style' content='default' />
       <meta name='mobile-web-app-capable' content='yes' />
       <Preview {...previewProps}>

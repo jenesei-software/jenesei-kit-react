@@ -1,0 +1,19 @@
+.area-skeleton {
+  background: var(--transparent);
+  transition: var(--transition-color);
+}
+
+.area-skeleton-visible-false {
+  background: linear-gradient(
+    90deg,
+    var(--area-skeleton-color) 25%,
+    var(--area-skeleton-line) 50%,
+    var(--area-skeleton-color) 75%
+  );
+  background-size: 200% 100%;
+  pointer-events: none;
+}
+
+.area-skeleton-visible-false * {
+  opacity: 0;
+}

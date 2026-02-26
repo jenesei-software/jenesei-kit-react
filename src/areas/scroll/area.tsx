@@ -1,30 +1,27 @@
 import { Stack } from '@local/components/stack';
-import { recipeAreaScroll } from '@local/theme';
+import { setClasses, setStyles } from '@local/styles/utils/functions';
 
-import { FC, useMemo } from 'react';
+import { FC } from 'react';
 
+import styles from './area.styles.module.css';
 import { ScrollProps } from './area.types';
 
 export const Scroll: FC<ScrollProps> = (props) => {
   const { children, className, style, ...rest } = props;
 
-  const scrollConfig = useMemo(() => {
-    return {
-      className: [
-        recipeAreaScroll({
-          horizontal: Boolean(props.horizontal),
-          vertical: Boolean(props.vertical),
-          isAlwaysHorizontal: Boolean(props.isAlwaysHorizontal),
-          isAlwaysVertical: Boolean(props.isAlwaysVertical),
-        }),
-        className,
-      ].join(' '),
-      style: Object.assign({}, style),
-    };
-  }, [className, style, props.horizontal, props.vertical, props.isAlwaysHorizontal, props.isAlwaysVertical]);
-
   return (
-    <Stack {...rest} className={scrollConfig.className} style={scrollConfig.style}>
+    <Stack
+      {...rest}
+      className={setClasses([
+        className,
+        styles['area-scroll'],
+        props.horizontal && styles['area-scroll-horizontal'],
+        props.vertical && styles['area-scroll-vertical'],
+        props.isAlwaysHorizontal && styles['area-scroll-is-always-horizontal'],
+        props.isAlwaysVertical && styles['area-scroll-is-always-vertical'],
+      ])}
+      style={setStyles([style])}
+    >
       {children}
     </Stack>
   );

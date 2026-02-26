@@ -1,0 +1,32 @@
+{
+  "eslint.enable": false,
+  "prettier.enable": false,
+
+  "editor.defaultFormatter": "biomejs.biome",
+  "tsInterfaceSorter.emptyLineBetweenProperties": true,
+  "tsInterfaceSorter.sortByCapitalLetterFirst": true,
+  "tsInterfaceSorter.sortByRequiredElementFirst": true,
+  "tsInterfaceSorter.sortTypes": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[twig]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "editor.codeActionsOnSave": {
+    "source.action.useSortedProperties.biome": "explicit",
+    "source.organizeImports.biome": "explicit"
+  }
+}

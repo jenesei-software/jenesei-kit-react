@@ -1,0 +1,110 @@
+.typography {
+  color: var(--text-primary);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight);
+  line-height: var(--font-height);
+  transition: var(--transition-color);
+}
+
+.typography-letter-spacing {
+  letter-spacing: var(--component-typography-letter-spacing);
+}
+
+.typography-flex {
+  flex: var(--component-typography-flex);
+}
+
+.typography-cursor {
+  cursor: var(--component-typography-cursor);
+}
+
+.typography-overflow {
+  overflow: var(--component-typography-overflow);
+}
+
+.typography-line-single {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: -webkit-fill-available;
+  max-width: fit-content;
+}
+
+.typography-line-multi {
+  word-break: break-word;
+  white-space: normal;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--component-typography-line-multiline);
+  width: fit-content;
+  overflow-wrap: anywhere;
+}
+
+.typography-family {
+  font-family: var(--component-typography-family);
+}
+
+.typography-is-bold {
+  font-weight: 700;
+}
+
+.typography-variant-callout {
+  font-weight: 700;
+}
+
+.typography-is-bold .typography-variant-callout {
+  font-weight: 800;
+}
+
+.typography-weight {
+  font-weight: var(--component-typography-weight);
+}
+
+.typography-height {
+  line-height: var(--component-typography-height);
+}
+
+.typography-color {
+  color: var(--component-typography-color);
+}
+
+.typography-align {
+  text-align: var(--component-typography-align);
+}
+
+.typography-wrap {
+  white-space: var(--component-typography-wrap);
+}
+
+.typography-decoration {
+  text-decoration: var(--component-typography-decoration);
+}
+
+.typography-transform {
+  text-transform: var(--component-typography-transform);
+}
+
+.typography-shadow-shadow-pulse {
+  animation: shadowPulse 2s infinite;
+}
+
+.typography-is-hover-underlining {
+  :hover {
+    text-decoration: underline;
+  }
+}
+
+.typography-is-no-user-select {
+  user-select: none;
+}
+
+.typography-size {
+  font-size: var(--component-typography-size);
+}
+
+.typography-variant {
+  font-size: var(--component-typography-variant);
+  line-height: calc(var(--component-typography-variant) + var(--component-typography-variant-height));
+}

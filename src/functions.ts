@@ -1,5 +1,3 @@
-import { I_LAYOUT, I_LAYOUT_VALUE, THEME_GLOBAL_VALUE } from '@local/theme';
-
 type EnumOption = {
   value: string;
   label: string;
@@ -103,25 +101,4 @@ export function stringifyCssObject<T extends AnyObject>(obj?: T): AnyObject | un
   }
 
   return result;
-}
-
-export const getResolveSX = <A extends object>(sxProp?: I_LAYOUT<A>, sxPropBase?: I_LAYOUT<A>): I_LAYOUT_VALUE<A> => {
-  const resolve = (sx?: I_LAYOUT<A>): I_LAYOUT_VALUE<A> =>
-    typeof sx === 'function' ? sx(THEME_GLOBAL_VALUE) : (sx ?? {});
-
-  const base = resolve(sxPropBase);
-  const custom = resolve(sxProp);
-
-  const merged: I_LAYOUT_VALUE<A> = {};
-
-  merged.default = mergeOptionalObjects(base.default, custom.default);
-  merged.breakpoints = mergeOptionalObjects(base.breakpoints, custom.breakpoints);
-  merged.orientations = mergeOptionalObjects(base.orientations, custom.orientations);
-
-  return merged;
-};
-
-function mergeOptionalObjects<T extends object>(base?: T, custom?: T): T | undefined {
-  if (base && custom) return { ...base, ...custom };
-  return base ?? custom;
 }

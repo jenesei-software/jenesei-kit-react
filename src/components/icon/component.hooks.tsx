@@ -58,31 +58,29 @@ export function useLazyInjectSprite(url: string) {
     let promise: Promise<void>;
 
     if (!status) {
-      // Создаём новый промис
-      promise = (async () => {
-        try {
-          const res = await fetch(url);
-          if (!res.ok) throw new Error(`Failed to load sprite: ${url}`);
-          const text = await res.text();
-          const div = document.createElement('div');
-          div.style.display = 'none';
-          div.innerHTML = text;
-          document.body.prepend(div);
-
-          //@ts-ignore
-          loadedSprites.set(url, { promise, loaded: true });
-        } catch (err) {
-          const errorObj = err instanceof Error ? err : new Error(String(err));
-          //@ts-ignore
-          loadedSprites.set(url, { promise, loaded: true, error: errorObj });
-          if (isMounted) setError(errorObj);
-          throw err;
-        }
+      const p = (async () => {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`Failed to load sprite: ${url}`);
+        const text = await res.text();
+        const div = document.createElement('div');
+        div.style.display = 'none';
+        div.innerHTML = text;
+        document.body.prepend(div);
       })();
 
-      loadedSprites.set(url, { promise, loaded: false });
+      loadedSprites.set(url, { promise: p, loaded: false });
+
+      p.then(() => {
+        const prev = loadedSprites.get(url);
+        loadedSprites.set(url, { ...(prev as any), promise: p, loaded: true });
+      }).catch((err) => {
+        const errorObj = err instanceof Error ? err : new Error(String(err));
+        const prev = loadedSprites.get(url);
+        loadedSprites.set(url, { ...(prev as any), promise: p, loaded: true, error: errorObj });
+      });
+
+      promise = p;
     } else {
-      // Уже есть промис — берём его
       promise = status.promise;
     }
 

@@ -17,7 +17,7 @@ export default meta;
 const IconWrapperAll: FC = () => {
   return (
     <WrapperBig sx={{ default: { flexDirection: 'row' } }}>
-      <WrapperBig sx={{ default: { flexDirection: 'column'} }}>
+      <WrapperBig sx={{ default: { flexDirection: 'column' } }}>
         <Typography
           sx={{
             default: {

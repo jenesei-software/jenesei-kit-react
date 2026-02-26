@@ -1,5 +1,4 @@
 import type { StorybookConfig } from '@storybook/react-vite';
-import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 
 const config: StorybookConfig = {
   stories: ['../.storybook-stories/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
@@ -12,13 +11,6 @@ const config: StorybookConfig = {
     reactDocgen: 'react-docgen-typescript',
   },
   staticDirs: ['../.storybook-public'],
-  async viteFinal(config) {
-    if (!config.plugins) {
-      config.plugins = [];
-    }
-    config.plugins.push(vanillaExtractPlugin());
-    return config;
-  },
   managerHead: (head) => ` 
     ${head}
     <link rel="shortcut icon" href="icons/icon-64x64-favicon.ico" />
