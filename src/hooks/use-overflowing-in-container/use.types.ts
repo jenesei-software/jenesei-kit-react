@@ -1,6 +1,6 @@
 import { RefObject } from 'react';
 
-export interface useOverflowingInContainerProps {
+export interface IUseOverflowingInContainer {
   isOverflowing?: boolean;
   isCheckSize?: boolean;
   ref: RefObject<HTMLElement | null>;

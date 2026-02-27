@@ -1,9 +1,9 @@
 import { useContextSelector } from 'use-context-selector';
 
 import { BrowserThemeContext } from './context';
-import { BrowserThemeContextProps, useBrowserThemeDependenciesProps } from './context.types';
+import { IBrowserThemeContext, IUseIBrowserThemeDependencies } from './context.types';
 
-export const useBrowserTheme = (props: useBrowserThemeDependenciesProps): BrowserThemeContextProps => {
+export const useIBrowserTheme = (props: IUseIBrowserThemeDependencies): IBrowserThemeContext => {
   const context = useContextSelector(BrowserThemeContext, (v) => {
     return v
       ? props.reduce((acc, prop) => {
@@ -13,7 +13,7 @@ export const useBrowserTheme = (props: useBrowserThemeDependenciesProps): Browse
       : null;
   });
   if (!context) {
-    throw new Error('useBrowserTheme must be used within an ProviderBrowserTheme');
+    throw new Error('useIBrowserTheme must be used within an ProviderBrowserTheme');
   }
   return context;
 };

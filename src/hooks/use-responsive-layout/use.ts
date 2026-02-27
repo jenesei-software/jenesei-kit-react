@@ -1,6 +1,6 @@
 import { useScreenWidth } from '@local/contexts/context-screen-width';
 import { useDeepMemo } from '@local/hooks/use-deep-memo';
-import { CSS_VARS, I_LAYOUT } from '@local/styles/utils';
+import { CSS_VARS, ILayout } from '@local/styles/utils';
 import { ILayoutResponsive } from '@local/styles/utils/types';
 
 export function useResponsiveLayout<A>(sx: ILayoutResponsive<A>): A | undefined {
@@ -23,7 +23,7 @@ export function useResponsiveLayout<A>(sx: ILayoutResponsive<A>): A | undefined 
   return result;
 }
 
-export function useSX<A>(sx: I_LAYOUT<A>): A | undefined {
+export function useSX<A>(sx: ILayout<A>): A | undefined {
   const resolvedSX = useDeepMemo(() => {
     return typeof sx === 'function' ? (sx as Function)(CSS_VARS) : sx;
   }, [sx]);

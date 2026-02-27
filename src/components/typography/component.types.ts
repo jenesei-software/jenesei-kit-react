@@ -1,8 +1,8 @@
-import { I_SX, I_SX_OUTLINE, I_SX_TYPOGRAPHY } from '@local/styles/utils';
+import { ISx, ISxOutline, ISxTypography } from '@local/styles/utils';
 
 import { CSSProperties, PropsWithChildren, Ref } from 'react';
 
-export type TypographyProps = PropsWithChildren & {
+export type ITypographyComponent = PropsWithChildren & {
   onClick?: () => void;
   className?: string;
   style?: CSSProperties;
@@ -14,7 +14,7 @@ export type TypographyProps = PropsWithChildren & {
 
   ref?: Ref<HTMLElement | HTMLHeadingElement | HTMLAnchorElement | null>;
 
-  sx: I_SX_TYPOGRAPHY['sxTypography'];
+  sx: ISxTypography['sxTypography'];
 
-  sxStandard?: I_SX['sx'];
-} & I_SX_OUTLINE;
+  sxStandard?: ISx['sx'];
+} & ISxOutline;

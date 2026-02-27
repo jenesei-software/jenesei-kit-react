@@ -1,13 +1,13 @@
 import { FC, useCallback, useEffect, useState } from 'react';
 import { createContext } from 'use-context-selector';
 
-import { BrowserTheme, BrowserThemeContextProps, BrowserThemeMode, ProviderBrowserThemeProps } from './context.types';
+import { IBrowserTheme, IBrowserThemeContext, IBrowserThemeMode, IProviderBrowserTheme } from './context.types';
 
-export const BrowserThemeContext = createContext<BrowserThemeContextProps | null>(null);
+export const BrowserThemeContext = createContext<IBrowserThemeContext | null>(null);
 
-export const ProviderBrowserTheme: FC<ProviderBrowserThemeProps> = (props) => {
-  const [mode, setMode] = useState<BrowserThemeMode>(props.defaultMode || 'auto');
-  const [theme, setTheme] = useState<BrowserTheme>(() => {
+export const ProviderBrowserTheme: FC<IProviderBrowserTheme> = (props) => {
+  const [mode, setMode] = useState<IBrowserThemeMode>(props.defaultMode || 'auto');
+  const [theme, setTheme] = useState<IBrowserTheme>(() => {
     if (props.defaultMode === 'auto') {
       return matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }

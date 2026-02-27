@@ -1,15 +1,15 @@
 import { useSX } from '@local/hooks/use-responsive-layout/use';
-import { CSS_CLASS, CSS_VARS, I_TYPOGRAPHY } from '@local/styles/utils';
+import { CSS_CLASS, CSS_VARS, ITypography } from '@local/styles/utils';
 import { CSS_VARS_RAW } from '@local/styles/utils/constants';
 import { setClasses, setStyles } from '@local/styles/utils/functions';
 
 import { ElementType, memo, useMemo } from 'react';
 
 import styles from './component.styles.module.css';
-import { TypographyProps } from './component.types';
+import { ITypographyComponent } from './component.types';
 
-export const Typography = memo((props: TypographyProps) => {
-  const sx = useSX(props?.sx ?? {}) as I_TYPOGRAPHY;
+export const Typography = memo((props: ITypographyComponent) => {
+  const sx = useSX(props?.sx ?? {}) as ITypography;
 
   const { className, style, Component } = useMemo(() => {
     const className = setClasses([

@@ -3,30 +3,44 @@ import { CSS_CLASS, CSS_VARS } from '@local/styles/utils';
 import { CSS_VARS_RAW } from '@local/styles/utils/constants';
 import { setClasses, setStyles } from '@local/styles/utils/functions';
 
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 
 import styles from './area.styles.module.css';
-import { SkeletonProps } from './area.types';
-export const Skeleton: FC<SkeletonProps> = (props) => {
+import { ISkeleton } from './area.types';
+export const Skeleton: FC<ISkeleton> = (props) => {
   const [visible, setVisible] = useState(props.defaultVisible ?? false);
 
-  useEffect(() => {
-    if ('time' in props) {
-      const timer = setTimeout(() => {
-        setVisible(true);
-      }, props.time);
-
-      return () => {
-        clearTimeout(timer);
-      };
-    }
-  }, [props]);
-
-  useEffect(() => {
+  const visibleProps = useMemo(() => {
     if ('visible' in props) {
-      setVisible(!props.visible);
+      return props.visible;
     }
+    return null;
   }, [props]);
+
+  const timeProps = useMemo(() => {
+    if ('time' in props) {
+      return props.time;
+    }
+    return null;
+  }, [props]);
+
+  useEffect(() => {
+    if (visibleProps !== null && timeProps === null) {
+      setVisible(visibleProps);
+    } else if (visibleProps !== null && timeProps !== null) {
+      if (visibleProps === false) {
+        setVisible(false);
+      } else {
+        const timer = setTimeout(() => {
+          setVisible(true);
+        }, timeProps);
+
+        return () => {
+          clearTimeout(timer);
+        };
+      }
+    }
+  }, [visibleProps, timeProps]);
 
   return (
     <Stack
@@ -45,11 +59,9 @@ export const Skeleton: FC<SkeletonProps> = (props) => {
               ? 'inherit'
               : props.type === 'secondary'
                 ? CSS_VARS.palette.fillQuaternary
-                : CSS_VARS.palette.fillQuinary,
+                : CSS_VARS.palette.fillQuaternary,
           [CSS_VARS_RAW.area.skeleton.line]:
-            props.type === 'secondary'
-              ? CSS_VARS.palette.fillQuinary
-              : CSS_VARS.palette.fillQuaternary,
+            props.type === 'secondary' ? CSS_VARS.palette.fillTertiary : CSS_VARS.palette.fillQuinary,
         },
         props.style,
       ])}

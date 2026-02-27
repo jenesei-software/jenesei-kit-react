@@ -1,9 +1,9 @@
 import { useContextSelector } from 'use-context-selector';
 
 import { ScreenWidthContext } from './context';
-import { ScreenWidthContextProps, useScreenWidthDependenciesProps } from './context.types';
+import { IScreenWidthContext, IUseScreenWidthDependencies } from './context.types';
 
-export const useScreenWidth = (props: useScreenWidthDependenciesProps): ScreenWidthContextProps => {
+export const useScreenWidth = (props: IUseScreenWidthDependencies): IScreenWidthContext => {
   const context = useContextSelector(ScreenWidthContext, (v) => {
     return v
       ? props.reduce((acc, prop) => {

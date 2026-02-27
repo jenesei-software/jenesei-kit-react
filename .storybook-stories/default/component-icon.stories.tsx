@@ -1,6 +1,6 @@
 import { Icon as IconComponent, THEME_MAP } from '@local/components/icon';
 import { Typography } from '@local/components/typography';
-import { I_THEME_PALETTE } from '@local/styles/utils';
+import { IThemePalette } from '@local/styles/utils';
 import { CSS_VARS } from '@local/styles/utils/constants';
 
 import type { Meta } from '@storybook/react-vite';
@@ -92,7 +92,7 @@ const IconWrapperAll: FC = () => {
         </Typography>
         <WrapperMin>
           {Object.keys(CSS_VARS.palette).map((item) => (
-            <IconComponent key={item} type={'logo'} name={'Jenesei'} size={'large'} color={item as I_THEME_PALETTE} />
+            <IconComponent key={item} type={'logo'} name={'Jenesei'} size={'large'} color={item as IThemePalette} />
           ))}
         </WrapperMin>
       </WrapperBig>

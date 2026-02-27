@@ -1,2 +1,2 @@
 export * from './use';
-export type { useTooltipProps } from './use.types';
+export type { IUseTooltip } from './use.types';

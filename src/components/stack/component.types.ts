@@ -1,9 +1,9 @@
-import { I_SX } from '@local/styles/utils';
+import { ISx } from '@local/styles/utils';
 
 import { AnimationProps, DraggableProps, FocusHandlers, HoverHandlers, LayoutProps, TapHandlers } from 'framer-motion';
 import { CSSProperties, DragEvent, DragEventHandler, JSX, PropsWithChildren, Ref } from 'react';
 
-export interface StackProps extends I_SX, PropsWithChildren {
+export interface IStack extends ISx, PropsWithChildren {
   className?: string;
 
   isHover?: boolean;
@@ -25,7 +25,7 @@ export interface StackProps extends I_SX, PropsWithChildren {
   style?: CSSProperties;
 }
 
-export type StackMotionProps = StackProps &
+export type IStackMotion = IStack &
   LayoutProps &
   AnimationProps &
   HoverHandlers &

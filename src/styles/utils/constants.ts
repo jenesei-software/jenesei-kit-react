@@ -274,6 +274,12 @@ export const CSS_CLASS = {
    */
   isHover: 'u-is-hover',
 
+  shadow: {
+    glass: 'u-shadow-glass',
+    primary: 'u-shadow-primary',
+    secondary: 'u-shadow-secondary',
+    quaternary: 'u-shadow-quaternary',
+  },
   keyframe: {
     shadowPulse: 'keyframe-shadow-pulse',
     backgroundMove: 'keyframe-background-move',

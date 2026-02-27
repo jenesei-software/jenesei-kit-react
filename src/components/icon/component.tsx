@@ -8,9 +8,9 @@ import { useMemo } from 'react';
 
 import { useLazyInjectSprite } from './component.hooks';
 import styles from './component.styles.module.css';
-import { IconProps } from './component.types';
+import { IIcon } from './component.types';
 
-export const Icon = (props: IconProps) => {
+export const Icon = (props: IIcon) => {
   const iconId = useMemo(() => getIconId({ type: props.type, name: props.name }), [props.name, props.type]);
   const spriteUrl = useMemo(() => getSpriteUrl({ type: props.type }), [props.type]);
   const { loaded, error } = useLazyInjectSprite(spriteUrl);

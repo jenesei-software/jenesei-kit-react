@@ -6,7 +6,7 @@
 import { transformObjectToArray, transformObjectValuesToKeys } from '@local/functions';
 import { IImageFormat, ILanguage, IService } from '@local/types';
 
-import { I_THEME_TYPOGRAPHY_HEADING } from './styles/utils';
+import { IThemeTypographyHeading } from './styles/utils';
 
 export const OBJECT_LANGUAGE: ILanguage = {
   eng: {
@@ -158,4 +158,4 @@ export const LOREM_IPSUM_TEXT =
 export const LIBRARY_VERSION = import.meta.env.VITE_APP_VERSION;
 export const ICON_VERSION = import.meta.env.VITE_ICON_VERSION;
 
-// export const LIST_TYPOGRAPHY_VARIANTS_DEFAULT: I_THEME_TYPOGRAPHY_HEADING[] = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+// export const LIST_TYPOGRAPHY_VARIANTS_DEFAULT: IThemeTypographyHeading[] = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];

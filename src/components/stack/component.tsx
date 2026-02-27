@@ -6,9 +6,9 @@ import { motion } from 'framer-motion';
 import { FC, useMemo } from 'react';
 
 import styles from './component.styles.module.css';
-import { StackMotionProps, StackProps } from './component.types';
+import { IStack, IStackMotion } from './component.types';
 
-export const Stack: FC<StackProps> = (props) => {
+export const Stack: FC<IStack> = (props) => {
   const sx = useSX(props?.sx ?? {});
 
   const { className, style, Component } = useMemo(() => {
@@ -42,7 +42,7 @@ export const Stack: FC<StackProps> = (props) => {
   );
 };
 
-export const StackMotion: FC<StackMotionProps> = (props) => {
+export const StackMotion: FC<IStackMotion> = (props) => {
   const { isHover, isRipple, onClick, onDrop, onDragOver, ref, sx, className, style, ...rest } = props;
   const sxMemo = useSX(props?.sx ?? {});
 

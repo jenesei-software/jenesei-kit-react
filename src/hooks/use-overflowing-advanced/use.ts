@@ -2,10 +2,10 @@ import { useDeepCompareMemoize } from '@local/hooks/use-deep-compare-memoize';
 
 import { RefObject, useEffect, useRef, useState } from 'react';
 
-import { useTooltipProps } from './use.types';
+import { IUseOverflowingAdvanced } from './use.types';
 
 export function useOverflowingAdvanced<T extends HTMLElement>(
-  props?: useTooltipProps,
+  props?: IUseOverflowingAdvanced,
 ): {
   isDisabled: boolean;
   isOverflowing: boolean;

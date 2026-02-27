@@ -4,9 +4,9 @@ import { setClasses, setStyles } from '@local/styles/utils/functions';
 import { FC } from 'react';
 
 import styles from './area.styles.module.css';
-import { ScrollProps } from './area.types';
+import { IScroll } from './area.types';
 
-export const Scroll: FC<ScrollProps> = (props) => {
+export const Scroll: FC<IScroll> = (props) => {
   const { children, className, style, ...rest } = props;
 
   return (

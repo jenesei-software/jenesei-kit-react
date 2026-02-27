@@ -1,14 +1,14 @@
 import { Stack } from '@local/components/stack';
-import { I_SX } from '@local/styles/utils';
+import { ISx } from '@local/styles/utils';
 
 import { FC, PropsWithChildren, useEffect, useRef } from 'react';
 
-type OutsideProps = PropsWithChildren &
-  I_SX & {
+type IOutside = PropsWithChildren &
+  ISx & {
     onOutsideClick: (event: MouseEvent) => void;
   };
 
-export const Outside: FC<OutsideProps> = (props) => {
+export const Outside: FC<IOutside> = (props) => {
   const elementRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

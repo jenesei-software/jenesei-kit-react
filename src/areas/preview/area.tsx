@@ -5,9 +5,9 @@ import { AnimatePresence } from 'framer-motion';
 import { FC, useEffect, useMemo, useState } from 'react';
 
 import styles from './area.styles.module.css';
-import { PreviewProps } from './area.types';
+import { IPreview } from './area.types';
 
-export const Preview: FC<PreviewProps> = (props) => {
+export const Preview: FC<IPreview> = (props) => {
   const [visible, setVisible] = useState(props.defaultVisible ?? true);
 
   const propsVisible = useMemo(() => ('visible' in props ? props.visible : null), [props]);

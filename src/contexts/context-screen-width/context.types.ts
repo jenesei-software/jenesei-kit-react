@@ -1,12 +1,12 @@
-import { I_THEME_BREAKPOINT, I_THEME_ORIENTATION } from '@local/styles/utils';
+import { IThemeBreakpoint, IThemeOrientation } from '@local/styles/utils';
 
 import { PropsWithChildren } from 'react';
 
-export type ProviderScreenWidthProps = PropsWithChildren;
+export type IProviderScreenWidth = PropsWithChildren;
 
-export interface ScreenWidthContextProps {
-  breakpoint: I_THEME_BREAKPOINT | 'default';
-  orientation: I_THEME_ORIENTATION;
+export interface IScreenWidthContext {
+  breakpoint: IThemeBreakpoint | 'default';
+  orientation: IThemeOrientation;
 }
 
-export type useScreenWidthDependenciesProps = (keyof ScreenWidthContextProps)[];
+export type IUseScreenWidthDependencies = (keyof IScreenWidthContext)[];

@@ -1,4 +1,4 @@
-import { Skeleton as SkeletonComponent, SkeletonProps } from '@local/areas/skeleton';
+import { ISkeleton, Skeleton as SkeletonComponent } from '@local/areas/skeleton';
 import { Stack } from '@local/components/stack';
 import { Typography } from '@local/components/typography';
 
@@ -8,27 +8,27 @@ import { FC } from 'react';
 const meta: Meta<typeof SkeletonComponent> = {
   component: SkeletonComponent,
   title: 'Area/Skeleton',
+  args: {
+    time: 2000,
+  },
 };
 
 export default meta;
 type Story = StoryObj<typeof SkeletonComponent>;
 
-const SkeletonWrapper: FC<SkeletonProps> = (props) => {
+const SkeletonWrapper: FC<ISkeleton> = (props) => {
   return (
     <SkeletonComponent
       {...props}
-      time={4000}
       sx={{
         overflow: 'auto',
-        width: '300px',
-        height: '300px',
         borderRadius: '12px',
       }}
     >
       <Stack
         sx={(theme) => ({
-          width: '100%',
-          height: '100%',
+          width: '300px',
+          height: '300px',
           padding: '12px',
           borderRadius: '6px',
           backgroundColor: theme.palette.accentGray,
@@ -51,7 +51,7 @@ export const SkeletonOne: Story = {
   args: { visible: true, isHover: true },
 };
 
-const SkeletonManyWrapper: FC<SkeletonProps> = (props) => {
+const SkeletonManyWrapper: FC<ISkeleton> = (props) => {
   return (
     <Stack
       sx={{
@@ -71,15 +71,13 @@ const SkeletonManyWrapper: FC<SkeletonProps> = (props) => {
           color='productPrimary'
           type='primary'
           sx={() => ({
-            width: '300px',
-            height: '300px',
-            padding: '12px',
+            borderRadius: '6px',
           })}
         >
           <Stack
             sx={(theme) => ({
-              width: '100%',
-              height: '100%',
+              width: '300px',
+              height: '300px',
               padding: '12px',
               borderRadius: '6px',
               backgroundColor: theme.palette.accentRed,
@@ -87,10 +85,10 @@ const SkeletonManyWrapper: FC<SkeletonProps> = (props) => {
           >
             <Typography
               sx={{
-                variant: 'body',
+                variant: 'title-2',
               }}
             >
-              One
+              Title 2
             </Typography>
           </Stack>
         </SkeletonComponent>
@@ -103,18 +101,17 @@ const SkeletonManyWrapper: FC<SkeletonProps> = (props) => {
           <SkeletonComponent
             {...props}
             sx={() => ({
-              width: '50px',
-              height: '50px',
               borderRadius: '100%',
             })}
-            type='secondary'
+            type='primary'
           >
             <Stack
               sx={(theme) => ({
-                width: '100%',
-                height: '100%',
+                width: '50px',
+                height: '50px',
                 padding: '12px',
-                borderRadius: '6px',
+                flexShrink: 0,
+                borderRadius: '100%',
                 backgroundColor: theme.palette.accentCyan,
               })}
             >
@@ -130,7 +127,6 @@ const SkeletonManyWrapper: FC<SkeletonProps> = (props) => {
           <SkeletonComponent
             {...props}
             sx={() => ({
-              height: '50px',
               borderRadius: '6px',
               flexGrow: 1,
             })}
@@ -139,9 +135,10 @@ const SkeletonManyWrapper: FC<SkeletonProps> = (props) => {
             <Stack
               sx={(theme) => ({
                 width: '100%',
-                height: '100%',
-                padding: '12px',
+                height: '50px',
                 borderRadius: '6px',
+                padding: '12px',
+                flexGrow: 1,
                 backgroundColor: theme.palette.accentIndigo,
               })}
             >
@@ -164,28 +161,27 @@ const SkeletonManyWrapper: FC<SkeletonProps> = (props) => {
       >
         <SkeletonComponent
           {...props}
+          color='productPrimary'
           type='primary'
           sx={() => ({
-            width: '300px',
-            height: '300px',
-            padding: '12px',
+            borderRadius: '6px',
           })}
         >
           <Stack
             sx={(theme) => ({
-              width: '100%',
-              height: '100%',
+              width: '300px',
+              height: '300px',
               padding: '12px',
               borderRadius: '6px',
-              backgroundColor: theme.palette.accentBrown,
+              backgroundColor: theme.palette.accentRed,
             })}
           >
             <Typography
               sx={{
-                variant: 'body',
+                variant: 'title-2',
               }}
             >
-              One
+              Title 2
             </Typography>
           </Stack>
         </SkeletonComponent>
@@ -198,19 +194,18 @@ const SkeletonManyWrapper: FC<SkeletonProps> = (props) => {
           <SkeletonComponent
             {...props}
             sx={() => ({
-              width: '50px',
-              height: '50px',
               borderRadius: '100%',
             })}
-            type='secondary'
+            type='primary'
           >
             <Stack
               sx={(theme) => ({
-                width: '100%',
-                height: '100%',
+                width: '50px',
+                height: '50px',
                 padding: '12px',
-                borderRadius: '6px',
-                backgroundColor: theme.palette.accentIndigo,
+                flexShrink: 0,
+                borderRadius: '100%',
+                backgroundColor: theme.palette.accentCyan,
               })}
             >
               <Typography
@@ -225,7 +220,6 @@ const SkeletonManyWrapper: FC<SkeletonProps> = (props) => {
           <SkeletonComponent
             {...props}
             sx={() => ({
-              height: '50px',
               borderRadius: '6px',
               flexGrow: 1,
             })}
@@ -234,15 +228,16 @@ const SkeletonManyWrapper: FC<SkeletonProps> = (props) => {
             <Stack
               sx={(theme) => ({
                 width: '100%',
-                height: '100%',
-                padding: '12px',
+                height: '50px',
                 borderRadius: '6px',
-                backgroundColor: theme.palette.accentBrown,
+                padding: '12px',
+                flexGrow: 1,
+                backgroundColor: theme.palette.accentIndigo,
               })}
             >
               <Typography
                 sx={{
-                  variant: 'body',
+                  variant: 'sub-headline',
                 }}
               >
                 One

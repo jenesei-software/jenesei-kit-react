@@ -1,25 +1,25 @@
-import { StackProps } from '@local/components/stack';
-import { I_THEME_PALETTE } from '@local/styles/utils';
+import { IStack } from '@local/components/stack';
+import { IThemePalette } from '@local/styles/utils';
 
 import { CSSProperties } from 'react';
 
-type SkeletonDefaultProps = {
+type ISkeletonDefault = {
   className?: string;
   style?: CSSProperties;
   defaultVisible?: boolean;
   type?: 'primary' | 'secondary';
-  color?: I_THEME_PALETTE;
-  colorLine?: I_THEME_PALETTE;
+  color?: IThemePalette;
+  colorLine?: IThemePalette;
   isInheritColor?: boolean;
+  isLiquid?: boolean;
 };
 
-interface SkeletonIsShowProps extends SkeletonDefaultProps {
+interface ISkeletonIsShow extends ISkeletonDefault {
   visible: boolean;
 }
 
-interface SkeletonTimeProps extends SkeletonDefaultProps {
+interface ISkeletonTime extends ISkeletonDefault {
   time: number;
 }
 
-export type SkeletonProps = StackProps & (SkeletonIsShowProps | SkeletonTimeProps);
-export type StyledSkeletonProps = Pick<SkeletonIsShowProps, 'visible' | 'type' | 'color' | 'isInheritColor'>;
+export type ISkeleton = IStack & (ISkeletonIsShow | ISkeletonTime);

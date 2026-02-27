@@ -1,4 +1,4 @@
-import { Scroll as ScrollComponent, ScrollProps } from '@local/areas/scroll';
+import { IScroll, Scroll as ScrollComponent } from '@local/areas/scroll';
 import { Stack } from '@local/components/stack';
 import { Typography } from '@local/components/typography';
 
@@ -13,7 +13,7 @@ const meta: Meta<typeof ScrollComponent> = {
 export default meta;
 type Story = StoryObj<typeof ScrollComponent>;
 
-const ScrollWrapper: FC<ScrollProps> = (props) => {
+const ScrollWrapper: FC<IScroll> = (props) => {
   const [content, setContent] = useState<boolean>(false);
 
   const toggleContent = () => {

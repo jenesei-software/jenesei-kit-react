@@ -1,20 +1,20 @@
-import { CSS_VARS, I_THEME_BREAKPOINT } from '@local/styles/utils';
+import { CSS_VARS, IThemeBreakpoint } from '@local/styles/utils';
 
 import { FC, useCallback, useEffect, useRef, useState } from 'react';
 import { createContext } from 'use-context-selector';
 
-import { ProviderScreenWidthProps, ScreenWidthContextProps } from './context.types';
+import { IProviderScreenWidth, IScreenWidthContext } from './context.types';
 
-export const ScreenWidthContext = createContext<ScreenWidthContextProps | null>(null);
+export const ScreenWidthContext = createContext<IScreenWidthContext | null>(null);
 
-export const ProviderScreenWidth: FC<ProviderScreenWidthProps> = ({ children }) => {
-  const [breakpoint, setBreakpoint] = useState<ScreenWidthContextProps['breakpoint']>('default');
-  const [orientation, setOrientation] = useState<ScreenWidthContextProps['orientation']>(
+export const ProviderScreenWidth: FC<IProviderScreenWidth> = ({ children }) => {
+  const [breakpoint, setBreakpoint] = useState<IScreenWidthContext['breakpoint']>('default');
+  const [orientation, setOrientation] = useState<IScreenWidthContext['orientation']>(
     typeof window !== 'undefined' && window.innerWidth > window.innerHeight ? 'landscape' : 'portrait',
   );
 
   const queriesRef = useRef<Array<{
-    key: I_THEME_BREAKPOINT;
+    key: IThemeBreakpoint;
     mq: MediaQueryList;
   }> | null>(null);
 

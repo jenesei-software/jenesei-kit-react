@@ -1,4 +1,4 @@
-import { PreviewProps } from '@local/areas/preview';
+import { IPreview } from '@local/areas/preview';
 import { Preview as PreviewComponent } from '@local/areas/preview/area';
 import { Stack } from '@local/components/stack';
 import { MotionTypingEffect } from '@local/styles/motion';
@@ -24,7 +24,7 @@ export const PreviewMax: Story = {
   },
 };
 
-const PreviewStackWrapper: FC<PreviewProps> = (props) => {
+const PreviewStackWrapper: FC<IPreview> = (props) => {
   return (
     <Stack
       sx={(theme) => ({

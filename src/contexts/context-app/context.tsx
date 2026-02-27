@@ -1,6 +1,6 @@
-import { Preview, PreviewAdditionalProps } from '@local/areas/preview';
+import { IPreviewAdditional, Preview } from '@local/areas/preview';
 import { useScreenWidth } from '@local/contexts/context-screen-width';
-import { CSS_VARS, I_THEME_PALETTE } from '@local/styles/utils';
+import { CSS_VARS, IThemePalette } from '@local/styles/utils';
 
 import { createContext, FC, useCallback, useEffect, useState } from 'react';
 
@@ -15,9 +15,9 @@ import {
   ProviderAppOutletRightAside,
   ProviderAppWrapper,
 } from './context.styles';
-import { AppContextProps, ProviderAppProps } from './context.types';
+import { IAppContext, IProviderApp } from './context.types';
 
-export const AppContext = createContext<AppContextProps | null>(null);
+export const AppContext = createContext<IAppContext | null>(null);
 
 /**
  * ProviderApp component is a context context that manages various application-level states
@@ -26,7 +26,7 @@ export const AppContext = createContext<AppContextProps | null>(null);
  *
  * @component
  *
- * @param {ProviderAppProps} props - The properties passed to the ProviderApp component.
+ * @param {IProviderApp} props - The properties passed to the ProviderApp component.
  * @param {string} props.defaultBgColor - The default background color.
  * @param {string} props.defaultStatusBarColor - The default status bar color.
  * @param {string} [props.defaultBgImage] - The default background image.
@@ -43,7 +43,7 @@ export const AppContext = createContext<AppContextProps | null>(null);
  *
  * @returns {JSX.Element} The rendered ProviderApp component.
  */
-export const ProviderApp: FC<ProviderAppProps> = (props) => {
+export const ProviderApp: FC<IProviderApp> = (props) => {
   const { bgColor, changeBgColor, historyBgColor, setDefaultBgColor } = useBgColor(props.defaultBgColor);
   const { statusBarColor, changeStatusBarColor, historyStatusBarColor, setDefaultStatusBarColor } = useStatusBarColor(
     props.defaultStatusBarColor,
@@ -140,15 +140,15 @@ export const ProviderApp: FC<ProviderAppProps> = (props) => {
 /**
  * Custom hook to manage preview properties.
  */
-const usePreview = (defaultPreview: ProviderAppProps['defaultPreview']) => {
-  const [previewProps, setPreviewProps] = useState(defaultPreview || { visible: true, defaultVisible: true });
+const usePreview = (defaultPreview: IProviderApp['defaultPreview']) => {
+  const [previewProps, setIPreview] = useState(defaultPreview || { visible: true, defaultVisible: true });
 
-  const changePreview = useCallback((newPreviewProps: PreviewAdditionalProps) => {
-    setPreviewProps(newPreviewProps);
+  const changePreview = useCallback((newIPreview: IPreviewAdditional) => {
+    setIPreview(newIPreview);
   }, []);
 
   useEffect(() => {
-    if (defaultPreview) setPreviewProps(defaultPreview);
+    if (defaultPreview) setIPreview(defaultPreview);
   }, [defaultPreview]);
 
   return { previewProps, changePreview };
@@ -158,19 +158,19 @@ const usePreview = (defaultPreview: ProviderAppProps['defaultPreview']) => {
  * Custom hook to manage background color state with history tracking.
  */
 type BgColorState = {
-  bgColor: I_THEME_PALETTE;
-  bgColorHistory: I_THEME_PALETTE[];
+  bgColor: IThemePalette;
+  bgColorHistory: IThemePalette[];
   bgColorIndex: number;
 };
 
-export const useBgColor = (defaultColor: I_THEME_PALETTE) => {
+export const useBgColor = (defaultColor: IThemePalette) => {
   const [state, setState] = useState<BgColorState>({
     bgColor: defaultColor,
     bgColorHistory: [defaultColor],
     bgColorIndex: 0,
   });
 
-  const changeBgColor = useCallback((color: I_THEME_PALETTE) => {
+  const changeBgColor = useCallback((color: IThemePalette) => {
     setState((prev) => {
       const newHistory = [...prev.bgColorHistory.slice(0, prev.bgColorIndex + 1), color];
       return {
@@ -224,19 +224,19 @@ export const useBgColor = (defaultColor: I_THEME_PALETTE) => {
  * Custom hook to manage the status bar color with history tracking.
  */
 type StatusBarColorState = {
-  statusBarColor: I_THEME_PALETTE;
-  statusBarColorHistory: I_THEME_PALETTE[];
+  statusBarColor: IThemePalette;
+  statusBarColorHistory: IThemePalette[];
   statusBarColorIndex: number;
 };
 
-export const useStatusBarColor = (defaultColor: I_THEME_PALETTE) => {
+export const useStatusBarColor = (defaultColor: IThemePalette) => {
   const [state, setState] = useState<StatusBarColorState>({
     statusBarColor: defaultColor,
     statusBarColorHistory: [defaultColor],
     statusBarColorIndex: 0,
   });
 
-  const changeStatusBarColor = useCallback((color: I_THEME_PALETTE) => {
+  const changeStatusBarColor = useCallback((color: IThemePalette) => {
     setState((prev) => {
       const newHistory = [...prev.statusBarColorHistory.slice(0, prev.statusBarColorIndex + 1), color];
       return {

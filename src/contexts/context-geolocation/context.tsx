@@ -2,11 +2,11 @@ import { usePermission } from '@local/contexts/context-permission';
 
 import { createContext, FC, useEffect, useState } from 'react';
 
-import { GeolocationContextProps, ProviderGeolocationProps } from './context.types';
+import { IGeolocationContext, IProviderGeolocation } from './context.types';
 
-export const GeolocationContext = createContext<GeolocationContextProps | null>(null);
+export const GeolocationContext = createContext<IGeolocationContext | null>(null);
 
-export const ProviderGeolocation: FC<ProviderGeolocationProps> = (props) => {
+export const ProviderGeolocation: FC<IProviderGeolocation> = (props) => {
   const { geolocationPermission, requestGeolocationPermission } = usePermission();
 
   const [location, setLocation] = useState<GeolocationPosition | null>(null);

@@ -1,21 +1,21 @@
-import { I_SX } from '@local/styles/utils';
+import { ISx } from '@local/styles/utils';
 
 import { PropsWithChildren, ReactNode } from 'react';
 
-type PreviewDefaultProps = { defaultVisible?: boolean; content?: ReactNode } & {
-  sxLoader?: I_SX['sx'];
-  sxChildren?: I_SX['sx'];
+type IPreviewDefault = { defaultVisible?: boolean; content?: ReactNode } & {
+  sxLoader?: ISx['sx'];
+  sxChildren?: ISx['sx'];
 };
 
-interface PreviewIsShowProps extends PreviewDefaultProps {
+interface IPreviewIsShow extends IPreviewDefault {
   visible: boolean;
   minTime?: number;
 }
 
-interface PreviewTimeProps extends PreviewDefaultProps {
+interface IPreviewTime extends IPreviewDefault {
   time: number;
 }
 
-export type PreviewAdditionalProps = PreviewIsShowProps | PreviewTimeProps;
+export type IPreviewAdditional = IPreviewIsShow | IPreviewTime;
 
-export type PreviewProps = PropsWithChildren & PreviewAdditionalProps;
+export type IPreview = PropsWithChildren & IPreviewAdditional;
