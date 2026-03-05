@@ -1,6 +1,5 @@
 .area-skeleton {
   background: var(--transparent);
-  transition: var(--transition-color);
   display: contents;
 }
 

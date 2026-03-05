@@ -1,7 +1,7 @@
 import { Skeleton } from '@local/areas/skeleton';
 import { ICON_VERSION } from '@local/consts';
 import { CSS_VARS } from '@local/styles/utils';
-import { CSS_VARS_RAW } from '@local/styles/utils/constants';
+import { CSS_CLASS, CSS_VARS_RAW } from '@local/styles/utils/constants';
 import { setClasses, setStyles } from '@local/styles/utils/functions';
 
 import { useMemo } from 'react';
@@ -31,7 +31,7 @@ export const Icon = (props: IIcon) => {
 
   const configIcon = useMemo(() => {
     return {
-      className: setClasses([styles.icon, props.className]),
+      className: setClasses([styles.icon, props.className, CSS_CLASS.transition.icon]),
 
       style: setStyles([
         {

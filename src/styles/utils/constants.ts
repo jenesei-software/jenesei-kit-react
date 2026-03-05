@@ -1,3 +1,92 @@
+const CSS_VARS_PALETTE = {
+  /* ACCENTS */
+  accentRedLight: 'var(--accent-red-light)',
+  accentOrangeLight: 'var(--accent-orange-light)',
+  accentYellowLight: 'var(--accent-yellow-light)',
+  accentGreenLight: 'var(--accent-green-light)',
+  accentMintLight: 'var(--accent-mint-light)',
+  accentTealLight: 'var(--accent-teal-light)',
+  accentCyanLight: 'var(--accent-cyan-light)',
+  accentBlueLight: 'var(--accent-blue-light)',
+  accentIndigoLight: 'var(--accent-indigo-light)',
+  accentPurpleLight: 'var(--accent-purple-light)',
+  accentPinkLight: 'var(--accent-pink-light)',
+  accentBrownLight: 'var(--accent-brown-light)',
+  accentGrayLight: 'var(--accent-gray-light)',
+
+  /* FILLS */
+  fillPrimaryLight: 'var(--fill-primary-light)',
+  fillSecondaryLight: 'var(--fill-secondary-light)',
+  fillTertiaryLight: 'var(--fill-tertiary-light)',
+  fillQuaternaryLight: 'var(--fill-quaternary-light)',
+  fillQuinaryLight: 'var(--fill-quinary-light)',
+
+  /* TEXT */
+  textPrimaryLight: 'var(--text-primary-light)',
+  textSecondaryLight: 'var(--text-secondary-light)',
+  textTertiaryLight: 'var(--text-tertiary-light)',
+
+  /* CONTROLS */
+  controlMenuLight: 'var(--control-menu-light)',
+  controlTooltipLight: 'var(--control-tooltip-light)',
+  controlTransparent: 'var(--control-transparent)',
+
+  /* SHADOWS */
+  shadowGlassLight: 'var(--shadow-glass-light)',
+  shadowPrimaryLight: 'var(--shadow-primary-light)',
+  shadowSecondaryLight: 'var(--shadow-secondary-light)',
+  shadowQuaternaryLight: 'var(--shadow-quaternary-light)',
+
+  /* PRODUCT */
+  productPrimary: 'var(--product-primary)',
+  productSecondary: 'var(--product-secondary)',
+  productTertiary: 'var(--product-tertiary)',
+  productQuaternary: 'var(--product-quaternary)',
+  productQuinary: 'var(--product-quinary)',
+
+  /* SPECIAL */
+  current: 'var(--current-color)',
+  inherit: 'var(--inherit)',
+  transparent: 'var(--transparent)',
+
+  /* ACCENTS */
+  accentRedDark: 'var(--accent-red-dark)',
+  accentOrangeDark: 'var(--accent-orange-dark)',
+  accentYellowDark: 'var(--accent-yellow-dark)',
+  accentGreenDark: 'var(--accent-green-dark)',
+  accentMintDark: 'var(--accent-mint-dark)',
+  accentTealDark: 'var(--accent-teal-dark)',
+  accentCyanDark: 'var(--accent-cyan-dark)',
+  accentBlueDark: 'var(--accent-blue-dark)',
+  accentIndigoDark: 'var(--accent-indigo-dark)',
+  accentPurpleDark: 'var(--accent-purple-dark)',
+  accentPinkDark: 'var(--accent-pink-dark)',
+  accentBrownDark: 'var(--accent-brown-dark)',
+  accentGrayDark: 'var(--accent-gray-dark)',
+
+  /* FILLS */
+  fillPrimaryDark: 'var(--fill-primary-dark)',
+  fillSecondaryDark: 'var(--fill-secondary-dark)',
+  fillTertiaryDark: 'var(--fill-tertiary-dark)',
+  fillQuaternaryDark: 'var(--fill-quaternary-dark)',
+  fillQuinaryDark: 'var(--fill-quinary-dark)',
+
+  /* TEXT */
+  textPrimaryDark: 'var(--text-primary-dark)',
+  textSecondaryDark: 'var(--text-secondary-dark)',
+  textTertiaryDark: 'var(--text-tertiary-dark)',
+
+  /* CONTROLS */
+  controlMenuDark: 'var(--control-menu-dark)',
+  controlTooltipDark: 'var(--control-tooltip-dark)',
+
+  /* SHADOWS */
+  shadowGlassDark: 'var(--shadow-glass-dark)',
+  shadowPrimaryDark: 'var(--shadow-primary-dark)',
+  shadowSecondaryDark: 'var(--shadow-secondary-dark)',
+  shadowQuaternaryDark: 'var(--shadow-quaternary-dark)',
+} as const;
+
 export const CSS_VARS = {
   font: {
     family: 'var(--font-family)',
@@ -33,104 +122,9 @@ export const CSS_VARS = {
   animation: {
     duration: 'var(--duration)',
     easing: 'var(--easing)',
-
-    transition: {
-      default: 'var(--transition-default)',
-      icon: 'var(--transition-icon)',
-      color: 'var(--transition-color)',
-      grid: 'var(--transition-grid)',
-      withoutSize: 'var(--transition-without-size)',
-      all: 'var(--transition-all)',
-    },
   },
 
-  palette: {
-    /* ACCENTS */
-    accentRed: 'var(--accent-red)',
-    accentRedVibrant: 'var(--accent-red-vibrant)',
-
-    accentOrange: 'var(--accent-orange)',
-    accentOrangeVibrant: 'var(--accent-orange-vibrant)',
-
-    accentYellow: 'var(--accent-yellow)',
-    accentYellowVibrant: 'var(--accent-yellow-vibrant)',
-
-    accentGreen: 'var(--accent-green)',
-    accentGreenVibrant: 'var(--accent-green-vibrant)',
-
-    accentMint: 'var(--accent-mint)',
-    accentMintVibrant: 'var(--accent-mint-vibrant)',
-
-    accentTeal: 'var(--accent-teal)',
-    accentTealVibrant: 'var(--accent-teal-vibrant)',
-
-    accentCyan: 'var(--accent-cyan)',
-    accentCyanVibrant: 'var(--accent-cyan-vibrant)',
-
-    accentBlue: 'var(--accent-blue)',
-    accentBlueVibrant: 'var(--accent-blue-vibrant)',
-
-    accentIndigo: 'var(--accent-indigo)',
-    accentIndigoVibrant: 'var(--accent-indigo-vibrant)',
-
-    accentPurple: 'var(--accent-purple)',
-    accentPurpleVibrant: 'var(--accent-purple-vibrant)',
-
-    accentPink: 'var(--accent-pink)',
-    accentPinkVibrant: 'var(--accent-pink-vibrant)',
-
-    accentBrown: 'var(--accent-brown)',
-    accentBrownVibrant: 'var(--accent-brown-vibrant)',
-
-    accentGray: 'var(--accent-gray)',
-    accentGrayVibrant: 'var(--accent-gray-vibrant)',
-
-    /* FILLS */
-    fillPrimary: 'var(--fill-primary)',
-    fillSecondary: 'var(--fill-secondary)',
-    fillTertiary: 'var(--fill-tertiary)',
-    fillQuaternary: 'var(--fill-quaternary)',
-    fillQuinary: 'var(--fill-quinary)',
-
-    fillPrimaryVibrant: 'var(--fill-primary-vibrant)',
-    fillSecondaryVibrant: 'var(--fill-secondary-vibrant)',
-    fillTertiaryVibrant: 'var(--fill-tertiary-vibrant)',
-    fillQuaternaryVibrant: 'var(--fill-quaternary-vibrant)',
-    fillQuinaryVibrant: 'var(--fill-quinary-vibrant)',
-
-    /* TEXT */
-    textPrimary: 'var(--text-primary)',
-    textSecondary: 'var(--text-secondary)',
-    textTertiary: 'var(--text-tertiary)',
-
-    textPrimaryVibrant: 'var(--text-primary-vibrant)',
-    textSecondaryVibrant: 'var(--text-secondary-vibrant)',
-    textTertiaryVibrant: 'var(--text-tertiary-vibrant)',
-
-    /* CONTROLS */
-    controlMenu: 'var(--control-menu)',
-    controlTooltip: 'var(--control-tooltip)',
-    controlTransparent: 'var(--control-transparent)',
-
-    /* PRODUCT */
-    productPrimary: 'var(--product-primary)',
-    productSecondary: 'var(--product-secondary)',
-    productTertiary: 'var(--product-tertiary)',
-    productQuaternary: 'var(--product-quaternary)',
-    productQuinary: 'var(--product-quinary)',
-    productPrimaryVibrant: 'var(--product-primary-vibrant)',
-
-    /* SHADOWS */
-    shadowGlass: 'var(--shadow-glass)',
-    shadowPrimary: 'var(--shadow-primary)',
-    shadowSecondary: 'var(--shadow-secondary)',
-    shadowQuaternary: 'var(--shadow-quaternary)',
-
-    /* SPECIAL */
-    current: 'var(--current-color)',
-    inherit: 'var(--inherit)',
-    transparent: 'var(--transparent)',
-  },
+  palette: CSS_VARS_PALETTE,
 
   size: {
     large: {
@@ -171,6 +165,21 @@ export const CSS_VARS = {
   },
 
   component: {
+    button: {
+      index: {
+        height: 'var(--component-button-height)',
+        padding: 'var(--component-button-padding)',
+        radius: 'var(--component-button-radius)',
+        gap: 'var(--component-button-gap)',
+
+        background: 'var(--component-button-background)',
+        border: 'var(--component-button-border)',
+        color: 'var(--component-button-color)',
+      },
+      iconGroup: {
+        order: 'var(--component-button-icon-group-order)',
+      },
+    },
     icon: {
       index: {
         order: 'var(--component-icon-order)',
@@ -214,6 +223,88 @@ export const CSS_VARS = {
       line: 'var(--area-skeleton-line)',
     },
   },
+
+  genre: {
+    button: {
+      green: {
+        background: {
+          index: CSS_VARS_PALETTE.accentGreenLight,
+        },
+        color: {
+          index: CSS_VARS_PALETTE.textPrimaryDark,
+        },
+        border: {
+          index: CSS_VARS_PALETTE.transparent,
+        },
+      },
+      red: {
+        background: {
+          index: CSS_VARS_PALETTE.accentRedLight,
+        },
+        color: {
+          index: CSS_VARS_PALETTE.textPrimaryDark,
+        },
+        border: {
+          index: CSS_VARS_PALETTE.transparent,
+        },
+      },
+      yellow: {
+        background: {
+          index: CSS_VARS_PALETTE.accentYellowLight,
+        },
+        color: {
+          index: CSS_VARS_PALETTE.textPrimaryDark,
+        },
+        border: {
+          index: CSS_VARS_PALETTE.transparent,
+        },
+      },
+      blue: {
+        background: {
+          index: CSS_VARS_PALETTE.accentBlueLight,
+        },
+        color: {
+          index: CSS_VARS_PALETTE.textPrimaryDark,
+        },
+        border: {
+          index: CSS_VARS_PALETTE.transparent,
+        },
+      },
+      primary: {
+        background: {
+          index: CSS_VARS_PALETTE.fillPrimaryDark,
+        },
+        color: {
+          index: CSS_VARS_PALETTE.textPrimaryLight,
+        },
+        border: {
+          index: CSS_VARS_PALETTE.textPrimaryLight,
+        },
+      },
+      secondary: {
+        background: {
+          index: CSS_VARS_PALETTE.fillPrimaryLight,
+        },
+        color: {
+          index: CSS_VARS_PALETTE.textPrimaryDark,
+        },
+        border: {
+          index: CSS_VARS_PALETTE.textPrimaryDark,
+        },
+      },
+      product: {
+        background: {
+          index: CSS_VARS_PALETTE.productPrimary,
+        },
+        color: {
+          index: CSS_VARS_PALETTE.textPrimaryDark,
+        },
+        border: {
+          index: CSS_VARS_PALETTE.transparent,
+        },
+      },
+    },
+  },
 } as const;
 
 export const CSS_CLASS = {
@@ -241,26 +332,28 @@ export const CSS_CLASS = {
    */
   isRipple: 'u-is-ripple',
 
-  /**
-   * Добавляет transition для font-size.
-   */
-  transitionFontSize: 'u-transition-font-size',
+  transition: {
+    default: 'u-transition-default',
+    fontSize: 'u-transition-font-size',
+    icon: 'u-transition-icon',
+    color: 'u-transition-color',
+    grid: 'u-transition-grid',
+    withoutSize: 'u-transition-without-size',
+    all: 'u-transition-all',
+  },
 
-  /**
-   * Базовый outline (прозрачный.
-   * Используется для focus-состояний.
-   */
-  outlineDefault: 'u-outline-default',
+  outline: {
+    default: 'u-outline-default',
+    boxShadow: 'u-outline-boxShadow',
+    always: 'u-outline-always',
+    none: 'u-outline-none',
+  },
 
-  /**
-   * Outline под box-shadow компоненты.
-   */
-  outlineBoxShadow: 'u-outline-boxShadow',
-
-  /**
-   * Постоянный outline (видимый.
-   */
-  outlineAlways: 'u-outline-always',
+  control: {
+    default: 'u-control-default',
+    onlyActive: 'u-control-only-active',
+    none: 'u-control-none',
+  },
 
   /**
    * Состояние disabled.
@@ -280,6 +373,7 @@ export const CSS_CLASS = {
     secondary: 'u-shadow-secondary',
     quaternary: 'u-shadow-quaternary',
   },
+
   keyframe: {
     shadowPulse: 'keyframe-shadow-pulse',
     backgroundMove: 'keyframe-background-move',

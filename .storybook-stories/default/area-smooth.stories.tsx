@@ -1,20 +1,20 @@
-import { IScroll, Scroll as ScrollComponent } from '@local/areas/scroll';
+import { Smooth as SmoothComponent } from '@local/areas/smooth';
 import { Button } from '@local/components/button';
-import { Stack } from '@local/components/stack';
+import { IStack, Stack, StackMotion } from '@local/components/stack';
 import { Typography } from '@local/components/typography';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { FC, useState } from 'react';
 
-const meta: Meta<typeof ScrollComponent> = {
-  component: ScrollComponent,
-  title: 'Area/Scroll',
+const meta: Meta<typeof SmoothComponent> = {
+  component: SmoothComponent,
+  title: 'Area/Smooth',
 };
 
 export default meta;
-type Story = StoryObj<typeof ScrollComponent>;
+type Story = StoryObj<typeof SmoothComponent>;
 
-const ScrollWrapper: FC<IScroll> = (props) => {
+const SmoothWrapper: FC<IStack> = (props) => {
   const [content, setContent] = useState<boolean>(false);
 
   const toggleContent = () => {
@@ -22,22 +22,26 @@ const ScrollWrapper: FC<IScroll> = (props) => {
   };
 
   return (
-    <ScrollComponent
+    <SmoothComponent
       {...props}
       sx={(theme) => ({
-        width: '300px',
+        height: 'fit-content',
+        gap: '4px',
+        flexDirection: 'column',
         padding: '12px',
-        boxSizing: 'content-box',
         backgroundColor: theme.palette.fillQuinaryLight,
       })}
     >
-      <Button isMinWidthAsContent onClick={toggleContent} size={'small'} genre={'primary'}>
-        Toggle Content
-      </Button>
-      <Stack
+      <StackMotion layout='position'>
+        <Button onClick={toggleContent} size={'small'} genre={'primary'}>
+          Toggle Content
+        </Button>
+      </StackMotion>
+      <StackMotion
+        layout='position'
         sx={(theme) => ({
-          width: '100px',
           height: '100px',
+          minHeight: '100px',
           backgroundColor: theme.palette.fillPrimaryLight,
         })}
       >
@@ -48,12 +52,10 @@ const ScrollWrapper: FC<IScroll> = (props) => {
         >
           One
         </Typography>
-      </Stack>
-      {content && (
+      </StackMotion>
+      {content ? (
         <Stack
           sx={(theme) => ({
-            width: '1000px',
-            minWidth: '1000px',
             height: '100px',
             backgroundColor: theme.palette.fillPrimaryLight,
           })}
@@ -66,12 +68,12 @@ const ScrollWrapper: FC<IScroll> = (props) => {
             Two
           </Typography>
         </Stack>
-      )}
-    </ScrollComponent>
+      ) : null}
+    </SmoothComponent>
   );
 };
 
-export const Scroll: Story = {
-  render: (args) => <ScrollWrapper {...args} />,
-  args: { horizontal: true },
+export const Smooth: Story = {
+  render: (args) => <SmoothWrapper {...args} />,
+  args: {},
 };

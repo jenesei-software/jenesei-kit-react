@@ -1,0 +1,4 @@
+body.sb-show-main {
+  background: var(--fill-primary-dark) !important;
+  transition: background-color var(--transition-default);
+}

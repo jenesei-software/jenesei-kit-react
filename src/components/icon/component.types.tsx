@@ -1,8 +1,9 @@
 import { ISx, IThemePalette, IThemeSize } from '@local/styles/utils';
 
-import React, { CSSProperties } from 'react';
+import { CSSProperties, MouseEvent } from 'react';
 
 import { THEME_MAP } from './component.consts';
+
 export type IIconMao = {
   id: typeof THEME_MAP.id;
   checkbox: typeof THEME_MAP.checkbox;
@@ -16,7 +17,7 @@ export type IIcon = {
     name: IIconMao[K][number];
     className?: string;
     style?: CSSProperties;
-    onClick?: (event: React.MouseEvent<SVGSVGElement>) => void;
+    onClick?: (event: MouseEvent<SVGSVGElement>) => void;
     size: IThemeSize | '100%';
     color?: IThemePalette;
     turn?: number;
@@ -38,7 +39,7 @@ export type IAddIIconGeneric<T extends keyof IIconMao = keyof IIconMao> = {
   type: T;
   name: IIconMao[T][number];
   className?: string;
-  onClick?: (event: React.MouseEvent<SVGSVGElement>) => void;
+  onClick?: (event: MouseEvent<SVGSVGElement>) => void;
   size?: IThemeSize | '100%';
   color?: IThemePalette;
   turn?: number;

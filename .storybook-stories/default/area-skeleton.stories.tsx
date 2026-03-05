@@ -31,7 +31,7 @@ const SkeletonWrapper: FC<ISkeleton> = (props) => {
           height: '300px',
           padding: '12px',
           borderRadius: '6px',
-          backgroundColor: theme.palette.accentGray,
+          backgroundColor: theme.palette.accentGrayLight,
         })}
       >
         <Typography
@@ -80,7 +80,7 @@ const SkeletonManyWrapper: FC<ISkeleton> = (props) => {
               height: '300px',
               padding: '12px',
               borderRadius: '6px',
-              backgroundColor: theme.palette.accentRed,
+              backgroundColor: theme.palette.accentRedLight,
             })}
           >
             <Typography
@@ -112,7 +112,7 @@ const SkeletonManyWrapper: FC<ISkeleton> = (props) => {
                 padding: '12px',
                 flexShrink: 0,
                 borderRadius: '100%',
-                backgroundColor: theme.palette.accentCyan,
+                backgroundColor: theme.palette.accentCyanLight,
               })}
             >
               <Typography
@@ -139,7 +139,7 @@ const SkeletonManyWrapper: FC<ISkeleton> = (props) => {
                 borderRadius: '6px',
                 padding: '12px',
                 flexGrow: 1,
-                backgroundColor: theme.palette.accentIndigo,
+                backgroundColor: theme.palette.accentIndigoLight,
               })}
             >
               <Typography
@@ -173,7 +173,7 @@ const SkeletonManyWrapper: FC<ISkeleton> = (props) => {
               height: '300px',
               padding: '12px',
               borderRadius: '6px',
-              backgroundColor: theme.palette.accentRed,
+              backgroundColor: theme.palette.accentRedLight,
             })}
           >
             <Typography
@@ -205,7 +205,7 @@ const SkeletonManyWrapper: FC<ISkeleton> = (props) => {
                 padding: '12px',
                 flexShrink: 0,
                 borderRadius: '100%',
-                backgroundColor: theme.palette.accentCyan,
+                backgroundColor: theme.palette.accentCyanLight,
               })}
             >
               <Typography
@@ -232,7 +232,7 @@ const SkeletonManyWrapper: FC<ISkeleton> = (props) => {
                 borderRadius: '6px',
                 padding: '12px',
                 flexGrow: 1,
-                backgroundColor: theme.palette.accentIndigo,
+                backgroundColor: theme.palette.accentIndigoLight,
               })}
             >
               <Typography

@@ -13,7 +13,7 @@ type ITypographyDefault = {
 
   family?: IThemeTypographyFontFamily;
 
-  isTransitionFontSize?: boolean;
+  transition?: IThemeTransition;
 
   isBold?: boolean;
 
@@ -92,3 +92,9 @@ export type IThemeOrientation = 'landscape' | 'portrait';
 export type IThemePalette = keyof typeof CSS_VARS.palette;
 
 export type IThemeShadow = keyof typeof CSS_CLASS.shadow;
+
+export type IThemeGenreButton = keyof typeof CSS_VARS.genre.button;
+
+export type IThemeOutline = keyof typeof CSS_CLASS.outline;
+
+export type IThemeTransition = keyof typeof CSS_CLASS.transition;

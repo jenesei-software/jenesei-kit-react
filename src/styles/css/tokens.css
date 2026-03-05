@@ -46,53 +46,6 @@
   --easing: ease-in-out;
 
   --transition-default: 0.3s ease-in-out;
-  --transition-icon: 0.05s ease-in-out;
-
-  /* ================= TRANSITIONS ================= */
-
-  --transition-color:
-    outline 0s,
-    opacity 0.3s ease-in-out,
-    background-color 0.3s ease-in-out,
-    color 0.3s ease-in-out,
-    box-shadow 0.3s ease-in-out,
-    border-color 0.3s ease-in-out;
-
-  --transition-grid:
-    grid-template-areas 0.3s ease-in-out, grid-template-columns 0.3s ease-in-out, grid-template-rows 0.3s ease-in-out;
-
-  --transition-without-size:
-    outline 0s,
-    opacity 0.3s ease-in-out,
-    transform 0.3s ease-in-out,
-    background-color 0.3s ease-in-out,
-    color 0.3s ease-in-out,
-    visibility 0.3s ease-in-out,
-    box-shadow 0.3s ease-in-out,
-    border-color 0.3s ease-in-out,
-    left 0.3s ease-in-out,
-    right 0.3s ease-in-out,
-    grid-template-areas 0.3s ease-in-out,
-    grid-template-rows 0.3s ease-in-out,
-    grid-template-columns 0.3s ease-in-out;
-
-  --transition-all:
-    outline 0s,
-    opacity 0.3s ease-in-out,
-    transform 0.3s ease-in-out,
-    background-color 0.3s ease-in-out,
-    height 0.3s ease-in-out,
-    max-height 0.3s ease-in-out,
-    width 0.3s ease-in-out,
-    color 0.3s ease-in-out,
-    visibility 0.3s ease-in-out,
-    box-shadow 0.3s ease-in-out,
-    border-color 0.3s ease-in-out,
-    left 0.3s ease-in-out,
-    right 0.3s ease-in-out,
-    grid-template-areas 0.3s ease-in-out,
-    grid-template-rows 0.3s ease-in-out,
-    grid-template-columns 0.3s ease-in-out;
 
   /* ================= SIZES ================= */
   /* LARGE */
@@ -170,74 +123,66 @@
 :root {
   /* ================= ACCENTS ================= */
 
-  --accent-red: rgba(255, 59, 48, 1);
-  --accent-red-vibrant: rgba(245, 49, 38, 0.4);
+  --accent-red-light: rgba(255, 59, 48, 1);
+  --accent-orange-light: rgba(255, 149, 0, 1);
+  --accent-yellow-light: rgba(255, 204, 0, 1);
+  --accent-green-light: rgba(40, 205, 65, 1);
+  --accent-mint-light: rgba(0, 199, 190, 1);
+  --accent-teal-light: rgba(89, 173, 196, 1);
+  --accent-cyan-light: rgba(85, 190, 240, 1);
+  --accent-blue-light: rgba(0, 122, 255, 1);
+  --accent-indigo-light: rgba(88, 86, 214, 1);
+  --accent-purple-light: rgba(175, 82, 222, 1);
+  --accent-pink-light: rgba(255, 45, 85, 1);
+  --accent-brown-light: rgba(162, 132, 94, 1);
+  --accent-gray-light: rgba(142, 142, 147, 1);
 
-  --accent-orange: rgba(255, 149, 0, 1);
-  --accent-orange-vibrant: rgba(245, 139, 0, 0.4);
-
-  --accent-yellow: rgba(255, 204, 0, 1);
-  --accent-yellow-vibrant: rgba(245, 194, 0, 0.4);
-
-  --accent-green: rgba(40, 205, 65, 1);
-  --accent-green-vibrant: rgba(30, 195, 55, 1);
-
-  --accent-mint: rgba(0, 199, 190, 1);
-  --accent-mint-vibrant: rgba(0, 189, 180, 1);
-
-  --accent-teal: rgba(89, 173, 196, 1);
-  --accent-teal-vibrant: rgba(46, 167, 189, 1);
-
-  --accent-cyan: rgba(85, 190, 240, 1);
-  --accent-cyan-vibrant: rgba(65, 175, 220, 1);
-
-  --accent-blue: rgba(0, 122, 255, 1);
-  --accent-blue-vibrant: rgba(0, 112, 245, 1);
-
-  --accent-indigo: rgba(88, 86, 214, 1);
-  --accent-indigo-vibrant: rgba(84, 82, 204, 1);
-
-  --accent-purple: rgba(175, 82, 222, 1);
-  --accent-purple-vibrant: rgba(159, 75, 201, 1);
-
-  --accent-pink: rgba(255, 45, 85, 1);
-  --accent-pink-vibrant: rgba(245, 35, 75, 1);
-
-  --accent-brown: rgba(162, 132, 94, 1);
-  --accent-brown-vibrant: rgba(152, 122, 84, 1);
-
-  --accent-gray: rgba(142, 142, 147, 1);
-  --accent-gray-vibrant: rgba(132, 132, 137, 1);
+  --accent-red-dark: rgba(255, 69, 58, 1);
+  --accent-orange-dark: rgba(255, 159, 10, 1);
+  --accent-yellow-dark: rgba(255, 214, 10, 1);
+  --accent-green-dark: rgba(50, 215, 75, 1);
+  --accent-mint-dark: rgba(102, 212, 207, 1);
+  --accent-teal-dark: rgba(106, 196, 220, 1);
+  --accent-cyan-dark: rgba(90, 200, 245, 1);
+  --accent-blue-dark: rgba(10, 132, 255, 1);
+  --accent-indigo-dark: rgba(94, 92, 230, 1);
+  --accent-purple-dark: rgba(191, 90, 242, 1);
+  --accent-pink-dark: rgba(255, 55, 95, 1);
+  --accent-brown-dark: rgba(172, 142, 104, 1);
+  --accent-gray-dark: rgba(152, 152, 157, 1);
 
   /* ================= FILLS ================= */
 
-  --fill-primary: rgba(0, 0, 0, 0.85);
-  --fill-secondary: rgba(0, 0, 0, 0.5);
-  --fill-tertiary: rgba(0, 0, 0, 0.25);
-  --fill-quaternary: rgba(0, 0, 0, 0.1);
-  --fill-quinary: rgba(0, 0, 0, 0.05);
+  --fill-primary-light: rgba(0, 0, 0, 0.85);
+  --fill-secondary-light: rgba(0, 0, 0, 0.5);
+  --fill-tertiary-light: rgba(0, 0, 0, 0.25);
+  --fill-quaternary-light: rgba(0, 0, 0, 0.1);
+  --fill-quinary-light: rgba(0, 0, 0, 0.05);
 
-  --fill-primary-vibrant: rgba(77, 77, 77, 1);
-  --fill-secondary-vibrant: rgba(128, 128, 128, 1);
-  --fill-tertiary-vibrant: rgba(128, 128, 128, 0.4);
-  --fill-quaternary-vibrant: rgba(128, 128, 128, 0.2);
-  --fill-quinary-vibrant: rgba(128, 128, 128, 0.14);
+  --fill-primary-dark: rgba(255, 255, 255, 0.85);
+  --fill-secondary-dark: rgba(255, 255, 255, 0.55);
+  --fill-tertiary-dark: rgba(255, 255, 255, 0.25);
+  --fill-quaternary-dark: rgba(255, 255, 255, 0.1);
+  --fill-quinary-dark: rgba(255, 255, 255, 0.05);
 
   /* ================= TEXT ================= */
 
-  --text-primary: rgba(0, 0, 0, 0.85);
-  --text-secondary: rgba(0, 0, 0, 0.5);
-  --text-tertiary: rgba(0, 0, 0, 0.25);
+  --text-primary-light: rgba(0, 0, 0, 0.85);
+  --text-secondary-light: rgba(0, 0, 0, 0.5);
+  --text-tertiary-light: rgba(0, 0, 0, 0.25);
 
-  --text-primary-vibrant: rgba(0, 0, 0, 1);
-  --text-secondary-vibrant: rgba(127, 127, 127, 0.5);
-  --text-tertiary-vibrant: rgba(127, 127, 127, 0.4);
+  --text-primary-dark: rgba(255, 255, 255, 0.85);
+  --text-secondary-dark: rgba(255, 255, 255, 0.55);
+  --text-tertiary-dark: rgba(255, 255, 255, 0.25);
 
   /* ================= CONTROLS ================= */
 
-  --control-menu: rgba(40, 40, 40, 0.58);
-  --control-tooltip: rgba(246, 246, 246, 0.6);
+  --control-menu-light: rgba(40, 40, 40, 0.58);
+  --control-tooltip-light: rgba(246, 246, 246, 0.6);
   --control-transparent: rgba(255, 255, 255, 0);
+
+  --control-menu-dark: rgba(246, 246, 246, 0.72);
+  --control-tooltip-dark: rgba(0, 0, 0, 0.35);
 
   /* ================= PRODUCT ================= */
 
@@ -246,14 +191,18 @@
   --product-tertiary: rgba(65, 149, 210, 0.25);
   --product-quaternary: rgba(65, 149, 210, 0.1);
   --product-quinary: rgba(65, 149, 210, 0.05);
-  --product-primary-vibrant: rgba(65, 149, 210, 1);
 
   /* ================= SHADOWS ================= */
 
-  --shadow-glass: 0px 1px 8px rgba(0, 0, 0, 0.1), inset 0px 0px 8px rgba(242, 242, 242, 1);
-  --shadow-primary: 0px 0px 3px rgba(0, 0, 0, 0.55), 0px 36px 100px rgba(0, 0, 0, 0.4);
-  --shadow-secondary: 0px 8px 40px rgba(0, 0, 0, 0.25);
-  --shadow-quaternary: 0px 4px 20px rgba(0, 0, 0, 0.25);
+  --shadow-glass-light: 0px 1px 8px rgba(0, 0, 0, 0.1), inset 0px 0px 8px rgba(242, 242, 242, 1);
+  --shadow-primary-light: 0px 0px 3px rgba(0, 0, 0, 0.55), 0px 36px 100px rgba(0, 0, 0, 0.4);
+  --shadow-secondary-light: 0px 8px 40px rgba(0, 0, 0, 0.25);
+  --shadow-quaternary-light: 0px 4px 20px rgba(0, 0, 0, 0.25);
+
+  --shadow-glass-dark: 0px 1px 8px rgba(0, 0, 0, 0.1), inset 0px 0px 16px rgba(242, 242, 242, 1);
+  --shadow-primary-dark: 0px 36px 100px rgba(0, 0, 0, 0.7);
+  --shadow-secondary-dark: 0px 8px 40px rgba(0, 0, 0, 0.7);
+  --shadow-quaternary-dark: 0px 4px 20px rgba(0, 0, 0, 0.45);
 
   /* ================= SPECIAL ================= */
 
@@ -265,67 +214,75 @@
 :root[data-theme="dark"] {
   /* ================= ACCENTS ================= */
 
-  --accent-red: rgba(255, 69, 58, 1);
-  --accent-orange: rgba(255, 159, 10, 1);
-  --accent-yellow: rgba(255, 214, 10, 1);
-  --accent-green: rgba(50, 215, 75, 1);
-  --accent-mint: rgba(102, 212, 207, 1);
-  --accent-teal: rgba(106, 196, 220, 1);
-  --accent-cyan: rgba(90, 200, 245, 1);
-  --accent-blue: rgba(10, 132, 255, 1);
-  --accent-indigo: rgba(94, 92, 230, 1);
-  --accent-purple: rgba(191, 90, 242, 1);
-  --accent-pink: rgba(255, 55, 95, 1);
-  --accent-brown: rgba(172, 142, 104, 1);
-  --accent-gray: rgba(152, 152, 157, 1);
+  --accent-red-dark: rgba(255, 59, 48, 1);
+  --accent-orange-dark: rgba(255, 149, 0, 1);
+  --accent-yellow-dark: rgba(255, 204, 0, 1);
+  --accent-green-dark: rgba(40, 205, 65, 1);
+  --accent-mint-dark: rgba(0, 199, 190, 1);
+  --accent-teal-dark: rgba(89, 173, 196, 1);
+  --accent-cyan-dark: rgba(85, 190, 240, 1);
+  --accent-blue-dark: rgba(0, 122, 255, 1);
+  --accent-indigo-dark: rgba(88, 86, 214, 1);
+  --accent-purple-dark: rgba(175, 82, 222, 1);
+  --accent-pink-dark: rgba(255, 45, 85, 1);
+  --accent-brown-dark: rgba(162, 132, 94, 1);
+  --accent-gray-dark: rgba(142, 142, 147, 1);
 
-  --accent-red-vibrant: rgba(255, 79, 68, 1);
-  --accent-orange-vibrant: rgba(255, 169, 20, 1);
-  --accent-yellow-vibrant: rgba(255, 224, 20, 1);
-  --accent-green-vibrant: rgba(60, 225, 85, 1);
-  --accent-mint-vibrant: rgba(108, 224, 219, 1);
-  --accent-teal-vibrant: rgba(68, 212, 250, 1);
-  --accent-cyan-vibrant: rgba(90, 205, 250, 1);
-  --accent-blue-vibrant: rgba(20, 142, 255, 1);
-  --accent-indigo-vibrant: rgba(99, 97, 242, 1);
-  --accent-purple-vibrant: rgba(204, 101, 255, 1);
-  --accent-pink-vibrant: rgba(255, 65, 105, 1);
-  --accent-brown-vibrant: rgba(182, 152, 114, 1);
-  --accent-gray-vibrant: rgba(162, 162, 167, 1);
+  --accent-red-light: rgba(255, 69, 58, 1);
+  --accent-orange-light: rgba(255, 159, 10, 1);
+  --accent-yellow-light: rgba(255, 214, 10, 1);
+  --accent-green-light: rgba(50, 215, 75, 1);
+  --accent-mint-light: rgba(102, 212, 207, 1);
+  --accent-teal-light: rgba(106, 196, 220, 1);
+  --accent-cyan-light: rgba(90, 200, 245, 1);
+  --accent-blue-light: rgba(10, 132, 255, 1);
+  --accent-indigo-light: rgba(94, 92, 230, 1);
+  --accent-purple-light: rgba(191, 90, 242, 1);
+  --accent-pink-light: rgba(255, 55, 95, 1);
+  --accent-brown-light: rgba(172, 142, 104, 1);
+  --accent-gray-light: rgba(152, 152, 157, 1);
 
   /* ================= FILLS ================= */
 
-  --fill-primary: rgba(255, 255, 255, 0.85);
-  --fill-secondary: rgba(255, 255, 255, 0.55);
-  --fill-tertiary: rgba(255, 255, 255, 0.25);
-  --fill-quaternary: rgba(255, 255, 255, 0.1);
-  --fill-quinary: rgba(255, 255, 255, 0.05);
+  --fill-primary-dark: rgba(0, 0, 0, 0.85);
+  --fill-secondary-dark: rgba(0, 0, 0, 0.5);
+  --fill-tertiary-dark: rgba(0, 0, 0, 0.25);
+  --fill-quaternary-dark: rgba(0, 0, 0, 0.1);
+  --fill-quinary-dark: rgba(0, 0, 0, 0.05);
 
-  --fill-primary-vibrant: rgba(255, 255, 255, 1);
-  --fill-secondary-vibrant: rgba(150, 150, 150, 1);
-  --fill-tertiary-vibrant: rgba(178, 178, 178, 1);
-  --fill-quaternary-vibrant: rgba(178, 178, 178, 0.4);
-  --fill-quinary-vibrant: rgba(178, 178, 178, 0.18);
+  --fill-primary-light: rgba(255, 255, 255, 0.85);
+  --fill-secondary-light: rgba(255, 255, 255, 0.55);
+  --fill-tertiary-light: rgba(255, 255, 255, 0.25);
+  --fill-quaternary-light: rgba(255, 255, 255, 0.1);
+  --fill-quinary-light: rgba(255, 255, 255, 0.05);
 
   /* ================= TEXT ================= */
 
-  --text-primary: rgba(255, 255, 255, 0.85);
-  --text-secondary: rgba(255, 255, 255, 0.55);
-  --text-tertiary: rgba(255, 255, 255, 0.25);
+  --text-primary-dark: rgba(0, 0, 0, 0.85);
+  --text-secondary-dark: rgba(0, 0, 0, 0.5);
+  --text-tertiary-dark: rgba(0, 0, 0, 0.25);
 
-  --text-primary-vibrant: rgba(255, 255, 255, 1);
-  --text-secondary-vibrant: rgba(127, 127, 127, 0.5);
-  --text-tertiary-vibrant: rgba(127, 127, 127, 0.4);
+  --text-primary-light: rgba(255, 255, 255, 0.85);
+  --text-secondary-light: rgba(255, 255, 255, 0.55);
+  --text-tertiary-light: rgba(255, 255, 255, 0.25);
 
   /* ================= CONTROLS ================= */
 
-  --control-menu: rgba(246, 246, 246, 0.72);
-  --control-tooltip: rgba(0, 0, 0, 0.35);
+  --control-menu-dark: rgba(40, 40, 40, 0.58);
+  --control-tooltip-dark: rgba(246, 246, 246, 0.6);
+
+  --control-menu-light: rgba(246, 246, 246, 0.72);
+  --control-tooltip-light: rgba(0, 0, 0, 0.35);
 
   /* ================= SHADOWS ================= */
 
-  --shadow-glass: 0px 1px 8px rgba(0, 0, 0, 0.1), inset 0px 0px 16px rgba(242, 242, 242, 1);
-  --shadow-primary: 0px 36px 100px rgba(0, 0, 0, 0.7);
-  --shadow-secondary: 0px 8px 40px rgba(0, 0, 0, 0.7);
-  --shadow-quaternary: 0px 4px 20px rgba(0, 0, 0, 0.45);
+  --shadow-glass-dark: 0px 1px 8px rgba(0, 0, 0, 0.1), inset 0px 0px 8px rgba(242, 242, 242, 1);
+  --shadow-primary-dark: 0px 0px 3px rgba(0, 0, 0, 0.55), 0px 36px 100px rgba(0, 0, 0, 0.4);
+  --shadow-secondary-dark: 0px 8px 40px rgba(0, 0, 0, 0.25);
+  --shadow-quaternary-dark: 0px 4px 20px rgba(0, 0, 0, 0.25);
+
+  --shadow-glass-light: 0px 1px 8px rgba(0, 0, 0, 0.1), inset 0px 0px 16px rgba(242, 242, 242, 1);
+  --shadow-primary-light: 0px 36px 100px rgba(0, 0, 0, 0.7);
+  --shadow-secondary-light: 0px 8px 40px rgba(0, 0, 0, 0.7);
+  --shadow-quaternary-light: 0px 4px 20px rgba(0, 0, 0, 0.45);
 }

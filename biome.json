@@ -41,7 +41,6 @@
     "enabled": true,
     "actions": {
       "source": {
-        "useSortedProperties": "on",
         "organizeImports": {
           "level": "on",
           "options": {

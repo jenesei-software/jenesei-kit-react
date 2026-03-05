@@ -1,9 +1,8 @@
 .typography {
-  color: var(--text-primary);
+  color: var(--text-primary-light);
   font-family: var(--font-family);
   font-weight: var(--font-weight);
   line-height: var(--font-height);
-  transition: var(--transition-color);
 }
 
 .typography-letter-spacing {

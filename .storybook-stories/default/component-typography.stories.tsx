@@ -19,7 +19,7 @@ const AllWrapper: FC = () => {
     <WrapperBig
       sx={(theme) => ({
         flexDirection: 'column',
-        color: theme.palette.accentBlue,
+        color: theme.palette.accentBlueLight,
       })}
     >
       <TypographyComponent
@@ -34,7 +34,7 @@ const AllWrapper: FC = () => {
       <WrapperMin
         sx={(theme) => ({
           flexDirection: 'column',
-          color: theme.palette.accentPink,
+          color: theme.palette.accentPinkLight,
         })}
       >
         <TypographyComponent
@@ -49,7 +49,7 @@ const AllWrapper: FC = () => {
       <WrapperMin
         sx={(theme) => ({
           flexDirection: 'column',
-          color: theme.palette.accentBrown,
+          color: theme.palette.accentBrownLight,
         })}
       >
         <TypographyComponent
@@ -97,7 +97,7 @@ const AllWrapper: FC = () => {
       <WrapperMin
         sx={(theme) => ({
           flexDirection: 'column',
-          color: theme.palette.accentBrown,
+          color: theme.palette.accentBrownLight,
         })}
       >
         <TypographyComponent
@@ -195,7 +195,7 @@ const TypographyBreakpoint: FC = () => {
     <TypographyComponent
       sx={{
         size: 14,
-        color: 'accentGreen',
+        color: 'accentGreenLight',
       }}
     >
       {` ${breakpoint} `}

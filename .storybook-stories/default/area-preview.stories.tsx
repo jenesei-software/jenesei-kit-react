@@ -1,6 +1,7 @@
 import { IPreview } from '@local/areas/preview';
 import { Preview as PreviewComponent } from '@local/areas/preview/area';
 import { Stack } from '@local/components/stack';
+import { Typography } from '@local/components/typography';
 import { MotionTypingEffect } from '@local/styles/motion';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -20,7 +21,16 @@ export const PreviewMax: Story = {
     defaultVisible: false,
     visible: true,
     minTime: 2000,
-    content: <MotionTypingEffect text='Loading...' />,
+    content: (
+      <Typography
+        sx={{
+          variant: 'headline',
+          color: 'textPrimaryLight',
+        }}
+      >
+        <MotionTypingEffect text='Loading...' />
+      </Typography>
+    ),
   },
 };
 
@@ -31,8 +41,8 @@ const PreviewStackWrapper: FC<IPreview> = (props) => {
         position: 'relative',
         width: '200px',
         height: '200px',
-        backgroundColor: theme.palette.accentGray,
-        color: theme.palette.textPrimary,
+        backgroundColor: theme.palette.accentGrayLight,
+        color: theme.palette.textPrimaryLight,
         borderRadius: '8px',
       })}
     >
@@ -46,6 +56,15 @@ export const PreviewStack: Story = {
   args: {
     defaultVisible: false,
     time: 2000,
-    content: <MotionTypingEffect text='Loading...' />,
+    content: (
+      <Typography
+        sx={{
+          variant: 'headline',
+          color: 'textPrimaryLight',
+        }}
+      >
+        <MotionTypingEffect text='Loading...' />
+      </Typography>
+    ),
   },
 };

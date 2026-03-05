@@ -49,6 +49,7 @@ export const Skeleton: FC<ISkeleton> = (props) => {
         styles['area-skeleton'],
         visible === false ? styles['area-skeleton-visible-false'] : false,
         visible === false ? CSS_CLASS.keyframe.backgroundMove : false,
+        CSS_CLASS.transition.color,
         props.className,
       ])}
       style={setStyles([
@@ -58,10 +59,10 @@ export const Skeleton: FC<ISkeleton> = (props) => {
             : props.isInheritColor
               ? 'inherit'
               : props.type === 'secondary'
-                ? CSS_VARS.palette.fillQuaternary
-                : CSS_VARS.palette.fillQuaternary,
+                ? CSS_VARS.palette.fillQuaternaryLight
+                : CSS_VARS.palette.fillQuaternaryLight,
           [CSS_VARS_RAW.area.skeleton.line]:
-            props.type === 'secondary' ? CSS_VARS.palette.fillTertiary : CSS_VARS.palette.fillQuinary,
+            props.type === 'secondary' ? CSS_VARS.palette.fillTertiaryLight : CSS_VARS.palette.fillQuinaryLight,
         },
         props.style,
       ])}

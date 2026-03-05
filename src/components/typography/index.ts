@@ -1,2 +1,2 @@
 export { Typography } from './component';
-export type { ITypography } from './component.types';
+export type { ITypographyComponent } from './component.types';

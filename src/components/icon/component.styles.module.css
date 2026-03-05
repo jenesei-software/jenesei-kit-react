@@ -6,11 +6,6 @@
   min-height: var(--component-icon-height-icon);
   color: var(--component-icon-color);
   transform: rotate(var(--component-icon-turn));
-  transition: var(--transition-color);
-}
-
-.icon path {
-  transition: var(--transition-color);
 }
 
 .icon-skeleton {
