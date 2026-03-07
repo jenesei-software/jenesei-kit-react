@@ -1,3 +1,6 @@
+/* =========================
+   Area - Preview
+   ========================= */
 .area-preview-loader {
   background-color: var(--background-white-standard);
   width: 100%;
@@ -11,13 +14,13 @@
   z-index: 1;
 }
 
-.area-preview-loader-container-icon {
+.area-preview-loader__container-icon {
   position: absolute;
   width: 8vmin;
   height: 8vmin;
 }
 
-.area-preview-loader-container-children {
+.area-preview-loader__container-children {
   position: relative;
   margin-top: 8vmin;
 }

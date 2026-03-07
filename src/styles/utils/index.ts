@@ -1,8 +1,6 @@
 export { CSS_CLASS, CSS_VARS } from './constants';
 export type {
   IContainer,
-  IContainerLayout,
-  ILayout,
   ILayoutValue,
   ISx,
   ISxOutline,
@@ -16,5 +14,4 @@ export type {
   IThemeTypographyHeading,
   IThemeTypographyWeight,
   ITypography,
-  ITypographyLayout,
 } from './types';

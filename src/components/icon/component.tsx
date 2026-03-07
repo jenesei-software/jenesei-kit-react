@@ -7,7 +7,6 @@ import { setClasses, setStyles } from '@local/styles/utils/functions';
 import { useMemo } from 'react';
 
 import { useLazyInjectSprite } from './component.hooks';
-import styles from './component.styles.module.css';
 import { IIcon } from './component.types';
 
 export const Icon = (props: IIcon) => {
@@ -17,7 +16,7 @@ export const Icon = (props: IIcon) => {
 
   const configSkeleton = useMemo(() => {
     return {
-      className: setClasses([styles['icon-skeleton'], props.className]),
+      className: setClasses([CSS_CLASS.component.icon.skeleton.root, props.className]),
       style: setStyles([
         {
           [CSS_VARS_RAW.component.icon.skeleton.heightIcon]:
@@ -31,7 +30,7 @@ export const Icon = (props: IIcon) => {
 
   const configIcon = useMemo(() => {
     return {
-      className: setClasses([styles.icon, props.className, CSS_CLASS.transition.icon]),
+      className: setClasses([CSS_CLASS.component.icon.index.root, props.className, CSS_CLASS.transition.icon]),
 
       style: setStyles([
         {
@@ -42,9 +41,10 @@ export const Icon = (props: IIcon) => {
           [CSS_VARS_RAW.component.icon.index.order]: props.order ? String(props.order) : 'initial',
         },
         props.style,
+        props?.sx,
       ]),
     };
-  }, [props.className, props.style, props.order, props.size, props.color, props.turn]);
+  }, [props.className, props.style, props.order, props.size, props.color, props.turn, props.sx]);
 
   if (!loaded || error)
     return (
@@ -52,7 +52,7 @@ export const Icon = (props: IIcon) => {
         color={props.color ?? undefined}
         className={configSkeleton.className}
         style={configSkeleton.style}
-        visible
+        visible={false}
       />
     );
 

@@ -1,5 +1,6 @@
 import { IShared } from '@local/areas/shared';
 import { Shared as SharedComponent } from '@local/areas/shared/area';
+import { CSS_VARS } from '@local/styles/utils';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { FC, useEffect, useState } from 'react';
@@ -24,15 +25,15 @@ const SharedStackWrapper: FC<IShared> = (props) => {
   }, [props.value]);
   return (
     <SharedComponent
-      sx={(theme) => ({
+      sx={{
         padding: '16px',
         position: 'relative',
         width: '100%',
         height: '100%',
-        backgroundColor: theme.palette.fillPrimaryDark,
+        backgroundColor: CSS_VARS.palette.fillPrimaryDark,
         borderRadius: '8px',
         gap: '8px',
-      })}
+      }}
       {...props}
       onSelected={onSelected}
       value={value}
@@ -61,7 +62,7 @@ export const Shared: Story = {
           ],
           genre: 'primary',
           children: 'Выкупы',
-          isHiddenBorder:true,
+          isHiddenBorder: true,
           size: 'medium',
           sxTypography: {
             family: 'Manrope',
@@ -84,7 +85,7 @@ export const Shared: Story = {
             },
           ],
           genre: 'primary',
-          isHiddenBorder:true,
+          isHiddenBorder: true,
           children: 'Доставки',
           size: 'medium',
           sxTypography: {
@@ -108,7 +109,7 @@ export const Shared: Story = {
             },
           ],
           genre: 'primary',
-          isHiddenBorder:true,
+          isHiddenBorder: true,
           children: 'Избранное',
           size: 'medium',
           sxTypography: {
@@ -132,7 +133,7 @@ export const Shared: Story = {
             },
           ],
           genre: 'primary',
-          isHiddenBorder:true,
+          isHiddenBorder: true,
           children: 'Отзывы',
           size: 'medium',
           sxTypography: {
@@ -156,7 +157,7 @@ export const Shared: Story = {
             },
           ],
           genre: 'primary',
-          isHiddenBorder:true,
+          isHiddenBorder: true,
           children: 'Позиции в поиске',
           size: 'medium',
           sxTypography: {
@@ -181,7 +182,7 @@ export const Shared: Story = {
             },
           ],
           genre: 'primary',
-          isHiddenBorder:true,
+          isHiddenBorder: true,
           children: 'Тест Лого',
           size: 'medium',
           sxTypography: {

@@ -1,0 +1,61 @@
+/* =========================
+   Component - Checkbox
+   ========================= */
+.component-checkbox {
+  cursor: pointer;
+  user-select: none;
+
+  border: 1px solid transparent;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: fit-content;
+  max-height: fit-content;
+
+
+
+
+  height: var(--component-checkbox-height);
+  min-height: var(--component-checkbox-height);
+  border-radius: var(--component-checkbox-radius);
+  gap: var(--component-checkbox-gap);
+  padding: var(--component-checkbox-padding);
+
+  background: var(--component-checkbox-background);
+  border-color: var(--component-checkbox-border);
+  color: var(--component-checkbox-color);
+}
+
+.component-checkbox.component-checkbox-is-hidden {
+  opacity: 0.5;
+}
+
+.component-checkbox:not(.component-checkbox-is-hidden) {
+  opacity: 1;
+}
+
+.component-checkbox.component-checkbox-is-hidden-border {
+  border: 0px solid transparent !important;
+}
+
+.component-checkbox.component-checkbox-is-radius {
+  border-radius: 100px;
+}
+
+.component-checkbox.component-checkbox-is-full-size {
+  height: 100%;
+  width: 100%;
+  border-radius: 0px;
+}
+
+.component-checkbox.component-checkbox-is-width-as-height {
+  width: var(--component-checkbox-height);
+  min-width: var(--component-checkbox-height);
+  padding: 0px;
+}
+
+.component-checkbox.component-checkbox-is-min-width-as-content {
+  min-width: max-content;
+}

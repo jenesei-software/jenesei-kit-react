@@ -40,7 +40,15 @@
 }
 
 .u-transition-font-size {
-  transition: font-size var(--transition-default);
+  transition:
+    outline 0s,
+    filter var(--transition-default),
+    opacity var(--transition-default),
+    background-color var(--transition-default),
+    color var(--transition-default),
+    box-shadow var(--transition-default),
+    border-color var(--transition-default),
+    font-size var(--transition-default);
 }
 
 .u-transition-icon {
@@ -138,6 +146,7 @@
 .u-outline-none {
   outline: none;
 }
+
 .u-outline-none:focus-visible {
   outline: none;
 }
@@ -159,6 +168,20 @@
 
 .u-control-only-active:active {
   filter: brightness(0.95);
+}
+
+.u-control-boxShadow:hover {
+  box-shadow:
+    0 1px 1px var(--product-quinary),
+    0 0 0 0.25rem var(--product-tertiary);
+}
+
+.u-control-boxShadow:active {
+  outline-offset: 4px;
+  outline: 1px solid var(--product-secondary);
+  box-shadow:
+    0 1px 1px var(--product-quinary),
+    0 0 0 0.25rem var(--product-secondary);
 }
 
 /* is-disabled */

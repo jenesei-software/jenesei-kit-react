@@ -1,5 +1,12 @@
 import { IAddIIcon } from '@local/components/icon';
-import { ISx, ISxOutline, ISxTypography, IThemeGenreButton, IThemeOutline, IThemeSize } from '@local/styles/utils/types';
+import {
+  ISx,
+  ISxOutline,
+  ISxTypography,
+  IThemeGenreButton,
+  IThemeOutline,
+  IThemeSize,
+} from '@local/styles/utils/types';
 
 import { CSSProperties, FocusEvent, MouseEventHandler, PropsWithChildren, Ref } from 'react';
 
@@ -7,6 +14,10 @@ type IButtonDefault = PropsWithChildren & {
   size: IThemeSize;
 
   genre: IThemeGenreButton;
+
+  name?: string;
+
+  ariaLabel?: string;
 
   id?: string;
 
@@ -17,7 +28,7 @@ type IButtonDefault = PropsWithChildren & {
   className?: string;
 
   style?: CSSProperties;
-  
+
   icons?: IAddIIcon[];
 
   isDisabled?: boolean;
@@ -41,13 +52,13 @@ type IButtonDefault = PropsWithChildren & {
   isFullSize?: boolean;
 
   outline?: IThemeOutline;
-  
+
   onFocus?: (event: FocusEvent<HTMLButtonElement, Element>) => void;
 
   onClick?: MouseEventHandler<HTMLButtonElement>;
 
   onMouseDown?: MouseEventHandler<HTMLButtonElement>;
-  
+
   type?: 'button' | 'submit' | 'reset';
 } & ISx &
   ISxOutline &

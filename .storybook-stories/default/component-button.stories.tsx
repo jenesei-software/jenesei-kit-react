@@ -1,18 +1,18 @@
-import { Button as ButtonComponent } from '@local/components/button';
+import { Button as ButtonComponent, IButton } from '@local/components/button';
 
-import type { Meta } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { FC } from 'react';
 
 import { WrapperBig, WrapperMin } from './tools';
 
-const meta: Meta<typeof ButtonComponent> = {
+const meta: Meta<IButton> = {
   component: ButtonComponent,
   title: 'Component/Button',
 };
 
 export default meta;
 
-const ButtonWrapper: FC = () => {
+const CollectionWrapper: FC = () => {
   return (
     <WrapperBig>
       <WrapperMin>
@@ -107,6 +107,16 @@ const ButtonWrapper: FC = () => {
   );
 };
 
-export const Button = {
-  render: () => <ButtonWrapper />,
+type Story = StoryObj<IButton>;
+
+export const Collection = {
+  render: () => <CollectionWrapper />,
+};
+
+export const Index: Story = {
+  args: {
+    genre:'primary',
+    size:'medium',
+    children: 'Example',
+  },
 };

@@ -1,60 +1,48 @@
-import { addErrorProps, addErrorPropsDollar } from '@local/components/error';
-import { addIconProps } from '@local/components/icon';
-import {
-  addOutlineProps,
-  addOutlinePropsDollar,
-  addSXProps,
-  addSXPropsDollar,
-  addSXTypographyProps,
-  addSXTypographyPropsDollar,
-  IThemeGenre,
-  IThemeSize,
-} from '@local/theme';
-import { AddDollarSign } from '@local/types';
+import { ISx, ISxOutline, ISxTypography, IThemeSize } from '@local/styles/utils';
+import { IThemeGenreCheckbox, IThemeOutline } from '@local/styles/utils/types';
 
-import { PropsWithChildren } from 'react';
+import { CSSProperties, PropsWithChildren, Ref } from 'react';
 
-export type CheckboxProps = PropsWithChildren & {
+import { IIcon } from '../icon';
+
+type IIconWithoutSize = {
+  [K in IIcon['type']]: Omit<Extract<IIcon, { type: K }>, 'size'> & { size?: IThemeSize };
+}[IIcon['type']];
+
+export type ICheckbox = PropsWithChildren & {
   checked?: boolean;
 
-  genre: TCheckboxGenre;
+  genre: IThemeGenreCheckbox;
 
   view: {
-    true: addIconProps;
-    false: addIconProps;
+    true: IIconWithoutSize & { size?: IThemeSize };
+    false: IIconWithoutSize & { size?: IThemeSize };
   };
 
+  ref?: Ref<HTMLElement | null>;
+  isHidden?: boolean;
+  className?: string;
+
+  style?: CSSProperties;
+  name?: string;
+
+  ariaLabel?: string;
+
+  id?: string;
   isDisabled?: boolean;
-
+  isRadius?: boolean;
   isOnlyLoading?: boolean;
-
+  isMinWidthAsContent?: boolean;
   isLoading?: boolean;
-
+  isNotHoverEffect?: boolean;
   isHiddenBorder?: boolean;
-
   isNotBackground?: boolean;
-
+  isFullSize?: boolean;
   onChange?: (checked: boolean) => void;
-
+  outline?: IThemeOutline;
   isWidthAsHeight?: boolean;
 
   size: IThemeSize;
-} & addSXProps &
-  addErrorProps &
-  addSXTypographyProps &
-  addOutlineProps;
-
-export type StyledCheckboxProps = AddDollarSign<
-  Pick<
-    CheckboxProps,
-    'checked' | 'genre' | 'view' | 'isWidthAsHeight' | 'size' | 'isDisabled' | 'isNotBackground' | 'isHiddenBorder'
-  >
-> &
-  addSXPropsDollar &
-  addErrorPropsDollar &
-  addSXTypographyPropsDollar &
-  addOutlinePropsDollar;
-
-export type TCheckboxGenre = keyof IThemeGenre;
-
-export type StyledIconProps = AddDollarSign<Pick<CheckboxProps, 'genre' | 'checked'>>;
+} & ISx &
+  ISxTypography &
+  ISxOutline;

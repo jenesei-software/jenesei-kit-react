@@ -2,6 +2,7 @@ import { IScroll, Scroll as ScrollComponent } from '@local/areas/scroll';
 import { Button } from '@local/components/button';
 import { Stack } from '@local/components/stack';
 import { Typography } from '@local/components/typography';
+import { CSS_VARS } from '@local/styles/utils/constants';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { FC, useState } from 'react';
@@ -24,22 +25,22 @@ const ScrollWrapper: FC<IScroll> = (props) => {
   return (
     <ScrollComponent
       {...props}
-      sx={(theme) => ({
+      sx={{
         width: '300px',
         padding: '12px',
         boxSizing: 'content-box',
-        backgroundColor: theme.palette.fillQuinaryLight,
-      })}
+        backgroundColor: CSS_VARS.palette.fillQuinaryLight,
+      }}
     >
       <Button isMinWidthAsContent onClick={toggleContent} size={'small'} genre={'primary'}>
         Toggle Content
       </Button>
       <Stack
-        sx={(theme) => ({
+        sx={{
           width: '100px',
           height: '100px',
-          backgroundColor: theme.palette.fillPrimaryLight,
-        })}
+          backgroundColor: CSS_VARS.palette.fillPrimaryLight,
+        }}
       >
         <Typography
           sx={{
@@ -51,12 +52,12 @@ const ScrollWrapper: FC<IScroll> = (props) => {
       </Stack>
       {content && (
         <Stack
-          sx={(theme) => ({
+          sx={{
             width: '1000px',
             minWidth: '1000px',
             height: '100px',
-            backgroundColor: theme.palette.fillPrimaryLight,
-          })}
+            backgroundColor: CSS_VARS.palette.fillPrimaryLight,
+          }}
         >
           <Typography
             sx={{

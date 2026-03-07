@@ -165,6 +165,16 @@ export const CSS_VARS = {
   },
 
   component: {
+    checkbox: {
+      height: 'var(--component-checkbox-height)',
+      padding: 'var(--component-checkbox-padding)',
+      radius: 'var(--component-checkbox-radius)',
+      gap: 'var(--component-checkbox-gap)',
+
+      background: 'var(--component-checkbox-background)',
+      border: 'var(--component-checkbox-border)',
+      color: 'var(--component-checkbox-color)',
+    },
     button: {
       index: {
         height: 'var(--component-button-height)',
@@ -193,27 +203,25 @@ export const CSS_VARS = {
       },
     },
     typography: {
-      index: {
-        letterSpacing: 'var(--component-typography-letter-spacing)',
-        flex: 'var(--component-typography-flex)',
-        cursor: 'var(--component-typography-cursor)',
-        overflow: 'var(--component-typography-overflow)',
-        line: {
-          single: 'var(--component-typography-line-single)',
-          multiline: 'var(--component-typography-line-multiline)',
-        },
-        family: 'var(--component-typography-family)',
-        weight: 'var(--component-typography-weight)',
-        height: 'var(--component-typography-height)',
-        color: 'var(--component-typography-color)',
-        align: 'var(--component-typography-align)',
-        wrap: 'var(--component-typography-wrap)',
-        decoration: 'var(--component-typography-decoration)',
-        transform: 'var(--component-typography-transform)',
-        size: 'var(--component-typography-size)',
-        variant: 'var(--component-typography-variant)',
-        variantHeight: 'var(--component-typography-variant-height)',
+      letterSpacing: 'var(--component-typography-letter-spacing)',
+      flex: 'var(--component-typography-flex)',
+      cursor: 'var(--component-typography-cursor)',
+      overflow: 'var(--component-typography-overflow)',
+      line: {
+        single: 'var(--component-typography-line-single)',
+        multiline: 'var(--component-typography-line-multiline)',
       },
+      family: 'var(--component-typography-family)',
+      weight: 'var(--component-typography-weight)',
+      height: 'var(--component-typography-height)',
+      color: 'var(--component-typography-color)',
+      align: 'var(--component-typography-align)',
+      wrap: 'var(--component-typography-wrap)',
+      decoration: 'var(--component-typography-decoration)',
+      transform: 'var(--component-typography-transform)',
+      size: 'var(--component-typography-size)',
+      variant: 'var(--component-typography-variant)',
+      variantHeight: 'var(--component-typography-variant-height)',
     },
   },
 
@@ -225,6 +233,85 @@ export const CSS_VARS = {
   },
 
   genre: {
+    checkbox: {
+      green: {
+        background: {
+          index: CSS_VARS_PALETTE.accentGreenLight,
+        },
+        color: {
+          index: CSS_VARS_PALETTE.textPrimaryDark,
+        },
+        border: {
+          index: CSS_VARS_PALETTE.transparent,
+        },
+      },
+      red: {
+        background: {
+          index: CSS_VARS_PALETTE.accentRedLight,
+        },
+        color: {
+          index: CSS_VARS_PALETTE.textPrimaryDark,
+        },
+        border: {
+          index: CSS_VARS_PALETTE.transparent,
+        },
+      },
+      yellow: {
+        background: {
+          index: CSS_VARS_PALETTE.accentYellowLight,
+        },
+        color: {
+          index: CSS_VARS_PALETTE.textPrimaryDark,
+        },
+        border: {
+          index: CSS_VARS_PALETTE.transparent,
+        },
+      },
+      blue: {
+        background: {
+          index: CSS_VARS_PALETTE.accentBlueLight,
+        },
+        color: {
+          index: CSS_VARS_PALETTE.textPrimaryDark,
+        },
+        border: {
+          index: CSS_VARS_PALETTE.transparent,
+        },
+      },
+      primary: {
+        background: {
+          index: CSS_VARS_PALETTE.fillPrimaryDark,
+        },
+        color: {
+          index: CSS_VARS_PALETTE.textPrimaryLight,
+        },
+        border: {
+          index: CSS_VARS_PALETTE.textPrimaryLight,
+        },
+      },
+      secondary: {
+        background: {
+          index: CSS_VARS_PALETTE.fillPrimaryLight,
+        },
+        color: {
+          index: CSS_VARS_PALETTE.textPrimaryDark,
+        },
+        border: {
+          index: CSS_VARS_PALETTE.textPrimaryDark,
+        },
+      },
+      product: {
+        background: {
+          index: CSS_VARS_PALETTE.productPrimary,
+        },
+        color: {
+          index: CSS_VARS_PALETTE.textPrimaryDark,
+        },
+        border: {
+          index: CSS_VARS_PALETTE.transparent,
+        },
+      },
+    },
     button: {
       green: {
         background: {
@@ -351,6 +438,7 @@ export const CSS_CLASS = {
 
   control: {
     default: 'u-control-default',
+    boxShadow: 'u-control-boxShadow',
     onlyActive: 'u-control-only-active',
     none: 'u-control-none',
   },
@@ -377,6 +465,72 @@ export const CSS_CLASS = {
   keyframe: {
     shadowPulse: 'keyframe-shadow-pulse',
     backgroundMove: 'keyframe-background-move',
+  },
+  area: {
+    preview: {
+      root: 'area-preview-loader',
+      containerIcon: 'area-preview-loader__container-icon',
+      containerChildren: 'area-preview-loader__container-children',
+      children: 'area-preview-children',
+    },
+    scroll: {
+      root: 'area-scroll',
+      horizontal: 'area-scroll-horizontal',
+      vertical: 'area-scroll-vertical',
+      isAlwaysHorizontal: 'area-scroll-is-always-horizontal',
+      isAlwaysVertical: 'area-scroll-is-always-vertical',
+    },
+    skeleton: {
+      root: 'area-skeleton',
+      visibleFalse: 'area-skeleton-visible-false',
+    },
+  },
+  component: {
+    typography: {
+      root: 'component-typography',
+      lineSingle: 'component-typography-line-single',
+      lineMulti: 'component-typography-line-multi',
+      isBold: 'component-typography-is-bold',
+      variantCallout: 'component-typography-variant-callout',
+      shadowShadowPulse: 'component-typography-shadow-shadowPulse',
+      isHoverUnderlining: 'component-typography-is-hover-underlining',
+      isNoUserSelect: 'component-typography-is-no-user-select',
+      size: 'component-typography-size',
+      variant: 'component-typography-variant',
+    },
+    button: {
+      index: {
+        root: 'component-button',
+        isHidden: 'component-button-is-hidden',
+        isHiddenBorder: 'component-button-is-hidden-border',
+        isRadius: 'component-button-is-radius',
+        isFullSize: 'component-button-is-full-size',
+        isWidthAsHeight: 'component-button-is-width-as-height',
+        isMinWidthAsContent: 'component-button-is-min-width-as-content',
+      },
+      icons: {
+        root: 'component-button__icons',
+        isIconGroup: 'component-button__icons-is-icon-group',
+      },
+    },
+    icon: {
+      index: {
+        root: 'component-icon',
+      },
+      skeleton: { root: 'component-icon__skeleton' },
+    },
+    stack: {
+      root: 'component-stack',
+    },
+    checkbox: {
+      root: 'component-checkbox',
+      isHidden: 'component-checkbox-is-hidden',
+      isHiddenBorder: 'component-checkbox-is-hidden-border',
+      isRadius: 'component-checkbox-is-radius',
+      isFullSize: 'component-checkbox-is-full-size',
+      isWidthAsHeight: 'component-checkbox-is-width-as-height',
+      isMinWidthAsContent: 'component-checkbox-is-min-width-as-content',
+    },
   },
 } as const;
 

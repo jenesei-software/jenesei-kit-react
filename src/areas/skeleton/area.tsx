@@ -5,8 +5,8 @@ import { setClasses, setStyles } from '@local/styles/utils/functions';
 
 import { FC, useEffect, useMemo, useState } from 'react';
 
-import styles from './area.styles.module.css';
 import { ISkeleton } from './area.types';
+
 export const Skeleton: FC<ISkeleton> = (props) => {
   const [visible, setVisible] = useState(props.defaultVisible ?? false);
 
@@ -46,8 +46,8 @@ export const Skeleton: FC<ISkeleton> = (props) => {
     <Stack
       {...props}
       className={setClasses([
-        styles['area-skeleton'],
-        visible === false ? styles['area-skeleton-visible-false'] : false,
+        CSS_CLASS.area.skeleton.root,
+        visible === false ? CSS_CLASS.area.skeleton.visibleFalse : false,
         visible === false ? CSS_CLASS.keyframe.backgroundMove : false,
         CSS_CLASS.transition.color,
         props.className,

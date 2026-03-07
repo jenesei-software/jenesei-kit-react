@@ -1,10 +1,10 @@
 import { Icon } from '@local/components/icon';
 import { Stack, StackMotion } from '@local/components/stack';
+import { CSS_CLASS } from '@local/styles/utils';
 
 import { AnimatePresence } from 'framer-motion';
 import { FC, useEffect, useMemo, useState } from 'react';
 
-import styles from './area.styles.module.css';
 import { IPreview } from './area.types';
 
 export const Preview: FC<IPreview> = (props) => {
@@ -49,22 +49,22 @@ export const Preview: FC<IPreview> = (props) => {
         <StackMotion
           key='loader'
           sx={props?.sxLoader}
-          className={styles['area-preview-loader']}
+          className={CSS_CLASS.area.preview.root}
           transition={{ duration: 0.3 }}
           exit={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          <Stack className={styles['area-preview-loader-container-icon']}>
+          <Stack className={CSS_CLASS.area.preview.containerIcon}>
             <Icon size='100%' type='loading' color='productPrimary' name='Line' />
           </Stack>
-          {props.content && <Stack className={styles['area-preview-loader-container-children']}>{props.content}</Stack>}
+          {props.content && <Stack className={CSS_CLASS.area.preview.containerChildren}>{props.content}</Stack>}
         </StackMotion>
       ) : null}
       {visible ? (
         <StackMotion
           key='children'
           sx={props?.sxChildren}
-          className={styles['area-preview-children']}
+          className={CSS_CLASS.area.preview.children}
           transition={{ duration: 0.3 }}
           initial={{ opacity: 0 }}
           exit={{ opacity: 0 }}

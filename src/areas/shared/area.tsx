@@ -1,5 +1,6 @@
 import { Button } from '@local/components/button';
 import { Stack, StackMotion } from '@local/components/stack';
+import { CSS_VARS } from '@local/styles/utils';
 
 import { motion } from 'framer-motion';
 import { CSSProperties, FC } from 'react';
@@ -32,10 +33,10 @@ export const Shared: FC<IShared> = (props) => {
             <StackMotion
               layoutId='underline'
               id='underline'
-              sx={(theme) => ({
+              sx={{
                 ...underline,
-                background: theme.palette[props.color ?? 'accentBlueLight'],
-              })}
+                background: CSS_VARS.palette[props.color ?? 'accentBlueLight'],
+              }}
             />
           ) : null}
         </motion.li>

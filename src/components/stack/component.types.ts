@@ -22,7 +22,7 @@ export interface IStack extends ISx, PropsWithChildren {
 
   ref?: Ref<HTMLDivElement | null>;
 
-  style?: CSSProperties;
+  style?: CSSProperties | undefined;
 }
 
 export type IStackMotion = IStack &

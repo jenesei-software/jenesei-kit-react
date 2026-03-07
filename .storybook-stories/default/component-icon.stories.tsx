@@ -27,7 +27,7 @@ const IconWrapperAll: FC = () => {
         >
           ID
         </Typography>
-        <WrapperMin sx={(theme) => ({ color: theme.palette.accentBrownLight })}>
+        <WrapperMin sx={{ color: CSS_VARS.palette.accentBrownLight }}>
           {THEME_MAP.id.map((item) => (
             <IconComponent key={item} type='id' name={item} size={'large'} />
           ))}
@@ -42,7 +42,7 @@ const IconWrapperAll: FC = () => {
         >
           Checkbox
         </Typography>
-        <WrapperMin>
+        <WrapperMin sx={{ color: CSS_VARS.palette.accentGreenLight }}>
           {THEME_MAP.checkbox.map((item) => (
             <IconComponent key={item} type={'checkbox'} name={item} size={'large'} color='textPrimaryLight' />
           ))}
@@ -57,7 +57,7 @@ const IconWrapperAll: FC = () => {
         >
           Loading
         </Typography>
-        <WrapperMin>
+        <WrapperMin sx={{ color: CSS_VARS.palette.accentBlueLight }}>
           {THEME_MAP.loading.map((item) => (
             <IconComponent key={item} type={'loading'} name={item} size={'large'} color='textPrimaryLight' />
           ))}

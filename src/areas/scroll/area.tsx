@@ -1,9 +1,9 @@
 import { Stack } from '@local/components/stack';
+import { CSS_CLASS } from '@local/styles/utils';
 import { setClasses, setStyles } from '@local/styles/utils/functions';
 
 import { FC } from 'react';
 
-import styles from './area.styles.module.css';
 import { IScroll } from './area.types';
 
 export const Scroll: FC<IScroll> = (props) => {
@@ -14,11 +14,11 @@ export const Scroll: FC<IScroll> = (props) => {
       {...rest}
       className={setClasses([
         className,
-        styles['area-scroll'],
-        props.horizontal && styles['area-scroll-horizontal'],
-        props.vertical && styles['area-scroll-vertical'],
-        props.isAlwaysHorizontal && styles['area-scroll-is-always-horizontal'],
-        props.isAlwaysVertical && styles['area-scroll-is-always-vertical'],
+        CSS_CLASS.area.scroll.root,
+        props.horizontal && CSS_CLASS.area.scroll.horizontal,
+        props.vertical && CSS_CLASS.area.scroll.vertical,
+        props.isAlwaysHorizontal && CSS_CLASS.area.scroll.isAlwaysHorizontal,
+        props.isAlwaysVertical && CSS_CLASS.area.scroll.isAlwaysVertical,
       ])}
       style={setStyles([style])}
     >

@@ -2,6 +2,7 @@ import { Smooth as SmoothComponent } from '@local/areas/smooth';
 import { Button } from '@local/components/button';
 import { IStack, Stack, StackMotion } from '@local/components/stack';
 import { Typography } from '@local/components/typography';
+import { CSS_VARS } from '@local/styles/utils/constants';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { FC, useState } from 'react';
@@ -24,13 +25,13 @@ const SmoothWrapper: FC<IStack> = (props) => {
   return (
     <SmoothComponent
       {...props}
-      sx={(theme) => ({
+      sx={{
         height: 'fit-content',
         gap: '4px',
         flexDirection: 'column',
         padding: '12px',
-        backgroundColor: theme.palette.fillQuinaryLight,
-      })}
+        backgroundColor: CSS_VARS.palette.fillQuinaryLight,
+      }}
     >
       <StackMotion layout='position'>
         <Button onClick={toggleContent} size={'small'} genre={'primary'}>
@@ -39,11 +40,11 @@ const SmoothWrapper: FC<IStack> = (props) => {
       </StackMotion>
       <StackMotion
         layout='position'
-        sx={(theme) => ({
+        sx={{
           height: '100px',
           minHeight: '100px',
-          backgroundColor: theme.palette.fillPrimaryLight,
-        })}
+          backgroundColor: CSS_VARS.palette.fillPrimaryLight,
+        }}
       >
         <Typography
           sx={{
@@ -55,10 +56,10 @@ const SmoothWrapper: FC<IStack> = (props) => {
       </StackMotion>
       {content ? (
         <Stack
-          sx={(theme) => ({
+          sx={{
             height: '100px',
-            backgroundColor: theme.palette.fillPrimaryLight,
-          })}
+            backgroundColor: CSS_VARS.palette.fillPrimaryLight,
+          }}
         >
           <Typography
             sx={{

@@ -1,6 +1,8 @@
 import { Typography as TypographyComponent } from '@local/components/typography';
 import { useScreenWidth } from '@local/contexts/context-screen-width';
 import { useResponsiveLayout } from '@local/hooks/use-responsive-layout';
+import { CSS_VARS } from '@local/styles/utils/constants';
+import { ITypography } from '@local/styles/utils/types';
 
 import type { Meta } from '@storybook/react-vite';
 import { FC } from 'react';
@@ -17,10 +19,10 @@ export default meta;
 const AllWrapper: FC = () => {
   return (
     <WrapperBig
-      sx={(theme) => ({
+      sx={{
         flexDirection: 'column',
-        color: theme.palette.accentBlueLight,
-      })}
+        color: CSS_VARS.palette.accentBlueLight,
+      }}
     >
       <TypographyComponent
         sx={{
@@ -32,10 +34,10 @@ const AllWrapper: FC = () => {
         (size: 14)
       </TypographyComponent>
       <WrapperMin
-        sx={(theme) => ({
+        sx={{
           flexDirection: 'column',
-          color: theme.palette.accentPinkLight,
-        })}
+          color: CSS_VARS.palette.accentPinkLight,
+        }}
       >
         <TypographyComponent
           sx={{
@@ -47,10 +49,10 @@ const AllWrapper: FC = () => {
         <TypographyResponsive />
       </WrapperMin>
       <WrapperMin
-        sx={(theme) => ({
+        sx={{
           flexDirection: 'column',
-          color: theme.palette.accentBrownLight,
-        })}
+          color: CSS_VARS.palette.textPrimaryLight,
+        }}
       >
         <TypographyComponent
           isParagraph
@@ -95,10 +97,10 @@ const AllWrapper: FC = () => {
         </TypographyComponent>
       </WrapperMin>
       <WrapperMin
-        sx={(theme) => ({
+        sx={{
           flexDirection: 'column',
-          color: theme.palette.accentBrownLight,
-        })}
+          color: CSS_VARS.palette.textPrimaryLight,
+        }}
       >
         <TypographyComponent
           sx={{
@@ -203,10 +205,10 @@ const TypographyBreakpoint: FC = () => {
   );
 };
 const TypographyResponsive: FC = () => {
-  const sxTypographyOne = useResponsiveLayout({
+  const sxTypographyOne = useResponsiveLayout<ITypography>({
     default: {
       size: 20,
-      isTransitionFontSize: true,
+      transition: 'fontSize',
     },
     breakpoints: {
       tablet: {

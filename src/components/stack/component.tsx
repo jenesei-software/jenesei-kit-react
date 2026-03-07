@@ -1,28 +1,24 @@
-import { useSX } from '@local/hooks/use-responsive-layout';
 import { CSS_CLASS } from '@local/styles/utils';
 import { setClasses, setStyles } from '@local/styles/utils/functions';
 
 import { motion } from 'framer-motion';
 import { FC, useMemo } from 'react';
 
-import styles from './component.styles.module.css';
 import { IStack, IStackMotion } from './component.types';
 
 export const Stack: FC<IStack> = (props) => {
-  const sx = useSX(props?.sx ?? {});
-
   const { className, style, Component } = useMemo(() => {
     return {
       className: setClasses([
-        styles.stack,
+        CSS_CLASS.component.stack.root,
         props.isRipple && CSS_CLASS.isRipple,
         props.isHover && CSS_CLASS.isHover,
         props.className,
       ]),
-      style: setStyles([sx, props.style]),
+      style: setStyles([props?.sx, props.style]),
       Component: props.as ?? 'div',
     };
-  }, [props.as, props.className, props.isHover, props.isRipple, props.style, sx]);
+  }, [props.as, props.className, props.isHover, props.isRipple, props.style, props.sx]);
 
   return (
     <Component
@@ -44,7 +40,6 @@ export const Stack: FC<IStack> = (props) => {
 
 export const StackMotion: FC<IStackMotion> = (props) => {
   const { isHover, isRipple, onClick, onDrop, onDragOver, ref, sx, className, style, ...rest } = props;
-  const sxMemo = useSX(props?.sx ?? {});
 
   const {
     className: className2,
@@ -52,11 +47,11 @@ export const StackMotion: FC<IStackMotion> = (props) => {
     as,
   } = useMemo(() => {
     return {
-      className: setClasses([styles.stack, isRipple && CSS_CLASS.isRipple, isHover && CSS_CLASS.isHover, className]),
-      style: setStyles([sxMemo, style]),
+      className: setClasses([CSS_CLASS.component.stack.root, isRipple && CSS_CLASS.isRipple, isHover && CSS_CLASS.isHover, className]),
+      style: setStyles([props?.sx, style]),
       as: props.as ?? 'div',
     };
-  }, [props.as, isHover, isRipple, className, style, sxMemo]);
+  }, [props.as, isHover, isRipple, className, style, props.sx]);
 
   return (
     <motion.div

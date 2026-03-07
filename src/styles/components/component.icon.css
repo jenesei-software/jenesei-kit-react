@@ -1,4 +1,7 @@
-.icon {
+/* =========================
+   Component - Icon
+   ========================= */
+.component-icon {
   order: var(--component-icon-order);
   width: var(--component-icon-height-icon);
   min-width: var(--component-icon-height-icon);
@@ -8,7 +11,10 @@
   transform: rotate(var(--component-icon-turn));
 }
 
-.icon-skeleton {
+/* =========================
+   Component - Icon - Skeleton
+   ========================= */
+.component-icon__skeleton {
   order: var(--component-icon-skeleton-order);
   width: var(--component-icon-skeleton-height-icon);
   min-width: var(--component-icon-skeleton-height-icon);

@@ -1,4 +1,6 @@
-/* Button */
+/* =========================
+   Component - Button
+   ========================= */
 .component-button {
   cursor: pointer;
   user-select: none;
@@ -22,45 +24,46 @@
   color: var(--component-button-color);
 }
 
-
-.component-button.is-hidden {
+.component-button.component-button-is-hidden {
   opacity: 0.5;
 }
 
-.component-button:not(.is-hidden) {
+.component-button:not(.component-button-is-hidden) {
   opacity: 1;
 }
 
-.component-button.is-hidden-border {
+.component-button.component-button-is-hidden-border {
   border: 0px solid transparent !important;
 }
 
-.component-button.is-radius {
+.component-button.component-button-is-radius {
   border-radius: 100px;
 }
 
-.component-button.is-full-size {
+.component-button.component-button-is-full-size {
   height: 100%;
   width: 100%;
   border-radius: 0px;
 }
 
-.component-button.is-width-as-height {
+.component-button.component-button-is-width-as-height {
   width: var(--component-button-height);
   min-width: var(--component-button-height);
   padding: 0px;
 }
 
-.component-button.is-min-width-as-content {
+.component-button.component-button-is-min-width-as-content {
   min-width: max-content;
 }
 
-/* Icons wrapper */
+/* =========================
+   Component - Button - Icons wrapper
+   ========================= */
 .component-button__icons {
   display: contents;
 }
 
-.component-button__icons.is-icon-group {
+.component-button__icons.component-button__icons-is-icon-group {
   display: flex;
   gap: var(--component-button-gap);
   align-items: center;

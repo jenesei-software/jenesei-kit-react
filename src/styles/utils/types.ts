@@ -57,20 +57,14 @@ export type ILayoutValue<A> = {
   orientations?: Record<IThemeOrientation, A>;
 };
 
-export type ILayout<A> = A | ((theme: IThemeGlobal) => A);
-
-export type ILayoutResponsive<A> = ILayoutValue<A> | ((theme: IThemeGlobal) => ILayoutValue<A>);
-
-export type ITypographyLayout = ILayout<ITypography>;
-
-export type IContainerLayout = ILayout<IContainer>;
+export type ILayoutResponsive<A> = ILayoutValue<A>;
 
 export type ISxTypography = {
-  sxTypography?: ITypographyLayout;
+  sxTypography?: ITypography;
 };
 
 export type ISx = {
-  sx?: IContainerLayout;
+  sx?: CSSProperties;
 };
 
 export type ISxOutline = {
@@ -94,6 +88,7 @@ export type IThemePalette = keyof typeof CSS_VARS.palette;
 export type IThemeShadow = keyof typeof CSS_CLASS.shadow;
 
 export type IThemeGenreButton = keyof typeof CSS_VARS.genre.button;
+export type IThemeGenreCheckbox = keyof typeof CSS_VARS.genre.checkbox;
 
 export type IThemeOutline = keyof typeof CSS_CLASS.outline;
 

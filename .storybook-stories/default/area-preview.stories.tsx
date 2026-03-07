@@ -3,6 +3,7 @@ import { Preview as PreviewComponent } from '@local/areas/preview/area';
 import { Stack } from '@local/components/stack';
 import { Typography } from '@local/components/typography';
 import { MotionTypingEffect } from '@local/styles/motion';
+import { CSS_VARS } from '@local/styles/utils/constants';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { FC } from 'react';
@@ -37,14 +38,14 @@ export const PreviewMax: Story = {
 const PreviewStackWrapper: FC<IPreview> = (props) => {
   return (
     <Stack
-      sx={(theme) => ({
+      sx={{
         position: 'relative',
         width: '200px',
         height: '200px',
-        backgroundColor: theme.palette.accentGrayLight,
-        color: theme.palette.textPrimaryLight,
+        backgroundColor: CSS_VARS.palette.accentGrayLight,
+        color: CSS_VARS.palette.textPrimaryLight,
         borderRadius: '8px',
-      })}
+      }}
     >
       <PreviewComponent {...props} />
     </Stack>
