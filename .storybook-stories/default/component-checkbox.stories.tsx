@@ -1,4 +1,5 @@
 import { Checkbox as CheckboxComponent, ICheckbox } from '@local/components/checkbox';
+import { Stack } from '@local/components/stack';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { FC, useEffect, useState } from 'react';
@@ -183,6 +184,7 @@ const CollectionWrapper: FC = () => {
           Yellow
         </CheckboxComponent>
       </WrapperMin>
+
       <WrapperMin>
         <CheckboxComponent
           view={{
@@ -249,7 +251,20 @@ const CollectionWrapper: FC = () => {
           small
         </CheckboxComponent>
       </WrapperMin>
+
       <WrapperMin>
+        <CheckboxComponent
+          size='medium'
+          genre='primary'
+          isRadius
+          checked={value}
+          onChange={(checked) => setValue(checked)}
+          view={{
+            true: { type: 'checkbox', name: 'Heart-true' },
+            false: { type: 'checkbox', name: 'Heart-false' },
+          }}
+          isWidthAsHeight
+        />
         <CheckboxComponent
           size='medium'
           isRadius
@@ -320,6 +335,30 @@ const CollectionWrapper: FC = () => {
         >
           isHiddenBorder
         </CheckboxComponent>
+        <Stack
+          style={{
+            position: 'relative',
+          }}
+        >
+          <CheckboxComponent
+            size='medium'
+            isRadius
+            genre='product'
+            error={{
+              isError: true,
+              errorMessage: 'Error?',
+              isErrorAbsolute: true,
+            }}
+            checked={value}
+            onChange={(checked) => setValue(checked)}
+            view={{
+              true: { type: 'checkbox', name: 'Square-true' },
+              false: { type: 'checkbox', name: 'Square-false' },
+            }}
+          >
+            Error
+          </CheckboxComponent>
+        </Stack>
       </WrapperMin>
     </WrapperBig>
   );

@@ -1,0 +1,22 @@
+/* =========================
+   Component - Error
+   ========================= */
+.component-error {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid transparent;
+}
+
+.component-error.component-error--size-default {
+  position: static;
+  padding: var(--component-error-padding);
+  color: var(--component-error-color);
+}
+
+.component-error.component-error--size-absolute {
+  position: absolute;
+  top: calc(100% + 4px);
+  padding-left: var(--component-error-padding);
+  color: var(--component-error-color);
+}

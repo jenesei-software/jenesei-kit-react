@@ -3,6 +3,7 @@ import { IThemeGenreCheckbox, IThemeOutline } from '@local/styles/utils/types';
 
 import { CSSProperties, PropsWithChildren, Ref } from 'react';
 
+import { IAddError } from '../error';
 import { IIcon } from '../icon';
 
 type IIconWithoutSize = {
@@ -25,9 +26,9 @@ export type ICheckbox = PropsWithChildren & {
 
   style?: CSSProperties;
   name?: string;
-
+  tabIndex?: number;
   ariaLabel?: string;
-
+  type?: 'button' | 'submit' | 'reset';
   id?: string;
   isDisabled?: boolean;
   isRadius?: boolean;
@@ -44,5 +45,6 @@ export type ICheckbox = PropsWithChildren & {
 
   size: IThemeSize;
 } & ISx &
+  IAddError &
   ISxTypography &
   ISxOutline;

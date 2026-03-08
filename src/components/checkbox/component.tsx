@@ -9,6 +9,7 @@ import { motion } from 'framer-motion';
 import { FC, useMemo, useRef } from 'react';
 
 import { ICheckbox } from './component.types';
+import { ErrorMessage } from '../error';
 
 export const Checkbox: FC<ICheckbox> = (props) => {
   const children = useMemo(
@@ -30,7 +31,7 @@ export const Checkbox: FC<ICheckbox> = (props) => {
   const ref = useMergeRefs([refDefault, props.ref]);
 
   const { className: classNameTypography, style: styleTypography } = useTypographyStyles({
-    sx: { ...props?.sxTypography, size: CSS_VARS.size[props.size].font, weight: '700' },
+    sx: { ...props?.sxTypography, size: CSS_VARS.size[props.size].font, weight: '700', height: '1' },
     style: { order: 0, display: 'contents' },
   });
 
@@ -43,6 +44,7 @@ export const Checkbox: FC<ICheckbox> = (props) => {
         props.isDisabled || props.isHidden ? 'none' : props.isNotHoverEffect ? 'onlyActive' : 'boxShadow'
       ],
       CSS_CLASS.transition.color,
+      props.error?.isError && CSS_CLASS.isError,
       props.isHidden && CSS_CLASS.component.checkbox.isHidden,
       props.isHiddenBorder && CSS_CLASS.component.checkbox.isHiddenBorder,
       props.isRadius && CSS_CLASS.component.checkbox.isRadius,
@@ -81,6 +83,7 @@ export const Checkbox: FC<ICheckbox> = (props) => {
     props.isWidthAsHeight,
     props.outline,
     props.size,
+    props.error,
   ]);
   const handleClick = () => {
     if (!props.isDisabled && props.onChange) {
@@ -90,12 +93,12 @@ export const Checkbox: FC<ICheckbox> = (props) => {
   return (
     <>
       <motion.button
-        type='button'
         disabled={props.isDisabled}
-        tabIndex={0}
+        tabIndex={props.tabIndex ?? 0}
         onClick={handleClick}
         className={className}
         style={style}
+        type={props.type ?? 'button'}
         ref={ref}
         name={props.name}
         aria-label={props.ariaLabel}
@@ -116,13 +119,13 @@ export const Checkbox: FC<ICheckbox> = (props) => {
           </>
         )}
       </motion.button>
-      {/* {props?.error ? (
+      {props?.error?.isError ? (
         <ErrorMessage
           size={props?.error.size ?? props.size}
-          sxTypography={getSxTypography({ size: 'medium', weight: 400, sx: props.sxTypography, theme })}
+          sxTypography={{ size: 'medium', weight: '400', ...props.sxTypography }}
           {...props.error}
         />
-      ) : null} */}
+      ) : null}
     </>
   );
 };

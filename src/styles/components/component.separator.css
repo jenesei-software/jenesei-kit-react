@@ -1,0 +1,14 @@
+/* =========================
+   Component - Separator
+   ========================= */
+.component-separator {
+  flex-grow: 1;
+  flex-shrink: 1;
+  background: var(--component-separator-background);
+  border-radius: var(--component-separator-radius);
+  border: none;
+  width: var(--component-separator-width);
+  height: var(--component-separator-height);
+  max-width: var(--component-separator-max-width);
+  max-height: var(--component-separator-max-height);
+}

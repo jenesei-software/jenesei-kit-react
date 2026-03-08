@@ -132,10 +132,10 @@
 
 .u-outline-boxShadow:focus-visible {
   outline-offset: 0px;
-  outline: 1px solid var(--product-primary);
+  outline: 1px solid var(--product-primary-light);
   box-shadow:
-    0 1px 1px var(--product-quinary),
-    0 0 0 0.25rem var(--product-tertiary);
+    0 1px 1px var(--product-quinary-light),
+    0 0 0 0.25rem var(--product-tertiary-light);
 }
 
 .u-outline-always {
@@ -172,16 +172,16 @@
 
 .u-control-boxShadow:hover {
   box-shadow:
-    0 1px 1px var(--product-quinary),
-    0 0 0 0.25rem var(--product-tertiary);
+    0 1px 1px var(--product-quinary-light),
+    0 0 0 0.25rem var(--product-tertiary-light);
 }
 
 .u-control-boxShadow:active {
   outline-offset: 4px;
-  outline: 1px solid var(--product-secondary);
+  outline: 1px solid var(--product-secondary-light);
   box-shadow:
-    0 1px 1px var(--product-quinary),
-    0 0 0 0.25rem var(--product-secondary);
+    0 1px 1px var(--product-quinary-light),
+    0 0 0 0.25rem var(--product-secondary-light);
 }
 
 /* is-disabled */
@@ -208,4 +208,22 @@
 
 .u-shadow-quaternary {
   box-shadow: var(--shadow-quaternary-light);
+}
+
+/* error */
+
+.u-is-error {
+  border-color: var(--accent-red-light) !important;
+}
+.u-is-error:focus {
+  border-color: var(--accent-red-light) !important;
+}
+.u-is-error:active {
+  border-color: var(--accent-red-light) !important;
+}
+.u-is-error:hover {
+  border-color: var(--accent-red-light) !important;
+}
+.u-is-error:focus-visible {
+  border-color: var(--accent-red-light) !important;
 }

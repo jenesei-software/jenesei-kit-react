@@ -1,3 +1,4 @@
+
 const CSS_VARS_PALETTE = {
   /* ACCENTS */
   accentRedLight: 'var(--accent-red-light)',
@@ -38,11 +39,11 @@ const CSS_VARS_PALETTE = {
   shadowQuaternaryLight: 'var(--shadow-quaternary-light)',
 
   /* PRODUCT */
-  productPrimary: 'var(--product-primary)',
-  productSecondary: 'var(--product-secondary)',
-  productTertiary: 'var(--product-tertiary)',
-  productQuaternary: 'var(--product-quaternary)',
-  productQuinary: 'var(--product-quinary)',
+  productPrimaryLight: 'var(--product-primary-light)',
+  productSecondaryLight: 'var(--product-secondary-light)',
+  productTertiaryLight: 'var(--product-tertiary-light)',
+  productQuaternaryLight: 'var(--product-quaternary-light)',
+  productQuinaryLight: 'var(--product-quinary-light)',
 
   /* SPECIAL */
   current: 'var(--current-color)',
@@ -79,6 +80,13 @@ const CSS_VARS_PALETTE = {
   /* CONTROLS */
   controlMenuDark: 'var(--control-menu-dark)',
   controlTooltipDark: 'var(--control-tooltip-dark)',
+
+  /* PRODUCT */
+  productPrimaryDark: 'var(--product-primary-dark)',
+  productSecondaryDark: 'var(--product-secondary-dark)',
+  productTertiaryDark: 'var(--product-tertiary-dark)',
+  productQuaternaryDark: 'var(--product-quaternary-dark)',
+  productQuinaryDark: 'var(--product-quinary-dark)',
 
   /* SHADOWS */
   shadowGlassDark: 'var(--shadow-glass-dark)',
@@ -164,7 +172,44 @@ export const CSS_VARS = {
     },
   },
 
+  sizeToggle: {
+    large: {
+      height: 'var(--size-toggle-large-height)',
+      width: 'var(--size-toggle-large-width)',
+      padding: 'var(--size-toggle-large-padding)',
+      thumb: 'var(--size-toggle-large-thumb)',
+    },
+    largeMedium: {
+      height: 'var(--size-toggle-large-medium-height)',
+      width: 'var(--size-toggle-large-medium-width)',
+      padding: 'var(--size-toggle-large-medium-padding)',
+      thumb: 'var(--size-toggle-large-medium-thumb)',
+    },
+    medium: {
+      height: 'var(--size-toggle-medium-height)',
+      width: 'var(--size-toggle-medium-width)',
+      padding: 'var(--size-toggle-medium-padding)',
+      thumb: 'var(--size-toggle-medium-thumb)',
+    },
+    mediumSmall: {
+      height: 'var(--size-toggle-medium-small-height)',
+      width: 'var(--size-toggle-medium-small-width)',
+      padding: 'var(--size-toggle-medium-small-padding)',
+      thumb: 'var(--size-toggle-medium-small-thumb)',
+    },
+    small: {
+      height: 'var(--size-toggle-small-height)',
+      width: 'var(--size-toggle-small-width)',
+      padding: 'var(--size-toggle-small-padding)',
+      thumb: 'var(--size-toggle-small-thumb)',
+    },
+  },
+
   component: {
+    error: {
+      padding: 'var(--component-error-padding)',
+      color: 'var(--component-error-color)',
+    },
     checkbox: {
       height: 'var(--component-checkbox-height)',
       padding: 'var(--component-checkbox-padding)',
@@ -174,6 +219,24 @@ export const CSS_VARS = {
       background: 'var(--component-checkbox-background)',
       border: 'var(--component-checkbox-border)',
       color: 'var(--component-checkbox-color)',
+    },
+    toggle: {
+      height: 'var(--component-toggle-height)',
+      width: 'var(--component-toggle-width)',
+      padding: 'var(--component-toggle-padding)',
+      backgroundActive: 'var(--component-toggle-active-background)',
+      borderActive: 'var(--component-toggle-active-border)',
+      backgroundUnActive: 'var(--component-toggle-un-active-background)',
+      borderUnActive: 'var(--component-toggle-un-active-border)',
+      centerHeight: 'var(--component-toggle-center-height)',
+      centerWidth: 'var(--component-toggle-center-width)',
+      centerBackgroundActive: 'var(--component-toggle-center-active-background)',
+      centerBorderActive: 'var(--component-toggle-center-active-border)',
+      centerBackgroundUnActive: 'var(--component-toggle-center-un-active-background)',
+      centerBorderUnActive: 'var(--component-toggle-center-un-active-border)',
+      centerBoxShadowActive: 'var(--component-toggle-center-active-box-shadow)',
+      centerBoxShadowUnActive: 'var(--component-toggle-center-un-active-box-shadow)',
+      centerX: 'var(--component-toggle-center-x)',
     },
     button: {
       index: {
@@ -222,6 +285,14 @@ export const CSS_VARS = {
       size: 'var(--component-typography-size)',
       variant: 'var(--component-typography-variant)',
       variantHeight: 'var(--component-typography-variant-height)',
+    },
+    separator: {
+      width: 'var(--component-separator-width)',
+      height: 'var(--component-separator-height)',
+      maxWidth: 'var(--component-separator-max-width)',
+      maxHeight: 'var(--component-separator-max-height)',
+      background: 'var(--component-separator-background)',
+      radius: 'var(--component-separator-radius)',
     },
   },
 
@@ -302,7 +373,7 @@ export const CSS_VARS = {
       },
       product: {
         background: {
-          index: CSS_VARS_PALETTE.productPrimary,
+          index: CSS_VARS_PALETTE.productPrimaryLight,
         },
         color: {
           index: CSS_VARS_PALETTE.textPrimaryDark,
@@ -381,13 +452,29 @@ export const CSS_VARS = {
       },
       product: {
         background: {
-          index: CSS_VARS_PALETTE.productPrimary,
+          index: CSS_VARS_PALETTE.productPrimaryLight,
         },
         color: {
           index: CSS_VARS_PALETTE.textPrimaryDark,
         },
         border: {
           index: CSS_VARS_PALETTE.transparent,
+        },
+      },
+    },
+    toggle: {
+      primary: {
+        active: {
+          border: CSS_VARS_PALETTE.transparent,
+          track: CSS_VARS_PALETTE.productPrimaryLight,
+          thumb: CSS_VARS_PALETTE.fillPrimaryDark,
+          thumbBoxShadow: CSS_VARS_PALETTE.shadowPrimaryLight,
+        },
+        unActive: {
+          border: CSS_VARS_PALETTE.productPrimaryLight,
+          track: CSS_VARS_PALETTE.fillPrimaryLight,
+          thumb: CSS_VARS_PALETTE.fillPrimaryDark,
+          thumbBoxShadow: CSS_VARS_PALETTE.shadowPrimaryLight,
         },
       },
     },
@@ -455,6 +542,8 @@ export const CSS_CLASS = {
    */
   isHover: 'u-is-hover',
 
+  isError: 'u-is-error',
+
   shadow: {
     glass: 'u-shadow-glass',
     primary: 'u-shadow-primary',
@@ -466,6 +555,7 @@ export const CSS_CLASS = {
     shadowPulse: 'keyframe-shadow-pulse',
     backgroundMove: 'keyframe-background-move',
   },
+
   area: {
     preview: {
       root: 'area-preview-loader',
@@ -485,7 +575,16 @@ export const CSS_CLASS = {
       visibleFalse: 'area-skeleton-visible-false',
     },
   },
+
   component: {
+    separator: {
+      root: 'component-separator',
+    },
+    error: {
+      root: 'component-error',
+      sizeDefault: 'component-error--size-default',
+      sizeAbsolute: 'component-error--size-absolute',
+    },
     typography: {
       root: 'component-typography',
       lineSingle: 'component-typography-line-single',
@@ -530,6 +629,16 @@ export const CSS_CLASS = {
       isFullSize: 'component-checkbox-is-full-size',
       isWidthAsHeight: 'component-checkbox-is-width-as-height',
       isMinWidthAsContent: 'component-checkbox-is-min-width-as-content',
+    },
+    toggle: {
+      root: 'component-toggle',
+      active: 'component-toggle--active',
+      unActive: 'component-toggle--un-active',
+      isHidden: 'component-toggle--is-hidden',
+      isHiddenBorder: 'component-toggle--is-hidden-border',
+      center: 'component-toggle-center',
+      centerActive: 'component-toggle-center--active',
+      centerUnActive: 'component-toggle-center--un-active',
     },
   },
 } as const;

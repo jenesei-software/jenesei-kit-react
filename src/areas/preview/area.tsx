@@ -55,7 +55,7 @@ export const Preview: FC<IPreview> = (props) => {
           animate={{ opacity: 1 }}
         >
           <Stack className={CSS_CLASS.area.preview.containerIcon}>
-            <Icon size='100%' type='loading' color='productPrimary' name='Line' />
+            <Icon size='100%' type='loading' color='productPrimaryLight' name='Line' />
           </Stack>
           {props.content && <Stack className={CSS_CLASS.area.preview.containerChildren}>{props.content}</Stack>}
         </StackMotion>

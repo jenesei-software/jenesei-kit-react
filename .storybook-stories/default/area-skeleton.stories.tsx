@@ -69,7 +69,7 @@ const SkeletonManyWrapper: FC<ISkeleton> = (props) => {
       >
         <SkeletonComponent
           {...props}
-          color='productPrimary'
+          color='productPrimaryLight'
           type='primary'
           sx={{
             borderRadius: '6px',
@@ -162,7 +162,7 @@ const SkeletonManyWrapper: FC<ISkeleton> = (props) => {
       >
         <SkeletonComponent
           {...props}
-          color='productPrimary'
+          color='productPrimaryLight'
           type='primary'
           sx={{
             borderRadius: '6px',

@@ -25,7 +25,7 @@ export const PreviewMax: Story = {
     content: (
       <Typography
         sx={{
-          variant: 'headline',
+          variant: 'title-3',
           color: 'textPrimaryLight',
         }}
       >
@@ -60,7 +60,7 @@ export const PreviewStack: Story = {
     content: (
       <Typography
         sx={{
-          variant: 'headline',
+          variant: 'title-3',
           color: 'textPrimaryLight',
         }}
       >

@@ -27,7 +27,7 @@ export const Button: FC<IButton> = (props) => {
   const isInteractive = !props.isDisabled && props.isWhileTapEffect;
 
   const { className: classNameTypography, style: styleTypography } = useTypographyStyles({
-    sx: { ...props?.sxTypography, size: CSS_VARS.size[props.size].font, weight: '700' },
+    sx: { ...props?.sxTypography, size: CSS_VARS.size[props.size].font, weight: '700', height: '1' },
     style: { order: 0, display: 'contents' },
   });
 
@@ -103,12 +103,12 @@ export const Button: FC<IButton> = (props) => {
       whileHover={isInteractive ? { scale: 0.97, transition: { duration: 0.2, ease: 'easeOut' } } : undefined}
       tabIndex={props.tabIndex ?? 0}
       disabled={props.isDisabled}
-      type={props.type ?? 'button'}
       className={className}
       style={style}
       onClick={handleClick}
       onFocus={props.onFocus}
       onMouseDown={props.onMouseDown}
+      type={props.type ?? 'button'}
       ref={ref as Ref<HTMLButtonElement>}
       name={props.name}
       aria-label={props.ariaLabel}

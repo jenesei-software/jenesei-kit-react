@@ -82,6 +82,37 @@
   --size-small-radius: 8px;
   --size-small-padding: 8px;
   --size-small-font: 12px;
+
+  /* ================= SIZES TOGGLE ================= */
+  /* LARGE */
+  --size-toggle-large-height: 46px;
+  --size-toggle-large-width: 92px;
+  --size-toggle-large-padding: 3px;
+  --size-toggle-large-thumb: 40px;
+
+  /* LARGE MEDIUM */
+  --size-toggle-large-medium-height: 42px;
+  --size-toggle-large-medium-width: 84px;
+  --size-toggle-large-medium-padding: 2px;
+  --size-toggle-large-medium-thumb: 38px;
+
+  /* MEDIUM */
+  --size-toggle-medium-height: 38px;
+  --size-toggle-medium-width: 76px;
+  --size-toggle-medium-padding: 2px;
+  --size-toggle-medium-thumb: 34px;
+
+  /* MEDIUM SMALL */
+  --size-toggle-medium-small-height: 34px;
+  --size-toggle-medium-small-width: 68px;
+  --size-toggle-medium-small-padding: 2px;
+  --size-toggle-medium-small-thumb: 30px;
+
+  /* SMALL */
+  --size-toggle-small-height: 30px;
+  --size-toggle-small-width: 60px;
+  --size-toggle-small-padding: 2px;
+  --size-toggle-small-thumb: 26px;
 }
 
 @media screen and (max-width: 1290px) {
@@ -186,11 +217,17 @@
 
   /* ================= PRODUCT ================= */
 
-  --product-primary: rgba(65, 149, 210, 1);
-  --product-secondary: rgba(65, 149, 210, 0.5);
-  --product-tertiary: rgba(65, 149, 210, 0.25);
-  --product-quaternary: rgba(65, 149, 210, 0.1);
-  --product-quinary: rgba(65, 149, 210, 0.05);
+  --product-primary-light: rgba(65, 149, 210, 1);
+  --product-secondary-light: rgba(65, 149, 210, 0.5);
+  --product-tertiary-light: rgba(65, 149, 210, 0.25);
+  --product-quaternary-light: rgba(65, 149, 210, 0.1);
+  --product-quinary-light: rgba(65, 149, 210, 0.05);
+
+  --product-primary-dark: rgba(100, 181, 246, 1);
+  --product-secondary-dark: rgba(100, 181, 246, 0.6);
+  --product-tertiary-dark: rgba(100, 181, 246, 0.35);
+  --product-quaternary-dark: rgba(100, 181, 246, 0.18);
+  --product-quinary-dark: rgba(100, 181, 246, 0.08);
 
   /* ================= SHADOWS ================= */
 
@@ -273,6 +310,18 @@
 
   --control-menu-light: rgba(246, 246, 246, 0.72);
   --control-tooltip-light: rgba(0, 0, 0, 0.35);
+
+  --product-primary-dark: rgba(65, 149, 210, 1);
+  --product-secondary-dark: rgba(65, 149, 210, 0.5);
+  --product-tertiary-dark: rgba(65, 149, 210, 0.25);
+  --product-quaternary-dark: rgba(65, 149, 210, 0.1);
+  --product-quinary-dark: rgba(65, 149, 210, 0.05);
+
+  --product-primary-light: rgba(100, 181, 246, 1);
+  --product-secondary-light: rgba(100, 181, 246, 0.6);
+  --product-tertiary-light: rgba(100, 181, 246, 0.35);
+  --product-quaternary-light: rgba(100, 181, 246, 0.18);
+  --product-quinary-light: rgba(100, 181, 246, 0.08);
 
   /* ================= SHADOWS ================= */
 

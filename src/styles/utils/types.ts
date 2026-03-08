@@ -89,6 +89,7 @@ export type IThemeShadow = keyof typeof CSS_CLASS.shadow;
 
 export type IThemeGenreButton = keyof typeof CSS_VARS.genre.button;
 export type IThemeGenreCheckbox = keyof typeof CSS_VARS.genre.checkbox;
+export type IThemeGenreToggle = keyof typeof CSS_VARS.genre.toggle;
 
 export type IThemeOutline = keyof typeof CSS_CLASS.outline;
 

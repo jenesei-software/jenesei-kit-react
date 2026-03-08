@@ -90,7 +90,7 @@ const AllWrapper: FC = () => {
         <TypographyComponent
           sx={{
             variant: 'title-3',
-            color: 'productPrimary',
+            color: 'productPrimaryLight',
           }}
         >
           Typography, variant - title-3, color - productPrimary
