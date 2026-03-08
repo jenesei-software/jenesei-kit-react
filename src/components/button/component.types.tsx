@@ -1,12 +1,5 @@
 import { IAddIIcon } from '@local/components/icon';
-import {
-  ISx,
-  ISxOutline,
-  ISxTypography,
-  IThemeGenreButton,
-  IThemeOutline,
-  IThemeSize,
-} from '@local/styles/utils/types';
+import { ISx, ISxTypography, IThemeGenreButton, IThemeOutline, IThemeSize } from '@local/styles/utils/types';
 
 import { CSSProperties, FocusEvent, MouseEventHandler, PropsWithChildren, Ref } from 'react';
 
@@ -31,6 +24,8 @@ type IButtonDefault = PropsWithChildren & {
 
   icons?: IAddIIcon[];
 
+  isDisabledOutline?: boolean;
+
   isDisabled?: boolean;
 
   isHidden?: boolean;
@@ -48,6 +43,8 @@ type IButtonDefault = PropsWithChildren & {
   isHiddenBorder?: boolean;
 
   isNotHoverEffect?: boolean;
+  
+  isZeroRadius?: boolean;
 
   isFullSize?: boolean;
 
@@ -61,7 +58,6 @@ type IButtonDefault = PropsWithChildren & {
 
   type?: 'button' | 'submit' | 'reset';
 } & ISx &
-  ISxOutline &
   ISxTypography;
 
 type IButtonStandard = IButtonDefault & {

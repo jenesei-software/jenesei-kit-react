@@ -6,7 +6,7 @@ on:
       build_folder:
         description: "Build output folder"
         required: false
-        default: "build"
+        default: "build-storybook"
         type: string
       env_property:
         description: "Environment property"

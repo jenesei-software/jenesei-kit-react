@@ -96,6 +96,8 @@ export const Checkbox: FC<ICheckbox> = (props) => {
         disabled={props.isDisabled}
         tabIndex={props.tabIndex ?? 0}
         onClick={handleClick}
+        onFocus={props.onFocus}
+        onMouseDown={props.onMouseDown}
         className={className}
         style={style}
         type={props.type ?? 'button'}

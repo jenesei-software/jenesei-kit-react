@@ -67,12 +67,6 @@ export type ISx = {
   sx?: CSSProperties;
 };
 
-export type ISxOutline = {
-  isReadOnly?: boolean;
-  isDisabledOutline?: boolean;
-  isOutlineBoxShadow?: boolean;
-};
-
 export type IThemeTypographyHeading = keyof typeof CSS_VARS.font.sizeHeading;
 export type IThemeTypographyWeight = '100' | '300' | '400' | '500' | '700' | '900';
 export type IThemeTypographyFontFamily = 'Inter' | 'Roboto' | 'Work Sans' | 'Roboto Mono' | 'Manrope';

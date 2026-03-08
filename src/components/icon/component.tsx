@@ -16,12 +16,12 @@ export const Icon = (props: IIcon) => {
 
   const configSkeleton = useMemo(() => {
     return {
-      className: setClasses([CSS_CLASS.component.icon.skeleton.root, props.className]),
+      className: setClasses([CSS_CLASS.component.icon.skeleton, props.className]),
       style: setStyles([
         {
-          [CSS_VARS_RAW.component.icon.skeleton.heightIcon]:
+          [CSS_VARS_RAW.component.icon.skeletonHeightIcon]:
             props.size !== '100%' ? CSS_VARS.size[props.size].heightIcon : '100%',
-          [CSS_VARS_RAW.component.icon.skeleton.order]: props.order ? String(props.order) : 'initial',
+          [CSS_VARS_RAW.component.icon.skeletonOrder]: props.order ? String(props.order) : 'initial',
         },
         props.style,
       ]),
@@ -30,15 +30,15 @@ export const Icon = (props: IIcon) => {
 
   const configIcon = useMemo(() => {
     return {
-      className: setClasses([CSS_CLASS.component.icon.index.root, props.className, CSS_CLASS.transition.icon]),
+      className: setClasses([CSS_CLASS.component.icon.root, props.className, CSS_CLASS.transition.icon]),
 
       style: setStyles([
         {
-          [CSS_VARS_RAW.component.icon.index.color]: props.color ? CSS_VARS.palette[props.color] : 'inherit',
-          [CSS_VARS_RAW.component.icon.index.heightIcon]:
+          [CSS_VARS_RAW.component.icon.color]: props.color ? CSS_VARS.palette[props.color] : 'inherit',
+          [CSS_VARS_RAW.component.icon.heightIcon]:
             props.size !== '100%' ? CSS_VARS.size[props.size].heightIcon : '100%',
-          [CSS_VARS_RAW.component.icon.index.turn]: props.turn ? `${props.turn}deg` : '0deg',
-          [CSS_VARS_RAW.component.icon.index.order]: props.order ? String(props.order) : 'initial',
+          [CSS_VARS_RAW.component.icon.turn]: props.turn ? `${props.turn}deg` : '0deg',
+          [CSS_VARS_RAW.component.icon.order]: props.order ? String(props.order) : 'initial',
         },
         props.style,
         props?.sx,

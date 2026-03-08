@@ -1,4 +1,3 @@
-
 const CSS_VARS_PALETTE = {
   /* ACCENTS */
   accentRedLight: 'var(--accent-red-light)',
@@ -239,31 +238,22 @@ export const CSS_VARS = {
       centerX: 'var(--component-toggle-center-x)',
     },
     button: {
-      index: {
-        height: 'var(--component-button-height)',
-        padding: 'var(--component-button-padding)',
-        radius: 'var(--component-button-radius)',
-        gap: 'var(--component-button-gap)',
-
-        background: 'var(--component-button-background)',
-        border: 'var(--component-button-border)',
-        color: 'var(--component-button-color)',
-      },
-      iconGroup: {
-        order: 'var(--component-button-icon-group-order)',
-      },
+      height: 'var(--component-button-height)',
+      padding: 'var(--component-button-padding)',
+      radius: 'var(--component-button-radius)',
+      gap: 'var(--component-button-gap)',
+      background: 'var(--component-button-background)',
+      border: 'var(--component-button-border)',
+      color: 'var(--component-button-color)',
+      iconGroupOrder: 'var(--component-button-icon-group-order)',
     },
     icon: {
-      index: {
-        order: 'var(--component-icon-order)',
-        color: 'var(--component-icon-color)',
-        heightIcon: 'var(--component-icon-height-icon)',
-        turn: 'var(--component-icon-turn)',
-      },
-      skeleton: {
-        heightIcon: 'var(--component-icon-skeleton-height-icon)',
-        order: 'var(--component-icon-skeleton-order)',
-      },
+      order: 'var(--component-icon-order)',
+      color: 'var(--component-icon-color)',
+      heightIcon: 'var(--component-icon-height-icon)',
+      turn: 'var(--component-icon-turn)',
+      skeletonHeightIcon: 'var(--component-icon-skeleton-height-icon)',
+      skeletonOrder: 'var(--component-icon-skeleton-order)',
     },
     typography: {
       letterSpacing: 'var(--component-typography-letter-spacing)',
@@ -471,7 +461,7 @@ export const CSS_VARS = {
           thumbBoxShadow: CSS_VARS_PALETTE.shadowPrimaryLight,
         },
         unActive: {
-          border: CSS_VARS_PALETTE.productPrimaryLight,
+          border: CSS_VARS_PALETTE.transparent,
           track: CSS_VARS_PALETTE.fillPrimaryLight,
           thumb: CSS_VARS_PALETTE.fillPrimaryDark,
           thumbBoxShadow: CSS_VARS_PALETTE.shadowPrimaryLight,
@@ -483,7 +473,7 @@ export const CSS_VARS = {
 
 export const CSS_CLASS = {
   /**
-   * Убирает скроллбар (Firefox + Webkit + IE
+   * Убирает скроллбар (Firefox + Webkit + IE)
    * Контент остаётся скроллируемым.
    */
   removeScrollbar: 'u-remove-scrollbar',
@@ -507,27 +497,27 @@ export const CSS_CLASS = {
   isRipple: 'u-is-ripple',
 
   transition: {
-    default: 'u-transition-default',
-    fontSize: 'u-transition-font-size',
-    icon: 'u-transition-icon',
-    color: 'u-transition-color',
-    grid: 'u-transition-grid',
-    withoutSize: 'u-transition-without-size',
-    all: 'u-transition-all',
+    default: 'u-transition--default',
+    fontSize: 'u-transition--font-size',
+    icon: 'u-transition--icon',
+    color: 'u-transition--color',
+    grid: 'u-transition--grid',
+    withoutSize: 'u-transition--without-size',
+    all: 'u-transition--all',
   },
 
   outline: {
-    default: 'u-outline-default',
-    boxShadow: 'u-outline-boxShadow',
-    always: 'u-outline-always',
-    none: 'u-outline-none',
+    default: 'u-outline--default',
+    boxShadow: 'u-outline--boxShadow',
+    always: 'u-outline--always',
+    none: 'u-outline--none',
   },
 
   control: {
-    default: 'u-control-default',
-    boxShadow: 'u-control-boxShadow',
-    onlyActive: 'u-control-only-active',
-    none: 'u-control-none',
+    default: 'u-control--default',
+    boxShadow: 'u-control--boxShadow',
+    onlyActive: 'u-control--only-active',
+    none: 'u-control--none',
   },
 
   /**
@@ -545,34 +535,33 @@ export const CSS_CLASS = {
   isError: 'u-is-error',
 
   shadow: {
-    glass: 'u-shadow-glass',
-    primary: 'u-shadow-primary',
-    secondary: 'u-shadow-secondary',
-    quaternary: 'u-shadow-quaternary',
+    primary: 'u-shadow--primary',
+    secondary: 'u-shadow--secondary',
+    quaternary: 'u-shadow--quaternary',
   },
 
   keyframe: {
-    shadowPulse: 'keyframe-shadow-pulse',
-    backgroundMove: 'keyframe-background-move',
+    shadowPulse: 'keyframe--shadow-pulse',
+    backgroundMove: 'keyframe--background-move',
   },
 
   area: {
     preview: {
-      root: 'area-preview-loader',
-      containerIcon: 'area-preview-loader__container-icon',
-      containerChildren: 'area-preview-loader__container-children',
-      children: 'area-preview-children',
+      root: 'area-preview__loader',
+      containerIcon: 'area-preview__loader__container-icon',
+      containerChildren: 'area-preview__loader__container-children',
+      children: 'area-preview__children',
     },
     scroll: {
       root: 'area-scroll',
-      horizontal: 'area-scroll-horizontal',
-      vertical: 'area-scroll-vertical',
-      isAlwaysHorizontal: 'area-scroll-is-always-horizontal',
-      isAlwaysVertical: 'area-scroll-is-always-vertical',
+      horizontal: 'area-scroll--horizontal',
+      vertical: 'area-scroll--vertical',
+      isAlwaysHorizontal: 'area-scroll--is-always-horizontal',
+      isAlwaysVertical: 'area-scroll--is-always-vertical',
     },
     skeleton: {
       root: 'area-skeleton',
-      visibleFalse: 'area-skeleton-visible-false',
+      visibleFalse: 'area-skeleton--visible-false',
     },
   },
 
@@ -587,48 +576,42 @@ export const CSS_CLASS = {
     },
     typography: {
       root: 'component-typography',
-      lineSingle: 'component-typography-line-single',
-      lineMulti: 'component-typography-line-multi',
-      isBold: 'component-typography-is-bold',
-      variantCallout: 'component-typography-variant-callout',
-      shadowShadowPulse: 'component-typography-shadow-shadowPulse',
-      isHoverUnderlining: 'component-typography-is-hover-underlining',
-      isNoUserSelect: 'component-typography-is-no-user-select',
-      size: 'component-typography-size',
-      variant: 'component-typography-variant',
+      lineSingle: 'component-typography--line-single',
+      lineMulti: 'component-typography--line-multi',
+      isBold: 'component-typography--is-bold',
+      variantCallout: 'component-typography--variant-callout',
+      shadowShadowPulse: 'component-typography--shadow-shadowPulse',
+      isHoverUnderlining: 'component-typography--is-hover-underlining',
+      isNoUserSelect: 'component-typography--is-no-user-select',
+      size: 'component-typography--size',
+      variant: 'component-typography--variant',
     },
     button: {
-      index: {
-        root: 'component-button',
-        isHidden: 'component-button-is-hidden',
-        isHiddenBorder: 'component-button-is-hidden-border',
-        isRadius: 'component-button-is-radius',
-        isFullSize: 'component-button-is-full-size',
-        isWidthAsHeight: 'component-button-is-width-as-height',
-        isMinWidthAsContent: 'component-button-is-min-width-as-content',
-      },
-      icons: {
-        root: 'component-button__icons',
-        isIconGroup: 'component-button__icons-is-icon-group',
-      },
+      root: 'component-button',
+      isHidden: 'component-button--is-hidden',
+      isHiddenBorder: 'component-button--is-hidden-border',
+      isRadius: 'component-button--is-radius',
+      isFullSize: 'component-button--is-full-size',
+      isWidthAsHeight: 'component-button--is-width-as-height',
+      isMinWidthAsContent: 'component-button--is-min-width-as-content',
+      iconGroup: 'component-button__icons',
+      iconGroupIsIconGroup: 'component-button__icons--is-icon-group',
     },
     icon: {
-      index: {
-        root: 'component-icon',
-      },
-      skeleton: { root: 'component-icon__skeleton' },
+      root: 'component-icon',
+      skeleton: 'component-icon__skeleton',
     },
     stack: {
       root: 'component-stack',
     },
     checkbox: {
       root: 'component-checkbox',
-      isHidden: 'component-checkbox-is-hidden',
-      isHiddenBorder: 'component-checkbox-is-hidden-border',
-      isRadius: 'component-checkbox-is-radius',
-      isFullSize: 'component-checkbox-is-full-size',
-      isWidthAsHeight: 'component-checkbox-is-width-as-height',
-      isMinWidthAsContent: 'component-checkbox-is-min-width-as-content',
+      isHidden: 'component-checkbox--is-hidden',
+      isHiddenBorder: 'component-checkbox--is-hidden-border',
+      isRadius: 'component-checkbox--is-radius',
+      isFullSize: 'component-checkbox--is-full-size',
+      isWidthAsHeight: 'component-checkbox--is-width-as-height',
+      isMinWidthAsContent: 'component-checkbox--is-min-width-as-content',
     },
     toggle: {
       root: 'component-toggle',
@@ -636,9 +619,9 @@ export const CSS_CLASS = {
       unActive: 'component-toggle--un-active',
       isHidden: 'component-toggle--is-hidden',
       isHiddenBorder: 'component-toggle--is-hidden-border',
-      center: 'component-toggle-center',
-      centerActive: 'component-toggle-center--active',
-      centerUnActive: 'component-toggle-center--un-active',
+      center: 'component-toggle__center',
+      centerActive: 'component-toggle__center--active',
+      centerUnActive: 'component-toggle__center--un-active',
     },
   },
 } as const;

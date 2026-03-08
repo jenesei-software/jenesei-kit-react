@@ -8,7 +8,7 @@ import { WrapperBig, WrapperMin } from './tools';
 
 const meta: Meta<ICheckbox> = {
   component: CheckboxComponent,
-  title: 'Component/Checkbox',
+  title: 'Component/2. Checkbox',
 };
 
 export default meta;

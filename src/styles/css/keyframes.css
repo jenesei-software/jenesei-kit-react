@@ -21,10 +21,10 @@
   }
 }
 
-.keyframe-shadow-pulse {
+.keyframe--shadow-pulse {
   animation: shadowPulse 1.5s ease-in-out infinite;
 }
 
-.keyframe-background-move {
+.keyframe--background-move {
   animation: backgroundMove 1.5s infinite linear;
 }

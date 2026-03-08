@@ -14,7 +14,6 @@
   padding: var(--component-toggle-padding);
 }
 
-
 .component-toggle.component-toggle--active {
   background: var(--component-toggle-active-background);
   border-color: var(--component-toggle-active-border);
@@ -24,9 +23,6 @@
   background: var(--component-toggle-un-active-background);
   border-color: var(--component-toggle-un-active-border);
 }
-
-
-
 
 .component-toggle.component-toggle--is-hidden {
   opacity: 0.5;
@@ -40,25 +36,24 @@
   border: 0px solid transparent !important;
 }
 
-
 /* =========================
    Component - Toggle - Center
    ========================= */
-.component-toggle-center {
+.component-toggle__center {
   border-radius: 100px;
   height: var(--component-toggle-center-height);
   width: var(--component-toggle-center-width);
-transform: translateX(var(--component-toggle-center-x));
+  transform: translateX(var(--component-toggle-center-x));
   transition: transform 0.15s ease-in-out;
 }
 
-.component-toggle-center.component-toggle-center--active {
+.component-toggle__center.component-toggle__center--active {
   background: var(--component-toggle-center-active-background);
   border-color: var(--component-toggle-center-active-border);
   box-shadow: var(--component-toggle-center-active-box-shadow);
 }
 
-.component-toggle-center.component-toggle-center--un-active {
+.component-toggle__center.component-toggle__center--un-active {
   background: var(--component-toggle-center-un-active-background);
   border-color: var(--component-toggle-center-un-active-border);
   box-shadow: var(--component-toggle-center-un-active-box-shadow);

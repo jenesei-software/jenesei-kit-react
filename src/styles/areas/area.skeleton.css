@@ -6,7 +6,7 @@
   display: contents;
 }
 
-.area-skeleton-visible-false {
+.area-skeleton--visible-false {
   background: linear-gradient(
     90deg,
     var(--area-skeleton-color) 25%,
@@ -20,6 +20,6 @@
   height: fit-content;
 }
 
-.area-skeleton-visible-false * {
+.area-skeleton--visible-false * {
   opacity: 0;
 }

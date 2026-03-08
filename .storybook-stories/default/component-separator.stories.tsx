@@ -8,12 +8,12 @@ import { WrapperBig, WrapperMin } from './tools';
 
 const meta: Meta<typeof SeparatorComponent> = {
   component: SeparatorComponent,
-  title: 'Component/Separator',
+  title: 'Component/5. Separator',
 };
 
 export default meta;
 
-const AllWrapper: FC = () => {
+const CollectionWrapper: FC = () => {
   return (
     <WrapperBig>
       <WrapperMin sx={{ width: '160px', height: '160px', flexDirection: 'column' }}>
@@ -64,6 +64,6 @@ const AllWrapper: FC = () => {
   );
 };
 
-export const Separator = {
-  render: () => <AllWrapper />,
+export const Collection = {
+  render: () => <CollectionWrapper />,
 };

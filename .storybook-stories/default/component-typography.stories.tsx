@@ -11,12 +11,12 @@ import { WrapperBig, WrapperMin } from './tools';
 
 const meta: Meta<typeof TypographyComponent> = {
   component: TypographyComponent,
-  title: 'Component/Typography',
+  title: 'Component/4. Typography',
 };
 
 export default meta;
 
-const AllWrapper: FC = () => {
+const CollectionWrapper: FC = () => {
   return (
     <WrapperBig
       sx={{
@@ -244,6 +244,6 @@ const TypographyResponsive: FC = () => {
   );
 };
 
-export const Typography = {
-  render: () => <AllWrapper />,
+export const Collection = {
+  render: () => <CollectionWrapper />,
 };

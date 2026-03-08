@@ -19,7 +19,7 @@
   text-transform: var(--component-typography-transform);
 }
 
-.component-typography.component-typography-line-single {
+.component-typography.component-typography--line-single {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -27,7 +27,7 @@
   max-width: fit-content;
 }
 
-.component-typography.component-typography-line-multi {
+.component-typography.component-typography--line-multi {
   word-break: break-word;
   white-space: normal;
   text-overflow: ellipsis;
@@ -39,37 +39,37 @@
   overflow-wrap: anywhere;
 }
 
-.component-typography.component-typography-is-bold {
+.component-typography.component-typography--is-bold {
   font-weight: 700;
 }
 
-.component-typography.component-typography-variant-callout {
+.component-typography.component-typography--variant-callout {
   font-weight: 700;
 }
 
-.component-typography.component-typography-is-bold .component-typography.component-typography-variant-callout {
+.component-typography.component-typography--is-bold .component-typography.component-typography--variant-callout {
   font-weight: 800;
 }
 
-.component-typography.component-typography-shadow-shadow-pulse {
+.component-typography.component-typography--shadow-shadow-pulse {
   animation: shadowPulse 2s infinite;
 }
 
-.component-typography.component-typography-is-hover-underlining {
+.component-typography.component-typography--is-hover-underlining {
   :hover {
     text-decoration: underline;
   }
 }
 
-.component-typography.component-typography-is-no-user-select {
+.component-typography.component-typography--is-no-user-select {
   user-select: none;
 }
 
-.component-typography.component-typography-size {
+.component-typography.component-typography--size {
   font-size: var(--component-typography-size);
 }
 
-.component-typography.component-typography-variant {
+.component-typography.component-typography--variant {
   font-size: var(--component-typography-variant);
   line-height: calc(var(--component-typography-variant) + var(--component-typography-variant-height));
 }

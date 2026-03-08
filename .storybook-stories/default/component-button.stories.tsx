@@ -7,7 +7,7 @@ import { WrapperBig, WrapperMin } from './tools';
 
 const meta: Meta<IButton> = {
   component: ButtonComponent,
-  title: 'Component/Button',
+  title: 'Component/1. Button',
 };
 
 export default meta;

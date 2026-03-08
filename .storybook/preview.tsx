@@ -62,7 +62,12 @@ const preview: Preview = {
       );
     },
   ],
+
   parameters: {
+    options: {
+      //@ts-expect-error
+      storySort: (a, b) => a.title.localeCompare(b.title, undefined, { numeric: true }),
+    },
     controls: {
       matchers: {
         color: /(background|color)$/i,

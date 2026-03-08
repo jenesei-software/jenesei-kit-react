@@ -36,10 +36,10 @@
 }
 
 /* transition */
-.u-transition-default {
+.u-transition--default {
 }
 
-.u-transition-font-size {
+.u-transition--font-size {
   transition:
     outline 0s,
     filter var(--transition-default),
@@ -51,7 +51,7 @@
     font-size var(--transition-default);
 }
 
-.u-transition-icon {
+.u-transition--icon {
   transition:
     outline 0s,
     filter var(--transition-default),
@@ -62,11 +62,11 @@
     border-color var(--transition-default);
 }
 
-.u-transition-icon path {
+.u-transition--icon path {
   transition: all var(--transition-default);
 }
 
-.u-transition-color {
+.u-transition--color {
   transition:
     outline 0s,
     filter var(--transition-default),
@@ -77,14 +77,14 @@
     border-color var(--transition-default);
 }
 
-.u-transition-grid {
+.u-transition--grid {
   transition:
     grid-template-areas var(--transition-default),
     grid-template-columns var(--transition-default),
     grid-template-rows var(--transition-default);
 }
 
-.u-transition-without-size {
+.u-transition--without-size {
   transition:
     outline 0s,
     filter var(--transition-default),
@@ -102,7 +102,7 @@
     grid-template-columns var(--transition-default);
 }
 
-.u-transition-all {
+.u-transition--all {
   transition:
     outline 0s,
     filter var(--transition-default),
@@ -125,12 +125,12 @@
 
 /* outline */
 
-.u-outline-default:focus-visible {
+.u-outline--default:focus-visible {
   outline-offset: 1px;
   outline: 2px solid var(--accent-gray-light);
 }
 
-.u-outline-boxShadow:focus-visible {
+.u-outline--boxShadow:focus-visible {
   outline-offset: 0px;
   outline: 1px solid var(--product-primary-light);
   box-shadow:
@@ -138,30 +138,30 @@
     0 0 0 0.25rem var(--product-tertiary-light);
 }
 
-.u-outline-always {
+.u-outline--always {
   outline-offset: 1px;
   outline: 2px solid var(--accent-gray-light);
 }
 
-.u-outline-none {
+.u-outline--none {
   outline: none;
 }
 
-.u-outline-none:focus-visible {
+.u-outline--none:focus-visible {
   outline: none;
 }
 
 /* control */
-.u-control-default:hover {
+.u-control--default:hover {
   filter: brightness(0.9);
 }
 
-.u-control-default:active {
+.u-control--default:active {
   filter: brightness(0.95);
 }
 
 @media (hover: none) {
-  .u-control-default:hover {
+  .u-control--default:hover {
     filter: none;
   }
 }
@@ -170,13 +170,13 @@
   filter: brightness(0.95);
 }
 
-.u-control-boxShadow:hover {
+.u-control--boxShadow:hover {
   box-shadow:
     0 1px 1px var(--product-quinary-light),
     0 0 0 0.25rem var(--product-tertiary-light);
 }
 
-.u-control-boxShadow:active {
+.u-control--boxShadow:active {
   outline-offset: 4px;
   outline: 1px solid var(--product-secondary-light);
   box-shadow:
@@ -198,15 +198,15 @@
 
 /* shadow */
 
-.u-shadow-primary {
+.u-shadow--primary {
   box-shadow: var(--shadow-primary-light);
 }
 
-.u-shadow-secondary {
+.u-shadow--secondary {
   box-shadow: var(--shadow-secondary-light);
 }
 
-.u-shadow-quaternary {
+.u-shadow--quaternary {
   box-shadow: var(--shadow-quaternary-light);
 }
 

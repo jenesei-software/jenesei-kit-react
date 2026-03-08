@@ -7,22 +7,22 @@
   overflow-y: hidden;
 }
 
-.area-scroll-horizontal {
+.area-scroll--horizontal {
   scrollbar-gutter: stable;
   overflow-x: auto;
 }
 
-.area-scroll-vertical {
+.area-scroll--vertical {
   scrollbar-gutter: stable;
   overflow-y: auto;
 }
 
-.area-scroll-is-always-horizontal {
+.area-scroll--is-always-horizontal {
   scrollbar-gutter: stable;
   overflow-x: scroll;
 }
 
-.area-scroll-is-always-vertical {
+.area-scroll--is-always-vertical {
   scrollbar-gutter: stable;
   overflow-y: scroll;
 }

@@ -5,9 +5,10 @@ import { useMergeRefs } from '@floating-ui/react';
 import { motion } from 'framer-motion';
 import { useMemo, useRef } from 'react';
 
-import { ToggleProps } from './component.types';
+import { IToggle } from './component.types';
+import { ErrorMessage } from '../error';
 
-export const Toggle = (props: ToggleProps) => {
+export const Toggle = (props: IToggle) => {
   const { className, style } = useMemo(() => {
     const className = setClasses([
       props.className,
@@ -15,9 +16,10 @@ export const Toggle = (props: ToggleProps) => {
       props.value ? CSS_CLASS.component.toggle.active : CSS_CLASS.component.toggle.unActive,
       CSS_CLASS.outline[props.isDisabledOutline ? 'none' : (props.outline ?? 'default')],
       CSS_CLASS.control[
-      props.isDisabled || props.isHidden ? 'none' : props.isNotHoverEffect ? 'onlyActive' : 'boxShadow'
+        props.isDisabled || props.isHidden ? 'none' : props.isNotHoverEffect ? 'onlyActive' : 'boxShadow'
       ],
       CSS_CLASS.transition.color,
+      props.error?.isError && CSS_CLASS.isError,
       props.isHidden && CSS_CLASS.component.toggle.isHidden,
       props.isHiddenBorder && CSS_CLASS.component.toggle.isHiddenBorder,
     ]);
@@ -47,6 +49,7 @@ export const Toggle = (props: ToggleProps) => {
     props.outline,
     props.size,
     props.value,
+    props.error?.isError,
   ]);
 
   const { className: classNameCenter, style: styleCenter } = useMemo(() => {
@@ -69,7 +72,9 @@ export const Toggle = (props: ToggleProps) => {
     vars[CSS_VARS_RAW.component.toggle.centerBoxShadowUnActive] =
       CSS_VARS.genre.toggle[props.genre].unActive.thumbBoxShadow;
 
-    vars[CSS_VARS_RAW.component.toggle.centerX] = props.value ? `calc(${CSS_VARS.sizeToggle[props.size].width} - ${CSS_VARS.sizeToggle[props.size].thumb} - ${CSS_VARS.sizeToggle[props.size].padding} * 2)` : '0px';
+    vars[CSS_VARS_RAW.component.toggle.centerX] = props.value
+      ? `calc(${CSS_VARS.sizeToggle[props.size].width} - ${CSS_VARS.sizeToggle[props.size].thumb} - ${CSS_VARS.sizeToggle[props.size].padding} * 2)`
+      : '0px';
 
     const style = setStyles([props.style, Object.keys(vars).length ? vars : undefined]);
 
@@ -79,22 +84,34 @@ export const Toggle = (props: ToggleProps) => {
   const refDefault = useRef<HTMLButtonElement>(null);
 
   const ref = useMergeRefs([refDefault, props.ref]);
-
+  const handleClick = () => {
+    if (!props.isDisabled && props.onChange) {
+      props.onChange(!props.value);
+    }
+  };
   return (
-    <motion.button
-      className={className}
-      style={style}
-      type={props.type ?? 'button'}
-      ref={ref}
-      name={props.name}
-      aria-label={props.ariaLabel}
-      id={props.id}
-      onClick={() => props.onChange?.(!props.value)}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter') props.onChange?.(!props.value);
-      }}
-    >
-      <motion.div className={classNameCenter} style={styleCenter} />
-    </motion.button>
+    <>
+      <motion.button
+        className={className}
+        style={style}
+        type={props.type ?? 'button'}
+        ref={ref}
+        name={props.name}
+        aria-label={props.ariaLabel}
+        id={props.id}
+        onClick={handleClick}
+        onFocus={props.onFocus}
+        onMouseDown={props.onMouseDown}
+      >
+        <motion.div className={classNameCenter} style={styleCenter} />
+      </motion.button>
+      {props?.error?.isError ? (
+        <ErrorMessage
+          size={props?.error.size ?? props.size}
+          sxTypography={{ size: 'medium', weight: '400', ...props.sxTypography }}
+          {...props.error}
+        />
+      ) : null}
+    </>
   );
 };

@@ -34,30 +34,30 @@ export const Button: FC<IButton> = (props) => {
   const { className, style } = useMemo(() => {
     const className = setClasses([
       props.className,
-      CSS_CLASS.component.button.index.root,
+      CSS_CLASS.component.button.root,
       CSS_CLASS.outline[props.isDisabledOutline ? 'none' : (props.outline ?? 'default')],
       CSS_CLASS.control[
         props.isDisabled || props.isHidden ? 'none' : props.isNotHoverEffect ? 'onlyActive' : 'boxShadow'
       ],
       CSS_CLASS.transition.color,
-      props.isHidden && CSS_CLASS.component.button.index.isHidden,
-      props.isHiddenBorder && CSS_CLASS.component.button.index.isHiddenBorder,
-      props.isRadius && CSS_CLASS.component.button.index.isRadius,
-      props.isFullSize && CSS_CLASS.component.button.index.isFullSize,
-      props.isWidthAsHeight && CSS_CLASS.component.button.index.isWidthAsHeight,
-      props.isMinWidthAsContent && CSS_CLASS.component.button.index.isMinWidthAsContent,
+      props.isHidden && CSS_CLASS.component.button.isHidden,
+      props.isHiddenBorder && CSS_CLASS.component.button.isHiddenBorder,
+      props.isRadius && CSS_CLASS.component.button.isRadius,
+      props.isFullSize && CSS_CLASS.component.button.isFullSize,
+      props.isWidthAsHeight && CSS_CLASS.component.button.isWidthAsHeight,
+      props.isMinWidthAsContent && CSS_CLASS.component.button.isMinWidthAsContent,
     ]);
 
     const vars: Record<string, string> = {};
 
-    vars[CSS_VARS_RAW.component.button.index.background] = CSS_VARS.genre.button[props.genre].background.index;
-    vars[CSS_VARS_RAW.component.button.index.color] = CSS_VARS.genre.button[props.genre].color.index;
-    vars[CSS_VARS_RAW.component.button.index.border] = CSS_VARS.genre.button[props.genre].border.index;
+    vars[CSS_VARS_RAW.component.button.background] = CSS_VARS.genre.button[props.genre].background.index;
+    vars[CSS_VARS_RAW.component.button.color] = CSS_VARS.genre.button[props.genre].color.index;
+    vars[CSS_VARS_RAW.component.button.border] = CSS_VARS.genre.button[props.genre].border.index;
 
-    vars[CSS_VARS_RAW.component.button.index.height] = CSS_VARS.size[props.size].height;
-    vars[CSS_VARS_RAW.component.button.index.padding] = CSS_VARS.size[props.size].padding;
-    vars[CSS_VARS_RAW.component.button.index.radius] = CSS_VARS.size[props.size].radius;
-    vars[CSS_VARS_RAW.component.button.index.gap] = `calc(${CSS_VARS.size[props.size].padding} - 2px)`;
+    vars[CSS_VARS_RAW.component.button.height] = CSS_VARS.size[props.size].height;
+    vars[CSS_VARS_RAW.component.button.padding] = CSS_VARS.size[props.size].padding;
+    vars[CSS_VARS_RAW.component.button.radius] = CSS_VARS.size[props.size].radius;
+    vars[CSS_VARS_RAW.component.button.gap] = `calc(${CSS_VARS.size[props.size].padding} - 2px)`;
 
     const style = setStyles([props.sx, props.style, Object.keys(vars).length ? vars : undefined]);
 
@@ -82,15 +82,15 @@ export const Button: FC<IButton> = (props) => {
 
   const { className: classNameIconGroup, style: styleIconGroup } = useMemo(() => {
     const className = setClasses([
-      CSS_CLASS.component.button.icons.root,
+      CSS_CLASS.component.button.iconGroup,
 
-      props.isIconGroup && CSS_CLASS.component.button.icons.isIconGroup,
+      props.isIconGroup && CSS_CLASS.component.button.iconGroupIsIconGroup,
     ]);
 
     const vars: Record<string, string> = {};
 
     if ('iconGroupOrder' in props)
-      vars[CSS_VARS_RAW.component.button.iconGroup.order] = String(props.iconGroupOrder ?? 'initial');
+      vars[CSS_VARS_RAW.component.button.iconGroupOrder] = String(props.iconGroupOrder ?? 'initial');
 
     const style = setStyles([Object.keys(vars).length ? vars : undefined]);
 

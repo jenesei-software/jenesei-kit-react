@@ -10,12 +10,12 @@ import { WrapperBig, WrapperMin } from './tools';
 
 const meta: Meta<typeof IconComponent> = {
   component: IconComponent,
-  title: 'Component/Icon',
+  title: 'Component/7. Icon',
 };
 
 export default meta;
 
-const IconWrapperAll: FC = () => {
+const CollectionWrapper: FC = () => {
   return (
     <WrapperBig sx={{ flexDirection: 'row' }}>
       <WrapperBig sx={{ flexDirection: 'column' }}>
@@ -221,6 +221,6 @@ const IconWrapperAll: FC = () => {
   );
 };
 
-export const Icon = {
-  render: () => <IconWrapperAll />,
+export const Collection = {
+  render: () => <CollectionWrapper />,
 };
