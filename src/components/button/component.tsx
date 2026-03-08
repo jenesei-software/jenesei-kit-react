@@ -1,23 +1,21 @@
 import { getIconComponents } from '@local/components/icon';
-import { Ripple } from '@local/components/ripple';
-import { getSxTypography } from '@local/functions';
+import { useTypographyStyles } from '@local/hooks/use-typography-styles';
+import { CSS_CLASS, CSS_VARS, CSS_VARS_RAW } from '@local/styles/utils/constants';
+import { setClasses, setStyles } from '@local/styles/utils/functions';
 
 import { useMergeRefs } from '@floating-ui/react';
+import { motion } from 'framer-motion';
 import { FC, Ref, useMemo, useRef } from 'react';
-import { useTheme } from 'styled-components';
 
-import { StyledButton, StyledButtonIconsWrapper } from './component.styles';
-import { ButtonProps } from './component.types';
+import { IButton } from './component.types';
 
-export const Button: FC<ButtonProps> = (props) => {
-  const theme = useTheme();
-
+export const Button: FC<IButton> = (props) => {
   const iconComponents = useMemo(
     () => getIconComponents({ icons: props.icons ?? [], size: props.size }),
     [props.icons, props.size],
   );
 
-  const handleClick: ButtonProps['onClick'] = (event) => {
+  const handleClick: IButton['onClick'] = (event) => {
     if (!props.isDisabled && props.onClick) {
       props.onClick(event);
     }
@@ -28,50 +26,102 @@ export const Button: FC<ButtonProps> = (props) => {
 
   const isInteractive = !props.isDisabled && props.isWhileTapEffect;
 
+  const { className: classNameTypography, style: styleTypography } = useTypographyStyles({
+    sx: { ...props?.sxTypography, size: CSS_VARS.size[props.size].font, weight: '700', height: '1' },
+    style: { order: 0, display: 'contents' },
+  });
+
+  const { className, style } = useMemo(() => {
+    const className = setClasses([
+      props.className,
+      CSS_CLASS.component.button.root,
+      CSS_CLASS.outline[props.isDisabledOutline ? 'none' : (props.outline ?? 'default')],
+      CSS_CLASS.control[
+        props.isDisabled || props.isHidden ? 'none' : props.isNotHoverEffect ? 'onlyActive' : 'boxShadow'
+      ],
+      CSS_CLASS.transition.color,
+      props.isHidden && CSS_CLASS.component.button.isHidden,
+      props.isHiddenBorder && CSS_CLASS.component.button.isHiddenBorder,
+      props.isRadius && CSS_CLASS.component.button.isRadius,
+      props.isFullSize && CSS_CLASS.component.button.isFullSize,
+      props.isWidthAsHeight && CSS_CLASS.component.button.isWidthAsHeight,
+      props.isMinWidthAsContent && CSS_CLASS.component.button.isMinWidthAsContent,
+    ]);
+
+    const vars: Record<string, string> = {};
+
+    vars[CSS_VARS_RAW.component.button.background] = CSS_VARS.genre.button[props.genre].background.index;
+    vars[CSS_VARS_RAW.component.button.color] = CSS_VARS.genre.button[props.genre].color.index;
+    vars[CSS_VARS_RAW.component.button.border] = CSS_VARS.genre.button[props.genre].border.index;
+
+    vars[CSS_VARS_RAW.component.button.height] = CSS_VARS.size[props.size].height;
+    vars[CSS_VARS_RAW.component.button.padding] = CSS_VARS.size[props.size].padding;
+    vars[CSS_VARS_RAW.component.button.radius] = CSS_VARS.size[props.size].radius;
+    vars[CSS_VARS_RAW.component.button.gap] = `calc(${CSS_VARS.size[props.size].padding} - 2px)`;
+
+    const style = setStyles([props.sx, props.style, Object.keys(vars).length ? vars : undefined]);
+
+    return { className, style };
+  }, [
+    props.className,
+    props.style,
+    props.sx,
+    props.genre,
+    props.isDisabled,
+    props.isDisabledOutline,
+    props.isFullSize,
+    props.isHidden,
+    props.isHiddenBorder,
+    props.isMinWidthAsContent,
+    props.isNotHoverEffect,
+    props.isRadius,
+    props.isWidthAsHeight,
+    props.outline,
+    props.size,
+  ]);
+
+  const { className: classNameIconGroup, style: styleIconGroup } = useMemo(() => {
+    const className = setClasses([
+      CSS_CLASS.component.button.iconGroup,
+
+      props.isIconGroup && CSS_CLASS.component.button.iconGroupIsIconGroup,
+    ]);
+
+    const vars: Record<string, string> = {};
+
+    if ('iconGroupOrder' in props)
+      vars[CSS_VARS_RAW.component.button.iconGroupOrder] = String(props.iconGroupOrder ?? 'initial');
+
+    const style = setStyles([Object.keys(vars).length ? vars : undefined]);
+
+    return { className, style };
+  }, [props.className, props.style, props]);
+
   return (
-    <StyledButton
-      $isNotHoverEffect={props.isNotHoverEffect}
+    <motion.button
       whileTap={isInteractive ? { scale: 1.1, transition: { duration: 0.08, ease: 'easeOut' } } : undefined}
       whileHover={isInteractive ? { scale: 0.97, transition: { duration: 0.2, ease: 'easeOut' } } : undefined}
-      id={props.id}
       tabIndex={props.tabIndex ?? 0}
-      $isFullSize={props.isFullSize}
-      $genre={props.genre}
-      $size={props.size}
-      $isDisabled={props.isDisabled}
-      $isDisabledOutline={props.isDisabled ?? props.isDisabledOutline}
-      $isOutlineBoxShadow={props.isOutlineBoxShadow}
-      $isReadOnly={props.isReadOnly}
-      $isMinWidthAsContent={props.isMinWidthAsContent}
-      $isWidthAsHeight={props.isWidthAsHeight}
-      $isRadius={props.isRadius}
-      $isHidden={props.isHidden}
-      $isPlaystationEffect={props.isPlaystationEffect}
-      $sxTypography={getSxTypography({ size: props.size, weight: 700, sx: props.sxTypography, theme })}
-      $isHiddenBorder={props.isHiddenBorder || props.isPlaystationEffect}
       disabled={props.isDisabled}
-      type={props.type ?? 'button'}
-      className={props.className}
+      className={className}
+      style={style}
       onClick={handleClick}
       onFocus={props.onFocus}
       onMouseDown={props.onMouseDown}
+      type={props.type ?? 'button'}
       ref={ref as Ref<HTMLButtonElement>}
-      $sx={props.sx}
+      name={props.name}
+      aria-label={props.ariaLabel}
+      id={props.id}
     >
-      <Ripple
-        color={theme.colors.checkbox[props.genre].color.rest}
-        isDisabled={props.isDisabled || props.isDisabledRipple}
-        isHidden={props.isHidden}
-      />
-
-      {!props.isOnlyIcon && <div style={{ order: 0, display: 'contents' }}>{props.children && props.children}</div>}
-      <StyledButtonIconsWrapper
-        $size={props.size}
-        $isIconGroup={props.isIconGroup}
-        $iconGroupOrder={'iconGroupOrder' in props ? props.iconGroupOrder : undefined}
-      >
+      {!props.isOnlyIcon && (
+        <div className={classNameTypography} style={styleTypography}>
+          {props.children}
+        </div>
+      )}
+      <div className={classNameIconGroup} style={styleIconGroup}>
         {iconComponents}
-      </StyledButtonIconsWrapper>
-    </StyledButton>
+      </div>
+    </motion.button>
   );
 };

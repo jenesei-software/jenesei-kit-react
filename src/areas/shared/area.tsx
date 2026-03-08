@@ -1,70 +1,72 @@
 import { Button } from '@local/components/button';
-import { Stack } from '@local/components/stack';
+import { Stack, StackMotion } from '@local/components/stack';
+import { CSS_VARS } from '@local/styles/utils';
 
-import { Link } from '@tanstack/react-router';
 import { motion } from 'framer-motion';
-import { FC } from 'react';
-import styled from 'styled-components';
+import { CSSProperties, FC } from 'react';
 
-import { SharedProps } from './area.types';
+import { IShared } from './area.types';
 
-export const Shared: FC<SharedProps> = (props) => {
+export const Shared: FC<IShared> = (props) => {
   return (
-    <Stack sx={props.sx}>
-      <ul style={tabsContainer}>
-        {props.option.map((item) => (
-          <motion.li key={item.id} initial={false} style={tab} onClick={() => props.onSelected?.(item.id)}>
-            {(props.isLink ?? false) && 'link' in item ? (
-              <Link {...item.link}>
-                <Button
-                  {...(item.id === props.value
-                    ? item.selected
-                      ? { ...item.default, ...item.selected }
-                      : item.default
-                    : item.default)}
-                />
-              </Link>
-            ) : (
-              <Button
-                {...(item.id === props.value
-                  ? item.selected
-                    ? { ...item.default, ...item.selected }
-                    : item.default
-                  : item.default)}
-              />
-            )}
-            {item.id === props.value ? <Underline layoutId='underline' id='underline' /> : null}
-          </motion.li>
-        ))}
-      </ul>
+    <Stack style={tabsContainer} sx={props.sx} as='ul'>
+      {props.option.map((item) => (
+        <motion.li key={item.id} initial={false} style={tab} onClick={() => props.onSelected?.(item.id)}>
+          {(props.isLink ?? false) && 'link' in item ? (
+            <Button
+              {...(item.id === props.value
+                ? item.selected
+                  ? { ...item.default, ...item.selected }
+                  : item.default
+                : item.default)}
+            />
+          ) : (
+            <Button
+              {...(item.id === props.value
+                ? item.selected
+                  ? { ...item.default, ...item.selected }
+                  : item.default
+                : item.default)}
+            />
+          )}
+          {item.id === props.value ? (
+            <StackMotion
+              layoutId='underline'
+              id='underline'
+              sx={{
+                ...underline,
+                background: CSS_VARS.palette[props.color ?? 'accentBlueLight'],
+              }}
+            />
+          ) : null}
+        </motion.li>
+      ))}
     </Stack>
   );
 };
 
-const tabsStyles: React.CSSProperties = {
+const tabsStyles: CSSProperties = {
   listStyle: 'none',
   padding: 0,
   margin: 0,
 };
 
-const tabsContainer: React.CSSProperties = {
+const tabsContainer: CSSProperties = {
   ...tabsStyles,
   display: 'flex',
   width: '100%',
 };
 
-const tab: React.CSSProperties = {
+const tab: CSSProperties = {
   ...tabsStyles,
   position: 'relative',
-  // display: 'contents',
 };
 
-const Underline = styled(motion.div)`
-  position: absolute;
-  width: 100%;
-  left: 0;
-  right: 0;
-  bottom: -2px;
-  height: 2px;
-  background: ${(props) => props.theme.palette.violetJanice};
-`;
+const underline: CSSProperties = {
+  position: 'absolute',
+  width: '100%',
+  left: 0,
+  right: 0,
+  bottom: -2,
+  height: 2,
+};

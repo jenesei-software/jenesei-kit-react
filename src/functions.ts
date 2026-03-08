@@ -1,8 +1,3 @@
-import { DefaultTheme } from 'styled-components';
-
-import { TypographySXProps } from './styles/add';
-import { IThemeSize, KEY_SIZE_DATA } from './styles/theme';
-
 type EnumOption = {
   value: string;
   label: string;
@@ -66,19 +61,44 @@ export function getHasVerticalScroll(): boolean {
   return document.documentElement.scrollHeight > window.innerHeight;
 }
 
-export function getSxTypography(props: {
-  size: IThemeSize;
-  weight: number;
-  sx?: TypographySXProps;
-  theme: DefaultTheme;
-}): TypographySXProps {
-  const sx = typeof props.sx === 'function' ? props.sx(props.theme) : props.sx;
-  return {
-    default: {
-      size: KEY_SIZE_DATA[props.size].font,
-      weight: 700,
-      ...sx?.default,
-    },
-    ...sx,
-  };
+// export function getSxTypography(props: {
+//   size: IThemeSize;
+//   weight: number;
+//   sx?: TypographySXProps;
+//   theme: DefaultTheme;
+// }): TypographySXProps {
+//   const sx = typeof props.sx === 'function' ? props.sx(props.theme) : props.sx;
+//   return {
+//     default: {
+//       size: THEME_KEY_SIZE[props.size].font,
+//       weight: 700,
+//       ...sx?.default,
+//     },
+//     ...sx,
+//   };
+// }
+
+type AnyObject = Record<string, any>;
+
+export function stringifyCssObject<T extends AnyObject>(obj?: T): AnyObject | undefined {
+  if (!obj) return undefined;
+
+  const result: AnyObject = {};
+
+  for (const key in obj) {
+    const value = obj[key];
+
+    if (value == null) continue;
+
+    if (typeof value === 'object' && !Array.isArray(value)) {
+      const nested = stringifyCssObject(value);
+      if (nested && Object.keys(nested).length > 0) {
+        result[key] = nested;
+      }
+    } else {
+      result[key] = String(value);
+    }
+  }
+
+  return result;
 }

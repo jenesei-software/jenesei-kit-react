@@ -1,10 +1,8 @@
-import { TooltipProps } from '@local/components/tooltip';
-import { addOutlineProps, addOutlinePropsDollar, addSXProps, addSXTypographyProps } from '@local/styles/add';
-import { AddDollarSign } from '@local/types';
+import { ISx, ISxTypography } from '@local/styles/utils';
 
 import { CSSProperties, PropsWithChildren, Ref } from 'react';
 
-export type TypographyProps = PropsWithChildren & {
+export type ITypographyComponent = PropsWithChildren & {
   onClick?: () => void;
   className?: string;
   style?: CSSProperties;
@@ -13,23 +11,9 @@ export type TypographyProps = PropsWithChildren & {
   isParagraph?: boolean;
   isAnchor?: boolean;
   isSpan?: boolean;
-  isTransitionFontSize?: boolean;
-
   ref?: Ref<HTMLElement | HTMLHeadingElement | HTMLAnchorElement | null>;
 
-  sx: addSXTypographyProps['sxTypography'];
+  sx: ISxTypography['sxTypography'];
 
-  sxStandard?: addSXProps['sx'];
-} & addOutlineProps;
-
-export type TypographyPropsDollar = AddDollarSign<{
-  sxTypography: addSXTypographyProps['sxTypography'];
-  sx?: addSXProps['sx'];
-  isTransitionFontSize?: boolean;
-}> &
-  addOutlinePropsDollar;
-
-export type TypographyTooltipProps = {
-  typography: TypographyProps;
-  tooltip: Omit<TooltipProps, 'children' | 'content'>;
-} & PropsWithChildren;
+  sxStandard?: ISx['sx'];
+};

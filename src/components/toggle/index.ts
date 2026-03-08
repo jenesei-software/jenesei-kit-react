@@ -1,2 +1,2 @@
 export { Toggle } from './component';
-export type { ToggleProps } from './component.types';
+export type { IToggle } from './component.types';

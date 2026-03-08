@@ -1,11 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { FC, useState } from 'react';
-import 'styled-components';
-
 import { Smooth as SmoothComponent } from '@local/areas/smooth';
 import { Button } from '@local/components/button';
-import { Stack, StackMotion, StackProps } from '@local/components/stack';
+import { IStack, Stack, StackMotion } from '@local/components/stack';
 import { Typography } from '@local/components/typography';
+import { CSS_VARS } from '@local/styles/utils/constants';
+
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { FC, useState } from 'react';
 
 const meta: Meta<typeof SmoothComponent> = {
   component: SmoothComponent,
@@ -15,7 +15,7 @@ const meta: Meta<typeof SmoothComponent> = {
 export default meta;
 type Story = StoryObj<typeof SmoothComponent>;
 
-const SmoothWrapper: FC<StackProps> = (props) => {
+const SmoothWrapper: FC<IStack> = (props) => {
   const [content, setContent] = useState<boolean>(false);
 
   const toggleContent = () => {
@@ -25,36 +25,30 @@ const SmoothWrapper: FC<StackProps> = (props) => {
   return (
     <SmoothComponent
       {...props}
-      sx={(theme) => ({
-        default: {
-          height: 'fit-content',
-          gap: '4px',
-          flexDirection: 'column',
-          padding: '12px',
-          backgroundColor: theme.palette.black40,
-        },
-      })}
+      sx={{
+        height: 'fit-content',
+        gap: '4px',
+        flexDirection: 'column',
+        padding: '12px',
+        backgroundColor: CSS_VARS.palette.fillQuinaryLight,
+      }}
     >
       <StackMotion layout='position'>
-        <Button onClick={toggleContent} size={'small'} genre={'gray'}>
+        <Button onClick={toggleContent} size={'small'} genre={'primary'}>
           Toggle Content
         </Button>
       </StackMotion>
       <StackMotion
         layout='position'
-        sx={(theme) => ({
-          default: {
-            height: '100px',
-            minHeight: '100px',
-            backgroundColor: theme.palette.whiteStandard,
-          },
-        })}
+        sx={{
+          height: '100px',
+          minHeight: '100px',
+          backgroundColor: CSS_VARS.palette.fillPrimaryLight,
+        }}
       >
         <Typography
           sx={{
-            default: {
-              variant: 'h7',
-            },
+            variant: 'title-5',
           }}
         >
           One
@@ -62,18 +56,14 @@ const SmoothWrapper: FC<StackProps> = (props) => {
       </StackMotion>
       {content ? (
         <Stack
-          sx={(theme) => ({
-            default: {
-              height: '100px',
-              backgroundColor: theme.palette.whiteStandard,
-            },
-          })}
+          sx={{
+            height: '100px',
+            backgroundColor: CSS_VARS.palette.fillPrimaryLight,
+          }}
         >
           <Typography
             sx={{
-              default: {
-                variant: 'h7',
-              },
+              variant: 'title-5',
             }}
           >
             Two

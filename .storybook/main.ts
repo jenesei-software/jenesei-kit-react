@@ -11,9 +11,6 @@ const config: StorybookConfig = {
     reactDocgen: 'react-docgen-typescript',
   },
   staticDirs: ['../.storybook-public'],
-  viteFinal: (config) => {
-    return config;
-  },
   managerHead: (head) => ` 
     ${head}
     <link rel="shortcut icon" href="icons/icon-64x64-favicon.ico" />

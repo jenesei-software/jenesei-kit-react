@@ -1,59 +1,52 @@
-import { addErrorProps, addErrorPropsDollar } from '@local/components/error';
-import { addIconProps } from '@local/components/icon';
-import {
-  addOutlineProps,
-  addOutlinePropsDollar,
-  addSXProps,
-  addSXPropsDollar,
-  addSXTypographyProps,
-  addSXTypographyPropsDollar,
-} from '@local/styles/add';
-import { IThemeGenre, IThemeSize } from '@local/styles/theme';
-import { AddDollarSign } from '@local/types';
+import { ISx, ISxTypography, IThemeSize } from '@local/styles/utils';
+import { IThemeGenreCheckbox, IThemeOutline } from '@local/styles/utils/types';
 
-import { PropsWithChildren } from 'react';
+import { CSSProperties, FocusEvent, MouseEventHandler, PropsWithChildren, Ref } from 'react';
 
-export type CheckboxProps = PropsWithChildren & {
+import { IAddError } from '../error';
+import { IIcon } from '../icon';
+
+type IIconWithoutSize = {
+  [K in IIcon['type']]: Omit<Extract<IIcon, { type: K }>, 'size'> & { size?: IThemeSize };
+}[IIcon['type']];
+
+export type ICheckbox = PropsWithChildren & {
   checked?: boolean;
 
-  genre: TCheckboxGenre;
+  genre: IThemeGenreCheckbox;
 
   view: {
-    true: addIconProps;
-    false: addIconProps;
+    true: IIconWithoutSize & { size?: IThemeSize };
+    false: IIconWithoutSize & { size?: IThemeSize };
   };
 
+  ref?: Ref<HTMLElement | null>;
+  isHidden?: boolean;
+  className?: string;
+
+  style?: CSSProperties;
+  name?: string;
+  tabIndex?: number;
+  ariaLabel?: string;
+  type?: 'button' | 'submit' | 'reset';
+  id?: string;
   isDisabled?: boolean;
-
+  isDisabledOutline?: boolean;
+  isRadius?: boolean;
   isOnlyLoading?: boolean;
-
+  isMinWidthAsContent?: boolean;
   isLoading?: boolean;
-
+  isNotHoverEffect?: boolean;
   isHiddenBorder?: boolean;
-
   isNotBackground?: boolean;
-
+  isFullSize?: boolean;
   onChange?: (checked: boolean) => void;
-
+  outline?: IThemeOutline;
   isWidthAsHeight?: boolean;
+  onFocus?: (event: FocusEvent<HTMLButtonElement, Element>) => void;
 
+  onMouseDown?: MouseEventHandler<HTMLButtonElement>;
   size: IThemeSize;
-} & addSXProps &
-  addErrorProps &
-  addSXTypographyProps &
-  addOutlineProps;
-
-export type StyledCheckboxProps = AddDollarSign<
-  Pick<
-    CheckboxProps,
-    'checked' | 'genre' | 'view' | 'isWidthAsHeight' | 'size' | 'isDisabled' | 'isNotBackground' | 'isHiddenBorder'
-  >
-> &
-  addSXPropsDollar &
-  addErrorPropsDollar &
-  addSXTypographyPropsDollar &
-  addOutlinePropsDollar;
-
-export type TCheckboxGenre = keyof IThemeGenre;
-
-export type StyledIconProps = AddDollarSign<Pick<CheckboxProps, 'genre' | 'checked'>>;
+} & ISx &
+  IAddError &
+  ISxTypography;

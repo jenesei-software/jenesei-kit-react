@@ -1,5 +1,5 @@
-export interface useTooltipProps {
+export interface IUseOverflowingAdvanced {
   isOverflowing?: boolean;
   isCheckSize?: boolean;
-  dependencies?: any[];
+  dependencies?: unknown[];
 }

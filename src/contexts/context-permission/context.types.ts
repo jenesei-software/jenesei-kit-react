@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 
-export interface PermissionContextProps {
+export interface IPermissionContext {
   geolocationPermission: PermissionState | null;
 
   isBiometricSupported: boolean;
@@ -16,4 +16,4 @@ export interface PermissionContextProps {
   requestNotificationPermission: () => Promise<NotificationPermission | undefined>;
 }
 
-export type ProviderPermissionProps = PropsWithChildren;
+export type IProviderPermission = PropsWithChildren;

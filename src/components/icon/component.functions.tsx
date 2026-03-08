@@ -1,7 +1,7 @@
 import { Icon } from './component';
-import { getIconComponentsProps } from './component.types';
+import { IGetIconComponentsProps } from './component.types';
 
-export function getIconComponents(props: getIconComponentsProps) {
+export function getIconComponents(props: IGetIconComponentsProps) {
   return (props.icons ?? [])
     ?.filter((icon) => !icon.isHidden)
     ?.map((icon, index) => (

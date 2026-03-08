@@ -1,12 +1,19 @@
-import { useContext } from 'react';
+import { useContextSelector } from 'use-context-selector';
 
 import { BrowserThemeContext } from './context';
-import { BrowserThemeContextProps } from './context.types';
+import { IBrowserThemeContext, IUseIBrowserThemeDependencies } from './context.types';
 
-export const useBrowserTheme = (): BrowserThemeContextProps => {
-  const context = useContext(BrowserThemeContext);
+export const useIBrowserTheme = (props: IUseIBrowserThemeDependencies): IBrowserThemeContext => {
+  const context = useContextSelector(BrowserThemeContext, (v) => {
+    return v
+      ? props.reduce((acc, prop) => {
+          acc[prop] = v[prop];
+          return acc;
+        }, {} as any)
+      : null;
+  });
   if (!context) {
-    throw new Error('useGeolocation must be used within an ProviderGeolocation');
+    throw new Error('useIBrowserTheme must be used within an ProviderBrowserTheme');
   }
   return context;
 };

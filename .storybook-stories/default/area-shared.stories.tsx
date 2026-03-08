@@ -1,9 +1,9 @@
+import { IShared } from '@local/areas/shared';
+import { Shared as SharedComponent } from '@local/areas/shared/area';
+import { CSS_VARS } from '@local/styles/utils';
+
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { FC, useEffect, useState } from 'react';
-import 'styled-components';
-
-import { SharedProps } from '@local/areas/shared';
-import { Shared as SharedComponent } from '@local/areas/shared/area';
 
 const meta: Meta<typeof SharedComponent> = {
   component: SharedComponent,
@@ -14,7 +14,7 @@ export default meta;
 
 type Story = StoryObj<typeof SharedComponent>;
 
-const SharedStackWrapper: FC<SharedProps> = (props) => {
+const SharedStackWrapper: FC<IShared> = (props) => {
   const [value, setValue] = useState(props.value ?? '1');
   const onSelected = (tab: string) => {
     setValue(tab);
@@ -25,17 +25,15 @@ const SharedStackWrapper: FC<SharedProps> = (props) => {
   }, [props.value]);
   return (
     <SharedComponent
-      sx={(theme) => ({
-        default: {
-          padding: '16px',
-          position: 'relative',
-          width: '100%',
-          height: '100%',
-          backgroundColor: theme.palette.whiteStandard,
-          borderRadius: '8px',
-          gap: '8px',
-        },
-      })}
+      sx={{
+        padding: '16px',
+        position: 'relative',
+        width: '100%',
+        height: '100%',
+        backgroundColor: CSS_VARS.palette.fillPrimaryDark,
+        borderRadius: '8px',
+        gap: '8px',
+      }}
       {...props}
       onSelected={onSelected}
       value={value}
@@ -52,132 +50,127 @@ export const Shared: Story = {
       {
         id: '1',
         selected: {
-          genre: 'bustmarket-gray-violet',
+          genre: 'primary',
         },
         default: {
           icons: [
             {
               order: -1,
-              type: 'bustmarket',
-              name: 'Card',
+              type: 'id',
+              name: 'Bag1',
             },
           ],
-          genre: 'bustmarket-gray',
+          genre: 'primary',
           children: 'Выкупы',
+          isHiddenBorder: true,
           size: 'medium',
           sxTypography: {
-            default: {
-              family: 'Manrope',
-              weight: 400,
-              size: 14,
-            },
+            family: 'Manrope',
+            weight: '400',
+            size: 14,
           },
         },
       },
       {
         id: '2',
         selected: {
-          genre: 'bustmarket-gray-violet',
+          genre: 'primary',
         },
         default: {
           icons: [
             {
               order: -1,
-              type: 'bustmarket',
-              name: 'Delivery',
+              type: 'id',
+              name: 'Bag1',
             },
           ],
-          genre: 'bustmarket-gray',
+          genre: 'primary',
+          isHiddenBorder: true,
           children: 'Доставки',
           size: 'medium',
           sxTypography: {
-            default: {
-              family: 'Manrope',
-              weight: 400,
-              size: 14,
-            },
+            family: 'Manrope',
+            weight: '400',
+            size: 14,
           },
         },
       },
       {
         id: '3',
         selected: {
-          genre: 'bustmarket-gray-violet',
+          genre: 'primary',
         },
         default: {
           icons: [
             {
               order: -1,
-              type: 'bustmarket',
-              name: 'Heart',
+              type: 'id',
+              name: 'Bag1',
             },
           ],
-          genre: 'bustmarket-gray',
+          genre: 'primary',
+          isHiddenBorder: true,
           children: 'Избранное',
           size: 'medium',
           sxTypography: {
-            default: {
-              family: 'Manrope',
-              weight: 400,
-              size: 14,
-            },
+            family: 'Manrope',
+            weight: '400',
+            size: 14,
           },
         },
       },
       {
         id: '4',
         selected: {
-          genre: 'bustmarket-gray-violet',
+          genre: 'primary',
         },
         default: {
           icons: [
             {
               order: -1,
-              type: 'bustmarket',
-              name: 'Reviews',
+              type: 'id',
+              name: 'Bag1',
             },
           ],
-          genre: 'bustmarket-gray',
+          genre: 'primary',
+          isHiddenBorder: true,
           children: 'Отзывы',
           size: 'medium',
           sxTypography: {
-            default: {
-              family: 'Manrope',
-              weight: 400,
-              size: 14,
-            },
+            family: 'Manrope',
+            weight: '400',
+            size: 14,
           },
         },
       },
       {
         id: '5',
         selected: {
-          genre: 'bustmarket-gray-violet',
+          genre: 'primary',
         },
         default: {
           icons: [
             {
               order: -1,
-              type: 'bustmarket',
-              name: 'Search',
+              type: 'id',
+              name: 'Bag1',
             },
           ],
-          genre: 'bustmarket-gray',
+          genre: 'primary',
+          isHiddenBorder: true,
           children: 'Позиции в поиске',
           size: 'medium',
           sxTypography: {
-            default: {
-              family: 'Manrope',
-              weight: 400,
-              size: 14,
-            },
+            family: 'Manrope',
+            weight: '400',
+            size: 14,
           },
         },
       },
       {
         id: '6',
         selected: {
-          genre: 'bustmarket-gray-violet',
+          genre: 'primary',
         },
         default: {
           isOutlineBoxShadow: true,
@@ -188,15 +181,14 @@ export const Shared: Story = {
               name: 'BustMarket',
             },
           ],
-          genre: 'bustmarket-gray',
+          genre: 'primary',
+          isHiddenBorder: true,
           children: 'Тест Лого',
           size: 'medium',
           sxTypography: {
-            default: {
-              family: 'Manrope',
-              weight: 400,
-              size: 14,
-            },
+            family: 'Manrope',
+            weight: '400',
+            size: 14,
           },
         },
       },

@@ -1,0 +1,28 @@
+/* =========================
+   Area - Scroll
+   ========================= */
+.area-scroll {
+  display: flex;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.area-scroll--horizontal {
+  scrollbar-gutter: stable;
+  overflow-x: auto;
+}
+
+.area-scroll--vertical {
+  scrollbar-gutter: stable;
+  overflow-y: auto;
+}
+
+.area-scroll--is-always-horizontal {
+  scrollbar-gutter: stable;
+  overflow-x: scroll;
+}
+
+.area-scroll--is-always-vertical {
+  scrollbar-gutter: stable;
+  overflow-y: scroll;
+}

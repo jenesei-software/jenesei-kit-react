@@ -1,13 +1,14 @@
-import { addSXProps } from '@local/styles/add';
-import { AddDollarSign } from '@local/types';
+import { ISx } from '@local/styles/utils';
 
 import { AnimationProps, DraggableProps, FocusHandlers, HoverHandlers, LayoutProps, TapHandlers } from 'framer-motion';
 import { CSSProperties, DragEvent, DragEventHandler, JSX, PropsWithChildren, Ref } from 'react';
 
-export interface StackProps extends addSXProps, PropsWithChildren {
+export interface IStack extends ISx, PropsWithChildren {
   className?: string;
 
   isHover?: boolean;
+
+  id?: string;
 
   isRipple?: boolean;
 
@@ -20,9 +21,11 @@ export interface StackProps extends addSXProps, PropsWithChildren {
   onDrop?: (e: DragEvent<HTMLDivElement>) => void;
 
   ref?: Ref<HTMLDivElement | null>;
+
+  style?: CSSProperties | undefined;
 }
 
-export type StackMotionProps = StackProps &
+export type IStackMotion = IStack &
   LayoutProps &
   AnimationProps &
   HoverHandlers &
@@ -31,5 +34,3 @@ export type StackMotionProps = StackProps &
   DraggableProps & {
     style?: CSSProperties;
   };
-
-export type StyledStackProps = AddDollarSign<StackProps>;

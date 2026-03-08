@@ -1,22 +1,16 @@
-import { addIconProps } from '@local/components/icon';
-import {
-  addOutlineProps,
-  addOutlinePropsDollar,
-  addSXProps,
-  addSXPropsDollar,
-  addSXTypographyProps,
-  addSXTypographyPropsDollar,
-} from '@local/styles/add';
-import { IThemeGenre, IThemeSize } from '@local/styles/theme';
-import { AddDollarSign } from '@local/types';
+import { IAddIIcon } from '@local/components/icon';
+import { ISx, ISxTypography, IThemeGenreButton, IThemeOutline, IThemeSize } from '@local/styles/utils/types';
 
-import React, { PropsWithChildren, Ref } from 'react';
+import { CSSProperties, FocusEvent, MouseEventHandler, PropsWithChildren, Ref } from 'react';
 
-export type TButtonGenre = keyof IThemeGenre;
-
-type ButtonPropsDefault = PropsWithChildren & {
+type IButtonDefault = PropsWithChildren & {
   size: IThemeSize;
-  genre: TButtonGenre;
+
+  genre: IThemeGenreButton;
+
+  name?: string;
+
+  ariaLabel?: string;
 
   id?: string;
 
@@ -26,11 +20,13 @@ type ButtonPropsDefault = PropsWithChildren & {
 
   className?: string;
 
-  icons?: addIconProps[];
+  style?: CSSProperties;
+
+  icons?: IAddIIcon[];
+
+  isDisabledOutline?: boolean;
 
   isDisabled?: boolean;
-
-  isDisabledRipple?: boolean;
 
   isHidden?: boolean;
 
@@ -46,49 +42,30 @@ type ButtonPropsDefault = PropsWithChildren & {
 
   isHiddenBorder?: boolean;
 
-  isPlaystationEffect?: boolean;
-
   isNotHoverEffect?: boolean;
+  
+  isZeroRadius?: boolean;
 
   isFullSize?: boolean;
 
-  onFocus?: (event: React.FocusEvent<HTMLButtonElement, Element>) => void;
-  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-  onMouseDown?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-  type?: 'button' | 'submit' | 'reset';
-} & addSXProps &
-  addOutlineProps &
-  addSXTypographyProps;
+  outline?: IThemeOutline;
 
-export type ButtonPropsStandard = ButtonPropsDefault & {
+  onFocus?: (event: FocusEvent<HTMLButtonElement, Element>) => void;
+
+  onClick?: MouseEventHandler<HTMLButtonElement>;
+
+  onMouseDown?: MouseEventHandler<HTMLButtonElement>;
+
+  type?: 'button' | 'submit' | 'reset';
+} & ISx &
+  ISxTypography;
+
+type IButtonStandard = IButtonDefault & {
   isIconGroup?: false;
 };
-export type ButtonPropsIconGroup = ButtonPropsDefault & {
+type IButtonIconGroup = IButtonDefault & {
   isIconGroup?: true;
   iconGroupOrder?: number;
 };
 
-export type ButtonProps = ButtonPropsStandard | ButtonPropsIconGroup;
-export type StyledButtonPropsDollar = AddDollarSign<
-  Pick<
-    ButtonProps,
-    | 'genre'
-    | 'isDisabled'
-    | 'isHidden'
-    | 'isWidthAsHeight'
-    | 'isMinWidthAsContent'
-    | 'isRadius'
-    | 'isHiddenBorder'
-    | 'isPlaystationEffect'
-    | 'size'
-    | 'isFullSize'
-    | 'isNotHoverEffect'
-  >
-> &
-  addSXPropsDollar &
-  addOutlinePropsDollar &
-  addSXTypographyPropsDollar;
-
-export type StyledButtonIconsWrapperPropsDollar = AddDollarSign<
-  Pick<ButtonProps, 'isIconGroup' | 'size'> & Pick<ButtonPropsIconGroup, 'iconGroupOrder'>
->;
+export type IButton = IButtonStandard | IButtonIconGroup;

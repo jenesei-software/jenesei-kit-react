@@ -1,14 +1,13 @@
 import { Button } from '@local/components/button';
 import { Stack } from '@local/components/stack';
-import { useResolveSx } from '@local/hooks/use-resolve-sx';
 
 import { AnimatePresence, motion } from 'framer-motion';
 import { FC, useCallback, useMemo } from 'react';
 
 import { DEFAULT_COMPONENT_PAGINATION_GAP } from './component.constants';
-import { PaginationProps } from './component.types';
+import { IPagination } from './component.types';
 
-export const Pagination: FC<PaginationProps> = (props) => {
+export const Pagination: FC<IPagination> = (props) => {
   const isDisabledPrevious = useMemo(() => props.index === 0 && !props.isInfinity, [props.index, props.isInfinity]);
   const isDisabledNext = useMemo(
     () => props.index === props.length - 1 && !props.isInfinity,
@@ -44,28 +43,23 @@ export const Pagination: FC<PaginationProps> = (props) => {
     return Array.from({ length: end - start }, (_, i) => start + i);
   }, [props.index, props.viewQuantity, props.length]);
 
-  const { resolveSX } = useResolveSx();
-  const sxStack = useMemo(
-    () =>
-      resolveSX(props?.sx, () => ({
-        default: {
-          height: 'fit-content',
-          gap: `${gap}px`,
-        },
-      })),
-    [props.sx, resolveSX, gap],
-  );
-
   return (
-    <Stack sx={sxStack}>
+    <Stack
+      sx={{
+        height: 'fit-content',
+        gap: `${gap}px`,
+      }}
+    >
       <Button
         isDisabled={isDisabledPrevious}
         isHidden={isDisabledPrevious}
         onClick={handlePrevious}
+        outline='boxShadow'
         {...props.buttonControl}
         icons={[
           {
             type: 'id',
+            size: 'large',
             name: 'Arrow2',
             order: -1,
             turn: 90,
@@ -77,14 +71,12 @@ export const Pagination: FC<PaginationProps> = (props) => {
 
       <Stack
         sx={{
-          default: {
-            width: 'fit-content',
-            height: 'fit-content',
-            display: 'flex',
-            gap: `${gap}px`,
-            alignItems: 'center',
-            justifyContent: 'flex-start',
-          },
+          width: 'fit-content',
+          height: 'fit-content',
+          display: 'flex',
+          gap: `${gap}px`,
+          alignItems: 'center',
+          justifyContent: 'flex-start',
         }}
       >
         {Array.from({ length: props.length }).map((_, i) => {
@@ -94,22 +86,16 @@ export const Pagination: FC<PaginationProps> = (props) => {
               {isVisible && (
                 <motion.div
                   layout
-                  initial={{
-                    opacity: 0,
-                    scale: 0.8,
+                  initial={{ opacity: 0, scale: 0.95, }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.1, ease: 'easeInOut' } }}
+                  transition={{
+                    default: { duration: 0.1, ease: 'easeOut' },
                   }}
-                  animate={{
-                    opacity: 1,
-                    scale: 1,
-                  }}
-                  exit={{
-                    opacity: 0,
-                    scale: 0.8,
-                  }}
-                  transition={{ duration: 1, ease: 'backOut' }}
                 >
                   <Button
                     isWidthAsHeight
+                    outline='boxShadow'
                     {...(i === props.index ? props.buttonCount.active : props.buttonCount.inactive)}
                     {...lengthData?.[i]}
                     onClick={() => props.changeIndex(i)}
@@ -127,10 +113,12 @@ export const Pagination: FC<PaginationProps> = (props) => {
         isDisabled={isDisabledNext}
         isHidden={isDisabledNext}
         onClick={handleNext}
+        outline='boxShadow'
         {...props.buttonControl}
         icons={[
           {
             type: 'id',
+            size: 'large',
             name: 'Arrow2',
             turn: -90,
           },

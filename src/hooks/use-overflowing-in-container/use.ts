@@ -1,9 +1,9 @@
 import { RefObject, useEffect, useMemo, useRef, useState } from 'react';
 
-import { useOverflowingInContainerProps } from './use.types';
+import { IUseOverflowingInContainer } from './use.types';
 
 export function useOverflowingInContainer<T extends HTMLElement>(
-  props?: useOverflowingInContainerProps,
+  props?: IUseOverflowingInContainer,
 ): {
   isDisabled: boolean;
   isOverflowing: boolean;

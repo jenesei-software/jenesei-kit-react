@@ -1,65 +1,52 @@
-import { addSX, addSXTypography } from '@local/styles/add';
-import { WordsPullUp } from '@local/styles/motion';
-import { KEY_SIZE_DATA } from '@local/styles/theme';
+import { useTypographyStyles } from '@local/hooks/use-typography-styles';
+import { MotionWordsPullUp } from '@local/styles/motion';
+import { CSS_CLASS, CSS_VARS } from '@local/styles/utils';
+import { CSS_VARS_RAW } from '@local/styles/utils/constants';
+import { setClasses, setStyles } from '@local/styles/utils/functions';
 
-import { FC } from 'react';
-import styled, { css } from 'styled-components';
+import { FC, useMemo } from 'react';
 
-import { addErrorPropsDollar, ErrorMessageDollarProps, ErrorMessageProps } from './component.types';
+import { IErrorMessage } from './component.types';
 
-const addErrorMessageSize = css<ErrorMessageDollarProps>`
-  ${(props) =>
-    props.$size
-      ? props.$isErrorAbsolute
-        ? css`
-        position: absolute;
-        top: calc(100% + 4px);
-        padding-left: ${KEY_SIZE_DATA[props.$size].padding}px;
-        color: ${(props) => props.theme.states.danger};
-      `
-        : css`
-        position: static;
-        padding: 0px ${KEY_SIZE_DATA[props.$size].padding}px;
-        color: ${(props) => props.theme.states.danger};
-      `
-      : null}
-`;
+export const ErrorMessage: FC<IErrorMessage> = (props) => {
+  const { className: classNameTypography, style: styleTypography } = useTypographyStyles({
+    sx: {
+      ...props?.sxTypography,
+      size: props.size ? CSS_VARS.size[props.size].font : '14',
+      weight: '700',
+      height: '1',
+    },
+    style: { order: 0, display: 'contents' },
+  });
 
-const ErrorMessageComponent = styled.div<ErrorMessageDollarProps>`
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  ${addErrorMessageSize};
-  ${addSX};
-  ${addSXTypography};
-`;
+  const { className, style } = useMemo(() => {
+    const className = setClasses([
+      props.className,
+      CSS_CLASS.component.error.root,
+      CSS_CLASS.transition.color,
+      props.size && props.isErrorAbsolute
+        ? CSS_CLASS.component.error.sizeAbsolute
+        : CSS_CLASS.component.error.sizeDefault,
+    ]);
 
-export const addError = css<addErrorPropsDollar>`
-  ${(props) =>
-    props.$error?.isError &&
-    css`
-      border-color: ${(props) => props.theme.states.danger};
-      &:focus,
-      &:active,
-      &:hover,
-      &:focus-visible {
-        border-color: ${(props) => props.theme.states.danger};
-      }
-    `};
-`;
+    const vars: Record<string, string> = {};
 
-export const ErrorMessage: FC<ErrorMessageProps> = (props) => {
+    vars[CSS_VARS_RAW.component.error.color] = CSS_VARS.palette.accentRedLight;
+    vars[CSS_VARS_RAW.component.error.padding] = props.size ? CSS_VARS.size[props.size].padding : '0px';
+
+    const style = setStyles([props.style, Object.keys(vars).length ? vars : undefined]);
+
+    return { className, style };
+  }, [props.className, props.style, props.size, props.isErrorAbsolute]);
+
   return (
     <>
       {props.errorMessage && props.isError ? (
-        <ErrorMessageComponent
-          $size={props.size}
-          $sxTypography={props.sxTypography}
-          $sx={props.sx}
-          $isErrorAbsolute={props.isErrorAbsolute}
-        >
-          <WordsPullUp text={props.errorMessage} />
-        </ErrorMessageComponent>
+        <div className={className} style={style}>
+          <div className={classNameTypography} style={styleTypography}>
+            <MotionWordsPullUp text={props.errorMessage} />
+          </div>
+        </div>
       ) : null}
     </>
   );

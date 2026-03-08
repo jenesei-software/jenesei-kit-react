@@ -1,2 +1,0 @@
-export const DEFAULT_RIPPLE_DURATION = 600;
-export const DEFAULT_RIPPLE_ID = 'JENESEI_RIPPLE';

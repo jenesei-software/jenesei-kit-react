@@ -1,78 +1,69 @@
-import type { Meta } from '@storybook/react-vite';
-import { FC } from 'react';
-import 'styled-components';
-
 import { Separator as SeparatorComponent } from '@local/components/separator';
 import { Typography } from '@local/components/typography';
+
+import type { Meta } from '@storybook/react-vite';
+import { FC } from 'react';
 
 import { WrapperBig, WrapperMin } from './tools';
 
 const meta: Meta<typeof SeparatorComponent> = {
   component: SeparatorComponent,
-  title: 'Component/Separator',
+  title: 'Component/5. Separator',
 };
 
 export default meta;
 
-const AllWrapper: FC = () => {
+const CollectionWrapper: FC = () => {
   return (
     <WrapperBig>
-      <WrapperMin sx={{ default: { width: '160px', height: '160px', flexDirection: 'column' } }}>
+      <WrapperMin sx={{ width: '160px', height: '160px', flexDirection: 'column' }}>
         <Typography
           sx={{
-            default: {
-              variant: 'h5',
-              color: 'black100',
-            },
+            variant: 'title-4',
+            color: 'textPrimaryLight',
           }}
         >
           Type - horizontal
         </Typography>
-        <SeparatorComponent color='black100' type='horizontal' />
+        <SeparatorComponent color='fillPrimaryLight' type='horizontal' />
       </WrapperMin>
-      <WrapperMin sx={{ default: { width: '160px', height: '160px', flexDirection: 'column' } }}>
+      <WrapperMin sx={{ width: '160px', height: '160px', flexDirection: 'column' }}>
         <Typography
           sx={{
-            default: {
-              variant: 'h5',
-              color: 'black100',
-            },
+            variant: 'title-4',
+            color: 'textPrimaryLight',
           }}
         >
           Type - horizontal, thickness - 5px, radius - 4px
         </Typography>
-        <SeparatorComponent color='black100' type='horizontal' thickness='5px' radius='4px' />
+        <SeparatorComponent color='fillPrimaryLight' type='horizontal' thickness='5px' radius='4px' />
       </WrapperMin>
-      <WrapperMin sx={{ default: { width: '160px', height: '160px', flexDirection: 'column' } }}>
+      <WrapperMin sx={{ width: '160px', height: '160px', flexDirection: 'column' }}>
         <Typography
           sx={{
-            default: {
-              variant: 'h5',
-              color: 'black100',
-            },
+            variant: 'title-4',
+            color: 'textPrimaryLight',
           }}
         >
           Type - vertical
         </Typography>
-        <SeparatorComponent color='black100' type='vertical' />
+        <SeparatorComponent color='fillPrimaryLight' type='vertical' />
       </WrapperMin>
-      <WrapperMin sx={{ default: { width: '160px', height: '160px', flexDirection: 'column' } }}>
+      <WrapperMin sx={{ width: '160px', height: '160px', flexDirection: 'column' }}>
         <Typography
           sx={{
-            default: {
-              variant: 'h5',
-              color: 'black100',
-            },
+            variant: 'title-4',
+            color: 'textPrimaryLight',
           }}
         >
-          Type - vertical, color - blueBr
+          Type - vertical, color - productPrimary
         </Typography>
-        <SeparatorComponent color='blueBr' type='vertical' />
+        <SeparatorComponent color='productPrimaryLight' type='vertical' thickness='5px' radius='4px'/>
       </WrapperMin>
     </WrapperBig>
   );
 };
 
-export const Separator = {
-  render: () => <AllWrapper />,
+export const Collection = {
+  render: () => <CollectionWrapper />,
 };

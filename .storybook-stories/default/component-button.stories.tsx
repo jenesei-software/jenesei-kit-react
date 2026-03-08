@@ -1,74 +1,74 @@
-import type { Meta } from '@storybook/react-vite';
-import { FC } from 'react';
-import 'styled-components';
+import { Button as ButtonComponent, IButton } from '@local/components/button';
 
-import { Button as ButtonComponent } from '@local/components/button';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { FC } from 'react';
 
 import { WrapperBig, WrapperMin } from './tools';
 
-const meta: Meta<typeof ButtonComponent> = {
+const meta: Meta<IButton> = {
   component: ButtonComponent,
-  title: 'Component/Button',
+  title: 'Component/1. Button',
 };
 
 export default meta;
 
-const ButtonWrapper: FC = () => {
+const CollectionWrapper: FC = () => {
   return (
     <WrapperBig>
       <WrapperMin>
-        <ButtonComponent isRadius size='medium' genre='black' isDisabledRipple isWhileTapEffect>
-          black
+        <ButtonComponent size='medium' genre='primary'>
+          Primary
         </ButtonComponent>
+        <ButtonComponent size='medium' genre='secondary'>
+          Secondary
+        </ButtonComponent>
+        <ButtonComponent size='medium' genre='product'>
+          Product
+        </ButtonComponent>
+        <ButtonComponent size='medium' genre='blue'>
+          Blue
+        </ButtonComponent>
+        <ButtonComponent size='medium' genre='green'>
+          Green
+        </ButtonComponent>
+        <ButtonComponent size='medium' genre='red'>
+          Red
+        </ButtonComponent>
+        <ButtonComponent size='medium' genre='yellow'>
+          Yellow
+        </ButtonComponent>
+      </WrapperMin>
+      <WrapperMin>
+        <ButtonComponent size='large' genre='primary'>
+          large
+        </ButtonComponent>
+        <ButtonComponent size='largeMedium' genre='primary'>
+          largeMedium
+        </ButtonComponent>
+        <ButtonComponent size='medium' genre='primary'>
+          medium
+        </ButtonComponent>
+        <ButtonComponent size='mediumSmall' genre='primary'>
+          mediumSmall
+        </ButtonComponent>
+        <ButtonComponent size='small' genre='primary'>
+          small
+        </ButtonComponent>
+      </WrapperMin>
+
+      <WrapperMin>
         <ButtonComponent
           isRadius
           isOnlyIcon
           isWidthAsHeight
-          icons={[{ type: 'logo', name: 'Jenesei', size: 'large' }]}
+          icons={[{ type: 'logo', name: 'Jenesei', size: '100%' }]}
           size='medium'
-          genre='black'
-          isDisabledRipple
+          genre='product'
           isWhileTapEffect
         />
-        <ButtonComponent size='medium' genre='blackBorder'>
-          blackBorder
-        </ButtonComponent>
-        <ButtonComponent size='medium' genre='gray'>
-          gray
-        </ButtonComponent>
-        <ButtonComponent size='medium' genre='grayBorder'>
-          grayBorder
-        </ButtonComponent>
-        <ButtonComponent size='medium' genre='greenTransparent'>
-          greenTransparent
-        </ButtonComponent>
-        <ButtonComponent size='medium' genre='product'>
-          product
-        </ButtonComponent>
-        <ButtonComponent size='medium' genre='productBorder'>
-          productBorder
-        </ButtonComponent>
-        <ButtonComponent size='medium' genre='realebail-gray'>
-          realebail-gray
-        </ButtonComponent>
-        <ButtonComponent size='medium' genre='realebail-product'>
-          realebail-product
-        </ButtonComponent>
-        <ButtonComponent size='medium' genre='realebail-white'>
-          realebail-white
-        </ButtonComponent>
-        <ButtonComponent size='medium' genre='redTransparent'>
-          redTransparent
-        </ButtonComponent>
-        <ButtonComponent size='medium' genre='white'>
-          white
-        </ButtonComponent>
-        <ButtonComponent size='medium' genre='yellowTransparent'>
-          yellowTransparent
-        </ButtonComponent>
         <ButtonComponent
           size='medium'
-          genre='yellowTransparent'
+          genre='product'
           icons={[
             {
               type: 'id',
@@ -81,33 +81,42 @@ const ButtonWrapper: FC = () => {
               order: -1,
             },
           ]}
-          isDisabledRipple
           isWhileTapEffect
+          isIconGroup
+          iconGroupOrder={1}
         >
-          yellowTransparent
+          2 Icons, isWhileTapEffect
         </ButtonComponent>
-      </WrapperMin>
-      <WrapperMin>
-        <ButtonComponent size='large' genre='black'>
-          large
+        <ButtonComponent size='medium' genre='product' isNotHoverEffect>
+          isNotHoverEffect
         </ButtonComponent>
-        <ButtonComponent size='largeMedium' genre='black'>
-          largeMedium
+        <ButtonComponent size='medium' genre='product' isDisabled>
+          isDisabled
         </ButtonComponent>
-        <ButtonComponent size='medium' genre='black'>
-          medium
+        <ButtonComponent size='medium' genre='product' isHidden>
+          isHidden
         </ButtonComponent>
-        <ButtonComponent size='mediumSmall' genre='black'>
-          mediumSmall
+        <ButtonComponent size='medium' genre='product' isDisabledOutline>
+          isDisabledOutline
         </ButtonComponent>
-        <ButtonComponent size='small' genre='black'>
-          small
+        <ButtonComponent size='medium' genre='primary' isHiddenBorder>
+          isHiddenBorder
         </ButtonComponent>
       </WrapperMin>
     </WrapperBig>
   );
 };
 
-export const Button = {
-  render: () => <ButtonWrapper />,
+type Story = StoryObj<IButton>;
+
+export const Collection = {
+  render: () => <CollectionWrapper />,
+};
+
+export const Index: Story = {
+  args: {
+    genre:'primary',
+    size:'medium',
+    children: 'Example',
+  },
 };

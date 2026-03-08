@@ -1,7 +1,6 @@
-export interface useTooltipProps {
+export interface IUseTooltip {
   isOverflowing?: boolean;
   isCheckSize?: boolean;
   mode?: 'default' | 'parent';
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  dependencies?: any[];
+  dependencies?: unknown[];
 }

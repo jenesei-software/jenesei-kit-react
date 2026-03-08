@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 
-import { CookieAttributes } from './context.types';
+import { ICookieAttributes } from './context.types';
 
 export function getFromCookie<T>(key: string): T | null {
   const item = Cookies.get(key);
@@ -15,7 +15,7 @@ export function getFromCookie<T>(key: string): T | null {
   return null;
 }
 
-export function setToCookie<T>(key: string, value: T, options?: CookieAttributes): void {
+export function setToCookie<T>(key: string, value: T, options?: ICookieAttributes): void {
   try {
     const item = JSON.stringify(value);
     Cookies.set(key, item, options);

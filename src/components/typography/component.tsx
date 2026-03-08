@@ -1,110 +1,44 @@
-import { Tooltip } from '@local/components/tooltip';
-import { useScreenWidth } from '@local/contexts/context-screen-width';
-import { useOverflowing } from '@local/hooks/use-overflowing';
+import { useTypographyStyles } from '@local/hooks/use-typography-styles';
 
-import { createLink, LinkProps } from '@tanstack/react-router';
-import { memo, useMemo } from 'react';
-import { useTheme } from 'styled-components';
+import { ElementType, memo, useMemo } from 'react';
 
-import { Title } from './component.styles';
-import { TypographyProps, TypographyPropsDollar, TypographyTooltipProps } from './component.types';
+import { ITypographyComponent } from './component.types';
 
-const TypographyWithRef = (props: TypographyProps) => {
-  const { screenActual } = useScreenWidth();
-  const cssProps: TypographyPropsDollar & Pick<TypographyProps, 'onClick' | 'className' | 'style'> = useMemo(
-    () => ({
-      $sxTypography: props.sx,
-      style: props.style,
-      className: props.className,
-      $sx: props.sxStandard,
-      $isTransitionFontSize: props.isTransitionFontSize,
-      $isDisabledOutline: props.isDisabledOutline,
-      $isOutlineBoxShadow: props.isOutlineBoxShadow,
-      $isReadOnly: props.isReadOnly,
-      onClick: props.onClick ? props.onClick : () => {},
-    }),
-    [
-      props.sx,
-      props.style,
-      props.className,
-      props.sxStandard,
-      props.onClick,
-      props.isDisabledOutline,
-      props.isOutlineBoxShadow,
-      props.isReadOnly,
-      props.isTransitionFontSize,
-    ],
-  );
-  const theme = useTheme();
-  const screenSX = useMemo(
-    () =>
-      (typeof props?.sx === 'function' ? props?.sx(theme) : props?.sx)?.breakpoints?.[screenActual] ??
-      (typeof props?.sx === 'function' ? props?.sx(theme) : props?.sx)?.default,
-    [props.sx, screenActual, theme],
-  );
-
-  if (screenSX && 'variant' in screenSX) {
-    if (screenSX.variant === 'h7' || screenSX.variant === 'h8' || screenSX.variant === 'h9') {
-      return (
-        <Title
-          ref={props.ref as any}
-          as={props.isAnchor ? 'a' : props.isParagraph ? 'p' : props.isSpan ? 'span' : 'span'}
-          href={props.href}
-          {...cssProps}
-        >
-          {props.children}
-        </Title>
-      );
-    } else {
-      return (
-        <Title
-          ref={props.ref as any}
-          as={props.isAnchor ? 'a' : props.isParagraph ? 'p' : props.isSpan ? 'span' : screenSX.variant}
-          href={props.href}
-          {...cssProps}
-        >
-          {props.children}
-        </Title>
-      );
-    }
-  }
-
-  return (
-    <Title
-      ref={props.ref as any}
-      as={props.isAnchor ? 'a' : props.isParagraph ? 'p' : props.isSpan ? 'span' : 'span'}
-      href={props.href}
-      {...cssProps}
-    >
-      {props.children}
-    </Title>
-  );
-};
-
-export const Typography = (props: TypographyProps) => {
-  return <TypographyWithRef {...props} />;
-};
-
-const TypographySizeIsAnchor = (props: TypographyProps & LinkProps) => {
-  return <TypographyWithRef isAnchor {...props} ref={props.ref} href={props.href} />;
-};
-
-export const TypographyLink = createLink(TypographySizeIsAnchor);
-
-export const TypographyTooltip = memo((props: TypographyTooltipProps) => {
-  const { isDisabled, ref } = useOverflowing<HTMLDivElement>({
-    isCheckSize: props.tooltip.isDisabled !== undefined ? !props.tooltip.isDisabled : true,
-    dependencies: [props.children],
+export const Typography = memo((props: ITypographyComponent) => {
+  const { className, style } = useTypographyStyles({
+    sx: props?.sx ?? {},
+    className: props.className,
+    style: props.style,
   });
+
+  const Component = useMemo(() => {
+    const Component: ElementType = props.isAnchor
+      ? 'a'
+      : props.isParagraph
+        ? 'p'
+        : props.isSpan
+          ? 'span'
+          : props.sx && 'variant' in props.sx
+            ? props.sx.variant === 'headline'
+              ? 'h1'
+              : props.sx.variant === 'sub-headline'
+                ? 'h2'
+                : props.sx.variant === 'title-1'
+                  ? 'h3'
+                  : props.sx.variant === 'title-2'
+                    ? 'h4'
+                    : props.sx.variant === 'title-3'
+                      ? 'h5'
+                      : props.sx.variant === 'title-4'
+                        ? 'h6'
+                        : 'span'
+            : 'span';
+    return Component;
+  }, [props.isAnchor, props.isParagraph, props.isSpan, props.sx]);
+
   return (
-    <Tooltip isDisabled={isDisabled} content={props.children} {...props.tooltip}>
-      <TypographyWithRef ref={ref} {...props.typography} style={{ position: 'relative' }}>
-        {props.children}
-      </TypographyWithRef>
-    </Tooltip>
+    <Component ref={props.ref as any} href={props.href} className={className} style={style}>
+      {props.children}
+    </Component>
   );
 });
-
-TypographyTooltip.displayName = 'TypographyTooltip';
-TypographyWithRef.displayName = 'TypographyWithRef';
-TypographySizeIsAnchor.displayName = 'TypographySizeIsAnchor';

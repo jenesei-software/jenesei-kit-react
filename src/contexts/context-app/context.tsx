@@ -1,6 +1,6 @@
-import { Preview, PreviewAdditionalProps } from '@local/areas/preview';
+import { IPreviewAdditional, Preview } from '@local/areas/preview';
 import { useScreenWidth } from '@local/contexts/context-screen-width';
-import { IThemePaletteKeys, JeneseiPalette } from '@local/styles/theme';
+import { CSS_VARS, IThemePalette } from '@local/styles/utils';
 
 import { createContext, FC, useCallback, useEffect, useState } from 'react';
 
@@ -15,9 +15,9 @@ import {
   ProviderAppOutletRightAside,
   ProviderAppWrapper,
 } from './context.styles';
-import { AppContextProps, ProviderAppProps } from './context.types';
+import { IAppContext, IProviderApp } from './context.types';
 
-export const AppContext = createContext<AppContextProps | null>(null);
+export const AppContext = createContext<IAppContext | null>(null);
 
 /**
  * ProviderApp component is a context context that manages various application-level states
@@ -26,7 +26,7 @@ export const AppContext = createContext<AppContextProps | null>(null);
  *
  * @component
  *
- * @param {ProviderAppProps} props - The properties passed to the ProviderApp component.
+ * @param {IProviderApp} props - The properties passed to the ProviderApp component.
  * @param {string} props.defaultBgColor - The default background color.
  * @param {string} props.defaultStatusBarColor - The default status bar color.
  * @param {string} [props.defaultBgImage] - The default background image.
@@ -43,7 +43,7 @@ export const AppContext = createContext<AppContextProps | null>(null);
  *
  * @returns {JSX.Element} The rendered ProviderApp component.
  */
-export const ProviderApp: FC<ProviderAppProps> = (props) => {
+export const ProviderApp: FC<IProviderApp> = (props) => {
   const { bgColor, changeBgColor, historyBgColor, setDefaultBgColor } = useBgColor(props.defaultBgColor);
   const { statusBarColor, changeStatusBarColor, historyStatusBarColor, setDefaultStatusBarColor } = useStatusBarColor(
     props.defaultStatusBarColor,
@@ -54,7 +54,7 @@ export const ProviderApp: FC<ProviderAppProps> = (props) => {
     props.defaultDescription,
   );
   const { changePreview, previewProps } = usePreview(props.defaultPreview);
-  const { screenActual } = useScreenWidth();
+  const { breakpoint } = useScreenWidth(['breakpoint']);
 
   return (
     <AppContext.Provider
@@ -79,7 +79,7 @@ export const ProviderApp: FC<ProviderAppProps> = (props) => {
     >
       <title>{title}</title>
       <meta name='description' content={description} />
-      <meta name='theme-color' content={JeneseiPalette[statusBarColor]} />
+      <meta name='theme-color' content={CSS_VARS.palette[statusBarColor]} />
       <meta name='apple-mobile-web-app-status-bar-style' content='default' />
       <meta name='mobile-web-app-capable' content='yes' />
       <Preview {...previewProps}>
@@ -93,23 +93,23 @@ export const ProviderApp: FC<ProviderAppProps> = (props) => {
             $leftAside={props.leftAside}
             $rightAside={props.rightAside}
           >
-            {props.notification?.length?.[screenActual] ? (
+            {props.notification?.length?.[breakpoint] ? (
               <ProviderAppOutletNotification $notification={props.notification}>
                 {props.notification?.component || null}
               </ProviderAppOutletNotification>
             ) : null}
 
-            {props.header?.length?.[screenActual] ? (
+            {props.header?.length?.[breakpoint] ? (
               <ProviderAppOutletHeader $header={props.header}>
                 {props.header?.component || null}
               </ProviderAppOutletHeader>
             ) : null}
 
-            {props.nav?.length?.[screenActual] ? (
+            {props.nav?.length?.[breakpoint] ? (
               <ProviderAppOutletNav $nav={props.nav}>{props.nav?.component || null}</ProviderAppOutletNav>
             ) : null}
 
-            {props.leftAside?.length?.[screenActual] ? (
+            {props.leftAside?.length?.[breakpoint] ? (
               <ProviderAppOutletLeftAside $leftAside={props.leftAside}>
                 {props.leftAside?.component || null}
               </ProviderAppOutletLeftAside>
@@ -119,13 +119,13 @@ export const ProviderApp: FC<ProviderAppProps> = (props) => {
               {props.children}
             </ProviderAppOutletChildren>
 
-            {props.rightAside?.length?.[screenActual] ? (
+            {props.rightAside?.length?.[breakpoint] ? (
               <ProviderAppOutletRightAside $rightAside={props.rightAside}>
                 {props.rightAside?.component || null}
               </ProviderAppOutletRightAside>
             ) : null}
 
-            {props.footer?.length?.[screenActual] ? (
+            {props.footer?.length?.[breakpoint] ? (
               <ProviderAppOutletFooter $footer={props.footer}>
                 {props.footer?.component || null}
               </ProviderAppOutletFooter>
@@ -140,15 +140,15 @@ export const ProviderApp: FC<ProviderAppProps> = (props) => {
 /**
  * Custom hook to manage preview properties.
  */
-const usePreview = (defaultPreview: ProviderAppProps['defaultPreview']) => {
-  const [previewProps, setPreviewProps] = useState(defaultPreview || { visible: true, defaultVisible: true });
+const usePreview = (defaultPreview: IProviderApp['defaultPreview']) => {
+  const [previewProps, setIPreview] = useState(defaultPreview || { visible: true, defaultVisible: true });
 
-  const changePreview = useCallback((newPreviewProps: PreviewAdditionalProps) => {
-    setPreviewProps(newPreviewProps);
+  const changePreview = useCallback((newIPreview: IPreviewAdditional) => {
+    setIPreview(newIPreview);
   }, []);
 
   useEffect(() => {
-    if (defaultPreview) setPreviewProps(defaultPreview);
+    if (defaultPreview) setIPreview(defaultPreview);
   }, [defaultPreview]);
 
   return { previewProps, changePreview };
@@ -158,19 +158,19 @@ const usePreview = (defaultPreview: ProviderAppProps['defaultPreview']) => {
  * Custom hook to manage background color state with history tracking.
  */
 type BgColorState = {
-  bgColor: IThemePaletteKeys;
-  bgColorHistory: IThemePaletteKeys[];
+  bgColor: IThemePalette;
+  bgColorHistory: IThemePalette[];
   bgColorIndex: number;
 };
 
-export const useBgColor = (defaultColor: IThemePaletteKeys) => {
+export const useBgColor = (defaultColor: IThemePalette) => {
   const [state, setState] = useState<BgColorState>({
     bgColor: defaultColor,
     bgColorHistory: [defaultColor],
     bgColorIndex: 0,
   });
 
-  const changeBgColor = useCallback((color: IThemePaletteKeys) => {
+  const changeBgColor = useCallback((color: IThemePalette) => {
     setState((prev) => {
       const newHistory = [...prev.bgColorHistory.slice(0, prev.bgColorIndex + 1), color];
       return {
@@ -224,19 +224,19 @@ export const useBgColor = (defaultColor: IThemePaletteKeys) => {
  * Custom hook to manage the status bar color with history tracking.
  */
 type StatusBarColorState = {
-  statusBarColor: IThemePaletteKeys;
-  statusBarColorHistory: IThemePaletteKeys[];
+  statusBarColor: IThemePalette;
+  statusBarColorHistory: IThemePalette[];
   statusBarColorIndex: number;
 };
 
-export const useStatusBarColor = (defaultColor: IThemePaletteKeys) => {
+export const useStatusBarColor = (defaultColor: IThemePalette) => {
   const [state, setState] = useState<StatusBarColorState>({
     statusBarColor: defaultColor,
     statusBarColorHistory: [defaultColor],
     statusBarColorIndex: 0,
   });
 
-  const changeStatusBarColor = useCallback((color: IThemePaletteKeys) => {
+  const changeStatusBarColor = useCallback((color: IThemePalette) => {
     setState((prev) => {
       const newHistory = [...prev.statusBarColorHistory.slice(0, prev.statusBarColorIndex + 1), color];
       return {

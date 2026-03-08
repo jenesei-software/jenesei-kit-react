@@ -1,55 +1,55 @@
-import { addSXProps, addSXPropsDollar } from '@local/styles/add';
-import { IThemePaletteKeys, IThemeSize } from '@local/styles/theme';
-import { AddDollarSign } from '@local/types';
+import { ISx, IThemePalette, IThemeSize } from '@local/styles/utils';
 
-import React from 'react';
-import { DefaultTheme } from 'styled-components';
+import { CSSProperties, MouseEvent } from 'react';
 
-export type IconProps = {
-  [K in keyof DefaultTheme['icon']['map']]: {
+import { THEME_MAP } from './component.consts';
+
+export type IIconMao = {
+  id: typeof THEME_MAP.id;
+  checkbox: typeof THEME_MAP.checkbox;
+  loading: typeof THEME_MAP.loading;
+  logo: typeof THEME_MAP.logo;
+};
+
+export type IIcon = {
+  [K in keyof IIconMao]: {
     type: K;
-    name: DefaultTheme['icon']['map'][K][number];
+    name: IIconMao[K][number];
     className?: string;
-    onClick?: (event: React.MouseEvent<SVGSVGElement>) => void;
+    style?: CSSProperties;
+    onClick?: (event: MouseEvent<SVGSVGElement>) => void;
     size: IThemeSize | '100%';
-    color?: IThemePaletteKeys;
+    color?: IThemePalette;
     turn?: number;
     order?: number;
     tabIndex?: number;
-  } & addSXProps;
-}[keyof DefaultTheme['icon']['map']];
+  } & ISx;
+}[keyof IIconMao];
 
-export type StyledIconProps = AddDollarSign<
-  Pick<IconProps, 'size' | 'turn' | 'order'> & { color?: IThemePaletteKeys }
-> &
-  addSXPropsDollar;
-
-export type StyledIconSkeletonProps = AddDollarSign<Pick<IconProps, 'size' | 'order'>>;
-
-export type addIconProps = {
-  [T in keyof DefaultTheme['icon']['map']]: Omit<IconProps, 'size'> & {
+export type IAddIIcon = {
+  [T in keyof IIconMao]: Omit<IIcon, 'size'> & {
     type: T;
-    name: DefaultTheme['icon']['map'][T][number];
+    name: IIconMao[T][number];
     isHidden?: boolean;
-    size?: IconProps['size'];
+    size?: IIcon['size'];
   };
-}[keyof DefaultTheme['icon']['map']];
+}[keyof IIconMao];
 
-export type addIconPropsGeneric<T extends keyof DefaultTheme['icon']['map'] = keyof DefaultTheme['icon']['map']> = {
+export type IAddIIconGeneric<T extends keyof IIconMao = keyof IIconMao> = {
   type: T;
-  name: DefaultTheme['icon']['map'][T][number];
+  name: IIconMao[T][number];
   className?: string;
-  onClick?: (event: React.MouseEvent<SVGSVGElement>) => void;
+  onClick?: (event: MouseEvent<SVGSVGElement>) => void;
   size?: IThemeSize | '100%';
-  color?: IThemePaletteKeys;
+  color?: IThemePalette;
   turn?: number;
   order?: number;
   tabIndex?: number;
   isHidden?: boolean;
-} & addSXProps;
+} & ISx;
 
-export type getIconComponentsProps = {
+export type IGetIconComponentsProps = {
   size: IThemeSize;
 
-  icons?: addIconProps[];
+  icons?: IAddIIcon[];
 };

@@ -1,8 +1,8 @@
 import { createContext, FC, useCallback, useEffect, useState } from 'react';
 
-import { LocalStorageContextProps, ProviderLocalStorageProps, ValidLocalStorageObject } from './context.types';
+import { ILocalStorageContext, IProviderLocalStorage, IValidLocalStorageObject } from './context.types';
 
-export const LocalStorageContext = createContext<LocalStorageContextProps | null>(null);
+export const LocalStorageContext = createContext<ILocalStorageContext | null>(null);
 
 /**
  * Provider component for managing local storage.
@@ -14,14 +14,14 @@ export const LocalStorageContext = createContext<LocalStorageContextProps | null
  * import '@jenesei-software/jenesei-kit-react'
  *
  * declare module '@jenesei-software/jenesei-kit-react' {
- *   export interface ValidLocalStorageObject {
+ *   export interface IValidLocalStorageObject {
  *     access_token: string
  *     refresh_token: string
  *   }
  * }
  * ```
  */
-export const ProviderLocalStorage: FC<ProviderLocalStorageProps> = (props) => {
+export const ProviderLocalStorage: FC<IProviderLocalStorage> = (props) => {
   const {
     getLocalStorage,
     setLocalStorage,
@@ -47,11 +47,11 @@ export const ProviderLocalStorage: FC<ProviderLocalStorageProps> = (props) => {
   );
 };
 
-const useProviderLocalStorage = (props: ProviderLocalStorageProps) => {
-  const [localStorageValues, setLocalStorageValues] = useState<ValidLocalStorageObject>();
+const useProviderLocalStorage = (props: IProviderLocalStorage) => {
+  const [localStorageValues, setLocalStorageValues] = useState<IValidLocalStorageObject>();
 
   const getLocalStorage = useCallback(
-    <K extends keyof ValidLocalStorageObject>(name: K): ValidLocalStorageObject[K] | undefined => {
+    <K extends keyof IValidLocalStorageObject>(name: K): IValidLocalStorageObject[K] | undefined => {
       const localStorageValue = localStorage.getItem(name);
       setLocalStorageValues((prevState) => ({
         ...prevState,
@@ -63,7 +63,7 @@ const useProviderLocalStorage = (props: ProviderLocalStorageProps) => {
   );
 
   const changeLocalStorage = useCallback(
-    <K extends keyof ValidLocalStorageObject>(name: K, value: ValidLocalStorageObject[K]) => {
+    <K extends keyof IValidLocalStorageObject>(name: K, value: IValidLocalStorageObject[K]) => {
       try {
         localStorage.setItem(String(name), JSON.stringify(value));
         setLocalStorageValues((prevState) => ({ ...prevState, [name]: value }));
@@ -74,7 +74,7 @@ const useProviderLocalStorage = (props: ProviderLocalStorageProps) => {
     [],
   );
 
-  const removeLocalStorageValue = useCallback(<K extends keyof ValidLocalStorageObject>(name: K) => {
+  const removeLocalStorageValue = useCallback(<K extends keyof IValidLocalStorageObject>(name: K) => {
     try {
       localStorage.removeItem(String(name));
       setLocalStorageValues((prevState) => ({

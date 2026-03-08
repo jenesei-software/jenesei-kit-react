@@ -1,1 +1,1 @@
-export { BlurIn, GradualSpacing, TypingEffect, WordsPullUp } from './motion';
+export * from './motion'

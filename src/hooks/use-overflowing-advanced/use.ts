@@ -2,10 +2,10 @@ import { useDeepCompareMemoize } from '@local/hooks/use-deep-compare-memoize';
 
 import { RefObject, useEffect, useRef, useState } from 'react';
 
-import { useTooltipProps } from './use.types';
+import { IUseOverflowingAdvanced } from './use.types';
 
 export function useOverflowingAdvanced<T extends HTMLElement>(
-  props?: useTooltipProps,
+  props?: IUseOverflowingAdvanced,
 ): {
   isDisabled: boolean;
   isOverflowing: boolean;
@@ -15,6 +15,7 @@ export function useOverflowingAdvanced<T extends HTMLElement>(
   const [isOverflowing, setIsOverflowing] = useState(false);
   const deps = useDeepCompareMemoize(props?.dependencies);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     if (!props?.isCheckSize) return;
     const el = ref.current;

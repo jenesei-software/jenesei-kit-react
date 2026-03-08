@@ -1,11 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { FC } from 'react';
-import 'styled-components';
-
-import { PreviewProps } from '@local/areas/preview';
+import { IPreview } from '@local/areas/preview';
 import { Preview as PreviewComponent } from '@local/areas/preview/area';
 import { Stack } from '@local/components/stack';
-import { TypingEffect } from '@local/styles/motion';
+import { Typography } from '@local/components/typography';
+import { MotionTypingEffect } from '@local/styles/motion';
+import { CSS_VARS } from '@local/styles/utils/constants';
+
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { FC } from 'react';
 
 const meta: Meta<typeof PreviewComponent> = {
   component: PreviewComponent,
@@ -21,22 +22,30 @@ export const PreviewMax: Story = {
     defaultVisible: false,
     visible: true,
     minTime: 2000,
-    content: <TypingEffect text='Loading...' />,
+    content: (
+      <Typography
+        sx={{
+          variant: 'title-3',
+          color: 'textPrimaryLight',
+        }}
+      >
+        <MotionTypingEffect text='Loading...' />
+      </Typography>
+    ),
   },
 };
 
-const PreviewStackWrapper: FC<PreviewProps> = (props) => {
+const PreviewStackWrapper: FC<IPreview> = (props) => {
   return (
     <Stack
-      sx={(theme) => ({
-        default: {
-          position: 'relative',
-          width: '200px',
-          height: '200px',
-          backgroundColor: theme.palette.blueFocus,
-          borderRadius: '8px',
-        },
-      })}
+      sx={{
+        position: 'relative',
+        width: '200px',
+        height: '200px',
+        backgroundColor: CSS_VARS.palette.accentGrayLight,
+        color: CSS_VARS.palette.textPrimaryLight,
+        borderRadius: '8px',
+      }}
     >
       <PreviewComponent {...props} />
     </Stack>
@@ -48,6 +57,15 @@ export const PreviewStack: Story = {
   args: {
     defaultVisible: false,
     time: 2000,
-    content: <TypingEffect text='Loading...' />,
+    content: (
+      <Typography
+        sx={{
+          variant: 'title-3',
+          color: 'textPrimaryLight',
+        }}
+      >
+        <MotionTypingEffect text='Loading...' />
+      </Typography>
+    ),
   },
 };

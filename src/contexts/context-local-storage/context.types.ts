@@ -1,22 +1,22 @@
 import { PropsWithChildren } from 'react';
 
-export interface ProviderLocalStorageProps extends PropsWithChildren {
+export interface IProviderLocalStorage extends PropsWithChildren {
   validate?: {
-    validateKeys: (keyof ValidLocalStorageObject)[];
-    getValidateLocalStorageValue: <K extends keyof ValidLocalStorageObject>(
+    validateKeys: (keyof IValidLocalStorageObject)[];
+    getValidateLocalStorageValue: <K extends keyof IValidLocalStorageObject>(
       key: K,
-      value: ValidLocalStorageObject[K],
-    ) => value is ValidLocalStorageObject[K];
+      value: IValidLocalStorageObject[K],
+    ) => value is IValidLocalStorageObject[K];
   };
 }
 
-export type ValidLocalStorageObject = {};
+export type IValidLocalStorageObject = {};
 
-export interface LocalStorageContextProps {
-  getLocalStorage: <K extends keyof ValidLocalStorageObject>(name: K) => ValidLocalStorageObject[K] | undefined;
-  setLocalStorage: <K extends keyof ValidLocalStorageObject>(name: K, value: ValidLocalStorageObject[K]) => void;
-  removeLocalStorageValue: <K extends keyof ValidLocalStorageObject>(name: K) => void;
+export interface ILocalStorageContext {
+  getLocalStorage: <K extends keyof IValidLocalStorageObject>(name: K) => IValidLocalStorageObject[K] | undefined;
+  setLocalStorage: <K extends keyof IValidLocalStorageObject>(name: K, value: IValidLocalStorageObject[K]) => void;
+  removeLocalStorageValue: <K extends keyof IValidLocalStorageObject>(name: K) => void;
   removeLocalStorageValues: () => void;
   checkLocalStorage: () => void;
-  localStorageValues: ValidLocalStorageObject | undefined;
+  localStorageValues: IValidLocalStorageObject | undefined;
 }

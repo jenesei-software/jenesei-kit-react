@@ -1,0 +1,60 @@
+/* =========================
+   Component - Toggle
+   ========================= */
+.component-toggle {
+  cursor: pointer;
+  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border-radius: 100px;
+
+  height: var(--component-toggle-height);
+  width: var(--component-toggle-width);
+  padding: var(--component-toggle-padding);
+}
+
+.component-toggle.component-toggle--active {
+  background: var(--component-toggle-active-background);
+  border-color: var(--component-toggle-active-border);
+}
+
+.component-toggle.component-toggle--un-active {
+  background: var(--component-toggle-un-active-background);
+  border-color: var(--component-toggle-un-active-border);
+}
+
+.component-toggle.component-toggle--is-hidden {
+  opacity: 0.5;
+}
+
+.component-toggle:not(.component-toggle--is-hidden) {
+  opacity: 1;
+}
+
+.component-toggle.component-toggle--is-hidden-border {
+  border: 0px solid transparent !important;
+}
+
+/* =========================
+   Component - Toggle - Center
+   ========================= */
+.component-toggle__center {
+  border-radius: 100px;
+  height: var(--component-toggle-center-height);
+  width: var(--component-toggle-center-width);
+  transform: translateX(var(--component-toggle-center-x));
+  transition: transform 0.15s ease-in-out;
+}
+
+.component-toggle__center.component-toggle__center--active {
+  background: var(--component-toggle-center-active-background);
+  border-color: var(--component-toggle-center-active-border);
+  box-shadow: var(--component-toggle-center-active-box-shadow);
+}
+
+.component-toggle__center.component-toggle__center--un-active {
+  background: var(--component-toggle-center-un-active-background);
+  border-color: var(--component-toggle-center-un-active-border);
+  box-shadow: var(--component-toggle-center-un-active-box-shadow);
+}

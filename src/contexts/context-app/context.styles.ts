@@ -1,12 +1,11 @@
-import { addGridTransition } from '@local/styles/add';
-import { JeneseiPalette } from '@local/styles/theme';
+import { addGridTransition, JeneseiPalette } from '@local/theme';
 
 import { css, styled } from 'styled-components';
 
-import { ProviderAppOutletChildrenProps, ProviderAppOutletProps, ProviderAppWrapperProps } from './context.types';
+import { IProviderAppOutlet, IProviderAppOutletChildren, IProviderAppWrapper } from './context.types';
 import { ScreenWidthProps } from '../context-screen-width';
 
-export const ProviderAppWrapper = styled.div<ProviderAppWrapperProps>`
+export const ProviderAppWrapper = styled.div<IProviderAppWrapper>`
   display: flex;
   flex-direction: column;
   max-width: 100dvw;
@@ -19,7 +18,7 @@ export const ProviderAppWrapper = styled.div<ProviderAppWrapperProps>`
   background-image: url(${(props) => props.$bgImage});
 `;
 
-const generateGridTemplateAreas = (props: ProviderAppOutletProps) => {
+const generateGridTemplateAreas = (props: IProviderAppOutlet) => {
   let templateAreas = `
     "notification notification notification"
     "header header header"
@@ -54,7 +53,7 @@ function toStyledAppOutletCSS(props: {
   `;
 }
 
-const addSXAppOutlet = css<ProviderAppOutletProps>`
+const addSXAppOutlet = css<IProviderAppOutlet>`
   ${(props) => {
     const leftAsideWidth = props.$leftAside?.length?.default;
     const rightAsideWidth = props.$rightAside?.length?.default;
@@ -100,7 +99,7 @@ const addSXAppOutlet = css<ProviderAppOutletProps>`
       });
   }}
 `;
-export const ProviderAppOutlet = styled.div<ProviderAppOutletProps>`
+export const ProviderAppOutlet = styled.div<IProviderAppOutlet>`
   display: grid;
   width: 100%;
   height: 100%;
@@ -120,7 +119,7 @@ export const ProviderAppOutlet = styled.div<ProviderAppOutletProps>`
   ${addSXAppOutlet};
 `;
 
-export const ProviderAppOutletChildren = styled.main<ProviderAppOutletChildrenProps>`
+export const ProviderAppOutletChildren = styled.main<IProviderAppOutletChildren>`
   z-index: ${(props) => props?.$main?.zIndex ?? 'auto'};
   display: flex;
   grid-area: children;
@@ -130,37 +129,37 @@ export const ProviderAppOutletChildren = styled.main<ProviderAppOutletChildrenPr
   scrollbar-gutter: stable;
 `;
 
-export const ProviderAppOutletNotification = styled.section<ProviderAppOutletProps>`
+export const ProviderAppOutletNotification = styled.section<IProviderAppOutlet>`
   z-index: ${(props) => props?.$notification?.zIndex ?? 'auto'};
   grid-area: notification;
   display: flex;
 `;
 
-export const ProviderAppOutletHeader = styled.header<ProviderAppOutletProps>`
+export const ProviderAppOutletHeader = styled.header<IProviderAppOutlet>`
   z-index: ${(props) => props?.$header?.zIndex ?? 'auto'};
   grid-area: header;
   display: flex;
 `;
 
-export const ProviderAppOutletFooter = styled.footer<ProviderAppOutletProps>`
+export const ProviderAppOutletFooter = styled.footer<IProviderAppOutlet>`
   z-index: ${(props) => props?.$footer?.zIndex ?? 'auto'};
   grid-area: footer;
   display: flex;
 `;
 
-export const ProviderAppOutletNav = styled.nav<ProviderAppOutletProps>`
+export const ProviderAppOutletNav = styled.nav<IProviderAppOutlet>`
   z-index: ${(props) => props?.$nav?.zIndex ?? 'auto'};
   grid-area: nav;
   display: flex;
 `;
 
-export const ProviderAppOutletLeftAside = styled.aside<ProviderAppOutletProps>`
+export const ProviderAppOutletLeftAside = styled.aside<IProviderAppOutlet>`
   z-index: ${(props) => props?.$leftAside?.zIndex ?? 'auto'};
   grid-area: leftAside;
   display: flex;
 `;
 
-export const ProviderAppOutletRightAside = styled.aside<ProviderAppOutletProps>`
+export const ProviderAppOutletRightAside = styled.aside<IProviderAppOutlet>`
   z-index: ${(props) => props?.$rightAside?.zIndex ?? 'auto'};
   grid-area: rightAside;
   display: flex;

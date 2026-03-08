@@ -1,12 +1,12 @@
 import Cookies from 'js-cookie';
 import { createContext, FC, useCallback, useEffect, useState } from 'react';
 
-import { CookieAttributes, CookieContextProps, ProviderCookieProps, ValidCookieObject } from './context.types';
+import { ICookieAttributes, ICookieContext, IProviderCookie, IValidCookieObject } from './context.types';
 
 /**
  * Context for managing cookies.
  */
-export const CookieContext = createContext<CookieContextProps | null>(null);
+export const CookieContext = createContext<ICookieContext | null>(null);
 
 /**
  * Provider component for managing cookies.
@@ -21,14 +21,14 @@ export const CookieContext = createContext<CookieContextProps | null>(null);
  * import '@jenesei-software/jenesei-kit-react'
  *
  * declare module '@jenesei-software/jenesei-kit-react' {
- *   export interface ValidCookieObject {
+ *   export interface IValidCookieObject {
  *    access_token: string
  *    refresh_token: string
  *   }
  * }
  * ```
  */
-export const ProviderCookie: FC<ProviderCookieProps> = (props) => {
+export const ProviderCookie: FC<IProviderCookie> = (props) => {
   const { getCookie, setCookie, removeCookieValue, removeCookieValues, checkCookie, cookieValues } =
     useProviderCookie(props);
 
@@ -48,10 +48,10 @@ export const ProviderCookie: FC<ProviderCookieProps> = (props) => {
   );
 };
 
-const useProviderCookie = (props: ProviderCookieProps) => {
-  const [cookieValues, setCookieValues] = useState<ValidCookieObject>();
+const useProviderCookie = (props: IProviderCookie) => {
+  const [cookieValues, setCookieValues] = useState<IValidCookieObject>();
 
-  const getCookie = useCallback(<K extends keyof ValidCookieObject>(name: K): ValidCookieObject[K] | undefined => {
+  const getCookie = useCallback(<K extends keyof IValidCookieObject>(name: K): IValidCookieObject[K] | undefined => {
     const cookie = Cookies.get(String(name));
     setCookieValues((prevState) => ({
       ...prevState,
@@ -61,7 +61,7 @@ const useProviderCookie = (props: ProviderCookieProps) => {
   }, []);
 
   const changeCookie = useCallback(
-    <K extends keyof ValidCookieObject>(name: K, value: ValidCookieObject[K], options?: CookieAttributes) => {
+    <K extends keyof IValidCookieObject>(name: K, value: IValidCookieObject[K], options?: ICookieAttributes) => {
       try {
         Cookies.set(String(name), JSON.stringify(value), options);
         setCookieValues((prevState) => ({ ...prevState, [name]: value }));
@@ -72,7 +72,7 @@ const useProviderCookie = (props: ProviderCookieProps) => {
     [],
   );
 
-  const removeCookieValue = useCallback(<K extends keyof ValidCookieObject>(name: K, options?: CookieAttributes) => {
+  const removeCookieValue = useCallback(<K extends keyof IValidCookieObject>(name: K, options?: ICookieAttributes) => {
     try {
       Cookies.remove(String(name), options);
       setCookieValues((prevState) => ({ ...prevState, [name]: undefined }));

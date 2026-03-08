@@ -1,225 +1,196 @@
-import type { Meta } from '@storybook/react-vite';
-import 'styled-components';
-
-import { Icon as IconComponent } from '@local/components/icon';
+import { Icon as IconComponent, THEME_MAP } from '@local/components/icon';
 import { Typography } from '@local/components/typography';
-import { IThemePaletteKeys, JeneseiPalette, ThemeLight } from '@local/styles/theme';
+import { IThemePalette } from '@local/styles/utils';
+import { CSS_VARS } from '@local/styles/utils/constants';
 
+import type { Meta } from '@storybook/react-vite';
 import { FC } from 'react';
 
 import { WrapperBig, WrapperMin } from './tools';
 
 const meta: Meta<typeof IconComponent> = {
   component: IconComponent,
-  title: 'Component/Icon',
+  title: 'Component/7. Icon',
 };
 
 export default meta;
 
-const IconWrapperAll: FC = () => {
+const CollectionWrapper: FC = () => {
   return (
-    <WrapperBig sx={{ default: { flexDirection: 'row' } }}>
-      <WrapperBig sx={{ default: { flexDirection: 'column'} }}>
+    <WrapperBig sx={{ flexDirection: 'row' }}>
+      <WrapperBig sx={{ flexDirection: 'column' }}>
         <Typography
           sx={{
-            default: {
-              variant: 'h5',
-              color: 'black100',
-            },
+            variant: 'title-2',
+            color: 'textPrimaryLight',
           }}
         >
           ID
         </Typography>
-        <WrapperMin sx={{ default: { color: 'black' } }}>
-          {ThemeLight.icon.map.id.map((item) => (
+        <WrapperMin sx={{ color: CSS_VARS.palette.accentBrownLight }}>
+          {THEME_MAP.id.map((item) => (
             <IconComponent key={item} type='id' name={item} size={'large'} />
           ))}
         </WrapperMin>
       </WrapperBig>
-      <WrapperBig sx={{ default: { flexDirection: 'column' } }}>
+      <WrapperBig sx={{ flexDirection: 'column' }}>
         <Typography
           sx={{
-            default: {
-              variant: 'h5',
-              color: 'black100',
-            },
+            variant: 'title-2',
+            color: 'textPrimaryLight',
           }}
         >
           Checkbox
         </Typography>
-        <WrapperMin>
-          {ThemeLight.icon.map.checkbox.map((item) => (
-            <IconComponent key={item} type={'checkbox'} name={item} size={'large'} color='black100' />
+        <WrapperMin sx={{ color: CSS_VARS.palette.accentGreenLight }}>
+          {THEME_MAP.checkbox.map((item) => (
+            <IconComponent key={item} type={'checkbox'} name={item} size={'large'} color='textPrimaryLight' />
           ))}
         </WrapperMin>
       </WrapperBig>
-      <WrapperBig sx={{ default: { flexDirection: 'column' } }}>
+      <WrapperBig sx={{ flexDirection: 'column' }}>
         <Typography
           sx={{
-            default: {
-              variant: 'h5',
-              color: 'black100',
-            },
+            variant: 'title-2',
+            color: 'textPrimaryLight',
           }}
         >
           Loading
         </Typography>
-        <WrapperMin>
-          {ThemeLight.icon.map.loading.map((item) => (
-            <IconComponent key={item} type={'loading'} name={item} size={'large'} color='black100' />
+        <WrapperMin sx={{ color: CSS_VARS.palette.accentBlueLight }}>
+          {THEME_MAP.loading.map((item) => (
+            <IconComponent key={item} type={'loading'} name={item} size={'large'} color='textPrimaryLight' />
           ))}
-          {ThemeLight.icon.map.loading.map((item) => (
-            <IconComponent key={item} type={'loading'} name={item} size={'large'} color='blueBr' />
+          {THEME_MAP.loading.map((item) => (
+            <IconComponent key={item} type={'loading'} name={item} size={'large'} color='accentBlueLight' />
           ))}
         </WrapperMin>
       </WrapperBig>
-      <WrapperBig sx={{ default: { flexDirection: 'column' } }}>
+      <WrapperBig sx={{ flexDirection: 'column' }}>
         <Typography
           sx={{
-            default: {
-              variant: 'h5',
-              color: 'black100',
-            },
+            variant: 'title-2',
+            color: 'textPrimaryLight',
           }}
         >
           Logo
         </Typography>
         <WrapperMin>
-          {ThemeLight.icon.map.logo.map((item) => (
-            <IconComponent key={item} type={'logo'} name={item} size={'large'} color='black100' />
+          {THEME_MAP.logo.map((item) => (
+            <IconComponent key={item} type={'logo'} name={item} size={'large'} color='textPrimaryLight' />
           ))}
         </WrapperMin>
       </WrapperBig>
-      <WrapperBig sx={{ default: { flexDirection: 'column' } }}>
+      <WrapperBig sx={{ flexDirection: 'column' }}>
         <Typography
           sx={{
-            default: {
-              variant: 'h5',
-              color: 'black100',
-            },
+            variant: 'title-2',
+            color: 'textPrimaryLight',
           }}
         >
           All Palette Colors
         </Typography>
         <WrapperMin>
-          {Object.keys(JeneseiPalette).map((item) => (
-            <IconComponent key={item} type={'logo'} name={'Jenesei'} size={'large'} color={item as IThemePaletteKeys} />
+          {Object.keys(CSS_VARS.palette).map((item) => (
+            <IconComponent key={item} type={'logo'} name={'Jenesei'} size={'large'} color={item as IThemePalette} />
           ))}
         </WrapperMin>
       </WrapperBig>
-      <WrapperBig sx={{ default: { flexDirection: 'column' } }}>
+      <WrapperBig sx={{ flexDirection: 'column' }}>
         <Typography
           sx={{
-            default: {
-              variant: 'h5',
-              color: 'black100',
-            },
+            variant: 'title-2',
+            color: 'textPrimaryLight',
           }}
         >
           All Sizes
         </Typography>
         <WrapperBig>
-          <WrapperMin sx={{ default: { flexDirection: 'column' } }}>
+          <WrapperMin sx={{ flexDirection: 'column' }}>
             <Typography
               sx={{
-                default: {
-                  variant: 'h5',
-                  color: 'black100',
-                },
+                variant: 'title-2',
+                color: 'textPrimaryLight',
               }}
             >
               small
             </Typography>
-            <IconComponent type={'logo'} name={'Jenesei'} size={'small'} color='black100' />
+            <IconComponent type={'logo'} name={'Jenesei'} size={'small'} color='textPrimaryLight' />
           </WrapperMin>
-          <WrapperMin sx={{ default: { flexDirection: 'column' } }}>
+          <WrapperMin sx={{ flexDirection: 'column' }}>
             <Typography
               sx={{
-                default: {
-                  variant: 'h5',
-                  color: 'black100',
-                },
+                variant: 'title-2',
+                color: 'textPrimaryLight',
               }}
             >
               mediumSmall
             </Typography>
-            <IconComponent type={'logo'} name={'Jenesei'} size={'mediumSmall'} color='black100' />
+            <IconComponent type={'logo'} name={'Jenesei'} size={'mediumSmall'} color='textPrimaryLight' />
           </WrapperMin>
-          <WrapperMin sx={{ default: { flexDirection: 'column' } }}>
+          <WrapperMin sx={{ flexDirection: 'column' }}>
             <Typography
               sx={{
-                default: {
-                  variant: 'h5',
-                  color: 'black100',
-                },
+                variant: 'title-2',
+                color: 'textPrimaryLight',
               }}
             >
               medium
             </Typography>
-            <IconComponent type={'logo'} name={'Jenesei'} size={'medium'} color='black100' />
+            <IconComponent type={'logo'} name={'Jenesei'} size={'medium'} color='textPrimaryLight' />
           </WrapperMin>
-          <WrapperMin sx={{ default: { flexDirection: 'column' } }}>
+          <WrapperMin sx={{ flexDirection: 'column' }}>
             <Typography
               sx={{
-                default: {
-                  variant: 'h5',
-                  color: 'black100',
-                },
+                variant: 'title-2',
+                color: 'textPrimaryLight',
               }}
             >
               largeMedium
             </Typography>
-            <IconComponent type={'logo'} name={'Jenesei'} size={'largeMedium'} color='black100' />
+            <IconComponent type={'logo'} name={'Jenesei'} size={'largeMedium'} color='textPrimaryLight' />
           </WrapperMin>
-          <WrapperMin sx={{ default: { flexDirection: 'column' } }}>
+          <WrapperMin sx={{ flexDirection: 'column' }}>
             <Typography
               sx={{
-                default: {
-                  variant: 'h5',
-                  color: 'black100',
-                },
+                variant: 'title-2',
+                color: 'textPrimaryLight',
               }}
             >
               large
             </Typography>
-            <IconComponent type={'logo'} name={'Jenesei'} size={'large'} color='black100' />
+            <IconComponent type={'logo'} name={'Jenesei'} size={'large'} color='textPrimaryLight' />
           </WrapperMin>
-          <WrapperMin sx={{ default: { flexDirection: 'column' } }}>
+          <WrapperMin sx={{ flexDirection: 'column' }}>
             <Typography
               sx={{
-                default: {
-                  variant: 'h5',
-                  color: 'black100',
-                },
+                variant: 'title-2',
+                color: 'textPrimaryLight',
               }}
             >
               100%
             </Typography>
-            <WrapperMin sx={{ default: { width: '100px', height: '100px' } }}>
-              <IconComponent type={'logo'} name={'Jenesei'} size={'100%'} color='black100' />
+            <WrapperMin sx={{ width: '100px', height: '100px' }}>
+              <IconComponent type={'logo'} name={'Jenesei'} size={'100%'} color='textPrimaryLight' />
             </WrapperMin>
           </WrapperMin>
         </WrapperBig>
       </WrapperBig>
-      <WrapperBig sx={{ default: { flexDirection: 'column' } }}>
+      <WrapperBig sx={{ flexDirection: 'column' }}>
         <Typography
           sx={{
-            default: {
-              variant: 'h5',
-              color: 'black100',
-            },
+            variant: 'title-2',
+            color: 'textPrimaryLight',
           }}
         >
           Other
         </Typography>
         <WrapperBig>
-          <WrapperMin sx={{ default: { flexDirection: 'column' } }}>
+          <WrapperMin sx={{ flexDirection: 'column' }}>
             <Typography
               sx={{
-                default: {
-                  variant: 'h5',
-                  color: 'black100',
-                },
+                variant: 'title-2',
+                color: 'textPrimaryLight',
               }}
             >
               Custom color
@@ -229,24 +200,20 @@ const IconWrapperAll: FC = () => {
               name={'Jenesei'}
               size={'medium'}
               sx={{
-                default: {
-                  color: 'red',
-                },
+                color: 'red',
               }}
             />
           </WrapperMin>
-          <WrapperMin sx={{ default: { flexDirection: 'column' } }}>
+          <WrapperMin sx={{ flexDirection: 'column' }}>
             <Typography
               sx={{
-                default: {
-                  variant: 'h5',
-                  color: 'black100',
-                },
+                variant: 'title-2',
+                color: 'textPrimaryLight',
               }}
             >
               Turn
             </Typography>
-            <IconComponent type={'logo'} name={'Jenesei'} size={'medium'} color='black100' turn={90} />
+            <IconComponent type={'logo'} name={'Jenesei'} size={'medium'} color='textPrimaryLight' turn={90} />
           </WrapperMin>
         </WrapperBig>
       </WrapperBig>
@@ -254,6 +221,6 @@ const IconWrapperAll: FC = () => {
   );
 };
 
-export const Icon = {
-  render: () => <IconWrapperAll />,
+export const Collection = {
+  render: () => <CollectionWrapper />,
 };

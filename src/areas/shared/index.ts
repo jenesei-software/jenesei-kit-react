@@ -1,2 +1,2 @@
 export { Shared } from './area';
-export type { SharedProps } from './area.types';
+export type { IShared } from './area.types';

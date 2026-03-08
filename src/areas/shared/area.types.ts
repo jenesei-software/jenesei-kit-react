@@ -1,21 +1,19 @@
-import { ButtonProps } from '@local/components/button';
-import { addSXProps } from '@local/styles/add';
+import { IButton } from '@local/components/button';
+import { ISx, IThemePalette } from '@local/styles/utils';
 
-import { LinkProps } from '@tanstack/react-router';
-
-type BaseSharedProps = addSXProps & {
+type IBaseShared = ISx & {
   value?: string;
   onSelected?: (tab: string) => void;
+  color?: IThemePalette;
 };
-type TabsLink = {
+type ITabsLink = {
   isLink?: true;
-  option: { default: ButtonProps; selected?: Partial<ButtonProps>; id: string; link: LinkProps }[];
+  option: { default: IButton; selected?: Partial<IButton>; id: string }[];
 };
 
-type TabsButton = {
+type ITabsButton = {
   isLink?: never | false;
-  option: { default: ButtonProps; selected?: Partial<ButtonProps>; id: string }[];
+  option: { default: IButton; selected?: Partial<IButton>; id: string }[];
 };
 
-export type SharedProps = BaseSharedProps & (TabsLink | TabsButton);
-export type StyledSharedProps = object;
+export type IShared = IBaseShared & (ITabsLink | ITabsButton);

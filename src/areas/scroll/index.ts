@@ -1,2 +1,2 @@
 export { Scroll } from './area';
-export type { ScrollProps } from './area.types';
+export type { IScroll } from './area.types';

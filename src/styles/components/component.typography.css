@@ -1,0 +1,75 @@
+/* =========================
+   Component - Typography
+   ========================= */
+.component-typography {
+  color: var(--component-typography-color, inherit);
+
+  letter-spacing: var(--component-typography-letter-spacing);
+  flex: var(--component-typography-flex);
+  cursor: var(--component-typography-cursor);
+  overflow: var(--component-typography-overflow);
+  
+  font-family: var(--component-typography-family, var(--font-family));
+  font-weight: var(--component-typography-weight, var(--font-weight));
+  line-height: var(--component-typography-height, var(--font-height));
+
+  text-align: var(--component-typography-align);
+  white-space: var(--component-typography-wrap);
+  text-decoration: var(--component-typography-decoration);
+  text-transform: var(--component-typography-transform);
+}
+
+.component-typography.component-typography--line-single {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: -webkit-fill-available;
+  max-width: fit-content;
+}
+
+.component-typography.component-typography--line-multi {
+  word-break: break-word;
+  white-space: normal;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--component-typography-line-multiline);
+  width: fit-content;
+  overflow-wrap: anywhere;
+}
+
+.component-typography.component-typography--is-bold {
+  font-weight: 700;
+}
+
+.component-typography.component-typography--variant-callout {
+  font-weight: 700;
+}
+
+.component-typography.component-typography--is-bold .component-typography.component-typography--variant-callout {
+  font-weight: 800;
+}
+
+.component-typography.component-typography--shadow-shadow-pulse {
+  animation: shadowPulse 2s infinite;
+}
+
+.component-typography.component-typography--is-hover-underlining {
+  :hover {
+    text-decoration: underline;
+  }
+}
+
+.component-typography.component-typography--is-no-user-select {
+  user-select: none;
+}
+
+.component-typography.component-typography--size {
+  font-size: var(--component-typography-size);
+}
+
+.component-typography.component-typography--variant {
+  font-size: var(--component-typography-variant);
+  line-height: calc(var(--component-typography-variant) + var(--component-typography-variant-height));
+}

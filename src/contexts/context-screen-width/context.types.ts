@@ -1,21 +1,12 @@
-import { IThemeDevice, IThemeScreen } from '@local/styles/theme';
+import { IThemeBreakpoint, IThemeOrientation } from '@local/styles/utils';
 
 import { PropsWithChildren } from 'react';
 
-export type ProviderScreenWidthProps = PropsWithChildren;
+export type IProviderScreenWidth = PropsWithChildren;
 
-export type Screens = keyof IThemeScreen;
-
-export interface ScreenWidthContextProps {
-  windowWidth: number;
-  screenWidth: Screens;
-  screens: {
-    value: Screens;
-    isScreen: boolean;
-  }[];
-  screenActual: Screens;
+export interface IScreenWidthContext {
+  breakpoint: IThemeBreakpoint | 'default';
+  orientation: IThemeOrientation;
 }
 
-export type ScreenWidthProps<T> = {
-  [K in IThemeDevice]?: T;
-};
+export type IUseScreenWidthDependencies = (keyof IScreenWidthContext)[];

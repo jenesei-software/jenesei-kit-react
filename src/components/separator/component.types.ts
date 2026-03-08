@@ -1,15 +1,12 @@
-import { addSXProps } from '@local/styles/add';
-import { IThemePaletteKeys } from '@local/styles/theme';
-import { AddDollarSign } from '@local/types';
+import { IThemePalette } from '@local/styles/utils';
 
-export interface SeparatorProps {
-  sx?: addSXProps['sx'];
+import { CSSProperties } from 'react';
+
+export interface ISeparator {
   radius?: string;
   type?: 'horizontal' | 'vertical';
-  color?: IThemePaletteKeys;
+  color?: IThemePalette;
   thickness?: string;
+  className?: string;
+  style?: CSSProperties;
 }
-
-export type SeparatorWrapperProps = AddDollarSign<
-  Pick<SeparatorProps, 'sx' | 'radius' | 'color' | 'type' | 'thickness'>
->;

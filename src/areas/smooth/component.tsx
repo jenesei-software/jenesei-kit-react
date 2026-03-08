@@ -1,8 +1,8 @@
-import { StackMotion, StackProps } from '@local/components/stack';
+import { IStack, StackMotion } from '@local/components/stack';
 
 import { FC } from 'react';
 
-export const Smooth: FC<StackProps> = (props) => {
+export const Smooth: FC<IStack> = (props) => {
   return (
     <StackMotion
       transition={{

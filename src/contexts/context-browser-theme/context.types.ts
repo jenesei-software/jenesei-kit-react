@@ -1,14 +1,16 @@
 import { PropsWithChildren } from 'react';
 
-export type ProviderBrowserThemeProps = PropsWithChildren & {
-  defaultMode?: BrowserThemeMode;
+export type IProviderBrowserTheme = PropsWithChildren & {
+  defaultMode?: IBrowserThemeMode;
 };
 
-export type BrowserTheme = 'light' | 'dark';
-export type BrowserThemeMode = BrowserTheme | 'auto';
+export type IBrowserTheme = 'light' | 'dark';
+export type IBrowserThemeMode = IBrowserTheme | 'auto';
 
-export interface BrowserThemeContextProps {
-  theme: BrowserTheme;
-  mode: BrowserThemeMode;
-  setMode: (mode: BrowserThemeMode) => void;
+export interface IBrowserThemeContext {
+  theme: IBrowserTheme;
+  mode: IBrowserThemeMode;
+  setMode: (mode: IBrowserThemeMode) => void;
 }
+
+export type IUseIBrowserThemeDependencies = (keyof IBrowserThemeContext)[];

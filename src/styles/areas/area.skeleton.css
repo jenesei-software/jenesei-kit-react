@@ -1,0 +1,25 @@
+/* =========================
+   Area - Skeleton
+   ========================= */
+.area-skeleton {
+  background: var(--transparent);
+  display: contents;
+}
+
+.area-skeleton--visible-false {
+  background: linear-gradient(
+    90deg,
+    var(--area-skeleton-color) 25%,
+    var(--area-skeleton-line) 50%,
+    var(--area-skeleton-color) 75%
+  );
+  background-size: 200% 100%;
+  pointer-events: none;
+  display: flex;
+  width: fit-content;
+  height: fit-content;
+}
+
+.area-skeleton--visible-false * {
+  opacity: 0;
+}

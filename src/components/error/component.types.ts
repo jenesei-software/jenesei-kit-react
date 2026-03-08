@@ -1,9 +1,8 @@
-import { addSXProps, addSXTypographyProps } from '@local/styles/add';
-import { IThemeSize } from '@local/styles/theme';
-import { AddDollarSign } from '@local/types';
+import { ISxTypography, IThemeSize } from '@local/styles/utils';
 
-export type ErrorMessageDollarProps = AddDollarSign<ErrorMessageProps>;
-export type ErrorMessageProps = {
+import { CSSProperties } from 'react';
+
+export type IErrorMessage = {
   errorMessage?: string;
 
   isError?: boolean;
@@ -11,9 +10,12 @@ export type ErrorMessageProps = {
   isErrorAbsolute?: boolean;
 
   size?: IThemeSize;
-} & addSXTypographyProps &
-  addSXProps;
-export interface addErrorProps {
-  error?: ErrorMessageProps;
+
+  className?: string;
+  
+  style?: CSSProperties;
+} & ISxTypography;
+
+export interface IAddError {
+  error?: IErrorMessage;
 }
-export type addErrorPropsDollar = AddDollarSign<addErrorProps>;

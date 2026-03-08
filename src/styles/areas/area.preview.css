@@ -1,0 +1,31 @@
+/* =========================
+   Area - Preview
+   ========================= */
+.area-preview__loader {
+  background-color: var(--background-white-standard);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.area-preview__loader__container-icon {
+  position: absolute;
+  width: 8vmin;
+  height: 8vmin;
+}
+
+.area-preview__loader__container-children {
+  position: relative;
+  margin-top: 16vmin;
+}
+
+.area-preview__children {
+  display: contents;
+  z-index: 0;
+}

@@ -1,12 +1,12 @@
 import { useContext } from 'react';
 
 import { PermissionContext } from './context';
-import { PermissionContextProps } from './context.types';
+import { IPermissionContext } from './context.types';
 
 /**
  * Custom hook to access the PermissionContext.
  */
-export const usePermission = (): PermissionContextProps => {
+export const usePermission = (): IPermissionContext => {
   const context = useContext(PermissionContext);
   if (!context) {
     throw new Error('usePermission must be used within an PermissionProvider');

@@ -1,29 +1,29 @@
 import Cookies from 'node_modules/@types/js-cookie';
 import { PropsWithChildren } from 'react';
 
-export type CookieAttributes = Cookies.CookieAttributes;
+export type ICookieAttributes = Cookies.CookieAttributes;
 
-export interface ProviderCookieProps extends PropsWithChildren {
+export interface IProviderCookie extends PropsWithChildren {
   validate?: {
-    validateKeys: (keyof ValidCookieObject)[];
-    getValidateCookieValue: <K extends keyof ValidCookieObject>(
+    validateKeys: (keyof IValidCookieObject)[];
+    getValidateCookieValue: <K extends keyof IValidCookieObject>(
       key: K,
-      value: ValidCookieObject[K],
-    ) => value is ValidCookieObject[K];
+      value: IValidCookieObject[K],
+    ) => value is IValidCookieObject[K];
   };
 }
 
-export type ValidCookieObject = {};
+export type IValidCookieObject = {};
 
-export interface CookieContextProps {
-  getCookie: <K extends keyof ValidCookieObject>(name: K) => ValidCookieObject[K] | undefined;
-  setCookie: <K extends keyof ValidCookieObject>(
+export interface ICookieContext {
+  getCookie: <K extends keyof IValidCookieObject>(name: K) => IValidCookieObject[K] | undefined;
+  setCookie: <K extends keyof IValidCookieObject>(
     name: K,
-    value: ValidCookieObject[K],
-    options?: CookieAttributes,
+    value: IValidCookieObject[K],
+    options?: ICookieAttributes,
   ) => void;
-  removeCookieValue: <K extends keyof ValidCookieObject>(name: K, options?: CookieAttributes) => void;
+  removeCookieValue: <K extends keyof IValidCookieObject>(name: K, options?: ICookieAttributes) => void;
   removeCookieValues: () => void;
   checkCookie: () => void;
-  cookieValues: ValidCookieObject | undefined;
+  cookieValues: IValidCookieObject | undefined;
 }

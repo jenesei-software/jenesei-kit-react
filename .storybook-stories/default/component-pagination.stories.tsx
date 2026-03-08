@@ -1,57 +1,51 @@
+import { IPagination, Pagination as PaginationComponent } from '@local/components/pagination';
+
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { FC, useEffect, useState } from 'react';
-import 'styled-components';
 
-import { Pagination as PaginationComponent, PaginationProps } from '@local/components/pagination';
-
-import { WrapperBig } from './tools';
 
 const meta: Meta<typeof PaginationComponent> = {
   component: PaginationComponent,
-  title: 'Component/Pagination',
+  title: 'Component/6. Pagination',
 };
 
 export default meta;
 type Story = StoryObj<typeof PaginationComponent>;
 
-const defaultArgs: Partial<PaginationProps> = {
+const defaultArgs: Partial<IPagination> = {
+  gap: 6,
   buttonControl: {
     genre: 'product',
-    size: 'medium',
+    size: 'small',
     isRadius: true,
     isWidthAsHeight: true,
-    isPlaystationEffect: true,
   },
   buttonCount: {
     active: {
-      genre: 'product',
-      size: 'medium',
+      genre: 'secondary',
+      size: 'small',
       isRadius: true,
-      isPlaystationEffect: true,
     },
     inactive: {
-      genre: 'white',
-      size: 'medium',
+      genre: 'primary',
+      size: 'small',
       isRadius: true,
-      isPlaystationEffect: true,
     },
   },
 };
 
-const PaginationWrapper: FC<PaginationProps> = (props) => {
+const PaginationWrapper: FC<IPagination> = (props) => {
   const [index, setIndex] = useState(props.index);
 
   useEffect(() => {
     setIndex(props.index);
   }, [props.index]);
   return (
-    <WrapperBig>
-      <PaginationComponent {...props} index={index} changeIndex={(index) => setIndex(index)} />
-    </WrapperBig>
+    <PaginationComponent {...props} index={index} changeIndex={(index) => setIndex(index)} />
   );
 };
 
-export const Pagination: Story = {
+export const Index: Story = {
   render: (args) => <PaginationWrapper {...args} />,
   args: {
     ...defaultArgs,

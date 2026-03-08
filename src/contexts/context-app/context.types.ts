@@ -1,14 +1,14 @@
-import { PreviewAdditionalProps } from '@local/areas/preview';
+import { IPreviewAdditional } from '@local/areas/preview';
 import { ScreenWidthProps } from '@local/contexts/context-screen-width';
-import { IThemePaletteKeys } from '@local/styles/theme';
-import { AddDollarSign } from '@local/types';
+import { IThemePalette } from '@local/styles/utils';
+import { IAddDollarSign } from '@local/types';
 
 import { PropsWithChildren, ReactElement } from 'react';
 
-export interface ProviderAppProps extends PropsWithChildren {
-  defaultPreview?: PreviewAdditionalProps;
-  defaultBgColor: IThemePaletteKeys;
-  defaultStatusBarColor: IThemePaletteKeys;
+export interface IProviderApp extends PropsWithChildren {
+  defaultPreview?: IPreviewAdditional;
+  defaultBgColor: IThemePalette;
+  defaultStatusBarColor: IThemePalette;
   defaultBgImage?: string;
   defaultTitle: string;
   defaultDescription: string;
@@ -54,11 +54,11 @@ export interface ProviderAppProps extends PropsWithChildren {
   };
 }
 
-export interface AppContextProps {
-  changePreview: (newPreviewProps: PreviewAdditionalProps) => void;
+export interface IAppContext {
+  changePreview: (newIPreview: IPreviewAdditional) => void;
 
-  changeStatusBarColor: (color: IThemePaletteKeys) => void;
-  changeBgColor: (color: IThemePaletteKeys) => void;
+  changeStatusBarColor: (color: IThemePalette) => void;
+  changeBgColor: (color: IThemePalette) => void;
   changeBgImage: (image: string) => void;
   changeTitle: (title: string) => void;
   changeDescription: (description: string) => void;
@@ -74,18 +74,18 @@ export interface AppContextProps {
   historyDescription: (step: number) => void;
 }
 
-export interface ProviderAppWrapperProps {
-  $bgColor: ProviderAppProps['defaultBgColor'];
-  $bgImage: ProviderAppProps['defaultBgImage'] | null;
+export interface IProviderAppWrapper {
+  $bgColor: IProviderApp['defaultBgColor'];
+  $bgImage: IProviderApp['defaultBgImage'] | null;
 }
 
-export type ProviderAppOutletProps = Partial<
-  AddDollarSign<
-    Pick<ProviderAppProps, 'isScrollOutlet' | 'notification' | 'header' | 'nav' | 'footer' | 'leftAside' | 'rightAside'>
+export type IProviderAppOutlet = Partial<
+  IAddDollarSign<
+    Pick<IProviderApp, 'isScrollOutlet' | 'notification' | 'header' | 'nav' | 'footer' | 'leftAside' | 'rightAside'>
   >
 >;
-export type ProviderAppElementProps = Partial<
-  AddDollarSign<Pick<ProviderAppProps, 'notification' | 'header' | 'nav' | 'footer' | 'leftAside' | 'rightAside'>>
+export type IProviderAppElement = Partial<
+  IAddDollarSign<Pick<IProviderApp, 'notification' | 'header' | 'nav' | 'footer' | 'leftAside' | 'rightAside'>>
 >;
 
-export type ProviderAppOutletChildrenProps = AddDollarSign<Pick<ProviderAppProps, 'main' | 'isScrollOutlet'>>;
+export type IProviderAppOutletChildren = IAddDollarSign<Pick<IProviderApp, 'main' | 'isScrollOutlet'>>;

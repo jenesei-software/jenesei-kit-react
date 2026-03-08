@@ -1,2 +1,2 @@
 export { Button } from './component';
-export type { ButtonProps } from './component.types';
+export type { IButton } from './component.types';

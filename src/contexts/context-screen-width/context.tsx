@@ -1,77 +1,79 @@
-import { createContext, FC, useCallback, useEffect, useMemo, useState } from 'react';
-import { useTheme } from 'styled-components';
+import { CSS_VARS, IThemeBreakpoint } from '@local/styles/utils';
 
-import { ProviderScreenWidthProps, Screens, ScreenWidthContextProps } from './context.types';
+import { FC, useCallback, useEffect, useRef, useState } from 'react';
+import { createContext } from 'use-context-selector';
 
-export const ScreenWidthContext = createContext<ScreenWidthContextProps | null>(null);
+import { IProviderScreenWidth, IScreenWidthContext } from './context.types';
 
-export const ProviderScreenWidth: FC<ProviderScreenWidthProps> = ({ children }) => {
-  const theme = useTheme();
-  const [screenWidth, setScreenWidth] = useState<Screens>('default');
-  const [windowWidth, setWindowWidth] = useState<number>(typeof window !== 'undefined' ? window.innerWidth : 0);
+export const ScreenWidthContext = createContext<IScreenWidthContext | null>(null);
 
-  const queries = useMemo(() => {
-    if (typeof window === 'undefined') return [];
+export const ProviderScreenWidth: FC<IProviderScreenWidth> = ({ children }) => {
+  const [breakpoint, setBreakpoint] = useState<IScreenWidthContext['breakpoint']>('default');
+  const [orientation, setOrientation] = useState<IScreenWidthContext['orientation']>(
+    typeof window !== 'undefined' && window.innerWidth > window.innerHeight ? 'landscape' : 'portrait',
+  );
 
-    return Object.entries(theme.screens)
-      .map(([key, value]) => ({
-        key: key as Screens,
-        bp: (value as { width: number }).width,
-      }))
+  const queriesRef = useRef<Array<{
+    key: IThemeBreakpoint;
+    mq: MediaQueryList;
+  }> | null>(null);
+
+  if (queriesRef.current === null && typeof window !== 'undefined') {
+    queriesRef.current = Object.entries(CSS_VARS.screen.breakpoint)
+      .map(([key, value]) => {
+        const bp = parseInt(value.replace(/\D/g, ''), 10);
+        return {
+          key: key as keyof typeof CSS_VARS.screen.breakpoint,
+          bp,
+        };
+      })
       .sort((a, b) => a.bp - b.bp)
       .map(({ key, bp }) => ({
         key,
         mq: window.matchMedia(`(max-width: ${bp}px)`),
       }));
-  }, [theme.screens]);
+  }
 
-  const updateScreen = useCallback(() => {
-    if (!queries.length) return;
-    const matched = queries.find(({ mq }) => mq.matches);
-    setScreenWidth(matched?.key ?? 'default');
-  }, [queries.find, queries.length]);
+  const updateBreakpoint = useCallback(() => {
+    if (!queriesRef.current) return;
+    const matched = queriesRef.current.find(({ mq }) => mq.matches);
+    setBreakpoint(matched?.key ?? 'default');
+  }, []);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener('resize', handleResize);
+    const handleResize = () => {
+      const newWidth = window.innerWidth;
+      const newOrientation = newWidth > window.innerHeight ? 'landscape' : 'portrait';
 
+      setOrientation(newOrientation);
+    };
+
+    window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   useEffect(() => {
-    if (!queries.length) return;
+    if (!queriesRef.current) return;
 
-    queries.forEach(({ mq }) => {
-      mq.addEventListener('change', updateScreen);
+    queriesRef.current.forEach(({ mq }) => {
+      mq.addEventListener('change', updateBreakpoint);
     });
-    updateScreen(); // первичная инициализация
+    updateBreakpoint();
 
     return () => {
-      queries.forEach(({ mq }) => {
-        mq.removeEventListener('change', updateScreen);
+      queriesRef.current?.forEach(({ mq }) => {
+        mq.removeEventListener('change', updateBreakpoint);
       });
     };
-  }, [queries, updateScreen]);
+  }, [updateBreakpoint]);
 
-  const screens = useMemo<ScreenWidthContextProps['screens']>(() => {
-    return Object.keys(theme.screens).map((key) => ({
-      isScreen: screenWidth === key,
-      value: key as Screens,
-    }));
-  }, [screenWidth, theme.screens]);
-
-  const screenActual = useMemo<ScreenWidthContextProps['screenActual']>(() => {
-    return screens.find((s) => s.isScreen)?.value ?? 'default';
-  }, [screens]);
   return (
     <ScreenWidthContext.Provider
       value={{
-        screens,
-        screenActual,
-        screenWidth,
-        windowWidth,
+        breakpoint,
+        orientation,
       }}
     >
       {children}

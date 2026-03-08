@@ -1,9 +1,8 @@
 import { RefObject } from 'react';
 
-export interface useOverflowingInContainerProps {
+export interface IUseOverflowingInContainer {
   isOverflowing?: boolean;
   isCheckSize?: boolean;
   ref: RefObject<HTMLElement | null>;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  dependencies?: any[];
+  dependencies?: unknown[];
 }

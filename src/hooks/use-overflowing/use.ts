@@ -2,7 +2,7 @@ import { useDeepCompareMemoize } from '@local/hooks/use-deep-compare-memoize';
 
 import { RefObject, useEffect, useMemo, useRef, useState } from 'react';
 
-import { useTooltipProps } from './use.types';
+import { IUseTooltip } from './use.types';
 
 /**
  * Хук для отслеживания переполнения содержимого в элементе (или его родителе).
@@ -10,7 +10,7 @@ import { useTooltipProps } from './use.types';
  * @param props - опциональные параметры для управления поведением проверки переполнения
  */
 export function useOverflowing<T extends HTMLElement>(
-  props?: useTooltipProps,
+  props?: IUseTooltip,
 ): {
   isDisabled: boolean; // true, если нет переполнения
   isOverflowing: boolean; // true, если содержимое выходит за пределы контейнера

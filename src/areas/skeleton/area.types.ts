@@ -1,23 +1,25 @@
-import { StackProps } from '@local/components/stack';
-import { IThemePaletteKeys } from '@local/styles/theme';
-import { AddDollarSign } from '@local/types';
+import { IStack } from '@local/components/stack';
+import { IThemePalette } from '@local/styles/utils';
 
-type SkeletonDefaultProps = {
+import { CSSProperties } from 'react';
+
+type ISkeletonDefault = {
   className?: string;
+  style?: CSSProperties;
   defaultVisible?: boolean;
   type?: 'primary' | 'secondary';
-  color?: IThemePaletteKeys;
+  color?: IThemePalette;
+  colorLine?: IThemePalette;
   isInheritColor?: boolean;
+  isLiquid?: boolean;
 };
 
-interface SkeletonIsShowProps extends SkeletonDefaultProps {
+interface ISkeletonIsShow extends ISkeletonDefault {
   visible: boolean;
 }
 
-interface SkeletonTimeProps extends SkeletonDefaultProps {
+interface ISkeletonTime extends ISkeletonDefault {
   time: number;
 }
 
-export type SkeletonProps = StackProps & (SkeletonIsShowProps | SkeletonTimeProps);
-export type StyledSkeletonProps = StackProps &
-  AddDollarSign<Pick<SkeletonIsShowProps & SkeletonTimeProps, 'visible' | 'type' | 'color' | 'isInheritColor'>>;
+export type ISkeleton = IStack & (ISkeletonIsShow | ISkeletonTime);

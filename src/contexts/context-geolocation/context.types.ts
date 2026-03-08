@@ -1,10 +1,10 @@
 import { PropsWithChildren } from 'react';
 
-export type ProviderGeolocationProps = PropsWithChildren & {
+export type IProviderGeolocation = PropsWithChildren & {
   isAskEntrance?: boolean;
 };
 
-export interface GeolocationContextProps {
+export interface IGeolocationContext {
   // eslint-disable-next-line no-undef
   geolocationPermission: PermissionState | null;
   requestGeolocationPermission: () => void;
