@@ -3,10 +3,10 @@ import { ISx } from '@local/styles/utils';
 import { IButton } from '../button';
 
 export type IPagination = {
-  buttonControl: Pick<IButton, 'size' | 'genre' | 'isRadius' | 'isWidthAsHeight'>;
+  buttonControl: Pick<IButton, 'size' | 'genre' | 'isFullRadius' | 'isWidthAsHeight'>;
   buttonCount: {
-    active: Pick<IButton, 'size' | 'genre' | 'isRadius'>;
-    inactive: Pick<IButton, 'size' | 'genre' | 'isRadius'>;
+    active: Pick<IButton, 'size' | 'genre' | 'isFullRadius'>;
+    inactive: Pick<IButton, 'size' | 'genre' | 'isFullRadius'>;
   };
   gap?: number;
   index: number;

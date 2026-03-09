@@ -1,62 +1,62 @@
 import { IAddIIcon } from '@local/components/icon';
 import { ISx, ISxTypography, IThemeGenreButton, IThemeOutline, IThemeSize } from '@local/styles/utils/types';
 
-import { CSSProperties, FocusEvent, MouseEventHandler, PropsWithChildren, Ref } from 'react';
+import { CSSProperties, FocusEventHandler, MouseEventHandler, PropsWithChildren, Ref } from 'react';
 
 type IButtonDefault = PropsWithChildren & {
-  size: IThemeSize;
-
-  genre: IThemeGenreButton;
-
-  name?: string;
-
   ariaLabel?: string;
-
-  id?: string;
-
-  tabIndex?: number;
-
-  ref?: Ref<HTMLElement | null>;
 
   className?: string;
 
-  style?: CSSProperties;
+  genre: IThemeGenreButton;
 
   icons?: IAddIIcon[];
 
-  isDisabledOutline?: boolean;
+  id?: string;
 
   isDisabled?: boolean;
 
+  isDisabledOutline?: boolean;
+
+  isFullSize?: boolean;
+
   isHidden?: boolean;
 
+  isHiddenBorder?: boolean;
+
+  isMinWidthAsContent?: boolean;
+
+  isNotHoverEffect?: boolean;
+
   isOnlyIcon?: boolean;
+
+  isFullRadius?: boolean;
 
   isWhileTapEffect?: boolean;
 
   isWidthAsHeight?: boolean;
 
-  isMinWidthAsContent?: boolean;
-
-  isRadius?: boolean;
-
-  isHiddenBorder?: boolean;
-
-  isNotHoverEffect?: boolean;
-  
   isZeroRadius?: boolean;
 
-  isFullSize?: boolean;
-
-  outline?: IThemeOutline;
-
-  onFocus?: (event: FocusEvent<HTMLButtonElement, Element>) => void;
+  name?: string;
 
   onClick?: MouseEventHandler<HTMLButtonElement>;
 
+  onFocus?: FocusEventHandler<HTMLButtonElement>;
+
   onMouseDown?: MouseEventHandler<HTMLButtonElement>;
 
-  type?: 'button' | 'submit' | 'reset';
+  outline?: IThemeOutline;
+
+  ref?: Ref<HTMLElement | null>;
+
+  size: IThemeSize;
+
+  style?: CSSProperties;
+
+  tabIndex?: number;
+
+  type?: HTMLButtonElement['type'];
 } & ISx &
   ISxTypography;
 
@@ -65,6 +65,7 @@ type IButtonStandard = IButtonDefault & {
 };
 type IButtonIconGroup = IButtonDefault & {
   isIconGroup?: true;
+
   iconGroupOrder?: number;
 };
 

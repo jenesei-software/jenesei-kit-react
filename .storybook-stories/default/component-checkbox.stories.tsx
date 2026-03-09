@@ -38,9 +38,8 @@ export const Index: Story = {
     size: 'medium',
     isLoading: false,
     isDisabled: false,
-    isOnlyLoading: false,
     isHiddenBorder: true,
-    isRadius: true,
+    isFullRadius: true,
   },
 };
 
@@ -55,7 +54,7 @@ const CollectionWrapper: FC = () => {
           genre='primary'
           checked={value}
           onChange={(checked) => setValue(checked)}
-          isRadius
+          isFullRadius
           view={{
             true: { type: 'checkbox', name: 'Square-true' },
             false: { type: 'checkbox', name: 'Square-false' },
@@ -68,7 +67,7 @@ const CollectionWrapper: FC = () => {
           genre='primary'
           checked={value}
           onChange={(checked) => setValue(checked)}
-          isRadius
+          isFullRadius
           view={{
             true: { type: 'checkbox', name: 'Radio-true' },
             false: { type: 'checkbox', name: 'Radio-false' },
@@ -79,7 +78,7 @@ const CollectionWrapper: FC = () => {
         <CheckboxComponent
           size='medium'
           genre='primary'
-          isRadius
+          isFullRadius
           checked={value}
           onChange={(checked) => setValue(checked)}
           view={{
@@ -98,7 +97,7 @@ const CollectionWrapper: FC = () => {
             false: { type: 'checkbox', name: 'Square-false' },
           }}
           size='medium'
-          isRadius
+          isFullRadius
           genre='primary'
           checked={value}
           onChange={(checked) => setValue(checked)}
@@ -110,7 +109,7 @@ const CollectionWrapper: FC = () => {
             true: { type: 'checkbox', name: 'Square-true' },
             false: { type: 'checkbox', name: 'Square-false' },
           }}
-          isRadius
+          isFullRadius
           size='medium'
           genre='secondary'
           checked={value}
@@ -125,7 +124,7 @@ const CollectionWrapper: FC = () => {
           }}
           size='medium'
           genre='product'
-          isRadius
+          isFullRadius
           checked={value}
           onChange={(checked) => setValue(checked)}
         >
@@ -138,7 +137,7 @@ const CollectionWrapper: FC = () => {
           }}
           size='medium'
           genre='blue'
-          isRadius
+          isFullRadius
           checked={value}
           onChange={(checked) => setValue(checked)}
         >
@@ -151,7 +150,7 @@ const CollectionWrapper: FC = () => {
           }}
           size='medium'
           genre='green'
-          isRadius
+          isFullRadius
           checked={value}
           onChange={(checked) => setValue(checked)}
         >
@@ -163,7 +162,7 @@ const CollectionWrapper: FC = () => {
             false: { type: 'checkbox', name: 'Square-false' },
           }}
           size='medium'
-          isRadius
+          isFullRadius
           genre='red'
           checked={value}
           onChange={(checked) => setValue(checked)}
@@ -177,7 +176,7 @@ const CollectionWrapper: FC = () => {
           }}
           size='medium'
           genre='yellow'
-          isRadius
+          isFullRadius
           checked={value}
           onChange={(checked) => setValue(checked)}
         >
@@ -205,7 +204,7 @@ const CollectionWrapper: FC = () => {
           }}
           size='largeMedium'
           genre='primary'
-          isRadius
+          isFullRadius
           checked={value}
           onChange={(checked) => setValue(checked)}
         >
@@ -218,7 +217,7 @@ const CollectionWrapper: FC = () => {
           }}
           size='medium'
           genre='primary'
-          isRadius
+          isFullRadius
           checked={value}
           onChange={(checked) => setValue(checked)}
         >
@@ -231,7 +230,7 @@ const CollectionWrapper: FC = () => {
           }}
           size='mediumSmall'
           genre='primary'
-          isRadius
+          isFullRadius
           checked={value}
           onChange={(checked) => setValue(checked)}
         >
@@ -244,7 +243,7 @@ const CollectionWrapper: FC = () => {
           }}
           size='small'
           genre='primary'
-          isRadius
+          isFullRadius
           checked={value}
           onChange={(checked) => setValue(checked)}
         >
@@ -256,7 +255,7 @@ const CollectionWrapper: FC = () => {
         <CheckboxComponent
           size='medium'
           genre='primary'
-          isRadius
+          isFullRadius
           checked={value}
           onChange={(checked) => setValue(checked)}
           view={{
@@ -267,7 +266,7 @@ const CollectionWrapper: FC = () => {
         />
         <CheckboxComponent
           size='medium'
-          isRadius
+          isFullRadius
           genre='product'
           isNotHoverEffect
           checked={value}
@@ -282,7 +281,7 @@ const CollectionWrapper: FC = () => {
         <CheckboxComponent
           size='medium'
           genre='product'
-          isRadius
+          isFullRadius
           isDisabled
           checked={value}
           onChange={(checked) => setValue(checked)}
@@ -297,7 +296,7 @@ const CollectionWrapper: FC = () => {
           size='medium'
           genre='product'
           isHidden
-          isRadius
+          isFullRadius
           checked={value}
           onChange={(checked) => setValue(checked)}
           view={{
@@ -309,7 +308,7 @@ const CollectionWrapper: FC = () => {
         </CheckboxComponent>
         <CheckboxComponent
           size='medium'
-          isRadius
+          isFullRadius
           genre='product'
           isDisabledOutline
           checked={value}
@@ -324,7 +323,7 @@ const CollectionWrapper: FC = () => {
         <CheckboxComponent
           size='medium'
           genre='primary'
-          isRadius
+          isFullRadius
           isHiddenBorder
           checked={value}
           onChange={(checked) => setValue(checked)}
@@ -342,7 +341,7 @@ const CollectionWrapper: FC = () => {
         >
           <CheckboxComponent
             size='medium'
-            isRadius
+            isFullRadius
             genre='product'
             error={{
               isError: true,
