@@ -12,7 +12,7 @@
   justify-content: center;
 
   height: auto;
-  max-height: none;
+  max-height: fit-content;
 
   min-height: var(--component-button-height);
   padding: 2px var(--component-button-padding);
