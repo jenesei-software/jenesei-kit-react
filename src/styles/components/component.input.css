@@ -6,18 +6,77 @@
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
-  box-shadow: var(--input-effect);
+
+  border: 1px solid;
+  border-color: var(--component-input-border-color);
+  background: var(--component-input-background);
+  box-shadow: var(--component-input-box-shadow);
+
+  height: var(--component-input-height);
+  min-height: var(--component-input-height);
+  max-height: var(--component-input-height);
+  border-radius: var(--component-input-radius);
+
+  overflow: hidden;
+}
+
+.component-input__wrapper.component-input__wrapper--is-zero-radius {
+  border-radius: 0;
+}
+
+.component-input__wrapper.component-input__wrapper--is-full-radius {
+  border-radius: 100px;
+}
+
+.component-input__wrapper.component-input__wrapper--is-min-width-as-content {
+  min-width: max-content;
+  width: max-content;
+}
+
+.component-input__wrapper.component-input__wrapper--is-hidden {
+  opacity: 0.5;
+}
+
+.component-input__wrapper:not(.component-input__wrapper--is-hidden) {
+  opacity: 1;
+}
+
+.component-input__wrapper.component-input__wrapper--is-hidden-border {
+  border: 0px solid transparent !important;
+}
+
+.component-input__wrapper.component-input__wrapper--is-full-radius {
+  border-radius: 100px;
+}
+
+.component-input__wrapper.component-input__wrapper--is-full-size {
+  height: 100%;
+  max-height: 100%;
+  width: 100%;
+}
+
+.component-input__wrapper.component-input__wrapper--is-zero-radius {
+  border-radius: 0px;
 }
 
 .component-input__wrapper.component-input__wrapper--is-width-as-height {
-  width: var(--input-height);
-  min-width: var(--input-height);
+  width: var(--component-input-height);
+  min-width: var(--component-input-height);
 }
 
 .component-input__wrapper.component-input__wrapper--is-width-as-height .component-input {
   text-align: center;
+  padding: 0px;
 }
 
+.component-input__wrapper.component-input__wrapper--is-min-width-as-content {
+  min-width: max-content;
+}
+
+.component-input__wrapper.component-input__wrapper--is-center .component-input {
+  text-align: center;
+  padding: 0px;
+}
 /* =========================
    Component - Input
    ========================= */
@@ -25,57 +84,51 @@
   resize: none;
   overflow: hidden;
   width: 100%;
-  border: 1px solid;
+  height: 100%;
+  border: 0px solid;
 
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-
-  transition: var(--transition);
-
-  padding: 0 var(--input-padding-x);
-  height: var(--input-height);
-  min-height: var(--input-height);
-  max-height: var(--input-height);
-  border-radius: var(--input-radius);
+}
+.component-input {
+  padding: 0 var(--component-input-padding);
 }
 .component-input,
 .component-input:active,
-.component-input:focus-visible {
-  background: var(--input-bg-rest);
-  border-color: var(--input-border-rest);
-  color: var(--input-color-rest);
+.component-input:focus-visible,
+.component-input:focus {
+  color: var(--component-input-color);
+  background: transparent;
+  border-color: transparent;
+  outline: none;
 }
 
 .component-input::placeholder,
 .component-input::-webkit-input-placeholder {
-  color: var(--input-placeholder-color);
+  color: var(--component-input-placeholder-color);
   opacity: 1;
 }
 
 .component-input:-ms-input-placeholder {
-  color: var(--input-placeholder-color);
+  color: var(--component-input-placeholder-color);
   opacity: 1;
 }
 
-.component-input.component-input--nice-number::placeholder,
-.component-input.component-input--nice-number::-webkit-input-placeholder {
-  color: var(--input-placeholder-color);
-  opacity: 1;
-  background: transparent;
+.component-input.component-input--has-prefix {
+  padding-left: calc(
+    var(--component-input-prefix-width) +
+    var(--component-input-prefix-right) +
+    var(--component-input-prefix-left)
+  );
 }
 
-.component-input.component-input--nice-number:-ms-input-placeholder {
-  color: var(--input-placeholder-color);
-  opacity: 1;
-  background: transparent;
-}
-.component-input.has-prefix {
-  padding-left: calc(var(--prefix-width) + var(--prefix-right) + var(--prefix-left));
-}
-
-.component-input.has-postfix {
-  padding-right: calc(var(--postfix-width) + var(--postfix-right) + var(--postfix-left));
+.component-input.component-input--has-postfix {
+  padding-right: calc(
+    var(--component-input-postfix-width) +
+    var(--component-input-postfix-right) +
+    var(--component-input-postfix-left)
+  );
 }
 
 /* =========================
@@ -84,8 +137,8 @@
 .component-input__prefix {
   position: absolute;
   display: flex;
-  left: var(--prefix-left);
-  width: var(--prefix-width);
+  left: var(--component-input-prefix-left);
+  width: var(--component-input-prefix-width);
   height: 100%;
 }
 
@@ -95,7 +148,7 @@
 .component-input__postfix {
   position: absolute;
   display: flex;
-  right: var(--postfix-right);
-  width: var(--postfix-width);
+  right: var(--component-input-postfix-right);
+  width: var(--component-input-postfix-width);
   height: 100%;
 }

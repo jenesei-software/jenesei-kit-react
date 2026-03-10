@@ -55,13 +55,6 @@ const CollectionWrapper: FC = () => {
         <ToggleComponent
           size='medium'
           genre='primary'
-          isNotHoverEffect
-          value={value}
-          onChange={(checked) => setValue(checked)}
-        />
-        <ToggleComponent
-          size='medium'
-          genre='primary'
           isDisabled
           value={value}
           onChange={(checked) => setValue(checked)}
@@ -70,13 +63,6 @@ const CollectionWrapper: FC = () => {
           size='medium'
           genre='primary'
           isHidden
-          value={value}
-          onChange={(checked) => setValue(checked)}
-        />
-        <ToggleComponent
-          size='medium'
-          genre='primary'
-          isDisabledOutline
           value={value}
           onChange={(checked) => setValue(checked)}
         />
@@ -104,6 +90,20 @@ const CollectionWrapper: FC = () => {
             onChange={(value) => setValue(value)}
           />
         </Stack>
+        <ToggleComponent
+          size='medium'
+          genre='primary'
+          control='default'
+          value={value}
+          onChange={(checked) => setValue(checked)}
+        />
+        <ToggleComponent
+          size='medium'
+          genre='primary'
+          control='onlyActive'
+          value={value}
+          onChange={(checked) => setValue(checked)}
+        />
       </WrapperMin>
     </WrapperBig>
   );

@@ -17,19 +17,19 @@ const defaultArgs: Partial<IPagination> = {
   buttonControl: {
     genre: 'product',
     size: 'small',
-    isRadius: true,
+    isFullRadius: true,
     isWidthAsHeight: true,
   },
   buttonCount: {
     active: {
       genre: 'secondary',
       size: 'small',
-      isRadius: true,
+      isFullRadius: true,
     },
     inactive: {
       genre: 'primary',
       size: 'small',
-      isRadius: true,
+      isFullRadius: true,
     },
   },
 };

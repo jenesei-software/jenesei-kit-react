@@ -14,10 +14,7 @@ export const Toggle = (props: IToggle) => {
       props.className,
       CSS_CLASS.component.toggle.root,
       props.value ? CSS_CLASS.component.toggle.active : CSS_CLASS.component.toggle.unActive,
-      CSS_CLASS.outline[props.isDisabledOutline ? 'none' : (props.outline ?? 'default')],
-      CSS_CLASS.control[
-        props.isDisabled || props.isHidden ? 'none' : props.isNotHoverEffect ? 'onlyActive' : 'boxShadow'
-      ],
+      CSS_CLASS.control[props.isDisabled ? 'none' : (props.control ?? 'boxShadow')],
       CSS_CLASS.transition.color,
       props.isZeroRadius && CSS_CLASS.component.toggle.isZeroRadius,
       props.error?.isError && CSS_CLASS.isError,
@@ -39,19 +36,16 @@ export const Toggle = (props: IToggle) => {
 
     return { className, style };
   }, [
-    props.className,
-    props.style,
-    props.genre,
-    props.isDisabled,
-    props.isDisabledOutline,
-    props.isHidden,
-    props.isHiddenBorder,
-    props.isNotHoverEffect,
-    props.outline,
-    props.size,
-    props.value,
-    props.error?.isError,
-    props.isZeroRadius,
+    props.className, 
+    props.style, 
+    props.genre, 
+    props.isDisabled, 
+    props.isHidden, 
+    props.isHiddenBorder, 
+    props.size, 
+    props.value, 
+    props.error?.isError, 
+    props.isZeroRadius, props.control
   ]);
 
   const { className: classNameCenter, style: styleCenter } = useMemo(() => {
@@ -112,7 +106,7 @@ export const Toggle = (props: IToggle) => {
       {props?.error?.isError && (
         <ErrorMessage
           size={props?.error.size ?? props.size}
-          sxTypography={{ size: 'medium', weight: '400', ...props?.error.sxTypography }}
+          sxTypography={{ size: '16px', weight: '400', ...props?.error.sxTypography }}
           {...props.error}
         />
       )}

@@ -1,9 +1,10 @@
 import { IAddError } from '@local/components/error';
-import { ISx, ISxTypography, IThemeSize } from '@local/styles/utils';
-import { IThemeGenreInput } from '@local/styles/utils/types';
+import { ISxTypography, IThemeSize } from '@local/styles/utils';
+import { IThemeControl, IThemeGenreInput } from '@local/styles/utils/types';
 
 import {
   ClipboardEventHandler,
+  CSSProperties,
   FocusEventHandler,
   HTMLInputAutoCompleteAttribute,
   HTMLInputTypeAttribute,
@@ -14,69 +15,76 @@ import {
 import { NumberFormatValues, NumericFormatProps, PatternFormatProps } from 'react-number-format';
 
 type ICommonInput = IAddError &
-  ISxTypography &
-  ISx & {
-    ref?: Ref<HTMLInputElement | null>;
-
-    name?: string;
-
+  ISxTypography & {
     ariaLabel?: string;
-
-    id?: string;
-
-    className?: string;
-
-    isNotShowHoverStyle?: boolean;
 
     autoComplete?: HTMLInputAutoCompleteAttribute | string;
 
-    isAllowEmptyFormatting?: boolean;
+    className?: string;
 
     genre: IThemeGenreInput;
 
-    size: IThemeSize;
+    id?: string;
 
-    tabIndex?: number;
+    inputMode?: 'text' | 'none' | 'tel' | 'url' | 'email' | 'numeric' | 'decimal' | 'search';
 
-    isWidthAsHeight?: boolean;
+    isAllowEmptyFormatting?: boolean;
 
-    isNiceNumber?: boolean;
-
-    isDisabled?: boolean;
-
-    isReadOnly?: boolean;
-
-    isLoading?: boolean;
-
-    isInputEffect?: boolean;
-
-    isRequired?: boolean;
+    isBold?: boolean;
 
     isCenter?: boolean;
 
+    isDisabled?: boolean;
+
+    isFullRadius?: boolean;
+
+    isHidden?: boolean;
+
+    isHiddenBorder?: boolean;
+
+    isMinWidthAsContent?: boolean;
+
+    isNiceNumber?: boolean;
+
     isNoSpaces?: boolean;
 
-    onBlur?: FocusEventHandler<HTMLInputElement>;
+    isReadOnly?: boolean;
 
-    onPaste?: ClipboardEventHandler<HTMLInputElement>;
+    isRequired?: boolean;
+
+    isWidthAsHeight?: boolean;
+
+    isZeroRadius?: boolean;
+
+    maxLength?: number;
+
+    minLength?: number;
+    
+    name?: string;
+
+    onBlur?: FocusEventHandler<HTMLInputElement>;
 
     onFocus?: FocusEventHandler<HTMLInputElement>;
 
     onKeyDown?: KeyboardEventHandler<HTMLInputElement>;
 
+    onPaste?: ClipboardEventHandler<HTMLInputElement>;
+
     placeholder?: string;
 
-    isBold?: boolean;
-
     postfixChildren?: InputChildrenProps;
-
+    
     prefixChildren?: InputChildrenProps;
 
-    inputMode?: 'text' | 'none' | 'tel' | 'url' | 'email' | 'numeric' | 'decimal' | 'search';
+    ref?: Ref<HTMLInputElement | null>;
 
-    maxLength?: number;
+    control?: IThemeControl;
+    
+    size: IThemeSize;
 
-    minLength?: number;
+    style?: CSSProperties;
+
+    tabIndex?: number;
   };
 
 type IControlledValue = {
@@ -106,7 +114,7 @@ export type IInputPattern = IBaseInput & {
   onChange?: (value: NumberFormatValues) => void;
   propsPattern: Pick<
     PatternFormatProps,
-    'format' | 'mask' | 'allowEmptyFormatting' | 'patternChar' | 'valueIsNumericString' | 'type'
+    'allowEmptyFormatting' | 'format' | 'mask' | 'patternChar' | 'type' | 'valueIsNumericString'
   >;
 };
 export type IInputNumeric = IBaseInput & {
@@ -115,16 +123,16 @@ export type IInputNumeric = IBaseInput & {
   propsNumeric: Pick<
     NumericFormatProps,
     | 'allowLeadingZeros'
-    | 'thousandSeparator'
     | 'allowNegative'
     | 'allowedDecimalSeparators'
     | 'decimalScale'
     | 'decimalSeparator'
     | 'fixedDecimalScale'
-    | 'prefix'
-    | 'thousandsGroupStyle'
     | 'isAllowed'
+    | 'prefix'
     | 'suffix'
+    | 'thousandSeparator'
+    | 'thousandsGroupStyle'
   >;
 };
 export type IInput = IInputStandard | IInputPattern | IInputNumeric;

@@ -125,7 +125,8 @@
 
 /* outline */
 
-.u-outline--default:focus-visible {
+.u-outline--default:focus-visible,
+.u-outline--default:has(input:focus-visible):not(:has(input:active)) {
   outline-offset: 1px;
   outline: 2px solid var(--accent-gray-light);
 }
@@ -152,21 +153,32 @@
 }
 
 /* control */
+.u-control--default:focus-visible,
+.u-control--only-active:focus-visible,
+.u-control--boxShadow:has(input:focus-visible) {
+  outline-offset: 1px;
+  outline: 2px solid var(--accent-gray-light);
+}
 .u-control--default:hover {
   filter: brightness(0.9);
+  outline-offset: 1px;
+  outline: 2px solid var(--accent-gray-light);
 }
 
 .u-control--default:active {
   filter: brightness(0.95);
 }
 
+.u-control--none {
+  outline: none;
+}
 @media (hover: none) {
   .u-control--default:hover {
     filter: none;
   }
 }
 
-.u-control-only-active:active {
+.u-control--only-active:active {
   filter: brightness(0.95);
 }
 
@@ -176,7 +188,9 @@
     0 0 0 0.25rem var(--product-tertiary-light);
 }
 
-.u-control--boxShadow:active {
+.u-control--boxShadow:active,
+.u-control--boxShadow:focus-visible,
+.u-control--boxShadow:has(input:focus-visible) {
   outline-offset: 4px;
   outline: 1px solid var(--product-secondary-light);
   box-shadow:

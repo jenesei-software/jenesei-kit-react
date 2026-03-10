@@ -25,10 +25,7 @@ export const Checkbox: FC<ICheckbox> = (props) => {
     const className = setClasses([
       props.className,
       CSS_CLASS.component.checkbox.root,
-      CSS_CLASS.outline[props.isDisabledOutline ? 'none' : (props.outline ?? 'default')],
-      CSS_CLASS.control[
-        props.isDisabled || props.isHidden ? 'none' : props.isNotHoverEffect ? 'onlyActive' : 'boxShadow'
-      ],
+      CSS_CLASS.control[props.isDisabled ? 'none' : (props.control ?? 'boxShadow')],
       CSS_CLASS.transition.color,
       props.error?.isError && CSS_CLASS.isError,
       props.isZeroRadius && CSS_CLASS.component.checkbox.isZeroRadius,
@@ -38,6 +35,7 @@ export const Checkbox: FC<ICheckbox> = (props) => {
       props.isFullSize && CSS_CLASS.component.checkbox.isFullSize,
       props.isWidthAsHeight && CSS_CLASS.component.checkbox.isWidthAsHeight,
       props.isMinWidthAsContent && CSS_CLASS.component.checkbox.isMinWidthAsContent,
+      props.isOnlyIcon && CSS_CLASS.component.checkbox.isOnlyIcon,
     ]);
 
     const vars: Record<string, string> = {};
@@ -60,17 +58,17 @@ export const Checkbox: FC<ICheckbox> = (props) => {
     props.sx, 
     props.genre, 
     props.isDisabled, 
-    props.isDisabledOutline, 
     props.isFullSize, 
     props.isHidden, 
     props.isHiddenBorder, 
     props.isMinWidthAsContent, 
-    props.isNotHoverEffect, 
     props.isFullRadius, 
     props.isWidthAsHeight, 
-    props.outline, 
     props.size, 
-    props.error, props.isFullRadius, props.isZeroRadius
+    props.error, 
+    props.isZeroRadius, 
+    props.isOnlyIcon, 
+    props.control
   ]);
   const handleClick = useCallback(() => {
     if (!props.isDisabled && props.onChange) {
@@ -97,7 +95,7 @@ export const Checkbox: FC<ICheckbox> = (props) => {
           {...(props.checked ? props.view.true : props.view.false)}
           size={(props.checked ? props.view.true : props.view.false)?.size ?? props.size}
         />
-        {!props.isOnlyCheckbox && (
+        {!props.isOnlyIcon && (
           <div className={classNameTypography} style={styleTypography}>
             {props.children}
           </div>
@@ -106,7 +104,7 @@ export const Checkbox: FC<ICheckbox> = (props) => {
       {props?.error?.isError && (
         <ErrorMessage
           size={props?.error.size ?? props.size}
-          sxTypography={{ size: 'medium', weight: '400', ...props.sxTypography, ...props?.error.sxTypography }}
+          sxTypography={{ size: '16px', weight: '400', ...props?.error.sxTypography }}
           {...props.error}
         />
       )}
