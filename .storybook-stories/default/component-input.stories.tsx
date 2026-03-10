@@ -112,7 +112,7 @@ const CollectionWrapper: FC = () => {
             color: 'textPrimaryLight',
           }}
         >
-          variety
+          Variety
         </Typography>
         <WrapperMin sx={{ flexDirection: 'column', width: '100%' }}>
           <InputComponent
@@ -308,6 +308,9 @@ const CollectionWrapper: FC = () => {
             }}
           >
             <InputComponent
+              style={{
+                width: '100%',
+              }}
               placeholder='Error'
               genre='primary'
               size='large'
