@@ -1,7 +1,11 @@
 import { ErrorMessage } from '@local/components/error';
+import { useTypographyStyles } from '@local/hooks/use-typography-styles';
+import { CSS_CLASS, CSS_VARS } from '@local/styles/utils';
+import { CSS_VARS_RAW } from '@local/styles/utils/constants';
+import { setClasses, setStyles } from '@local/styles/utils/functions';
 
 import { motion } from 'framer-motion';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { NumberFormatValues, NumericFormat, PatternFormat } from 'react-number-format';
 
 import { IInput } from './component.types';
@@ -24,12 +28,98 @@ export const Input = (props: IInput) => {
     [props],
   );
 
+  const { className: classNameTypography, style: styleTypography } = useTypographyStyles({
+    sx: {
+      ...props?.sxTypography,
+      size: 16,
+      weight: props.isBold ? '500' : '400',
+      height: '1',
+    },
+  });
+
+  const { className, style } = useMemo(() => {
+    const className = setClasses([
+      props.className,
+      CSS_CLASS.component.input.wrapper,
+      CSS_CLASS.transition.color,
+      CSS_CLASS.outline[props.isDisabledOutline ? 'none' : (props.outline ?? 'default')],
+      CSS_CLASS.control[
+        props.isDisabled || props.isHidden ? 'none' : props.isNotHoverEffect ? 'onlyActive' : 'boxShadow'
+      ],
+
+      props.isWidthAsHeight && CSS_CLASS.component.input.wrapperIsWidthAsHeight,
+
+      props.isZeroRadius && CSS_CLASS.component.input.wrapperIsZeroRadius,
+      props.isHidden && CSS_CLASS.component.input.wrapperIsHidden,
+      props.isHiddenBorder && CSS_CLASS.component.input.wrapperIsHiddenBorder,
+      props.isFullRadius && CSS_CLASS.component.input.wrapperIsFullRadius,
+      props.isWidthAsHeight && CSS_CLASS.component.input.wrapperIsWidthAsHeight,
+      props.isMinWidthAsContent && CSS_CLASS.component.input.wrapperIsMinWidthAsContent,
+    ]);
+
+    const vars: Record<string, string> = {};
+
+    vars[CSS_VARS_RAW.component.input.height] = CSS_VARS.size[props.size].height;
+    vars[CSS_VARS_RAW.component.input.borderColor] = CSS_VARS.genre.input[props.genre].border;
+    vars[CSS_VARS_RAW.component.input.radius] = CSS_VARS.size[props.size].radius;
+
+    if (props.postfixChildren?.left) vars[CSS_VARS_RAW.component.input.postfixLeft] = props.postfixChildren?.left;
+    if (props.postfixChildren?.right) vars[CSS_VARS_RAW.component.input.postfixRight] = props.postfixChildren?.right;
+    if (props.postfixChildren?.width) vars[CSS_VARS_RAW.component.input.postfixWidth] = props.postfixChildren?.width;
+
+    if (props.prefixChildren?.left) vars[CSS_VARS_RAW.component.input.prefixLeft] = props.prefixChildren?.left;
+    if (props.prefixChildren?.right) vars[CSS_VARS_RAW.component.input.prefixRight] = props.prefixChildren?.right;
+    if (props.prefixChildren?.width) vars[CSS_VARS_RAW.component.input.prefixWidth] = props.prefixChildren?.width;
+
+    const style = setStyles([props.style, Object.keys(vars).length ? vars : undefined]);
+
+    return { className, style };
+  }, [
+    props.className,
+    props.isWidthAsHeight,
+    props.size,
+    props.style,
+    props.isDisabled,
+    props.isDisabledOutline,
+    props.isHidden,
+    props.isNotHoverEffect,
+    props.outline,
+    props.isFullRadius,
+    props.isHiddenBorder,
+    props.isMinWidthAsContent,
+    props.isZeroRadius,
+    props.genre,
+    props.postfixChildren?.left,
+    props.postfixChildren?.right,
+    props.postfixChildren?.width,
+    props.prefixChildren?.left,
+    props.prefixChildren?.right,
+    props.prefixChildren?.width,
+  ]);
+
+  const { className: classNameInput, style: styleInput } = useMemo(() => {
+    const className = setClasses([CSS_CLASS.component.input.root, CSS_CLASS.transition.color, classNameTypography]);
+
+    const vars: Record<string, string> = {};
+
+    vars[CSS_VARS_RAW.component.input.color] = CSS_VARS.genre.input[props.genre].color;
+    vars[CSS_VARS_RAW.component.input.placeholderColor] = CSS_VARS.genre.input[props.genre].placeholder;
+    vars[CSS_VARS_RAW.component.input.borderColor] = CSS_VARS.genre.input[props.genre].border;
+    vars[CSS_VARS_RAW.component.input.padding] = CSS_VARS.size[props.size].padding;
+
+    const style = setStyles([props.style, styleTypography, Object.keys(vars).length ? vars : undefined]);
+
+    return { className, style };
+  }, [props.size, props.style, props.genre, classNameTypography, styleTypography]);
+
   return (
     <>
-      <div className={props.className}>
+      <div className={className} style={style}>
         {props.prefixChildren && <div>{props.prefixChildren.children}</div>}
         {props.variety === 'pattern' ? (
           <PatternFormat
+            className={classNameInput}
+            style={styleInput}
             disabled={props.isDisabled}
             readOnly={props.isReadOnly}
             required={props.isRequired}
@@ -52,6 +142,8 @@ export const Input = (props: IInput) => {
           />
         ) : props.variety === 'numeric' ? (
           <NumericFormat
+            className={classNameInput}
+            style={styleInput}
             disabled={props.isDisabled}
             readOnly={props.isReadOnly}
             required={props.isRequired}
@@ -74,6 +166,8 @@ export const Input = (props: IInput) => {
           />
         ) : (
           <motion.input
+            className={classNameInput}
+            style={styleInput}
             inputMode={props.inputMode}
             maxLength={props.maxLength}
             minLength={props.minLength}

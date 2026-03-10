@@ -125,7 +125,8 @@
 
 /* outline */
 
-.u-outline--default:focus-visible {
+.u-outline--default:focus-visible,
+.u-outline--default:has(input:focus-visible):not(:has(input:active)) {
   outline-offset: 1px;
   outline: 2px solid var(--accent-gray-light);
 }
@@ -176,7 +177,8 @@
     0 0 0 0.25rem var(--product-tertiary-light);
 }
 
-.u-control--boxShadow:active {
+.u-control--boxShadow:active,
+.u-control--boxShadow:has(input:focus-visible) {
   outline-offset: 4px;
   outline: 1px solid var(--product-secondary-light);
   box-shadow:

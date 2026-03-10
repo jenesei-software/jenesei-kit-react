@@ -1,9 +1,10 @@
 import { IAddError } from '@local/components/error';
 import { ISx, ISxTypography, IThemeSize } from '@local/styles/utils';
-import { IThemeGenreInput } from '@local/styles/utils/types';
+import { IThemeGenreInput, IThemeOutline } from '@local/styles/utils/types';
 
 import {
   ClipboardEventHandler,
+  CSSProperties,
   FocusEventHandler,
   HTMLInputAutoCompleteAttribute,
   HTMLInputTypeAttribute,
@@ -14,8 +15,7 @@ import {
 import { NumberFormatValues, NumericFormatProps, PatternFormatProps } from 'react-number-format';
 
 type ICommonInput = IAddError &
-  ISxTypography &
-  ISx & {
+  ISxTypography & {
     ref?: Ref<HTMLInputElement | null>;
 
     name?: string;
@@ -25,6 +25,8 @@ type ICommonInput = IAddError &
     id?: string;
 
     className?: string;
+
+    style?: CSSProperties;
 
     isNotShowHoverStyle?: boolean;
 
@@ -43,9 +45,14 @@ type ICommonInput = IAddError &
     isNiceNumber?: boolean;
 
     isDisabled?: boolean;
-
+    isZeroRadius?: boolean;
+    isFullRadius?: boolean;
+    isMinWidthAsContent?: boolean;
     isReadOnly?: boolean;
-
+    isHidden?: boolean;
+    isHiddenBorder?: boolean;
+    isDisabledOutline?: boolean;
+    isNotHoverEffect?: boolean;
     isLoading?: boolean;
 
     isInputEffect?: boolean;
@@ -55,6 +62,8 @@ type ICommonInput = IAddError &
     isCenter?: boolean;
 
     isNoSpaces?: boolean;
+
+    outline?: IThemeOutline;
 
     onBlur?: FocusEventHandler<HTMLInputElement>;
 

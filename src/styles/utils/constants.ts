@@ -284,6 +284,25 @@ export const CSS_VARS = {
       background: 'var(--component-separator-background)',
       radius: 'var(--component-separator-radius)',
     },
+    input: {
+      boxShadow: 'var(--component-input-box-shadow)',
+      background: 'var(--component-input-background)',
+      borderColor: 'var(--component-input-border-color)',
+      color: 'var(--component-input-color)',
+      placeholderColor: 'var(--component-input-placeholder-color)',
+
+      height: 'var(--component-input-height)',
+      padding: 'var(--component-input-padding)',
+      radius: 'var(--component-input-radius)',
+
+      prefixWidth: 'var(--component-input-prefix-width)',
+      prefixRight: 'var(--component-input-prefix-right)',
+      prefixLeft: 'var(--component-input-prefix-left)',
+
+      postfixWidth: 'var(--component-input-postfix-width)',
+      postfixRight: 'var(--component-input-postfix-right)',
+      postfixLeft: 'var(--component-input-postfix-left)',
+    },
   },
 
   area: {
@@ -580,6 +599,21 @@ export const CSS_CLASS = {
   },
 
   component: {
+    input: {
+      wrapper: 'component-input__wrapper',
+      wrapperIsWidthAsHeight: 'component-input__wrapper--is-width-as-height',
+      wrapperIsZeroRadius: 'component-input__wrapper--is-zero-radius',
+      wrapperIsHidden: 'component-input__wrapper--is-hidden',
+      wrapperIsHiddenBorder: 'component-input__wrapper--is-hidden-border',
+      wrapperIsFullRadius: 'component-input__wrapper--is-full-radius',
+      wrapperIsMinWidthAsContent: 'component-input__wrapper--is-min-width-as-content',
+
+      root: 'component-input',
+      hasPrefix: 'component-input--has-prefix',
+      hasPostfix: 'component-input--has-postfix',
+      prefix: 'component-input__prefix',
+      postfix: 'component-input__postfix',
+    },
     separator: {
       root: 'component-separator',
     },
@@ -628,6 +662,7 @@ export const CSS_CLASS = {
       isWidthAsHeight: 'component-checkbox--is-width-as-height',
       isMinWidthAsContent: 'component-checkbox--is-min-width-as-content',
       isZeroRadius: 'component-checkbox--is-zero-radius',
+      isOnlyIcon: 'component-checkbox--is-only-icon',
     },
     toggle: {
       root: 'component-toggle',

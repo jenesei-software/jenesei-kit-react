@@ -61,3 +61,15 @@
 .component-checkbox.component-checkbox--is-min-width-as-content {
   min-width: max-content;
 }
+
+.component-checkbox.component-checkbox--is-only-icon {
+  padding: 0px;
+  gap: 0px;
+  background: transparent;
+  height: auto;
+  width: auto;
+  min-width: unset;
+  min-height: unset;
+  border: 0px solid transparent;
+  border-color: transparent;
+}

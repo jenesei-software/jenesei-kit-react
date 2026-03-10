@@ -39,7 +39,7 @@ export type ICheckbox = PropsWithChildren & {
 
   isNotHoverEffect?: boolean;
 
-  isOnlyCheckbox?: boolean;
+  isOnlyIcon?: boolean;
   
   isFullRadius?: boolean;
 

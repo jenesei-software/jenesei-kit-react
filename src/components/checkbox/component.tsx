@@ -38,6 +38,7 @@ export const Checkbox: FC<ICheckbox> = (props) => {
       props.isFullSize && CSS_CLASS.component.checkbox.isFullSize,
       props.isWidthAsHeight && CSS_CLASS.component.checkbox.isWidthAsHeight,
       props.isMinWidthAsContent && CSS_CLASS.component.checkbox.isMinWidthAsContent,
+      props.isOnlyIcon && CSS_CLASS.component.checkbox.isOnlyIcon,
     ]);
 
     const vars: Record<string, string> = {};
@@ -70,7 +71,7 @@ export const Checkbox: FC<ICheckbox> = (props) => {
     props.isWidthAsHeight, 
     props.outline, 
     props.size, 
-    props.error, props.isFullRadius, props.isZeroRadius
+    props.error, props.isFullRadius, props.isZeroRadius, props.isOnlyIcon
   ]);
   const handleClick = useCallback(() => {
     if (!props.isDisabled && props.onChange) {
@@ -97,7 +98,7 @@ export const Checkbox: FC<ICheckbox> = (props) => {
           {...(props.checked ? props.view.true : props.view.false)}
           size={(props.checked ? props.view.true : props.view.false)?.size ?? props.size}
         />
-        {!props.isOnlyCheckbox && (
+        {!props.isOnlyIcon && (
           <div className={classNameTypography} style={styleTypography}>
             {props.children}
           </div>

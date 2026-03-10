@@ -308,6 +308,32 @@ const CollectionWrapper: FC = () => {
         </CheckboxComponent>
         <CheckboxComponent
           size='medium'
+          genre='product'
+          isZeroRadius
+          checked={value}
+          onChange={(checked) => setValue(checked)}
+          view={{
+            true: { type: 'checkbox', name: 'Square-true' },
+            false: { type: 'checkbox', name: 'Square-false' },
+          }}
+        >
+          isZeroRadius
+        </CheckboxComponent>
+        <CheckboxComponent
+          size='medium'
+          genre='primary'
+          isOnlyIcon
+          checked={value}
+          onChange={(checked) => setValue(checked)}
+          view={{
+            true: { type: 'checkbox', name: 'Heart-true' },
+            false: { type: 'checkbox', name: 'Heart-false' },
+          }}
+        >
+          isOnlyIcon
+        </CheckboxComponent>
+        <CheckboxComponent
+          size='medium'
           isFullRadius
           genre='product'
           isDisabledOutline
