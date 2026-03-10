@@ -137,26 +137,16 @@ const CollectionWrapper: FC = () => {
           <ButtonComponent size='medium' genre='product' control='onlyActive'>
             Control - onlyActive
           </ButtonComponent>
-          <WrapperMin>
-            <Typography
-              sx={{
-                variant: 'title-2',
-                color: 'textPrimaryLight',
-              }}
-            >
+          <Stack
+            style={{
+              width: '100px',
+              height: '100px',
+            }}
+          >
+            <ButtonComponent isZeroRadius size='large' isFullSize genre='primary'>
               100%
-            </Typography>
-            <Stack
-              style={{
-                width: '100px',
-                height: '100px',
-              }}
-            >
-              <ButtonComponent size='large' isFullSize genre='primary'>
-                large
-              </ButtonComponent>
-            </Stack>
-          </WrapperMin>
+            </ButtonComponent>
+          </Stack>
         </WrapperMin>
       </WrapperBig>
     </WrapperBig>
