@@ -4,8 +4,8 @@ import { CSS_CLASS, CSS_VARS } from '@local/styles/utils';
 import { CSS_VARS_RAW } from '@local/styles/utils/constants';
 import { setClasses, setStyles } from '@local/styles/utils/functions';
 
-import { motion } from 'framer-motion';
-import { useCallback, useMemo } from 'react';
+import { useMergeRefs } from '@floating-ui/react';
+import { useCallback, useMemo, useRef } from 'react';
 import { NumberFormatValues, NumericFormat, PatternFormat } from 'react-number-format';
 
 import { IInput } from './component.types';
@@ -31,8 +31,9 @@ export const Input = (props: IInput) => {
   const { className: classNameTypography, style: styleTypography } = useTypographyStyles({
     sx: {
       ...props?.sxTypography,
+      family: props.isNiceNumber ? 'Roboto Mono' : props.sxTypography?.family,
       size: 16,
-      weight: props.isBold ? '500' : '400',
+      weight: props.isBold ? '700' : '400',
       height: '1',
     },
   });
@@ -42,26 +43,24 @@ export const Input = (props: IInput) => {
       props.className,
       CSS_CLASS.component.input.wrapper,
       CSS_CLASS.transition.color,
-      CSS_CLASS.outline[props.isDisabledOutline ? 'none' : (props.outline ?? 'default')],
-      CSS_CLASS.control[
-        props.isDisabled || props.isHidden ? 'none' : props.isNotHoverEffect ? 'onlyActive' : 'boxShadow'
-      ],
-
+      props.error?.isError && CSS_CLASS.isError,
+      CSS_CLASS.control[props.isDisabled ? 'none' : (props.control ?? 'boxShadow')],
       props.isWidthAsHeight && CSS_CLASS.component.input.wrapperIsWidthAsHeight,
-
       props.isZeroRadius && CSS_CLASS.component.input.wrapperIsZeroRadius,
       props.isHidden && CSS_CLASS.component.input.wrapperIsHidden,
       props.isHiddenBorder && CSS_CLASS.component.input.wrapperIsHiddenBorder,
       props.isFullRadius && CSS_CLASS.component.input.wrapperIsFullRadius,
       props.isWidthAsHeight && CSS_CLASS.component.input.wrapperIsWidthAsHeight,
       props.isMinWidthAsContent && CSS_CLASS.component.input.wrapperIsMinWidthAsContent,
+      props.isCenter && CSS_CLASS.component.input.wrapperIsCenter,
     ]);
 
     const vars: Record<string, string> = {};
 
     vars[CSS_VARS_RAW.component.input.height] = CSS_VARS.size[props.size].height;
-    vars[CSS_VARS_RAW.component.input.borderColor] = CSS_VARS.genre.input[props.genre].border;
     vars[CSS_VARS_RAW.component.input.radius] = CSS_VARS.size[props.size].radius;
+    vars[CSS_VARS_RAW.component.input.borderColor] = CSS_VARS.genre.input[props.genre].border;
+    vars[CSS_VARS_RAW.component.input.background] = CSS_VARS.genre.input[props.genre].background;
 
     if (props.postfixChildren?.left) vars[CSS_VARS_RAW.component.input.postfixLeft] = props.postfixChildren?.left;
     if (props.postfixChildren?.right) vars[CSS_VARS_RAW.component.input.postfixRight] = props.postfixChildren?.right;
@@ -80,10 +79,7 @@ export const Input = (props: IInput) => {
     props.size,
     props.style,
     props.isDisabled,
-    props.isDisabledOutline,
     props.isHidden,
-    props.isNotHoverEffect,
-    props.outline,
     props.isFullRadius,
     props.isHiddenBorder,
     props.isMinWidthAsContent,
@@ -95,10 +91,19 @@ export const Input = (props: IInput) => {
     props.prefixChildren?.left,
     props.prefixChildren?.right,
     props.prefixChildren?.width,
+    props.control,
+    props.isCenter,
+    props.error?.isError,
   ]);
 
   const { className: classNameInput, style: styleInput } = useMemo(() => {
-    const className = setClasses([CSS_CLASS.component.input.root, CSS_CLASS.transition.color, classNameTypography]);
+    const className = setClasses([
+      CSS_CLASS.component.input.root,
+      CSS_CLASS.transition.color,
+      classNameTypography,
+      props.prefixChildren && CSS_CLASS.component.input.hasPrefix,
+      props.postfixChildren && CSS_CLASS.component.input.hasPostfix,
+    ]);
 
     const vars: Record<string, string> = {};
 
@@ -110,12 +115,26 @@ export const Input = (props: IInput) => {
     const style = setStyles([props.style, styleTypography, Object.keys(vars).length ? vars : undefined]);
 
     return { className, style };
-  }, [props.size, props.style, props.genre, classNameTypography, styleTypography]);
+  }, [
+    props.size,
+    props.style,
+    props.genre,
+    classNameTypography,
+    styleTypography,
+    props.postfixChildren,
+    props.prefixChildren,
+  ]);
+
+  const refDefault = useRef<HTMLInputElement>(null);
+
+  const ref = useMergeRefs([refDefault, props.ref]);
 
   return (
     <>
       <div className={className} style={style}>
-        {props.prefixChildren && <div>{props.prefixChildren.children}</div>}
+        {props.prefixChildren && (
+          <div className={CSS_CLASS.component.input.prefix}>{props.prefixChildren.children}</div>
+        )}
         {props.variety === 'pattern' ? (
           <PatternFormat
             className={classNameInput}
@@ -138,6 +157,7 @@ export const Input = (props: IInput) => {
             maxLength={props.maxLength}
             minLength={props.minLength}
             tabIndex={props.tabIndex}
+            getInputRef={ref}
             {...props.propsPattern}
           />
         ) : props.variety === 'numeric' ? (
@@ -162,16 +182,17 @@ export const Input = (props: IInput) => {
             maxLength={props.maxLength}
             minLength={props.minLength}
             tabIndex={props.tabIndex}
+            getInputRef={ref}
             {...props.propsNumeric}
           />
         ) : (
-          <motion.input
+          <input
             className={classNameInput}
             style={styleInput}
             inputMode={props.inputMode}
             maxLength={props.maxLength}
             minLength={props.minLength}
-            ref={props.ref}
+            ref={ref}
             disabled={props.isDisabled}
             readOnly={props.isReadOnly}
             required={props.isRequired}
@@ -197,12 +218,14 @@ export const Input = (props: IInput) => {
             step={props.step}
           />
         )}
-        {props.postfixChildren && <div>{props.postfixChildren.children}</div>}
+        {props.postfixChildren && (
+          <div className={CSS_CLASS.component.input.postfix}>{props.postfixChildren.children}</div>
+        )}
       </div>
       {props?.error?.isError && (
         <ErrorMessage
           size={props?.error.size ?? props.size}
-          sxTypography={{ size: 'medium', weight: '400', ...props.sxTypography, ...props?.error.sxTypography }}
+          sxTypography={{ size: '16px', weight: '400', ...props?.error.sxTypography }}
           {...props.error}
         />
       )}

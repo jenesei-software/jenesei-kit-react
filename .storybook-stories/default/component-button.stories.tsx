@@ -110,9 +110,6 @@ const CollectionWrapper: FC = () => {
         >
           2 Icons, isWhileTapEffect
         </ButtonComponent>
-        <ButtonComponent size='medium' genre='product' isNotHoverEffect>
-          isNotHoverEffect
-        </ButtonComponent>
         <ButtonComponent size='medium' genre='product' isZeroRadius>
           isZeroRadius
         </ButtonComponent>
@@ -122,11 +119,14 @@ const CollectionWrapper: FC = () => {
         <ButtonComponent size='medium' genre='product' isHidden>
           isHidden
         </ButtonComponent>
-        <ButtonComponent size='medium' genre='product' isDisabledOutline>
-          isDisabledOutline
-        </ButtonComponent>
         <ButtonComponent size='medium' genre='primary' isHiddenBorder>
           isHiddenBorder
+        </ButtonComponent>
+        <ButtonComponent size='medium' genre='product' control='default'>
+          Control - default
+        </ButtonComponent>
+        <ButtonComponent size='medium' genre='product' control='onlyActive'>
+          Control - onlyActive
         </ButtonComponent>
       </WrapperMin>
 

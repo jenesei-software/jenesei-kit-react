@@ -11,10 +11,10 @@ import { IErrorMessage } from './component.types';
 export const ErrorMessage: FC<IErrorMessage> = (props) => {
   const { className: classNameTypography, style: styleTypography } = useTypographyStyles({
     sx: {
-      ...props?.sxTypography,
-      size: props.size ? CSS_VARS.size[props.size].font : '14',
+      size: '16px',
       weight: '700',
       height: '1',
+      ...props?.sxTypography,
     },
     style: { order: 0, display: 'contents' },
   });

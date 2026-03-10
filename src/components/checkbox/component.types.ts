@@ -1,10 +1,10 @@
 import { ISx, ISxTypography, IThemeSize } from '@local/styles/utils';
-import { IThemeGenreCheckbox, IThemeOutline } from '@local/styles/utils/types';
+import { IThemeControl, IThemeGenreCheckbox } from '@local/styles/utils/types';
 
 import { CSSProperties, FocusEvent, MouseEventHandler, PropsWithChildren, Ref } from 'react';
 
 import { IAddError } from '../error';
-import { IAddIIcon, IIcon } from '../icon';
+import { IIcon } from '../icon';
 
 type IIconWithoutSize = {
   [K in IIcon['type']]: Omit<Extract<IIcon, { type: K }>, 'size'> & { size?: IThemeSize };
@@ -23,8 +23,6 @@ export type ICheckbox = PropsWithChildren & {
 
   isDisabled?: boolean;
 
-  isDisabledOutline?: boolean;
-
   isFullSize?: boolean;
 
   isHidden?: boolean;
@@ -36,8 +34,6 @@ export type ICheckbox = PropsWithChildren & {
   isMinWidthAsContent?: boolean;
 
   isNotBackground?: boolean;
-
-  isNotHoverEffect?: boolean;
 
   isOnlyIcon?: boolean;
   
@@ -55,7 +51,7 @@ export type ICheckbox = PropsWithChildren & {
 
   onMouseDown?: MouseEventHandler<HTMLButtonElement>;
 
-  outline?: IThemeOutline;
+  control?: IThemeControl;
 
   ref?: Ref<HTMLElement | null>;
 

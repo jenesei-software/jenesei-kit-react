@@ -264,20 +264,7 @@ const CollectionWrapper: FC = () => {
           }}
           isWidthAsHeight
         />
-        <CheckboxComponent
-          size='medium'
-          isFullRadius
-          genre='product'
-          isNotHoverEffect
-          checked={value}
-          onChange={(checked) => setValue(checked)}
-          view={{
-            true: { type: 'checkbox', name: 'Square-true' },
-            false: { type: 'checkbox', name: 'Square-false' },
-          }}
-        >
-          isNotHoverEffect
-        </CheckboxComponent>
+
         <CheckboxComponent
           size='medium'
           genre='product'
@@ -334,20 +321,6 @@ const CollectionWrapper: FC = () => {
         </CheckboxComponent>
         <CheckboxComponent
           size='medium'
-          isFullRadius
-          genre='product'
-          isDisabledOutline
-          checked={value}
-          onChange={(checked) => setValue(checked)}
-          view={{
-            true: { type: 'checkbox', name: 'Square-true' },
-            false: { type: 'checkbox', name: 'Square-false' },
-          }}
-        >
-          isDisabledOutline
-        </CheckboxComponent>
-        <CheckboxComponent
-          size='medium'
           genre='primary'
           isFullRadius
           isHiddenBorder
@@ -384,6 +357,34 @@ const CollectionWrapper: FC = () => {
             Error
           </CheckboxComponent>
         </Stack>
+        <CheckboxComponent
+          size='medium'
+          isFullRadius
+          genre='product'
+          control='default'
+          checked={value}
+          onChange={(checked) => setValue(checked)}
+          view={{
+            true: { type: 'checkbox', name: 'Square-true' },
+            false: { type: 'checkbox', name: 'Square-false' },
+          }}
+        >
+          Control - default
+        </CheckboxComponent>
+        <CheckboxComponent
+          size='medium'
+          isFullRadius
+          genre='product'
+          control='onlyActive'
+          checked={value}
+          onChange={(checked) => setValue(checked)}
+          view={{
+            true: { type: 'checkbox', name: 'Square-true' },
+            false: { type: 'checkbox', name: 'Square-false' },
+          }}
+        >
+          Control - onlyActive
+        </CheckboxComponent>
       </WrapperMin>
     </WrapperBig>
   );

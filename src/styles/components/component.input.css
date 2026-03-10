@@ -9,12 +9,15 @@
 
   border: 1px solid;
   border-color: var(--component-input-border-color);
+  background: var(--component-input-background);
   box-shadow: var(--component-input-box-shadow);
 
   height: var(--component-input-height);
   min-height: var(--component-input-height);
   max-height: var(--component-input-height);
   border-radius: var(--component-input-radius);
+
+  overflow: hidden;
 }
 
 .component-input__wrapper.component-input__wrapper--is-zero-radius {
@@ -27,6 +30,7 @@
 
 .component-input__wrapper.component-input__wrapper--is-min-width-as-content {
   min-width: max-content;
+  width: max-content;
 }
 
 .component-input__wrapper.component-input__wrapper--is-hidden {
@@ -69,6 +73,10 @@
   min-width: max-content;
 }
 
+.component-input__wrapper.component-input__wrapper--is-center .component-input {
+  text-align: center;
+  padding: 0px;
+}
 /* =========================
    Component - Input
    ========================= */
@@ -90,8 +98,8 @@
 .component-input:active,
 .component-input:focus-visible,
 .component-input:focus {
-  background: var(--component-input-background);
   color: var(--component-input-color);
+  background: transparent;
   border-color: transparent;
   outline: none;
 }

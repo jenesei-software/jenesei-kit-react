@@ -141,7 +141,7 @@ const InputWrapperAll: FC = () => {
               return (floatValue ?? 0) >= 0 && (floatValue ?? 0) <= 10000;
             },
           }}
-          genre='blackBorder'
+          genre='secondary'
           size='medium'
           value={valueCost}
           variety='numeric'

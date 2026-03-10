@@ -539,13 +539,6 @@ export const CSS_CLASS = {
     all: 'u-transition--all',
   },
 
-  outline: {
-    default: 'u-outline--default',
-    boxShadow: 'u-outline--boxShadow',
-    always: 'u-outline--always',
-    none: 'u-outline--none',
-  },
-
   control: {
     default: 'u-control--default',
     boxShadow: 'u-control--boxShadow',
@@ -607,7 +600,8 @@ export const CSS_CLASS = {
       wrapperIsHiddenBorder: 'component-input__wrapper--is-hidden-border',
       wrapperIsFullRadius: 'component-input__wrapper--is-full-radius',
       wrapperIsMinWidthAsContent: 'component-input__wrapper--is-min-width-as-content',
-
+      wrapperIsCenter: 'component-input__wrapper--is-center',
+      
       root: 'component-input',
       hasPrefix: 'component-input--has-prefix',
       hasPostfix: 'component-input--has-postfix',

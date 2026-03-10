@@ -1,4 +1,4 @@
-import { ISxTypography, IThemeGenreToggle, IThemeOutline, IThemeSize } from '@local/styles/utils/types';
+import { IThemeControl, IThemeGenreToggle, IThemeSize } from '@local/styles/utils/types';
 
 import { CSSProperties, FocusEvent, MouseEventHandler, Ref } from 'react';
 
@@ -15,15 +15,11 @@ export type IToggle = {
 
   isDisabled?: boolean;
 
-  isDisabledOutline?: boolean;
-
   isHidden?: boolean;
 
   isHiddenBorder?: boolean;
 
   isZeroRadius?: boolean;
-  
-  isNotHoverEffect?: boolean;
 
   name?: string;
 
@@ -33,7 +29,7 @@ export type IToggle = {
 
   onMouseDown?: MouseEventHandler<HTMLButtonElement>;
 
-  outline?: IThemeOutline;
+  control?: IThemeControl;
 
   ref?: Ref<HTMLElement | null>;
 
