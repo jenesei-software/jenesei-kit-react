@@ -11,8 +11,8 @@
   align-items: center;
   justify-content: center;
 
-  height: fit-content;
-  max-height: fit-content;
+  height: auto;
+  max-height: none;
 
   min-height: var(--component-button-height);
   padding: 2px var(--component-button-padding);
@@ -36,13 +36,17 @@
   border: 0px solid transparent !important;
 }
 
-.component-button.component-button--is-radius {
+.component-button.component-button--is-full-radius {
   border-radius: 100px;
 }
 
 .component-button.component-button--is-full-size {
   height: 100%;
+  max-height: 100%;
   width: 100%;
+}
+
+.component-button.component-button--is-zero-radius {
   border-radius: 0px;
 }
 

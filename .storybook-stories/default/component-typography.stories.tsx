@@ -1,10 +1,10 @@
-import { Typography as TypographyComponent } from '@local/components/typography';
+import { ITypographyComponent, Typography as TypographyComponent } from '@local/components/typography';
 import { useScreenWidth } from '@local/contexts/context-screen-width';
 import { useResponsiveLayout } from '@local/hooks/use-responsive-layout';
 import { CSS_VARS } from '@local/styles/utils/constants';
 import { ITypography } from '@local/styles/utils/types';
 
-import type { Meta } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { FC } from 'react';
 
 import { WrapperBig, WrapperMin } from './tools';
@@ -246,4 +246,16 @@ const TypographyResponsive: FC = () => {
 
 export const Collection = {
   render: () => <CollectionWrapper />,
+};
+
+type Story = StoryObj<ITypographyComponent>;
+
+export const Index: Story = {
+  args: {
+    sx: {
+      variant: 'title-1',
+      color: 'textPrimaryLight',
+    },
+    children: 'Typography, variant - title-1, color - textPrimary',
+  },
 };

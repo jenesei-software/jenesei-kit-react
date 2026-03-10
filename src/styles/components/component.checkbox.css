@@ -40,13 +40,17 @@
   border: 0px solid transparent !important;
 }
 
-.component-checkbox.component-checkbox--is-radius {
+.component-checkbox.component-checkbox--is-full-radius {
   border-radius: 100px;
 }
 
 .component-checkbox.component-checkbox--is-full-size {
   height: 100%;
+  max-height: 100%;
   width: 100%;
+}
+
+.component-checkbox.component-checkbox--is-zero-radius {
   border-radius: 0px;
 }
 

@@ -4,49 +4,74 @@ import { IThemeGenreCheckbox, IThemeOutline } from '@local/styles/utils/types';
 import { CSSProperties, FocusEvent, MouseEventHandler, PropsWithChildren, Ref } from 'react';
 
 import { IAddError } from '../error';
-import { IIcon } from '../icon';
+import { IAddIIcon, IIcon } from '../icon';
 
 type IIconWithoutSize = {
   [K in IIcon['type']]: Omit<Extract<IIcon, { type: K }>, 'size'> & { size?: IThemeSize };
 }[IIcon['type']];
 
 export type ICheckbox = PropsWithChildren & {
+  ariaLabel?: string;
+
   checked?: boolean;
+
+  className?: string;
 
   genre: IThemeGenreCheckbox;
 
-  view: {
-    true: IIconWithoutSize & { size?: IThemeSize };
-    false: IIconWithoutSize & { size?: IThemeSize };
-  };
-
-  ref?: Ref<HTMLElement | null>;
-  isHidden?: boolean;
-  className?: string;
-
-  style?: CSSProperties;
-  name?: string;
-  tabIndex?: number;
-  ariaLabel?: string;
-  type?: 'button' | 'submit' | 'reset';
   id?: string;
+
   isDisabled?: boolean;
+
   isDisabledOutline?: boolean;
-  isRadius?: boolean;
-  isOnlyLoading?: boolean;
-  isMinWidthAsContent?: boolean;
-  isLoading?: boolean;
-  isNotHoverEffect?: boolean;
-  isHiddenBorder?: boolean;
-  isNotBackground?: boolean;
+
   isFullSize?: boolean;
-  onChange?: (checked: boolean) => void;
-  outline?: IThemeOutline;
+
+  isHidden?: boolean;
+
+  isHiddenBorder?: boolean;
+
+  isLoading?: boolean;
+
+  isMinWidthAsContent?: boolean;
+
+  isNotBackground?: boolean;
+
+  isNotHoverEffect?: boolean;
+
+  isOnlyCheckbox?: boolean;
+  
+  isFullRadius?: boolean;
+
+  isZeroRadius?: boolean;
+
   isWidthAsHeight?: boolean;
+
+  name?: string;
+
+  onChange?: (checked: boolean) => void;
+
   onFocus?: (event: FocusEvent<HTMLButtonElement, Element>) => void;
 
   onMouseDown?: MouseEventHandler<HTMLButtonElement>;
+
+  outline?: IThemeOutline;
+
+  ref?: Ref<HTMLElement | null>;
+
   size: IThemeSize;
+
+  style?: CSSProperties;
+
+  tabIndex?: number;
+
+  type?: HTMLButtonElement['type'];
+
+  view: {
+    true: IIconWithoutSize & { size?: IThemeSize };
+    
+    false: IIconWithoutSize & { size?: IThemeSize };
+  };
 } & ISx &
   IAddError &
   ISxTypography;

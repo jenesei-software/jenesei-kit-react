@@ -8,7 +8,7 @@ import { FC } from 'react';
 
 const meta: Meta<typeof SkeletonComponent> = {
   component: SkeletonComponent,
-  title: 'Area/Skeleton',
+  title: 'Area/4. Skeleton',
   args: {
     time: 2000,
   },
@@ -47,12 +47,12 @@ const SkeletonWrapper: FC<ISkeleton> = (props) => {
   );
 };
 
-export const SkeletonOne: Story = {
+export const Index: Story = {
   render: (args) => <SkeletonWrapper {...args} />,
   args: { visible: true, isHover: true },
 };
 
-const SkeletonManyWrapper: FC<ISkeleton> = (props) => {
+const CollectionWrapper: FC = () => {
   return (
     <Stack
       sx={{
@@ -68,7 +68,8 @@ const SkeletonManyWrapper: FC<ISkeleton> = (props) => {
         }}
       >
         <SkeletonComponent
-          {...props}
+          visible={true}
+          isHover={true}
           color='productPrimaryLight'
           type='primary'
           sx={{
@@ -100,7 +101,8 @@ const SkeletonManyWrapper: FC<ISkeleton> = (props) => {
           }}
         >
           <SkeletonComponent
-            {...props}
+            visible={true}
+            isHover={true}
             sx={{
               borderRadius: '100%',
             }}
@@ -126,7 +128,8 @@ const SkeletonManyWrapper: FC<ISkeleton> = (props) => {
             </Stack>
           </SkeletonComponent>
           <SkeletonComponent
-            {...props}
+            visible={true}
+            isHover={true}
             sx={{
               borderRadius: '6px',
               flexGrow: 1,
@@ -161,7 +164,8 @@ const SkeletonManyWrapper: FC<ISkeleton> = (props) => {
         }}
       >
         <SkeletonComponent
-          {...props}
+          visible={true}
+          isHover={true}
           color='productPrimaryLight'
           type='primary'
           sx={{
@@ -193,7 +197,8 @@ const SkeletonManyWrapper: FC<ISkeleton> = (props) => {
           }}
         >
           <SkeletonComponent
-            {...props}
+            visible={true}
+            isHover={true}
             sx={{
               borderRadius: '100%',
             }}
@@ -219,7 +224,8 @@ const SkeletonManyWrapper: FC<ISkeleton> = (props) => {
             </Stack>
           </SkeletonComponent>
           <SkeletonComponent
-            {...props}
+            visible={true}
+            isHover={true}
             sx={{
               borderRadius: '6px',
               flexGrow: 1,
@@ -251,10 +257,6 @@ const SkeletonManyWrapper: FC<ISkeleton> = (props) => {
   );
 };
 
-export const SkeletonMany: Story = {
-  render: (args) => <SkeletonManyWrapper {...args} />,
-  args: {
-    visible: true,
-    isHover: true,
-  },
+export const Collection: Story = {
+  render: () => <CollectionWrapper />,
 };

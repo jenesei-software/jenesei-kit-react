@@ -5,26 +5,40 @@ import { setClasses, setStyles } from '@local/styles/utils/functions';
 
 import { useMergeRefs } from '@floating-ui/react';
 import { motion } from 'framer-motion';
-import { FC, Ref, useMemo, useRef } from 'react';
+import { FC, Ref, useCallback, useMemo, useRef } from 'react';
 
 import { IButton } from './component.types';
 
 export const Button: FC<IButton> = (props) => {
   const iconComponents = useMemo(
-    () => getIconComponents({ icons: props.icons ?? [], size: props.size }),
-    [props.icons, props.size],
+    () =>
+      getIconComponents({
+        icons: (props.icons ?? []).map((e) => ({
+          ...e,
+          style: { color: CSS_VARS.genre.button[props.genre].color.index },
+        })),
+        size: props.size,
+      }),
+    [props.icons, props.size, props.genre],
   );
 
-  const handleClick: IButton['onClick'] = (event) => {
-    if (!props.isDisabled && props.onClick) {
-      props.onClick(event);
-    }
-  };
+  const handleClick = useCallback<Exclude<IButton['onClick'], undefined>>(
+    (event) => {
+      if (!props.isDisabled && props.onClick) {
+        props.onClick(event);
+      }
+    },
+    [props.isDisabled, props.onClick],
+  );
+
   const refDefault = useRef<HTMLButtonElement>(null);
 
   const ref = useMergeRefs([refDefault, props.ref]);
 
-  const isInteractive = !props.isDisabled && props.isWhileTapEffect;
+  const isInteractive = useMemo(
+    () => !props.isDisabled && props.isWhileTapEffect,
+    [props.isDisabled, props.isWhileTapEffect],
+  );
 
   const { className: classNameTypography, style: styleTypography } = useTypographyStyles({
     sx: { ...props?.sxTypography, size: CSS_VARS.size[props.size].font, weight: '700', height: '1' },
@@ -40,9 +54,10 @@ export const Button: FC<IButton> = (props) => {
         props.isDisabled || props.isHidden ? 'none' : props.isNotHoverEffect ? 'onlyActive' : 'boxShadow'
       ],
       CSS_CLASS.transition.color,
+      props.isZeroRadius && CSS_CLASS.component.button.isZeroRadius,
       props.isHidden && CSS_CLASS.component.button.isHidden,
       props.isHiddenBorder && CSS_CLASS.component.button.isHiddenBorder,
-      props.isRadius && CSS_CLASS.component.button.isRadius,
+      props.isFullRadius && CSS_CLASS.component.button.isFullRadius,
       props.isFullSize && CSS_CLASS.component.button.isFullSize,
       props.isWidthAsHeight && CSS_CLASS.component.button.isWidthAsHeight,
       props.isMinWidthAsContent && CSS_CLASS.component.button.isMinWidthAsContent,
@@ -74,10 +89,11 @@ export const Button: FC<IButton> = (props) => {
     props.isHiddenBorder,
     props.isMinWidthAsContent,
     props.isNotHoverEffect,
-    props.isRadius,
+    props.isFullRadius,
     props.isWidthAsHeight,
     props.outline,
     props.size,
+    props.isZeroRadius,
   ]);
 
   const { className: classNameIconGroup, style: styleIconGroup } = useMemo(() => {

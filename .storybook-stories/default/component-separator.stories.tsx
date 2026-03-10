@@ -1,7 +1,7 @@
-import { Separator as SeparatorComponent } from '@local/components/separator';
+import { ISeparator, Separator as SeparatorComponent } from '@local/components/separator';
 import { Typography } from '@local/components/typography';
 
-import type { Meta } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { FC } from 'react';
 
 import { WrapperBig, WrapperMin } from './tools';
@@ -58,7 +58,7 @@ const CollectionWrapper: FC = () => {
         >
           Type - vertical, color - productPrimary
         </Typography>
-        <SeparatorComponent color='productPrimaryLight' type='vertical' thickness='5px' radius='4px'/>
+        <SeparatorComponent color='productPrimaryLight' type='vertical' thickness='5px' radius='4px' />
       </WrapperMin>
     </WrapperBig>
   );
@@ -66,4 +66,14 @@ const CollectionWrapper: FC = () => {
 
 export const Collection = {
   render: () => <CollectionWrapper />,
+};
+
+type Story = StoryObj<ISeparator>;
+
+export const Index: Story = {
+  args: {
+    type: 'horizontal',
+    thickness: '2px',
+    color: 'accentBlueDark',
+  },
 };

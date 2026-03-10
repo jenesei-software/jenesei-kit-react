@@ -36,6 +36,10 @@
   border: 0px solid transparent !important;
 }
 
+.component-toggle.component-toggle--is-zero-radius {
+  border-radius: 0px;
+}
+
 /* =========================
    Component - Toggle - Center
    ========================= */

@@ -7,13 +7,13 @@ import { CSS_VARS } from '@local/styles/utils/constants';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { FC, useState } from 'react';
 
-const meta: Meta<typeof ScrollComponent> = {
+const meta: Meta<IScroll> = {
   component: ScrollComponent,
-  title: 'Area/Scroll',
+  title: 'Area/2. Scroll',
 };
 
 export default meta;
-type Story = StoryObj<typeof ScrollComponent>;
+type Story = StoryObj<IScroll>;
 
 const ScrollWrapper: FC<IScroll> = (props) => {
   const [content, setContent] = useState<boolean>(false);
@@ -72,7 +72,7 @@ const ScrollWrapper: FC<IScroll> = (props) => {
   );
 };
 
-export const Scroll: Story = {
+export const Example: Story = {
   render: (args) => <ScrollWrapper {...args} />,
   args: { horizontal: true },
 };

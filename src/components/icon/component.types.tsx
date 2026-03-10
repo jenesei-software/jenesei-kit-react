@@ -50,6 +50,6 @@ export type IAddIIconGeneric<T extends keyof IIconMao = keyof IIconMao> = {
 
 export type IGetIconComponentsProps = {
   size: IThemeSize;
-
+  
   icons?: IAddIIcon[];
 };

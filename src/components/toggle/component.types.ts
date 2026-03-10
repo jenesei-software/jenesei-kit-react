@@ -5,28 +5,45 @@ import { CSSProperties, FocusEvent, MouseEventHandler, Ref } from 'react';
 import { IAddError } from '../error';
 
 export type IToggle = {
-  value: boolean;
+  ariaLabel?: string;
+
+  className?: string;
+
+  genre: IThemeGenreToggle;
+
+  id?: string;
+
+  isDisabled?: boolean;
+
+  isDisabledOutline?: boolean;
+
+  isHidden?: boolean;
+
+  isHiddenBorder?: boolean;
+
+  isZeroRadius?: boolean;
+  
+  isNotHoverEffect?: boolean;
+
+  name?: string;
+
   onChange?: (value: boolean) => void;
+
   onFocus?: (event: FocusEvent<HTMLButtonElement, Element>) => void;
 
   onMouseDown?: MouseEventHandler<HTMLButtonElement>;
-  isDisabled?: boolean;
-  isDisabledOutline?: boolean;
-  isHidden?: boolean;
-  genre: IThemeGenreToggle;
-  size: IThemeSize;
-  className?: string;
-  style?: CSSProperties;
-  name?: string;
-  isHiddenBorder?: boolean;
-  type?: 'button' | 'submit' | 'reset';
-  isNotHoverEffect?: boolean;
 
   outline?: IThemeOutline;
-  ariaLabel?: string;
+
   ref?: Ref<HTMLElement | null>;
-  id?: string;
+
+  size: IThemeSize;
+
+  style?: CSSProperties;
 
   tabIndex?: number;
-} & IAddError &
-  ISxTypography;
+
+  type?: HTMLButtonElement['type'];
+
+  value: boolean;
+} & IAddError;

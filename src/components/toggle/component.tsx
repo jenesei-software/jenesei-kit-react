@@ -3,7 +3,7 @@ import { setClasses, setStyles } from '@local/styles/utils/functions';
 
 import { useMergeRefs } from '@floating-ui/react';
 import { motion } from 'framer-motion';
-import { useMemo, useRef } from 'react';
+import { useCallback, useMemo, useRef } from 'react';
 
 import { IToggle } from './component.types';
 import { ErrorMessage } from '../error';
@@ -19,6 +19,7 @@ export const Toggle = (props: IToggle) => {
         props.isDisabled || props.isHidden ? 'none' : props.isNotHoverEffect ? 'onlyActive' : 'boxShadow'
       ],
       CSS_CLASS.transition.color,
+      props.isZeroRadius && CSS_CLASS.component.toggle.isZeroRadius,
       props.error?.isError && CSS_CLASS.isError,
       props.isHidden && CSS_CLASS.component.toggle.isHidden,
       props.isHiddenBorder && CSS_CLASS.component.toggle.isHiddenBorder,
@@ -50,6 +51,7 @@ export const Toggle = (props: IToggle) => {
     props.size,
     props.value,
     props.error?.isError,
+    props.isZeroRadius,
   ]);
 
   const { className: classNameCenter, style: styleCenter } = useMemo(() => {
@@ -84,11 +86,13 @@ export const Toggle = (props: IToggle) => {
   const refDefault = useRef<HTMLButtonElement>(null);
 
   const ref = useMergeRefs([refDefault, props.ref]);
-  const handleClick = () => {
+
+  const handleClick = useCallback(() => {
     if (!props.isDisabled && props.onChange) {
       props.onChange(!props.value);
     }
-  };
+  }, [props.isDisabled, props.onChange, props.value]);
+
   return (
     <>
       <motion.button
@@ -105,13 +109,13 @@ export const Toggle = (props: IToggle) => {
       >
         <motion.div className={classNameCenter} style={styleCenter} />
       </motion.button>
-      {props?.error?.isError ? (
+      {props?.error?.isError && (
         <ErrorMessage
           size={props?.error.size ?? props.size}
-          sxTypography={{ size: 'medium', weight: '400', ...props.sxTypography }}
+          sxTypography={{ size: 'medium', weight: '400', ...props?.error.sxTypography }}
           {...props.error}
         />
-      ) : null}
+      )}
     </>
   );
 };

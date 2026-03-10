@@ -1,9 +1,9 @@
-import { Icon as IconComponent, THEME_MAP } from '@local/components/icon';
+import { Icon as IconComponent, IIcon, THEME_MAP } from '@local/components/icon';
 import { Typography } from '@local/components/typography';
 import { IThemePalette } from '@local/styles/utils';
 import { CSS_VARS } from '@local/styles/utils/constants';
 
-import type { Meta } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { FC } from 'react';
 
 import { WrapperBig, WrapperMin } from './tools';
@@ -223,4 +223,15 @@ const CollectionWrapper: FC = () => {
 
 export const Collection = {
   render: () => <CollectionWrapper />,
+};
+
+type Story = StoryObj<IIcon>;
+
+export const Index: Story = {
+  args: {
+    type: 'logo',
+    name: 'Jenesei',
+    size: 'medium',
+    color: 'textPrimaryLight',
+  },
 };

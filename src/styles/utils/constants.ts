@@ -468,6 +468,20 @@ export const CSS_VARS = {
         },
       },
     },
+    input: {
+      primary: {
+        color: CSS_VARS_PALETTE.textPrimaryLight,
+        background: CSS_VARS_PALETTE.fillPrimaryDark,
+        border: CSS_VARS_PALETTE.textPrimaryLight,
+        placeholder: CSS_VARS_PALETTE.textSecondaryLight,
+      },
+      secondary: {
+        color: CSS_VARS_PALETTE.textPrimaryDark,
+        background: CSS_VARS_PALETTE.fillPrimaryLight,
+        border: CSS_VARS_PALETTE.textPrimaryDark,
+        placeholder: CSS_VARS_PALETTE.textSecondaryDark,
+      },
+    },
   },
 } as const;
 
@@ -590,12 +604,13 @@ export const CSS_CLASS = {
       root: 'component-button',
       isHidden: 'component-button--is-hidden',
       isHiddenBorder: 'component-button--is-hidden-border',
-      isRadius: 'component-button--is-radius',
+      isFullRadius: 'component-button--is-full-radius',
       isFullSize: 'component-button--is-full-size',
       isWidthAsHeight: 'component-button--is-width-as-height',
       isMinWidthAsContent: 'component-button--is-min-width-as-content',
       iconGroup: 'component-button__icons',
       iconGroupIsIconGroup: 'component-button__icons--is-icon-group',
+      isZeroRadius: 'component-button--is-zero-radius',
     },
     icon: {
       root: 'component-icon',
@@ -608,10 +623,11 @@ export const CSS_CLASS = {
       root: 'component-checkbox',
       isHidden: 'component-checkbox--is-hidden',
       isHiddenBorder: 'component-checkbox--is-hidden-border',
-      isRadius: 'component-checkbox--is-radius',
+      isFullRadius: 'component-checkbox--is-full-radius',
       isFullSize: 'component-checkbox--is-full-size',
       isWidthAsHeight: 'component-checkbox--is-width-as-height',
       isMinWidthAsContent: 'component-checkbox--is-min-width-as-content',
+      isZeroRadius: 'component-checkbox--is-zero-radius',
     },
     toggle: {
       root: 'component-toggle',
@@ -619,6 +635,7 @@ export const CSS_CLASS = {
       unActive: 'component-toggle--un-active',
       isHidden: 'component-toggle--is-hidden',
       isHiddenBorder: 'component-toggle--is-hidden-border',
+      isZeroRadius: 'component-toggle--is-zero-radius',
       center: 'component-toggle__center',
       centerActive: 'component-toggle__center--active',
       centerUnActive: 'component-toggle__center--un-active',

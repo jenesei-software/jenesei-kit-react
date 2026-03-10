@@ -1,4 +1,6 @@
 import { Button as ButtonComponent, IButton } from '@local/components/button';
+import { Stack } from '@local/components/stack';
+import { Typography } from '@local/components/typography';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { FC } from 'react';
@@ -16,49 +18,70 @@ const CollectionWrapper: FC = () => {
   return (
     <WrapperBig>
       <WrapperMin>
-        <ButtonComponent size='medium' genre='primary'>
-          Primary
-        </ButtonComponent>
-        <ButtonComponent size='medium' genre='secondary'>
-          Secondary
-        </ButtonComponent>
-        <ButtonComponent size='medium' genre='product'>
-          Product
-        </ButtonComponent>
-        <ButtonComponent size='medium' genre='blue'>
-          Blue
-        </ButtonComponent>
-        <ButtonComponent size='medium' genre='green'>
-          Green
-        </ButtonComponent>
-        <ButtonComponent size='medium' genre='red'>
-          Red
-        </ButtonComponent>
-        <ButtonComponent size='medium' genre='yellow'>
-          Yellow
-        </ButtonComponent>
+        <Typography
+          sx={{
+            variant: 'title-2',
+            color: 'textPrimaryLight',
+          }}
+        >
+          Genre
+        </Typography>
+        <WrapperMin>
+          <ButtonComponent size='medium' genre='primary'>
+            Primary
+          </ButtonComponent>
+          <ButtonComponent size='medium' genre='secondary'>
+            Secondary
+          </ButtonComponent>
+          <ButtonComponent size='medium' genre='product'>
+            Product
+          </ButtonComponent>
+          <ButtonComponent size='medium' genre='blue'>
+            Blue
+          </ButtonComponent>
+          <ButtonComponent size='medium' genre='green'>
+            Green
+          </ButtonComponent>
+          <ButtonComponent size='medium' genre='red'>
+            Red
+          </ButtonComponent>
+          <ButtonComponent size='medium' genre='yellow'>
+            Yellow
+          </ButtonComponent>
+        </WrapperMin>
       </WrapperMin>
+
       <WrapperMin>
-        <ButtonComponent size='large' genre='primary'>
-          large
-        </ButtonComponent>
-        <ButtonComponent size='largeMedium' genre='primary'>
-          largeMedium
-        </ButtonComponent>
-        <ButtonComponent size='medium' genre='primary'>
-          medium
-        </ButtonComponent>
-        <ButtonComponent size='mediumSmall' genre='primary'>
-          mediumSmall
-        </ButtonComponent>
-        <ButtonComponent size='small' genre='primary'>
-          small
-        </ButtonComponent>
+        <Typography
+          sx={{
+            variant: 'title-2',
+            color: 'textPrimaryLight',
+          }}
+        >
+          Sizes
+        </Typography>
+        <WrapperMin>
+          <ButtonComponent size='large' genre='primary'>
+            large
+          </ButtonComponent>
+          <ButtonComponent size='largeMedium' genre='primary'>
+            largeMedium
+          </ButtonComponent>
+          <ButtonComponent size='medium' genre='primary'>
+            medium
+          </ButtonComponent>
+          <ButtonComponent size='mediumSmall' genre='primary'>
+            mediumSmall
+          </ButtonComponent>
+          <ButtonComponent size='small' genre='primary'>
+            small
+          </ButtonComponent>
+        </WrapperMin>
       </WrapperMin>
 
       <WrapperMin>
         <ButtonComponent
-          isRadius
+          isFullRadius
           isOnlyIcon
           isWidthAsHeight
           icons={[{ type: 'logo', name: 'Jenesei', size: '100%' }]}
@@ -90,6 +113,9 @@ const CollectionWrapper: FC = () => {
         <ButtonComponent size='medium' genre='product' isNotHoverEffect>
           isNotHoverEffect
         </ButtonComponent>
+        <ButtonComponent size='medium' genre='product' isZeroRadius>
+          isZeroRadius
+        </ButtonComponent>
         <ButtonComponent size='medium' genre='product' isDisabled>
           isDisabled
         </ButtonComponent>
@@ -103,6 +129,27 @@ const CollectionWrapper: FC = () => {
           isHiddenBorder
         </ButtonComponent>
       </WrapperMin>
+
+      <WrapperMin>
+        <Typography
+          sx={{
+            variant: 'title-2',
+            color: 'textPrimaryLight',
+          }}
+        >
+          100%
+        </Typography>
+        <Stack
+          style={{
+            width: '100px',
+            height: '100px',
+          }}
+        >
+          <ButtonComponent size='large' isFullSize genre='primary'>
+            large
+          </ButtonComponent>
+        </Stack>
+      </WrapperMin>
     </WrapperBig>
   );
 };
@@ -115,8 +162,8 @@ export const Collection = {
 
 export const Index: Story = {
   args: {
-    genre:'primary',
-    size:'medium',
+    genre: 'primary',
+    size: 'medium',
     children: 'Example',
   },
 };

@@ -1,10 +1,10 @@
 export { Input } from './component';
 export { addInputIsInputEffect } from './component.styles';
 export type {
-  InputNumericProps,
-  InputPatternProps,
-  InputProps,
-  InputStandardProps,
+  IInput,
+  IInputNumeric,
+  IInputPattern,
+  IInputStandard,
   StyledInputProps,
   StyledInputWrapperProps,
 } from './component.types';

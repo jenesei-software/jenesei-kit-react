@@ -1,13 +1,6 @@
-import { addErrorProps } from '@local/components/error';
-import {
-  addOutlineProps,
-  addOutlinePropsDollar,
-  addSXProps,
-  addSXTypographyProps,
-  ITheme,
-  IThemeSize,
-} from '@local/theme';
-import { AddDollarSign } from '@local/types';
+import { IAddError } from '@local/components/error';
+import { ISx, ISxTypography, IThemeSize } from '@local/styles/utils';
+import { IThemeGenreInput } from '@local/styles/utils/types';
 
 import {
   ClipboardEventHandler,
@@ -20,10 +13,9 @@ import {
 } from 'react';
 import { NumberFormatValues, NumericFormatProps, PatternFormatProps } from 'react-number-format';
 
-type CommonInputProps = addErrorProps &
-  addSXTypographyProps &
-  addOutlineProps &
-  addSXProps & {
+type ICommonInput = IAddError &
+  ISxTypography &
+  ISx & {
     ref?: Ref<HTMLInputElement | null>;
 
     name?: string;
@@ -40,7 +32,7 @@ type CommonInputProps = addErrorProps &
 
     isAllowEmptyFormatting?: boolean;
 
-    genre: TInputGenre;
+    genre: IThemeGenreInput;
 
     size: IThemeSize;
 
@@ -51,6 +43,8 @@ type CommonInputProps = addErrorProps &
     isNiceNumber?: boolean;
 
     isDisabled?: boolean;
+
+    isReadOnly?: boolean;
 
     isLoading?: boolean;
 
@@ -85,23 +79,21 @@ type CommonInputProps = addErrorProps &
     minLength?: number;
   };
 
-// Контролируемый вариант
-type ControlledValue = {
+type IControlledValue = {
   value: string | number | null | undefined;
 
   defaultValue?: never;
 };
 
-// Неконтролируемый вариант
-type UncontrolledValue = {
+type IUnControlledValue = {
   defaultValue: string | number | null | undefined;
 
   value?: never;
 };
 
-type BaseInputProps = CommonInputProps & (ControlledValue | UncontrolledValue);
+type IBaseInput = ICommonInput & (IControlledValue | IUnControlledValue);
 
-export type InputStandardProps = BaseInputProps & {
+export type IInputStandard = IBaseInput & {
   variety: 'standard';
   onChange?: (value: string) => void;
   type?: HTMLInputTypeAttribute;
@@ -109,7 +101,7 @@ export type InputStandardProps = BaseInputProps & {
   max?: number;
   step?: number;
 };
-export type InputPatternProps = BaseInputProps & {
+export type IInputPattern = IBaseInput & {
   variety: 'pattern';
   onChange?: (value: NumberFormatValues) => void;
   propsPattern: Pick<
@@ -117,7 +109,7 @@ export type InputPatternProps = BaseInputProps & {
     'format' | 'mask' | 'allowEmptyFormatting' | 'patternChar' | 'valueIsNumericString' | 'type'
   >;
 };
-export type InputNumericProps = BaseInputProps & {
+export type IInputNumeric = IBaseInput & {
   variety: 'numeric';
   onChange?: (value: NumberFormatValues) => void;
   propsNumeric: Pick<
@@ -135,7 +127,7 @@ export type InputNumericProps = BaseInputProps & {
     | 'suffix'
   >;
 };
-export type InputProps = InputStandardProps | InputPatternProps | InputNumericProps;
+export type IInput = IInputStandard | IInputPattern | IInputNumeric;
 
 export interface InputChildrenProps extends PropsWithChildren {
   left: string;
@@ -144,34 +136,3 @@ export interface InputChildrenProps extends PropsWithChildren {
 
   width: string;
 }
-
-export type StyledInputChildrenProps = AddDollarSign<
-  Pick<InputProps, 'isDisabled'> & Pick<InputChildrenProps, 'left' | 'right' | 'width'>
->;
-
-type TInputGenre = keyof ITheme['colors']['input'];
-
-export type StyledInputProps = AddDollarSign<
-  Pick<
-    InputProps,
-    | 'genre'
-    | 'size'
-    | 'error'
-    | 'isLoading'
-    | 'isInputEffect'
-    | 'isDisabled'
-    | 'postfixChildren'
-    | 'prefixChildren'
-    | 'isBold'
-    | 'isNiceNumber'
-    | 'isNotShowHoverStyle'
-    | 'sx'
-    | 'isCenter'
-    | 'sxTypography'
-  >
-> &
-  addOutlinePropsDollar;
-
-export type StyledInputWrapperProps = AddDollarSign<
-  Pick<InputProps, 'isDisabled' | 'isInputEffect' | 'sx' | 'size' | 'isWidthAsHeight'>
->;

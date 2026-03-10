@@ -6,26 +6,12 @@ import { setClasses, setStyles } from '@local/styles/utils/functions';
 
 import { useMergeRefs } from '@floating-ui/react';
 import { motion } from 'framer-motion';
-import { FC, useMemo, useRef } from 'react';
+import { FC, useCallback, useMemo, useRef } from 'react';
 
 import { ICheckbox } from './component.types';
 import { ErrorMessage } from '../error';
 
 export const Checkbox: FC<ICheckbox> = (props) => {
-  const children = useMemo(
-    () => (
-      <>
-        <Icon
-          {...(props.checked ? props.view.true : props.view.false)}
-          size={(props.checked ? props.view.true : props.view.false)?.size ?? props.size}
-        />
-        {props.children && props.children}
-      </>
-    ),
-    [props.checked, props.children, props.size, props.view],
-  );
-  const LoadingComponent = <Icon size={props.size} type='loading' name='Line' />;
-
   const refDefault = useRef<HTMLButtonElement>(null);
 
   const ref = useMergeRefs([refDefault, props.ref]);
@@ -45,9 +31,10 @@ export const Checkbox: FC<ICheckbox> = (props) => {
       ],
       CSS_CLASS.transition.color,
       props.error?.isError && CSS_CLASS.isError,
+      props.isZeroRadius && CSS_CLASS.component.checkbox.isZeroRadius,
       props.isHidden && CSS_CLASS.component.checkbox.isHidden,
       props.isHiddenBorder && CSS_CLASS.component.checkbox.isHiddenBorder,
-      props.isRadius && CSS_CLASS.component.checkbox.isRadius,
+      props.isFullRadius && CSS_CLASS.component.checkbox.isFullRadius,
       props.isFullSize && CSS_CLASS.component.checkbox.isFullSize,
       props.isWidthAsHeight && CSS_CLASS.component.checkbox.isWidthAsHeight,
       props.isMinWidthAsContent && CSS_CLASS.component.checkbox.isMinWidthAsContent,
@@ -68,28 +55,28 @@ export const Checkbox: FC<ICheckbox> = (props) => {
 
     return { className, style };
   }, [
-    props.className,
-    props.style,
-    props.sx,
-    props.genre,
-    props.isDisabled,
-    props.isDisabledOutline,
-    props.isFullSize,
-    props.isHidden,
-    props.isHiddenBorder,
-    props.isMinWidthAsContent,
-    props.isNotHoverEffect,
-    props.isRadius,
-    props.isWidthAsHeight,
-    props.outline,
-    props.size,
-    props.error,
+    props.className, 
+    props.style, 
+    props.sx, 
+    props.genre, 
+    props.isDisabled, 
+    props.isDisabledOutline, 
+    props.isFullSize, 
+    props.isHidden, 
+    props.isHiddenBorder, 
+    props.isMinWidthAsContent, 
+    props.isNotHoverEffect, 
+    props.isFullRadius, 
+    props.isWidthAsHeight, 
+    props.outline, 
+    props.size, 
+    props.error, props.isFullRadius, props.isZeroRadius
   ]);
-  const handleClick = () => {
+  const handleClick = useCallback(() => {
     if (!props.isDisabled && props.onChange) {
       props.onChange(!props.checked);
     }
-  };
+  }, [props.isDisabled, props.onChange, props.checked]);
   return (
     <>
       <motion.button
@@ -106,28 +93,23 @@ export const Checkbox: FC<ICheckbox> = (props) => {
         aria-label={props.ariaLabel}
         id={props.id}
       >
-        {props.isOnlyLoading ? (
-          props.isLoading ? (
-            LoadingComponent
-          ) : (
-            children
-          )
-        ) : (
-          <>
-            <div className={classNameTypography} style={styleTypography}>
-              {children}
-            </div>
-            {props.isLoading && LoadingComponent}
-          </>
+        <Icon
+          {...(props.checked ? props.view.true : props.view.false)}
+          size={(props.checked ? props.view.true : props.view.false)?.size ?? props.size}
+        />
+        {!props.isOnlyCheckbox && (
+          <div className={classNameTypography} style={styleTypography}>
+            {props.children}
+          </div>
         )}
       </motion.button>
-      {props?.error?.isError ? (
+      {props?.error?.isError && (
         <ErrorMessage
           size={props?.error.size ?? props.size}
-          sxTypography={{ size: 'medium', weight: '400', ...props.sxTypography }}
+          sxTypography={{ size: 'medium', weight: '400', ...props.sxTypography, ...props?.error.sxTypography }}
           {...props.error}
         />
-      ) : null}
+      )}
     </>
   );
 };
