@@ -11,8 +11,8 @@
   align-items: center;
   justify-content: center;
 
-  height: fit-content;
-  max-height: fit-content;
+  height: auto;
+  max-height: none;
 
   min-height: var(--component-button-height);
   padding: 2px var(--component-button-padding);

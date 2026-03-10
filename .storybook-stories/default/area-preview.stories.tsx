@@ -1,5 +1,4 @@
-import { IPreview } from '@local/areas/preview';
-import { Preview as PreviewComponent } from '@local/areas/preview/area';
+import { IPreview, Preview as PreviewComponent } from '@local/areas/preview';
 import { Stack } from '@local/components/stack';
 import { Typography } from '@local/components/typography';
 import { MotionTypingEffect } from '@local/styles/motion';
@@ -8,16 +7,18 @@ import { CSS_VARS } from '@local/styles/utils/constants';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { FC } from 'react';
 
-const meta: Meta<typeof PreviewComponent> = {
+import { WrapperBig } from './tools';
+
+const meta: Meta<IPreview> = {
   component: PreviewComponent,
-  title: 'Area/Preview',
+  title: 'Area/1. Preview',
 };
 
 export default meta;
 
-type Story = StoryObj<typeof PreviewComponent>;
+type Story = StoryObj<IPreview>;
 
-export const PreviewMax: Story = {
+export const Index: Story = {
   args: {
     defaultVisible: false,
     visible: true,
@@ -35,37 +36,63 @@ export const PreviewMax: Story = {
   },
 };
 
-const PreviewStackWrapper: FC<IPreview> = (props) => {
+const CollectionWrapper: FC = () => {
   return (
-    <Stack
-      sx={{
-        position: 'relative',
-        width: '200px',
-        height: '200px',
-        backgroundColor: CSS_VARS.palette.accentGrayLight,
-        color: CSS_VARS.palette.textPrimaryLight,
-        borderRadius: '8px',
-      }}
-    >
-      <PreviewComponent {...props} />
-    </Stack>
+    <WrapperBig>
+      <Stack
+        sx={{
+          position: 'relative',
+          width: '200px',
+          height: '200px',
+          backgroundColor: CSS_VARS.palette.accentGrayLight,
+          color: CSS_VARS.palette.textPrimaryLight,
+          borderRadius: '8px',
+        }}
+      >
+        <PreviewComponent
+          time={2000}
+          defaultVisible={false}
+          content={
+            <Typography
+              sx={{
+                variant: 'title-3',
+                color: 'textPrimaryLight',
+              }}
+            >
+              <MotionTypingEffect text='Loading...' />
+            </Typography>
+          }
+        />
+      </Stack>
+      <Stack
+        sx={{
+          position: 'relative',
+          width: '160px',
+          height: '200px',
+          backgroundColor: CSS_VARS.palette.accentBlueLight,
+          color: CSS_VARS.palette.textPrimaryLight,
+          borderRadius: '8px',
+        }}
+      >
+        <PreviewComponent
+          time={2000}
+          defaultVisible={false}
+          content={
+            <Typography
+              sx={{
+                variant: 'title-2',
+                color: 'textPrimaryLight',
+              }}
+            >
+              <MotionTypingEffect text='Loading...' />
+            </Typography>
+          }
+        />
+      </Stack>
+    </WrapperBig>
   );
 };
 
-export const PreviewStack: Story = {
-  render: (args) => <PreviewStackWrapper {...args} />,
-  args: {
-    defaultVisible: false,
-    time: 2000,
-    content: (
-      <Typography
-        sx={{
-          variant: 'title-3',
-          color: 'textPrimaryLight',
-        }}
-      >
-        <MotionTypingEffect text='Loading...' />
-      </Typography>
-    ),
-  },
+export const Collection: Story = {
+  render: () => <CollectionWrapper />,
 };

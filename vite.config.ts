@@ -1,5 +1,6 @@
 import { pluginUpdateIcons, pluginUpdateReadmePD } from '@jenesei-software/jenesei-plugin-vite';
 import react from '@vitejs/plugin-react';
+import autoprefixer from 'autoprefixer';
 import path, { resolve } from 'path';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
@@ -21,6 +22,11 @@ export default defineConfig(() => {
     resolve: {
       alias: {
         '@local': path.resolve(__dirname, './src'),
+      },
+    },
+    css: {
+      postcss: {
+        plugins: [autoprefixer({})],
       },
     },
     plugins: [

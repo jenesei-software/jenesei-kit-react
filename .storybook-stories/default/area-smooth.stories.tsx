@@ -9,7 +9,7 @@ import { FC, useState } from 'react';
 
 const meta: Meta<typeof SmoothComponent> = {
   component: SmoothComponent,
-  title: 'Area/Smooth',
+  title: 'Area/5. Smooth',
 };
 
 export default meta;
@@ -74,7 +74,7 @@ const SmoothWrapper: FC<IStack> = (props) => {
   );
 };
 
-export const Smooth: Story = {
+export const Example: Story = {
   render: (args) => <SmoothWrapper {...args} />,
   args: {},
 };

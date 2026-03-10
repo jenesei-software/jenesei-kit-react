@@ -7,7 +7,7 @@ import { FC, useEffect, useState } from 'react';
 
 const meta: Meta<typeof SharedComponent> = {
   component: SharedComponent,
-  title: 'Area/Shared',
+  title: 'Area/3. Shared',
 };
 
 export default meta;
@@ -32,7 +32,7 @@ const SharedStackWrapper: FC<IShared> = (props) => {
         height: '100%',
         backgroundColor: CSS_VARS.palette.fillPrimaryDark,
         borderRadius: '8px',
-        gap: '8px',
+        gap: '0px',
       }}
       {...props}
       onSelected={onSelected}
@@ -41,7 +41,7 @@ const SharedStackWrapper: FC<IShared> = (props) => {
   );
 };
 
-export const Shared: Story = {
+export const Example: Story = {
   render: (args) => <SharedStackWrapper {...args} />,
   args: {
     isLink: false,
@@ -63,6 +63,7 @@ export const Shared: Story = {
           genre: 'primary',
           children: 'Выкупы',
           isHiddenBorder: true,
+          isZeroRadius: true,
           size: 'medium',
           sxTypography: {
             family: 'Manrope',
@@ -86,6 +87,7 @@ export const Shared: Story = {
           ],
           genre: 'primary',
           isHiddenBorder: true,
+          isZeroRadius: true,
           children: 'Доставки',
           size: 'medium',
           sxTypography: {
@@ -110,6 +112,7 @@ export const Shared: Story = {
           ],
           genre: 'primary',
           isHiddenBorder: true,
+          isZeroRadius: true,
           children: 'Избранное',
           size: 'medium',
           sxTypography: {
@@ -134,6 +137,7 @@ export const Shared: Story = {
           ],
           genre: 'primary',
           isHiddenBorder: true,
+          isZeroRadius: true,
           children: 'Отзывы',
           size: 'medium',
           sxTypography: {
@@ -158,6 +162,7 @@ export const Shared: Story = {
           ],
           genre: 'primary',
           isHiddenBorder: true,
+          isZeroRadius: true,
           children: 'Позиции в поиске',
           size: 'medium',
           sxTypography: {
@@ -173,7 +178,7 @@ export const Shared: Story = {
           genre: 'primary',
         },
         default: {
-          isOutlineBoxShadow: true,
+          isZeroRadius: true,
           icons: [
             {
               order: -1,

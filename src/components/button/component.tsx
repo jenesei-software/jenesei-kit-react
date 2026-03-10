@@ -11,16 +11,26 @@ import { IButton } from './component.types';
 
 export const Button: FC<IButton> = (props) => {
   const iconComponents = useMemo(
-    () => getIconComponents({ icons: props.icons ?? [], size: props.size }),
-    [props.icons, props.size],
+    () =>
+      getIconComponents({
+        icons: (props.icons ?? []).map((e) => ({
+          ...e,
+          style: { color: CSS_VARS.genre.button[props.genre].color.index },
+        })),
+        size: props.size,
+      }),
+    [props.icons, props.size, props.genre],
   );
 
-  const handleClick = useCallback<Exclude<IButton['onClick'], undefined>>((event) => {
-    if (!props.isDisabled && props.onClick) {
-      props.onClick(event);
-    }
-  }, [props.isDisabled, props.onClick]);
-  
+  const handleClick = useCallback<Exclude<IButton['onClick'], undefined>>(
+    (event) => {
+      if (!props.isDisabled && props.onClick) {
+        props.onClick(event);
+      }
+    },
+    [props.isDisabled, props.onClick],
+  );
+
   const refDefault = useRef<HTMLButtonElement>(null);
 
   const ref = useMergeRefs([refDefault, props.ref]);
@@ -68,21 +78,22 @@ export const Button: FC<IButton> = (props) => {
 
     return { className, style };
   }, [
-    props.className, 
-    props.style, 
-    props.sx, 
-    props.genre, 
-    props.isDisabled, 
-    props.isDisabledOutline, 
-    props.isFullSize, 
-    props.isHidden, 
-    props.isHiddenBorder, 
-    props.isMinWidthAsContent, 
-    props.isNotHoverEffect, 
-    props.isFullRadius, 
-    props.isWidthAsHeight, 
-    props.outline, 
-    props.size, props.isZeroRadius
+    props.className,
+    props.style,
+    props.sx,
+    props.genre,
+    props.isDisabled,
+    props.isDisabledOutline,
+    props.isFullSize,
+    props.isHidden,
+    props.isHiddenBorder,
+    props.isMinWidthAsContent,
+    props.isNotHoverEffect,
+    props.isFullRadius,
+    props.isWidthAsHeight,
+    props.outline,
+    props.size,
+    props.isZeroRadius,
   ]);
 
   const { className: classNameIconGroup, style: styleIconGroup } = useMemo(() => {

@@ -468,6 +468,20 @@ export const CSS_VARS = {
         },
       },
     },
+    input: {
+      primary: {
+        color: CSS_VARS_PALETTE.textPrimaryLight,
+        background: CSS_VARS_PALETTE.fillPrimaryDark,
+        border: CSS_VARS_PALETTE.textPrimaryLight,
+        placeholder: CSS_VARS_PALETTE.textSecondaryLight,
+      },
+      secondary: {
+        color: CSS_VARS_PALETTE.textPrimaryDark,
+        background: CSS_VARS_PALETTE.fillPrimaryLight,
+        border: CSS_VARS_PALETTE.textPrimaryDark,
+        placeholder: CSS_VARS_PALETTE.textSecondaryDark,
+      },
+    },
   },
 } as const;
 

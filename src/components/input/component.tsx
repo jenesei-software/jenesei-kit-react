@@ -1,21 +1,12 @@
 import { ErrorMessage } from '@local/components/error';
-import { getSxTypography } from '@local/functions';
 
+import { motion } from 'framer-motion';
 import { useCallback } from 'react';
-import { NumberFormatValues } from 'react-number-format';
-import { useTheme } from 'styled-components';
+import { NumberFormatValues, NumericFormat, PatternFormat } from 'react-number-format';
 
-import {
-  InputPostfixChildren,
-  InputPrefixChildren,
-  StyledInput,
-  StyledInputNumeric,
-  StyledInputPattern,
-  StyledInputWrapper,
-} from './component.styles';
-import { InputProps } from './component.types';
+import { IInput } from './component.types';
 
-export const Input = (props: InputProps) => {
+export const Input = (props: IInput) => {
   const handleOnChange = useCallback(
     (input: string | NumberFormatValues) => {
       if (props.variety === 'standard') {
@@ -32,63 +23,27 @@ export const Input = (props: InputProps) => {
     },
     [props],
   );
-  const theme = useTheme();
+
   return (
     <>
-      <StyledInputWrapper
-        $isInputEffect={props.isInputEffect}
-        className={props.className}
-        $isDisabled={props.isDisabled}
-        $sx={props.sx}
-        $size={props.size}
-        $isWidthAsHeight={props.isWidthAsHeight}
-      >
-        {props.prefixChildren && (
-          <InputPrefixChildren
-            $left={props.prefixChildren.left}
-            $right={props.prefixChildren.right}
-            $isDisabled={props.isDisabled}
-            $width={props.prefixChildren.width}
-          >
-            {props.prefixChildren.children}
-          </InputPrefixChildren>
-        )}
+      <div className={props.className}>
+        {props.prefixChildren && <div>{props.prefixChildren.children}</div>}
         {props.variety === 'pattern' ? (
-          <StyledInputPattern
-            $isNiceNumber={props.isNiceNumber}
-            $isInputEffect={props.isInputEffect}
-            $error={props?.error}
-            $isLoading={props.isLoading}
-            $postfixChildren={props?.postfixChildren}
-            $prefixChildren={props?.prefixChildren}
-            $genre={props.genre}
-            $size={props.size}
-            $sxTypography={getSxTypography({
-              size: props.size,
-              weight: props.isBold ? 500 : 400,
-              sx: props.sxTypography,
-              theme,
-            })}
-            $isBold={props.isBold}
-            $isDisabled={props.isDisabled}
-            $isDisabledOutline={props.isDisabled ?? props.isDisabledOutline}
-            $isOutlineBoxShadow={props.isOutlineBoxShadow}
-            $isCenter={props.isCenter}
-            $isReadOnly={props.isReadOnly}
+          <PatternFormat
             disabled={props.isDisabled}
             readOnly={props.isReadOnly}
             required={props.isRequired}
-            defaultValue={props.defaultValue === null ? '' : props.defaultValue}
-            value={props.value === null ? '' : props.value}
+            defaultValue={props.defaultValue == null ? '' : props.defaultValue}
+            value={props.value == null ? '' : props.value}
             placeholder={props.placeholder}
             onValueChange={(props) => handleOnChange(props)}
             onBlur={props.onBlur}
             onFocus={props.onFocus}
             onPaste={props.onPaste}
+            onKeyDown={props.onKeyDown}
             name={props.name}
             aria-label={props.ariaLabel ?? props.name}
             id={props.id}
-            onKeyDown={props.onKeyDown}
             inputMode={props.inputMode}
             maxLength={props.maxLength}
             minLength={props.minLength}
@@ -96,41 +51,21 @@ export const Input = (props: InputProps) => {
             {...props.propsPattern}
           />
         ) : props.variety === 'numeric' ? (
-          <StyledInputNumeric
-            $isNiceNumber={props.isNiceNumber}
-            $isInputEffect={props.isInputEffect}
-            $error={props?.error}
-            $isLoading={props.isLoading}
-            $postfixChildren={props?.postfixChildren}
-            $prefixChildren={props?.prefixChildren}
-            $genre={props.genre}
-            $size={props.size}
-            $sxTypography={getSxTypography({
-              size: props.size,
-              weight: props.isBold ? 500 : 400,
-              sx: props.sxTypography,
-              theme,
-            })}
-            $isBold={props.isBold}
-            $isDisabled={props.isDisabled}
-            $isDisabledOutline={props.isDisabled ?? props.isDisabledOutline}
-            $isOutlineBoxShadow={props.isOutlineBoxShadow}
-            $isReadOnly={props.isReadOnly}
-            $isCenter={props.isCenter}
+          <NumericFormat
             disabled={props.isDisabled}
             readOnly={props.isReadOnly}
             required={props.isRequired}
-            defaultValue={props.defaultValue === null ? '' : props.defaultValue}
-            value={props.value === null ? '' : props.value}
+            defaultValue={props.defaultValue == null ? '' : props.defaultValue}
+            value={props.value == null ? '' : props.value}
             placeholder={props.placeholder}
             onValueChange={(props) => handleOnChange(props)}
             onBlur={props.onBlur}
             onFocus={props.onFocus}
             onPaste={props.onPaste}
+            onKeyDown={props.onKeyDown}
             name={props.name}
             aria-label={props.ariaLabel ?? props.name}
             id={props.id}
-            onKeyDown={props.onKeyDown}
             inputMode={props.inputMode}
             maxLength={props.maxLength}
             minLength={props.minLength}
@@ -138,36 +73,16 @@ export const Input = (props: InputProps) => {
             {...props.propsNumeric}
           />
         ) : (
-          <StyledInput
-            $isNiceNumber={props.isNiceNumber}
+          <motion.input
             inputMode={props.inputMode}
             maxLength={props.maxLength}
             minLength={props.minLength}
             ref={props.ref}
-            $error={props.error}
-            $isInputEffect={props.isInputEffect}
-            $isLoading={props.isLoading}
-            $postfixChildren={props?.postfixChildren}
-            $prefixChildren={props?.prefixChildren}
-            $genre={props.genre}
-            $size={props.size}
-            $sxTypography={getSxTypography({
-              size: props.size,
-              weight: props.isBold ? 500 : 400,
-              sx: props.sxTypography,
-              theme,
-            })}
-            $isBold={props.isBold}
-            $isDisabled={props.isDisabled}
-            $isDisabledOutline={props.isDisabled ?? props.isDisabledOutline}
-            $isOutlineBoxShadow={props.isOutlineBoxShadow}
-            $isReadOnly={props.isReadOnly}
-            $isCenter={props.isCenter}
             disabled={props.isDisabled}
             readOnly={props.isReadOnly}
             required={props.isRequired}
-            defaultValue={props.defaultValue === null ? '' : props.defaultValue}
-            value={props.value === null ? '' : props.value}
+            defaultValue={props.defaultValue == null ? '' : props.defaultValue}
+            value={props.value == null ? '' : props.value}
             placeholder={props.placeholder}
             type={props.type}
             autoComplete={props.autoComplete}
@@ -178,35 +93,25 @@ export const Input = (props: InputProps) => {
             onBlur={props.onBlur}
             onFocus={props.onFocus}
             onPaste={props.onPaste}
+            onKeyDown={props.onKeyDown}
             name={props.name}
             aria-label={props.ariaLabel ?? props.name}
             id={props.id}
             tabIndex={props.tabIndex}
-            onKeyDown={props.onKeyDown}
             min={props.min}
             max={props.max}
             step={props.step}
           />
         )}
-
-        {props.postfixChildren && (
-          <InputPostfixChildren
-            $left={props.postfixChildren.left}
-            $right={props.postfixChildren.right}
-            $isDisabled={props.isDisabled}
-            $width={props.postfixChildren.width}
-          >
-            {props.postfixChildren.children}
-          </InputPostfixChildren>
-        )}
-      </StyledInputWrapper>
-      {props?.error ? (
+        {props.postfixChildren && <div>{props.postfixChildren.children}</div>}
+      </div>
+      {props?.error?.isError && (
         <ErrorMessage
           size={props?.error.size ?? props.size}
-          sxTypography={getSxTypography({ size: props.size, weight: 400, sx: props.sxTypography, theme })}
+          sxTypography={{ size: 'medium', weight: '400', ...props.sxTypography, ...props?.error.sxTypography }}
           {...props.error}
         />
-      ) : null}
+      )}
     </>
   );
 };

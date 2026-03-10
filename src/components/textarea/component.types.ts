@@ -40,18 +40,18 @@ type CommonTextAreaProps = addErrorProps &
   };
 
 // Контролируемый вариант
-type ControlledValue = {
+type IControlledValue = {
   value: string | null | undefined;
   defaultValue?: never;
 };
 
 // Неконтролируемый вариант
-type UncontrolledValue = {
+type IUnControlledValue = {
   value?: never;
   defaultValue: string;
 };
 
-type BaseTextAreaProps = CommonTextAreaProps & (ControlledValue | UncontrolledValue);
+type BaseTextAreaProps = CommonTextAreaProps & (IControlledValue | IUnControlledValue);
 
 // AutoHeight вариант
 type AutoHeightTextAreaProps = BaseTextAreaProps & {

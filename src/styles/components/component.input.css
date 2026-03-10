@@ -1,0 +1,101 @@
+/* =========================
+   Component - Input - Wrapper
+   ========================= */
+.component-input__wrapper {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  box-shadow: var(--input-effect);
+}
+
+.component-input__wrapper.component-input__wrapper--is-width-as-height {
+  width: var(--input-height);
+  min-width: var(--input-height);
+}
+
+.component-input__wrapper.component-input__wrapper--is-width-as-height .component-input {
+  text-align: center;
+}
+
+/* =========================
+   Component - Input
+   ========================= */
+.component-input {
+  resize: none;
+  overflow: hidden;
+  width: 100%;
+  border: 1px solid;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+
+  transition: var(--transition);
+
+  padding: 0 var(--input-padding-x);
+  height: var(--input-height);
+  min-height: var(--input-height);
+  max-height: var(--input-height);
+  border-radius: var(--input-radius);
+}
+.component-input,
+.component-input:active,
+.component-input:focus-visible {
+  background: var(--input-bg-rest);
+  border-color: var(--input-border-rest);
+  color: var(--input-color-rest);
+}
+
+.component-input::placeholder,
+.component-input::-webkit-input-placeholder {
+  color: var(--input-placeholder-color);
+  opacity: 1;
+}
+
+.component-input:-ms-input-placeholder {
+  color: var(--input-placeholder-color);
+  opacity: 1;
+}
+
+.component-input.component-input--nice-number::placeholder,
+.component-input.component-input--nice-number::-webkit-input-placeholder {
+  color: var(--input-placeholder-color);
+  opacity: 1;
+  background: transparent;
+}
+
+.component-input.component-input--nice-number:-ms-input-placeholder {
+  color: var(--input-placeholder-color);
+  opacity: 1;
+  background: transparent;
+}
+.component-input.has-prefix {
+  padding-left: calc(var(--prefix-width) + var(--prefix-right) + var(--prefix-left));
+}
+
+.component-input.has-postfix {
+  padding-right: calc(var(--postfix-width) + var(--postfix-right) + var(--postfix-left));
+}
+
+/* =========================
+   Component - Input - Prefix
+   ========================= */
+.component-input__prefix {
+  position: absolute;
+  display: flex;
+  left: var(--prefix-left);
+  width: var(--prefix-width);
+  height: 100%;
+}
+
+/* =========================
+   Component - Input - Postfix
+   ========================= */
+.component-input__postfix {
+  position: absolute;
+  display: flex;
+  right: var(--postfix-right);
+  width: var(--postfix-width);
+  height: 100%;
+}

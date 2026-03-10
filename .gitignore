@@ -11,6 +11,7 @@ storybook-static
 node_modules
 dist
 build
+build-storybook
 dist-ssr
 *.local
 *.npmrc
