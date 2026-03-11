@@ -34,7 +34,6 @@ type ICommonTextArea = IAddError &
     isResize?: boolean;
     isLoading?: boolean;
     isBold?: boolean;
-    isCenter?: boolean;
     isDisabled?: boolean;
     isFullRadius?: boolean;
     isHidden?: boolean;
