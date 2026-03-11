@@ -10,7 +10,7 @@
 
 .component-error.component-error--size-default {
   position: static;
-  padding: var(--component-error-padding);
+  padding-left: var(--component-error-padding);
   color: var(--component-error-color);
 }
 

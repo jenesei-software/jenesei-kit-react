@@ -17,6 +17,7 @@ export const WrapperBig: FC<PropsWithChildren & ISx> = (props) => {
         flexDirection: 'row',
         flexWrap: 'wrap',
         gap: '6px',
+        width: '100%',
         overflow: 'hidden',
       }}
       style={props?.sx}
@@ -36,7 +37,8 @@ export const WrapperMin: FC<PropsWithChildren & ISx> = (props) => {
         height: 'fit-content',
         color: CSS_VARS.palette.textPrimaryLight,
         borderColor: CSS_VARS.palette.accentBlueLight,
-        flexDirection: 'row',
+        flexDirection: 'column',
+        width: '100%',
         flexWrap: 'wrap',
         gap: '6px',
       }}

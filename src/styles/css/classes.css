@@ -126,7 +126,8 @@
 /* outline */
 
 .u-outline--default:focus-visible,
-.u-outline--default:has(input:focus-visible):not(:has(input:active)) {
+.u-outline--default:has(input:focus-visible):not(:has(input:active)),
+.u-outline--default:has(textarea:focus-visible):not(:has(textarea:active)) {
   outline-offset: 1px;
   outline: 2px solid var(--accent-gray-light);
 }
@@ -155,7 +156,8 @@
 /* control */
 .u-control--default:focus-visible,
 .u-control--only-active:focus-visible,
-.u-control--boxShadow:has(input:focus-visible) {
+.u-control--boxShadow:has(input:focus-visible),
+.u-control--boxShadow:has(textarea:focus-visible) {
   outline-offset: 1px;
   outline: 2px solid var(--accent-gray-light);
 }
@@ -190,7 +192,8 @@
 
 .u-control--boxShadow:active,
 .u-control--boxShadow:focus-visible,
-.u-control--boxShadow:has(input:focus-visible) {
+.u-control--boxShadow:has(input:focus-visible),
+.u-control--boxShadow:has(textarea:focus-visible) {
   outline-offset: 4px;
   outline: 1px solid var(--product-secondary-light);
   box-shadow:

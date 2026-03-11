@@ -99,6 +99,7 @@ export const CSS_VARS = {
     family: 'var(--font-family)',
     weight: 'var(--font-weight)',
     height: 'var(--font-height)',
+    size: 'var(--font-size)',
     sizeHeading: {
       headline: 'var(--font-size-heading-headline)',
       'sub-headline': 'var(--font-size-heading-sub-headline)',
@@ -303,6 +304,16 @@ export const CSS_VARS = {
       postfixRight: 'var(--component-input-postfix-right)',
       postfixLeft: 'var(--component-input-postfix-left)',
     },
+
+    textarea: {
+      boxShadow: 'var(--component-textarea-box-shadow)',
+      background: 'var(--component-textarea-background)',
+      borderColor: 'var(--component-textarea-border-color)',
+      color: 'var(--component-textarea-color)',
+      placeholderColor: 'var(--component-textarea-placeholder-color)',
+      padding: 'var(--component-textarea-padding)',
+      radius: 'var(--component-textarea-radius)',
+    },
   },
 
   area: {
@@ -501,6 +512,20 @@ export const CSS_VARS = {
         placeholder: CSS_VARS_PALETTE.textSecondaryDark,
       },
     },
+    textarea: {
+      primary: {
+        color: CSS_VARS_PALETTE.textPrimaryLight,
+        background: CSS_VARS_PALETTE.fillPrimaryDark,
+        border: CSS_VARS_PALETTE.textPrimaryLight,
+        placeholder: CSS_VARS_PALETTE.textSecondaryLight,
+      },
+      secondary: {
+        color: CSS_VARS_PALETTE.textPrimaryDark,
+        background: CSS_VARS_PALETTE.fillPrimaryLight,
+        border: CSS_VARS_PALETTE.textPrimaryDark,
+        placeholder: CSS_VARS_PALETTE.textSecondaryDark,
+      },
+    },
   },
 } as const;
 
@@ -592,6 +617,16 @@ export const CSS_CLASS = {
   },
 
   component: {
+    textarea: {
+      root: 'component-textarea',
+      wrapper: 'component-textarea__wrapper',
+      wrapperIsZeroRadius: 'component-textarea__wrapper--is-zero-radius',
+      wrapperIsHidden: 'component-textarea__wrapper--is-hidden',
+      wrapperIsHiddenBorder: 'component-textarea__wrapper--is-hidden-border',
+      wrapperIsFullRadius: 'component-textarea__wrapper--is-full-radius',
+      wrapperIsCenter: 'component-textarea__wrapper--is-center',
+      wrapperIsNotResize: 'component-textarea__wrapper--is-not-resize',
+    },
     input: {
       wrapper: 'component-input__wrapper',
       wrapperIsWidthAsHeight: 'component-input__wrapper--is-width-as-height',
@@ -601,7 +636,7 @@ export const CSS_CLASS = {
       wrapperIsFullRadius: 'component-input__wrapper--is-full-radius',
       wrapperIsMinWidthAsContent: 'component-input__wrapper--is-min-width-as-content',
       wrapperIsCenter: 'component-input__wrapper--is-center',
-      
+
       root: 'component-input',
       hasPrefix: 'component-input--has-prefix',
       hasPostfix: 'component-input--has-postfix',
@@ -695,3 +730,10 @@ function removeVarWrapper<T extends Record<string, any>>(obj: T): DeepRemoveVar<
 }
 
 export const CSS_VARS_RAW = removeVarWrapper(CSS_VARS);
+
+export const EXTRA_VALUE = {
+  font: {
+    height: 16,
+    size: 1.2,
+  },
+};

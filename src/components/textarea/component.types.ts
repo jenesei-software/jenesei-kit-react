@@ -1,97 +1,90 @@
-import { addErrorProps } from '@local/components/error';
-import { addSXProps, addSXTypographyProps, ITheme, IThemeSize } from '@local/theme';
-import { AddDollarSign } from '@local/types';
+import { ISxTypography, IThemeSize } from '@local/styles/utils';
+import { IThemeControl, IThemeGenreTextArea } from '@local/styles/utils/types';
 
-import { FocusEvent, HTMLInputAutoCompleteAttribute, KeyboardEventHandler, MouseEventHandler, RefObject } from 'react';
+import {
+  ClipboardEventHandler,
+  CSSProperties,
+  FocusEventHandler,
+  HTMLInputAutoCompleteAttribute,
+  KeyboardEventHandler,
+  MouseEventHandler,
+  Ref
+} from 'react';
 
-type CommonTextAreaProps = addErrorProps &
-  addSXTypographyProps &
-  addSXProps & {
+import { IAddError } from '../error';
+
+type ICommonTextArea = IAddError &
+  ISxTypography & {
     name?: string;
     ariaLabel?: string;
     autoComplete?: HTMLInputAutoCompleteAttribute | string;
     id?: string;
-    ref?: RefObject<HTMLTextAreaElement | null>;
     className?: string;
-    genre: TextAreaGenre;
+    style?: CSSProperties;
+    genre: IThemeGenreTextArea;
     minRows: number;
+    ref?: Ref<HTMLTextAreaElement | null>;
+    control?: IThemeControl;
     size: IThemeSize;
     placeholder?: string;
 
     maxLength?: number;
     minLength?: number;
 
-    isDisabled?: boolean;
-    isDisabledOutline?: boolean;
-    isOutlineBoxShadow?: boolean;
     isResize?: boolean;
     isLoading?: boolean;
-    isReadOnly?: boolean;
-    isInputEffect?: boolean;
-    isRequired?: boolean;
-    isNoSpaces?: boolean;
     isBold?: boolean;
-    onFocus?: (event?: FocusEvent<HTMLTextAreaElement>) => void;
-    onBlur?: (event?: FocusEvent<HTMLTextAreaElement>) => void;
+    isCenter?: boolean;
+    isDisabled?: boolean;
+    isFullRadius?: boolean;
+    isHidden?: boolean;
+    isHiddenBorder?: boolean;
+    isNiceNumber?: boolean;
+    isNoSpaces?: boolean;
+    isReadOnly?: boolean;
+    isRequired?: boolean;
+    isZeroRadius?: boolean;
+
     onChange?: (value: string) => void;
     onClick?: MouseEventHandler<HTMLTextAreaElement>;
     onMouseDown?: MouseEventHandler<HTMLTextAreaElement>;
+    onBlur?: FocusEventHandler<HTMLTextAreaElement>;
+    onFocus?: FocusEventHandler<HTMLTextAreaElement>;
     onKeyDown?: KeyboardEventHandler<HTMLTextAreaElement>;
+    onPaste?: ClipboardEventHandler<HTMLTextAreaElement>;
   };
 
-// Контролируемый вариант
 type IControlledValue = {
   value: string | null | undefined;
   defaultValue?: never;
 };
 
-// Неконтролируемый вариант
 type IUnControlledValue = {
   value?: never;
   defaultValue: string;
 };
 
-type BaseTextAreaProps = CommonTextAreaProps & (IControlledValue | IUnControlledValue);
+type IBaseTextArea = ICommonTextArea & (IControlledValue | IUnControlledValue);
 
 // AutoHeight вариант
-type AutoHeightTextAreaProps = BaseTextAreaProps & {
+type IAutoHeightTextArea = IBaseTextArea & {
   isAutoHeight: true;
   maxRows: number;
   isResize?: false | undefined;
 };
 
 // Resizable (с запретом autoHeight и maxRows)
-type ResizableTextAreaProps = BaseTextAreaProps & {
+type IResizableTextArea = IBaseTextArea & {
   isResize: true;
   isAutoHeight?: false | undefined;
   maxRows?: never;
 };
 
 // Fixed (не autoHeight и не resizable)
-type FixedTextAreaProps = BaseTextAreaProps & {
+type IFixedTextArea = IBaseTextArea & {
   isResize?: false | undefined;
   isAutoHeight?: false | undefined;
   maxRows?: never;
 };
 
-export type TextAreaProps = AutoHeightTextAreaProps | ResizableTextAreaProps | FixedTextAreaProps;
-
-type TextAreaGenre = keyof ITheme['colors']['input'];
-
-export type StyledTextAreaProps = AddDollarSign<
-  Pick<
-    TextAreaProps,
-    'genre' | 'size' | 'error' | 'isLoading' | 'isInputEffect' | 'isDisabled' | 'isBold' | 'isResize' | 'sxTypography'
-  > & {
-    lineHeight: number;
-  }
->;
-
-export type TextAreaWrapperProps = AddDollarSign<
-  Pick<
-    TextAreaProps,
-    'isDisabled' | 'isInputEffect' | 'sx' | 'size' | 'genre' | 'isReadOnly' | 'isDisabledOutline' | 'isOutlineBoxShadow'
-  > & {
-    lineHeight: number;
-  }
->;
+export type ITextArea = IAutoHeightTextArea | IResizableTextArea | IFixedTextArea;

@@ -17,7 +17,7 @@ export default meta;
 const CollectionWrapper: FC = () => {
   return (
     <WrapperBig>
-      <WrapperMin>
+      <WrapperBig>
         <Typography
           sx={{
             variant: 'title-2',
@@ -49,16 +49,16 @@ const CollectionWrapper: FC = () => {
             Yellow
           </ButtonComponent>
         </WrapperMin>
-      </WrapperMin>
+      </WrapperBig>
 
-      <WrapperMin>
+      <WrapperBig>
         <Typography
           sx={{
             variant: 'title-2',
             color: 'textPrimaryLight',
           }}
         >
-          Sizes
+          Size
         </Typography>
         <WrapperMin>
           <ButtonComponent size='large' genre='primary'>
@@ -77,79 +77,78 @@ const CollectionWrapper: FC = () => {
             small
           </ButtonComponent>
         </WrapperMin>
-      </WrapperMin>
+      </WrapperBig>
 
-      <WrapperMin>
-        <ButtonComponent
-          isFullRadius
-          isOnlyIcon
-          isWidthAsHeight
-          icons={[{ type: 'logo', name: 'Jenesei', size: '100%' }]}
-          size='medium'
-          genre='product'
-          isWhileTapEffect
-        />
-        <ButtonComponent
-          size='medium'
-          genre='product'
-          icons={[
-            {
-              type: 'id',
-              name: 'Biometry',
-              order: 1,
-            },
-            {
-              type: 'loading',
-              name: 'Blocks',
-              order: -1,
-            },
-          ]}
-          isWhileTapEffect
-          isIconGroup
-          iconGroupOrder={1}
-        >
-          2 Icons, isWhileTapEffect
-        </ButtonComponent>
-        <ButtonComponent size='medium' genre='product' isZeroRadius>
-          isZeroRadius
-        </ButtonComponent>
-        <ButtonComponent size='medium' genre='product' isDisabled>
-          isDisabled
-        </ButtonComponent>
-        <ButtonComponent size='medium' genre='product' isHidden>
-          isHidden
-        </ButtonComponent>
-        <ButtonComponent size='medium' genre='primary' isHiddenBorder>
-          isHiddenBorder
-        </ButtonComponent>
-        <ButtonComponent size='medium' genre='product' control='default'>
-          Control - default
-        </ButtonComponent>
-        <ButtonComponent size='medium' genre='product' control='onlyActive'>
-          Control - onlyActive
-        </ButtonComponent>
-      </WrapperMin>
-
-      <WrapperMin>
+      <WrapperBig>
         <Typography
           sx={{
             variant: 'title-2',
             color: 'textPrimaryLight',
           }}
         >
-          100%
+          Other
         </Typography>
-        <Stack
-          style={{
-            width: '100px',
-            height: '100px',
-          }}
-        >
-          <ButtonComponent size='large' isFullSize genre='primary'>
-            large
+        <WrapperMin>
+          <ButtonComponent
+            isFullRadius
+            isOnlyIcon
+            isWidthAsHeight
+            icons={[{ type: 'logo', name: 'Jenesei', size: '100%' }]}
+            size='medium'
+            genre='product'
+            isWhileTapEffect
+          />
+          <ButtonComponent
+            size='medium'
+            genre='product'
+            icons={[
+              {
+                type: 'id',
+                name: 'Biometry',
+                order: 1,
+              },
+              {
+                type: 'loading',
+                name: 'Blocks',
+                order: -1,
+              },
+            ]}
+            isWhileTapEffect
+            isIconGroup
+            iconGroupOrder={1}
+          >
+            2 Icons, isWhileTapEffect
           </ButtonComponent>
-        </Stack>
-      </WrapperMin>
+          <ButtonComponent size='medium' genre='product' isZeroRadius>
+            isZeroRadius
+          </ButtonComponent>
+          <ButtonComponent size='medium' genre='product' isDisabled>
+            isDisabled
+          </ButtonComponent>
+          <ButtonComponent size='medium' genre='product' isHidden>
+            isHidden
+          </ButtonComponent>
+          <ButtonComponent size='medium' genre='primary' isHiddenBorder>
+            isHiddenBorder
+          </ButtonComponent>
+          <ButtonComponent size='medium' genre='product' control='default'>
+            Control - default
+          </ButtonComponent>
+          <ButtonComponent size='medium' genre='product' control='onlyActive'>
+            Control - onlyActive
+          </ButtonComponent>
+          <Stack
+            style={{
+              width: '100px',
+              height: '100px',
+            }}
+          >
+            <ButtonComponent isZeroRadius size='large' isFullSize genre='primary'>
+              100%
+            </ButtonComponent>
+          </Stack>
+        </WrapperMin>
+      </WrapperBig>
     </WrapperBig>
   );
 };

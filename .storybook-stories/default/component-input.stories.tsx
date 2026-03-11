@@ -112,7 +112,7 @@ const CollectionWrapper: FC = () => {
             color: 'textPrimaryLight',
           }}
         >
-          variety
+          Variety
         </Typography>
         <WrapperMin sx={{ flexDirection: 'column', width: '100%' }}>
           <InputComponent
@@ -302,6 +302,14 @@ const CollectionWrapper: FC = () => {
             isZeroRadius
             onChange={(newValue) => setValueStandard(newValue)}
           />
+          <InputComponent
+            placeholder='Default value'
+            genre='primary'
+            size='large'
+            defaultValue={valueStandard}
+            variety='standard'
+            onChange={(newValue) => setValueStandard(newValue)}
+          />
           <Stack
             style={{
               position: 'relative',
@@ -428,6 +436,7 @@ const CollectionWrapper: FC = () => {
               left: '0px',
               right: '4px',
               width: '28px',
+              isFocusInput: true,
               children: (
                 <Stack
                   sx={{
@@ -447,6 +456,7 @@ const CollectionWrapper: FC = () => {
               left: '0px',
               right: '0px',
               width: '24px',
+              isFocusInput: true,
               children: (
                 <Stack sx={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                   <Icon type={'logo'} name={'Jenesei'} size={'large'} color='textPrimaryLight' />
@@ -468,5 +478,6 @@ export const Index: Story = {
   args: {
     genre: 'primary',
     size: 'large',
+    placeholder: 'Placeholder',
   },
 };

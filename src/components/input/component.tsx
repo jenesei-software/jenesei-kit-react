@@ -109,7 +109,6 @@ export const Input = (props: IInput) => {
 
     vars[CSS_VARS_RAW.component.input.color] = CSS_VARS.genre.input[props.genre].color;
     vars[CSS_VARS_RAW.component.input.placeholderColor] = CSS_VARS.genre.input[props.genre].placeholder;
-    vars[CSS_VARS_RAW.component.input.borderColor] = CSS_VARS.genre.input[props.genre].border;
     vars[CSS_VARS_RAW.component.input.padding] = CSS_VARS.size[props.size].padding;
 
     const style = setStyles([props.style, styleTypography, Object.keys(vars).length ? vars : undefined]);
@@ -133,7 +132,17 @@ export const Input = (props: IInput) => {
     <>
       <div className={className} style={style}>
         {props.prefixChildren && (
-          <div className={CSS_CLASS.component.input.prefix}>{props.prefixChildren.children}</div>
+          <div
+            onMouseDown={(e) => {
+              if (props.prefixChildren?.isFocusInput) {
+                e.preventDefault();
+                refDefault.current?.focus();
+              }
+            }}
+            className={CSS_CLASS.component.input.prefix}
+          >
+            {props.prefixChildren.children}
+          </div>
         )}
         {props.variety === 'pattern' ? (
           <PatternFormat
@@ -142,8 +151,8 @@ export const Input = (props: IInput) => {
             disabled={props.isDisabled}
             readOnly={props.isReadOnly}
             required={props.isRequired}
-            defaultValue={props.defaultValue == null ? '' : props.defaultValue}
-            value={props.value == null ? '' : props.value}
+            defaultValue={props.defaultValue === null ? '' : props.defaultValue}
+            value={props.value === null ? '' : props.value}
             placeholder={props.placeholder}
             onValueChange={(props) => handleOnChange(props)}
             onBlur={props.onBlur}
@@ -167,8 +176,8 @@ export const Input = (props: IInput) => {
             disabled={props.isDisabled}
             readOnly={props.isReadOnly}
             required={props.isRequired}
-            defaultValue={props.defaultValue == null ? '' : props.defaultValue}
-            value={props.value == null ? '' : props.value}
+            defaultValue={props.defaultValue === null ? '' : props.defaultValue}
+            value={props.value === null ? '' : props.value}
             placeholder={props.placeholder}
             onValueChange={(props) => handleOnChange(props)}
             onBlur={props.onBlur}
@@ -196,8 +205,8 @@ export const Input = (props: IInput) => {
             disabled={props.isDisabled}
             readOnly={props.isReadOnly}
             required={props.isRequired}
-            defaultValue={props.defaultValue == null ? '' : props.defaultValue}
-            value={props.value == null ? '' : props.value}
+            defaultValue={props.defaultValue === null ? '' : props.defaultValue}
+            value={props.value === null ? '' : props.value}
             placeholder={props.placeholder}
             type={props.type}
             autoComplete={props.autoComplete}
@@ -219,7 +228,17 @@ export const Input = (props: IInput) => {
           />
         )}
         {props.postfixChildren && (
-          <div className={CSS_CLASS.component.input.postfix}>{props.postfixChildren.children}</div>
+          <div
+            onMouseDown={(e) => {
+              if (props.postfixChildren?.isFocusInput) {
+                e.preventDefault();
+                refDefault?.current?.focus();
+              }
+            }}
+            className={CSS_CLASS.component.input.postfix}
+          >
+            {props.postfixChildren.children}
+          </div>
         )}
       </div>
       {props?.error?.isError && (

@@ -27,6 +27,10 @@
     "enabled": true,
     "rules": {
       "nursery": {},
+      "a11y": {
+        "useButtonType": "warn",
+        "noStaticElementInteractions": "off"
+      },
       "suspicious": {
         "noArrayIndexKey": "off",
         "noImportCycles": "error"

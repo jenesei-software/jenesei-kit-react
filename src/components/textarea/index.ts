@@ -1,2 +1,2 @@
 export { TextArea } from './component';
-export type { TextAreaProps } from './component.types';
+export type { ITextArea } from './component.types';

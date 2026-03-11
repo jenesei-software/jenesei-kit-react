@@ -85,6 +85,7 @@ export type IThemeGenreButton = keyof typeof CSS_VARS.genre.button;
 export type IThemeGenreCheckbox = keyof typeof CSS_VARS.genre.checkbox;
 export type IThemeGenreToggle = keyof typeof CSS_VARS.genre.toggle;
 export type IThemeGenreInput = keyof typeof CSS_VARS.genre.input;
+export type IThemeGenreTextArea = keyof typeof CSS_VARS.genre.textarea;
 
 export type IThemeControl = keyof typeof CSS_CLASS.control;
 
