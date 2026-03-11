@@ -1,2 +1,2 @@
 export { InputOTP } from './component';
-export type { InputOTPProps } from './component.types';
+export type { IInputOTP } from './component.types';

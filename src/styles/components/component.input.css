@@ -6,7 +6,8 @@
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
-
+  width: 100%;
+  
   border: 1px solid;
   border-color: var(--component-input-border-color);
   background: var(--component-input-background);
@@ -69,10 +70,6 @@
   padding: 0px;
 }
 
-.component-input__wrapper.component-input__wrapper--is-min-width-as-content {
-  min-width: max-content;
-}
-
 .component-input__wrapper.component-input__wrapper--is-center .component-input {
   text-align: center;
   padding: 0px;
@@ -105,11 +102,7 @@
 }
 
 .component-input::placeholder,
-.component-input::-webkit-input-placeholder {
-  color: var(--component-input-placeholder-color);
-  opacity: 1;
-}
-
+.component-input::-webkit-input-placeholder,
 .component-input:-ms-input-placeholder {
   color: var(--component-input-placeholder-color);
   opacity: 1;

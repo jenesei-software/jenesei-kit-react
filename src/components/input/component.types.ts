@@ -16,75 +16,44 @@ import { NumberFormatValues, NumericFormatProps, PatternFormatProps } from 'reac
 
 type ICommonInput = IAddError &
   ISxTypography & {
+    placeholder?: string;
+    ref?: Ref<HTMLInputElement | null>;
+    control?: IThemeControl;
+    size: IThemeSize;
+    style?: CSSProperties;
+    tabIndex?: number;
     ariaLabel?: string;
-
     autoComplete?: HTMLInputAutoCompleteAttribute | string;
-
     className?: string;
-
     genre: IThemeGenreInput;
-
     id?: string;
-
     inputMode?: 'text' | 'none' | 'tel' | 'url' | 'email' | 'numeric' | 'decimal' | 'search';
 
-    isAllowEmptyFormatting?: boolean;
-
     isBold?: boolean;
-
     isCenter?: boolean;
-
     isDisabled?: boolean;
-
     isFullRadius?: boolean;
-
     isHidden?: boolean;
-
     isHiddenBorder?: boolean;
-
     isMinWidthAsContent?: boolean;
-
     isNiceNumber?: boolean;
-
     isNoSpaces?: boolean;
-
     isReadOnly?: boolean;
-
     isRequired?: boolean;
-
     isWidthAsHeight?: boolean;
-
     isZeroRadius?: boolean;
 
     maxLength?: number;
-
     minLength?: number;
-    
     name?: string;
 
     onBlur?: FocusEventHandler<HTMLInputElement>;
-
     onFocus?: FocusEventHandler<HTMLInputElement>;
-
     onKeyDown?: KeyboardEventHandler<HTMLInputElement>;
-
     onPaste?: ClipboardEventHandler<HTMLInputElement>;
 
-    placeholder?: string;
-
     postfixChildren?: InputChildrenProps;
-    
     prefixChildren?: InputChildrenProps;
-
-    ref?: Ref<HTMLInputElement | null>;
-
-    control?: IThemeControl;
-    
-    size: IThemeSize;
-
-    style?: CSSProperties;
-
-    tabIndex?: number;
   };
 
 type IControlledValue = {
@@ -143,4 +112,6 @@ export interface InputChildrenProps extends PropsWithChildren {
   right: string;
 
   width: string;
+
+  isFocusInput?: boolean;
 }

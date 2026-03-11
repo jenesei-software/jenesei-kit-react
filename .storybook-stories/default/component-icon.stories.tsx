@@ -27,7 +27,7 @@ const CollectionWrapper: FC = () => {
         >
           ID
         </Typography>
-        <WrapperMin sx={{ color: CSS_VARS.palette.accentBrownLight }}>
+        <WrapperMin sx={{ color: CSS_VARS.palette.accentBrownLight, flexDirection: 'row' }}>
           {THEME_MAP.id.map((item) => (
             <IconComponent key={item} type='id' name={item} size={'large'} />
           ))}
@@ -42,7 +42,7 @@ const CollectionWrapper: FC = () => {
         >
           Checkbox
         </Typography>
-        <WrapperMin sx={{ color: CSS_VARS.palette.accentGreenLight }}>
+        <WrapperMin sx={{ color: CSS_VARS.palette.accentGreenLight, flexDirection: 'row' }}>
           {THEME_MAP.checkbox.map((item) => (
             <IconComponent key={item} type={'checkbox'} name={item} size={'large'} color='textPrimaryLight' />
           ))}
@@ -57,7 +57,7 @@ const CollectionWrapper: FC = () => {
         >
           Loading
         </Typography>
-        <WrapperMin sx={{ color: CSS_VARS.palette.accentBlueLight }}>
+        <WrapperMin sx={{ color: CSS_VARS.palette.accentBlueLight, flexDirection: 'row' }}>
           {THEME_MAP.loading.map((item) => (
             <IconComponent key={item} type={'loading'} name={item} size={'large'} color='textPrimaryLight' />
           ))}
@@ -75,7 +75,7 @@ const CollectionWrapper: FC = () => {
         >
           Logo
         </Typography>
-        <WrapperMin>
+        <WrapperMin sx={{ flexDirection: 'row' }}>
           {THEME_MAP.logo.map((item) => (
             <IconComponent key={item} type={'logo'} name={item} size={'large'} color='textPrimaryLight' />
           ))}
@@ -90,7 +90,7 @@ const CollectionWrapper: FC = () => {
         >
           All Palette Colors
         </Typography>
-        <WrapperMin>
+        <WrapperMin sx={{ flexDirection: 'row' }}>
           {Object.keys(CSS_VARS.palette).map((item) => (
             <IconComponent key={item} type={'logo'} name={'Jenesei'} size={'large'} color={item as IThemePalette} />
           ))}

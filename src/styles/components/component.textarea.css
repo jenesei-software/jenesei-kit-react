@@ -1,0 +1,90 @@
+/* =========================
+   Component - TextArea - Wrapper
+   ========================= */
+.component-textarea__wrapper {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 100%;
+  
+  border: 1px solid;
+  border-color: var(--component-textarea-border-color);
+  background: var(--component-textarea-background);
+  box-shadow: var(--component-textarea-box-shadow);
+
+  min-height: var(--component-textarea-height);
+  border-radius: var(--component-textarea-radius);
+  padding: var(--component-textarea-padding);
+
+  overflow: hidden;
+}
+
+.component-textarea__wrapper.component-textarea__wrapper--is-zero-radius {
+  border-radius: 0;
+}
+
+.component-textarea__wrapper.component-textarea__wrapper--is-full-radius {
+  border-radius: 100px;
+}
+
+.component-textarea__wrapper.component-textarea__wrapper--is-hidden {
+  opacity: 0.5;
+}
+
+.component-textarea__wrapper:not(.component-textarea__wrapper--is-hidden) {
+  opacity: 1;
+}
+
+.component-textarea__wrapper.component-textarea__wrapper--is-hidden-border {
+  border: 0px solid transparent !important;
+}
+
+.component-textarea__wrapper.component-textarea__wrapper--is-full-radius {
+  border-radius: 100px;
+}
+
+.component-textarea__wrapper.component-textarea__wrapper--is-full-size {
+  height: 100%;
+  max-height: 100%;
+  width: 100%;
+}
+
+.component-textarea__wrapper.component-textarea__wrapper--is-zero-radius {
+  border-radius: 0px;
+}
+
+.component-textarea__wrapper.component-textarea__wrapper--is-not-resize .component-textarea {
+  resize: none;
+}
+/* =========================
+   Component - Textarea
+   ========================= */
+.component-textarea {
+  overflow-x: hidden;
+  width: -webkit-fill-available;
+  padding: 0 !important;
+  border: none !important;
+  margin: 0 !important;
+  white-space: normal;
+  text-overflow: ellipsis;
+  height: auto;
+  background-color: transparent;
+}
+
+.component-textarea,
+.component-textarea:active,
+.component-textarea:focus-visible,
+.component-textarea:focus {
+  color: var(--component-textarea-color);
+  background: transparent;
+  border-color: transparent;
+  outline: none;
+}
+
+.component-textarea::placeholder,
+.component-textarea::-webkit-input-placeholder,
+.component-textarea:-ms-input-placeholder {
+  color: var(--component-textarea-placeholder-color);
+  opacity: 1;
+}

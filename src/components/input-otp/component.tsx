@@ -1,18 +1,16 @@
 import { ErrorMessage } from '@local/components/error';
 import { Input } from '@local/components/input';
-import { getSxTypography } from '@local/functions';
+import { CSS_VARS } from '@local/styles/utils';
 
 import { ClipboardEvent, FocusEvent, KeyboardEvent, useCallback, useRef, useState } from 'react';
-import { useTheme } from 'styled-components';
 
-import { InputOTPWrapper } from './component.styles';
-import { InputOTPProps } from './component.types';
+import { IInputOTP } from './component.types';
 
-export const InputOTP = (props: InputOTPProps) => {
+export const InputOTP = (props: IInputOTP) => {
   const [otp, setOtp] = useState<string[]>(new Array(props.length).fill(''));
   const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
-  const theme = useTheme();
+
   const handlePaste = useCallback(
     (index: number, e: ClipboardEvent<HTMLInputElement>) => {
       e.preventDefault();
@@ -127,9 +125,15 @@ export const InputOTP = (props: InputOTPProps) => {
   }, []);
   return (
     <>
-      <InputOTPWrapper
-        $error={props.error}
-        $size={props.size}
+      <div
+        className={props.className}
+        style={{
+          gap: `calc(${CSS_VARS.size[props.size].padding} - 2px)`,
+          width: '100%',
+          display: 'flex',
+          alignItems: 'flex-start',
+          ...props.style,
+        }}
         id={props.id}
         ref={wrapperRef}
         onBlur={(e) => {
@@ -146,7 +150,6 @@ export const InputOTP = (props: InputOTPProps) => {
             }
           }, 0);
         }}
-        $sx={props.sx}
       >
         {otp.map((digit, index) => (
           <Input
@@ -168,20 +171,21 @@ export const InputOTP = (props: InputOTPProps) => {
             genre={props.genre}
             size={props.size}
             sxTypography={props.sxTypography}
+            isBold={props.isBold}
+            isFullRadius={props.isFullRadius}
+            isDisabled={props.isDisabled}
+            isHidden={props.isHidden}
+            isHiddenBorder={props.isHiddenBorder}
           />
         ))}
-      </InputOTPWrapper>
-      {props?.error ? (
+      </div>
+      {props?.error?.isError && (
         <ErrorMessage
-          {...props.error}
           size={props?.error.size ?? props.size}
-          sxTypography={getSxTypography({
-            size: props.size,
-            weight: 400,
-            theme,
-          })}
+          sxTypography={{ size: '16px', weight: '400', ...props?.error.sxTypography }}
+          {...props.error}
         />
-      ) : null}
+      )}
     </>
   );
 };
