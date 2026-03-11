@@ -113,6 +113,11 @@ export const CSS_VARS = {
       footnote: 'var(--font-size-heading-footnote)',
       'caption-1': 'var(--font-size-heading-caption-1)',
       'caption-2': 'var(--font-size-heading-caption-2)',
+      'controller-large': 'var(--font-size-heading-controller-large)',
+      'controller-large-medium': 'var(--font-size-heading-controller-large-medium)',
+      'controller-medium': 'var(--font-size-heading-controller-medium)',
+      'controller-medium-small': 'var(--font-size-heading-controller-medium-small)',
+      'controller-small': 'var(--font-size-heading-controller-small)',
     },
   },
 
@@ -206,6 +211,20 @@ export const CSS_VARS = {
   },
 
   component: {
+    tooltip: {
+      padding: 'var(--component-tooltip-padding)',
+      height: 'var(--component-tooltip-height)',
+    },
+    popover: {
+      padding: 'var(--component-popover-padding)',
+      borderRadius: 'var(--component-popover-border-radius)',
+      maxWidth: 'var(--component-popover-max-width)',
+      maxHeight: 'var(--component-popover-max-height)',
+
+      background: 'var(--component-popover-background)',
+      borderColor: 'var(--component-popover-border-color)',
+      color: 'var(--component-popover-color)',
+    },
     error: {
       padding: 'var(--component-error-padding)',
       color: 'var(--component-error-color)',
@@ -304,7 +323,6 @@ export const CSS_VARS = {
       postfixRight: 'var(--component-input-postfix-right)',
       postfixLeft: 'var(--component-input-postfix-left)',
     },
-
     textarea: {
       boxShadow: 'var(--component-textarea-box-shadow)',
       background: 'var(--component-textarea-background)',
@@ -617,6 +635,13 @@ export const CSS_CLASS = {
   },
 
   component: {
+    tooltip: {
+      root: 'component-tooltip',
+      wrapper: 'component-tooltip__wrapper',
+    },
+    popover: {
+      root: 'component-popover',
+    },
     textarea: {
       root: 'component-textarea',
       wrapper: 'component-textarea__wrapper',
@@ -730,10 +755,3 @@ function removeVarWrapper<T extends Record<string, any>>(obj: T): DeepRemoveVar<
 }
 
 export const CSS_VARS_RAW = removeVarWrapper(CSS_VARS);
-
-export const EXTRA_VALUE = {
-  font: {
-    height: 16,
-    size: 1.2,
-  },
-};

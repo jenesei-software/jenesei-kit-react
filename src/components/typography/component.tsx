@@ -1,8 +1,10 @@
+import { useOverflowing } from '@local/hooks/use-overflowing';
 import { useTypographyStyles } from '@local/hooks/use-typography-styles';
 
 import { ElementType, memo, useMemo } from 'react';
 
-import { ITypographyComponent } from './component.types';
+import { ITypographyComponent, ITypographyTooltip } from './component.types';
+import { Tooltip } from '../tooltip';
 
 export const Typography = memo((props: ITypographyComponent) => {
   const { className, style } = useTypographyStyles({
@@ -40,5 +42,19 @@ export const Typography = memo((props: ITypographyComponent) => {
     <Component ref={props.ref as any} href={props.href} className={className} style={style}>
       {props.children}
     </Component>
+  );
+});
+
+export const TypographyTooltip = memo((props: ITypographyTooltip) => {
+  const { isDisabled, ref } = useOverflowing<HTMLDivElement>({
+    isCheckSize: props.tooltip.isDisabled !== undefined ? !props.tooltip.isDisabled : true,
+    dependencies: [props.children],
+  });
+  return (
+    <Tooltip isDisabled={isDisabled} content={props.children} {...props.tooltip}>
+      <Typography ref={ref} {...props.typography} style={{ position: 'relative' }}>
+        {props.children}
+      </Typography>
+    </Tooltip>
   );
 });

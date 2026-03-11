@@ -1,13 +1,5 @@
-import { addErrorPropsDollar } from '@local/components/error';
-import {
-  addSXProps,
-  addSXPropsDollar,
-  addSXTypographyProps,
-  addSXTypographyPropsDollar,
-  ITheme,
-  IThemeSize,
-} from '@local/theme';
-import { AddDollarSign } from '@local/types';
+import { ISxTypography, IThemeSize } from '@local/styles/utils';
+import { IThemeGenreButton } from '@local/styles/utils/types';
 
 import { Placement } from '@floating-ui/react';
 import { CSSProperties, PropsWithChildren, Ref } from 'react';
@@ -15,72 +7,66 @@ import { CSSProperties, PropsWithChildren, Ref } from 'react';
 /**
  * Props for the Popover component. / Свойства компонента Popover.
  */
-export type PopoverProps = PropsWithChildren & {
-  /**
-   * Additional class name for the popover root element.
-   * Дополнительный CSS-класс для корневого элемента поповера.
-   */
-  className?: string;
-  /**
-   * Maximum width of the popover (CSS value, e.g. '300px' or '100%').
-   * Максимальная ширина поповера (CSS-значение, например, '300px' или '100%').
-   */
-  maxWidth?: string;
-  /**
-   * Maximum height of the popover (CSS value, e.g. '400px' or '100%').
-   * Максимальная высота поповера (CSS-значение, например, '400px' или '100%').
-   */
-  maxHeight?: string;
-  /**
-   * Controls whether the popover is open (visible).
-   * Управляет открытием поповера (видимостью).
-   */
-  isOpen: boolean;
-  /**
-   * If true, always show the outline (for accessibility/debug).
-   * Если true — всегда показывать обводку (для доступности/отладки).
-   */
-  isShowAlwaysOutline?: boolean;
-  /**
-   * Styles for the floating popover element (from floating-ui).
-   * Стили для плавающего элемента поповера (от floating-ui).
-   */
-  floatingStyles: CSSProperties;
-  /**
-   * Callback fired when the popover should close (e.g. click outside).
-   * Колбэк, вызываемый при необходимости закрыть поповер (например, при клике вне).
-   */
-  onClose?: () => void;
-  /**
-   * Ref to the popover root element.
-   * Ref на корневой элемент поповера.
-   */
-  ref?: Ref<HTMLElement | null>;
-  /**
-   * Size of the popover (affects padding, font, etc.).
-   * Размер поповера (влияет на отступы, шрифт и т.д.).
-   */
-  size?: IThemeSize;
-  /**
-   * Visual genre/style of the popover (e.g. 'black', 'primary').
-   * Визуальный стиль поповера (например, 'black', 'primary').
-   */
-  genre?: keyof ITheme['colors']['button'];
-} & addSXProps &
-  addSXTypographyProps;
-
-export type StyledPopoverProps = AddDollarSign<
-  Pick<PopoverProps, 'maxWidth' | 'maxHeight' | 'size' | 'isShowAlwaysOutline'> & Required<Pick<PopoverProps, 'genre'>>
-> &
-  addSXPropsDollar &
-  addErrorPropsDollar &
-  addSXTypographyPropsDollar;
+export type IPopover = PropsWithChildren &
+  ISxTypography & {
+    /**
+     * Additional class name for the popover root element.
+     * Дополнительный CSS-класс для корневого элемента поповера.
+     */
+    className?: string;
+    style?: CSSProperties;
+    /**
+     * Maximum width of the popover (CSS value, e.g. '300px' or '100%').
+     * Максимальная ширина поповера (CSS-значение, например, '300px' или '100%').
+     */
+    maxWidth?: string;
+    /**
+     * Maximum height of the popover (CSS value, e.g. '400px' or '100%').
+     * Максимальная высота поповера (CSS-значение, например, '400px' или '100%').
+     */
+    maxHeight?: string;
+    /**
+     * Controls whether the popover is open (visible).
+     * Управляет открытием поповера (видимостью).
+     */
+    isOpen: boolean;
+    /**
+     * If true, always show the outline (for accessibility/debug).
+     * Если true — всегда показывать обводку (для доступности/отладки).
+     */
+    isShowAlwaysOutline?: boolean;
+    /**
+     * Styles for the floating popover element (from floating-ui).
+     * Стили для плавающего элемента поповера (от floating-ui).
+     */
+    floatingStyles: CSSProperties;
+    /**
+     * Callback fired when the popover should close (e.g. click outside).
+     * Колбэк, вызываемый при необходимости закрыть поповер (например, при клике вне).
+     */
+    onClose?: () => void;
+    /**
+     * Ref to the popover root element.
+     * Ref на корневой элемент поповера.
+     */
+    ref?: Ref<HTMLElement | null>;
+    /**
+     * Size of the popover (affects padding, font, etc.).
+     * Размер поповера (влияет на отступы, шрифт и т.д.).
+     */
+    size: IThemeSize;
+    /**
+     * Visual genre/style of the popover (e.g. 'primary').
+     * Визуальный стиль поповера (например, 'primary').
+     */
+    genre: IThemeGenreButton;
+  };
 
 /**
  * Props for the usePopover hook (popover logic and behavior).
  * Свойства для хука usePopover (логика и поведение поповера).
  */
-export type UsePopoverProps = {
+export type IUsePopover = {
   /**
    * Поддержка фокуса внутри поповера (если true, фокус будет удерживаться внутри поповера).
    */

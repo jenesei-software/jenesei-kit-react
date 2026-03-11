@@ -1,14 +1,15 @@
-import { getSxTypography } from '@local/functions';
+import { useTypographyStyles } from '@local/hooks/use-typography-styles';
+import { CSS_CLASS, CSS_VARS } from '@local/styles/utils';
+import { CSS_VARS_RAW } from '@local/styles/utils/constants';
+import { setClasses, setStyles } from '@local/styles/utils/functions';
 
 import { autoUpdate, flip, offset, shift, useFloating } from '@floating-ui/react';
-import { AnimatePresence } from 'framer-motion';
-import { FC, Ref, useCallback, useEffect, useMemo, useRef, useResponsiveLayoutEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { FC, Ref, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { useTheme } from 'styled-components';
 
 import { DEFAULT_POPOVER_CLOSE_DELAY, DEFAULT_POPOVER_OFFSET } from './component.constants';
-import { PopoverWrapper } from './component.styles';
-import { PopoverProps, UsePopoverProps } from './component.types';
+import { IPopover, IUsePopover } from './component.types';
 
 // Утилита для поиска фокусируемых элементов
 const getFocusableElements = (container: HTMLElement): HTMLElement[] => {
@@ -39,8 +40,43 @@ const getNextFocusableElement = (currentElement: HTMLElement, backward = false):
   }
 };
 
-export const Popover: FC<PopoverProps> = (props) => {
-  const theme = useTheme();
+export const Popover: FC<IPopover> = (props) => {
+  const { className: classNameTypography, style: styleTypography } = useTypographyStyles({
+    sx: { variant: 'callout', ...props?.sxTypography },
+  });
+
+  const { className, style } = useMemo(() => {
+    const className = setClasses([
+      classNameTypography,
+      CSS_CLASS.component.popover.root,
+      CSS_CLASS.transition.color,
+      props.className,
+    ]);
+
+    const vars: Record<string, string> = {};
+
+    vars[CSS_VARS_RAW.component.popover.background] = CSS_VARS.genre.button[props.genre].background.index;
+    vars[CSS_VARS_RAW.component.popover.color] = CSS_VARS.genre.button[props.genre].color.index;
+    vars[CSS_VARS_RAW.component.popover.borderColor] = CSS_VARS.genre.button[props.genre].border.index;
+
+    vars[CSS_VARS_RAW.component.popover.maxHeight] = props.maxHeight || '100%';
+    vars[CSS_VARS_RAW.component.popover.maxWidth] = props.maxWidth || '100%';
+    vars[CSS_VARS_RAW.component.popover.padding] = CSS_VARS.size[props.size].padding;
+    vars[CSS_VARS_RAW.component.popover.borderRadius] = CSS_VARS.size[props.size].radius;
+
+    const style = setStyles([styleTypography, Object.keys(vars).length ? vars : undefined, props.style]);
+
+    return { className, style };
+  }, [
+    props.className,
+    props.style,
+    props.genre,
+    props.maxHeight,
+    props.maxWidth,
+    props.size,
+    classNameTypography,
+    styleTypography,
+  ]);
 
   return ReactDOM.createPortal(
     <AnimatePresence>
@@ -58,28 +94,17 @@ export const Popover: FC<PopoverProps> = (props) => {
             border: '0px transparent solid !important',
           }}
         >
-          <PopoverWrapper
+          <motion.div
             tabIndex={-1}
-            $isShowAlwaysOutline={props.isShowAlwaysOutline}
-            $genre={props.genre ?? 'black'}
-            $sxTypography={getSxTypography({
-              size: props.size ?? 'medium',
-              weight: 700,
-              sx: props.sxTypography,
-              theme,
-            })}
-            className={props.className}
+            className={className}
+            style={style}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            $sx={props.sx}
-            $size={props.size}
-            $maxHeight={props.maxHeight}
-            $maxWidth={props.maxWidth}
           >
             {props.children}
-          </PopoverWrapper>
+          </motion.div>
         </div>
       )}
     </AnimatePresence>,
@@ -87,7 +112,7 @@ export const Popover: FC<PopoverProps> = (props) => {
   );
 };
 
-export const usePopover = (props: UsePopoverProps) => {
+export const usePopover = (props: IUsePopover) => {
   const { onFocus, onBlur, onBlurReference } = props;
 
   // Состояние открытия поповера
@@ -279,7 +304,7 @@ export const usePopover = (props: UsePopoverProps) => {
   /**
    * Устанавливаем минимальную ширину поповера, равную reference (если включено isWidthAsContent)
    */
-  useResponsiveLayoutEffect(() => {
+  useLayoutEffect(() => {
     if (!props.isWidthAsContent || !refs.reference.current) return;
     const rect = refs.reference.current.getBoundingClientRect();
     setMinWidth(rect.width);

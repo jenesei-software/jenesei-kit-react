@@ -1,0 +1,23 @@
+/* =========================
+   Component - Tooltip - Wrapper
+   ========================= */
+.component-tooltip__wrapper {
+  display: flex;
+  width: fit-content;
+  height: fit-content;
+}
+
+/* =========================
+   Component - Tooltip
+   ========================= */
+.component-tooltip {
+  gap: 0px;
+  padding: var(--component-tooltip-padding);
+  box-shadow: var(--shadow-primary-light);
+}
+.component-tooltip::after {
+  content: "";
+  display: block;
+  height: var(--component-tooltip-height);
+  width: 100%;
+}

@@ -14,7 +14,6 @@ export const useTypographyStyles = ({
   const { className, style } = useMemo(() => {
     const className = setClasses([
       CSS_CLASS.component.typography.root,
-      propsClassName,
       CSS_CLASS.transition[sx.transition ?? 'color'],
       sx.isBold != null && CSS_CLASS.component.typography.isBold,
       sx.line != null
@@ -22,7 +21,11 @@ export const useTypographyStyles = ({
           ? CSS_CLASS.component.typography.lineMulti
           : CSS_CLASS.component.typography.lineSingle
         : false,
-      sx.shadow != null ? (sx.shadow === 'shadowPulse' ? CSS_CLASS.component.typography.shadowShadowPulse : false) : false,
+      sx.shadow != null
+        ? sx.shadow === 'shadowPulse'
+          ? CSS_CLASS.component.typography.shadowShadowPulse
+          : false
+        : false,
       sx.isHoverUnderlining != null && CSS_CLASS.component.typography.isHoverUnderlining,
       sx.isNoUserSelect != null && CSS_CLASS.component.typography.isNoUserSelect,
       'size' in sx && CSS_CLASS.component.typography.size,
@@ -30,6 +33,7 @@ export const useTypographyStyles = ({
       'variant' in sx &&
         (sx.variant === 'callout' || sx.variant === 'headline') &&
         CSS_CLASS.component.typography.variantCallout,
+      propsClassName,
     ]);
 
     const vars: Record<string, string> = {};
@@ -41,7 +45,7 @@ export const useTypographyStyles = ({
     if ('variant' in sx) {
       vars[CSS_VARS_RAW.component.typography.variant] = CSS_VARS.font.sizeHeading[sx.variant];
       vars[CSS_VARS_RAW.component.typography.variantHeight] =
-        `${CSS_VARS.font.sizeHeading[sx.variant]}-plus-height`;
+        `var(${CSS_VARS_RAW.font.sizeHeading[sx.variant]}-plus-height)`;
     }
 
     if (sx.letterSpacing != null) {
@@ -67,7 +71,7 @@ export const useTypographyStyles = ({
     if (sx.decoration != null) vars[CSS_VARS_RAW.component.typography.decoration] = `${sx.decoration}`;
     if (sx.transform != null) vars[CSS_VARS_RAW.component.typography.transform] = `${sx.transform}`;
 
-    const style = setStyles([propsStyle, Object.keys(vars).length ? vars : undefined]);
+    const style = setStyles([Object.keys(vars).length ? vars : undefined, propsStyle]);
 
     return { className, style };
   }, [sx, propsClassName, propsStyle]);

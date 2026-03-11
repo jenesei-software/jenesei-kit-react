@@ -1,6 +1,6 @@
 import { Icon } from '@local/components/icon';
 import { useTypographyStyles } from '@local/hooks/use-typography-styles';
-import { CSS_CLASS, CSS_VARS } from '@local/styles/utils';
+import { CSS_CLASS, CSS_VARS, EXTRA_VALUE } from '@local/styles/utils';
 import { CSS_VARS_RAW } from '@local/styles/utils/constants';
 import { setClasses, setStyles } from '@local/styles/utils/functions';
 
@@ -17,13 +17,12 @@ export const Checkbox: FC<ICheckbox> = (props) => {
   const ref = useMergeRefs([refDefault, props.ref]);
 
   const { className: classNameTypography, style: styleTypography } = useTypographyStyles({
-    sx: { ...props?.sxTypography, size: CSS_VARS.size[props.size].font, weight: '700', height: '1' },
-    style: { order: 0, display: 'contents' },
+    sx: { variant: EXTRA_VALUE.sizeToController[props.size], ...props?.sxTypography },
+    style: { order: 0, display: 'inline-flex' },
   });
 
   const { className, style } = useMemo(() => {
     const className = setClasses([
-      props.className,
       CSS_CLASS.component.checkbox.root,
       CSS_CLASS.control[props.isDisabled ? 'none' : (props.control ?? 'boxShadow')],
       CSS_CLASS.transition.color,
@@ -36,6 +35,7 @@ export const Checkbox: FC<ICheckbox> = (props) => {
       props.isWidthAsHeight && CSS_CLASS.component.checkbox.isWidthAsHeight,
       props.isMinWidthAsContent && CSS_CLASS.component.checkbox.isMinWidthAsContent,
       props.isOnlyIcon && CSS_CLASS.component.checkbox.isOnlyIcon,
+      props.className,
     ]);
 
     const vars: Record<string, string> = {};
@@ -49,26 +49,25 @@ export const Checkbox: FC<ICheckbox> = (props) => {
     vars[CSS_VARS_RAW.component.checkbox.radius] = CSS_VARS.size[props.size].radius;
     vars[CSS_VARS_RAW.component.checkbox.gap] = `calc(${CSS_VARS.size[props.size].padding} - 2px)`;
 
-    const style = setStyles([props.sx, props.style, Object.keys(vars).length ? vars : undefined]);
+    const style = setStyles([Object.keys(vars).length ? vars : undefined, props.style]);
 
     return { className, style };
   }, [
-    props.className, 
-    props.style, 
-    props.sx, 
-    props.genre, 
-    props.isDisabled, 
-    props.isFullSize, 
-    props.isHidden, 
-    props.isHiddenBorder, 
-    props.isMinWidthAsContent, 
-    props.isFullRadius, 
-    props.isWidthAsHeight, 
-    props.size, 
-    props.error, 
-    props.isZeroRadius, 
-    props.isOnlyIcon, 
-    props.control
+    props.className,
+    props.style,
+    props.genre,
+    props.isDisabled,
+    props.isFullSize,
+    props.isHidden,
+    props.isHiddenBorder,
+    props.isMinWidthAsContent,
+    props.isFullRadius,
+    props.isWidthAsHeight,
+    props.size,
+    props.error,
+    props.isZeroRadius,
+    props.isOnlyIcon,
+    props.control,
   ]);
   const handleClick = useCallback(() => {
     if (!props.isDisabled && props.onChange) {
@@ -95,7 +94,7 @@ export const Checkbox: FC<ICheckbox> = (props) => {
           {...(props.checked ? props.view.true : props.view.false)}
           size={(props.checked ? props.view.true : props.view.false)?.size ?? props.size}
         />
-        {!props.isOnlyIcon && (
+        {!props.isOnlyIcon && props.children && (
           <div className={classNameTypography} style={styleTypography}>
             {props.children}
           </div>

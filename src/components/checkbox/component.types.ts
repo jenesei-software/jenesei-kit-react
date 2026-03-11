@@ -1,4 +1,4 @@
-import { ISx, ISxTypography, IThemeSize } from '@local/styles/utils';
+import { ISxTypography, IThemeSize } from '@local/styles/utils';
 import { IThemeControl, IThemeGenreCheckbox } from '@local/styles/utils/types';
 
 import { CSSProperties, FocusEvent, MouseEventHandler, PropsWithChildren, Ref } from 'react';
@@ -68,6 +68,6 @@ export type ICheckbox = PropsWithChildren & {
     
     false: IIconWithoutSize & { size?: IThemeSize };
   };
-} & ISx &
+} &
   IAddError &
   ISxTypography;

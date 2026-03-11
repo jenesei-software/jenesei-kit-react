@@ -1,5 +1,5 @@
 import { IAddIIcon } from '@local/components/icon';
-import { ISx, ISxTypography, IThemeControl, IThemeGenreButton, IThemeSize } from '@local/styles/utils/types';
+import { ISxTypography, IThemeControl, IThemeGenreButton, IThemeSize } from '@local/styles/utils/types';
 
 import { CSSProperties, FocusEventHandler, MouseEventHandler, PropsWithChildren, Ref } from 'react';
 
@@ -53,7 +53,7 @@ type IButtonDefault = PropsWithChildren & {
   tabIndex?: number;
 
   type?: HTMLButtonElement['type'];
-} & ISx &
+}  &
   ISxTypography;
 
 type IButtonStandard = IButtonDefault & {

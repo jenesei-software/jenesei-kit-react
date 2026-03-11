@@ -433,7 +433,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
                 isDisabledRipple
                 isNotHoverEffect
               >
-                <Icon type={'loading'} name={'Circle'} size={props.size} />
+                <Icon type={'loading'} name={'Line'} size={props.size} />
               </Button>
             )}
           </ButtonList>

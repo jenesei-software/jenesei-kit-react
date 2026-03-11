@@ -41,6 +41,20 @@
   --font-size-heading-caption-2: 9px;
   --font-size-heading-caption-2-plus-height: 3px;
 
+  --font-size-heading-controller-large: 20px;
+  --font-size-heading-controller-large-plus-height: 4px;
+
+  --font-size-heading-controller-large-medium: 18px;
+  --font-size-heading-controller-large-medium-plus-height: 3.6px;
+
+  --font-size-heading-controller-medium: 16px;
+  --font-size-heading-controller-medium-plus-height: 3.2px;
+
+  --font-size-heading-controller-medium-small: 14px;
+  --font-size-heading-controller-medium-small-plus-height: 2.8px;
+
+  --font-size-heading-controller-small: 12px;
+  --font-size-heading-controller-small-plus-height: 2.4px;
   /* ================= ANIMATION ================= */
   --duration: 0.3s;
   --easing: ease-in-out;

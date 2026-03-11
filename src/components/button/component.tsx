@@ -1,6 +1,6 @@
 import { getIconComponents } from '@local/components/icon';
 import { useTypographyStyles } from '@local/hooks/use-typography-styles';
-import { CSS_CLASS, CSS_VARS, CSS_VARS_RAW } from '@local/styles/utils/constants';
+import { CSS_CLASS, CSS_VARS, CSS_VARS_RAW, EXTRA_VALUE } from '@local/styles/utils';
 import { setClasses, setStyles } from '@local/styles/utils/functions';
 
 import { useMergeRefs } from '@floating-ui/react';
@@ -41,13 +41,12 @@ export const Button: FC<IButton> = (props) => {
   );
 
   const { className: classNameTypography, style: styleTypography } = useTypographyStyles({
-    sx: { ...props?.sxTypography, size: CSS_VARS.size[props.size].font, weight: '700', height: '1' },
-    style: { order: 0, display: 'contents' },
+    sx: { variant: EXTRA_VALUE.sizeToController[props.size], ...props?.sxTypography },
+    style: { order: 0, display: 'inline-flex' },
   });
 
   const { className, style } = useMemo(() => {
     const className = setClasses([
-      props.className,
       CSS_CLASS.component.button.root,
       CSS_CLASS.control[props.isDisabled ? 'none' : (props.control ?? 'boxShadow')],
       CSS_CLASS.transition.color,
@@ -58,6 +57,7 @@ export const Button: FC<IButton> = (props) => {
       props.isFullSize && CSS_CLASS.component.button.isFullSize,
       props.isWidthAsHeight && CSS_CLASS.component.button.isWidthAsHeight,
       props.isMinWidthAsContent && CSS_CLASS.component.button.isMinWidthAsContent,
+      props.className,
     ]);
 
     const vars: Record<string, string> = {};
@@ -71,23 +71,23 @@ export const Button: FC<IButton> = (props) => {
     vars[CSS_VARS_RAW.component.button.radius] = CSS_VARS.size[props.size].radius;
     vars[CSS_VARS_RAW.component.button.gap] = `calc(${CSS_VARS.size[props.size].padding} - 2px)`;
 
-    const style = setStyles([props.sx, props.style, Object.keys(vars).length ? vars : undefined]);
+    const style = setStyles([Object.keys(vars).length ? vars : undefined, props.style]);
 
     return { className, style };
   }, [
-    props.className, 
-    props.style, 
-    props.sx, 
-    props.genre, 
-    props.isDisabled, 
-    props.isFullSize, 
-    props.isHidden, 
-    props.isHiddenBorder, 
-    props.isMinWidthAsContent, 
-    props.isFullRadius, 
-    props.isWidthAsHeight, 
-    props.size, 
-    props.isZeroRadius, props.control
+    props.className,
+    props.style,
+    props.genre,
+    props.isDisabled,
+    props.isFullSize,
+    props.isHidden,
+    props.isHiddenBorder,
+    props.isMinWidthAsContent,
+    props.isFullRadius,
+    props.isWidthAsHeight,
+    props.size,
+    props.isZeroRadius,
+    props.control,
   ]);
 
   const { className: classNameIconGroup, style: styleIconGroup } = useMemo(() => {
@@ -105,7 +105,7 @@ export const Button: FC<IButton> = (props) => {
     const style = setStyles([Object.keys(vars).length ? vars : undefined]);
 
     return { className, style };
-  }, [props.className, props.style, props]);
+  }, [props]);
 
   return (
     <motion.button
@@ -124,7 +124,7 @@ export const Button: FC<IButton> = (props) => {
       aria-label={props.ariaLabel}
       id={props.id}
     >
-      {!props.isOnlyIcon && (
+      {!props.isOnlyIcon && props.children &&(
         <div className={classNameTypography} style={styleTypography}>
           {props.children}
         </div>

@@ -1,4 +1,7 @@
-import { ISx } from '@local/styles/utils';
+
+
+import { CSSProperties } from 'react';
+
 
 import { IButton } from '../button';
 
@@ -19,4 +22,6 @@ export type IPagination = {
     prev: string;
     next: string;
   };
-} & ISx;
+  className?:string;
+  style:CSSProperties
+};

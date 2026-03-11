@@ -199,7 +199,7 @@ const CollectionWrapper: FC = () => {
               type={'logo'}
               name={'Jenesei'}
               size={'medium'}
-              sx={{
+              style={{
                 color: 'red',
               }}
             />
