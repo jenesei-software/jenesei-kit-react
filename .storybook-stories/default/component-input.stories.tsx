@@ -448,7 +448,7 @@ const CollectionWrapper: FC = () => {
                     background: CSS_VARS.palette.fillPrimaryLight,
                   }}
                 >
-                  <Icon type={'loading'} name={'Circle'} size={'largeMedium'} color='textPrimaryDark' />
+                  <Icon type={'loading'} name={'Line'} size={'largeMedium'} color='textPrimaryDark' />
                 </Stack>
               ),
             }}

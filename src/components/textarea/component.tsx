@@ -1,6 +1,6 @@
 import { ErrorMessage } from '@local/components/error';
 import { useTypographyStyles } from '@local/hooks/use-typography-styles/use';
-import { CSS_CLASS, CSS_VARS, CSS_VARS_RAW, EXTRA_VALUE } from '@local/styles/utils/constants';
+import { CSS_CLASS, CSS_VARS, CSS_VARS_RAW, EXTRA_VALUE } from '@local/styles/utils';
 import { setClasses, setStyles } from '@local/styles/utils/functions';
 
 import { useMergeRefs } from '@floating-ui/react';
@@ -47,17 +47,16 @@ export const TextArea = (props: ITextArea) => {
 
   const { className: classNameTypography, style: styleTypography } = useTypographyStyles({
     sx: {
-      ...props?.sxTypography,
       family: props.isNiceNumber ? 'Roboto Mono' : props.sxTypography?.family,
       size: 16,
       weight: props.isBold ? '700' : '400',
       height: '1.2',
+      ...props?.sxTypography,
     },
   });
 
   const { className, style } = useMemo(() => {
     const className = setClasses([
-      props.className,
       CSS_CLASS.component.textarea.wrapper,
       CSS_CLASS.transition.color,
       props.error?.isError && CSS_CLASS.isError,
@@ -68,6 +67,7 @@ export const TextArea = (props: ITextArea) => {
       props.isFullRadius && CSS_CLASS.component.textarea.wrapperIsFullRadius,
       props.isCenter && CSS_CLASS.component.textarea.wrapperIsCenter,
       !props.isResize && CSS_CLASS.component.textarea.wrapperIsNotResize,
+      props.className,
     ]);
 
     const vars: Record<string, string> = {};
@@ -78,7 +78,7 @@ export const TextArea = (props: ITextArea) => {
     vars[CSS_VARS_RAW.component.textarea.padding] =
       `calc(${CSS_VARS.size[props.size].padding} - 4px) 0px calc(${CSS_VARS.size[props.size].padding} - 4px) ${CSS_VARS.size[props.size].padding}`;
 
-    const style = setStyles([props.style, Object.keys(vars).length ? vars : undefined]);
+    const style = setStyles([Object.keys(vars).length ? vars : undefined, props.style]);
 
     return { className, style };
   }, [

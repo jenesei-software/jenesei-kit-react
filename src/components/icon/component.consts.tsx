@@ -101,7 +101,7 @@ const THEME_MAP_CHECKBOX = [
   'Heart-false',
   'Arrow',
 ] as const;
-const THEME_MAP_LOADING = ['Line', 'Circle', 'Blocks', 'Balls'] as const;
+const THEME_MAP_LOADING = ['Line', 'Blocks', 'Balls'] as const;
 const THEME_MAP_LOGO = ['Jenesei', 'BustMarket'] as const;
 
 export const THEME_MAP = {

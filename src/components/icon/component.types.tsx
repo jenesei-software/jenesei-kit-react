@@ -1,4 +1,4 @@
-import { ISx, IThemePalette, IThemeSize } from '@local/styles/utils';
+import { IThemePalette, IThemeSize } from '@local/styles/utils';
 
 import { CSSProperties, MouseEvent } from 'react';
 
@@ -23,7 +23,7 @@ export type IIcon = {
     turn?: number;
     order?: number;
     tabIndex?: number;
-  } & ISx;
+  };
 }[keyof IIconMao];
 
 export type IAddIIcon = {
@@ -46,7 +46,7 @@ export type IAddIIconGeneric<T extends keyof IIconMao = keyof IIconMao> = {
   order?: number;
   tabIndex?: number;
   isHidden?: boolean;
-} & ISx;
+};
 
 export type IGetIconComponentsProps = {
   size: IThemeSize;

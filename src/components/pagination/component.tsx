@@ -45,16 +45,17 @@ export const Pagination: FC<IPagination> = (props) => {
 
   return (
     <Stack
-      sx={{
+      className={props.className}
+      style={{
         height: 'fit-content',
         gap: `${gap}px`,
+        ...props.style,
       }}
     >
       <Button
         isDisabled={isDisabledPrevious}
         isHidden={isDisabledPrevious}
         onClick={handlePrevious}
-        outline='boxShadow'
         {...props.buttonControl}
         icons={[
           {
@@ -86,7 +87,7 @@ export const Pagination: FC<IPagination> = (props) => {
               {isVisible && (
                 <motion.div
                   layout
-                  initial={{ opacity: 0, scale: 0.95, }}
+                  initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.1, ease: 'easeInOut' } }}
                   transition={{
@@ -95,7 +96,6 @@ export const Pagination: FC<IPagination> = (props) => {
                 >
                   <Button
                     isWidthAsHeight
-                    outline='boxShadow'
                     {...(i === props.index ? props.buttonCount.active : props.buttonCount.inactive)}
                     {...lengthData?.[i]}
                     onClick={() => props.changeIndex(i)}
@@ -113,7 +113,6 @@ export const Pagination: FC<IPagination> = (props) => {
         isDisabled={isDisabledNext}
         isHidden={isDisabledNext}
         onClick={handleNext}
-        outline='boxShadow'
         {...props.buttonControl}
         icons={[
           {

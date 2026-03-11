@@ -8,3 +8,5 @@
 @import "../components/component.toggle.css";
 @import "../components/component.input.css";
 @import "../components/component.textarea.css";
+@import "../components/component.popover.css";
+@import "../components/component.tooltip.css";

@@ -30,17 +30,16 @@ export const Input = (props: IInput) => {
 
   const { className: classNameTypography, style: styleTypography } = useTypographyStyles({
     sx: {
-      ...props?.sxTypography,
       family: props.isNiceNumber ? 'Roboto Mono' : props.sxTypography?.family,
       size: 16,
       weight: props.isBold ? '700' : '400',
       height: '1',
+      ...props?.sxTypography,
     },
   });
 
   const { className, style } = useMemo(() => {
     const className = setClasses([
-      props.className,
       CSS_CLASS.component.input.wrapper,
       CSS_CLASS.transition.color,
       props.error?.isError && CSS_CLASS.isError,
@@ -53,6 +52,7 @@ export const Input = (props: IInput) => {
       props.isWidthAsHeight && CSS_CLASS.component.input.wrapperIsWidthAsHeight,
       props.isMinWidthAsContent && CSS_CLASS.component.input.wrapperIsMinWidthAsContent,
       props.isCenter && CSS_CLASS.component.input.wrapperIsCenter,
+      props.className,
     ]);
 
     const vars: Record<string, string> = {};
@@ -70,7 +70,7 @@ export const Input = (props: IInput) => {
     if (props.prefixChildren?.right) vars[CSS_VARS_RAW.component.input.prefixRight] = props.prefixChildren?.right;
     if (props.prefixChildren?.width) vars[CSS_VARS_RAW.component.input.prefixWidth] = props.prefixChildren?.width;
 
-    const style = setStyles([props.style, Object.keys(vars).length ? vars : undefined]);
+    const style = setStyles([Object.keys(vars).length ? vars : undefined, props.style]);
 
     return { className, style };
   }, [

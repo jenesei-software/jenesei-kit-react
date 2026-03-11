@@ -30,7 +30,7 @@ export const Icon = (props: IIcon) => {
 
   const configIcon = useMemo(() => {
     return {
-      className: setClasses([CSS_CLASS.component.icon.root, props.className, CSS_CLASS.transition.icon]),
+      className: setClasses([CSS_CLASS.component.icon.root, CSS_CLASS.transition.icon,props.className]),
 
       style: setStyles([
         {
@@ -41,10 +41,9 @@ export const Icon = (props: IIcon) => {
           [CSS_VARS_RAW.component.icon.order]: props.order ? String(props.order) : 'initial',
         },
         props.style,
-        props?.sx,
       ]),
     };
-  }, [props.className, props.style, props.order, props.size, props.color, props.turn, props.sx]);
+  }, [props.className, props.style, props.order, props.size, props.color, props.turn]);
 
   if (!loaded || error)
     return (

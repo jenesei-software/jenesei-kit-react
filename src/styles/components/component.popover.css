@@ -1,0 +1,21 @@
+/* =========================
+   Component - Popover
+   ========================= */
+.component-popover {
+  border: 1px solid transparent;
+
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+
+  border-radius: var(--component-popover-border-radius);
+  padding: var(--component-popover-padding);
+  gap: calc(var(--component-popover-padding) - 2px);
+  max-width: var(--component-popover-max-width, 100%);
+  max-height: var(--component-popover-max-height, 100%);
+
+
+  background: var(--component-popover-background);
+  border-color: var(--component-popover-border-color);
+  color: var(--component-popover-color);
+}

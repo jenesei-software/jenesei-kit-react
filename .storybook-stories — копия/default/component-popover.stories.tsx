@@ -1,5 +1,5 @@
 import { Button } from '@local/components/button';
-import { Popover as PopoverComponent, PopoverProps, usePopover } from '@local/components/popover';
+import { IPopover, Popover as PopoverComponent, usePopover } from '@local/components/popover';
 import { Stack } from '@local/components/stack';
 import { Typography } from '@local/components/typography';
 
@@ -18,7 +18,7 @@ export default meta;
 
 type Story = StoryObj<typeof PopoverComponent>;
 
-const PopoverWrapper: FC<PopoverProps> = (props) => {
+const PopoverWrapper: FC<IPopover> = (props) => {
   const { isOpen, refReference, refFloating, floatingStyles } = usePopover({
     placement: 'bottom-start',
     offset: 8,

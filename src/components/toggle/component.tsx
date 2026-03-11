@@ -11,7 +11,6 @@ import { ErrorMessage } from '../error';
 export const Toggle = (props: IToggle) => {
   const { className, style } = useMemo(() => {
     const className = setClasses([
-      props.className,
       CSS_CLASS.component.toggle.root,
       props.value ? CSS_CLASS.component.toggle.active : CSS_CLASS.component.toggle.unActive,
       CSS_CLASS.control[props.isDisabled ? 'none' : (props.control ?? 'boxShadow')],
@@ -20,6 +19,7 @@ export const Toggle = (props: IToggle) => {
       props.error?.isError && CSS_CLASS.isError,
       props.isHidden && CSS_CLASS.component.toggle.isHidden,
       props.isHiddenBorder && CSS_CLASS.component.toggle.isHiddenBorder,
+      props.className,
     ]);
 
     const vars: Record<string, string> = {};
@@ -32,20 +32,21 @@ export const Toggle = (props: IToggle) => {
     vars[CSS_VARS_RAW.component.toggle.borderActive] = CSS_VARS.genre.toggle[props.genre].active.border;
     vars[CSS_VARS_RAW.component.toggle.borderUnActive] = CSS_VARS.genre.toggle[props.genre].unActive.border;
 
-    const style = setStyles([props.style, Object.keys(vars).length ? vars : undefined]);
+    const style = setStyles([Object.keys(vars).length ? vars : undefined, props.style]);
 
     return { className, style };
   }, [
-    props.className, 
-    props.style, 
-    props.genre, 
-    props.isDisabled, 
-    props.isHidden, 
-    props.isHiddenBorder, 
-    props.size, 
-    props.value, 
-    props.error?.isError, 
-    props.isZeroRadius, props.control
+    props.className,
+    props.style,
+    props.genre,
+    props.isDisabled,
+    props.isHidden,
+    props.isHiddenBorder,
+    props.size,
+    props.value,
+    props.error?.isError,
+    props.isZeroRadius,
+    props.control,
   ]);
 
   const { className: classNameCenter, style: styleCenter } = useMemo(() => {
@@ -72,10 +73,10 @@ export const Toggle = (props: IToggle) => {
       ? `calc(${CSS_VARS.sizeToggle[props.size].width} - ${CSS_VARS.sizeToggle[props.size].thumb} - ${CSS_VARS.sizeToggle[props.size].padding} * 2)`
       : '0px';
 
-    const style = setStyles([props.style, Object.keys(vars).length ? vars : undefined]);
+    const style = setStyles([Object.keys(vars).length ? vars : undefined]);
 
     return { className, style };
-  }, [props.style, props.genre, props.size, props.value]);
+  }, [props.genre, props.size, props.value]);
 
   const refDefault = useRef<HTMLButtonElement>(null);
 

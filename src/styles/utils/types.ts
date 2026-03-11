@@ -90,3 +90,18 @@ export type IThemeGenreTextArea = keyof typeof CSS_VARS.genre.textarea;
 export type IThemeControl = keyof typeof CSS_CLASS.control;
 
 export type IThemeTransition = keyof typeof CSS_CLASS.transition;
+
+export const EXTRA_VALUE = {
+  font: {
+    height: 16,
+    size: 1.2,
+  },
+  sizeToController: {
+    large: 'controller-large',
+    largeMedium: 'controller-large-medium',
+    medium: 'controller-medium',
+    mediumSmall: 'controller-medium-small',
+    small: 'controller-small',
+  } as Record<IThemeSize,IThemeTypographyHeading>,
+};
+  

@@ -9,9 +9,8 @@ import { ISeparator } from './component.types';
 const DEFAULT_SEPARATOR_SIZE = '1px';
 
 export const Separator: FC<ISeparator> = (props) => {
-
   const { className, style } = useMemo(() => {
-    const className = setClasses([props.className, CSS_CLASS.component.separator.root]);
+    const className = setClasses([CSS_CLASS.component.separator.root, props.className]);
 
     const vars: Record<string, string> = {};
 
@@ -26,7 +25,7 @@ export const Separator: FC<ISeparator> = (props) => {
     vars[CSS_VARS_RAW.component.separator.maxWidth] =
       props.type === 'horizontal' ? '100%' : props.thickness || DEFAULT_SEPARATOR_SIZE;
 
-    const style = setStyles([props.style, Object.keys(vars).length ? vars : undefined]);
+    const style = setStyles([Object.keys(vars).length ? vars : undefined, props.style]);
 
     return { className, style };
   }, [props.className, props.style, props.color, props.radius, props.thickness, props.type]);
