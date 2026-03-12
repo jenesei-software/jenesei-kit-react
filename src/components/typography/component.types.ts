@@ -1,8 +1,7 @@
+import { ITooltip } from '@local/components/tooltip';
 import { ISx, ISxTypography } from '@local/styles/utils';
 
 import { CSSProperties, PropsWithChildren, Ref } from 'react';
-
-import { ITooltip } from '../tooltip';
 
 export type ITypographyComponent = PropsWithChildren & {
   onClick?: () => void;

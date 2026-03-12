@@ -248,15 +248,6 @@ const CollectionWrapper: FC = () => {
             onChange={(newValue) => setValue(newValue)}
           />
           <TextAreaComponent
-            placeholder='Is center'
-            genre='primary'
-            size='large'
-            value={value}
-            minRows={2}
-            isCenter
-            onChange={(newValue) => setValue(newValue)}
-          />
-          <TextAreaComponent
             placeholder='Is disabled'
             genre='primary'
             size='large'

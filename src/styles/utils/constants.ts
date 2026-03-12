@@ -177,6 +177,43 @@ export const CSS_VARS = {
     },
   },
 
+  sizeValue: {
+    large: {
+      height: 46,
+      heightIcon: 24,
+      radius: 6,
+      padding: 16,
+      font: 20,
+    },
+    largeMedium: {
+      height: 42,
+      heightIcon: 22,
+      radius: 6,
+      padding: 14,
+      font: 18,
+    },
+    medium: {
+      height: 38,
+      heightIcon: 20,
+      radius: 6,
+      padding: 12,
+      font: 14,
+    },
+    mediumSmall: {
+      height: 34,
+      heightIcon: 18,
+      radius: 6,
+      padding: 10,
+      font: 14,
+    },
+    small: {
+      height: 30,
+      heightIcon: 16,
+      radius: 8,
+      padding: 8,
+      font: 12,
+    },
+  },
   sizeToggle: {
     large: {
       height: 'var(--size-toggle-large-height)',
@@ -211,6 +248,20 @@ export const CSS_VARS = {
   },
 
   component: {
+    select: {
+      padding: 'var(--component-select-padding)',
+      height: 'var(--component-select-height)',
+      borderRadius: 'var(--component-select-border-radius)',
+
+      background: 'var(--component-select-background)',
+      borderColor: 'var(--component-select-border-color)',
+      borderColorSelect: 'var(--component-select-border-color-select)',
+      color: 'var(--component-select-color)',
+
+      backgroundInput: 'var(--component-select-background-input)',
+      borderColorInput: 'var(--component-select-border-color-input)',
+      colorInput: 'var(--component-select-color-input)',
+    },
     tooltip: {
       padding: 'var(--component-tooltip-padding)',
       height: 'var(--component-tooltip-height)',
@@ -224,6 +275,7 @@ export const CSS_VARS = {
       background: 'var(--component-popover-background)',
       borderColor: 'var(--component-popover-border-color)',
       color: 'var(--component-popover-color)',
+      boxShadow: 'var(--component-popover-box-shadow)',
     },
     error: {
       padding: 'var(--component-error-padding)',
@@ -342,6 +394,20 @@ export const CSS_VARS = {
   },
 
   genre: {
+    popover: {
+      primary: {
+        background: CSS_VARS_PALETTE.fillPrimaryDark,
+        color: CSS_VARS_PALETTE.textPrimaryLight,
+        border: CSS_VARS_PALETTE.transparent,
+        boxShadow: CSS_VARS_PALETTE.shadowPrimaryDark,
+      },
+      secondary: {
+        background: CSS_VARS_PALETTE.fillPrimaryLight,
+        color: CSS_VARS_PALETTE.textPrimaryDark,
+        border: CSS_VARS_PALETTE.transparent,
+        boxShadow: CSS_VARS_PALETTE.shadowPrimaryLight,
+      },
+    },
     checkbox: {
       green: {
         background: {
@@ -530,6 +596,38 @@ export const CSS_VARS = {
         placeholder: CSS_VARS_PALETTE.textSecondaryDark,
       },
     },
+    select: {
+      primary: {
+        color: {
+          index: CSS_VARS_PALETTE.textPrimaryLight,
+        },
+        background: {
+          index: CSS_VARS_PALETTE.fillPrimaryDark,
+        },
+        border: {
+          index: CSS_VARS_PALETTE.textPrimaryLight,
+          select: CSS_VARS_PALETTE.productPrimaryLight,
+        },
+        placeholder: {
+          index: CSS_VARS_PALETTE.textSecondaryLight,
+        },
+      },
+      secondary: {
+        color: {
+          index: CSS_VARS_PALETTE.textPrimaryDark,
+        },
+        background: {
+          index: CSS_VARS_PALETTE.fillPrimaryLight,
+        },
+        border: {
+          index: CSS_VARS_PALETTE.textPrimaryDark,
+          select: CSS_VARS_PALETTE.productPrimaryLight,
+        },
+        placeholder: {
+          index: CSS_VARS_PALETTE.textSecondaryDark,
+        },
+      },
+    },
     textarea: {
       primary: {
         color: CSS_VARS_PALETTE.textPrimaryLight,
@@ -585,6 +683,8 @@ export const CSS_CLASS = {
   control: {
     default: 'u-control--default',
     boxShadow: 'u-control--boxShadow',
+    boxShadowSelect: 'u-control--boxShadow-select',
+    boxShadowOnlyHover: 'u-control--boxShadow-only-hover',
     onlyActive: 'u-control--only-active',
     none: 'u-control--none',
   },
@@ -635,6 +735,23 @@ export const CSS_CLASS = {
   },
 
   component: {
+    select: {
+      wrapper: 'component-select__wrapper',
+      isCenter: 'component-select--is-center',
+      isShowScroll: 'component-select--is-show-scroll',
+      isWrapSelectOption: 'component-select--is-wrap-select-option',
+      isClearWhenClickSelectListOption: 'component-select--is-clear-when-click-select-list-option',
+      isOnlyColorInSelectListOption: 'component-select--is-only-color-in-select-list-option',
+      dropdownList: 'component-select__dropdown__list',
+      dropdownListWrapper: 'component-select__dropdown__list__wrapper',
+      dropdownOption: 'component-select__dropdown__option',
+      dropdownOptionIsSelected: 'component-select__dropdown__option--is-selected',
+      dropdownOptionIsDisabled: 'component-select__dropdown__option--is-disabled',
+      list: 'component-select__list',
+      listOption: 'component-select__list__option',
+      listOptionIsSelected: 'component-select__list__option--is-selected',
+      textarea: 'component-select__textarea',
+    },
     tooltip: {
       root: 'component-tooltip',
       wrapper: 'component-tooltip__wrapper',

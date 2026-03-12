@@ -1,6 +1,6 @@
 import { useTypographyStyles } from '@local/hooks/use-typography-styles';
 import { MotionWordsPullUp } from '@local/styles/motion';
-import { CSS_CLASS, CSS_VARS, EXTRA_VALUE } from '@local/styles/utils';
+import { CSS_CLASS, CSS_VARS } from '@local/styles/utils';
 import { CSS_VARS_RAW } from '@local/styles/utils/constants';
 import { setClasses, setStyles } from '@local/styles/utils/functions';
 
@@ -10,17 +10,12 @@ import { IErrorMessage } from './component.types';
 
 export const ErrorMessage: FC<IErrorMessage> = (props) => {
   const { className: classNameTypography, style: styleTypography } = useTypographyStyles({
-    sx: props.size
-      ? {
-          variant: EXTRA_VALUE.sizeToController[props.size],
-          ...props?.sxTypography,
-        }
-      : {
-          size: '16px',
-          weight: '700',
-          height: '1',
-          ...props?.sxTypography,
-        },
+    sx: {
+      size: '16px',
+      weight: '700',
+      height: '1',
+      ...props?.sxTypography,
+    },
     style: { order: 0, display: 'contents' },
   });
 

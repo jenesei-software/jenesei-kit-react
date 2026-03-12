@@ -1,6 +1,6 @@
 // import {
 //   DatePickerTranslateInputProps,
-//   DatePickerTranslateMonthProps,
+//   IDatePickerTranslateMonth,
 //   DatePickerTranslateWeekProps,
 // } from '@local/components/date-picker';
 import { transformObjectToArray, transformObjectValuesToKeys } from '@local/functions';
@@ -43,7 +43,7 @@ export const LIST_KEY_SERVICE = transformObjectValuesToKeys(OBJECT_SERVICE);
 //   month: 'ММ',
 //   year: 'ГГГГ',
 // };
-// export const LOCALE_MONTHS: DatePickerTranslateMonthProps[] = [
+// export const LOCALE_MONTHS: IDatePickerTranslateMonth[] = [
 //   {
 //     localeLong: 'Январь',
 //     localeShort: 'Янв',

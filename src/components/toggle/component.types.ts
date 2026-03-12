@@ -1,8 +1,7 @@
+import { IAddError } from '@local/components/error';
 import { IThemeControl, IThemeGenreToggle, IThemeSize } from '@local/styles/utils/types';
 
 import { CSSProperties, FocusEvent, MouseEventHandler, Ref } from 'react';
-
-import { IAddError } from '../error';
 
 export type IToggle = {
   ariaLabel?: string;

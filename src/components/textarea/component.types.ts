@@ -1,3 +1,4 @@
+import { IAddError } from '@local/components/error';
 import { ISxTypography, IThemeSize } from '@local/styles/utils';
 import { IThemeControl, IThemeGenreTextArea } from '@local/styles/utils/types';
 
@@ -10,8 +11,6 @@ import {
   MouseEventHandler,
   Ref
 } from 'react';
-
-import { IAddError } from '../error';
 
 type ICommonTextArea = IAddError &
   ISxTypography & {
@@ -34,7 +33,6 @@ type ICommonTextArea = IAddError &
     isResize?: boolean;
     isLoading?: boolean;
     isBold?: boolean;
-    isCenter?: boolean;
     isDisabled?: boolean;
     isFullRadius?: boolean;
     isHidden?: boolean;

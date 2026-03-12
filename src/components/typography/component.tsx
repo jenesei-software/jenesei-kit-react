@@ -1,10 +1,10 @@
+import { Tooltip } from '@local/components/tooltip';
 import { useOverflowing } from '@local/hooks/use-overflowing';
 import { useTypographyStyles } from '@local/hooks/use-typography-styles';
 
 import { ElementType, memo, useMemo } from 'react';
 
 import { ITypographyComponent, ITypographyTooltip } from './component.types';
-import { Tooltip } from '../tooltip';
 
 export const Typography = memo((props: ITypographyComponent) => {
   const { className, style } = useTypographyStyles({
@@ -52,7 +52,7 @@ export const TypographyTooltip = memo((props: ITypographyTooltip) => {
   });
   return (
     <Tooltip isDisabled={isDisabled} content={props.children} {...props.tooltip}>
-      <Typography ref={ref} {...props.typography} style={{ position: 'relative' }}>
+      <Typography ref={ref} {...props.typography} style={{ position: 'relative', ...props.typography.style }}>
         {props.children}
       </Typography>
     </Tooltip>

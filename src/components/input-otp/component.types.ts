@@ -1,6 +1,6 @@
-import { FocusEvent } from 'react';
+import { IInputStandard } from '@local/components/input';
 
-import { IInputStandard } from '../input';
+import { FocusEvent } from 'react';
 
 export type IInputOTP = {
   length: number;

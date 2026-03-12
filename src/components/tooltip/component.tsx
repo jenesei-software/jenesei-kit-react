@@ -1,6 +1,7 @@
 import { Popover, usePopover } from '@local/components/popover';
 import { Typography } from '@local/components/typography';
-import { CSS_CLASS } from '@local/styles/utils';
+import { useTypographyStyles } from '@local/hooks/use-typography-styles';
+import { CSS_CLASS, EXTRA_VALUE } from '@local/styles/utils';
 import { CSS_VARS, CSS_VARS_RAW } from '@local/styles/utils/constants';
 import { setClasses, setStyles } from '@local/styles/utils/functions';
 
@@ -12,7 +13,7 @@ import { ITooltip } from './component.types';
 export const Tooltip: FC<ITooltip> = memo((props) => {
   if (props.isDisabled)
     return (
-      <div className={setClasses([CSS_CLASS.component.tooltip.wrapper, props.className])} style={props.style}>
+      <div className={setClasses([CSS_CLASS.component.tooltip.wrapper, props.classNameWrapper])} style={props.styleWrapper}>
         {props.children}
       </div>
     );
@@ -33,23 +34,29 @@ export const TooltipContent: FC<ITooltip> = (props) => {
   });
 
   const { className, style } = useMemo(() => {
-    const className = setClasses([CSS_CLASS.component.tooltip.root]);
+    const className = setClasses([CSS_CLASS.component.tooltip.root,props.classNamePopover]);
 
     const vars: Record<string, string> = {};
 
     vars[CSS_VARS_RAW.component.tooltip.height] = CSS_VARS.size[props.size].padding;
-    vars[CSS_VARS_RAW.component.tooltip.padding] = `${CSS_VARS.size[props.size].padding} ${CSS_VARS.size[props.size].padding} 0px ${CSS_VARS.size[props.size].padding}`;
+    vars[CSS_VARS_RAW.component.tooltip.padding] =
+      `${CSS_VARS.size[props.size].padding} ${CSS_VARS.size[props.size].padding} 0px ${CSS_VARS.size[props.size].padding}`;
 
-    const style = setStyles([Object.keys(vars).length ? vars : undefined, props.style]);
+    const style = setStyles([Object.keys(vars).length ? vars : undefined,props.stylePopover]);
 
     return { className, style };
-  }, [props.style, props.size]);
+  }, [props.size, props.classNamePopover, props.stylePopover]);
+
+  const { className: classNameTypography, style: styleTypography } = useTypographyStyles({
+    sx: { variant: EXTRA_VALUE.sizeToController[props.size], isBold: true, ...props?.sxTypography },
+    style: { order: 0, display: 'inline-flex' },
+  });
 
   return (
     <>
       <div
-        className={setClasses([CSS_CLASS.component.tooltip.wrapper, props.className])}
-        style={props.style}
+        className={setClasses([CSS_CLASS.component.tooltip.wrapper, props.classNameWrapper])}
+        style={props.styleWrapper}
         ref={refReference as Ref<HTMLDivElement | null>}
       >
         {props.children}
@@ -65,12 +72,7 @@ export const TooltipContent: FC<ITooltip> = (props) => {
         maxHeight={props.maxHeight}
         maxWidth={props.maxWidth}
       >
-        <Typography
-          sx={{
-            size: 14,
-            ...props.sxTypography,
-          }}
-        >
+        <Typography className={classNameTypography} style={styleTypography} sx={props.sxTypography}>
           {props.content}
         </Typography>
       </Popover>

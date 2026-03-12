@@ -1,3 +1,4 @@
+import { ErrorMessage } from '@local/components/error';
 import { Icon } from '@local/components/icon';
 import { useTypographyStyles } from '@local/hooks/use-typography-styles';
 import { CSS_CLASS, CSS_VARS, EXTRA_VALUE } from '@local/styles/utils';
@@ -9,7 +10,6 @@ import { motion } from 'framer-motion';
 import { FC, useCallback, useMemo, useRef } from 'react';
 
 import { ICheckbox } from './component.types';
-import { ErrorMessage } from '../error';
 
 export const Checkbox: FC<ICheckbox> = (props) => {
   const refDefault = useRef<HTMLButtonElement>(null);
@@ -17,7 +17,7 @@ export const Checkbox: FC<ICheckbox> = (props) => {
   const ref = useMergeRefs([refDefault, props.ref]);
 
   const { className: classNameTypography, style: styleTypography } = useTypographyStyles({
-    sx: { variant: EXTRA_VALUE.sizeToController[props.size], ...props?.sxTypography },
+    sx: { variant: EXTRA_VALUE.sizeToController[props.size], isNoUserSelect: true, ...props?.sxTypography },
     style: { order: 0, display: 'inline-flex' },
   });
 

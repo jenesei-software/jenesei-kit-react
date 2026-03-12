@@ -1,9 +1,8 @@
 
 
+import { IButton } from '@local/components/button';
+
 import { CSSProperties } from 'react';
-
-
-import { IButton } from '../button';
 
 export type IPagination = {
   buttonControl: Pick<IButton, 'size' | 'genre' | 'isFullRadius' | 'isWidthAsHeight'>;

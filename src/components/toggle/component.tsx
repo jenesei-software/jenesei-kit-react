@@ -1,3 +1,4 @@
+import { ErrorMessage } from '@local/components/error';
 import { CSS_CLASS, CSS_VARS, CSS_VARS_RAW } from '@local/styles/utils/constants';
 import { setClasses, setStyles } from '@local/styles/utils/functions';
 
@@ -6,7 +7,6 @@ import { motion } from 'framer-motion';
 import { useCallback, useMemo, useRef } from 'react';
 
 import { IToggle } from './component.types';
-import { ErrorMessage } from '../error';
 
 export const Toggle = (props: IToggle) => {
   const { className, style } = useMemo(() => {

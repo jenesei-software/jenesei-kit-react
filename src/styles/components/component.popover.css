@@ -14,8 +14,8 @@
   max-width: var(--component-popover-max-width, 100%);
   max-height: var(--component-popover-max-height, 100%);
 
-
   background: var(--component-popover-background);
   border-color: var(--component-popover-border-color);
   color: var(--component-popover-color);
+  box-shadow: var(--component-popover-box-shadow);
 }
