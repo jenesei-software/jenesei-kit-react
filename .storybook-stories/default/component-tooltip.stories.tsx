@@ -101,31 +101,6 @@ const CollectionWrapper: FC = () => {
             secondary
           </Button>
         </TooltipComponent>
-        <TooltipComponent placement='bottom-start' size='medium' genre='product' content={'TooltipComponent'}>
-          <Button genre='product' size={'medium'}>
-            product
-          </Button>
-        </TooltipComponent>
-        <TooltipComponent placement='bottom-start' size='medium' genre='blue' content={'TooltipComponent'}>
-          <Button genre='blue' size={'medium'}>
-            blue
-          </Button>
-        </TooltipComponent>
-        <TooltipComponent placement='bottom-start' size='medium' genre='green' content={'TooltipComponent'}>
-          <Button genre='green' size={'medium'}>
-            green
-          </Button>
-        </TooltipComponent>
-        <TooltipComponent placement='bottom-start' size='medium' genre='red' content={'TooltipComponent'}>
-          <Button genre='red' size={'medium'}>
-            red
-          </Button>
-        </TooltipComponent>
-        <TooltipComponent placement='bottom-start' size='medium' genre='yellow' content={'TooltipComponent'}>
-          <Button genre='yellow' size={'medium'}>
-            yellow
-          </Button>
-        </TooltipComponent>
       </WrapperBig>
       <WrapperBig>
         <TooltipComponent placement='bottom' size='large' genre='primary' content={'TooltipComponent'}>
@@ -200,6 +175,7 @@ const CollectionWrapper: FC = () => {
           maxHeight='100px'
           content={LOREM_IPSUM_TEXT}
           isWidthAsContent
+          // hoverCloseDelay={10000}
         >
           <Button genre='primary' size={'medium'}>
             TooltipComponent with long text
@@ -213,10 +189,7 @@ const CollectionWrapper: FC = () => {
             genre: 'primary',
             mode: 'hover',
             size: 'medium',
-            maxWidth: '150px',
-            style: {
-              maxWidth: '150px',
-            },
+            maxWidth: '200px',
           }}
           typography={{
             sx: {
@@ -224,6 +197,9 @@ const CollectionWrapper: FC = () => {
               family: 'Inter',
               size: 16,
               color: 'textPrimaryLight',
+            },
+            style: {
+              maxWidth: '50px',
             },
           }}
         >

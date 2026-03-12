@@ -72,6 +72,7 @@ const CollectionWrapper: FC = () => {
           isHover={true}
           color='productPrimaryLight'
           type='primary'
+          time={2000}
           sx={{
             borderRadius: '6px',
           }}
@@ -103,6 +104,7 @@ const CollectionWrapper: FC = () => {
           <SkeletonComponent
             visible={true}
             isHover={true}
+            time={2000}
             sx={{
               borderRadius: '100%',
             }}
@@ -129,6 +131,7 @@ const CollectionWrapper: FC = () => {
           </SkeletonComponent>
           <SkeletonComponent
             visible={true}
+            time={2000}
             isHover={true}
             sx={{
               borderRadius: '6px',
@@ -165,6 +168,7 @@ const CollectionWrapper: FC = () => {
       >
         <SkeletonComponent
           visible={true}
+          time={2000}
           isHover={true}
           color='productPrimaryLight'
           type='primary'
@@ -199,6 +203,7 @@ const CollectionWrapper: FC = () => {
           <SkeletonComponent
             visible={true}
             isHover={true}
+            time={2000}
             sx={{
               borderRadius: '100%',
             }}
@@ -226,6 +231,7 @@ const CollectionWrapper: FC = () => {
           <SkeletonComponent
             visible={true}
             isHover={true}
+            time={2000}
             sx={{
               borderRadius: '6px',
               flexGrow: 1,

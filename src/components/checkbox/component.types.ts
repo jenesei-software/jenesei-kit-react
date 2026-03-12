@@ -1,10 +1,9 @@
+import { IAddError } from '@local/components/error';
+import { IIcon } from '@local/components/icon';
 import { ISxTypography, IThemeSize } from '@local/styles/utils';
 import { IThemeControl, IThemeGenreCheckbox } from '@local/styles/utils/types';
 
 import { CSSProperties, FocusEvent, MouseEventHandler, PropsWithChildren, Ref } from 'react';
-
-import { IAddError } from '../error';
-import { IIcon } from '../icon';
 
 type IIconWithoutSize = {
   [K in IIcon['type']]: Omit<Extract<IIcon, { type: K }>, 'size'> & { size?: IThemeSize };

@@ -1,5 +1,5 @@
 import { ISxTypography, IThemeSize } from '@local/styles/utils';
-import { IThemeGenreButton } from '@local/styles/utils/types';
+import { IThemeGenrePopover } from '@local/styles/utils/types';
 
 import { Placement } from '@floating-ui/react';
 import { CSSProperties, PropsWithChildren, Ref } from 'react';
@@ -41,6 +41,11 @@ export type IPopover = PropsWithChildren &
      */
     floatingStyles: CSSProperties;
     /**
+     * True after the first position calculation by floating-ui.
+     * True после первого вычисления позиции floating-ui.
+     */
+    isPositioned?: boolean;
+    /**
      * Callback fired when the popover should close (e.g. click outside).
      * Колбэк, вызываемый при необходимости закрыть поповер (например, при клике вне).
      */
@@ -59,7 +64,7 @@ export type IPopover = PropsWithChildren &
      * Visual genre/style of the popover (e.g. 'primary').
      * Визуальный стиль поповера (например, 'primary').
      */
-    genre: IThemeGenreButton;
+    genre: IThemeGenrePopover;
   };
 
 /**

@@ -1,12 +1,16 @@
 import { IPopover, IUsePopover } from '@local/components/popover';
 import { ISxTypography } from '@local/styles/utils';
 
-import { PropsWithChildren, ReactNode } from 'react';
+import { CSSProperties, PropsWithChildren, ReactNode } from 'react';
 
 export type ITooltip = PropsWithChildren &
-  Pick<IPopover, 'genre' | 'size' | 'maxHeight' | 'maxWidth' | 'className' | 'style'> & {
+  Pick<IPopover, 'genre' | 'size' | 'maxHeight' | 'maxWidth'> & {
     content: ReactNode;
     isDisabled?: boolean;
+    classNameWrapper?: string;
+    styleWrapper?: CSSProperties;
+    classNamePopover?: string;
+    stylePopover?: CSSProperties;
   } & ISxTypography &
   Pick<
     IUsePopover,

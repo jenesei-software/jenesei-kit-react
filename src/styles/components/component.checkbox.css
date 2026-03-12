@@ -19,7 +19,7 @@
   min-height: var(--component-checkbox-height);
   border-radius: var(--component-checkbox-radius);
   gap: var(--component-checkbox-gap);
-  padding: var(--component-checkbox-padding);
+  padding: 0px var(--component-checkbox-padding);
 
   background: var(--component-checkbox-background);
   border-color: var(--component-checkbox-border);

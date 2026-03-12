@@ -4,7 +4,6 @@ import { CSS_VARS_RAW } from '@local/styles/utils/constants';
 import { setClasses, setStyles } from '@local/styles/utils/functions';
 
 import { autoUpdate, flip, offset, shift, useFloating } from '@floating-ui/react';
-import { AnimatePresence, motion } from 'framer-motion';
 import { FC, Ref, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 
@@ -55,9 +54,10 @@ export const Popover: FC<IPopover> = (props) => {
 
     const vars: Record<string, string> = {};
 
-    vars[CSS_VARS_RAW.component.popover.background] = CSS_VARS.genre.button[props.genre].background.index;
-    vars[CSS_VARS_RAW.component.popover.color] = CSS_VARS.genre.button[props.genre].color.index;
-    vars[CSS_VARS_RAW.component.popover.borderColor] = CSS_VARS.genre.button[props.genre].border.index;
+    vars[CSS_VARS_RAW.component.popover.background] = CSS_VARS.genre.popover[props.genre].background;
+    vars[CSS_VARS_RAW.component.popover.color] = CSS_VARS.genre.popover[props.genre].color;
+    vars[CSS_VARS_RAW.component.popover.borderColor] = CSS_VARS.genre.popover[props.genre].border;
+    vars[CSS_VARS_RAW.component.popover.boxShadow] = CSS_VARS.genre.popover[props.genre].boxShadow;
 
     vars[CSS_VARS_RAW.component.popover.maxHeight] = props.maxHeight || '100%';
     vars[CSS_VARS_RAW.component.popover.maxWidth] = props.maxWidth || '100%';
@@ -68,46 +68,36 @@ export const Popover: FC<IPopover> = (props) => {
 
     return { className, style };
   }, [
-    props.className,
-    props.style,
-    props.genre,
-    props.maxHeight,
-    props.maxWidth,
-    props.size,
-    classNameTypography,
-    styleTypography,
+    props.className, 
+    props.style, 
+    props.genre, 
+    props.maxHeight, 
+    props.maxWidth, 
+    props.size, 
+    classNameTypography, 
+    styleTypography
   ]);
 
+
   return ReactDOM.createPortal(
-    <AnimatePresence>
-      {props.isOpen && (
-        <div
-          ref={props.ref as Ref<HTMLDivElement | null>}
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            ...props.floatingStyles,
-            transform: props.floatingStyles.transform,
-            zIndex: 9998,
-            outline: '0px transparent solid !important',
-            border: '0px transparent solid !important',
-          }}
-        >
-          <motion.div
-            tabIndex={-1}
-            className={className}
-            style={style}
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: 0.2 }}
-          >
-            {props.children}
-          </motion.div>
+    props.isOpen && (
+      <div
+        ref={props.ref as Ref<HTMLDivElement | null>}
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          ...props.floatingStyles,
+          zIndex: 9998,
+          outline: '0px transparent solid !important',
+          border: '0px transparent solid !important',
+        }}
+      >
+        <div tabIndex={-1} className={className} style={style}>
+          {props.children}
         </div>
-      )}
-    </AnimatePresence>,
+      </div>
+    ),
     document.body,
   );
 };
@@ -129,6 +119,7 @@ export const usePopover = (props: IUsePopover) => {
     refs,
     floatingStyles,
     update,
+    isPositioned,
     placement: actualPlacement,
   } = useFloating({
     open: isOpen,
@@ -540,5 +531,6 @@ export const usePopover = (props: IUsePopover) => {
     refFloating: refs.setFloating as Ref<HTMLElement | null>,
     floatingStyles: combinedStyles,
     placement: actualPlacement,
+    isPositioned,
   };
 };

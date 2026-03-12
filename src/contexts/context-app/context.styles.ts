@@ -1,9 +1,9 @@
+import { ScreenWidthProps } from '@local/components/context-screen-width';
 import { addGridTransition, JeneseiPalette } from '@local/theme';
 
 import { css, styled } from 'styled-components';
 
 import { IProviderAppOutlet, IProviderAppOutletChildren, IProviderAppWrapper } from './context.types';
-import { ScreenWidthProps } from '../context-screen-width';
 
 export const ProviderAppWrapper = styled.div<IProviderAppWrapper>`
   display: flex;

@@ -244,7 +244,7 @@ export const Input = (props: IInput) => {
       {props?.error?.isError && (
         <ErrorMessage
           size={props?.error.size ?? props.size}
-          sxTypography={{ size: '16px', weight: '400', ...props?.error.sxTypography }}
+          sxTypography={{ size: 16, weight: '400', ...props?.error.sxTypography }}
           {...props.error}
         />
       )}

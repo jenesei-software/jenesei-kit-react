@@ -41,7 +41,7 @@ export const Button: FC<IButton> = (props) => {
   );
 
   const { className: classNameTypography, style: styleTypography } = useTypographyStyles({
-    sx: { variant: EXTRA_VALUE.sizeToController[props.size], ...props?.sxTypography },
+    sx: { variant: EXTRA_VALUE.sizeToController[props.size], isNoUserSelect: true, ...props?.sxTypography },
     style: { order: 0, display: 'inline-flex' },
   });
 
@@ -124,7 +124,7 @@ export const Button: FC<IButton> = (props) => {
       aria-label={props.ariaLabel}
       id={props.id}
     >
-      {!props.isOnlyIcon && props.children &&(
+      {!props.isOnlyIcon && props.children && (
         <div className={classNameTypography} style={styleTypography}>
           {props.children}
         </div>
