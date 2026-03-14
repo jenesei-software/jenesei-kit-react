@@ -2,10 +2,6 @@
   "eslint.enable": false,
   "prettier.enable": false,
   "editor.defaultFormatter": "biomejs.biome",
-  "tsInterfaceSorter.emptyLineBetweenProperties": true,
-  "tsInterfaceSorter.sortByCapitalLetterFirst": true,
-  "tsInterfaceSorter.sortByRequiredElementFirst": true,
-  "tsInterfaceSorter.sortTypes": true,
   "[javascript]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
@@ -28,9 +24,4 @@
     "source.action.useSortedProperties.biome": "explicit",
     "source.organizeImports.biome": "explicit"
   },
-  "github.copilot.editor.enableCodeActions": false,
-  "github.copilot.chat.codeActions.enabled": false,
-  "[jsonc]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
-  }
 }

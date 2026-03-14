@@ -11,14 +11,14 @@ import { WrapperBig } from './tools';
 
 const meta: Meta<typeof PopoverComponent> = {
   component: PopoverComponent,
-  title: 'Component/Popover',
+  title: 'Component/13. Popover',
 };
 
 export default meta;
 
-type Story = StoryObj<typeof PopoverComponent>;
+type Story = StoryObj<IPopover>;
 
-const PopoverWrapper: FC<IPopover> = (props) => {
+const IndexWrapper: FC<IPopover> = (props) => {
   const { isOpen, refReference, refFloating, floatingStyles } = usePopover({
     placement: 'bottom-start',
     offset: 8,
@@ -33,17 +33,18 @@ const PopoverWrapper: FC<IPopover> = (props) => {
     placement: 'top-start',
     offset: 8,
     mode: 'hover',
-    isFloatingHover: false,
+    isFloatingHover: true,
   });
   const ref = useMergeRefs([refReference, refReferenceTop]);
 
   return (
-    <WrapperBig sx={{ default: { padding: '100px' } }}>
-      <Button genre={'black'} size={'medium'} ref={ref}>
+    <WrapperBig sx={{ padding: '100px' }}>
+      <Button genre={'primary'} size={'medium'} ref={ref}>
         {isOpen ? 'Open' : 'Close'}
       </Button>
       <PopoverComponent
         {...props}
+        genre='primary'
         size='small'
         isOpen={isOpenTop}
         floatingStyles={floatingStylesTop}
@@ -53,48 +54,40 @@ const PopoverWrapper: FC<IPopover> = (props) => {
       </PopoverComponent>
       <PopoverComponent
         {...props}
-        genre='white'
-        size='medium'
+        genre='primary'
+        size='small'
         isOpen={isOpen}
         floatingStyles={floatingStyles}
         ref={refFloating}
-        sx={{
-          default: {
-            padding: '0px',
-            gap: '0px',
-            width: '120px',
-          },
+        style={{
+          padding: '4px',
+          width: '120px',
         }}
       >
         <Stack
           sx={{
-            default: {
-              flexDirection: 'column',
-            },
+            flexDirection: 'column',
+            gap: '4px',
           }}
         >
           <Typography
-            sxStandard={{
-              default: {
-                padding: '8px 16px',
-                textAlign: 'left',
-              },
+            style={{
+              padding: '8px 16px',
+              textAlign: 'left',
             }}
             sx={{
-              default: {
-                variant: 'h6',
-              },
+              variant: 'controller-medium',
             }}
           >
             Menu
           </Typography>
-          <Button genre={'gray'} isHiddenBorder isFullSize size={'small'}>
+          <Button genre={'primary'} isHiddenBorder isFullSize size={'small'}>
             First
           </Button>
-          <Button genre={'gray'} isHiddenBorder isFullSize size={'small'}>
+          <Button genre={'primary'} isHiddenBorder isFullSize size={'small'}>
             Second
           </Button>
-          <Button genre={'gray'} isHiddenBorder isFullSize size={'small'}>
+          <Button genre={'primary'} isHiddenBorder isFullSize size={'small'}>
             Third
           </Button>
         </Stack>
@@ -103,6 +96,6 @@ const PopoverWrapper: FC<IPopover> = (props) => {
   );
 };
 
-export const Popover: Story = {
-  render: (args) => <PopoverWrapper {...args} />,
+export const Index: Story = {
+  render: (args) => <IndexWrapper {...args} />,
 };

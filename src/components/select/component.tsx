@@ -1,29 +1,24 @@
+/** biome-ignore-all lint/a11y/noNoninteractiveTabindex: <explanation> */
+/** biome-ignore-all lint/a11y/useKeyWithClickEvents: <explanation> */
 import { Button } from '@local/components/button';
 import { ErrorMessage } from '@local/components/error';
 import { Icon } from '@local/components/icon';
 import { Popover, usePopover } from '@local/components/popover';
 import { TextArea } from '@local/components/textarea';
 import { Typography } from '@local/components/typography';
-import { LIST_LANGUAGE } from '@local/consts';
 import { useTypographyStyles } from '@local/hooks/use-typography-styles';
 import { CSS_CLASS, CSS_VARS, CSS_VARS_RAW, EXTRA_VALUE } from '@local/styles/utils';
 import { setClasses, setStyles } from '@local/styles/utils/functions';
 
 import { useMergeRefs } from '@floating-ui/react';
 import { useVirtualizer } from '@tanstack/react-virtual';
-import moment from 'moment';
-import { FC, KeyboardEvent, memo, Ref, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { KeyboardEvent, memo, Ref, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import {
   IContainerDropdownListOption,
   IContainerSelectListOption,
   ISelect,
-  ISelectItem,
-  ISelectLanguage,
-  ISelectLanguageOption,
-  ISelectMonth,
-  ISelectMonths,
-  ISelectYear,
+  ISelectItem
 } from './component.types';
 
 const DEFAULT_LABEL_SELECT_ALL = 'Select all option';
@@ -257,6 +252,11 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
         props.isDisabled ? 'none' : (props.control ?? (isOpen ? 'boxShadowSelect' : 'boxShadowOnlyHover'))
       ],
       CSS_CLASS.transition.color,
+      isShowScroll && CSS_CLASS.component.select.isShowScroll,
+      props.isCenter && CSS_CLASS.component.select.isCenter,
+      props.isWrapSelectOption && CSS_CLASS.component.select.isWrapSelectOption,
+      props.isClearWhenClickSelectListOption && CSS_CLASS.component.select.isClearWhenClickSelectListOption,
+      props.isOnlyColorInSelectListOption && CSS_CLASS.component.select.isOnlyColorInSelectListOption,
       props.error?.isError && CSS_CLASS.isError,
       props.className,
     ]);
@@ -288,12 +288,16 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
     props.control,
     isOpen,
     props.error?.isError,
+    isShowScroll,
+    props.isCenter,
+    props.isClearWhenClickSelectListOption,
+    props.isOnlyColorInSelectListOption,
+    props.isWrapSelectOption,
   ]);
 
   return (
     <>
       <div
-        // biome-ignore lint/a11y/noNoninteractiveTabindex: <explanation>
         tabIndex={0}
         className={classNameWrapper}
         style={styleWrapper}
@@ -331,10 +335,9 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
           />
         )}
         {isHaveValue && (props.isShowSelectAllLabel ? !isAll : true) ? (
-          <SelectList
-            $size={props.size}
+          <ul
+            className={CSS_CLASS.component.select.list}
             tabIndex={-1}
-            $isWrapSelectOption={props.isWrapSelectOption}
             onMouseDown={(e) => {
               e.preventDefault();
               e.stopPropagation();
@@ -348,7 +351,7 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
 
               const isChecked = isSelectedItem(value);
               return (
-                <ContainerSelectListOption
+                <SelectListOption
                   key={`${value.value}-${index}`}
                   isChecked={isChecked}
                   onClick={() => {
@@ -368,14 +371,16 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
                   isWrapSelectOption={props.isWrapSelectOption}
                   isNotShowHoverStyle={props.isNotShowHoverStyle}
                   isCenter={props.isCenter}
+                  className={classNameTypography}
+                  style={styleTypography}
                 />
               );
             })}
-          </SelectList>
+          </ul>
         ) : null}
         {isHaveValue && (props.isShowSelectAllLabel ? isAll : false) ? (
           <Typography
-            sxStandard={{
+            style={{
               padding: `${sizePadding / 2.8}px 0px ${sizePadding / 2.8}px ${sizePadding / 2.8}px`,
             }}
             sx={{ size: 16, line: 1, isNoUserSelect: true }}
@@ -385,7 +390,7 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
         ) : null}
         {!isHaveValue && !props.isSearch ? (
           <Typography
-            sxStandard={{
+            style={{
               color: CSS_VARS.genre.select[props.genre].placeholder.index,
               padding: `${sizePadding / 2.8}px 0px ${sizePadding / 2.8}px ${sizePadding / 2.8}px`,
             }}
@@ -397,7 +402,7 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
 
         {isValueMoreMaxViewSelect && isHaveValue && (props.isShowSelectAllLabel ? !isAll : true) ? (
           <Typography
-            sxStandard={{
+            style={{
               padding: `${sizePadding / 2.8}px 0px ${sizePadding / 2.8}px ${sizePadding / 2.8}px`,
             }}
             sx={{ size: 16, line: 1, isNoUserSelect: true }}
@@ -406,8 +411,8 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
           </Typography>
         ) : null}
         {isShowButtonList ? (
-          <ButtonList
-            $size={props.size}
+          <div
+            className={CSS_CLASS.component.select.listButton}
             onMouseDown={(e) => {
               e.preventDefault();
               e.stopPropagation();
@@ -454,12 +459,11 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
                 isFullSize
                 isFullRadius
                 isHiddenBorder
-                isNotHoverEffect
               >
                 <Icon type={'loading'} name={'Line'} size={props.size} />
               </Button>
             )}
-          </ButtonList>
+          </div>
         ) : null}
       </div>
       <Popover
@@ -476,93 +480,84 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
         ref={refFloating}
         isOpen={isOpen}
       >
-        <DropdownListParent
+        <div
           tabIndex={-1}
           ref={refDropdownList}
-          $size={props.size}
+          className={CSS_CLASS.component.select.dropdownListWrapper}
           onScroll={(e) => onScroll(e.target as HTMLDivElement)}
         >
           {isShowDropdownSettingsList && (
-            <DropdownList style={{ position: 'sticky', top: 0, zIndex: 1 }}>
+            <ul style={{ position: 'sticky', top: 0, zIndex: 1 }} className={CSS_CLASS.component.select.dropdownList}>
               {isShowAddOption ? (
-                <DropdownListOption
+                <li
+                  className={setClasses([
+                    CSS_CLASS.component.select.dropdownListOption,
+                    isAll && CSS_CLASS.component.select.dropdownListOptionIsChecked,
+                    classNameTypography,
+                  ])}
                   tabIndex={0}
                   onClick={() => props.valueSearch && onAddOption(props.valueSearch)}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' && props.valueSearch) onAddOption(props.valueSearch);
                   }}
-                  $isCenter={props.isCenter}
-                  $isNotShowHoverStyle={props.isNotShowHoverStyle}
-                  $genre={props.genre}
-                  $size={props.size}
-                  $sxTypography={sxTypography}
-                  $isBold={props.isBold}
-                  $isChecked={isAll}
-                  style={{ position: 'relative', minHeight: `${sizeHeight}px` }}
+                  style={setStyles([{ position: 'relative', minHeight: `${sizeHeight}px` }, styleTypography])}
                 >
                   {props.valueSearch && labelAddOption(props.valueSearch)}
-                </DropdownListOption>
+                </li>
               ) : null}
               {props.isShowSelectAll && isHaveOption ? (
-                <DropdownListOption
+                <li
+                  className={setClasses([
+                    CSS_CLASS.component.select.dropdownListOption,
+                    isAll && CSS_CLASS.component.select.dropdownListOptionIsChecked,
+                    classNameTypography,
+                  ])}
                   tabIndex={0}
                   onClick={() => onClickAll()}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') onClickAll();
                   }}
-                  $isCenter={props.isCenter}
-                  $isNotShowHoverStyle={props.isNotShowHoverStyle}
-                  $genre={props.genre}
-                  $size={props.size}
-                  $sxTypography={sxTypography}
-                  $isBold={props.isBold}
-                  $isChecked={isAll}
-                  $isShowScroll={isShowScroll}
-                  style={{ position: 'relative', minHeight: `${sizeHeight}px` }}
+                  style={setStyles([{ position: 'relative', minHeight: `${sizeHeight}px` }, styleTypography])}
                 >
                   {labelSelectAll}
                   {props.isShowDropdownOptionIcon && (
-                    <DropdownListOptionIcon
+                    <Icon
+                      className={CSS_CLASS.component.select.dropdownListOptionIcon}
                       tabIndex={-1}
                       size={props.size}
                       type='checkbox'
                       name='Arrow'
-                      $genre={props.genre}
-                      $checked={isAll}
-                      $size={props.size}
                     />
                   )}
-                </DropdownListOption>
+                </li>
               ) : null}
               {!isHaveOption ? (
-                <DropdownListOption
+                <li
                   tabIndex={-1}
-                  $isCenter={props.isCenter}
-                  $isNotShowHoverStyle={props.isNotShowHoverStyle}
-                  $genre={props.genre}
-                  $size={props.size}
-                  $sxTypography={sxTypography}
-                  $isBold={props.isBold}
-                  $isChecked={isAll}
-                  $isShowScroll={isShowScroll}
-                  style={{ position: 'relative', minHeight: `${sizeHeight}px` }}
+                  className={setClasses([
+                    CSS_CLASS.component.select.dropdownListOption,
+                    isAll && CSS_CLASS.component.select.dropdownListOptionIsChecked,
+                    classNameTypography,
+                  ])}
+                  style={setStyles([{ position: 'relative', minHeight: `${sizeHeight}px` }, styleTypography])}
                 >
                   <Typography sx={{ size: 16, line: 1 }}>{labelEmptyOption}</Typography>
-                </DropdownListOption>
+                </li>
               ) : null}
-            </DropdownList>
+            </ul>
           )}
 
           {isHaveOption ? (
-            <DropdownList
+            <ul
               tabIndex={-1}
               style={{ height: `${listVirtualizer.getTotalSize()}px`, minHeight: `${heightDropdownList}px` }}
+              className={CSS_CLASS.component.select.dropdownList}
             >
               {listVirtualizer.getVirtualItems().map((virtualRow) => {
                 const item = props.option[virtualRow.index];
                 const isChecked = isSelectedItem(item);
                 return (
-                  <ContainerDropdownListOption
+                  <DropdownListOption
                     key={virtualRow.index}
                     virtualRowSize={virtualRow.size}
                     virtualRowStart={virtualRow.start}
@@ -571,7 +566,8 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
                     item={item}
                     genre={props.genre}
                     size={props.size}
-                    sxTypography={sxTypography}
+                    className={classNameTypography}
+                    style={styleTypography}
                     isBold={props.isBold}
                     isNotShowHoverStyle={props.isNotShowHoverStyle}
                     isCenter={props.isCenter}
@@ -580,9 +576,9 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
                   />
                 );
               })}
-            </DropdownList>
+            </ul>
           ) : null}
-        </DropdownListParent>
+        </div>
       </Popover>
       {props?.error?.isError && (
         <ErrorMessage
@@ -595,7 +591,7 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
   );
 };
 
-const ContainerDropdownListOptionComponent = <T extends object & ISelectItem>(
+const ContainerDropdownListOption = <T extends object & ISelectItem>(
   props: IContainerDropdownListOption<T>,
 ) => {
   const handleKeyDown = (event: KeyboardEvent<HTMLLIElement>) => {
@@ -606,234 +602,58 @@ const ContainerDropdownListOptionComponent = <T extends object & ISelectItem>(
   };
 
   return (
-    <DropdownListOption
+    <li
+      className={setClasses([
+        CSS_CLASS.component.select.dropdownListOption,
+        props.isChecked && CSS_CLASS.component.select.dropdownListOptionIsChecked,
+        props.item.isDisabled && CSS_CLASS.component.select.dropdownListOptionIsDisabled,
+        props.className,
+      ])}
       tabIndex={0}
       onClick={() => {
         !props.item.isDisabled && props.onClick();
       }}
       onKeyDown={handleKeyDown}
-      style={{
-        position: 'absolute',
-        height: `${props.virtualRowSize}px`,
-        transform: `translateY(${props.virtualRowStart}px)`,
-      }}
-      $isCenter={props.isCenter}
-      $isNotShowHoverStyle={props.isNotShowHoverStyle}
-      $item={props.item}
-      $genre={props.genre}
-      $size={props.size}
-      $sxTypography={props.sxTypography}
-      $isBold={props.isBold}
-      $isChecked={props.isChecked}
-      $isShowScroll={props.isShowScroll}
+      style={setStyles([
+        {
+          position: 'absolute',
+          height: `${props.virtualRowSize}px`,
+          transform: `translateY(${props.virtualRowStart}px)`,
+        },
+        props.style,
+      ])}
     >
       {props.item.label}
       {props.isShowDropdownOptionIcon && (
-        <DropdownListOptionIcon
+        <Icon
+          className={CSS_CLASS.component.select.dropdownListOptionIcon}
+          color='inherit'
           tabIndex={-1}
-          size={props.size}
           type='checkbox'
           name='Arrow'
-          $genre={props.genre}
-          $checked={props.isChecked}
-          $size={props.size}
+          size={props.size}
         />
       )}
-    </DropdownListOption>
+    </li>
   );
 };
 
-const ContainerSelectListOptionComponent = <T extends object & ISelectItem>(props: IContainerSelectListOption<T>) => {
+const ContainerSelectListOption = <T extends object & ISelectItem>(props: IContainerSelectListOption<T>) => {
   return (
-    <SelectListOption
+    <li
+      className={setClasses([
+        CSS_CLASS.component.select.listOption,
+        props.isChecked && CSS_CLASS.component.select.listOptionIsChecked,
+        props.className,
+      ])}
+      style={props.style}
       tabIndex={-1}
       onClick={props.onClick}
-      $isOnlyColorInSelectListOption={props.isOnlyColorInSelectListOption}
-      $isClearWhenClickSelectListOption={props.isClearWhenClickSelectListOption}
-      $isWrapSelectOption={props.isWrapSelectOption}
-      $isCenter={props.isCenter}
-      $isNotShowHoverStyle={props.isNotShowHoverStyle}
-      $item={props.item}
-      $genre={props.genre}
-      $size={props.size}
-      $isBold={props.isBold}
-      $isChecked={props.isChecked}
     >
       <Typography sx={{ size: 16, line: 1 }}>{props.item.label}</Typography>
-    </SelectListOption>
+    </li>
   );
 };
 
-export const ContainerDropdownListOption = memo(ContainerDropdownListOptionComponent);
-export const ContainerSelectListOption = memo(ContainerSelectListOptionComponent);
-
-export const SelectLanguage: FC<ISelectLanguage> = (props) => {
-  const { value, onChange } = props;
-
-  const option = LIST_LANGUAGE;
-
-  const [viewOption] = useState<ISelectLanguageOption[]>(option);
-
-  const handleSelectChange = (value: ISelectLanguageOption[]) => {
-    if (value.length === 0) {
-      onChange(null);
-    } else {
-      onChange(value[0].value.toString());
-    }
-  };
-  const valueLocal = useMemo(() => {
-    const findOption = option.find((e) => e.value === value);
-    if (!findOption) return [];
-    return [findOption];
-  }, [value]);
-
-  return (
-    <Select<ISelectLanguageOption> {...props} option={viewOption} value={valueLocal} onChange={handleSelectChange} />
-  );
-};
-export const SelectMonth: FC<ISelectMonth> = (props) => {
-  const { value, onChange, dateMin, dateMax, monthsLocale, isShortLabel } = props;
-
-  const year = moment(value).utc().year();
-
-  const option = useMemo(() => {
-    return monthsLocale.map((monthItem) => {
-      const monthIndex = moment().month(monthItem.value).month();
-
-      const monthMoment = moment.utc().year(year).month(monthIndex).startOf('month');
-      const isDisabled =
-        (dateMin && monthMoment.isBefore(moment.utc(dateMin), 'month')) ||
-        (dateMax && monthMoment.isAfter(moment.utc(dateMax), 'month'));
-
-      return {
-        value: monthMoment.valueOf(),
-        label: isShortLabel ? monthItem.localeShort : monthItem.localeLong,
-        placeholder: isShortLabel ? monthItem.localeShort : monthItem.localeLong,
-        search: `${monthItem.localeLong.toLowerCase()}, ${monthIndex + 1}`,
-        isDisabled: !!isDisabled,
-        monthValue: monthItem.value,
-      };
-    });
-  }, [monthsLocale, year, dateMin, dateMax, isShortLabel]);
-
-  const handleSelectChange = (value: ISelectLanguageOption[]) => {
-    if (value.length === 0) onChange(null);
-    onChange(+value[0].value);
-  };
-  const valueLocal = useMemo(() => {
-    const findOption = option.find((e) => e.value === value);
-    if (!findOption) return [];
-    return [findOption];
-  }, [value, option]);
-
-  return <Select<ISelectLanguageOption> {...props} option={option} value={valueLocal} onChange={handleSelectChange} />;
-};
-export const SelectMonths: FC<ISelectMonths> = (props) => {
-  const { value, onChange, dateMin, dateMax, monthsLocale, isShortLabel } = props;
-
-  const year = moment(value).utc().year();
-
-  const option = useMemo(() => {
-    return monthsLocale.map((monthItem) => {
-      const monthIndex = moment().month(monthItem.value).month();
-
-      const monthMoment = moment.utc().year(year).month(monthIndex).startOf('month');
-      const isDisabled =
-        (dateMin && monthMoment.isBefore(moment.utc(dateMin), 'month')) ||
-        (dateMax && monthMoment.isAfter(moment.utc(dateMax), 'month'));
-
-      return {
-        value: monthMoment.valueOf(),
-        label: isShortLabel ? monthItem.localeShort : monthItem.localeLong,
-        placeholder: isShortLabel ? monthItem.localeShort : monthItem.localeLong,
-        search: `${monthItem.localeLong.toLowerCase()}, ${monthIndex + 1}`,
-        isDisabled: !!isDisabled,
-        monthValue: monthItem.value,
-      };
-    });
-  }, [monthsLocale, year, dateMin, dateMax, isShortLabel]);
-  const [viewOption, setViewOption] = useState<ISelectLanguageOption[]>(option);
-
-  useEffect(() => {
-    setViewOption(option);
-  }, [option]);
-  const handleSelectChange = (value: ISelectLanguageOption[]) => {
-    if (value.length === 0) onChange([]);
-    onChange(value.map((e) => +e.value));
-  };
-  const valueLocal = useMemo(() => {
-    if (!value || value.length === 0) return [];
-    return value.map((val) => option.find((opt) => opt.value === val)).filter(Boolean) as ISelectLanguageOption[];
-  }, [value, option]);
-
-  const [search, setSearch] = useState<string>('');
-  const handleSearchChange = useCallback(
-    (value: string) => {
-      setSearch(value);
-
-      if (value === '') {
-        setViewOption(option);
-      } else {
-        const filteredOptions = option.filter((option) =>
-          Object.values(option).some((field) => field?.toString().toLowerCase().includes(value.toLowerCase())),
-        );
-        setViewOption(filteredOptions);
-      }
-    },
-    [option],
-  );
-  return (
-    <Select<ISelectLanguageOption>
-      {...props}
-      valueSearch={search}
-      onChangeSearch={handleSearchChange}
-      optionAllLength={option.length}
-      option={viewOption}
-      minViewDropdown={1}
-      isMulti
-      value={valueLocal}
-      onChange={handleSelectChange}
-      onChangeAll={(_value, isAll) => {
-        if (isAll) {
-          onChange(viewOption.map((e) => +e.value));
-        } else {
-          onChange([]);
-        }
-      }}
-    />
-  );
-};
-export const SelectYear: FC<ISelectYear> = (props) => {
-  const { value, onChange, dateMin, dateMax, sortOrder = 'desc' } = props;
-
-  const startYear = moment(dateMin).utc().year();
-  const endYear = moment(dateMax).utc().year();
-
-  const option = useMemo(() => {
-    const yearArray = Array.from({ length: endYear - startYear + 1 }, (_, index) => {
-      const year = startYear + index;
-      return {
-        value: moment().year(year).utc().startOf('year').valueOf(),
-        label: moment().year(year).utc().format('YYYY'),
-        placeholder: moment().year(year).utc().format('YYYY'),
-        search: `${moment().year(year).utc().format('YYYY').toLowerCase()}`,
-      };
-    });
-
-    return sortOrder === 'asc'
-      ? yearArray.sort((a, b) => a.value - b.value)
-      : yearArray.sort((a, b) => b.value - a.value);
-  }, [endYear, startYear, sortOrder]);
-
-  const handleSelectChange = (value: ISelectLanguageOption[]) => {
-    if (value.length === 0) onChange(null);
-    onChange(+value[0].value);
-  };
-  const valueLocal = useMemo(() => {
-    const findOption = option.find((e) => e.value === value);
-    if (!findOption) return [];
-    return [findOption];
-  }, [value, option]);
-
-  return <Select<ISelectLanguageOption> {...props} option={option} value={valueLocal} onChange={handleSelectChange} />;
-};
+export const DropdownListOption = memo(ContainerDropdownListOption);
+export const SelectListOption = memo(ContainerSelectListOption);

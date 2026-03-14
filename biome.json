@@ -2,14 +2,25 @@
   "$schema": "https://biomejs.dev/schemas/2.4.2/schema.json",
   "files": {
     "ignoreUnknown": false,
-    "includes": ["src/**", "*.ts", "*.tsx", "*.js", "*.jsx",".storybook-stories/**", "!coverage", "!node_modules", "!build", "!dist"]
+    "includes": [
+      "src/**",
+      "*.ts",
+      "*.tsx",
+      "*.js",
+      "*.jsx",
+      ".storybook-stories/**",
+      "!coverage",
+      "!node_modules",
+      "!build",
+      "!dist"
+    ]
   },
   "formatter": {
+    "lineEnding": "lf",
     "enabled": true,
     "formatWithErrors": false,
     "indentStyle": "space",
     "indentWidth": 2,
-    "lineEnding": "lf",
     "lineWidth": 120,
     "attributePosition": "auto",
     "bracketSameLine": false,
