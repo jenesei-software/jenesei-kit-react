@@ -24,8 +24,8 @@ export type ISelect<T extends ISelectItem> = IAddError &
     size: IThemeSize;
     genre: IThemeGenreSelect;
     control?: IThemeControl;
-    
-    className?:string
+
+    className?: string;
     style?: CSSProperties;
 
     isToggleWhenClickSelectListOption?: boolean;
@@ -116,7 +116,15 @@ export type ISelectYear = Omit<ISelectMonth, 'monthsLocale'> & {
 
 export type IContainerDropdownListOption<T extends ISelectItem> = Pick<
   ISelect<T>,
-  'genre' | 'size' | 'isCenter' | 'isNotShowHoverStyle' | 'isBold' | 'isShowDropdownOptionIcon' | 'sxTypography'
+  | 'genre'
+  | 'size'
+  | 'isCenter'
+  | 'isNotShowHoverStyle'
+  | 'isBold'
+  | 'isShowDropdownOptionIcon'
+  | 'sxTypography'
+  | 'className'
+  | 'style'
 > & {
   item: T;
 
@@ -140,6 +148,8 @@ export type IContainerSelectListOption<T extends ISelectItem> = Pick<
   | 'isWrapSelectOption'
   | 'isClearWhenClickSelectListOption'
   | 'isOnlyColorInSelectListOption'
+  | 'className'
+  | 'style'
 > & {
   item: T;
 

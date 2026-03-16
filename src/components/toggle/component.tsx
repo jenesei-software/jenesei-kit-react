@@ -1,10 +1,9 @@
 import { ErrorMessage } from '@local/components/error';
+import { useMergeRefs } from '@local/hooks/use-merge-refs';
 import { CSS_CLASS, CSS_VARS, CSS_VARS_RAW } from '@local/styles/utils/constants';
 import { setClasses, setStyles } from '@local/styles/utils/functions';
 
-import { useMergeRefs } from '@floating-ui/react';
-import { motion } from 'framer-motion';
-import { useCallback, useMemo, useRef } from 'react';
+import { Ref, useCallback, useMemo, useRef } from 'react';
 
 import { IToggle } from './component.types';
 
@@ -90,11 +89,11 @@ export const Toggle = (props: IToggle) => {
 
   return (
     <>
-      <motion.button
+      <button
         className={className}
         style={style}
         type={props.type ?? 'button'}
-        ref={ref}
+        ref={ref as Ref<HTMLButtonElement>}
         name={props.name}
         aria-label={props.ariaLabel}
         id={props.id}
@@ -102,8 +101,8 @@ export const Toggle = (props: IToggle) => {
         onFocus={props.onFocus}
         onMouseDown={props.onMouseDown}
       >
-        <motion.div className={classNameCenter} style={styleCenter} />
-      </motion.button>
+        <div className={classNameCenter} style={styleCenter} />
+      </button>
       {props?.error?.isError && (
         <ErrorMessage
           size={props?.error.size ?? props.size}

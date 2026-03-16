@@ -28,8 +28,6 @@ type IButtonDefault = PropsWithChildren & {
 
   isFullRadius?: boolean;
 
-  isWhileTapEffect?: boolean;
-
   isWidthAsHeight?: boolean;
 
   isZeroRadius?: boolean;

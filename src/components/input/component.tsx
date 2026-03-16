@@ -1,10 +1,10 @@
 import { ErrorMessage } from '@local/components/error';
+import { useMergeRefs } from '@local/hooks/use-merge-refs';
 import { useTypographyStyles } from '@local/hooks/use-typography-styles';
 import { CSS_CLASS, CSS_VARS } from '@local/styles/utils';
 import { CSS_VARS_RAW } from '@local/styles/utils/constants';
 import { setClasses, setStyles } from '@local/styles/utils/functions';
 
-import { useMergeRefs } from '@floating-ui/react';
 import { useCallback, useMemo, useRef } from 'react';
 import { NumberFormatValues, NumericFormat, PatternFormat } from 'react-number-format';
 

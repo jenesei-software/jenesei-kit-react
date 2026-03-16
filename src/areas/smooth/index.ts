@@ -1,1 +1,0 @@
-export { Smooth } from './component';

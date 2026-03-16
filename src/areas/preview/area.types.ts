@@ -1,10 +1,13 @@
-import { ISx } from '@local/styles/utils';
+import { ISx, IThemePalette } from '@local/styles/utils';
 
 import { PropsWithChildren, ReactNode } from 'react';
 
-type IPreviewDefault = { defaultVisible?: boolean; content?: ReactNode } & {
+type IPreviewDefault = {
+  defaultVisible?: boolean;
+  content?: ReactNode;
   sxLoader?: ISx['sx'];
   sxChildren?: ISx['sx'];
+  colorIcon?: IThemePalette;
 };
 
 interface IPreviewIsShow extends IPreviewDefault {

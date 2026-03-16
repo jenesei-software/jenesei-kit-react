@@ -10,12 +10,12 @@ import { WrapperBig } from './tools';
 
 const meta: Meta<typeof SelectLanguage> = {
   component: SelectLanguage,
-  title: 'Component/Select',
+  title: 'Component/12. Select',
 };
 
 export default meta;
 
-const SelectWrapperAll: FC = () => {
+const CollectionWrapper: FC = () => {
   const [valueLanguage, setValueLanguage] = useState<string | null>(null);
   const handleSelectChangeLanguage = (language: string | null) => {
     setValueLanguage(language);
@@ -36,14 +36,12 @@ const SelectWrapperAll: FC = () => {
     setValueYear(value);
   };
   return (
-    <WrapperBig sx={{ default: { flexDirection: 'column', minWidth: '500px', maxWidth: '500px' } }}>
-      <WrapperBig sx={{ default: { flexDirection: 'column' } }}>
+    <WrapperBig sx={{ flexDirection: 'column', minWidth: '500px', maxWidth: '500px' }}>
+      <WrapperBig sx={{ flexDirection: 'column' }}>
         <Typography
           sx={{
-            default: {
-              variant: 'h5',
-              color: 'black100',
-            },
+            variant: 'title-2',
+            color: 'textPrimaryLight',
           }}
         >
           Single, language
@@ -52,44 +50,40 @@ const SelectWrapperAll: FC = () => {
           isToggleWhenClickSelectListOption
           isShowDropdownOptionIcon
           size='medium'
-          genre='grayBorder'
+          genre='primary'
           value={valueLanguage}
           onChange={handleSelectChangeLanguage}
         />
       </WrapperBig>
-      <WrapperBig sx={{ default: { flexDirection: 'column' } }}>
+      <WrapperBig sx={{ flexDirection: 'column' }}>
         <Typography
           sx={{
-            default: {
-              variant: 'h5',
-              color: 'black100',
-            },
+            variant: 'title-2',
+            color: 'textPrimaryLight',
           }}
         >
           Single, Month
         </Typography>
         <SelectMonth
           size='medium'
-          genre='grayBorder'
+          genre='secondary'
           value={valueMonth}
           onChange={handleSelectChangeMonth}
           monthsLocale={LOCALE_MONTHS}
         />
       </WrapperBig>
-      <WrapperBig sx={{ default: { flexDirection: 'column' } }}>
+      <WrapperBig sx={{ flexDirection: 'column' }}>
         <Typography
           sx={{
-            default: {
-              variant: 'h5',
-              color: 'black100',
-            },
+            variant: 'title-2',
+            color: 'textPrimaryLight',
           }}
         >
           Multiple, Months
         </Typography>
         <SelectMonths
           size='medium'
-          genre='grayBorder'
+          genre='primary'
           isShowIconSearchClear
           isShowIconFetching
           isShowIconToggle
@@ -103,20 +97,18 @@ const SelectWrapperAll: FC = () => {
           monthsLocale={LOCALE_MONTHS}
         />
       </WrapperBig>
-      <WrapperBig sx={{ default: { flexDirection: 'column' } }}>
+      <WrapperBig sx={{ flexDirection: 'column' }}>
         <Typography
           sx={{
-            default: {
-              variant: 'h5',
-              color: 'black100',
-            },
+            variant: 'title-2',
+            color: 'textPrimaryLight',
           }}
         >
           Single, Year
         </Typography>
         <SelectYear
           size='medium'
-          genre='grayBorder'
+          genre='primary'
           labelPlaceholder='Year'
           value={valueYear}
           onChange={handleSelectChangeYear}
@@ -124,20 +116,18 @@ const SelectWrapperAll: FC = () => {
           dateMax={moment.utc().startOf('day').valueOf()}
         />
       </WrapperBig>
-      <WrapperBig sx={{ default: { flexDirection: 'column' } }}>
+      <WrapperBig sx={{ flexDirection: 'column' }}>
         <Typography
           sx={{
-            default: {
-              variant: 'h5',
-              color: 'black100',
-            },
+            variant: 'title-2',
+            color: 'textPrimaryLight',
           }}
         >
           Single, Year, Center
         </Typography>
         <SelectYear
           size='medium'
-          genre='grayBorder'
+          genre='primary'
           labelPlaceholder='Year'
           isCenter
           value={valueYear}
@@ -146,20 +136,18 @@ const SelectWrapperAll: FC = () => {
           dateMax={moment.utc().startOf('day').valueOf()}
         />
       </WrapperBig>
-      <WrapperBig sx={{ default: { flexDirection: 'column' } }}>
+      <WrapperBig sx={{ flexDirection: 'column' }}>
         <Typography
           sx={{
-            default: {
-              variant: 'h5',
-              color: 'black100',
-            },
+            variant: 'title-2',
+            color: 'textPrimaryLight',
           }}
         >
           Single, Year, Error
         </Typography>
         <SelectYear
           size='medium'
-          genre='grayBorder'
+          genre='primary'
           labelPlaceholder='Year'
           error={{
             errorMessage: 'This field is required',
@@ -176,6 +164,6 @@ const SelectWrapperAll: FC = () => {
   );
 };
 
-export const Select = {
-  render: () => <SelectWrapperAll />,
+export const Collection = {
+  render: () => <CollectionWrapper />,
 };

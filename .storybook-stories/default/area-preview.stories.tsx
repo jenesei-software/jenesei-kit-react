@@ -20,19 +20,8 @@ type Story = StoryObj<IPreview>;
 
 export const Index: Story = {
   args: {
-    defaultVisible: false,
-    visible: true,
+    visible: false,
     minTime: 2000,
-    content: (
-      <Typography
-        sx={{
-          variant: 'title-3',
-          color: 'textPrimaryLight',
-        }}
-      >
-        <MotionTypingEffect text='Loading...' />
-      </Typography>
-    ),
   },
 };
 
@@ -44,50 +33,24 @@ const CollectionWrapper: FC = () => {
           position: 'relative',
           width: '200px',
           height: '200px',
-          backgroundColor: CSS_VARS.palette.accentGrayLight,
+          backgroundColor: CSS_VARS.palette.fillQuaternaryLight,
           color: CSS_VARS.palette.textPrimaryLight,
           borderRadius: '8px',
         }}
       >
-        <PreviewComponent
-          time={2000}
-          defaultVisible={false}
-          content={
-            <Typography
-              sx={{
-                variant: 'title-3',
-                color: 'textPrimaryLight',
-              }}
-            >
-              <MotionTypingEffect text='Loading...' />
-            </Typography>
-          }
-        />
+        <PreviewComponent time={2000} defaultVisible={false} />
       </Stack>
       <Stack
         sx={{
           position: 'relative',
-          width: '160px',
+          width: '200px',
           height: '200px',
           backgroundColor: CSS_VARS.palette.accentBlueLight,
-          color: CSS_VARS.palette.textPrimaryLight,
+          color: CSS_VARS.palette.textPrimaryDark,
           borderRadius: '8px',
         }}
       >
-        <PreviewComponent
-          time={2000}
-          defaultVisible={false}
-          content={
-            <Typography
-              sx={{
-                variant: 'title-2',
-                color: 'textPrimaryLight',
-              }}
-            >
-              <MotionTypingEffect text='Loading...' />
-            </Typography>
-          }
-        />
+        <PreviewComponent time={2000} defaultVisible={false} />
       </Stack>
     </WrapperBig>
   );

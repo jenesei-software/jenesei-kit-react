@@ -8,40 +8,28 @@ import { FC, useEffect, useMemo, useState } from 'react';
 import { IPreview } from './area.types';
 
 export const Preview: FC<IPreview> = (props) => {
-  const [visible, setVisible] = useState(props.defaultVisible ?? true);
+  const [visible, setVisible] = useState(props.defaultVisible ?? false);
 
   const propsVisible = useMemo(() => ('visible' in props ? props.visible : null), [props]);
   const propsTime = useMemo(() => ('time' in props ? props.time : null), [props]);
-  const propsMinTime = useMemo(() => ('minTime' in props ? props.minTime : null), [props]);
 
   useEffect(() => {
-    if (propsTime !== null) {
-      const timer = setTimeout(() => {
-        setVisible(true);
-      }, propsTime);
-
-      return () => {
-        clearTimeout(timer);
-      };
-    }
-  }, [propsTime]);
-
-  useEffect(() => {
-    if (propsVisible !== null) {
-      if (propsVisible) {
-        if (propsMinTime) {
-          const timer = setTimeout(() => {
-            setVisible(propsVisible);
-          }, propsMinTime);
-          return () => clearTimeout(timer);
-        } else {
-          setVisible(propsVisible);
-        }
+    if (propsVisible !== null && propsTime === null) {
+      setVisible(propsVisible);
+    } else if (propsVisible !== null && propsTime !== null) {
+      if (propsVisible === false) {
+        setVisible(false);
       } else {
-        setVisible(propsVisible);
+        const timer = setTimeout(() => {
+          setVisible(true);
+        }, propsTime);
+
+        return () => {
+          clearTimeout(timer);
+        };
       }
     }
-  }, [propsVisible, propsMinTime]);
+  }, [propsVisible, propsTime]);
 
   return (
     <AnimatePresence>
@@ -55,7 +43,7 @@ export const Preview: FC<IPreview> = (props) => {
           animate={{ opacity: 1 }}
         >
           <Stack className={CSS_CLASS.area.preview.containerIcon}>
-            <Icon size='100%' type='loading' color='productPrimaryLight' name='Line' />
+            <Icon size='100%' type='loading' color={props.colorIcon ?? 'inherit'} name='Line' />
           </Stack>
           {props.content && <Stack className={CSS_CLASS.area.preview.containerChildren}>{props.content}</Stack>}
         </StackMotion>

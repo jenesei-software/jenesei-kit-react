@@ -6,6 +6,7 @@
 import { transformObjectToArray, transformObjectValuesToKeys } from '@local/functions';
 import { IImageFormat, ILanguage, IService } from '@local/types';
 
+import { IDatePickerTranslateMonth } from './components/date-picker';
 import { IThemeTypographyHeading } from './styles/utils';
 
 export const OBJECT_LANGUAGE: ILanguage = {
@@ -43,68 +44,68 @@ export const LIST_KEY_SERVICE = transformObjectValuesToKeys(OBJECT_SERVICE);
 //   month: 'ММ',
 //   year: 'ГГГГ',
 // };
-// export const LOCALE_MONTHS: IDatePickerTranslateMonth[] = [
-//   {
-//     localeLong: 'Январь',
-//     localeShort: 'Янв',
-//     value: 'january',
-//   },
-//   {
-//     localeLong: 'February',
-//     localeShort: 'Feb',
-//     value: 'february',
-//   },
-//   {
-//     localeLong: 'March',
-//     localeShort: 'Mar',
-//     value: 'march',
-//   },
-//   {
-//     localeLong: 'April',
-//     localeShort: 'Apr',
-//     value: 'april',
-//   },
-//   {
-//     localeLong: 'May',
-//     localeShort: 'May',
-//     value: 'may',
-//   },
-//   {
-//     localeLong: 'June',
-//     localeShort: 'Jun',
-//     value: 'june',
-//   },
-//   {
-//     localeLong: 'July',
-//     localeShort: 'Jul',
-//     value: 'july',
-//   },
-//   {
-//     localeLong: 'August',
-//     localeShort: 'Aug',
-//     value: 'august',
-//   },
-//   {
-//     localeLong: 'September',
-//     localeShort: 'Sep',
-//     value: 'september',
-//   },
-//   {
-//     localeLong: 'October',
-//     localeShort: 'Oct',
-//     value: 'october',
-//   },
-//   {
-//     localeLong: 'November',
-//     localeShort: 'Nov',
-//     value: 'november',
-//   },
-//   {
-//     localeLong: 'December',
-//     localeShort: 'Dec',
-//     value: 'december',
-//   },
-// ];
+export const LOCALE_MONTHS: IDatePickerTranslateMonth[] = [
+  {
+    localeLong: 'Январь',
+    localeShort: 'Янв',
+    value: 'january',
+  },
+  {
+    localeLong: 'February',
+    localeShort: 'Feb',
+    value: 'february',
+  },
+  {
+    localeLong: 'March',
+    localeShort: 'Mar',
+    value: 'march',
+  },
+  {
+    localeLong: 'April',
+    localeShort: 'Apr',
+    value: 'april',
+  },
+  {
+    localeLong: 'May',
+    localeShort: 'May',
+    value: 'may',
+  },
+  {
+    localeLong: 'June',
+    localeShort: 'Jun',
+    value: 'june',
+  },
+  {
+    localeLong: 'July',
+    localeShort: 'Jul',
+    value: 'july',
+  },
+  {
+    localeLong: 'August',
+    localeShort: 'Aug',
+    value: 'august',
+  },
+  {
+    localeLong: 'September',
+    localeShort: 'Sep',
+    value: 'september',
+  },
+  {
+    localeLong: 'October',
+    localeShort: 'Oct',
+    value: 'october',
+  },
+  {
+    localeLong: 'November',
+    localeShort: 'Nov',
+    value: 'november',
+  },
+  {
+    localeLong: 'December',
+    localeShort: 'Dec',
+    value: 'december',
+  },
+];
 // export const LOCALE_WEEKS: DatePickerTranslateWeekProps[] = [
 //   {
 //     localeLong: 'Monday',

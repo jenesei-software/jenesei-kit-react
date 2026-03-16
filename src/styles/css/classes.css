@@ -185,14 +185,15 @@
 }
 
 .u-control--boxShadow-only-hover:hover,
+.u-control--boxShadow:focus-visible,
 .u-control--boxShadow:hover {
+  outline: none;
   box-shadow:
     0 1px 1px var(--product-quinary-light),
     0 0 0 0.25rem var(--product-tertiary-light);
 }
 
 .u-control--boxShadow:active,
-.u-control--boxShadow:focus-visible,
 .u-control--boxShadow:has(input:focus-visible),
 .u-control--boxShadow:has(textarea:focus-visible) {
   outline-offset: 4px;

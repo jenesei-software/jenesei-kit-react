@@ -4,7 +4,6 @@ import autoprefixer from 'autoprefixer';
 import path, { resolve } from 'path';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
-import tsconfigPaths from 'vite-tsconfig-paths';
 
 import { peerDependencies } from './package.json';
 import process from 'node:process';
@@ -20,6 +19,7 @@ export default defineConfig(() => {
 
   return {
     resolve: {
+      tsconfigPaths: true,
       alias: {
         '@local': path.resolve(__dirname, './src'),
       },
@@ -46,7 +46,6 @@ export default defineConfig(() => {
       //     pathPackageJson: resolve(__dirname, 'package.json'),
       //   }),
       react(),
-      tsconfigPaths(),
       !isStorybook &&
         dts({
           include: ['src/'],
@@ -122,7 +121,7 @@ export default defineConfig(() => {
             formats: ['es', 'cjs'],
             fileName: (format, name) => `${name}.${format}.js`,
           }
-        : {},
+        : false,
       rollupOptions: {
         external: Object.keys(peerDependencies),
         output: {
