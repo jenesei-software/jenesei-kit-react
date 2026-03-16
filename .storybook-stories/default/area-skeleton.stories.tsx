@@ -8,7 +8,7 @@ import { FC } from 'react';
 
 const meta: Meta<typeof SkeletonComponent> = {
   component: SkeletonComponent,
-  title: 'Area/4. Skeleton',
+  title: 'Area/2. Skeleton',
   args: {
     time: 2000,
   },

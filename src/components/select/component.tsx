@@ -6,11 +6,11 @@ import { Icon } from '@local/components/icon';
 import { Popover, usePopover } from '@local/components/popover';
 import { TextArea } from '@local/components/textarea';
 import { Typography } from '@local/components/typography';
+import { useMergeRefs } from '@local/hooks/use-merge-refs';
 import { useTypographyStyles } from '@local/hooks/use-typography-styles';
 import { CSS_CLASS, CSS_VARS, CSS_VARS_RAW, EXTRA_VALUE } from '@local/styles/utils';
 import { setClasses, setStyles } from '@local/styles/utils/functions';
 
-import { useMergeRefs } from '@floating-ui/react';
 import { useVirtualizer } from '@tanstack/react-virtual';
 import { KeyboardEvent, memo, Ref, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 

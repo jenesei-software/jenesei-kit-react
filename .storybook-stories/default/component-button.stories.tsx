@@ -96,7 +96,6 @@ const CollectionWrapper: FC = () => {
             icons={[{ type: 'logo', name: 'Jenesei', size: '100%' }]}
             size='medium'
             genre='product'
-            isWhileTapEffect
           />
           <ButtonComponent
             size='medium'
@@ -113,11 +112,10 @@ const CollectionWrapper: FC = () => {
                 order: -1,
               },
             ]}
-            isWhileTapEffect
             isIconGroup
             iconGroupOrder={1}
           >
-            2 Icons, isWhileTapEffect
+            2 Icons
           </ButtonComponent>
           <ButtonComponent size='medium' genre='product' isZeroRadius>
             isZeroRadius

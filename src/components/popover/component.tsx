@@ -4,6 +4,7 @@ import { CSS_VARS_RAW } from '@local/styles/utils/constants';
 import { setClasses, setStyles } from '@local/styles/utils/functions';
 
 import { autoUpdate, flip, offset, shift, useFloating } from '@floating-ui/react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { FC, Ref, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 
@@ -68,36 +69,47 @@ export const Popover: FC<IPopover> = (props) => {
 
     return { className, style };
   }, [
-    props.className, 
-    props.style, 
-    props.genre, 
-    props.maxHeight, 
-    props.maxWidth, 
-    props.size, 
-    classNameTypography, 
-    styleTypography
+    props.className,
+    props.style,
+    props.genre,
+    props.maxHeight,
+    props.maxWidth,
+    props.size,
+    classNameTypography,
+    styleTypography,
   ]);
 
-
   return ReactDOM.createPortal(
-    props.isOpen && (
-      <div
-        ref={props.ref as Ref<HTMLDivElement | null>}
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          ...props.floatingStyles,
-          zIndex: 9998,
-          outline: '0px transparent solid !important',
-          border: '0px transparent solid !important',
-        }}
-      >
-        <div tabIndex={-1} className={className} style={style}>
-          {props.children}
+    <AnimatePresence>
+      {props.isOpen && (
+        <div
+          ref={props.ref as Ref<HTMLDivElement | null>}
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            ...props.floatingStyles,
+            transform: props.floatingStyles.transform,
+            zIndex: 9998,
+            outline: '0px transparent solid !important',
+            border: '0px transparent solid !important',
+            maxWidth: '100dvw',
+          }}
+        >
+          <motion.div
+            tabIndex={-1}
+            className={className}
+            style={style}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+          >
+            {props.children}
+          </motion.div>
         </div>
-      </div>
-    ),
+      )}
+    </AnimatePresence>,
     document.body,
   );
 };
@@ -319,8 +331,11 @@ export const usePopover = (props: IUsePopover) => {
   const combinedStyles = useMemo(() => {
     return {
       ...floatingStyles,
-      minWidth: props.isWidthAsContent && minWidth ? `${minWidth}px` : undefined,
-      maxWidth: props.isWidthAsContent && minWidth ? `${minWidth}px` : undefined,
+      ...(props.isWidthAsContent
+        ? {
+            width: `min(${minWidth}px, 100dvw)`,
+          }
+        : {}),
     };
   }, [floatingStyles, props.isWidthAsContent, minWidth]);
 

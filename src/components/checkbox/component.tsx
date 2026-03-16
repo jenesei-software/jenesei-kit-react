@@ -1,13 +1,12 @@
 import { ErrorMessage } from '@local/components/error';
 import { Icon } from '@local/components/icon';
+import { useMergeRefs } from '@local/hooks/use-merge-refs';
 import { useTypographyStyles } from '@local/hooks/use-typography-styles';
 import { CSS_CLASS, CSS_VARS, EXTRA_VALUE } from '@local/styles/utils';
 import { CSS_VARS_RAW } from '@local/styles/utils/constants';
 import { setClasses, setStyles } from '@local/styles/utils/functions';
 
-import { useMergeRefs } from '@floating-ui/react';
-import { motion } from 'framer-motion';
-import { FC, useCallback, useMemo, useRef } from 'react';
+import { FC, Ref, useCallback, useMemo, useRef } from 'react';
 
 import { ICheckbox } from './component.types';
 
@@ -76,7 +75,7 @@ export const Checkbox: FC<ICheckbox> = (props) => {
   }, [props.isDisabled, props.onChange, props.checked]);
   return (
     <>
-      <motion.button
+      <button
         disabled={props.isDisabled}
         tabIndex={props.tabIndex ?? 0}
         onClick={handleClick}
@@ -85,7 +84,7 @@ export const Checkbox: FC<ICheckbox> = (props) => {
         className={className}
         style={style}
         type={props.type ?? 'button'}
-        ref={ref}
+        ref={ref as Ref<HTMLButtonElement>}
         name={props.name}
         aria-label={props.ariaLabel}
         id={props.id}
@@ -99,7 +98,7 @@ export const Checkbox: FC<ICheckbox> = (props) => {
             {props.children}
           </div>
         )}
-      </motion.button>
+      </button>
       {props?.error?.isError && (
         <ErrorMessage
           size={props?.error.size ?? props.size}

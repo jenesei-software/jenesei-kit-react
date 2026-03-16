@@ -10,37 +10,26 @@ import { ISkeleton } from './area.types';
 export const Skeleton: FC<ISkeleton> = (props) => {
   const [visible, setVisible] = useState(props.defaultVisible ?? false);
 
-  const visibleProps = useMemo(() => {
-    if ('visible' in props) {
-      return props.visible;
-    }
-    return null;
-  }, [props]);
-
-  const timeProps = useMemo(() => {
-    if ('time' in props) {
-      return props.time;
-    }
-    return null;
-  }, [props]);
+  const propsVisible = useMemo(() => ('visible' in props ? props.visible : null), [props]);
+  const propsTime = useMemo(() => ('time' in props ? props.time : null), [props]);
 
   useEffect(() => {
-    if (visibleProps !== null && timeProps === null) {
-      setVisible(visibleProps);
-    } else if (visibleProps !== null && timeProps !== null) {
-      if (visibleProps === false) {
+    if (propsVisible !== null && propsTime === null) {
+      setVisible(propsVisible);
+    } else if (propsVisible !== null && propsTime !== null) {
+      if (propsVisible === false) {
         setVisible(false);
       } else {
         const timer = setTimeout(() => {
           setVisible(true);
-        }, timeProps);
+        }, propsTime);
 
         return () => {
           clearTimeout(timer);
         };
       }
     }
-  }, [visibleProps, timeProps]);
+  }, [propsVisible, propsTime]);
 
   return (
     <Stack

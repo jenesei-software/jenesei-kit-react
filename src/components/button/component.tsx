@@ -1,10 +1,9 @@
 import { getIconComponents } from '@local/components/icon';
+import { useMergeRefs } from '@local/hooks/use-merge-refs';
 import { useTypographyStyles } from '@local/hooks/use-typography-styles';
 import { CSS_CLASS, CSS_VARS, CSS_VARS_RAW, EXTRA_VALUE } from '@local/styles/utils';
 import { setClasses, setStyles } from '@local/styles/utils/functions';
 
-import { useMergeRefs } from '@floating-ui/react';
-import { motion } from 'framer-motion';
 import { FC, Ref, useCallback, useMemo, useRef } from 'react';
 
 import { IButton } from './component.types';
@@ -34,11 +33,6 @@ export const Button: FC<IButton> = (props) => {
   const refDefault = useRef<HTMLButtonElement>(null);
 
   const ref = useMergeRefs([refDefault, props.ref]);
-
-  const isInteractive = useMemo(
-    () => !props.isDisabled && props.isWhileTapEffect,
-    [props.isDisabled, props.isWhileTapEffect],
-  );
 
   const { className: classNameTypography, style: styleTypography } = useTypographyStyles({
     sx: { variant: EXTRA_VALUE.sizeToController[props.size], isNoUserSelect: true, ...props?.sxTypography },
@@ -108,9 +102,7 @@ export const Button: FC<IButton> = (props) => {
   }, [props]);
 
   return (
-    <motion.button
-      whileTap={isInteractive ? { scale: 1.1, transition: { duration: 0.08, ease: 'easeOut' } } : undefined}
-      whileHover={isInteractive ? { scale: 0.97, transition: { duration: 0.2, ease: 'easeOut' } } : undefined}
+    <button
       tabIndex={props.tabIndex ?? 0}
       disabled={props.isDisabled}
       className={className}
@@ -132,6 +124,6 @@ export const Button: FC<IButton> = (props) => {
       <div className={classNameIconGroup} style={styleIconGroup}>
         {iconComponents}
       </div>
-    </motion.button>
+    </button>
   );
 };

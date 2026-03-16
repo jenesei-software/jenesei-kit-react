@@ -1,9 +1,9 @@
 import { ErrorMessage } from '@local/components/error';
+import { useMergeRefs } from '@local/hooks/use-merge-refs';
 import { useTypographyStyles } from '@local/hooks/use-typography-styles/use';
 import { CSS_CLASS, CSS_VARS, CSS_VARS_RAW, EXTRA_VALUE } from '@local/styles/utils';
 import { setClasses, setStyles } from '@local/styles/utils/functions';
 
-import { useMergeRefs } from '@floating-ui/react';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 
 import { ITextArea } from './component.types';
