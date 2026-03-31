@@ -3,7 +3,6 @@ export type {
   IContainer,
   ILayoutValue,
   ISx,
-  ISxTypography,
   IThemeBreakpoint,
   IThemeGlobal,
   IThemeOrientation,

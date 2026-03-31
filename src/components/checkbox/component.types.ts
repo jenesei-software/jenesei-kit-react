@@ -1,9 +1,10 @@
-import { IAddError } from '@local/components/error';
 import { IIcon } from '@local/components/icon';
-import { ISxTypography, IThemeSize } from '@local/styles/utils';
-import { IThemeControl, IThemeGenreCheckbox } from '@local/styles/utils/types';
+import { IThemeSize } from '@local/styles/utils';
+import { IThemeControl, IThemeGenreCheckbox, ITypography } from '@local/styles/utils/types';
 
 import { CSSProperties, FocusEvent, MouseEventHandler, PropsWithChildren, Ref } from 'react';
+
+import { IErrorMessage } from '../error/component.types';
 
 type IIconWithoutSize = {
   [K in IIcon['type']]: Omit<Extract<IIcon, { type: K }>, 'size'> & { size?: IThemeSize };
@@ -35,7 +36,7 @@ export type ICheckbox = PropsWithChildren & {
   isNotBackground?: boolean;
 
   isOnlyIcon?: boolean;
-  
+
   isFullRadius?: boolean;
 
   isZeroRadius?: boolean;
@@ -52,6 +53,8 @@ export type ICheckbox = PropsWithChildren & {
 
   control?: IThemeControl;
 
+  sxTypography?: ITypography;
+
   ref?: Ref<HTMLElement | null>;
 
   size: IThemeSize;
@@ -62,11 +65,11 @@ export type ICheckbox = PropsWithChildren & {
 
   type?: HTMLButtonElement['type'];
 
+  error?: IErrorMessage;
+  
   view: {
     true: IIconWithoutSize & { size?: IThemeSize };
-    
+
     false: IIconWithoutSize & { size?: IThemeSize };
   };
-} &
-  IAddError &
-  ISxTypography;
+};

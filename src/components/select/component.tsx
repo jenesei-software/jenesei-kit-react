@@ -14,12 +14,7 @@ import { setClasses, setStyles } from '@local/styles/utils/functions';
 import { useVirtualizer } from '@tanstack/react-virtual';
 import { KeyboardEvent, memo, Ref, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-import {
-  IContainerDropdownListOption,
-  IContainerSelectListOption,
-  ISelect,
-  ISelectItem
-} from './component.types';
+import { IContainerDropdownListOption, IContainerSelectListOption, ISelect, ISelectItem } from './component.types';
 
 const DEFAULT_LABEL_SELECT_ALL = 'Select all option';
 const DEFAULT_LABEL_PLACEHOLDER = 'Select an option';
@@ -295,6 +290,42 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
     props.isWrapSelectOption,
   ]);
 
+  const { className: classNamePopover, style: stylePopover } = useMemo(() => {
+    const className = setClasses([
+      CSS_CLASS.transition.color,
+      isShowScroll && CSS_CLASS.component.select.isShowScroll,
+      props.isCenter && CSS_CLASS.component.select.isCenter,
+    ]);
+
+    const vars: Record<string, string> = {};
+
+    vars[CSS_VARS_RAW.component.select.background] = CSS_VARS.genre.select[props.genre].background.index;
+    vars[CSS_VARS_RAW.component.select.color] = CSS_VARS.genre.select[props.genre].color.index;
+    vars[CSS_VARS_RAW.component.select.borderColor] = CSS_VARS.genre.select[props.genre].border.index;
+    vars[CSS_VARS_RAW.component.select.borderColorSelect] = CSS_VARS.genre.select[props.genre].border.select;
+
+    vars[CSS_VARS_RAW.component.select.height] = CSS_VARS.size[props.size].height;
+    vars[CSS_VARS_RAW.component.select.padding] = CSS_VARS.size[props.size].padding;
+    vars[CSS_VARS_RAW.component.select.borderRadius] = CSS_VARS.size[props.size].radius;
+
+    vars[CSS_VARS_RAW.component.select.backgroundInput] = CSS_VARS.genre.input[props.genre].background;
+    vars[CSS_VARS_RAW.component.select.backgroundOption] = CSS_VARS.genre.input[props.genre].backgroundOption;
+    vars[CSS_VARS_RAW.component.select.colorInput] = CSS_VARS.genre.input[props.genre].color;
+    vars[CSS_VARS_RAW.component.select.borderColorInput] = CSS_VARS.genre.input[props.genre].border;
+
+    const style = setStyles([
+      Object.keys(vars).length ? vars : undefined,
+      {
+        background: CSS_VARS.genre.popover[props.genre].background,
+        borderRadius: `${sizeRadius}px`,
+        padding: '0px',
+        maxHeight: `${heightPopover}px`,
+        boxSizing: 'content-box',
+      },
+    ]);
+
+    return { className, style };
+  }, [props.genre, props.size, isShowScroll, heightPopover, sizeRadius, props.isCenter]);
   return (
     <>
       <div
@@ -332,6 +363,7 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
             }}
             value={props.valueSearch}
             placeholder={labelPlaceholder}
+            control='none'
           />
         )}
         {isHaveValue && (props.isShowSelectAllLabel ? !isAll : true) ? (
@@ -365,11 +397,9 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
                   item={value}
                   genre={props.genre}
                   size={props.size}
-                  isBold={props.isBold}
                   isOnlyColorInSelectListOption={props.isOnlyColorInSelectListOption}
                   isClearWhenClickSelectListOption={props.isClearWhenClickSelectListOption}
                   isWrapSelectOption={props.isWrapSelectOption}
-                  isNotShowHoverStyle={props.isNotShowHoverStyle}
                   isCenter={props.isCenter}
                   className={classNameTypography}
                   style={styleTypography}
@@ -467,18 +497,15 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
         ) : null}
       </div>
       <Popover
-        style={{
-          background: CSS_VARS.genre.popover[props.genre].background,
-          borderRadius: `${sizeRadius}px`,
-          padding: '0px',
-          maxHeight: `${heightPopover}px`,
-        }}
-        isShowAlwaysOutline
+        style={stylePopover}
+        className={classNamePopover}
         size={props.size}
         genre={props.genre}
         floatingStyles={floatingStyles}
         ref={refFloating}
         isOpen={isOpen}
+        control='boxShadowSelect'
+        isDisabledBoxShadow
       >
         <div
           tabIndex={-1}
@@ -568,8 +595,6 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
                     size={props.size}
                     className={classNameTypography}
                     style={styleTypography}
-                    isBold={props.isBold}
-                    isNotShowHoverStyle={props.isNotShowHoverStyle}
                     isCenter={props.isCenter}
                     isShowScroll={isShowScroll}
                     isShowDropdownOptionIcon={props.isShowDropdownOptionIcon}
@@ -591,9 +616,7 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
   );
 };
 
-const ContainerDropdownListOption = <T extends object & ISelectItem>(
-  props: IContainerDropdownListOption<T>,
-) => {
+const ContainerDropdownListOption = <T extends object & ISelectItem>(props: IContainerDropdownListOption<T>) => {
   const handleKeyDown = (event: KeyboardEvent<HTMLLIElement>) => {
     if (props.item.isDisabled) return;
     if (event.key === 'Enter') {
@@ -650,7 +673,7 @@ const ContainerSelectListOption = <T extends object & ISelectItem>(props: IConta
       tabIndex={-1}
       onClick={props.onClick}
     >
-      <Typography sx={{ size: 16, line: 1 }}>{props.item.label}</Typography>
+      <Typography sx={{ size: 16, height: 1 }}>{props.item.label}</Typography>
     </li>
   );
 };

@@ -13,7 +13,10 @@ import { ITooltip } from './component.types';
 export const Tooltip: FC<ITooltip> = memo((props) => {
   if (props.isDisabled)
     return (
-      <div className={setClasses([CSS_CLASS.component.tooltip.wrapper, props.classNameWrapper])} style={props.styleWrapper}>
+      <div
+        className={setClasses([CSS_CLASS.component.tooltip.wrapper, props.classNameWrapper])}
+        style={props.styleWrapper}
+      >
         {props.children}
       </div>
     );
@@ -22,7 +25,7 @@ export const Tooltip: FC<ITooltip> = memo((props) => {
 });
 
 export const TooltipContent: FC<ITooltip> = (props) => {
-  const { isOpen, refReference, refFloating, floatingStyles } = usePopover({
+  const { isOpen, refReference, refFloating, floatingStyles, context, refArrow } = usePopover({
     placement: props.placement ?? DEFAULT_TOOLTIP_PLACEMENT_FALLBACK,
     offset: props.offset ?? DEFAULT_TOOLTIP_OFFSET_FALLBACK,
     mode: props.mode ?? 'hover',
@@ -34,7 +37,7 @@ export const TooltipContent: FC<ITooltip> = (props) => {
   });
 
   const { className, style } = useMemo(() => {
-    const className = setClasses([CSS_CLASS.component.tooltip.root,props.classNamePopover]);
+    const className = setClasses([CSS_CLASS.component.tooltip.root, props.classNamePopover]);
 
     const vars: Record<string, string> = {};
 
@@ -42,7 +45,7 @@ export const TooltipContent: FC<ITooltip> = (props) => {
     vars[CSS_VARS_RAW.component.tooltip.padding] =
       `${CSS_VARS.size[props.size].padding} ${CSS_VARS.size[props.size].padding} 0px ${CSS_VARS.size[props.size].padding}`;
 
-    const style = setStyles([Object.keys(vars).length ? vars : undefined,props.stylePopover]);
+    const style = setStyles([Object.keys(vars).length ? vars : undefined, props.stylePopover]);
 
     return { className, style };
   }, [props.size, props.classNamePopover, props.stylePopover]);
@@ -71,6 +74,9 @@ export const TooltipContent: FC<ITooltip> = (props) => {
         ref={refFloating}
         maxHeight={props.maxHeight}
         maxWidth={props.maxWidth}
+        context={context}
+        refArrow={refArrow}
+        isArrow
       >
         <Typography className={classNameTypography} style={styleTypography} sx={props.sxTypography}>
           {props.content}

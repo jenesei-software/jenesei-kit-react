@@ -703,7 +703,6 @@ export const DatePicker = (props: DatePickerProps) => {
         size={props.size}
         genre={props.genre}
         isOpen={isOpen}
-        isShowAlwaysOutline
         floatingStyles={floatingStyles}
         ref={refFloating}
       >

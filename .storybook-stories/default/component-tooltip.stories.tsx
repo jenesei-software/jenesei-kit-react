@@ -221,5 +221,6 @@ export const Index: Story = {
     genre: 'primary',
     size: 'medium',
     children: 'Example',
+    content: 'TooltipComponent',
   },
 };

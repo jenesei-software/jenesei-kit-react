@@ -8,9 +8,8 @@
   flex-wrap: wrap;
   align-items: center;
   align-content: center;
-  flex-wrap: wrap;
 
-  border: 1px solid;
+  border: 1px solid transparent;
   width: 100%;
   height: fit-content;
   justify-content: "flex-start";
@@ -30,19 +29,14 @@
   justify-content: center;
 }
 
-/* =========================
-   Component - Select - Dropdown - List
-   ========================= */
-.component-select__dropdown__list {
-  list-style: none;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  transform: translateZ(0);
-  flex-shrink: 0;
-  gap: calc(var(--component-select-padding) / 2.8);
-}
+
+
+
+
+
+
+
+
 /* =========================
    Component - Select - Dropdown - List - Wrapper
    ========================= */
@@ -55,6 +49,20 @@
   padding: 0;
   display: flex;
   flex-direction: column;
+  gap: calc(var(--component-select-padding) / 2.8);
+}
+
+/* =========================
+   Component - Select - Dropdown - List
+   ========================= */
+.component-select__dropdown__list {
+  list-style: none;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  transform: translateZ(0);
+  flex-shrink: 0;
 }
 /* =========================
    Component - Select - Dropdown - List - Option
@@ -75,33 +83,36 @@
   justify-content: flex-start;
 }
 
+.component-select__dropdown__list__option:focus-visible {
+  outline: none;
+}
 .component-select__dropdown__list__option:first-child {
-  border-radius: var(--component-select-padding) var(--component-select-padding) 0px 0px;
+  border-radius: var(--component-select-border-radius) var(--component-select-border-radius) 0px 0px;
 }
 .component-select--is-show-scroll .component-select__dropdown__list__option:first-child {
-  border-radius: var(--component-select-padding) 0px 0px 0px;
+  border-radius: var(--component-select-border-radius) 0px 0px 0px;
 }
 .component-select__dropdown__list__option:last-child {
-  border-radius: 0 0 var(--component-select-padding) var(--component-select-padding);
+  border-radius: 0 0 var(--component-select-border-radius) var(--component-select-border-radius);
 }
 .component-select--is-show-scroll .component-select__dropdown__list__option:last-child {
-  border-radius: 0px 0px 0px var(--component-select-padding);
+  border-radius: 0px 0px 0px var(--component-select-border-radius);
 }
 .component-select__dropdown__list__option:not(:first-child):not(:last-child) {
   border-radius: 0px;
 }
 .component-select__dropdown__list__option:first-child:last-child {
-  border-radius: var(--component-select-padding);
+  border-radius: var(--component-select-border-radius);
 }
 .component-select--is-show-scroll .component-select__dropdown__list__option:first-child:last-child {
-  border-radius: var(--component-select-padding) 0px 0px var(--component-select-padding);
+  border-radius: var(--component-select-border-radius) 0px 0px var(--component-select-border-radius);
 }
 
 .component-select__dropdown__list__option,
 .component-select__dropdown__list__option:hover,
 .component-select__dropdown__list__option:active,
 .component-select__dropdown__list__option:focus-visible {
-  background: var(--component-select-background);
+  background: var(--component-select-background-option);
   border-color: var(--component-select-border-color);
   color: var(--component-select-color);
 }
@@ -127,14 +138,25 @@
    ========================= */
 .component-select__dropdown__list__option__icon {
   position: absolute;
-  right: 0;
   align-items: center;
   color: var(--component-select-border-color-input);
-  right: calc(var(--component-select-padding) - 6);
+  right: calc(var(--component-select-padding) - 6px);
 }
 .component-select__dropdown__list__option--is-checked .component-select__dropdown__list__option__icon {
   color: var(--component-select-border-color-select);
 }
+
+
+
+
+
+
+
+
+
+
+
+
 /* =========================
    Component - Select - List
    ========================= */

@@ -1,6 +1,6 @@
-import { IAddError } from '@local/components/error';
-import { ISxTypography, IThemeSize } from '@local/styles/utils';
-import { IThemeControl, IThemeGenreTextArea } from '@local/styles/utils/types';
+import { IErrorMessage } from '@local/components/error';
+import { IThemeSize } from '@local/styles/utils';
+import { IThemeControl, IThemeGenreTextArea, ITypography } from '@local/styles/utils/types';
 
 import {
   ClipboardEventHandler,
@@ -12,8 +12,8 @@ import {
   Ref
 } from 'react';
 
-type ICommonTextArea = IAddError &
-  ISxTypography & {
+type ICommonTextArea = 
+   {
     name?: string;
     ariaLabel?: string;
     autoComplete?: HTMLInputAutoCompleteAttribute | string;
@@ -24,6 +24,8 @@ type ICommonTextArea = IAddError &
     minRows: number;
     ref?: Ref<HTMLTextAreaElement | null>;
     control?: IThemeControl;
+    error?: IErrorMessage;
+    sxTypography?: ITypography;
     size: IThemeSize;
     placeholder?: string;
 

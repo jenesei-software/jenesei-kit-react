@@ -36,7 +36,7 @@ const CollectionWrapper: FC = () => {
     setValueYear(value);
   };
   return (
-    <WrapperBig sx={{ flexDirection: 'column', minWidth: '500px', maxWidth: '500px' }}>
+    <WrapperBig sx={{ flexDirection: 'column', minWidth: '340px', maxWidth: '340px' }}>
       <WrapperBig sx={{ flexDirection: 'column' }}>
         <Typography
           sx={{

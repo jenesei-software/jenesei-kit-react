@@ -103,7 +103,7 @@ export const Button: FC<IButton> = (props) => {
 
   return (
     <button
-      tabIndex={props.tabIndex ?? 0}
+      tabIndex={props.tabIndex}
       disabled={props.isDisabled}
       className={className}
       style={style}

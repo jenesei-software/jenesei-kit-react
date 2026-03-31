@@ -17,5 +17,8 @@
   background: var(--component-popover-background);
   border-color: var(--component-popover-border-color);
   color: var(--component-popover-color);
+}
+
+.component-popover--box-shadow {
   box-shadow: var(--component-popover-box-shadow);
 }

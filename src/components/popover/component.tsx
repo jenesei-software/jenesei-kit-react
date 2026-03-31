@@ -3,10 +3,19 @@ import { CSS_CLASS, CSS_VARS } from '@local/styles/utils';
 import { CSS_VARS_RAW } from '@local/styles/utils/constants';
 import { setClasses, setStyles } from '@local/styles/utils/functions';
 
-import { autoUpdate, flip, offset, shift, useFloating } from '@floating-ui/react';
-import { AnimatePresence, motion } from 'framer-motion';
-import { FC, Ref, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import ReactDOM from 'react-dom';
+import {
+  arrow,
+  autoUpdate,
+  FloatingArrow,
+  FloatingPortal,
+  flip,
+  offset,
+  shift,
+  size,
+  useFloating,
+} from '@floating-ui/react';
+import { motion, Variants } from 'framer-motion';
+import { FC, Ref, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { DEFAULT_POPOVER_CLOSE_DELAY, DEFAULT_POPOVER_OFFSET } from './component.constants';
 import { IPopover, IUsePopover } from './component.types';
@@ -40,6 +49,19 @@ const getNextFocusableElement = (currentElement: HTMLElement, backward = false):
   }
 };
 
+const variants: Variants = {
+  active: {
+    opacity: 1,
+    visibility: 'visible',
+    pointerEvents: 'auto',
+  },
+  inactive: {
+    opacity: 0,
+    visibility: 'hidden',
+    pointerEvents: 'none',
+  },
+};
+
 export const Popover: FC<IPopover> = (props) => {
   const { className: classNameTypography, style: styleTypography } = useTypographyStyles({
     sx: { variant: 'callout', ...props?.sxTypography },
@@ -50,6 +72,8 @@ export const Popover: FC<IPopover> = (props) => {
       classNameTypography,
       CSS_CLASS.component.popover.root,
       CSS_CLASS.transition.color,
+      props.control ? CSS_CLASS.control[props.control] : false,
+      !props.isDisabledBoxShadow ? CSS_CLASS.component.popover.boxShadow : false,
       props.className,
     ]);
 
@@ -58,7 +82,8 @@ export const Popover: FC<IPopover> = (props) => {
     vars[CSS_VARS_RAW.component.popover.background] = CSS_VARS.genre.popover[props.genre].background;
     vars[CSS_VARS_RAW.component.popover.color] = CSS_VARS.genre.popover[props.genre].color;
     vars[CSS_VARS_RAW.component.popover.borderColor] = CSS_VARS.genre.popover[props.genre].border;
-    vars[CSS_VARS_RAW.component.popover.boxShadow] = CSS_VARS.genre.popover[props.genre].boxShadow;
+    if (!props.isDisabledBoxShadow)
+      vars[CSS_VARS_RAW.component.popover.boxShadow] = CSS_VARS.genre.popover[props.genre].boxShadow;
 
     vars[CSS_VARS_RAW.component.popover.maxHeight] = props.maxHeight || '100%';
     vars[CSS_VARS_RAW.component.popover.maxWidth] = props.maxWidth || '100%';
@@ -69,75 +94,113 @@ export const Popover: FC<IPopover> = (props) => {
 
     return { className, style };
   }, [
-    props.className,
-    props.style,
-    props.genre,
-    props.maxHeight,
-    props.maxWidth,
-    props.size,
-    classNameTypography,
-    styleTypography,
+    props.className, 
+    props.style, 
+    props.genre, 
+    props.maxHeight, 
+    props.maxWidth, 
+    props.size, 
+    classNameTypography, 
+    styleTypography, 
+    props.control, props.isDisabledBoxShadow
   ]);
 
-  return ReactDOM.createPortal(
-    <AnimatePresence>
-      {props.isOpen && (
-        <div
-          ref={props.ref as Ref<HTMLDivElement | null>}
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            ...props.floatingStyles,
-            transform: props.floatingStyles.transform,
-            zIndex: 9998,
-            outline: '0px transparent solid !important',
-            border: '0px transparent solid !important',
-            maxWidth: '100dvw',
-          }}
+  return (
+    <FloatingPortal>
+      {/* <div ref={props.ref as Ref<HTMLDivElement | null>} style={props.floatingStyles}> */}
+      <div
+        ref={props.ref as Ref<HTMLDivElement | null>}
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          ...props.floatingStyles,
+          // transform: props.floatingStyles.transform,
+          zIndex: 9998,
+          outline: '0px transparent solid !important',
+          border: '0px transparent solid !important',
+          pointerEvents: props.isOpen ? 'auto' : 'none',
+        }}
+      >
+        <motion.div
+          tabIndex={-1}
+          className={className}
+          style={style}
+          initial={{ opacity: 0 }}
+          variants={variants}
+          animate={props.isOpen ? 'active' : 'inactive'}
         >
-          <motion.div
-            tabIndex={-1}
-            className={className}
-            style={style}
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: 0.2 }}
-          >
-            {props.children}
-          </motion.div>
-        </div>
-      )}
-    </AnimatePresence>,
-    document.body,
+          {props.isArrow && props.context && (
+            <FloatingArrow
+              ref={props.refArrow}
+              context={props.context}
+              fill={CSS_VARS.genre.popover[props.genre].background}
+              staticOffset={'15%'}
+            />
+          )}
+          {props.children}
+        </motion.div>
+      </div>
+    </FloatingPortal>
   );
 };
 
 export const usePopover = (props: IUsePopover) => {
   const { onFocus, onBlur, onBlurReference } = props;
 
+  // const [isPositioned, setIsPositioned] = useState(false);
+
   // Состояние открытия поповера
   const [isOpen, setIsOpen] = useState(false);
   // Минимальная ширина поповера (нужна, если хотим, чтобы ширина совпадала с референсом)
-  const [minWidth, setMinWidth] = useState<number | undefined>(undefined);
+  // const [minWidth, setMinWidth] = useState<number | undefined>(undefined);
   // Флаг, был ли поповер когда-либо открыт (чтобы onBlur не вызывался при первом рендере)
   const [wasEverOpen, setWasEverOpen] = useState(false);
   // Ссылка на элемент, который был в фокусе до открытия поповера
   const previousActiveElement = useRef<HTMLElement | null>(null);
 
+  const refArrow = useRef(null);
+
+  // Отступ для hover-зоны (чтобы не закрывался мгновенно при небольших движениях мыши)
+  const hoverOffset = useMemo(
+    () => (props.hoverOffset ?? props.offset ?? DEFAULT_POPOVER_OFFSET) + (props.arrowHeight ?? 0),
+    [props.hoverOffset, props.offset, props.arrowHeight],
+  );
+
+  const defaultOffset = useMemo(
+    () => (props.offset ?? DEFAULT_POPOVER_OFFSET) + (props.arrowHeight ?? 0),
+    [props.offset, props.arrowHeight],
+  );
+
   // Позиционирование через floating-ui
   const {
-    refs,
     floatingStyles,
+    context,
     update,
-    isPositioned,
+    refs,
     placement: actualPlacement,
   } = useFloating({
     open: isOpen,
     placement: props.placement,
-    middleware: [offset(props.offset ?? 8), flip(), shift()],
-    whileElementsMounted: autoUpdate,
+    middleware: [
+      offset(defaultOffset),
+      flip(),
+      shift(),
+      props.isArrow
+        ? arrow({
+            element: refArrow,
+          })
+        : false,
+      props.isWidthAsContent
+        ? size({
+            apply({ rects, elements }) {
+              Object.assign(elements.floating.style, {
+                minWidth: `min(${rects.reference.width}px, 100dvw)`,
+              });
+            },
+          })
+        : false,
+    ],
   });
 
   // Сохраняем обработчик клика вне поповера (чтобы можно было удалить при cleanup)
@@ -145,11 +208,6 @@ export const usePopover = (props: IUsePopover) => {
   // Таймаут для закрытия при hover-режиме
   const hoverCloseTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Отступ для hover-зоны (чтобы не закрывался мгновенно при небольших движениях мыши)
-  const hoverOffset = useMemo(
-    () => props.hoverOffset ?? props.offset ?? DEFAULT_POPOVER_OFFSET,
-    [props.hoverOffset, props.offset],
-  );
   // Задержка перед закрытием при hover
   const hoverCloseDelay = useMemo(() => props.hoverCloseDelay ?? DEFAULT_POPOVER_CLOSE_DELAY, [props.hoverCloseDelay]);
 
@@ -203,8 +261,18 @@ export const usePopover = (props: IUsePopover) => {
     if (!isOpen || !refs.reference.current || !refs.floating.current || props.isDisabled) return;
 
     const cleanup = autoUpdate(refs.reference.current, refs.floating.current, update);
-
-    return () => cleanup();
+    // const test = autoUpdate(refs.reference.current, refs.floating.current, () => {
+    //   computePosition(refs.reference.current, refs.floating.current, {
+    //     placement:props.placement,
+    //     middleware: [arrow({ element: refArrow.current })]
+    //   }).then(({ x, y }) => {
+    //     Object.assign(refs.floating.style, {
+    //       left: `${x}px`,
+    //       top: `${y}px`
+    //     });
+    //   });
+    // });
+    return cleanup;
   }, [isOpen, refs.reference, refs.floating, update, props.isDisabled]);
 
   /**
@@ -307,11 +375,24 @@ export const usePopover = (props: IUsePopover) => {
   /**
    * Устанавливаем минимальную ширину поповера, равную reference (если включено isWidthAsContent)
    */
-  useLayoutEffect(() => {
-    if (!props.isWidthAsContent || !refs.reference.current) return;
-    const rect = refs.reference.current.getBoundingClientRect();
-    setMinWidth(rect.width);
-  }, [props.isWidthAsContent, refs.reference]);
+  // useEffect(() => {
+  //   if (!props.isWidthAsContent || !refs.reference.current) return;
+
+  //   const el = refs.reference.current;
+
+  //   const observer = new ResizeObserver(([entry]) => {
+  //     const width = entry.contentRect.width;
+  //     if (width > 0) setMinWidth(width);
+  //   });
+
+  //   observer.observe(el as Element);
+
+  //   // Синхронный fallback на случай если размер уже есть
+  //   const rect = el.getBoundingClientRect();
+  //   if (rect.width > 0) setMinWidth(rect.width);
+
+  //   return () => observer.disconnect();
+  // }, [props.isWidthAsContent, refs.reference]);
 
   // Методы управления открытием
   const open = useCallback(() => {
@@ -326,18 +407,6 @@ export const usePopover = (props: IUsePopover) => {
     if (props.isDisabled) return;
     setIsOpen((prev) => !prev);
   }, [props.isDisabled]);
-
-  // Объединяем стили floating-ui с дополнительными ограничениями по ширине
-  const combinedStyles = useMemo(() => {
-    return {
-      ...floatingStyles,
-      ...(props.isWidthAsContent
-        ? {
-            width: `min(${minWidth}px, 100dvw)`,
-          }
-        : {}),
-    };
-  }, [floatingStyles, props.isWidthAsContent, minWidth]);
 
   /**
    * Вызываем onFocus при открытии
@@ -544,8 +613,9 @@ export const usePopover = (props: IUsePopover) => {
     toggle,
     refReference: refs.setReference as Ref<HTMLElement | null>,
     refFloating: refs.setFloating as Ref<HTMLElement | null>,
-    floatingStyles: combinedStyles,
+    refArrow,
+    context,
+    floatingStyles,
     placement: actualPlacement,
-    isPositioned,
   };
 };
