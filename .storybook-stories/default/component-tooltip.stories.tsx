@@ -73,7 +73,13 @@ const CollectionWrapper: FC = () => {
           </TooltipComponent>
         </WrapperMin>
         <WrapperMin>
-          <TooltipComponent placement='top' size='medium' genre='primary' content={'TooltipComponent'}>
+          <TooltipComponent
+            placement='top'
+            size='medium'
+            genre='primary'
+            content={'TooltipComponent'}
+            hoverCloseDelay={9999}
+          >
             <Button genre='primary' size={'medium'}>
               top
             </Button>
@@ -179,6 +185,20 @@ const CollectionWrapper: FC = () => {
         >
           <Button genre='primary' size={'medium'}>
             TooltipComponent with long text
+          </Button>
+        </TooltipComponent>
+        <TooltipComponent
+          placement='bottom'
+          size='medium'
+          genre='primary'
+          maxHeight='100px'
+          content={LOREM_IPSUM_TEXT}
+          isWidthAsContent
+          isCenteredArrow
+          // hoverCloseDelay={10000}
+        >
+          <Button genre='primary' size={'medium'}>
+            Tooltip centered arrow
           </Button>
         </TooltipComponent>
       </WrapperBig>

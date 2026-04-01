@@ -12,7 +12,7 @@ import { CSS_CLASS, CSS_VARS, CSS_VARS_RAW, EXTRA_VALUE } from '@local/styles/ut
 import { setClasses, setStyles } from '@local/styles/utils/functions';
 
 import { useVirtualizer } from '@tanstack/react-virtual';
-import { KeyboardEvent, memo, Ref, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { KeyboardEvent, memo, Ref, useCallback, useMemo, useRef, useState } from 'react';
 
 import { IContainerDropdownListOption, IContainerSelectListOption, ISelect, ISelectItem } from './component.types';
 
@@ -90,29 +90,40 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
     }
   }, [props.option, props.isNotShowDisabledOptions]);
 
-  const heightDropdownList = useMemo(
-    () =>
+  const heightDropdownList = useMemo(() => {
+    let result = 0;
+    result =
       sizeHeight *
       (optionsLength < maxViewDropdown
         ? optionsLength < minViewDropdown
           ? optionsLength
           : optionsLength
-        : maxViewDropdown),
-    [sizeHeight, optionsLength, maxViewDropdown, minViewDropdown],
-  );
+        : maxViewDropdown);
+    result =
+      result +
+      (optionsLength < maxViewDropdown
+        ? optionsLength < minViewDropdown
+          ? (optionsLength - 1) * (sizePadding / 2.8)
+          : (optionsLength - 1) * (sizePadding / 2.8)
+        : (maxViewDropdown - 1) * (sizePadding / 2.8));
+    return result;
+  }, [sizeHeight, optionsLength, maxViewDropdown, minViewDropdown, sizePadding]);
+
   const heightPopover = useMemo(() => {
     const selectAll = props.isShowSelectAll && isHaveOption ? sizeHeight : 0;
     const selectNoOption = !isHaveOption ? sizeHeight : 0;
     const selectList = isHaveOption ? heightDropdownList : 0;
     const selectAdd = isShowAddOption ? sizeHeight : 0;
+    const selectSearch = isShowSearch ? sizeHeight : 0;
     const sum =
       (selectAll !== 0 ? 1 : 0) +
       (selectNoOption !== 0 ? 1 : 0) +
       (selectList !== 0 ? 1 : 0) +
-      (selectAdd !== 0 ? 1 : 0);
+      (selectAdd !== 0 ? 1 : 0) +
+      (selectSearch !== 0 ? 1 : 0);
     const padding = sum <= 1 ? 0 : (sum - 1) * (sizePadding / 2.8);
-    return selectAll + selectNoOption + selectList + selectAdd + padding;
-  }, [props.isShowSelectAll, sizeHeight, isHaveOption, sizePadding, heightDropdownList, isShowAddOption]);
+    return selectAll + selectNoOption + selectList + selectAdd + padding + selectSearch + sizePadding * 2;
+  }, [props.isShowSelectAll, sizeHeight, isHaveOption, sizePadding, heightDropdownList, isShowAddOption, isShowSearch]);
 
   const isValueMoreMaxViewSelect = useMemo(
     () => props.value.length > maxViewSelect,
@@ -143,6 +154,7 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
     getScrollElement: () => refDropdownList.current,
     overscan: DEFAULT_OVERSCAN,
     paddingEnd: 0,
+    gap: sizePadding / 2.8,
   });
 
   const onChangeShowSearch = useCallback(
@@ -216,20 +228,6 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
     },
     [props],
   );
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
-  useEffect(() => {
-    onChangeShowSearch(false);
-  }, [onChangeShowSearch, props.isDisabled]);
-  useEffect(() => {
-    if (!isHaveValue) {
-      onChangeShowSearch(true);
-    }
-  }, [isHaveValue, onChangeShowSearch]);
-  useEffect(() => {
-    if (!isOpen && isHaveValue) {
-      onChangeShowSearch(false);
-    }
-  }, [isHaveValue, isOpen, onChangeShowSearch]);
 
   const { className: classNameTypography, style: styleTypography } = useTypographyStyles({
     sx: {
@@ -262,6 +260,9 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
     vars[CSS_VARS_RAW.component.select.color] = CSS_VARS.genre.select[props.genre].color.index;
     vars[CSS_VARS_RAW.component.select.borderColor] = CSS_VARS.genre.select[props.genre].border.index;
     vars[CSS_VARS_RAW.component.select.borderColorSelect] = CSS_VARS.genre.select[props.genre].border.select;
+
+    vars[CSS_VARS_RAW.component.select.backgroundChecked] = CSS_VARS.genre.select[props.genre].background.select;
+    vars[CSS_VARS_RAW.component.select.borderColorChecked] = CSS_VARS.genre.select[props.genre].border.select;
 
     vars[CSS_VARS_RAW.component.select.height] = CSS_VARS.size[props.size].height;
     vars[CSS_VARS_RAW.component.select.padding] = CSS_VARS.size[props.size].padding;
@@ -303,6 +304,9 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
     vars[CSS_VARS_RAW.component.select.color] = CSS_VARS.genre.select[props.genre].color.index;
     vars[CSS_VARS_RAW.component.select.borderColor] = CSS_VARS.genre.select[props.genre].border.index;
     vars[CSS_VARS_RAW.component.select.borderColorSelect] = CSS_VARS.genre.select[props.genre].border.select;
+
+    vars[CSS_VARS_RAW.component.select.backgroundChecked] = CSS_VARS.genre.select[props.genre].background.select;
+    vars[CSS_VARS_RAW.component.select.borderColorChecked] = CSS_VARS.genre.select[props.genre].border.select;
 
     vars[CSS_VARS_RAW.component.select.height] = CSS_VARS.size[props.size].height;
     vars[CSS_VARS_RAW.component.select.padding] = CSS_VARS.size[props.size].padding;
@@ -346,26 +350,6 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
           }
         }}
       >
-        {isShowSearch && (
-          <TextArea
-            className={CSS_CLASS.component.select.textarea}
-            ref={refTextArea}
-            genre={props.genre}
-            size={props.size}
-            minRows={1}
-            maxRows={5}
-            isAutoHeight
-            onChange={(value) => {
-              props?.onChangeSearch?.(value);
-            }}
-            onMouseDown={(e) => {
-              e.stopPropagation();
-            }}
-            value={props.valueSearch}
-            placeholder={labelPlaceholder}
-            control='none'
-          />
-        )}
         {isHaveValue && (props.isShowSelectAllLabel ? !isAll : true) ? (
           <ul
             className={CSS_CLASS.component.select.list}
@@ -418,7 +402,7 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
             {labelSelectAll}
           </Typography>
         ) : null}
-        {!isHaveValue && !props.isSearch ? (
+        {!isHaveValue ? (
           <Typography
             style={{
               color: CSS_VARS.genre.select[props.genre].placeholder.index,
@@ -429,7 +413,6 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
             {labelPlaceholder}
           </Typography>
         ) : null}
-
         {isValueMoreMaxViewSelect && isHaveValue && (props.isShowSelectAllLabel ? !isAll : true) ? (
           <Typography
             style={{
@@ -448,31 +431,16 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
               e.stopPropagation();
             }}
           >
-            {isShowIconSearchClear && (
-              <Button
-                genre={props.genre}
-                size='small'
-                isWidthAsHeight
-                isFullSize
-                isFullRadius
-                isOnlyIcon
-                icons={[{ name: 'Close', type: 'id' }]}
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  onClearSearch();
-                }}
-              />
-            )}
             {props.isShowIconToggle && (
               <Button
                 genre={props.genre}
+                isOnlyIcon
                 size='small'
                 isWidthAsHeight
                 isFullSize
                 isFullRadius
-                isOnlyIcon
-                icons={[{ name: 'Select', type: 'id' }]}
+                isHiddenBorder
+                icons={[{ name: 'Select', type: 'id', size: 'large' }]}
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
@@ -489,6 +457,12 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
                 isFullSize
                 isFullRadius
                 isHiddenBorder
+                control='none'
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  toggle();
+                }}
               >
                 <Icon type={'loading'} name={'Line'} size={props.size} />
               </Button>
@@ -515,6 +489,56 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
         >
           {isShowDropdownSettingsList && (
             <ul style={{ position: 'sticky', top: 0, zIndex: 1 }} className={CSS_CLASS.component.select.dropdownList}>
+              {isShowSearch && (
+                <li
+                  className={setClasses([
+                    CSS_CLASS.component.select.dropdownListOption,
+                    CSS_CLASS.component.select.dropdownListOptionIsBorder,
+                    classNameTypography,
+                  ])}
+                  tabIndex={0}
+                  onClick={() => {
+                    refTextArea.current?.focus();
+                  }}
+                  style={setStyles([{ position: 'relative', minHeight: `${sizeHeight}px` }, styleTypography])}
+                >
+                  <TextArea
+                    className={CSS_CLASS.component.select.textarea}
+                    ref={refTextArea}
+                    genre={props.genre}
+                    size={props.size}
+                    minRows={1}
+                    maxRows={5}
+                    isAutoHeight
+                    onChange={(value) => {
+                      props?.onChangeSearch?.(value);
+                    }}
+                    onMouseDown={(e) => {
+                      e.stopPropagation();
+                    }}
+                    value={props.valueSearch}
+                    placeholder={labelPlaceholder}
+                    control='none'
+                  />
+                  {isShowIconSearchClear && (
+                    <Button
+                      genre={props.genre}
+                      size='small'
+                      isWidthAsHeight
+                      isFullSize
+                      isFullRadius
+                      isHiddenBorder
+                      isOnlyIcon
+                      icons={[{ name: 'Close', type: 'id', size: 'large' }]}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        onClearSearch();
+                      }}
+                    />
+                  )}
+                </li>
+              )}
               {isShowAddOption ? (
                 <li
                   className={setClasses([

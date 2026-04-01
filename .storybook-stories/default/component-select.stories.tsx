@@ -91,7 +91,10 @@ const CollectionWrapper: FC = () => {
           isShowSelectAll
           isShowAddOption
           isSearch
-          labelPlaceholder='Select or search months'
+          isFetching
+          labelPlaceholder='Search months'
+          isStaySearchAfterSelect
+          isShowDropdownOptionIcon
           value={valueMonths}
           onChange={handleSelectChangeMonths}
           monthsLocale={LOCALE_MONTHS}

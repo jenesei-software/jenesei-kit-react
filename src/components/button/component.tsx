@@ -51,6 +51,8 @@ export const Button: FC<IButton> = (props) => {
       props.isFullSize && CSS_CLASS.component.button.isFullSize,
       props.isWidthAsHeight && CSS_CLASS.component.button.isWidthAsHeight,
       props.isMinWidthAsContent && CSS_CLASS.component.button.isMinWidthAsContent,
+      props.isZeroPadding && CSS_CLASS.component.button.isZeroPadding,
+      props.isSizeFitContent && CSS_CLASS.component.button.isSizeFitContent,
       props.className,
     ]);
 
@@ -82,6 +84,8 @@ export const Button: FC<IButton> = (props) => {
     props.size,
     props.isZeroRadius,
     props.control,
+    props.isZeroPadding,
+    props.isSizeFitContent,
   ]);
 
   const { className: classNameIconGroup, style: styleIconGroup } = useMemo(() => {

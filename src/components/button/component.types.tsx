@@ -26,6 +26,10 @@ type IButtonDefault = PropsWithChildren & {
 
   isOnlyIcon?: boolean;
 
+  isZeroPadding?: boolean;
+  
+  isSizeFitContent?: boolean;
+
   isFullRadius?: boolean;
 
   isWidthAsHeight?: boolean;

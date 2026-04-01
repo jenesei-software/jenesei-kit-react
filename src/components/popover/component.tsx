@@ -12,12 +12,12 @@ import {
   offset,
   shift,
   size,
-  useFloating,
+  useFloating
 } from '@floating-ui/react';
 import { motion, Variants } from 'framer-motion';
 import { FC, Ref, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-import { DEFAULT_POPOVER_CLOSE_DELAY, DEFAULT_POPOVER_OFFSET } from './component.constants';
+import { DEFAULT_ARROW_HEIGHT, DEFAULT_POPOVER_CLOSE_DELAY, DEFAULT_POPOVER_OFFSET } from './component.constants';
 import { IPopover, IUsePopover } from './component.types';
 
 // Утилита для поиска фокусируемых элементов
@@ -94,16 +94,38 @@ export const Popover: FC<IPopover> = (props) => {
 
     return { className, style };
   }, [
-    props.className, 
-    props.style, 
-    props.genre, 
-    props.maxHeight, 
-    props.maxWidth, 
-    props.size, 
-    classNameTypography, 
-    styleTypography, 
-    props.control, props.isDisabledBoxShadow
+    props.className,
+    props.style,
+    props.genre,
+    props.maxHeight,
+    props.maxWidth,
+    props.size,
+    classNameTypography,
+    styleTypography,
+    props.control,
+    props.isDisabledBoxShadow,
   ]);
+
+  const staticSide = props.placement
+    ? {
+        top: {
+          size: 'left',
+          value: `calc(50% - ${(props.arrowHeight ?? DEFAULT_ARROW_HEIGHT) * 2}px)`,
+        },
+        right: {
+          size: 'top',
+          value: `calc(50% - ${(props.arrowHeight ?? DEFAULT_ARROW_HEIGHT)}px)`,
+        },
+        bottom: {
+          size: 'left',
+          value: `calc(50% - ${(props.arrowHeight ?? DEFAULT_ARROW_HEIGHT) * 2}px)`,
+        },
+        left: {
+          size: 'top',
+          value: `calc(50% - ${(props.arrowHeight ?? DEFAULT_ARROW_HEIGHT)}px)`,
+        },
+      }[props.placement.split('-')[0]]
+    : null;
 
   return (
     <FloatingPortal>
@@ -132,10 +154,12 @@ export const Popover: FC<IPopover> = (props) => {
         >
           {props.isArrow && props.context && (
             <FloatingArrow
+              width={(props.arrowHeight ?? DEFAULT_ARROW_HEIGHT) * 2}
+              height={props.arrowHeight ?? DEFAULT_ARROW_HEIGHT}
               ref={props.refArrow}
               context={props.context}
               fill={CSS_VARS.genre.popover[props.genre].background}
-              staticOffset={'15%'}
+              style={props.isCenteredArrow && staticSide ? { [staticSide.size]: staticSide.value } : {}}
             />
           )}
           {props.children}
@@ -182,6 +206,7 @@ export const usePopover = (props: IUsePopover) => {
   } = useFloating({
     open: isOpen,
     placement: props.placement,
+
     middleware: [
       offset(defaultOffset),
       flip(),
@@ -196,6 +221,7 @@ export const usePopover = (props: IUsePopover) => {
             apply({ rects, elements }) {
               Object.assign(elements.floating.style, {
                 minWidth: `min(${rects.reference.width}px, 100dvw)`,
+                maxWidth: `min(${rects.reference.width}px, 100dvw)`,
               });
             },
           })

@@ -25,7 +25,7 @@ export const Tooltip: FC<ITooltip> = memo((props) => {
 });
 
 export const TooltipContent: FC<ITooltip> = (props) => {
-  const { isOpen, refReference, refFloating, floatingStyles, context, refArrow } = usePopover({
+  const { isOpen, refReference, refFloating, floatingStyles, context, refArrow, placement } = usePopover({
     placement: props.placement ?? DEFAULT_TOOLTIP_PLACEMENT_FALLBACK,
     offset: props.offset ?? DEFAULT_TOOLTIP_OFFSET_FALLBACK,
     mode: props.mode ?? 'hover',
@@ -76,7 +76,9 @@ export const TooltipContent: FC<ITooltip> = (props) => {
         maxWidth={props.maxWidth}
         context={context}
         refArrow={refArrow}
+        placement={placement}
         isArrow
+        isCenteredArrow={props.isCenteredArrow}
       >
         <Typography className={classNameTypography} style={styleTypography} sx={props.sxTypography}>
           {props.content}

@@ -19,6 +19,9 @@ export type IPopover = PropsWithChildren &
     onClose?: () => void;
     control?: IThemeControl;
     sxTypography?: ITypography;
+    placement?: Placement;
+    arrowHeight?: number;
+    isCenteredArrow?: boolean;
     /**
      * Ref to the popover root element.
      */
