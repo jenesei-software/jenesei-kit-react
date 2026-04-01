@@ -24,4 +24,7 @@
     "source.action.useSortedProperties.biome": "explicit",
     "source.organizeImports.biome": "explicit"
   },
+  "github.copilot.chat.commitMessageGeneration.instructions": [
+    { "file": "instruction.commit-rules.md" }
+  ]
 }
