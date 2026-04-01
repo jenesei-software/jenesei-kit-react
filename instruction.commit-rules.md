@@ -15,6 +15,8 @@
 * Use imperative mood (e.g., "add", not "added")
 * Keep the first line short (max 72 chars)
 * The first line MUST fit in one visible line (no wrapping)
+* `<type>(scope): <short description>` must be lowercase
+* Body can use any casing (lowercase, uppercase, sentence case)
 * Add a body if the change is complex or long
 * Use bullet points for detailed descriptions
 
@@ -32,11 +34,11 @@
 
 feat: enhance Popover and Select components
 
-* integrate Floating UI for better positioning with arrow support
-* add animation variants to Popover
-* refactor Popover styles and props for better customization
-* update Select to use new Popover styles and control box shadow
-* improve Select dropdown structure and usability
+* Integrate Floating UI for better positioning with arrow support
+* Add animation variants to Popover
+* Refactor Popover styles and props for better customization
+* Update Select to use new Popover styles and control box shadow
+* Improve Select dropdown structure and usability
 
 ## Examples:
 
