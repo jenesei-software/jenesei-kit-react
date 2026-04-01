@@ -25,6 +25,6 @@
     "source.organizeImports.biome": "explicit"
   },
   "github.copilot.chat.commitMessageGeneration.instructions": [
-    { "file": "instruction.commit-rules.md" }
+    { "file": ".github/instructions/commit-rules.md" }
   ]
 }
