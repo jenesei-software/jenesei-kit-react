@@ -1,4 +1,4 @@
-import { IAddError } from '@local/components/error';
+import { IErrorMessage } from '@local/components/error';
 import { IThemeControl, IThemeGenreToggle, IThemeSize } from '@local/styles/utils/types';
 
 import { CSSProperties, FocusEvent, MouseEventHandler, Ref } from 'react';
@@ -30,6 +30,8 @@ export type IToggle = {
 
   control?: IThemeControl;
 
+  error?: IErrorMessage;
+
   ref?: Ref<HTMLElement | null>;
 
   size: IThemeSize;
@@ -41,4 +43,4 @@ export type IToggle = {
   type?: HTMLButtonElement['type'];
 
   value: boolean;
-} & IAddError;
+};

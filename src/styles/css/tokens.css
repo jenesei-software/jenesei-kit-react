@@ -198,12 +198,14 @@
 
   /* ================= FILLS ================= */
 
+  --fill-light: rgba(0, 0, 0, 1);
   --fill-primary-light: rgba(0, 0, 0, 0.85);
   --fill-secondary-light: rgba(0, 0, 0, 0.5);
   --fill-tertiary-light: rgba(0, 0, 0, 0.25);
   --fill-quaternary-light: rgba(0, 0, 0, 0.1);
   --fill-quinary-light: rgba(0, 0, 0, 0.05);
 
+  --fill-dark: rgba(255, 255, 255, 1);
   --fill-primary-dark: rgba(255, 255, 255, 0.85);
   --fill-secondary-dark: rgba(255, 255, 255, 0.55);
   --fill-tertiary-dark: rgba(255, 255, 255, 0.25);
@@ -295,12 +297,14 @@
 
   /* ================= FILLS ================= */
 
+  --fill-dark: rgba(0, 0, 0, 1);
   --fill-primary-dark: rgba(0, 0, 0, 0.85);
   --fill-secondary-dark: rgba(0, 0, 0, 0.5);
   --fill-tertiary-dark: rgba(0, 0, 0, 0.25);
   --fill-quaternary-dark: rgba(0, 0, 0, 0.1);
   --fill-quinary-dark: rgba(0, 0, 0, 0.05);
 
+  --fill-light: rgba(255, 255, 255, 1);
   --fill-primary-light: rgba(255, 255, 255, 0.85);
   --fill-secondary-light: rgba(255, 255, 255, 0.55);
   --fill-tertiary-light: rgba(255, 255, 255, 0.25);

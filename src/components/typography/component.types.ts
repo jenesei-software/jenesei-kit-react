@@ -1,5 +1,5 @@
 import { ITooltip } from '@local/components/tooltip';
-import { ISxTypography } from '@local/styles/utils';
+import { ITypography } from '@local/styles/utils';
 
 import { CSSProperties, PropsWithChildren, Ref } from 'react';
 
@@ -13,8 +13,7 @@ export type ITypographyComponent = PropsWithChildren & {
   isAnchor?: boolean;
   isSpan?: boolean;
   ref?: Ref<HTMLElement | HTMLHeadingElement | HTMLAnchorElement | null>;
-
-  sx: ISxTypography['sxTypography'];
+  sx?: ITypography;
 };
 
 export type ITypographyTooltip = {

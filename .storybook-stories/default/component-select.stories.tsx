@@ -36,7 +36,7 @@ const CollectionWrapper: FC = () => {
     setValueYear(value);
   };
   return (
-    <WrapperBig sx={{ flexDirection: 'column', minWidth: '500px', maxWidth: '500px' }}>
+    <WrapperBig sx={{ flexDirection: 'column', minWidth: '340px', maxWidth: '340px' }}>
       <WrapperBig sx={{ flexDirection: 'column' }}>
         <Typography
           sx={{
@@ -91,7 +91,10 @@ const CollectionWrapper: FC = () => {
           isShowSelectAll
           isShowAddOption
           isSearch
-          labelPlaceholder='Select or search months'
+          isFetching
+          labelPlaceholder='Search months'
+          isStaySearchAfterSelect
+          isShowDropdownOptionIcon
           value={valueMonths}
           onChange={handleSelectChangeMonths}
           monthsLocale={LOCALE_MONTHS}

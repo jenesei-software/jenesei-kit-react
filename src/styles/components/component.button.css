@@ -61,6 +61,16 @@
   min-width: max-content;
 }
 
+.component-button--is-zero-padding{
+  padding: 0px;
+}
+
+.component-button--is-size-fit-content{
+  width: fit-content !important;
+  height: fit-content !important;
+  min-height: fit-content !important;
+  min-width: fit-content !important;
+}
 /* =========================
    Component - Button - Icons wrapper
    ========================= */

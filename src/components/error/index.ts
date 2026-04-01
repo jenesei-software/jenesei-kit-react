@@ -1,2 +1,3 @@
 export { ErrorMessage } from './component';
-export type { IAddError } from './component.types';
+export type { IErrorMessage } from './component.types';
+

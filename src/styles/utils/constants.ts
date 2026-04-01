@@ -15,6 +15,7 @@ const CSS_VARS_PALETTE = {
   accentGrayLight: 'var(--accent-gray-light)',
 
   /* FILLS */
+  fillLight: 'var(--fill-light)',
   fillPrimaryLight: 'var(--fill-primary-light)',
   fillSecondaryLight: 'var(--fill-secondary-light)',
   fillTertiaryLight: 'var(--fill-tertiary-light)',
@@ -65,6 +66,7 @@ const CSS_VARS_PALETTE = {
   accentGrayDark: 'var(--accent-gray-dark)',
 
   /* FILLS */
+  fillDark: 'var(--fill-dark)',
   fillPrimaryDark: 'var(--fill-primary-dark)',
   fillSecondaryDark: 'var(--fill-secondary-dark)',
   fillTertiaryDark: 'var(--fill-tertiary-dark)',
@@ -176,7 +178,6 @@ export const CSS_VARS = {
       font: 'var(--size-small-font)',
     },
   },
-
   sizeValue: {
     large: {
       height: 46,
@@ -258,9 +259,14 @@ export const CSS_VARS = {
       borderColorSelect: 'var(--component-select-border-color-select)',
       color: 'var(--component-select-color)',
 
+      backgroundChecked: 'var(--component-select-background-checked)',
+      borderColorChecked: 'var(--component-select-border-color-checked)',
+
       backgroundInput: 'var(--component-select-background-input)',
       borderColorInput: 'var(--component-select-border-color-input)',
       colorInput: 'var(--component-select-color-input)',
+
+      backgroundOption: 'var(--component-select-background-option)',
     },
     tooltip: {
       padding: 'var(--component-tooltip-padding)',
@@ -396,13 +402,13 @@ export const CSS_VARS = {
   genre: {
     popover: {
       primary: {
-        background: CSS_VARS_PALETTE.fillPrimaryDark,
+        background: CSS_VARS_PALETTE.fillDark,
         color: CSS_VARS_PALETTE.textPrimaryLight,
         border: CSS_VARS_PALETTE.transparent,
         boxShadow: CSS_VARS_PALETTE.shadowPrimaryDark,
       },
       secondary: {
-        background: CSS_VARS_PALETTE.fillPrimaryLight,
+        background: CSS_VARS_PALETTE.fillLight,
         color: CSS_VARS_PALETTE.textPrimaryDark,
         border: CSS_VARS_PALETTE.transparent,
         boxShadow: CSS_VARS_PALETTE.shadowPrimaryLight,
@@ -586,12 +592,14 @@ export const CSS_VARS = {
       primary: {
         color: CSS_VARS_PALETTE.textPrimaryLight,
         background: CSS_VARS_PALETTE.fillPrimaryDark,
+        backgroundOption: CSS_VARS_PALETTE.fillDark,
         border: CSS_VARS_PALETTE.textPrimaryLight,
         placeholder: CSS_VARS_PALETTE.textSecondaryLight,
       },
       secondary: {
         color: CSS_VARS_PALETTE.textPrimaryDark,
         background: CSS_VARS_PALETTE.fillPrimaryLight,
+        backgroundOption: CSS_VARS_PALETTE.fillLight,
         border: CSS_VARS_PALETTE.textPrimaryDark,
         placeholder: CSS_VARS_PALETTE.textSecondaryDark,
       },
@@ -603,6 +611,7 @@ export const CSS_VARS = {
         },
         background: {
           index: CSS_VARS_PALETTE.fillPrimaryDark,
+          select: CSS_VARS_PALETTE.productQuaternaryLight,
         },
         border: {
           index: CSS_VARS_PALETTE.textPrimaryLight,
@@ -618,6 +627,7 @@ export const CSS_VARS = {
         },
         background: {
           index: CSS_VARS_PALETTE.fillPrimaryLight,
+          select: CSS_VARS_PALETTE.productQuaternaryLight,
         },
         border: {
           index: CSS_VARS_PALETTE.textPrimaryDark,
@@ -746,6 +756,7 @@ export const CSS_CLASS = {
       dropdownListWrapper: 'component-select__dropdown__list__wrapper',
       dropdownListOption: 'component-select__dropdown__list__option',
       dropdownListOptionIsChecked: 'component-select__dropdown__list__option--is-checked',
+      dropdownListOptionIsBorder: 'component-select__dropdown__list__option--is-border',
       dropdownListOptionIsDisabled: 'component-select__dropdown__list__option--is-disabled',
       dropdownListOptionIcon: 'component-select__dropdown__list__option__icon',
       list: 'component-select__list',
@@ -760,6 +771,7 @@ export const CSS_CLASS = {
     },
     popover: {
       root: 'component-popover',
+      boxShadow: 'component-popover--box-shadow',
     },
     textarea: {
       root: 'component-textarea',
@@ -815,6 +827,8 @@ export const CSS_CLASS = {
       isFullSize: 'component-button--is-full-size',
       isWidthAsHeight: 'component-button--is-width-as-height',
       isMinWidthAsContent: 'component-button--is-min-width-as-content',
+      isZeroPadding: 'component-button--is-zero-padding',
+      isSizeFitContent: 'component-button--is-size-fit-content',
       iconGroup: 'component-button__icons',
       iconGroupIsIconGroup: 'component-button__icons--is-icon-group',
       isZeroRadius: 'component-button--is-zero-radius',

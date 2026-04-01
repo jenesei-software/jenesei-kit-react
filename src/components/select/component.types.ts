@@ -1,7 +1,7 @@
 import { IDatePickerTranslateMonth } from '@local/components/date-picker';
-import { IAddError } from '@local/components/error';
+import { IErrorMessage } from '@local/components/error';
 import { IThemeSize } from '@local/styles/utils';
-import { ISxTypography, IThemeControl, IThemeGenreSelect } from '@local/styles/utils/types';
+import { IThemeControl, IThemeGenreSelect, ITypography } from '@local/styles/utils/types';
 
 import { CSSProperties, FocusEvent, ReactNode, Ref } from 'react';
 
@@ -17,69 +17,69 @@ export interface ISelectItem {
   value: string | number;
 }
 
-export type ISelect<T extends ISelectItem> = IAddError &
-  ISxTypography & {
-    id?: string;
+export type ISelect<T extends ISelectItem> = {
+  id?: string;
 
-    size: IThemeSize;
-    genre: IThemeGenreSelect;
-    control?: IThemeControl;
+  size: IThemeSize;
+  genre: IThemeGenreSelect;
+  control?: IThemeControl;
+  sxTypography?: ITypography;
+  error?: IErrorMessage;
 
-    className?: string;
-    style?: CSSProperties;
+  className?: string;
+  style?: CSSProperties;
 
-    isToggleWhenClickSelectListOption?: boolean;
-    isDisabled?: boolean;
-    isShowDropdownOptionIcon?: boolean;
-    isShowIconToggle?: boolean;
-    isShowIconSearchClear?: boolean;
-    isShowIconFetching?: boolean;
-    isShowSelectAll?: boolean;
-    isShowSelectAllLabel?: boolean;
-    isShowAddOption?: boolean;
-    isNotShowDisabledOptions?: boolean;
-    isOnClickOptionClose?: boolean;
-    isNotShowHoverStyle?: boolean;
-    isSortValueAsOption?: boolean;
-    isCenter?: boolean;
-    isStayValueAfterSelect?: boolean;
-    isBold?: boolean;
-    isWrapSelectOption?: boolean;
-    isMulti?: boolean;
-    isFetching?: boolean;
-    isClearWhenClickSelectListOption?: boolean;
-    isStaySearchAfterSelect?: boolean;
-    isOnlyColorInSelectListOption?: boolean;
+  isToggleWhenClickSelectListOption?: boolean;
+  isDisabled?: boolean;
+  isShowDropdownOptionIcon?: boolean;
+  isShowIconToggle?: boolean;
+  isShowIconSearchClear?: boolean;
+  isShowIconFetching?: boolean;
+  isShowSelectAll?: boolean;
+  isShowSelectAllLabel?: boolean;
+  isShowAddOption?: boolean;
+  isNotShowDisabledOptions?: boolean;
+  isOnClickOptionClose?: boolean;
+  isSortValueAsOption?: boolean;
+  isCenter?: boolean;
+  isStayValueAfterSelect?: boolean;
+  isBold?: boolean;
+  isWrapSelectOption?: boolean;
+  isMulti?: boolean;
+  isFetching?: boolean;
+  isClearWhenClickSelectListOption?: boolean;
+  isStaySearchAfterSelect?: boolean;
+  isOnlyColorInSelectListOption?: boolean;
 
-    labelPlaceholder?: string;
-    labelEmptyOption?: string;
-    labelSelectAll?: string;
-    labelAndMore?: (count: number) => string;
-    labelAddOption?: (value: string) => string;
+  labelPlaceholder?: string;
+  labelEmptyOption?: string;
+  labelSelectAll?: string;
+  labelAndMore?: (count: number) => string;
+  labelAddOption?: (value: string) => string;
 
-    isSearch?: boolean;
-    valueSearch?: string;
-    onChangeSearch?: (value: string) => void;
+  isSearch?: boolean;
+  valueSearch?: string;
+  onChangeSearch?: (value: string) => void;
 
-    optionAllLength?: number;
+  optionAllLength?: number;
 
-    option: T[];
-    value: T[];
-    maxViewSelect?: number;
-    maxViewDropdown?: number;
-    minViewDropdown?: number;
+  option: T[];
+  value: T[];
+  maxViewSelect?: number;
+  maxViewDropdown?: number;
+  minViewDropdown?: number;
 
-    refFloating?: Ref<HTMLElement | null>;
-    refReference?: Ref<HTMLElement | null>;
+  refFloating?: Ref<HTMLElement | null>;
+  refReference?: Ref<HTMLElement | null>;
 
-    onAddOption?: (value: string) => void;
-    onChange: (value: T[]) => void;
-    onChangeAll?: (value: T[], isAll: boolean) => void;
-    onFocus?: (event?: FocusEvent<HTMLElement>) => void;
-    onBlur?: (event?: FocusEvent<HTMLElement>) => void;
-    fetchNextPage?: () => void;
-    getEstimateSize?: (index: number) => number;
-  };
+  onAddOption?: (value: string) => void;
+  onChange: (value: T[]) => void;
+  onChangeAll?: (value: T[], isAll: boolean) => void;
+  onFocus?: (event?: FocusEvent<HTMLElement>) => void;
+  onBlur?: (event?: FocusEvent<HTMLElement>) => void;
+  fetchNextPage?: () => void;
+  getEstimateSize?: (index: number) => number;
+};
 
 export interface ISelectLanguageOption extends ISelectItem {
   placeholder: string;
@@ -116,15 +116,7 @@ export type ISelectYear = Omit<ISelectMonth, 'monthsLocale'> & {
 
 export type IContainerDropdownListOption<T extends ISelectItem> = Pick<
   ISelect<T>,
-  | 'genre'
-  | 'size'
-  | 'isCenter'
-  | 'isNotShowHoverStyle'
-  | 'isBold'
-  | 'isShowDropdownOptionIcon'
-  | 'sxTypography'
-  | 'className'
-  | 'style'
+  'genre' | 'size' | 'isCenter' | 'isBold' | 'isShowDropdownOptionIcon' | 'sxTypography' | 'className' | 'style'
 > & {
   item: T;
 
@@ -143,8 +135,6 @@ export type IContainerSelectListOption<T extends ISelectItem> = Pick<
   | 'genre'
   | 'size'
   | 'isCenter'
-  | 'isNotShowHoverStyle'
-  | 'isBold'
   | 'isWrapSelectOption'
   | 'isClearWhenClickSelectListOption'
   | 'isOnlyColorInSelectListOption'

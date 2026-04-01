@@ -1,4 +1,4 @@
-import { ISxTypography, IThemeSize } from '@local/styles/utils';
+import { IThemeSize, ITypography } from '@local/styles/utils';
 
 import { CSSProperties } from 'react';
 
@@ -14,8 +14,6 @@ export type IErrorMessage = {
   className?: string;
   
   style?: CSSProperties;
-} & ISxTypography;
 
-export interface IAddError {
-  error?: IErrorMessage;
-}
+  sxTypography?: ITypography;
+};

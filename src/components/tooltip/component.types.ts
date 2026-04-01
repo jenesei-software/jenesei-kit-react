@@ -1,18 +1,18 @@
 import { IPopover, IUsePopover } from '@local/components/popover';
-import { ISxTypography } from '@local/styles/utils';
+import { ITypography } from '@local/styles/utils';
 
 import { CSSProperties, PropsWithChildren, ReactNode } from 'react';
 
 export type ITooltip = PropsWithChildren &
-  Pick<IPopover, 'genre' | 'size' | 'maxHeight' | 'maxWidth'> & {
+  Pick<IPopover, 'genre' | 'size' | 'maxHeight' | 'maxWidth' | 'isCenteredArrow'> & {
     content: ReactNode;
     isDisabled?: boolean;
     classNameWrapper?: string;
     styleWrapper?: CSSProperties;
     classNamePopover?: string;
     stylePopover?: CSSProperties;
-  } & ISxTypography &
-  Pick<
+    sxTypography?: ITypography;
+  } & Pick<
     IUsePopover,
     | 'isWidthAsContent'
     | 'offset'

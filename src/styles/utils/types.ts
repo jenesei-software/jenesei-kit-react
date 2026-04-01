@@ -59,10 +59,6 @@ export type ILayoutValue<A> = {
 
 export type ILayoutResponsive<A> = ILayoutValue<A>;
 
-export type ISxTypography = {
-  sxTypography?: ITypography;
-};
-
 export type ISx = {
   sx?: CSSProperties;
 };

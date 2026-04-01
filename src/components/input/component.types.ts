@@ -1,6 +1,5 @@
-import { IAddError } from '@local/components/error';
-import { ISxTypography, IThemeSize } from '@local/styles/utils';
-import { IThemeControl, IThemeGenreInput } from '@local/styles/utils/types';
+import { IThemeSize } from '@local/styles/utils';
+import { IThemeControl, IThemeGenreInput, ITypography } from '@local/styles/utils/types';
 
 import {
   ClipboardEventHandler,
@@ -14,47 +13,50 @@ import {
 } from 'react';
 import { NumberFormatValues, NumericFormatProps, PatternFormatProps } from 'react-number-format';
 
-type ICommonInput = IAddError &
-  ISxTypography & {
-    placeholder?: string;
-    ref?: Ref<HTMLInputElement | null>;
-    control?: IThemeControl;
-    size: IThemeSize;
-    style?: CSSProperties;
-    tabIndex?: number;
-    ariaLabel?: string;
-    autoComplete?: HTMLInputAutoCompleteAttribute | string;
-    className?: string;
-    genre: IThemeGenreInput;
-    id?: string;
-    inputMode?: 'text' | 'none' | 'tel' | 'url' | 'email' | 'numeric' | 'decimal' | 'search';
+import { IErrorMessage } from '../error/component.types';
 
-    isBold?: boolean;
-    isCenter?: boolean;
-    isDisabled?: boolean;
-    isFullRadius?: boolean;
-    isHidden?: boolean;
-    isHiddenBorder?: boolean;
-    isMinWidthAsContent?: boolean;
-    isNiceNumber?: boolean;
-    isNoSpaces?: boolean;
-    isReadOnly?: boolean;
-    isRequired?: boolean;
-    isWidthAsHeight?: boolean;
-    isZeroRadius?: boolean;
+type ICommonInput = {
+  error?: IErrorMessage;
+  placeholder?: string;
+  ref?: Ref<HTMLInputElement | null>;
+  sxTypography?: ITypography;
+  control?: IThemeControl;
+  size: IThemeSize;
+  style?: CSSProperties;
+  tabIndex?: number;
+  ariaLabel?: string;
+  autoComplete?: HTMLInputAutoCompleteAttribute | string;
+  className?: string;
+  genre: IThemeGenreInput;
+  id?: string;
+  inputMode?: 'text' | 'none' | 'tel' | 'url' | 'email' | 'numeric' | 'decimal' | 'search';
 
-    maxLength?: number;
-    minLength?: number;
-    name?: string;
+  isBold?: boolean;
+  isCenter?: boolean;
+  isDisabled?: boolean;
+  isFullRadius?: boolean;
+  isHidden?: boolean;
+  isHiddenBorder?: boolean;
+  isMinWidthAsContent?: boolean;
+  isNiceNumber?: boolean;
+  isNoSpaces?: boolean;
+  isReadOnly?: boolean;
+  isRequired?: boolean;
+  isWidthAsHeight?: boolean;
+  isZeroRadius?: boolean;
 
-    onBlur?: FocusEventHandler<HTMLInputElement>;
-    onFocus?: FocusEventHandler<HTMLInputElement>;
-    onKeyDown?: KeyboardEventHandler<HTMLInputElement>;
-    onPaste?: ClipboardEventHandler<HTMLInputElement>;
+  maxLength?: number;
+  minLength?: number;
+  name?: string;
 
-    postfixChildren?: InputChildrenProps;
-    prefixChildren?: InputChildrenProps;
-  };
+  onBlur?: FocusEventHandler<HTMLInputElement>;
+  onFocus?: FocusEventHandler<HTMLInputElement>;
+  onKeyDown?: KeyboardEventHandler<HTMLInputElement>;
+  onPaste?: ClipboardEventHandler<HTMLInputElement>;
+
+  postfixChildren?: InputChildrenProps;
+  prefixChildren?: InputChildrenProps;
+};
 
 type IControlledValue = {
   value: string | number | null | undefined;

@@ -1,5 +1,5 @@
 import { IAddIIcon } from '@local/components/icon';
-import { ISxTypography, IThemeControl, IThemeGenreButton, IThemeSize } from '@local/styles/utils/types';
+import { IThemeControl, IThemeGenreButton, IThemeSize, ITypography } from '@local/styles/utils/types';
 
 import { CSSProperties, FocusEventHandler, MouseEventHandler, PropsWithChildren, Ref } from 'react';
 
@@ -26,6 +26,10 @@ type IButtonDefault = PropsWithChildren & {
 
   isOnlyIcon?: boolean;
 
+  isZeroPadding?: boolean;
+  
+  isSizeFitContent?: boolean;
+
   isFullRadius?: boolean;
 
   isWidthAsHeight?: boolean;
@@ -42,6 +46,8 @@ type IButtonDefault = PropsWithChildren & {
 
   control?: IThemeControl;
 
+  sxTypography?: ITypography;
+  
   ref?: Ref<HTMLElement | null>;
 
   size: IThemeSize;
@@ -51,8 +57,7 @@ type IButtonDefault = PropsWithChildren & {
   tabIndex?: number;
 
   type?: HTMLButtonElement['type'];
-}  &
-  ISxTypography;
+};
 
 type IButtonStandard = IButtonDefault & {
   isIconGroup?: false;
