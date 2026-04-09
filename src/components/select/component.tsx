@@ -543,7 +543,7 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
                 <li
                   className={setClasses([
                     CSS_CLASS.component.select.dropdownListOption,
-                    isAll && CSS_CLASS.component.select.dropdownListOptionIsChecked,
+                    CSS_CLASS.component.select.dropdownListOptionIsBorder,
                     classNameTypography,
                   ])}
                   tabIndex={0}
@@ -587,7 +587,6 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
                   tabIndex={-1}
                   className={setClasses([
                     CSS_CLASS.component.select.dropdownListOption,
-                    isAll && CSS_CLASS.component.select.dropdownListOptionIsChecked,
                     classNameTypography,
                   ])}
                   style={setStyles([{ position: 'relative', minHeight: `${sizeHeight}px` }, styleTypography])}
