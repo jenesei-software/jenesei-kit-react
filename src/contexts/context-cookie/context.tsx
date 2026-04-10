@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
 import { createContext, FC, useCallback, useEffect, useState } from 'react';
 
-import { ICookieAttributes, ICookieContext, IProviderCookie, IValidCookieObject } from './context.types';
+import { ICookieAttributes, ICookieContext, ICookieProvider, IValidCookieObject } from './context.types';
 
 /**
  * Context for managing cookies.
@@ -28,7 +28,7 @@ export const CookieContext = createContext<ICookieContext | null>(null);
  * }
  * ```
  */
-export const ProviderCookie: FC<IProviderCookie> = (props) => {
+export const ProviderCookie: FC<ICookieProvider> = (props) => {
   const { getCookie, setCookie, removeCookieValue, removeCookieValues, checkCookie, cookieValues } =
     useProviderCookie(props);
 
@@ -48,7 +48,7 @@ export const ProviderCookie: FC<IProviderCookie> = (props) => {
   );
 };
 
-const useProviderCookie = (props: IProviderCookie) => {
+const useProviderCookie = (props: ICookieProvider) => {
   const [cookieValues, setCookieValues] = useState<IValidCookieObject>();
 
   const getCookie = useCallback(<K extends keyof IValidCookieObject>(name: K): IValidCookieObject[K] | undefined => {

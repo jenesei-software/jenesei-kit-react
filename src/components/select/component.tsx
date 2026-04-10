@@ -12,7 +12,7 @@ import { CSS_CLASS, CSS_VARS, CSS_VARS_RAW, EXTRA_VALUE } from '@local/styles/ut
 import { setClasses, setStyles } from '@local/styles/utils/functions';
 
 import { useVirtualizer } from '@tanstack/react-virtual';
-import { KeyboardEvent, memo, Ref, useCallback, useMemo, useRef, useState } from 'react';
+import { KeyboardEvent, memo, Ref, useCallback, useMemo, useRef } from 'react';
 
 import { IContainerDropdownListOption, IContainerSelectListOption, ISelect, ISelectItem } from './component.types';
 
@@ -80,7 +80,6 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
     () => props.valueSearch && props.isShowAddOption,
     [props.valueSearch, props.isShowAddOption],
   );
-  const [isShowSearch, setIsShowSearch] = useState<boolean>(false);
 
   const optionsLength = useMemo(() => {
     if (props.isNotShowDisabledOptions) {
@@ -114,16 +113,26 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
     const selectNoOption = !isHaveOption ? sizeHeight : 0;
     const selectList = isHaveOption ? heightDropdownList : 0;
     const selectAdd = isShowAddOption ? sizeHeight : 0;
-    const selectSearch = isShowSearch ? sizeHeight : 0;
+    const selectSearch = props.isSearch ? sizeHeight : 0;
     const sum =
       (selectAll !== 0 ? 1 : 0) +
       (selectNoOption !== 0 ? 1 : 0) +
       (selectList !== 0 ? 1 : 0) +
       (selectAdd !== 0 ? 1 : 0) +
       (selectSearch !== 0 ? 1 : 0);
-    const padding = sum <= 1 ? 0 : (sum - 1) * (sizePadding / 2.8);
-    return selectAll + selectNoOption + selectList + selectAdd + padding + selectSearch + sizePadding * 2;
-  }, [props.isShowSelectAll, sizeHeight, isHaveOption, sizePadding, heightDropdownList, isShowAddOption, isShowSearch]);
+    const gap = sum <= 1 ? 0 : (sum - 1) * (sizePadding / 2.8);
+    const padding = (sizePadding / 4) * 2
+    const result = selectAll + selectNoOption + selectList + selectAdd + selectSearch + padding + gap;
+    return result;
+  }, [
+    props.isShowSelectAll,
+    sizeHeight,
+    isHaveOption,
+    sizePadding,
+    heightDropdownList,
+    isShowAddOption,
+    props.isSearch,
+  ]);
 
   const isValueMoreMaxViewSelect = useMemo(
     () => props.value.length > maxViewSelect,
@@ -157,16 +166,6 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
     gap: sizePadding / 2.8,
   });
 
-  const onChangeShowSearch = useCallback(
-    (show: boolean) => {
-      if (props.isSearch && !props.isDisabled) {
-        setIsShowSearch(show);
-      } else {
-        setIsShowSearch(false);
-      }
-    },
-    [props.isDisabled, props.isSearch],
-  );
   const onClick = useCallback(
     (option: T) => {
       let newValues: T[] = [];
@@ -190,20 +189,18 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
         }
       }
       props.onChange(newValues);
-      onChangeShowSearch(!!props.isStaySearchAfterSelect);
       if (props.isOnClickOptionClose) {
         close();
       }
     },
-    [close, onChangeShowSearch, props],
+    [close, props],
   );
   const onClickAll = useCallback(() => {
     props.onChangeAll?.(isAll ? [] : props.option, !isAll);
-    onChangeShowSearch(!!props.isStaySearchAfterSelect);
     if (props.isOnClickOptionClose) {
       close();
     }
-  }, [close, isAll, onChangeShowSearch, props]);
+  }, [close, isAll, props]);
   // const onClear = useCallback(() => {
   //   props.onChange([]);
   // }, [props]);
@@ -340,13 +337,11 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
         onMouseDown={(e) => {
           e.preventDefault();
           toggle();
-          onChangeShowSearch(true);
         }}
         onFocus={() => {
           // При фокусе через Tab/клавиатуру открываем select
           if (!isOpen) {
             open();
-            onChangeShowSearch(true);
           }
         }}
       >
@@ -428,7 +423,6 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
             className={CSS_CLASS.component.select.listButton}
             onMouseDown={(e) => {
               e.preventDefault();
-              e.stopPropagation();
             }}
           >
             {props.isShowIconToggle && (
@@ -444,7 +438,6 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
-                  toggle();
                 }}
               />
             )}
@@ -461,7 +454,6 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
-                  toggle();
                 }}
               >
                 <Icon type={'loading'} name={'Line'} size={props.size} />
@@ -489,7 +481,7 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
         >
           {isShowDropdownSettingsList && (
             <ul style={{ position: 'sticky', top: 0, zIndex: 1 }} className={CSS_CLASS.component.select.dropdownList}>
-              {isShowSearch && (
+              {props.isSearch && (
                 <li
                   className={setClasses([
                     CSS_CLASS.component.select.dropdownListOption,
@@ -585,10 +577,7 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
               {!isHaveOption ? (
                 <li
                   tabIndex={-1}
-                  className={setClasses([
-                    CSS_CLASS.component.select.dropdownListOption,
-                    classNameTypography,
-                  ])}
+                  className={setClasses([CSS_CLASS.component.select.dropdownListOption, classNameTypography])}
                   style={setStyles([{ position: 'relative', minHeight: `${sizeHeight}px` }, styleTypography])}
                 >
                   <Typography sx={{ size: 16, line: 1 }}>{labelEmptyOption}</Typography>

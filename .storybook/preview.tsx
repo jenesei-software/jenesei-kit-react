@@ -33,12 +33,12 @@ import '@fontsource/work-sans/400.css';
 import '@fontsource/work-sans/500.css';
 import '@fontsource/work-sans/700.css';
 import '@fontsource/work-sans/900.css';
+import '@local/styles/css/areas.css';
+import '@local/styles/css/components.css';
 import '@local/styles/css/tokens.css';
 import '@local/styles/css/reset.css';
 import '@local/styles/css/keyframes.css';
 import '@local/styles/css/classes.css';
-import '@local/styles/css/areas.css';
-import '@local/styles/css/components.css';
 import './preview.css';
 
 const preview: Preview = {

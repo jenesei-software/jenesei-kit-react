@@ -1,13 +1,13 @@
 // import {
-//   DatePickerTranslateInputProps,
+//   IDatePickerTranslateInput,
 //   IDatePickerTranslateMonth,
-//   DatePickerTranslateWeekProps,
+//   IDatePickerTranslateWeek,
 // } from '@local/components/date-picker';
-import { transformObjectToArray, transformObjectValuesToKeys } from '@local/functions';
-import { IImageFormat, ILanguage, IService } from '@local/types';
+import { transformObjectToArray, transformObjectValuesToKeys } from '@local/cores/functions';
+import { IImageFormat, ILanguage, IService } from '@local/cores/types';
 
-import { IDatePickerTranslateMonth } from './components/date-picker';
-import { IThemeTypographyHeading } from './styles/utils';
+import { IDatePickerTranslateMonth } from '../components/date-picker';
+import { IThemeTypographyHeading } from '../styles/utils';
 
 export const OBJECT_LANGUAGE: ILanguage = {
   eng: {
@@ -39,7 +39,7 @@ export const LIST_KEY_LANGUAGE = transformObjectValuesToKeys(OBJECT_LANGUAGE);
 export const LIST_SERVICE = transformObjectToArray(OBJECT_SERVICE);
 export const LIST_KEY_SERVICE = transformObjectValuesToKeys(OBJECT_SERVICE);
 
-// export const LOCALE_INPUT: DatePickerTranslateInputProps = {
+// export const LOCALE_INPUT: IDatePickerTranslateInput = {
 //   day: 'ДД',
 //   month: 'ММ',
 //   year: 'ГГГГ',
@@ -106,7 +106,7 @@ export const LOCALE_MONTHS: IDatePickerTranslateMonth[] = [
     value: 'december',
   },
 ];
-// export const LOCALE_WEEKS: DatePickerTranslateWeekProps[] = [
+// export const LOCALE_WEEKS: IDatePickerTranslateWeek[] = [
 //   {
 //     localeLong: 'Monday',
 //     localeShort: 'Пн',

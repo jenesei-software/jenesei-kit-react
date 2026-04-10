@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 
-export interface IProviderLocalStorage extends PropsWithChildren {
+export interface ILocalStorageProvider extends PropsWithChildren {
   validate?: {
     validateKeys: (keyof IValidLocalStorageObject)[];
     getValidateLocalStorageValue: <K extends keyof IValidLocalStorageObject>(

@@ -1,4 +1,4 @@
-import { LIST_LANGUAGE } from "@local/consts";
+import { LIST_LANGUAGE } from "@local/cores/consts";
 
 import moment from "moment";
 import { FC, useCallback, useEffect, useMemo, useState } from "react";

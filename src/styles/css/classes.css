@@ -173,6 +173,7 @@
 
 .u-control--none {
   outline: none;
+  cursor: default;
 }
 @media (hover: none) {
   .u-control--default:hover {

@@ -2,7 +2,7 @@ import { Button } from '@local/components/button';
 import { Stack } from '@local/components/stack';
 import { ITooltip, Tooltip as TooltipComponent } from '@local/components/tooltip';
 import { Typography, TypographyTooltip } from '@local/components/typography';
-import { LOREM_IPSUM_TEXT } from '@local/consts';
+import { LOREM_IPSUM_TEXT } from '@local/cores/consts';
 import { CSS_VARS } from '@local/styles/utils';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';

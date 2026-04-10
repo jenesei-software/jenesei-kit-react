@@ -48,7 +48,6 @@ export type ISelect<T extends ISelectItem> = {
   isMulti?: boolean;
   isFetching?: boolean;
   isClearWhenClickSelectListOption?: boolean;
-  isStaySearchAfterSelect?: boolean;
   isOnlyColorInSelectListOption?: boolean;
 
   labelPlaceholder?: string;

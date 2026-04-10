@@ -3,7 +3,7 @@ import { PropsWithChildren } from 'react';
 
 export type ICookieAttributes = Cookies.CookieAttributes;
 
-export interface IProviderCookie extends PropsWithChildren {
+export interface ICookieProvider extends PropsWithChildren {
   validate?: {
     validateKeys: (keyof IValidCookieObject)[];
     getValidateCookieValue: <K extends keyof IValidCookieObject>(

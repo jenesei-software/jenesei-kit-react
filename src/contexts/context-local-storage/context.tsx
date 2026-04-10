@@ -1,6 +1,6 @@
 import { createContext, FC, useCallback, useEffect, useState } from 'react';
 
-import { ILocalStorageContext, IProviderLocalStorage, IValidLocalStorageObject } from './context.types';
+import { ILocalStorageContext, ILocalStorageProvider, IValidLocalStorageObject } from './context.types';
 
 export const LocalStorageContext = createContext<ILocalStorageContext | null>(null);
 
@@ -21,7 +21,7 @@ export const LocalStorageContext = createContext<ILocalStorageContext | null>(nu
  * }
  * ```
  */
-export const ProviderLocalStorage: FC<IProviderLocalStorage> = (props) => {
+export const ProviderLocalStorage: FC<ILocalStorageProvider> = (props) => {
   const {
     getLocalStorage,
     setLocalStorage,
@@ -47,7 +47,7 @@ export const ProviderLocalStorage: FC<IProviderLocalStorage> = (props) => {
   );
 };
 
-const useProviderLocalStorage = (props: IProviderLocalStorage) => {
+const useProviderLocalStorage = (props: ILocalStorageProvider) => {
   const [localStorageValues, setLocalStorageValues] = useState<IValidLocalStorageObject>();
 
   const getLocalStorage = useCallback(

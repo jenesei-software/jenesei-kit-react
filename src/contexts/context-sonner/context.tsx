@@ -1,6 +1,6 @@
 import { Button } from '@local/components/button';
 import { Icon } from '@local/components/icon';
-import { getSxTypography } from '@local/functions';
+import { getSxTypography } from '@local/cores/functions';
 
 import { AnimatePresence, motion } from 'framer-motion';
 import { createContext, FC, memo, useCallback, useEffect, useMemo, useState } from 'react';
