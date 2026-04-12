@@ -390,6 +390,53 @@ export const CSS_VARS = {
       padding: 'var(--component-textarea-padding)',
       radius: 'var(--component-textarea-radius)',
     },
+    datePicker: {
+      rows: 'var(--component-date-picker-rows)',
+      row: 'var(--component-date-picker-row)',
+      column: 'var(--component-date-picker-column)',
+
+      padding: 'var(--component-date-picker-padding)',
+
+      dayRadius: 'var(--component-date-picker-day-radius)',
+
+      dayBackgroundRest: 'var(--component-date-picker-day-background-rest)',
+      dayBackgroundHover: 'var(--component-date-picker-day-background-hover)',
+      dayBackgroundWeekend: 'var(--component-date-picker-day-background-weekend)',
+      dayBackgroundToday: 'var(--component-date-picker-day-background-today)',
+      dayBackgroundChoice: 'var(--component-date-picker-day-background-choice)',
+
+      dayBorderRest: 'var(--component-date-picker-day-border-rest)',
+      dayBorderWeekend: 'var(--component-date-picker-day-border-weekend)',
+      dayBorderToday: 'var(--component-date-picker-day-border-today)',
+      dayBorderChoice: 'var(--component-date-picker-day-border-choice)',
+      dayBorderHover: 'var(--component-date-picker-day-border-hover)',
+
+      dayColorRest: 'var(--component-date-picker-day-color-rest)',
+      dayColorHover: 'var(--component-date-picker-day-color-hover)',
+      dayColorWeekend: 'var(--component-date-picker-day-color-weekend)',
+      dayColorToday: 'var(--component-date-picker-day-color-today)',
+      dayColorChoice: 'var(--component-date-picker-day-color-choice)',
+
+      inputBackground: 'var(--component-date-picker-input-background)',
+      inputBackgroundHover: 'var(--component-date-picker-input-background-hover)',
+      inputSegmentBackgroundActive: 'var(--component-date-picker-input-segment-background-active)',
+
+      inputBorderColor: 'var(--component-date-picker-input-border-color)',
+      inputBorderColorHover: 'var(--component-date-picker-input-border-color-hover)',
+
+      inputColor: 'var(--component-date-picker-input-color)',
+      inputColorHover: 'var(--component-date-picker-input-color-hover)',
+
+      inputPadding: 'var(--component-date-picker-input-padding)',
+      inputHeight: 'var(--component-date-picker-input-height)',
+      inputRadius: 'var(--component-date-picker-input-radius)',
+
+      inputValueColor: 'var(--component-date-picker-input-value-color)',
+      inputPlaceholderColor: 'var(--component-date-picker-input-placeholder-color)',
+
+      buttonToggleRight: 'var(--component-date-picker-button-toggle-right)',
+      buttonClearRight: 'var(--component-date-picker-button-clear-right)',
+    },
   },
 
   area: {
@@ -652,6 +699,54 @@ export const CSS_VARS = {
         placeholder: CSS_VARS_PALETTE.textSecondaryDark,
       },
     },
+    datepicker: {
+      primary: {
+        color: {
+          index: CSS_VARS_PALETTE.textPrimaryLight,
+          hover: CSS_VARS_PALETTE.textPrimaryLight,
+          weekend: CSS_VARS_PALETTE.textPrimaryLight,
+          today: CSS_VARS_PALETTE.textPrimaryLight,
+          choice: CSS_VARS_PALETTE.textPrimaryDark,
+        },
+        background: {
+          index: CSS_VARS_PALETTE.transparent,
+          hover: CSS_VARS_PALETTE.fillQuaternaryLight,
+          weekend: CSS_VARS_PALETTE.fillQuaternaryLight,
+          today: CSS_VARS_PALETTE.transparent,
+          choice: CSS_VARS_PALETTE.productPrimaryLight,
+        },
+        border: {
+          index: CSS_VARS_PALETTE.transparent,
+          hover: CSS_VARS_PALETTE.transparent,
+          weekend: CSS_VARS_PALETTE.transparent,
+          today: CSS_VARS_PALETTE.textPrimaryLight,
+          choice: CSS_VARS_PALETTE.productPrimaryLight,
+        },
+      },
+      secondary: {
+        color: {
+          index: CSS_VARS_PALETTE.textPrimaryDark,
+          hover: CSS_VARS_PALETTE.textPrimaryDark,
+          weekend: CSS_VARS_PALETTE.textPrimaryDark,
+          today: CSS_VARS_PALETTE.textPrimaryDark,
+          choice: CSS_VARS_PALETTE.textPrimaryLight,
+        },
+        background: {
+          index: CSS_VARS_PALETTE.transparent,
+          hover: CSS_VARS_PALETTE.fillQuaternaryDark,
+          weekend: CSS_VARS_PALETTE.fillQuaternaryDark,
+          today: CSS_VARS_PALETTE.transparent,
+          choice: CSS_VARS_PALETTE.productPrimaryDark,
+        },
+        border: {
+          index: CSS_VARS_PALETTE.transparent,
+          hover: CSS_VARS_PALETTE.transparent,
+          weekend: CSS_VARS_PALETTE.transparent,
+          today: CSS_VARS_PALETTE.textPrimaryDark,
+          choice: CSS_VARS_PALETTE.productPrimaryDark,
+        },
+      },
+    },
   },
 } as const;
 
@@ -699,6 +794,10 @@ export const CSS_CLASS = {
     none: 'u-control--none',
   },
 
+  scrollbarGutter: {
+    stable: 'u-scrollbar-gutter--stable',
+    stableBoth: 'u-scrollbar-gutter--stable-both',
+  },
   /**
    * Состояние disabled.
    * Делает элемент полупрозрачным.
@@ -780,7 +879,6 @@ export const CSS_CLASS = {
       wrapperIsHidden: 'component-textarea__wrapper--is-hidden',
       wrapperIsHiddenBorder: 'component-textarea__wrapper--is-hidden-border',
       wrapperIsFullRadius: 'component-textarea__wrapper--is-full-radius',
-      wrapperIsCenter: 'component-textarea__wrapper--is-center',
       wrapperIsNotResize: 'component-textarea__wrapper--is-not-resize',
     },
     input: {
@@ -861,6 +959,24 @@ export const CSS_CLASS = {
       center: 'component-toggle__center',
       centerActive: 'component-toggle__center--active',
       centerUnActive: 'component-toggle__center--un-active',
+    },
+    datePicker: {
+      wrapper: 'component-date-picker__wrapper',
+      wrapperIsMinWidth: 'component-date-picker__wrapper--is-min-width',
+      dropdownList: 'component-date-picker__dropdown__list',
+      dropdownListDays: 'component-date-picker__dropdown-list__days',
+      day: 'component-date-picker__dropdown-list__day',
+      dayIsChoice: 'component-date-picker__dropdown-list__day--is-choice',
+      dayIsNotCurrentMonth: 'component-date-picker__dropdown-list__day--is-not-current-month',
+      dayIsToday: 'component-date-picker__dropdown-list__day--is-today',
+      dayIsWeekend: 'component-date-picker__dropdown-list__day--is-weekend',
+      dayIsHidden: 'component-date-picker__dropdown-list__day--is-hidden',
+      dayOfWeek: 'component-date-picker__dropdown-list__day-of-week',
+      inputWrapper: 'component-date-picker__input-wrapper',
+      inputSegment: 'component-date-picker__input-segment',
+      inputSegmentHasValue: 'component-date-picker__input-segment--has-value',
+      inputSegmentIsActive: 'component-date-picker__input-segment--is-active',
+      listButton: 'component-date-picker__list__button',
     },
   },
 } as const;

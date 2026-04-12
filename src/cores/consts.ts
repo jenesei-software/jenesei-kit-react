@@ -6,7 +6,7 @@
 import { transformObjectToArray, transformObjectValuesToKeys } from '@local/cores/functions';
 import { IImageFormat, ILanguage, IService } from '@local/cores/types';
 
-import { IDatePickerTranslateMonth } from '../components/date-picker';
+import { IDatePickerTranslateInput, IDatePickerTranslateMonth, IDatePickerTranslateWeek } from '../components/date-picker';
 import { IThemeTypographyHeading } from '../styles/utils';
 
 export const OBJECT_LANGUAGE: ILanguage = {
@@ -39,11 +39,11 @@ export const LIST_KEY_LANGUAGE = transformObjectValuesToKeys(OBJECT_LANGUAGE);
 export const LIST_SERVICE = transformObjectToArray(OBJECT_SERVICE);
 export const LIST_KEY_SERVICE = transformObjectValuesToKeys(OBJECT_SERVICE);
 
-// export const LOCALE_INPUT: IDatePickerTranslateInput = {
-//   day: 'ДД',
-//   month: 'ММ',
-//   year: 'ГГГГ',
-// };
+export const LOCALE_INPUT: IDatePickerTranslateInput = {
+  day: 'ДД',
+  month: 'ММ',
+  year: 'ГГГГ',
+};
 export const LOCALE_MONTHS: IDatePickerTranslateMonth[] = [
   {
     localeLong: 'Январь',
@@ -106,43 +106,43 @@ export const LOCALE_MONTHS: IDatePickerTranslateMonth[] = [
     value: 'december',
   },
 ];
-// export const LOCALE_WEEKS: IDatePickerTranslateWeek[] = [
-//   {
-//     localeLong: 'Monday',
-//     localeShort: 'Пн',
-//     value: 'mo',
-//   },
-//   {
-//     localeLong: 'Tuesday',
-//     localeShort: 'Tue',
-//     value: 'tu',
-//   },
-//   {
-//     localeLong: 'Wednesday',
-//     localeShort: 'Wed',
-//     value: 'we',
-//   },
-//   {
-//     localeLong: 'Thursday',
-//     localeShort: 'Thu',
-//     value: 'th',
-//   },
-//   {
-//     localeLong: 'Friday',
-//     localeShort: 'Fri',
-//     value: 'fr',
-//   },
-//   {
-//     localeLong: 'Saturday',
-//     localeShort: 'Sat',
-//     value: 'sa',
-//   },
-//   {
-//     localeLong: 'Sunday',
-//     localeShort: 'Sun',
-//     value: 'su',
-//   },
-// ];
+export const LOCALE_WEEKS: IDatePickerTranslateWeek[] = [
+  {
+    localeLong: 'Monday',
+    localeShort: 'Пн',
+    value: 'mo',
+  },
+  {
+    localeLong: 'Tuesday',
+    localeShort: 'Tue',
+    value: 'tu',
+  },
+  {
+    localeLong: 'Wednesday',
+    localeShort: 'Wed',
+    value: 'we',
+  },
+  {
+    localeLong: 'Thursday',
+    localeShort: 'Thu',
+    value: 'th',
+  },
+  {
+    localeLong: 'Friday',
+    localeShort: 'Fri',
+    value: 'fr',
+  },
+  {
+    localeLong: 'Saturday',
+    localeShort: 'Sat',
+    value: 'sa',
+  },
+  {
+    localeLong: 'Sunday',
+    localeShort: 'Sun',
+    value: 'su',
+  },
+];
 
 export const LIST_IMAGE_SUPPORTED_FORMAT: IImageFormat[] = [
   'image/jpeg',

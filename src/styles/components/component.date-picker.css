@@ -6,229 +6,198 @@
     Component - DatePicker - Wrapper
     ========================= */
 .component-date-picker__wrapper {
-   width: 100%;
-   position: relative;
-   height: fit-content;
+  width: 100%;
+  position: relative;
+  height: fit-content;
 }
 
 .component-date-picker__wrapper.component-date-picker__wrapper--is-min-width {
-   width: min-content;
-}
-
-/* =========================
-    Component - DatePicker - Input Wrapper
-    ========================= */
-.component-date-picker__input-wrapper {
-   resize: none;
-   overflow: hidden;
-   width: 100%;
-   border: 1px solid transparent;
-   white-space: nowrap;
-   display: flex;
-   align-items: center;
-   gap: 0;
-
-   background: var(--component-date-picker-input-background);
-   border-color: var(--component-date-picker-input-border-color);
-   color: var(--component-date-picker-input-color);
-
-   padding: var(--component-date-picker-input-padding);
-   height: var(--component-date-picker-input-height);
-   min-height: var(--component-date-picker-input-height);
-   max-height: var(--component-date-picker-input-height);
-   border-radius: var(--component-date-picker-input-radius);
-
-   outline: 2px solid transparent;
-   outline-offset: 1px;
-
-   transition:
-      outline 0s,
-      filter var(--transition-default),
-      opacity var(--transition-default),
-      background-color var(--transition-default),
-      color var(--transition-default),
-      box-shadow var(--transition-default),
-      border-color var(--transition-default);
-}
-
-.component-date-picker__input-wrapper:hover {
-   background: var(--component-date-picker-input-background-hover);
-   border-color: var(--component-date-picker-input-border-color-hover);
-   color: var(--component-date-picker-input-color-hover);
-}
-
-.component-date-picker__input-wrapper.component-date-picker__input-wrapper--is-open:not(
-      .component-date-picker__input-wrapper--is-read-only
-   ):not(.component-date-picker__input-wrapper--is-disabled-outline) {
-   background: var(--component-date-picker-input-background);
-   border-color: var(--component-date-picker-input-border-color);
-   color: var(--component-date-picker-input-color);
-   outline: 2px solid var(--component-date-picker-focus-color);
-}
-
-.component-date-picker__input-wrapper.component-date-picker__input-wrapper--is-open.component-date-picker__input-wrapper--is-outline-box-shadow:not(
-      .component-date-picker__input-wrapper--is-read-only
-   ):not(.component-date-picker__input-wrapper--is-disabled-outline) {
-   outline: 1px solid #83b7e8;
-   outline-offset: 0;
-   box-shadow:
-      0 1px 1px rgba(24, 36, 51, 0.06),
-      0 0 0 0.25rem rgba(6, 111, 209, 0.25);
-}
-
-/* =========================
-    Component - DatePicker - Input Segment
-    ========================= */
-.component-date-picker__input {
-   text-align: center;
-   resize: none;
-   overflow: hidden;
-   border: 0 solid;
-   background: transparent;
-   margin: 0 !important;
-   white-space: nowrap;
-   border-radius: 4px;
-   padding: 2px;
-   min-width: 10px;
-   outline: none !important;
-}
-
-.component-date-picker__input.component-date-picker__input--has-value,
-.component-date-picker__input.component-date-picker__input--has-value:focus-visible {
-   color: var(--component-date-picker-input-value-color);
-}
-
-.component-date-picker__input:not(.component-date-picker__input--has-value) {
-   color: var(--component-date-picker-input-placeholder-color);
-}
-
-.component-date-picker__input.component-date-picker__input--is-active {
-   background-color: var(--component-date-picker-input-active-background);
-}
-
-/* =========================
-    Component - DatePicker - Buttons
-    ========================= */
-.component-date-picker__button {
-   position: absolute;
-   right: var(--component-date-picker-button-right);
-   height: max-content !important;
-}
-
-.component-date-picker__button-clear {
-   position: absolute;
-   right: var(--component-date-picker-button-clear-right);
-   height: max-content !important;
+  width: min-content;
 }
 
 /* =========================
     Component - DatePicker - Dropdown List
     ========================= */
 .component-date-picker__dropdown-list {
-   position: relative;
-   display: flex;
-   flex-direction: column;
-   width: 100%;
-   padding-top: 6px;
-   transform: translateZ(0);
-   justify-content: flex-start;
-   gap: 10px;
-}
-
-.component-date-picker__dropdown-list.component-date-picker__dropdown-list--is-input-effect {
-   background: var(--component-date-picker-input-background);
-   border-color: var(--component-date-picker-input-border-color);
-   color: var(--component-date-picker-input-color);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-top: 6px;
+  transform: translateZ(0);
+  justify-content: flex-start;
+  gap: 10px;
 }
 
 /* =========================
-    Component - DatePicker - Days Grid
+    Component - DatePicker - Dropdown List - Days
     ========================= */
-.component-date-picker__dropdown-days {
-   display: grid;
-   gap: 6px;
-   grid-template-columns: repeat(7, 28px);
-   grid-template-rows: repeat(var(--component-date-picker-rows), 28px);
-   justify-content: space-between;
+.component-date-picker__dropdown-list__days {
+  display: grid;
+  gap: 6px;
+  grid-template-columns: repeat(7, 28px);
+  grid-template-rows: repeat(var(--component-date-picker-rows), 28px);
+  justify-content: space-between;
 }
 
 /* =========================
-    Component - DatePicker - Day Cell
+    Component - DatePicker - Dropdown List - Day
     ========================= */
-.component-date-picker__dropdown-day,
-.component-date-picker__dropdown-day-of-week {
-   position: relative;
-   overflow: hidden;
-   isolation: isolate;
-   user-select: none;
+.component-date-picker__dropdown-list__day,
+.component-date-picker__dropdown-list__day-of-week {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  user-select: none;
 
-   border-radius: var(--component-date-picker-day-radius);
-   border: 1px solid transparent;
+  border-radius: var(--component-date-picker-day-radius);
+  border: 1px solid transparent;
 
-   grid-row: var(--component-date-picker-row);
-   grid-column: var(--component-date-picker-column);
+  grid-row: var(--component-date-picker-row);
+  grid-column: var(--component-date-picker-column);
 
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   width: 100%;
-   height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 
-   background: var(--component-date-picker-day-background-rest);
-   border-color: var(--component-date-picker-day-border-rest);
-   color: var(--component-date-picker-day-color-rest);
+  background: var(--component-date-picker-day-background-rest);
+  border-color: var(--component-date-picker-day-border-rest);
+  color: var(--component-date-picker-day-color-rest);
 
-   transition:
-      outline 0s,
-      filter var(--transition-default),
-      opacity var(--transition-default),
-      background-color var(--transition-default),
-      color var(--transition-default),
-      box-shadow var(--transition-default),
-      border-color var(--transition-default);
+  transition:
+    outline 0s,
+    filter var(--transition-default),
+    opacity var(--transition-default),
+    background-color var(--transition-default),
+    color var(--transition-default),
+    box-shadow var(--transition-default),
+    border-color var(--transition-default);
 }
 
-.component-date-picker__dropdown-day {
-   cursor: pointer;
+.component-date-picker__dropdown-list__day {
+  cursor: pointer;
 }
 
-.component-date-picker__dropdown-day:hover:not(.component-date-picker__dropdown-day--is-disabled) {
-   background: var(--component-date-picker-day-background-hover);
-   border-color: var(--component-date-picker-day-border-hover);
-   color: var(--component-date-picker-day-color-hover);
+.component-date-picker__dropdown-list__day:hover:not(.component-date-picker__dropdown-list__day--is-hidden) {
+  background: var(--component-date-picker-day-background-hover);
+  border-color: var(--component-date-picker-day-border-hover);
+  color: var(--component-date-picker-day-color-hover);
 }
 
-.component-date-picker__dropdown-day.component-date-picker__dropdown-day--is-weekend {
-   background: var(--component-date-picker-day-background-weekend);
-   border-color: var(--component-date-picker-day-border-weekend);
-   color: var(--component-date-picker-day-color-weekend);
+.component-date-picker__dropdown-list__day.component-date-picker__dropdown-list__day--is-weekend {
+  background: var(--component-date-picker-day-background-weekend);
+  border-color: var(--component-date-picker-day-border-weekend);
+  color: var(--component-date-picker-day-color-weekend);
 }
 
-.component-date-picker__dropdown-day.component-date-picker__dropdown-day--is-today {
-   background: var(--component-date-picker-day-background-today);
-   border-color: var(--component-date-picker-day-border-today);
-   color: var(--component-date-picker-day-color-today);
+.component-date-picker__dropdown-list__day.component-date-picker__dropdown-list__day--is-today {
+  background: var(--component-date-picker-day-background-today);
+  border-color: var(--component-date-picker-day-border-today);
+  color: var(--component-date-picker-day-color-today);
 }
 
-.component-date-picker__dropdown-day.component-date-picker__dropdown-day--is-choice {
-   background: var(--component-date-picker-day-background-choice);
-   border-color: var(--component-date-picker-day-border-choice);
-   color: var(--component-date-picker-day-color-choice);
+.component-date-picker__dropdown-list__day.component-date-picker__dropdown-list__day--is-choice {
+  background: var(--component-date-picker-day-background-choice);
+  border-color: var(--component-date-picker-day-border-choice);
+  color: var(--component-date-picker-day-color-choice);
 }
 
-.component-date-picker__dropdown-day.component-date-picker__dropdown-day--is-disabled {
-   background: var(--component-date-picker-day-background-weekend);
-   border-color: var(--component-date-picker-day-border-weekend);
-   color: var(--component-date-picker-day-color-weekend);
-   opacity: 0.5;
+.component-date-picker__dropdown-list__day.component-date-picker__dropdown-list__day--is-hidden {
+  background: var(--component-date-picker-day-background-weekend);
+  border-color: var(--component-date-picker-day-border-weekend);
+  color: var(--component-date-picker-day-color-weekend);
+  opacity: 0.5;
 }
 
-.component-date-picker__dropdown-day.component-date-picker__dropdown-day--is-not-current-month {
-   opacity: 0.5;
+.component-date-picker__dropdown-list__day.component-date-picker__dropdown-list__day--is-not-current-month {
+  opacity: 0.5;
 }
 
-.component-date-picker__dropdown-day-of-week {
-   opacity: 1;
-   background-color: transparent;
-   cursor: default;
+.component-date-picker__dropdown-list__day-of-week {
+  opacity: 1;
+  background-color: transparent;
+  cursor: default;
+}
+
+/* =========================
+    Component - DatePicker - Input Wrapper
+    ========================= */
+.component-date-picker__input-wrapper {
+  resize: none;
+  overflow: hidden;
+  width: 100%;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0;
+
+  background: var(--component-date-picker-input-background);
+  border-color: var(--component-date-picker-input-border-color);
+  color: var(--component-date-picker-input-color);
+
+  padding: var(--component-date-picker-input-padding);
+  height: var(--component-date-picker-input-height);
+  min-height: var(--component-date-picker-input-height);
+  max-height: var(--component-date-picker-input-height);
+  border-radius: var(--component-date-picker-input-radius);
+
+  transition:
+    outline 0s,
+    filter var(--transition-default),
+    opacity var(--transition-default),
+    background-color var(--transition-default),
+    color var(--transition-default),
+    box-shadow var(--transition-default),
+    border-color var(--transition-default);
+}
+
+.component-date-picker__input-wrapper:hover {
+  background: var(--component-date-picker-input-background-hover);
+  border-color: var(--component-date-picker-input-border-color-hover);
+  color: var(--component-date-picker-input-color-hover);
+}
+
+/* =========================
+    Component - DatePicker - Input Segment
+    ========================= */
+.component-date-picker__input-segment {
+  text-align: center;
+  resize: none;
+  overflow: hidden;
+  border: 0 solid;
+  background: transparent;
+  margin: 0 !important;
+  white-space: nowrap;
+  border-radius: 4px;
+  padding: 2px;
+  min-width: 10px;
+  outline: none !important;
+}
+
+.component-date-picker__input-segment.component-date-picker__input-segment--has-value,
+.component-date-picker__input-segment.component-date-picker__input-segment--has-value:focus-visible {
+  color: var(--component-date-picker-input-value-color);
+}
+
+.component-date-picker__input-segment:not(.component-date-picker__input-segment--has-value) {
+  color: var(--component-date-picker-input-placeholder-color);
+}
+
+.component-date-picker__input-segment.component-date-picker__input-segment--is-active {
+  background-color: var(--component-date-picker-input-segment-background-active);
+}
+
+/* =========================
+   Component - DatePicker - List - Button
+   ========================= */
+.component-date-picker__list__button {
+  position: absolute;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+  gap: calc(var(--component-date-picker-padding) / 2.8);
+  padding: calc(var(--component-date-picker-padding) / 2.8) var(--component-date-picker-padding);
 }

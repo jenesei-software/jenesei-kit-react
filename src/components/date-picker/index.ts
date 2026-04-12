@@ -1,7 +1,7 @@
 export { DatePicker } from './component';
 export type {
-  DatePickerProps,
-  DatePickerTranslateInputProps,
-  DatePickerTranslateWeekProps,
+  IDatePicker,
+  IDatePickerTranslateInput,
   IDatePickerTranslateMonth,
+  IDatePickerTranslateWeek,
 } from './component.types';

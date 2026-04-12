@@ -11,6 +11,7 @@ export const Stack: FC<IStack> = (props) => {
     return {
       className: setClasses([
         CSS_CLASS.component.stack.root,
+        props.scrollbarGutter && CSS_CLASS.scrollbarGutter[props.scrollbarGutter],
         props.isRipple && CSS_CLASS.isRipple,
         props.isHover && CSS_CLASS.isHover,
         props.className,
@@ -18,7 +19,7 @@ export const Stack: FC<IStack> = (props) => {
       style: setStyles([props?.sx, props.style]),
       Component: props.as ?? 'div',
     };
-  }, [props.as, props.className, props.isHover, props.isRipple, props.style, props.sx]);
+  }, [props.as, props.className, props.isHover, props.isRipple, props.style, props.sx, props.scrollbarGutter]);
 
   return (
     <Component

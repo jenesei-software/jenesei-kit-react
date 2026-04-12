@@ -1,12 +1,13 @@
+/** biome-ignore-all lint/a11y/useKeyWithClickEvents: <explanation> */
 import { Button } from '@local/components/button';
 import { ErrorMessage } from '@local/components/error';
 import { Popover, usePopover } from '@local/components/popover';
-import { Ripple } from '@local/components/ripple';
 import { SelectMonth, SelectYear } from '@local/components/select';
 import { Stack } from '@local/components/stack';
 import { Typography } from '@local/components/typography';
-import { getSxTypography } from '@local/functions';
-import { THEME_KEY_SIZE } from '@local/theme';
+import { useTypographyStyles } from '@local/hooks/use-typography-styles';
+import { CSS_CLASS, CSS_VARS, CSS_VARS_RAW, EXTRA_VALUE } from '@local/styles/utils';
+import { setClasses, setStyles } from '@local/styles/utils/functions';
 
 import moment, { Moment } from 'moment';
 import {
@@ -20,33 +21,20 @@ import {
   useRef,
   useState,
 } from 'react';
-import { useTheme } from 'styled-components';
 
 import {
-  DateDropdownDay,
-  DateDropdownDayOfWeek,
-  DateDropdownDays,
-  DateDropdownList,
-  DateInput,
-  DateInputButton,
-  DateInputButtonClear,
-  DateInputWrapper,
-  DateWrapper,
-} from './component.styles';
-import {
-  DateDayProps,
-  DatePickerMode,
-  DatePickerProps,
-  DatePickerTranslateWeekProps,
-  DatePickerType,
   DatePickerVariant,
+  IDatePicker,
+  IDatePickerDay,
+  IDatePickerMode,
+  IDatePickerTranslateWeek,
+  IDatePickerType,
 } from './component.types';
 
-const weekOrder: DatePickerTranslateWeekProps['value'][] = ['mo', 'tu', 'we', 'th', 'fr', 'sa', 'su'];
+const weekOrder: IDatePickerTranslateWeek['value'][] = ['mo', 'tu', 'we', 'th', 'fr', 'sa', 'su'];
 
-export const DatePicker = (props: DatePickerProps) => {
+export const DatePicker = (props: IDatePicker) => {
   const { onChange } = props;
-  const theme = useTheme();
 
   const [valueMoment, setValueMoment] = useState<null | Moment>(null);
   const [dateDefaultMoment, setDateDefaultMoment] = useState<Moment>(moment(props.dateDefault).utc());
@@ -78,7 +66,7 @@ export const DatePicker = (props: DatePickerProps) => {
   const [activeSegment, setActiveSegment] = useState<DatePickerVariant | null>(null);
   const [isError, setIsError] = useState(false);
 
-  const mode: DatePickerMode = useMemo(() => {
+  const mode: IDatePickerMode = useMemo(() => {
     if (!props.mode || props.mode.length === 0) {
       return [DatePickerVariant.DD, DatePickerVariant.MM, DatePickerVariant.YYYY];
     }
@@ -92,7 +80,7 @@ export const DatePicker = (props: DatePickerProps) => {
     return props.mode;
   }, [props.mode]);
 
-  const type: DatePickerType = useMemo(() => {
+  const type: IDatePickerType = useMemo(() => {
     if (!props.type) {
       return 'manualAndSelect';
     }
@@ -155,7 +143,7 @@ export const DatePicker = (props: DatePickerProps) => {
     });
   }, [props.locale.weeks]);
 
-  const daysInMonth: DateDayProps[] = useMemo(() => {
+  const daysInMonth: IDatePickerDay[] = useMemo(() => {
     const dateToday = moment.utc();
     const dateValue = valueMoment ?? dateDefaultMoment;
     const dateStartOfMonth = dateValue.clone().startOf('month');
@@ -166,7 +154,7 @@ export const DatePicker = (props: DatePickerProps) => {
     const dateVisibleDayFirst = dateStartOfMonth.clone().subtract(dateStartOfMonth.isoWeekday() - 1, 'days');
     const dateVisibleDayLast = dateEndOfMonth.clone().add(7 - dateEndOfMonth.isoWeekday(), 'days');
 
-    const result: DateDayProps[] = [];
+    const result: IDatePickerDay[] = [];
     const dateCurrent = dateVisibleDayFirst.clone();
 
     while (dateCurrent <= dateVisibleDayLast) {
@@ -194,10 +182,10 @@ export const DatePicker = (props: DatePickerProps) => {
 
   const rows = useMemo(() => getCountSevens(daysInMonth.length) + 1, [daysInMonth]);
 
-  const sizeRadius = useMemo(() => THEME_KEY_SIZE[props.size].radius, [props.size]);
-  const sizePadding = useMemo(() => THEME_KEY_SIZE[props.size].padding, [props.size]);
+  const sizeRadius = useMemo(() => CSS_VARS.sizeValue[props.size].radius, [props.size]);
+  const sizePadding = useMemo(() => CSS_VARS.sizeValue[props.size].padding, [props.size]);
 
-  const height = useMemo(() => 40 + rows * 28 + (rows - 1) * 6 + sizePadding * 2, [sizePadding, rows]);
+  // const height = useMemo(() => 40 + rows * 28 + (rows - 1) * 6 + sizePadding * 2, [sizePadding, rows]);
 
   const isHasValue = useMemo(() => valueMoment !== null, [valueMoment]);
 
@@ -233,6 +221,7 @@ export const DatePicker = (props: DatePickerProps) => {
   }, []);
 
   const { isOpen, refReference, refFloating, floatingStyles, close, toggle } = usePopover({
+    isFocusTrap: true,
     placement: 'bottom-start',
     offset: sizePadding,
     mode: 'independence',
@@ -531,38 +520,110 @@ export const DatePicker = (props: DatePickerProps) => {
       refHiddenInput?.current?.focus();
     }
   }, [activeSegment, close]);
+
+  const { className: classNameTypographyDay, style: styleTypographyDay } = useTypographyStyles({
+    sx: {
+      variant: EXTRA_VALUE.sizeToController.small,
+      weight: '500',
+      ...props?.sxTypography,
+    },
+  });
+
+  const { className: classNameTypography, style: styleTypography } = useTypographyStyles({
+    sx: {
+      size: 16,
+      weight: props.isBold ? '700' : '400',
+      ...props?.sxTypography,
+    },
+  });
+
+  const { className: classNameWrapper, style: styleWrapper } = useMemo(() => {
+    const className = setClasses([CSS_CLASS.component.datePicker.wrapper, props.className]);
+
+    const vars: Record<string, string> = {};
+
+    vars[CSS_VARS_RAW.component.datePicker.padding] = CSS_VARS.size[props.size].padding;
+
+    vars[CSS_VARS_RAW.component.datePicker.inputBackground] = CSS_VARS.genre.select[props.genre].background.index;
+    vars[CSS_VARS_RAW.component.datePicker.inputBackgroundHover] = CSS_VARS.genre.input[props.genre].background;
+    vars[CSS_VARS_RAW.component.datePicker.inputSegmentBackgroundActive] = CSS_VARS.palette.fillQuaternaryLight;
+
+    vars[CSS_VARS_RAW.component.datePicker.inputBorderColor] = CSS_VARS.genre.input[props.genre].border;
+    vars[CSS_VARS_RAW.component.datePicker.inputBorderColorHover] = CSS_VARS.genre.input[props.genre].border;
+
+    vars[CSS_VARS_RAW.component.datePicker.inputColor] = CSS_VARS.genre.input[props.genre].color;
+    vars[CSS_VARS_RAW.component.datePicker.inputColorHover] = CSS_VARS.genre.input[props.genre].color;
+
+    vars[CSS_VARS_RAW.component.datePicker.inputPadding] = isShowPlaceholder
+      ? `0px ${CSS_VARS.size[props.size].padding}`
+      : `0px ${CSS_VARS.size[props.size].padding} 0px ${CSS_VARS.sizeValue[props.size].padding - 2}px`;
+    vars[CSS_VARS_RAW.component.datePicker.inputHeight] = CSS_VARS.size[props.size].height;
+    vars[CSS_VARS_RAW.component.datePicker.inputRadius] = CSS_VARS.size[props.size].radius;
+
+    vars[CSS_VARS_RAW.component.datePicker.inputValueColor] = CSS_VARS.genre.input[props.genre].color;
+    vars[CSS_VARS_RAW.component.datePicker.inputPlaceholderColor] = CSS_VARS.genre.input[props.genre].placeholder;
+    vars[CSS_VARS_RAW.component.datePicker.buttonToggleRight] = `${CSS_VARS.size[props.size].padding}`;
+    vars[CSS_VARS_RAW.component.datePicker.buttonClearRight] =
+      `${CSS_VARS.sizeValue[props.size].padding * 2 + CSS_VARS.sizeValue[props.size].height}px`;
+
+    const style = setStyles([Object.keys(vars).length ? vars : undefined, props.style]);
+
+    return { className, style };
+  }, [props.className, props.style, isShowPlaceholder, props.genre, props.size]);
+
+  const { className: classNamePopover, style: stylePopover } = useMemo(() => {
+    const className = setClasses([props.classNamePopover]);
+
+    const vars: Record<string, string> = {};
+
+    vars[CSS_VARS_RAW.component.datePicker.dayRadius] = `${sizeRadius}px`;
+
+    vars[CSS_VARS_RAW.component.datePicker.dayBackgroundRest] = CSS_VARS.genre.datepicker[props.genre].background.index;
+    vars[CSS_VARS_RAW.component.datePicker.dayBackgroundHover] =
+      CSS_VARS.genre.datepicker[props.genre].background.hover;
+    vars[CSS_VARS_RAW.component.datePicker.dayBackgroundWeekend] =
+      CSS_VARS.genre.datepicker[props.genre].background.weekend;
+    vars[CSS_VARS_RAW.component.datePicker.dayBackgroundToday] =
+      CSS_VARS.genre.datepicker[props.genre].background.today;
+    vars[CSS_VARS_RAW.component.datePicker.dayBackgroundChoice] =
+      CSS_VARS.genre.datepicker[props.genre].background.choice;
+
+    vars[CSS_VARS_RAW.component.datePicker.dayBorderRest] = CSS_VARS.genre.datepicker[props.genre].border.index;
+    vars[CSS_VARS_RAW.component.datePicker.dayBorderWeekend] = CSS_VARS.genre.datepicker[props.genre].border.weekend;
+    vars[CSS_VARS_RAW.component.datePicker.dayBorderToday] = CSS_VARS.genre.datepicker[props.genre].border.today;
+    vars[CSS_VARS_RAW.component.datePicker.dayBorderChoice] = CSS_VARS.genre.datepicker[props.genre].border.choice;
+    vars[CSS_VARS_RAW.component.datePicker.dayBorderHover] = CSS_VARS.genre.datepicker[props.genre].border.hover;
+
+    vars[CSS_VARS_RAW.component.datePicker.dayColorRest] = CSS_VARS.genre.datepicker[props.genre].color.index;
+    vars[CSS_VARS_RAW.component.datePicker.dayColorHover] = CSS_VARS.genre.datepicker[props.genre].color.hover;
+    vars[CSS_VARS_RAW.component.datePicker.dayColorWeekend] = CSS_VARS.genre.datepicker[props.genre].color.weekend;
+    vars[CSS_VARS_RAW.component.datePicker.dayColorToday] = CSS_VARS.genre.datepicker[props.genre].color.today;
+    vars[CSS_VARS_RAW.component.datePicker.dayColorChoice] = CSS_VARS.genre.datepicker[props.genre].color.choice;
+
+    const style = setStyles([
+      Object.keys(vars).length ? vars : undefined,
+      {
+        background: CSS_VARS.genre.popover[props.genre].background,
+        border: `solid 1px ${CSS_VARS.genre.input[props.genre].border}`,
+      },
+      props.stylePopover,
+    ]);
+
+    return { className, style };
+  }, [props.classNamePopover, props.stylePopover, props.genre, sizeRadius]);
+
+  const isShowButtonList = useMemo(() => {
+    return (
+      type !== 'manual' ||
+      (props.isShowClearButton && (isHasValue || isHasInput) && !props?.isDisabled && !props?.isReadOnly)
+    );
+  }, [type, isHasInput, isHasValue, props.isShowClearButton, props?.isDisabled, props?.isReadOnly]);
   return (
     <>
-      <DateWrapper
-        $size={props.size}
-        $genre={props.genre}
-        $sx={props.sx}
-        $isDisabled={props?.isDisabled}
-        $isMinWidth={props?.isMinWidth}
-        $radius={sizeRadius}
-        $parentListHeight={height}
-        tabIndex={-1}
-      >
-        <DateInputWrapper
+      <div className={classNameWrapper} style={styleWrapper} tabIndex={-1}>
+        <div
           ref={refReference as RefObject<HTMLDivElement | null>}
-          $genre={props.genre}
-          $size={props.size}
-          $isShowPlaceholder={isShowPlaceholder}
-          $isDisabled={props?.isDisabled}
-          $isReadOnly={props?.isReadOnly}
-          $isDisabledOutline={props?.isDisabledOutline}
-          $isOutlineBoxShadow={props?.isOutlineBoxShadow}
           tabIndex={-1}
-          $error={
-            isError
-              ? {
-                  isError: true,
-                  size: props?.error?.size ?? props.size,
-                  ...props.notValidDate,
-                }
-              : props.error
-          }
-          $isOpen={isOpen || !!activeSegment}
           onClick={() => {
             if (type === 'select') {
               toggle();
@@ -570,6 +631,15 @@ export const DatePicker = (props: DatePickerProps) => {
             }
             if (!activeSegment && !props?.isReadOnly) setActiveSegment(DatePickerVariant.DD);
           }}
+          className={setClasses([
+            CSS_CLASS.component.datePicker.inputWrapper,
+            CSS_CLASS.transition.color,
+            CSS_CLASS.control[
+              props.isDisabled
+                ? 'none'
+                : (props.control ?? (isOpen || activeSegment ? 'boxShadowSelect' : 'boxShadowOnlyHover'))
+            ],
+          ])}
         >
           {type !== 'select' ? (
             <input
@@ -600,29 +670,25 @@ export const DatePicker = (props: DatePickerProps) => {
           ) : null}
           {isShowPlaceholder ? (
             <Typography
-              sx={{ default: { size: 16, line: 1, isNoUserSelect: true } }}
-              sxStandard={(theme) => ({
-                default: {
-                  color: theme.colors.input[props.genre].color.placeholder,
-                },
-              })}
+              sx={{ size: 16, line: 1, isNoUserSelect: true }}
+              style={{
+                color: CSS_VARS.genre.input[props.genre].placeholder,
+              }}
             >
               {props.labelPlaceholder}
             </Typography>
           ) : (
             dataDate.sort.map((date, index) => (
               <Fragment key={date.type}>
-                <DateInput
-                  $isHaveValue={!!date.value}
-                  $isActive={activeSegment === date.type}
-                  $genre={props.genre}
-                  $size={props.size}
-                  $sxTypography={getSxTypography({
-                    size: props.size,
-                    weight: props.isBold ? 500 : 400,
-                    sx: props.sxTypography,
-                    theme,
-                  })}
+                <div
+                  className={setClasses([
+                    CSS_CLASS.component.datePicker.inputSegment,
+                    CSS_CLASS.transition.color,
+                    classNameTypography,
+                    !!date.value && CSS_CLASS.component.datePicker.inputSegmentHasValue,
+                    activeSegment === date.type && CSS_CLASS.component.datePicker.inputSegmentIsActive,
+                  ])}
+                  style={styleTypography}
                   onClick={(e) => {
                     if (type === 'select') return;
                     e.preventDefault();
@@ -632,93 +698,90 @@ export const DatePicker = (props: DatePickerProps) => {
                   }}
                 >
                   {date.value || date.placeholder || ''}
-                </DateInput>
+                </div>
                 {index !== dataDate.sort.length - 1 && (
                   <span style={{ width: '4px', pointerEvents: 'none', textAlign: 'center' }}>.</span>
                 )}
               </Fragment>
             ))
           )}
-          {type !== 'manual' ? (
-            <DateInputButton
-              genre={props.genre}
-              size='small'
-              isWidthAsHeight
-              isFullSize
-              isRadius
-              isWhileTapEffect
-              isOnlyIcon
-              isDisabledRipple
-              icons={[{ name: 'Calendar', type: 'id' }]}
-              isDisabled={props?.isDisabled || props?.isReadOnly}
-              tabIndex={0}
-              onFocus={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                setActiveSegment(null);
-              }}
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                toggle();
-              }}
-            />
+          {isShowButtonList ? (
+            <div className={setClasses([CSS_CLASS.component.datePicker.listButton])}>
+              {props.isShowClearButton && (isHasValue || isHasInput) && !props?.isDisabled && !props?.isReadOnly ? (
+                <Button
+                  genre={props.genre}
+                  size='small'
+                  isWidthAsHeight
+                  isFullRadius
+                  isFullSize
+                  isHiddenBorder
+                  isOnlyIcon
+                  tabIndex={0}
+                  icons={[{ name: 'Close', type: 'id' }]}
+                  isDisabled={props?.isDisabled || props?.isReadOnly}
+                  onFocus={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setActiveSegment(null);
+                  }}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    onChange(null);
+                    onClearInput();
+                    setIsError(false);
+                  }}
+                />
+              ) : null}
+              {type !== 'manual' ? (
+                <Button
+                  genre={props.genre}
+                  size='small'
+                  isWidthAsHeight
+                  isFullRadius
+                  isFullSize
+                  isHiddenBorder
+                  isOnlyIcon
+                  icons={[{ name: 'Calendar', type: 'id' }]}
+                  isDisabled={props?.isDisabled || props?.isReadOnly}
+                  tabIndex={0}
+                  onFocus={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setActiveSegment(null);
+                  }}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    toggle();
+                  }}
+                />
+              ) : null}
+            </div>
           ) : null}
-          {props.isShowClearButton && (isHasValue || isHasInput) && !props?.isDisabled && !props?.isReadOnly ? (
-            <DateInputButtonClear
-              genre={props.genre}
-              size='small'
-              isWidthAsHeight
-              isFullSize
-              isRadius
-              isWhileTapEffect
-              isOnlyIcon
-              isDisabledRipple
-              tabIndex={0}
-              icons={[{ name: 'Close', type: 'id' }]}
-              isDisabled={props?.isDisabled || props?.isReadOnly}
-              onFocus={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                setActiveSegment(null);
-              }}
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                onChange(null);
-                onClearInput();
-                setIsError(false);
-              }}
-            />
-          ) : null}
-        </DateInputWrapper>
-      </DateWrapper>
+        </div>
+      </div>
       <Popover
-        sx={(theme) => ({
-          default: {
-            background: theme.colors.input[props.genre].background.rest,
-            border: `solid 1px ${theme.colors.input[props.genre].border.rest}`,
-          },
-        })}
+        style={stylePopover}
+        className={classNamePopover}
         size={props.size}
         genre={props.genre}
         isOpen={isOpen}
         floatingStyles={floatingStyles}
         ref={refFloating}
+        control='boxShadowSelect'
+        isDisabledBoxShadow
       >
-        <DateDropdownList $isInputEffect={props.isInputEffect} $genre={props.genre} $size={props.size}>
+        <div className={setClasses([CSS_CLASS.component.datePicker.dropdownList])}>
           <Stack
-            sx={{
-              default: {
-                justifyContent: 'space-between',
-                alignItems: 'center',
-              },
+            style={{
+              justifyContent: 'space-between',
+              alignItems: 'center',
             }}
           >
             <Button
               type='button'
-              isRadius
-              isWhileTapEffect
+              isFullRadius
               icons={[
                 {
                   name: 'Arrow2',
@@ -730,11 +793,10 @@ export const DatePicker = (props: DatePickerProps) => {
               genre={props.genre}
               size={'small'}
               onClick={() => onPrevMonth()}
-              isDisabledRipple
               isHidden={isBlockPrevMonth}
               isDisabled={isBlockPrevMonth}
             />
-            <Stack sx={{ default: { gap: '8px' } }}>
+            <Stack style={{ gap: '8px' }}>
               <SelectMonth
                 isToggleWhenClickSelectListOption
                 monthsLocale={props.locale.months}
@@ -752,7 +814,7 @@ export const DatePicker = (props: DatePickerProps) => {
                 }}
                 dateMin={props.dateMin}
                 dateMax={props.dateMax}
-                sx={{ default: { width: '60px' } }}
+                style={{ width: '60px' }}
               />
               <SelectYear
                 isToggleWhenClickSelectListOption
@@ -769,15 +831,14 @@ export const DatePicker = (props: DatePickerProps) => {
                 isCenter
                 dateMin={props.dateMin}
                 dateMax={props.dateMax}
-                sx={{ default: { width: '60px' } }}
+                style={{ width: '60px' }}
               />
             </Stack>
             <Button
               type='button'
-              isWhileTapEffect
               onClick={() => onNextMonth()}
               isWidthAsHeight
-              isRadius
+              isFullRadius
               icons={[
                 {
                   name: 'Arrow2',
@@ -787,40 +848,57 @@ export const DatePicker = (props: DatePickerProps) => {
               ]}
               genre={props.genre}
               size={'small'}
-              isDisabledRipple
               isDisabled={isBlockNextMonth}
               isHidden={isBlockNextMonth}
             />
           </Stack>
-          <DateDropdownDays $rows={rows}>
+          <div
+            className={setClasses([CSS_CLASS.component.datePicker.dropdownListDays])}
+            style={setStyles([
+              {
+                [CSS_VARS_RAW.component.datePicker.rows]: rows,
+              },
+            ])}
+          >
             {daysInWeek.map((e, index) => (
-              <DateDropdownDayOfWeek
-                $sxTypography={getSxTypography({ size: props.size, weight: 700, sx: props.sxTypography, theme })}
+              <div
+                className={setClasses([
+                  CSS_CLASS.component.datePicker.dayOfWeek,
+                  classNameTypographyDay,
+                  CSS_CLASS.transition.color,
+                ])}
+                style={setStyles([
+                  styleTypographyDay,
+                  {
+                    [CSS_VARS_RAW.component.datePicker.row]: daysInMonth[0]?.weekOfMonth - 1,
+                    [CSS_VARS_RAW.component.datePicker.column]: index + 1,
+                  },
+                ])}
                 tabIndex={-1}
-                type='button'
-                $isToday={false}
-                $isWeekend={false}
-                $genre={props.genre}
-                $size={props.size}
-                $row={daysInMonth[0]?.weekOfMonth - 1}
-                $column={index + 1}
                 key={`${e.label}-${index}`}
               >
                 {e.label}
-              </DateDropdownDayOfWeek>
+              </div>
             ))}
             {daysInMonth.map((day) => (
-              <DateDropdownDay
-                $sxTypography={getSxTypography({ size: props.size, weight: 700, sx: props.sxTypography, theme })}
-                type='button'
-                $isDisabled={day.isDisabled}
-                $isDisabledOutline={day.isDisabled ?? props.isDisabledOutline}
-                $isOutlineBoxShadow={props.isOutlineBoxShadow}
-                $isReadOnly={props.isReadOnly}
-                $genre={props.genre}
-                $size={props.size}
-                $row={day?.weekOfMonth + 1}
-                $column={day.dayOfWeek}
+              <div
+                className={setClasses([
+                  CSS_CLASS.component.datePicker.day,
+                  classNameTypographyDay,
+                  CSS_CLASS.transition.color,
+                  day.isDisabled && CSS_CLASS.component.datePicker.dayIsHidden,
+                  day.isToday && CSS_CLASS.component.datePicker.dayIsToday,
+                  day.isWeekend && CSS_CLASS.component.datePicker.dayIsWeekend,
+                  day.value === valueMoment?.valueOf() && CSS_CLASS.component.datePicker.dayIsChoice,
+                  !day.isCurrentMonth && CSS_CLASS.component.datePicker.dayIsNotCurrentMonth,
+                ])}
+                style={setStyles([
+                  styleTypographyDay,
+                  {
+                    [CSS_VARS_RAW.component.datePicker.row]: day?.weekOfMonth + 1,
+                    [CSS_VARS_RAW.component.datePicker.column]: day.dayOfWeek,
+                  },
+                ])}
                 key={day.value}
                 onClick={() => {
                   if (!day.isDisabled) {
@@ -831,31 +909,20 @@ export const DatePicker = (props: DatePickerProps) => {
                   }
                 }}
                 tabIndex={day.isDisabled ? -1 : 0}
-                $isToday={day.isToday}
-                $isWeekend={day.isWeekend}
-                $isChoice={day.value === valueMoment?.valueOf()}
-                $isCurrentMonth={day.isCurrentMonth}
               >
-                <Ripple color={theme.colors.date[props.genre].color.rest} isDisabled={day.isDisabled} />
                 {day.labelNumber}
-              </DateDropdownDay>
+              </div>
             ))}
-          </DateDropdownDays>
-        </DateDropdownList>
+          </div>
+        </div>
       </Popover>
-      {isError || props?.error ? (
+      {(props?.error?.isError || isError) && (
         <ErrorMessage
-          {...(isError
-            ? {
-                isError: true,
-                size: props?.error?.size ?? props.size,
-                ...props.notValidDate,
-              }
-            : props.error)}
           size={props?.error?.size ?? props.size}
-          sxTypography={getSxTypography({ size: props.size, weight: 400, sx: props.sxTypography, theme })}
+          sxTypography={{ size: 16, weight: '400', ...props?.error?.sxTypography }}
+          {...props.error}
         />
-      ) : null}
+      )}
     </>
   );
 };
@@ -1016,12 +1083,12 @@ function getCountSevens(number: number) {
   return remainder > 0 ? count + 1 : count;
 }
 
-function getNextSegment(currentSegment: DatePickerVariant, mode: DatePickerMode): DatePickerVariant | null {
+function getNextSegment(currentSegment: DatePickerVariant, mode: IDatePickerMode): DatePickerVariant | null {
   const currentIndex = mode.indexOf(currentSegment);
   return currentIndex < mode.length - 1 ? mode[currentIndex + 1] : mode[0];
 }
 
-function getPrevSegment(currentSegment: DatePickerVariant, mode: DatePickerMode): DatePickerVariant | null {
+function getPrevSegment(currentSegment: DatePickerVariant, mode: IDatePickerMode): DatePickerVariant | null {
   const currentIndex = mode.indexOf(currentSegment);
   return currentIndex > 0 ? mode[currentIndex - 1] : mode[mode.length - 1];
 }

@@ -87,6 +87,7 @@ export type IThemeGenrePopover = keyof typeof CSS_VARS.genre.popover;
 export type IThemeGenreSelect = keyof typeof CSS_VARS.genre.select;
 
 export type IThemeControl = keyof typeof CSS_CLASS.control;
+export type IThemeScrollbarGutter = keyof typeof CSS_CLASS.scrollbarGutter;
 
 export type IThemeTransition = keyof typeof CSS_CLASS.transition;
 

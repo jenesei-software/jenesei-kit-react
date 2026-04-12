@@ -24,36 +24,35 @@ import {
   DateWrapperProps,
 } from './component.types';
 
-export const DateWrapper = styled.div<DateWrapperProps>`
-  width: 100%;
-  position: relative;
-  height: fit-content;
-  ${(props) =>
-    props.$isMinWidth &&
-    css`
-      width: min-content;
-    `}
-  ${addSX};
-  ${addNiceNumber};
-`;
+// export const DateWrapper = styled.div<DateWrapperProps>`
+//   width: 100%;
+//   position: relative;
+//   height: fit-content;
+//   ${(props) =>
+//     props.$isMinWidth &&
+//     css`
+//       width: min-content;
+//     `}
+//   ${addSX};
+//   ${addNiceNumber};
+// `;
 
-export const DateDropdownListParent = styled(motion.div)<DateStyledListProps>`
-  ${addRemoveScrollbar};
-`;
 
-export const DateDropdownList = styled.div<DateDropdownListProps>`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  padding-top: 6px;
-  transform: translateZ(0);
-  justify-content: flex-start;
-  gap: 10px;
-  ${addInputIsInputEffect};
-`;
+// export const DateDropdownList = styled.div<DateDropdownListProps>`
+//   position: relative;
+//   display: flex;
+//   flex-direction: column;
+//   width: 100%;
+//   padding-top: 6px;
+//   transform: translateZ(0);
+//   justify-content: flex-start;
+//   gap: 10px;
+//   ${addInputIsInputEffect};
+// `;
 
-export const DateDropdownDays = styled.div<{ $rows: number }>`
+
+
+export const DateDropdownListDays = styled.div<{ $rows: number }>`
   display: grid;
   column-gap: normal;
   row-gap: normal;
@@ -62,6 +61,8 @@ export const DateDropdownDays = styled.div<{ $rows: number }>`
   grid-template-rows: repeat(${(props) => props.$rows}, 28px);
   justify-content: space-between;
 `;
+
+
 
 export const addDateDropdownDaySize = css<DateDropdownDayProps>`
   ${(props) =>
@@ -134,130 +135,143 @@ export const addDateDropdownDaySize = css<DateDropdownDayProps>`
   ${addSXTypography};
   ${addOutline};
 `;
-
-export const DateDropdownDay = styled.button<DateDropdownDayProps>`
+export const DateDropdownListDay = styled.button<DateDropdownDayProps>`
   ${addDateDropdownDaySize}
 `;
-export const DateDropdownDayOfWeek = styled.button<DateDropdownDayProps>`
+export const DateDropdownListDayOfWeek = styled.button<DateDropdownDayProps>`
   ${addDateDropdownDaySize}
   opacity: 1;
   background-color: transparent;
 `;
 
-/****************************************** Genre *************************************************/
-const addDateInputGenre = css<DateInputProps>`
-  background-color: ${(props) => (props.$isActive ? props.theme.palette.black10 : 'transparent')};
-  ${(props) =>
-    props.$isHaveValue
-      ? css`
-        color: ${props.theme.colors.input[props.$genre].color.rest};
-        &:focus-visible {
-          color: ${props.theme.colors.input[props.$genre].color.rest};
-        }
-    `
-      : css`
-          color: ${props.theme.colors.input[props.$genre].color.placeholder};
-        `};
-`;
-const addDateInputSize = css<DateInputProps>`
-  border-radius: 4px;
-  padding: 2px;
-  min-width: 10px;
-`;
-export const DateInput = styled.div<DateInputProps>`
-  text-align: center;
-  resize: none;
-  overflow: hidden;
-  border: 0px solid;
-  background: transparent;
-  margin: 0px !important;
-  white-space: nowrap;
-  ${addSXTypography};
-  ${addDateInputSize};
-  ${addDateInputGenre};
-  ${addRemoveOutline};
-`;
 
-/****************************************** Genre *************************************************/
-const addDateInputWrapperGenre = css<DateInputProps>`
-  ${(props) => css`
-    background: ${props.theme.colors.input[props.$genre].background.rest};
-    border-color: ${props.theme.colors.input[props.$genre].border.rest};
-    color: ${props.theme.colors.input[props.$genre].color.rest};
-    outline: 2px solid transparent;
-    outline-offset: 1px;
-    &:hover {
-      background: ${props.theme.colors.input[props.$genre].background.hover};
-      border-color: ${props.theme.colors.input[props.$genre].border.hover};
-      color: ${props.theme.colors.input[props.$genre].color.hover};
-    }
-    ${
-      props.$isOpen && !props.$isReadOnly && !props.$isDisabledOutline
-        ? props.$isOutlineBoxShadow
-          ? css`
-          outline: 1px solid transparent;
-          outline-offset: 0px;
-          outline: 1px solid #83b7e8;
-          box-shadow: 0 1px 1px rgba(24,36,51, .06), 0 0 0 .25rem rgba(6,111,209, .25);
-      `
-          : css`
-            background: ${props.theme.colors.input[props.$genre].background.rest};
-            border-color: ${props.theme.colors.input[props.$genre].border.rest};
-            color: ${props.theme.colors.input[props.$genre].color.rest};
-            outline: 2px solid ${(props) => props.theme.states.focus};
-    `
-        : null
-    }
-  `};
-`;
 
-/****************************************** Size *************************************************/
-export const addDateInputWrapperSize = css<DateInputProps>`
-  ${(props) => css`
-    padding: ${props.$isShowPlaceholder ? `0px ${THEME_KEY_SIZE[props.$size].padding}px` : `0px ${THEME_KEY_SIZE[props.$size].padding}px 0px ${THEME_KEY_SIZE[props.$size].padding - 2}px`};
-    height: ${THEME_KEY_SIZE[props.$size].height}px;
-    min-height: ${THEME_KEY_SIZE[props.$size].height}px;
-    max-height: ${THEME_KEY_SIZE[props.$size].height}px;
-    border-radius: ${THEME_KEY_SIZE[props.$size].radius}px;
-  `}
-`;
 
-export const DateInputWrapper = styled.div<DateInputProps>`
-  resize: none;
-  overflow: hidden;
-  width: 100%;
-  border: 1px solid transparent;
 
-  white-space: nowrap;
 
-  display: flex;
-  align-items: center;
-  gap: 0px;
 
-  ${addDisabled};
-  ${addDateInputWrapperSize};
-  ${addDateInputWrapperGenre};
-  ${addTransition};
-  ${addError};
-`;
 
-export const addDateInputButtonSize = css<ButtonProps>`
-  ${(props) => css`
-    right:${THEME_KEY_SIZE[props.size].padding}px;
-  `}
-`;
-export const DateInputButton = styled(Button)`
-    position: absolute;
-    height: max-content !important;
-    ${addDateInputButtonSize};
-`;
-export const addDateInputButtonClearSize = css<ButtonProps>`
-  ${(props) => css`
-    right:${THEME_KEY_SIZE[props.size].padding * 2 + THEME_KEY_SIZE[props.size].height}px;
-  `}
-`;
-export const DateInputButtonClear = styled(Button)`
-    position: absolute;
-    height: max-content !important;
-    ${addDateInputButtonClearSize};
-`;
+// const addDateInputWrapperGenre = css<DateInputProps>`
+//   ${(props) => css`
+//     background: ${props.theme.colors.input[props.$genre].background.rest};
+//     border-color: ${props.theme.colors.input[props.$genre].border.rest};
+//     color: ${props.theme.colors.input[props.$genre].color.rest};
+//     outline: 2px solid transparent;
+//     outline-offset: 1px;
+//     &:hover {
+//       background: ${props.theme.colors.input[props.$genre].background.hover};
+//       border-color: ${props.theme.colors.input[props.$genre].border.hover};
+//       color: ${props.theme.colors.input[props.$genre].color.hover};
+//     }
+//     ${
+//       props.$isOpen && !props.$isReadOnly && !props.$isDisabledOutline
+//         ? props.$isOutlineBoxShadow
+//           ? css`
+//           outline: 1px solid transparent;
+//           outline-offset: 0px;
+//           outline: 1px solid #83b7e8;
+//           box-shadow: 0 1px 1px rgba(24,36,51, .06), 0 0 0 .25rem rgba(6,111,209, .25);
+//       `
+//           : css`
+//             background: ${props.theme.colors.input[props.$genre].background.rest};
+//             border-color: ${props.theme.colors.input[props.$genre].border.rest};
+//             color: ${props.theme.colors.input[props.$genre].color.rest};
+//             outline: 2px solid ${(props) => props.theme.states.focus};
+//     `
+//         : null
+//     }
+//   `};
+// `;
+// export const addDateInputWrapperSize = css<DateInputProps>`
+//   ${(props) => css`
+//     padding: ${props.$isShowPlaceholder ? `0px ${THEME_KEY_SIZE[props.$size].padding}px` : `0px ${THEME_KEY_SIZE[props.$size].padding}px 0px ${THEME_KEY_SIZE[props.$size].padding - 2}px`};
+//     height: ${THEME_KEY_SIZE[props.$size].height}px;
+//     min-height: ${THEME_KEY_SIZE[props.$size].height}px;
+//     max-height: ${THEME_KEY_SIZE[props.$size].height}px;
+//     border-radius: ${THEME_KEY_SIZE[props.$size].radius}px;
+//   `}
+// `;
+// export const DateInputWrapper = styled.div<DateInputProps>`
+//   resize: none;
+//   overflow: hidden;
+//   width: 100%;
+//   border: 1px solid transparent;
+
+//   white-space: nowrap;
+
+//   display: flex;
+//   align-items: center;
+//   gap: 0px;
+
+//   ${addDisabled};
+//   ${addDateInputWrapperSize};
+//   ${addDateInputWrapperGenre};
+//   ${addTransition};
+//   ${addError};
+// `;
+
+
+
+
+
+// const addDateInputGenre = css<DateInputProps>`
+//   background-color: ${(props) => (props.$isActive ? props.theme.palette.black10 : 'transparent')};
+//   ${(props) =>
+//     props.$isHaveValue
+//       ? css`
+//         color: ${props.theme.colors.input[props.$genre].color.rest};
+//         &:focus-visible {
+//           color: ${props.theme.colors.input[props.$genre].color.rest};
+//         }
+//     `
+//       : css`
+//           color: ${props.theme.colors.input[props.$genre].color.placeholder};
+//         `};
+// `;
+// const addDateInputSize = css<DateInputProps>`
+//   border-radius: 4px;
+//   padding: 2px;
+//   min-width: 10px;
+// `;
+// export const DateInput = styled.div<DateInputProps>`
+//   text-align: center;
+//   resize: none;
+//   overflow: hidden;
+//   border: 0px solid;
+//   background: transparent;
+//   margin: 0px !important;
+//   white-space: nowrap;
+//   ${addSXTypography};
+//   ${addDateInputSize};
+//   ${addDateInputGenre};
+//   ${addRemoveOutline};
+// `;
+
+
+
+
+
+
+
+
+
+// export const addDateInputButtonSize = css<ButtonProps>`
+//   ${(props) => css`
+//     right:${THEME_KEY_SIZE[props.size].padding}px;
+//   `}
+// `;
+// export const DateInputButton = styled(Button)`
+//     position: absolute;
+//     height: max-content !important;
+//     ${addDateInputButtonSize};
+// `;
+// export const addDateInputButtonClearSize = css<ButtonProps>`
+//   ${(props) => css`
+//     right:${THEME_KEY_SIZE[props.size].padding * 2 + THEME_KEY_SIZE[props.size].height}px;
+//   `}
+// `;
+// export const DateInputButtonClear = styled(Button)`
+//     position: absolute;
+//     height: max-content !important;
+//     ${addDateInputButtonClearSize};
+// `;

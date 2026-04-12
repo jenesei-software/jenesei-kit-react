@@ -121,7 +121,7 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
       (selectAdd !== 0 ? 1 : 0) +
       (selectSearch !== 0 ? 1 : 0);
     const gap = sum <= 1 ? 0 : (sum - 1) * (sizePadding / 2.8);
-    const padding = (sizePadding / 4) * 2
+    const padding = (sizePadding / 4) * 2;
     const result = selectAll + selectNoOption + selectList + selectAdd + selectSearch + padding + gap;
     return result;
   }, [
@@ -293,6 +293,7 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
       CSS_CLASS.transition.color,
       isShowScroll && CSS_CLASS.component.select.isShowScroll,
       props.isCenter && CSS_CLASS.component.select.isCenter,
+      props.classNamePopover,
     ]);
 
     const vars: Record<string, string> = {};
@@ -323,10 +324,20 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
         maxHeight: `${heightPopover}px`,
         boxSizing: 'content-box',
       },
+      props.stylePopover,
     ]);
 
     return { className, style };
-  }, [props.genre, props.size, isShowScroll, heightPopover, sizeRadius, props.isCenter]);
+  }, [
+    props.genre,
+    props.size,
+    isShowScroll,
+    heightPopover,
+    sizeRadius,
+    props.isCenter,
+    props.classNamePopover,
+    props.stylePopover,
+  ]);
   return (
     <>
       <div
@@ -515,7 +526,7 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
                   {isShowIconSearchClear && (
                     <Button
                       genre={props.genre}
-                      size='small'
+                      size={props.size}
                       isWidthAsHeight
                       isFullSize
                       isFullRadius

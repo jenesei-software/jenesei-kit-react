@@ -29,6 +29,9 @@ export type ISelect<T extends ISelectItem> = {
   className?: string;
   style?: CSSProperties;
 
+  classNamePopover?: string;
+  stylePopover?: CSSProperties;
+
   isToggleWhenClickSelectListOption?: boolean;
   isDisabled?: boolean;
   isShowDropdownOptionIcon?: boolean;
