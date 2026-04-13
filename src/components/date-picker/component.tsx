@@ -885,6 +885,7 @@ export const DatePicker = (props: IDatePicker) => {
                 className={setClasses([
                   CSS_CLASS.component.datePicker.day,
                   classNameTypographyDay,
+                  CSS_CLASS.control[day.isDisabled ? 'none' : 'boxShadow'],
                   CSS_CLASS.transition.color,
                   day.isDisabled && CSS_CLASS.component.datePicker.dayIsHidden,
                   day.isToday && CSS_CLASS.component.datePicker.dayIsToday,

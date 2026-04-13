@@ -497,6 +497,7 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
                   className={setClasses([
                     CSS_CLASS.component.select.dropdownListOption,
                     CSS_CLASS.component.select.dropdownListOptionIsBorder,
+                    CSS_CLASS.control.boxShadow,
                     classNameTypography,
                   ])}
                   tabIndex={0}
@@ -526,7 +527,7 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
                   {isShowIconSearchClear && (
                     <Button
                       genre={props.genre}
-                      size={props.size}
+                      size='small'
                       isWidthAsHeight
                       isFullSize
                       isFullRadius
@@ -547,6 +548,7 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
                   className={setClasses([
                     CSS_CLASS.component.select.dropdownListOption,
                     CSS_CLASS.component.select.dropdownListOptionIsBorder,
+                    CSS_CLASS.control.boxShadow,
                     classNameTypography,
                   ])}
                   tabIndex={0}
@@ -564,6 +566,7 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
                   className={setClasses([
                     CSS_CLASS.component.select.dropdownListOption,
                     isAll && CSS_CLASS.component.select.dropdownListOptionIsChecked,
+                    CSS_CLASS.control.boxShadow,
                     classNameTypography,
                   ])}
                   tabIndex={0}
@@ -653,6 +656,7 @@ const ContainerDropdownListOption = <T extends object & ISelectItem>(props: ICon
         CSS_CLASS.component.select.dropdownListOption,
         props.isChecked && CSS_CLASS.component.select.dropdownListOptionIsChecked,
         props.item.isDisabled && CSS_CLASS.component.select.dropdownListOptionIsDisabled,
+        CSS_CLASS.control[props.item.isDisabled ? 'none' : 'boxShadow'],
         props.className,
       ])}
       tabIndex={0}

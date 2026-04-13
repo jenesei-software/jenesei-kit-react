@@ -71,6 +71,7 @@ const CollectionWrapper: FC = () => {
             size='large'
             genre='primary'
             labelPlaceholder='Year'
+            isShowIconToggle
             value={valueYear}
             onChange={handleSelectChangeYear}
             dateMin={moment.utc().subtract(100, 'years').startOf('year').valueOf()}
@@ -80,6 +81,7 @@ const CollectionWrapper: FC = () => {
             size='largeMedium'
             genre='primary'
             labelPlaceholder='Year'
+            isShowIconToggle
             value={valueYear}
             onChange={handleSelectChangeYear}
             dateMin={moment.utc().subtract(100, 'years').startOf('year').valueOf()}
@@ -89,6 +91,7 @@ const CollectionWrapper: FC = () => {
             size='medium'
             genre='primary'
             labelPlaceholder='Year'
+            isShowIconToggle
             value={valueYear}
             onChange={handleSelectChangeYear}
             dateMin={moment.utc().subtract(100, 'years').startOf('year').valueOf()}
@@ -98,6 +101,7 @@ const CollectionWrapper: FC = () => {
             size='mediumSmall'
             genre='primary'
             labelPlaceholder='Year'
+            isShowIconToggle
             value={valueYear}
             onChange={handleSelectChangeYear}
             dateMin={moment.utc().subtract(100, 'years').startOf('year').valueOf()}
@@ -107,6 +111,7 @@ const CollectionWrapper: FC = () => {
             size='small'
             genre='primary'
             labelPlaceholder='Year'
+            isShowIconToggle
             value={valueYear}
             onChange={handleSelectChangeYear}
             dateMin={moment.utc().subtract(100, 'years').startOf('year').valueOf()}
