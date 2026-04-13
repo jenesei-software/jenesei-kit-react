@@ -173,6 +173,7 @@
 
 .u-control--none {
   outline: none;
+  cursor: default;
 }
 @media (hover: none) {
   .u-control--default:hover {
@@ -209,6 +210,14 @@
     0 1px 1px var(--product-quinary-light),
     0 0 0 0.25rem var(--product-secondary-light);
 }
+/* scrollbar */
+.u-scrollbar-gutter--stable {
+  scrollbar-gutter: stable;
+}
+.u-scrollbar-gutter--stable-both {
+  scrollbar-gutter: stable both-edges;
+}
+
 /* is-disabled */
 .u-is-disabled {
   opacity: 0.5;

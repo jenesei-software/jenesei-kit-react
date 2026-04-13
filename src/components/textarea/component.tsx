@@ -65,7 +65,6 @@ export const TextArea = (props: ITextArea) => {
       props.isHidden && CSS_CLASS.component.textarea.wrapperIsHidden,
       props.isHiddenBorder && CSS_CLASS.component.textarea.wrapperIsHiddenBorder,
       props.isFullRadius && CSS_CLASS.component.textarea.wrapperIsFullRadius,
-      props.isCenter && CSS_CLASS.component.textarea.wrapperIsCenter,
       !props.isResize && CSS_CLASS.component.textarea.wrapperIsNotResize,
       props.className,
     ]);
@@ -92,13 +91,17 @@ export const TextArea = (props: ITextArea) => {
     props.isZeroRadius,
     props.genre,
     props.control,
-    props.isCenter,
     props.error?.isError,
     props.isResize,
   ]);
 
   const { className: classNameTextarea, style: styleTextarea } = useMemo(() => {
-    const className = setClasses([CSS_CLASS.component.textarea.root, CSS_CLASS.transition.color, classNameTypography]);
+    const className = setClasses([
+      CSS_CLASS.component.textarea.root,
+      CSS_CLASS.scrollbarGutter.stable,
+      CSS_CLASS.transition.color,
+      classNameTypography,
+    ]);
 
     const vars: Record<string, string> = {};
 

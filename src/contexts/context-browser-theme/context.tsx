@@ -1,11 +1,11 @@
 import { FC, useCallback, useEffect, useState } from 'react';
 import { createContext } from 'use-context-selector';
 
-import { IBrowserTheme, IBrowserThemeContext, IBrowserThemeMode, IProviderBrowserTheme } from './context.types';
+import { IBrowserTheme, IBrowserThemeContext, IBrowserThemeMode, IBrowserThemeProvider } from './context.types';
 
 export const BrowserThemeContext = createContext<IBrowserThemeContext | null>(null);
 
-export const ProviderBrowserTheme: FC<IProviderBrowserTheme> = (props) => {
+export const ProviderBrowserTheme: FC<IBrowserThemeProvider> = (props) => {
   const [mode, setMode] = useState<IBrowserThemeMode>(props.defaultMode || 'auto');
   const [theme, setTheme] = useState<IBrowserTheme>(() => {
     if (props.defaultMode === 'auto') {

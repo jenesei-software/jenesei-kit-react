@@ -1,7 +1,7 @@
 import { IPreviewAdditional } from '@local/areas/preview';
 import { ScreenWidthProps } from '@local/contexts/context-screen-width';
+import { IAddDollarSign } from '@local/cores/types';
 import { IThemePalette } from '@local/styles/utils';
-import { IAddDollarSign } from '@local/types';
 
 import { PropsWithChildren, ReactElement } from 'react';
 

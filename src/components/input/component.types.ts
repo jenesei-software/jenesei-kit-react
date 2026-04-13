@@ -16,17 +16,18 @@ import { NumberFormatValues, NumericFormatProps, PatternFormatProps } from 'reac
 import { IErrorMessage } from '../error/component.types';
 
 type ICommonInput = {
+  className?: string;
+  style?: CSSProperties;
+
   error?: IErrorMessage;
   placeholder?: string;
   ref?: Ref<HTMLInputElement | null>;
   sxTypography?: ITypography;
   control?: IThemeControl;
   size: IThemeSize;
-  style?: CSSProperties;
   tabIndex?: number;
   ariaLabel?: string;
   autoComplete?: HTMLInputAutoCompleteAttribute | string;
-  className?: string;
   genre: IThemeGenreInput;
   id?: string;
   inputMode?: 'text' | 'none' | 'tel' | 'url' | 'email' | 'numeric' | 'decimal' | 'search';

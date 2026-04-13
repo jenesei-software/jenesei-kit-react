@@ -1,5 +1,5 @@
+import { AddDollarSign } from '@local/cores/types';
 import { addOutlineProps, IThemePaletteKeys } from '@local/theme';
-import { AddDollarSign } from '@local/types';
 
 import { PropsWithChildren, ReactNode } from 'react';
 

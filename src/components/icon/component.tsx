@@ -1,5 +1,5 @@
 import { Skeleton } from '@local/areas/skeleton';
-import { ICON_VERSION } from '@local/consts';
+import { ICON_VERSION } from '@local/cores/consts';
 import { CSS_VARS } from '@local/styles/utils';
 import { CSS_CLASS, CSS_VARS_RAW } from '@local/styles/utils/constants';
 import { setClasses, setStyles } from '@local/styles/utils/functions';

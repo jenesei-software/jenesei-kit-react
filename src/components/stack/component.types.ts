@@ -1,4 +1,5 @@
 import { ISx } from '@local/styles/utils';
+import { IThemeScrollbarGutter } from '@local/styles/utils/types';
 
 import { AnimationProps, DraggableProps, FocusHandlers, HoverHandlers, LayoutProps, TapHandlers } from 'framer-motion';
 import { CSSProperties, DragEvent, DragEventHandler, JSX, PropsWithChildren, Ref } from 'react';
@@ -13,6 +14,8 @@ export interface IStack extends ISx, PropsWithChildren {
   isRipple?: boolean;
 
   as?: keyof JSX.IntrinsicElements;
+
+  scrollbarGutter?: IThemeScrollbarGutter;
 
   onClick?: () => void;
 

@@ -1,9 +1,9 @@
 import { useContextSelector } from 'use-context-selector';
 
 import { BrowserThemeContext } from './context';
-import { IBrowserThemeContext, IUseIBrowserThemeDependencies } from './context.types';
+import { IBrowserThemeContext, IUseBrowserThemeDependencies } from './context.types';
 
-export const useIBrowserTheme = (props: IUseIBrowserThemeDependencies): IBrowserThemeContext => {
+export const useIBrowserTheme = (props: IUseBrowserThemeDependencies): IBrowserThemeContext => {
   const context = useContextSelector(BrowserThemeContext, (v) => {
     return v
       ? props.reduce((acc, prop) => {
