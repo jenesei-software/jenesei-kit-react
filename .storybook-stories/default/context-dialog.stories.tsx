@@ -27,7 +27,6 @@ const ProviderDialogWrapperDouble: FC = () => {
         test: 'test',
       },
       propsDialog: {
-        background:'fillLight',
         isRemoveOnOutsideClick: false,
       },
       content: (params) => {
@@ -40,14 +39,17 @@ const ProviderDialogWrapperDouble: FC = () => {
           >
             <Typography
               sx={{
-                variant: 'title-5',
+                variant: 'title-1',
+                color: 'accentBlueDark',
               }}
             >
               {params.propsCustom?.test}
             </Typography>
             <Typography
               sx={{
-                variant: 'title-5',
+                variant: 'title-3',
+                color: 'accentBlueDark',
+
               }}
             >
               {params.isAnimating ? ' animating' : ' not animating'}

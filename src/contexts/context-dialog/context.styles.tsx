@@ -16,7 +16,7 @@ export const DialogClass = CSS_CLASS.context.dialog;
 export const getDialogLayoutClassName = () => DialogClass.layout;
 
 export const getDialogLayoutStyle = (props: IDialogLayoutStyle): CSSProperties => ({
-  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  backgroundColor: CSS_VARS.palette.fillSecondaryLightStable,
   zIndex: props.zIndex,
 });
 
