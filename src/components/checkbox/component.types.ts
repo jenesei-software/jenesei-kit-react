@@ -1,10 +1,9 @@
+import { IErrorMessage } from '@local/components/error';
 import { IIcon } from '@local/components/icon';
 import { IThemeSize } from '@local/styles/utils';
 import { IThemeControl, IThemeGenreCheckbox, ITypography } from '@local/styles/utils/types';
 
 import { CSSProperties, FocusEvent, MouseEventHandler, PropsWithChildren, Ref } from 'react';
-
-import { IErrorMessage } from '../error/component.types';
 
 type IIconWithoutSize = {
   [K in IIcon['type']]: Omit<Extract<IIcon, { type: K }>, 'size'> & { size?: IThemeSize };
@@ -66,7 +65,7 @@ export type ICheckbox = PropsWithChildren & {
   type?: HTMLButtonElement['type'];
 
   error?: IErrorMessage;
-  
+
   view: {
     true: IIconWithoutSize & { size?: IThemeSize };
 

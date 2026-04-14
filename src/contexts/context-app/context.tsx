@@ -1,4 +1,5 @@
 import { IPreviewAdditional, Preview } from '@local/areas/preview';
+import { useScreenWidth } from '@local/contexts/context-screen-width';
 import { CSS_CLASS, CSS_VARS, IThemePalette } from '@local/styles/utils';
 import { setClasses } from '@local/styles/utils/functions';
 
@@ -17,7 +18,6 @@ import {
   getProviderAppWrapperStyle,
 } from './context.styles';
 import { IAppContext, IAppProvider, IAppProviderElement, IAppProviderOutletStyled } from './context.types';
-import { useScreenWidth } from '../context-screen-width';
 
 export const AppContext = createContext<IAppContext | null>(null);
 
@@ -33,7 +33,7 @@ export const ProviderApp: FC<IAppProvider> = (props) => {
   );
   const { changePreview, previewProps } = usePreview(props.defaultPreview);
 
-  const { breakpoint, type, orientation } = useScreenWidth(['breakpoint']);
+  const { breakpoint, type, orientation } = useScreenWidth(['breakpoint', 'type', 'orientation']);
 
   const getValueByBreakpoint = useCallback(
     (lengthByBreakpoint: IAppProviderElement['length']) => {

@@ -5,6 +5,7 @@ import { ProviderBrowserTheme } from '../src/contexts/context-browser-theme';
 import { ProviderGeolocation } from '../src/contexts/context-geolocation';
 import { ProviderPermission } from '../src/contexts/context-permission';
 import { ProviderScreenWidth } from '../src/contexts/context-screen-width';
+import { ProviderDialog } from '../src/contexts/context-dialog';
 
 import '@fontsource/inter/100.css';
 import '@fontsource/inter/300.css';
@@ -53,9 +54,12 @@ const preview: Preview = {
           <ProviderPermission>
             <ProviderGeolocation>
               <ProviderBrowserTheme defaultMode={sbMode}>
-                <Layout>
+                <ProviderDialog zIndex={999}>
+<Layout>
                   <Story />
                 </Layout>
+                </ProviderDialog>
+                
               </ProviderBrowserTheme>
             </ProviderGeolocation>
           </ProviderPermission>

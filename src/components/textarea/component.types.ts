@@ -9,50 +9,49 @@ import {
   HTMLInputAutoCompleteAttribute,
   KeyboardEventHandler,
   MouseEventHandler,
-  Ref
+  Ref,
 } from 'react';
 
-type ICommonTextArea = 
-   {
-    name?: string;
-    ariaLabel?: string;
-    autoComplete?: HTMLInputAutoCompleteAttribute | string;
-    id?: string;
-    className?: string;
-    style?: CSSProperties;
-    genre: IThemeGenreTextArea;
-    minRows: number;
-    ref?: Ref<HTMLTextAreaElement | null>;
-    control?: IThemeControl;
-    error?: IErrorMessage;
-    sxTypography?: ITypography;
-    size: IThemeSize;
-    placeholder?: string;
+type ICommonTextArea = {
+  name?: string;
+  ariaLabel?: string;
+  autoComplete?: HTMLInputAutoCompleteAttribute | string;
+  id?: string;
+  className?: string;
+  style?: CSSProperties;
+  genre: IThemeGenreTextArea;
+  minRows: number;
+  ref?: Ref<HTMLTextAreaElement | null>;
+  control?: IThemeControl;
+  error?: IErrorMessage;
+  sxTypography?: ITypography;
+  size: IThemeSize;
+  placeholder?: string;
 
-    maxLength?: number;
-    minLength?: number;
+  maxLength?: number;
+  minLength?: number;
 
-    isResize?: boolean;
-    isLoading?: boolean;
-    isBold?: boolean;
-    isDisabled?: boolean;
-    isFullRadius?: boolean;
-    isHidden?: boolean;
-    isHiddenBorder?: boolean;
-    isNiceNumber?: boolean;
-    isNoSpaces?: boolean;
-    isReadOnly?: boolean;
-    isRequired?: boolean;
-    isZeroRadius?: boolean;
+  isResize?: boolean;
+  isLoading?: boolean;
+  isBold?: boolean;
+  isDisabled?: boolean;
+  isFullRadius?: boolean;
+  isHidden?: boolean;
+  isHiddenBorder?: boolean;
+  isNiceNumber?: boolean;
+  isNoSpaces?: boolean;
+  isReadOnly?: boolean;
+  isRequired?: boolean;
+  isZeroRadius?: boolean;
 
-    onChange?: (value: string) => void;
-    onClick?: MouseEventHandler<HTMLTextAreaElement>;
-    onMouseDown?: MouseEventHandler<HTMLTextAreaElement>;
-    onBlur?: FocusEventHandler<HTMLTextAreaElement>;
-    onFocus?: FocusEventHandler<HTMLTextAreaElement>;
-    onKeyDown?: KeyboardEventHandler<HTMLTextAreaElement>;
-    onPaste?: ClipboardEventHandler<HTMLTextAreaElement>;
-  };
+  onChange?: (value: string) => void;
+  onClick?: MouseEventHandler<HTMLTextAreaElement>;
+  onMouseDown?: MouseEventHandler<HTMLTextAreaElement>;
+  onBlur?: FocusEventHandler<HTMLTextAreaElement>;
+  onFocus?: FocusEventHandler<HTMLTextAreaElement>;
+  onKeyDown?: KeyboardEventHandler<HTMLTextAreaElement>;
+  onPaste?: ClipboardEventHandler<HTMLTextAreaElement>;
+};
 
 type IControlledValue = {
   value: string | null | undefined;

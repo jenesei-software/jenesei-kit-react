@@ -6,7 +6,7 @@ import { IAppProviderOutletStyled } from './context.types';
 
 type IAppOutletParts = IAppProviderOutletStyled;
 
-const toPx = (value?: number | string | null) => typeof value === 'number' ? `${value}px` : value ?? '0px';
+const toPx = (value?: number | string | null) => (typeof value === 'number' ? `${value}px` : (value ?? '0px'));
 
 const generateGridTemplateAreas = (props: IAppOutletParts) => {
   return `
@@ -21,6 +21,9 @@ const generateGridTemplateAreas = (props: IAppOutletParts) => {
 export const getProviderAppWrapperStyle = (bgColor: IThemePalette, bgImage: string | null): CSSProperties => ({
   backgroundColor: CSS_VARS.palette[bgColor],
   backgroundImage: bgImage ? `url(${bgImage})` : undefined,
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  backgroundRepeat: 'no-repeat',
 });
 
 export const getProviderAppOutletStyle = (props: IAppOutletParts): CSSProperties => ({

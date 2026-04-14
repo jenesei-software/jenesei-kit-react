@@ -48,7 +48,12 @@ export const StackMotion: FC<IStackMotion> = (props) => {
     as,
   } = useMemo(() => {
     return {
-      className: setClasses([CSS_CLASS.component.stack.root, isRipple && CSS_CLASS.isRipple, isHover && CSS_CLASS.isHover, className]),
+      className: setClasses([
+        CSS_CLASS.component.stack.root,
+        isRipple && CSS_CLASS.isRipple,
+        isHover && CSS_CLASS.isHover,
+        className,
+      ]),
       style: setStyles([props?.sx, style]),
       as: props.as ?? 'div',
     };

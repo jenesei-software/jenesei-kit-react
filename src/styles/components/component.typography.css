@@ -8,7 +8,7 @@
   flex: var(--component-typography-flex);
   cursor: var(--component-typography-cursor);
   overflow: var(--component-typography-overflow);
-  
+
   font-family: var(--component-typography-family, var(--font-family));
   font-weight: var(--component-typography-weight, var(--font-weight));
   line-height: var(--component-typography-height, var(--font-height));

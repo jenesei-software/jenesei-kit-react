@@ -1,10 +1,10 @@
-import { LIST_LANGUAGE } from "@local/cores/consts";
+import { LIST_LANGUAGE } from '@local/cores/consts';
 
-import moment from "moment";
-import { FC, useCallback, useEffect, useMemo, useState } from "react";
+import moment from 'moment';
+import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 
-import { Select } from "./component";
-import { ISelectLanguage, ISelectLanguageOption, ISelectMonth, ISelectMonths, ISelectYear } from "./component.types";
+import { Select } from './component';
+import { ISelectLanguage, ISelectLanguageOption, ISelectMonth, ISelectMonths, ISelectYear } from './component.types';
 
 export const SelectLanguage: FC<ISelectLanguage> = (props) => {
   const { value, onChange } = props;

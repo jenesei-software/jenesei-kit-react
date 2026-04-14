@@ -1,68 +1,59 @@
-import { addIconProps } from '@local/components/icon';
-import { AddDollarSign } from '@local/cores/types';
-import { ITheme, IThemeGenre } from '@local/styles/theme/theme.interface';
-import { addSXTypographyProps } from '@local/theme';
+import { IAddIIcon } from '@local/components/icon';
+import { IThemeGenreButton, IThemeGenreSonner, ITypography } from '@local/styles/utils/types';
 
 import { PropsWithChildren, ReactNode } from 'react';
 
-export type ProviderSonnerProps = PropsWithChildren & {
+export type ISonnerProvider = PropsWithChildren & {
   gap: number;
   position: 'bottom-right' | 'bottom-left' | 'top-right' | 'top-left' | 'bottom-center' | 'top-center';
   visibleToasts?: number;
   zIndex?: number;
-  default: Omit<SonnerContentStandardProps, 'index'>;
+  default: Omit<ISonnerContentStandard, 'index'>;
 };
 
-export type SonnerLayoutProps = Required<AddDollarSign<Pick<ProviderSonnerProps, 'position' | 'gap' | 'zIndex'>>>;
-export type SonnerElementWrapperProps = Required<AddDollarSign<Pick<SonnerContentStandardProps, 'genre'>>>;
-export type SonnerContentTitleProps = Required<
-  AddDollarSign<Pick<SonnerContentStandardProps, 'genre' | 'sxTypography'>>
->;
-export type SonnerContentDescriptionProps = Required<
-  AddDollarSign<Pick<SonnerContentStandardProps, 'genre' | 'sxTypography'>>
->;
-
-export type SonnerContextProps = {
-  toast: (content: Omit<SonnerContentStandardProps, 'index'>) => void;
+export type ISonnerContext = {
+  toast: (content: Omit<ISonnerContentStandard, 'index'>) => void;
   promise: <T>(
     promise: Promise<T>,
-    expectation: Omit<SonnerContentStandardProps, 'index'>,
-    toast: (success: T | undefined, error: any | undefined) => Omit<SonnerContentProps, 'index'>,
+    expectation: Omit<ISonnerContentStandard, 'index'>,
+    toast: (success: T | undefined, error: any | undefined) => Omit<ISonnerContent, 'index'>,
   ) => void;
-  remove: (id: SonnerContentDefaultProps['id']) => void;
-  contentHistory: SonnerContentProps[];
+  remove: (id: ISonnerContentDefault['id']) => void;
+  contentHistory: ISonnerContent[];
 };
+export type IUseSonnerDependencies = (keyof ISonnerContext)[];
 
-export type SonnerElementProps = SonnerElementDefaultProps;
+export type ISonnerElement = ISonnerElementDefault;
 
-type SonnerElementDefaultProps = {
-  id: SonnerContentDefaultProps['id'];
-  title: SonnerContentStandardProps['title'];
-  description: SonnerContentStandardProps['description'];
-  content: SonnerContentContentProps['content'];
-  icon?: SonnerContentDefaultProps['icon'];
-  isLoading: SonnerContentDefaultProps['isLoading'];
-  hidingMode: SonnerContentDefaultProps['hidingMode'];
-  button: SonnerContentDefaultProps['button'];
+type ISonnerElementDefault = {
+  id: ISonnerContentDefault['id'];
+  title: ISonnerContentStandard['title'];
+  description: ISonnerContentStandard['description'];
+  content: ISonnerContentContent['content'];
+  icon?: ISonnerContentDefault['icon'];
+  isLoading: ISonnerContentDefault['isLoading'];
+  hidingMode: ISonnerContentDefault['hidingMode'];
+  button: ISonnerContentDefault['button'];
   index: number;
-  handleOnClick: (id: SonnerContentDefaultProps['id'], hidingMode?: SonnerContentDefaultProps['hidingMode']) => void;
+  handleOnClick: (id: ISonnerContentDefault['id'], hidingMode?: ISonnerContentDefault['hidingMode']) => void;
   isMoreThanLastViewIndexPlusOne: boolean;
   isMoreThanLastViewIndex: boolean;
   isHovered: boolean;
   isLastViewIndex: boolean;
-  buttonGenre: keyof IThemeGenre;
+  buttonGenre: IThemeGenreButton;
   isTop: boolean;
-} & Required<Pick<SonnerContentDefaultProps, 'genre'>>;
+} & Required<Pick<ISonnerContentDefault, 'genre'>>;
 
-export type SonnerContentProps = SonnerContentContentProps | SonnerContentStandardProps;
+export type ISonnerContent = ISonnerContentContent | ISonnerContentStandard;
 
-type SonnerContentDefaultProps = {
+type ISonnerContentDefault = {
   hidingMode?: 'clickOnSonner' | 'clickOnButton';
   hidingTime?: number;
-  icon?: addIconProps;
+  icon?: IAddIIcon;
   id?: string;
-  genre?: keyof ITheme['colors']['sonner'];
+  genre?: IThemeGenreSonner;
   isLoading?: boolean;
+  sxTypography?: ITypography;
   button?:
     | {
         content?: string | ReactNode;
@@ -70,13 +61,13 @@ type SonnerContentDefaultProps = {
       }
     | false;
   index: number;
-} & addSXTypographyProps;
+};
 
-type SonnerContentContentProps = SonnerContentDefaultProps & {
+type ISonnerContentContent = ISonnerContentDefault & {
   content: ReactNode | false;
 };
 
-export type SonnerContentStandardProps = SonnerContentDefaultProps & {
+export type ISonnerContentStandard = ISonnerContentDefault & {
   description?: string | ReactNode;
   title?: string | ReactNode;
 };

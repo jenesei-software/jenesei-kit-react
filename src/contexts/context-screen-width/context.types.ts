@@ -2,7 +2,7 @@ import { IThemeBreakpoint, IThemeOrientation } from '@local/styles/utils';
 
 import { PropsWithChildren } from 'react';
 
-export type IProviderScreenWidth = PropsWithChildren & {
+export type IScreenWidthProvider = PropsWithChildren & {
   type?: 'breakpoint' | 'orientation';
 };
 

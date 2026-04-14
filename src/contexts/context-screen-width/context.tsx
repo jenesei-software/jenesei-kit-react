@@ -3,7 +3,7 @@ import { CSS_VARS, IThemeBreakpoint } from '@local/styles/utils';
 import { FC, useCallback, useEffect, useRef, useState } from 'react';
 import { createContext } from 'use-context-selector';
 
-import { IProviderScreenWidth, IScreenWidthContext } from './context.types';
+import { IScreenWidthContext, IScreenWidthProvider } from './context.types';
 
 export const ScreenWidthContext = createContext<IScreenWidthContext | null>(null);
 
@@ -26,7 +26,7 @@ const getDefaultBreakpoint = (): IScreenWidthContext['breakpoint'] => {
 
 const defaultBreakpoint: IScreenWidthContext['breakpoint'] = getDefaultBreakpoint();
 
-export const ProviderScreenWidth: FC<IProviderScreenWidth> = (props) => {
+export const ProviderScreenWidth: FC<IScreenWidthProvider> = (props) => {
   const [breakpoint, setBreakpoint] = useState<IScreenWidthContext['breakpoint']>(defaultBreakpoint);
   const [orientation, setOrientation] = useState<IScreenWidthContext['orientation']>(defaultOrientation);
 

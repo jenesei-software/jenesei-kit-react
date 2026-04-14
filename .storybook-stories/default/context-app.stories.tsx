@@ -15,9 +15,9 @@ export default meta;
 type Story = StoryObj<typeof ProviderApp>;
 
 const defaultNotification = (
-  <div
+  <Stack
     style={{
-      backgroundColor: 'darkgoldenrod',
+      backgroundColor: CSS_VARS.palette.fillPrimaryDark,
       padding: '2px',
       height: '100%',
       width: '100%',
@@ -31,12 +31,12 @@ const defaultNotification = (
     >
       Notification
     </Typography>
-  </div>
+  </Stack>
 );
 const defaultHeader = (
-  <div
+  <Stack
     style={{
-      backgroundColor: 'lightblue',
+      backgroundColor: CSS_VARS.palette.fillPrimaryLight,
       padding: '10px',
       height: '100%',
       width: '100%',
@@ -50,12 +50,12 @@ const defaultHeader = (
     >
       Header
     </Typography>
-  </div>
+  </Stack>
 );
 const defaultFooter = (
-  <div
+  <Stack
     style={{
-      backgroundColor: 'lightcoral',
+      backgroundColor: CSS_VARS.palette.fillSecondaryLight,
       padding: '10px',
       height: '100%',
       width: '100%',
@@ -69,12 +69,12 @@ const defaultFooter = (
     >
       Footer
     </Typography>
-  </div>
+  </Stack>
 );
 const defaultLeftAside = (
-  <div
+  <Stack
     style={{
-      backgroundColor: 'lightgreen',
+      backgroundColor: CSS_VARS.palette.fillTertiaryLight,
       padding: '10px',
       height: '100%',
       width: '100%',
@@ -88,12 +88,12 @@ const defaultLeftAside = (
     >
       Left Aside
     </Typography>
-  </div>
+  </Stack>
 );
 const defaultRightAside = (
-  <div
+  <Stack
     style={{
-      backgroundColor: 'lightyellow',
+      backgroundColor: CSS_VARS.palette.fillQuaternaryLight,
       padding: '10px',
       height: '100%',
       width: '100%',
@@ -107,12 +107,12 @@ const defaultRightAside = (
     >
       Right Aside
     </Typography>
-  </div>
+  </Stack>
 );
 const defaultNav = (
-  <div
+  <Stack
     style={{
-      backgroundColor: 'beige',
+      backgroundColor: CSS_VARS.palette.fillQuinaryLight,
       padding: '10px',
       height: '100%',
       width: '100%',
@@ -126,7 +126,7 @@ const defaultNav = (
     >
       Nav
     </Typography>
-  </div>
+  </Stack>
 );
 const defaultChildren = (
   <Stack
@@ -139,35 +139,35 @@ const defaultChildren = (
   >
     <Typography
       sx={{
-        variant: 'headline',
+        variant: 'title-1',
         wrap: 'nowrap',
       }}
     >
-      Title H1
+      Title 1
     </Typography>
     <Typography
       sx={{
-        variant: 'headline',
+        variant: 'title-2',
         wrap: 'nowrap',
       }}
     >
-      Title H2
+      Title 2
     </Typography>
     <Typography
       sx={{
-        variant: 'headline',
+        variant: 'title-3',
         wrap: 'nowrap',
       }}
     >
-      Title H3
+      Title 3
     </Typography>
     <Typography
       sx={{
-        variant: 'headline',
+        variant: 'title-4',
         wrap: 'nowrap',
       }}
     >
-      Title H4
+      Title 4
     </Typography>
   </Stack>
 );

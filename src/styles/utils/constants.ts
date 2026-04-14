@@ -855,6 +855,25 @@ export const CSS_CLASS = {
       outletLeftAside: 'context-app__outlet-left-aside',
       outletRightAside: 'context-app__outlet-right-aside',
     },
+    dialog: {
+      layout: 'context-dialog__layout',
+      element: 'context-dialog__element',
+    },
+    sonner: {
+      layout: 'context-sonner__layout',
+      layoutBottomCenter: 'context-sonner__layout--bottom-center',
+      layoutBottomLeft: 'context-sonner__layout--bottom-left',
+      layoutBottomRight: 'context-sonner__layout--bottom-right',
+      layoutTopRight: 'context-sonner__layout--top-right',
+      layoutTopLeft: 'context-sonner__layout--top-left',
+      layoutTopCenter: 'context-sonner__layout--top-center',
+      elementWrapper: 'context-sonner__element-wrapper',
+      content: 'context-sonner__content',
+      icon: 'context-sonner__icon',
+      contentTitle: 'context-sonner__content-title',
+      contentDescription: 'context-sonner__content-description',
+      buttonWrapper: 'context-sonner__button-wrapper',
+    },
   },
 
   component: {

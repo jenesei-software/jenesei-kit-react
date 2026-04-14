@@ -16,4 +16,4 @@ export interface IPermissionContext {
   requestNotificationPermission: () => Promise<NotificationPermission | undefined>;
 }
 
-export type IProviderPermission = PropsWithChildren;
+export type IPermissionProvider = PropsWithChildren;

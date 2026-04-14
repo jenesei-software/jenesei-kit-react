@@ -12,7 +12,7 @@ export type IErrorMessage = {
   size?: IThemeSize;
 
   className?: string;
-  
+
   style?: CSSProperties;
 
   sxTypography?: ITypography;

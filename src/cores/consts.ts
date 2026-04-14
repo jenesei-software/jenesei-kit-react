@@ -1,13 +1,10 @@
-// import {
-//   IDatePickerTranslateInput,
-//   IDatePickerTranslateMonth,
-//   IDatePickerTranslateWeek,
-// } from '@local/components/date-picker';
+import {
+  IDatePickerTranslateInput,
+  IDatePickerTranslateMonth,
+  IDatePickerTranslateWeek,
+} from '@local/components/date-picker';
 import { transformObjectToArray, transformObjectValuesToKeys } from '@local/cores/functions';
 import { IImageFormat, ILanguage, IService } from '@local/cores/types';
-
-import { IDatePickerTranslateInput, IDatePickerTranslateMonth, IDatePickerTranslateWeek } from '../components/date-picker';
-import { IThemeTypographyHeading } from '../styles/utils';
 
 export const OBJECT_LANGUAGE: ILanguage = {
   eng: {

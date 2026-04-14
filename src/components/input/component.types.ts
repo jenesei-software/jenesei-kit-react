@@ -1,3 +1,4 @@
+import { IErrorMessage } from '@local/components/error';
 import { IThemeSize } from '@local/styles/utils';
 import { IThemeControl, IThemeGenreInput, ITypography } from '@local/styles/utils/types';
 
@@ -12,8 +13,6 @@ import {
   Ref,
 } from 'react';
 import { NumberFormatValues, NumericFormatProps, PatternFormatProps } from 'react-number-format';
-
-import { IErrorMessage } from '../error/component.types';
 
 type ICommonInput = {
   className?: string;

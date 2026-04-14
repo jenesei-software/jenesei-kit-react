@@ -1,0 +1,28 @@
+/* =========================
+   Context - Dialog
+   ========================= */
+.context-dialog__layout {
+  position: fixed;
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.context-dialog__element {
+  width: max-content;
+  height: max-content;
+  border: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+  box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}

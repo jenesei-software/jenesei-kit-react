@@ -1,10 +1,10 @@
 import { createContext, useCallback, useEffect, useState } from 'react';
 
-import { IPermissionContext, IProviderPermission } from './context.types';
+import { IPermissionContext, IPermissionProvider } from './context.types';
 
 export const PermissionContext = createContext<IPermissionContext | null>(null);
 
-export const ProviderPermission = (props: IProviderPermission) => {
+export const ProviderPermission = (props: IPermissionProvider) => {
   const { pushNotificationSupported } = usePushNotificationSupported();
   const { isBiometricSupported } = useBiometricSupported();
   const { notificationPermission, requestNotificationPermission, isNotificationPermissionLoading } =

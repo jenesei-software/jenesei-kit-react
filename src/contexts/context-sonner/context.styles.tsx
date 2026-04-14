@@ -1,129 +1,56 @@
-import { addRemoveScrollbar, addSXTypography, addTransition } from '@local/theme';
+import { CSS_CLASS, CSS_VARS } from '@local/styles/utils';
+import { setClasses } from '@local/styles/utils/functions';
+import { IThemeGenreSonner } from '@local/styles/utils/types';
 
-import styled, { css } from 'styled-components';
+import { CSSProperties } from 'react';
 
-import {
-  SonnerContentDescriptionProps,
-  SonnerContentTitleProps,
-  SonnerElementWrapperProps,
-  SonnerLayoutProps,
-} from './context.types';
+import { ISonnerProvider } from './context.types';
 
-export const SonnerLayout = styled.div<SonnerLayoutProps>`
-  position: fixed;
-  z-index: ${(props) => props.$zIndex};
-  max-height: calc(100dvh - 20px);
-  width: 320px;
-  display: flex;
-  margin: 10px;
-  gap: ${(props) => props.$gap}px;
-  box-sizing: content-box;
-  overflow-y: visible;
-  overflow-x: visible;
-  ${addRemoveScrollbar}
-  ${(props) =>
-    props.$position === 'bottom-center'
-      ? css`
-          bottom: 0;
-          left: 50%;
-          transform: translateX(-50%);
-          justify-content: flex-start;
-          flex-direction: column-reverse;
-        `
-      : props.$position === 'bottom-left'
-        ? css`
-            left: 0;
-            bottom: 0;
-            justify-content: flex-start;
-            flex-direction: column-reverse;
-          `
-        : props.$position === 'bottom-right'
-          ? css`
-              right: 0;
-              bottom: 0;
-              justify-content: flex-start;
-              flex-direction: column-reverse;
-            `
-          : props.$position === 'top-right'
-            ? css`
-                top: 0;
-                right: 0;
-                justify-content: flex-end;
-                flex-direction: column;
-              `
-            : props.$position === 'top-left'
-              ? css`
-                  top: 0;
-                  left: 0;
-                  justify-content: flex-end;
-                  flex-direction: column;
-                `
-              : props.$position === 'top-center'
-                ? css`
-                    top: 0;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    justify-content: flex-end;
-                    flex-direction: column;
-                  `
-                : css``}
-`;
+export const SonnerClass = CSS_CLASS.context.sonner;
 
-export const SonnerElementWrapper = styled.div<SonnerElementWrapperProps>`
-  background: ${(props) => props.theme.colors.sonner[props.$genre].wrapper.background};
-  color: ${(props) => props.theme.colors.sonner[props.$genre].icon.color};
-  border-radius: 12px;
-  border-style: solid;
-  border-color: ${(props) => props.theme.colors.sonner[props.$genre].wrapper.borderColor};
-  border-width: 1px;
-  padding: 16px 20px 16px 20px;
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  align-items: center;
-  justify-content: flex-start;
-  align-self: stretch;
-  flex-shrink: 0;
-  flex-shrink: 1;
-  min-width: 320px;
-  min-height: 64px;
-  transform-origin: center center;
-  box-shadow: ${(props) => props.theme.colors.sonner[props.$genre].wrapper.boxShadow};
-  overflow: visible;
-  &:hover {
-    box-shadow: ${(props) => props.theme.colors.sonner[props.$genre].wrapper.boxShadowHover};
-  }
-  ${addTransition};
-`;
-export const SonnerContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  align-self: stretch;
-  flex-shrink: 0;
-  flex: 1;
-  position: relative;
-  overflow: hidden;
-`;
-export const SonnerIcon = styled.div`
-  display: contents;
-`;
-export const SonnerContentTitle = styled.div<SonnerContentTitleProps>`
-  color:  ${(props) => props.theme.colors.sonner[props.$genre].title.color};
-  text-align: left;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-`;
-export const SonnerContentDescription = styled.div<SonnerContentDescriptionProps>`
-  color:${(props) => props.theme.colors.sonner[props.$genre].description.color};
-  text-align: left;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  ${addSXTypography};
-`;
-export const SonnerButtonWrapper = styled.div``;
+export const SonnerLayout = SonnerClass.layout;
+export const SonnerElementWrapper = SonnerClass.elementWrapper;
+export const SonnerContent = SonnerClass.content;
+export const SonnerIcon = SonnerClass.icon;
+export const SonnerContentTitle = SonnerClass.contentTitle;
+export const SonnerContentDescription = SonnerClass.contentDescription;
+export const SonnerButtonWrapper = SonnerClass.buttonWrapper;
+
+const SONNER_LAYOUT_POSITION_CLASS: Record<ISonnerProvider['position'], string> = {
+  'bottom-center': SonnerClass.layoutBottomCenter,
+  'bottom-left': SonnerClass.layoutBottomLeft,
+  'bottom-right': SonnerClass.layoutBottomRight,
+  'top-right': SonnerClass.layoutTopRight,
+  'top-left': SonnerClass.layoutTopLeft,
+  'top-center': SonnerClass.layoutTopCenter,
+};
+
+type ISonnerStyleWithVars = CSSProperties & Record<string, string>;
+
+export const getSonnerLayoutClassName = (position: ISonnerProvider['position']) =>
+  setClasses([SonnerLayout, SONNER_LAYOUT_POSITION_CLASS[position]]);
+
+export const getSonnerLayoutStyle = (props: Pick<ISonnerProvider, 'gap' | 'zIndex'>): ISonnerStyleWithVars => ({
+  '--context-sonner-gap': `${props.gap}px`,
+  '--context-sonner-z-index': `${props.zIndex ?? 0}`,
+});
+
+export const getSonnerElementWrapperStyle = (genre: IThemeGenreSonner): ISonnerStyleWithVars => {
+  const genreTheme = CSS_VARS.genre.button[genre];
+
+  return {
+    '--context-sonner-wrapper-background': genreTheme.background.index,
+    '--context-sonner-wrapper-border-color': genreTheme.border.index,
+    '--context-sonner-wrapper-box-shadow':
+      genre === 'primary' || genre === 'secondary'
+        ? CSS_VARS.palette.shadowPrimaryLight
+        : CSS_VARS.palette.shadowSecondaryLight,
+    '--context-sonner-wrapper-box-shadow-hover':
+      genre === 'primary' || genre === 'secondary'
+        ? CSS_VARS.palette.shadowSecondaryLight
+        : CSS_VARS.palette.shadowPrimaryLight,
+    '--context-sonner-icon-color': genreTheme.color.index,
+    '--context-sonner-title-color': genreTheme.color.index,
+    '--context-sonner-description-color': genreTheme.color.index,
+  };
+};
