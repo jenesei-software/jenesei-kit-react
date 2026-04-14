@@ -1,12 +1,13 @@
 import { Stack } from '@local/components/stack';
 import { Typography } from '@local/components/typography';
 import { ProviderApp } from '@local/contexts/context-app';
+import { CSS_VARS } from '@local/styles/utils';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta: Meta<typeof ProviderApp> = {
   component: ProviderApp,
-  title: 'Context/App',
+  title: 'Context/1. App',
 };
 
 export default meta;
@@ -24,10 +25,8 @@ const defaultNotification = (
   >
     <Typography
       sx={{
-        default: {
-          variant: 'h8',
-          wrap: 'nowrap',
-        },
+        variant: 'headline',
+        wrap: 'nowrap',
       }}
     >
       Notification
@@ -45,10 +44,8 @@ const defaultHeader = (
   >
     <Typography
       sx={{
-        default: {
-          variant: 'h5',
-          wrap: 'nowrap',
-        },
+        variant: 'headline',
+        wrap: 'nowrap',
       }}
     >
       Header
@@ -66,9 +63,8 @@ const defaultFooter = (
   >
     <Typography
       sx={{
-        default: {
-          variant: 'h5',
-        },
+        variant: 'headline',
+        wrap: 'nowrap',
       }}
     >
       Footer
@@ -86,9 +82,8 @@ const defaultLeftAside = (
   >
     <Typography
       sx={{
-        default: {
-          variant: 'h6',
-        },
+        variant: 'headline',
+        wrap: 'nowrap',
       }}
     >
       Left Aside
@@ -106,9 +101,8 @@ const defaultRightAside = (
   >
     <Typography
       sx={{
-        default: {
-          variant: 'h6',
-        },
+        variant: 'headline',
+        wrap: 'nowrap',
       }}
     >
       Right Aside
@@ -126,9 +120,8 @@ const defaultNav = (
   >
     <Typography
       sx={{
-        default: {
-          variant: 'h6',
-        },
+        variant: 'headline',
+        wrap: 'nowrap',
       }}
     >
       Nav
@@ -137,78 +130,44 @@ const defaultNav = (
 );
 const defaultChildren = (
   <Stack
-    sx={(theme) => ({
-      default: {
-        backgroundColor: theme.palette.whiteStandard,
-        padding: '10px',
-        flexDirection: 'column',
-        height: 'fit-content',
-      },
-      breakpoints: {
-        tablet: {
-          backgroundColor: theme.palette.whiteJanice,
-          padding: '10px',
-        },
-        mobile: {
-          backgroundColor: theme.palette.grayMonica,
-          padding: '10px',
-        },
-      },
-    })}
+    sx={{
+      backgroundColor: CSS_VARS.palette.fillDark,
+      padding: '10px',
+      flexDirection: 'column',
+      height: 'fit-content',
+    }}
   >
     <Typography
       sx={{
-        default: {
-          variant: 'h1',
-        },
+        variant: 'headline',
+        wrap: 'nowrap',
       }}
     >
       Title H1
     </Typography>
     <Typography
       sx={{
-        default: {
-          variant: 'h2',
-        },
+        variant: 'headline',
+        wrap: 'nowrap',
       }}
     >
       Title H2
     </Typography>
     <Typography
       sx={{
-        default: {
-          variant: 'h3',
-        },
+        variant: 'headline',
+        wrap: 'nowrap',
       }}
     >
       Title H3
     </Typography>
     <Typography
       sx={{
-        default: {
-          variant: 'h4',
-        },
+        variant: 'headline',
+        wrap: 'nowrap',
       }}
     >
       Title H4
-    </Typography>
-    <Typography
-      sx={{
-        default: {
-          variant: 'h5',
-        },
-      }}
-    >
-      Title H5
-    </Typography>
-    <Typography
-      sx={{
-        default: {
-          variant: 'h6',
-        },
-      }}
-    >
-      Title H6
     </Typography>
   </Stack>
 );
@@ -222,17 +181,15 @@ export const Default: Story = {
       content: (
         <Typography
           sx={{
-            default: {
-              variant: 'h6',
-              weight: 700,
-            },
+            variant: 'headline',
+            wrap: 'nowrap',
           }}
         >
           Loading
         </Typography>
       ),
     },
-    defaultBgColor: 'whiteStandard',
+    defaultBgColor: 'fillDark',
     isScrollOutlet: false,
     defaultTitle: 'Storybook?',
     defaultDescription: 'Description from Storybook?',
@@ -240,48 +197,60 @@ export const Default: Story = {
       component: defaultNotification,
       length: {
         default: '20px',
-        tablet: '20px',
-        mobile: null,
+        breakpoint: {
+          tablet: '15px',
+          mobile: '10px',
+        },
       },
     },
     header: {
       component: defaultHeader,
       length: {
         default: '80px',
-        tablet: '60px',
-        mobile: '40px',
+        breakpoint: {
+          tablet: '60px',
+          mobile: '40px',
+        },
       },
     },
     leftAside: {
       component: defaultLeftAside,
       length: {
         default: '180px',
-        tablet: '160px',
-        mobile: null,
+        breakpoint: {
+          tablet: '160px',
+          mobile: null,
+        },
       },
     },
     nav: {
       component: defaultNav,
       length: {
         default: '80px',
-        tablet: '60px',
-        mobile: '40px',
+        breakpoint: {
+          tablet: '60px',
+          mobile: '40px',
+        },
       },
     },
     rightAside: {
       component: defaultRightAside,
       length: {
         default: '180px',
-        tablet: '160px',
-        mobile: null,
+        breakpoint: {
+          tablet: '160px',
+          mobile: null,
+        },
       },
     },
     footer: {
       component: defaultFooter,
       length: {
         default: '80px',
-        tablet: '60px',
-        mobile: '40px',
+        breakpoint: {
+          tablet: '60px',
+          mobile: '40px',
+        },
       },
     },
     children: defaultChildren,
@@ -291,30 +260,36 @@ export const Default: Story = {
 export const AsideDifferentTop: Story = {
   render: (args) => <ProviderApp {...args} />,
   args: {
-    defaultBgColor: 'black40',
+    defaultBgColor: 'fillPrimaryDark',
     isScrollOutlet: true,
     header: {
       component: defaultHeader,
       length: {
         default: '80px',
-        tablet: '60px',
-        mobile: '40px',
+        breakpoint: {
+          tablet: '60px',
+          mobile: '40px',
+        },
       },
     },
     nav: {
       component: defaultNav,
       length: {
         default: '80px',
-        tablet: '60px',
-        mobile: '40px',
+        breakpoint: {
+          tablet: '60px',
+          mobile: '40px',
+        },
       },
     },
     leftAside: {
       component: defaultLeftAside,
       length: {
         default: '80px',
-        tablet: '60px',
-        mobile: null,
+        breakpoint: {
+          tablet: '60px',
+          mobile: null,
+        },
       },
       isTopNav: true,
     },
@@ -322,8 +297,10 @@ export const AsideDifferentTop: Story = {
       component: defaultRightAside,
       length: {
         default: '80px',
-        tablet: '60px',
-        mobile: null,
+        breakpoint: {
+          tablet: '60px',
+          mobile: null,
+        },
       },
       isTopFooter: true,
       isTopHeader: true,
@@ -332,8 +309,10 @@ export const AsideDifferentTop: Story = {
       component: defaultFooter,
       length: {
         default: '80px',
-        tablet: '60px',
-        mobile: '40px',
+        breakpoint: {
+          tablet: '60px',
+          mobile: '40px',
+        },
       },
     },
     children: defaultChildren,
@@ -343,22 +322,26 @@ export const AsideDifferentTop: Story = {
 export const WithoutAsides: Story = {
   render: (args) => <ProviderApp {...args} />,
   args: {
-    defaultBgColor: 'black50',
+    defaultBgColor: 'fillPrimaryDark',
     isScrollOutlet: false,
     header: {
       component: defaultHeader,
       length: {
         default: '80px',
-        tablet: '60px',
-        mobile: '40px',
+        breakpoint: {
+          tablet: '60px',
+          mobile: '40px',
+        },
       },
     },
     footer: {
       component: defaultFooter,
       length: {
         default: '80px',
-        tablet: '60px',
-        mobile: null,
+        breakpoint: {
+          tablet: '60px',
+          mobile: null,
+        },
       },
     },
     children: defaultChildren,

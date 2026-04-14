@@ -35,6 +35,7 @@ import '@fontsource/work-sans/700.css';
 import '@fontsource/work-sans/900.css';
 import '@local/styles/css/areas.css';
 import '@local/styles/css/components.css';
+import '@local/styles/css/contexts.css';
 import '@local/styles/css/tokens.css';
 import '@local/styles/css/reset.css';
 import '@local/styles/css/keyframes.css';

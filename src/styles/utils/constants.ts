@@ -843,6 +843,20 @@ export const CSS_CLASS = {
     },
   },
 
+  context: {
+    app: {
+      wrapper: 'context-app__wrapper',
+      outlet: 'context-app__outlet',
+      outletChildren: 'context-app__outlet-children',
+      outletNotification: 'context-app__outlet-notification',
+      outletHeader: 'context-app__outlet-header',
+      outletFooter: 'context-app__outlet-footer',
+      outletNav: 'context-app__outlet-nav',
+      outletLeftAside: 'context-app__outlet-left-aside',
+      outletRightAside: 'context-app__outlet-right-aside',
+    },
+  },
+
   component: {
     select: {
       wrapper: 'component-select__wrapper',

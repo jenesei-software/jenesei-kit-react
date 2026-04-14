@@ -7,11 +7,28 @@ import { IProviderScreenWidth, IScreenWidthContext } from './context.types';
 
 export const ScreenWidthContext = createContext<IScreenWidthContext | null>(null);
 
-export const ProviderScreenWidth: FC<IProviderScreenWidth> = ({ children }) => {
-  const [breakpoint, setBreakpoint] = useState<IScreenWidthContext['breakpoint']>('default');
-  const [orientation, setOrientation] = useState<IScreenWidthContext['orientation']>(
-    typeof window !== 'undefined' && window.innerWidth > window.innerHeight ? 'landscape' : 'portrait',
-  );
+const defaultOrientation =
+  typeof window !== 'undefined' && window.innerWidth > window.innerHeight ? 'landscape' : 'portrait';
+
+const getDefaultBreakpoint = (): IScreenWidthContext['breakpoint'] => {
+  if (typeof window === 'undefined') return 'default';
+
+  const breakpoints = Object.entries(CSS_VARS.screen.breakpoint)
+    .map(([key, value]) => ({
+      key: key as keyof typeof CSS_VARS.screen.breakpoint,
+      bp: parseInt(value.replace(/\D/g, ''), 10),
+    }))
+    .sort((a, b) => a.bp - b.bp);
+
+  const matched = breakpoints.find(({ bp }) => window.innerWidth <= bp);
+  return matched?.key ?? 'default';
+};
+
+const defaultBreakpoint: IScreenWidthContext['breakpoint'] = getDefaultBreakpoint();
+
+export const ProviderScreenWidth: FC<IProviderScreenWidth> = (props) => {
+  const [breakpoint, setBreakpoint] = useState<IScreenWidthContext['breakpoint']>(defaultBreakpoint);
+  const [orientation, setOrientation] = useState<IScreenWidthContext['orientation']>(defaultOrientation);
 
   const queriesRef = useRef<Array<{
     key: IThemeBreakpoint;
@@ -74,9 +91,10 @@ export const ProviderScreenWidth: FC<IProviderScreenWidth> = ({ children }) => {
       value={{
         breakpoint,
         orientation,
+        type: props.type ?? 'breakpoint',
       }}
     >
-      {children}
+      {props.children}
     </ScreenWidthContext.Provider>
   );
 };

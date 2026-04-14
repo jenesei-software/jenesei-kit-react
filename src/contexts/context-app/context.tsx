@@ -1,49 +1,27 @@
 import { IPreviewAdditional, Preview } from '@local/areas/preview';
-import { useScreenWidth } from '@local/contexts/context-screen-width';
-import { CSS_VARS, IThemePalette } from '@local/styles/utils';
+import { CSS_CLASS, CSS_VARS, IThemePalette } from '@local/styles/utils';
+import { setClasses } from '@local/styles/utils/functions';
 
-import { createContext, FC, useCallback, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useMemo, useState } from 'react';
+import { createContext } from 'use-context-selector';
 
 import {
-  ProviderAppOutlet,
-  ProviderAppOutletChildren,
-  ProviderAppOutletFooter,
-  ProviderAppOutletHeader,
-  ProviderAppOutletLeftAside,
-  ProviderAppOutletNav,
-  ProviderAppOutletNotification,
-  ProviderAppOutletRightAside,
-  ProviderAppWrapper,
+  getProviderAppOutletChildrenStyle,
+  getProviderAppOutletFooterStyle,
+  getProviderAppOutletHeaderStyle,
+  getProviderAppOutletLeftAsideStyle,
+  getProviderAppOutletNavStyle,
+  getProviderAppOutletNotificationStyle,
+  getProviderAppOutletRightAsideStyle,
+  getProviderAppOutletStyle,
+  getProviderAppWrapperStyle,
 } from './context.styles';
-import { IAppContext, IProviderApp } from './context.types';
+import { IAppContext, IAppProvider, IAppProviderElement, IAppProviderOutletStyled } from './context.types';
+import { useScreenWidth } from '../context-screen-width';
 
 export const AppContext = createContext<IAppContext | null>(null);
 
-/**
- * ProviderApp component is a context context that manages various application-level states
- * such as background color, status bar color, background image, title, and description.
- * It uses several custom hooks to handle these states and provides them via the AppContext.
- *
- * @component
- *
- * @param {IProviderApp} props - The properties passed to the ProviderApp component.
- * @param {string} props.defaultBgColor - The default background color.
- * @param {string} props.defaultStatusBarColor - The default status bar color.
- * @param {string} [props.defaultBgImage] - The default background image.
- * @param {string} [props.defaultTitle] - The default title.
- * @param {string} [props.defaultDescription] - The default description.
- * @param {boolean} [props.isScrollOutlet] - Determines if the outlet should be scrollable.
- * @param {object} [props.footer] - The footer component and its properties.
- * @param {object} [props.notification] - The notification component and its properties.
- * @param {object} [props.header] - The header component and its properties.
- * @param {object} [props.nav] - The navigation component and its properties.
- * @param {object} [props.leftAside] - The left aside component and its properties.
- * @param {object} [props.rightAside] - The right aside component and its properties.
- * @param {React.ReactNode} props.children - The children components to be rendered inside the ProviderApp.
- *
- * @returns {JSX.Element} The rendered ProviderApp component.
- */
-export const ProviderApp: FC<IProviderApp> = (props) => {
+export const ProviderApp: FC<IAppProvider> = (props) => {
   const { bgColor, changeBgColor, historyBgColor, setDefaultBgColor } = useBgColor(props.defaultBgColor);
   const { statusBarColor, changeStatusBarColor, historyStatusBarColor, setDefaultStatusBarColor } = useStatusBarColor(
     props.defaultStatusBarColor,
@@ -54,7 +32,90 @@ export const ProviderApp: FC<IProviderApp> = (props) => {
     props.defaultDescription,
   );
   const { changePreview, previewProps } = usePreview(props.defaultPreview);
-  const { breakpoint } = useScreenWidth(['breakpoint']);
+
+  const { breakpoint, type, orientation } = useScreenWidth(['breakpoint']);
+
+  const getValueByBreakpoint = useCallback(
+    (lengthByBreakpoint: IAppProviderElement['length']) => {
+      if (!lengthByBreakpoint) return null;
+      if (type === 'orientation' && lengthByBreakpoint.orientation) {
+        const value = lengthByBreakpoint.orientation?.[orientation];
+        return value ?? null;
+      }
+      if (lengthByBreakpoint.breakpoint && lengthByBreakpoint.breakpoint) {
+        if (breakpoint === 'default') return lengthByBreakpoint.default ?? null;
+        const value = lengthByBreakpoint.breakpoint?.[breakpoint];
+        return value ?? null;
+      }
+    },
+    [breakpoint, orientation, type],
+  );
+
+  const outletStyledProps: IAppProviderOutletStyled = useMemo(
+    () => ({
+      isScrollOutlet: props.isScrollOutlet,
+      main: props.main,
+      notification: props.notification
+        ? {
+            component: props.notification.component,
+            length: getValueByBreakpoint(props.notification.length),
+            zIndex: props.notification.zIndex,
+          }
+        : undefined,
+      header: props.header
+        ? {
+            component: props.header.component,
+            length: getValueByBreakpoint(props.header.length),
+            zIndex: props.header.zIndex,
+          }
+        : undefined,
+      nav: props.nav
+        ? {
+            component: props.nav.component,
+            length: getValueByBreakpoint(props.nav.length),
+            zIndex: props.nav.zIndex,
+          }
+        : undefined,
+      footer: props.footer
+        ? {
+            component: props.footer.component,
+            length: getValueByBreakpoint(props.footer.length),
+            zIndex: props.footer.zIndex,
+          }
+        : undefined,
+      leftAside: props.leftAside
+        ? {
+            component: props.leftAside.component,
+            length: getValueByBreakpoint(props.leftAside.length),
+            zIndex: props.leftAside.zIndex,
+            isTopHeader: props.leftAside.isTopHeader,
+            isTopFooter: props.leftAside.isTopFooter,
+            isTopNav: props.leftAside.isTopNav,
+          }
+        : undefined,
+      rightAside: props.rightAside
+        ? {
+            component: props.rightAside.component,
+            length: getValueByBreakpoint(props.rightAside.length),
+            zIndex: props.rightAside.zIndex,
+            isTopHeader: props.rightAside.isTopHeader,
+            isTopFooter: props.rightAside.isTopFooter,
+            isTopNav: props.rightAside.isTopNav,
+          }
+        : undefined,
+    }),
+    [
+      props.footer,
+      props.header,
+      props.leftAside,
+      props.main,
+      props.nav,
+      props.notification,
+      props.rightAside,
+      props.isScrollOutlet,
+      getValueByBreakpoint,
+    ],
+  );
 
   return (
     <AppContext.Provider
@@ -83,55 +144,70 @@ export const ProviderApp: FC<IProviderApp> = (props) => {
       <meta name='apple-mobile-web-app-status-bar-style' content='default' />
       <meta name='mobile-web-app-capable' content='yes' />
       <Preview {...previewProps}>
-        <ProviderAppWrapper $bgColor={bgColor} $bgImage={bgImage}>
-          <ProviderAppOutlet
-            $isScrollOutlet={props.isScrollOutlet}
-            $footer={props.footer}
-            $notification={props.notification}
-            $header={props.header}
-            $nav={props.nav}
-            $leftAside={props.leftAside}
-            $rightAside={props.rightAside}
+        <div className={CSS_CLASS.context.app.wrapper} style={getProviderAppWrapperStyle(bgColor, bgImage)}>
+          <div
+            className={setClasses([CSS_CLASS.context.app.outlet, CSS_CLASS.transition.grid])}
+            style={getProviderAppOutletStyle(outletStyledProps)}
           >
-            {props.notification?.length?.[breakpoint] ? (
-              <ProviderAppOutletNotification $notification={props.notification}>
+            {outletStyledProps.notification?.length ? (
+              <section
+                className={CSS_CLASS.context.app.outletNotification}
+                style={getProviderAppOutletNotificationStyle(outletStyledProps)}
+              >
                 {props.notification?.component || null}
-              </ProviderAppOutletNotification>
+              </section>
             ) : null}
 
-            {props.header?.length?.[breakpoint] ? (
-              <ProviderAppOutletHeader $header={props.header}>
+            {outletStyledProps.header?.length ? (
+              <header
+                className={CSS_CLASS.context.app.outletHeader}
+                style={getProviderAppOutletHeaderStyle(outletStyledProps)}
+              >
                 {props.header?.component || null}
-              </ProviderAppOutletHeader>
+              </header>
             ) : null}
 
-            {props.nav?.length?.[breakpoint] ? (
-              <ProviderAppOutletNav $nav={props.nav}>{props.nav?.component || null}</ProviderAppOutletNav>
+            {outletStyledProps.nav?.length ? (
+              <nav className={CSS_CLASS.context.app.outletNav} style={getProviderAppOutletNavStyle(outletStyledProps)}>
+                {props.nav?.component || null}
+              </nav>
             ) : null}
 
-            {props.leftAside?.length?.[breakpoint] ? (
-              <ProviderAppOutletLeftAside $leftAside={props.leftAside}>
+            {outletStyledProps.leftAside?.length ? (
+              <aside
+                className={CSS_CLASS.context.app.outletLeftAside}
+                style={getProviderAppOutletLeftAsideStyle(outletStyledProps)}
+              >
                 {props.leftAside?.component || null}
-              </ProviderAppOutletLeftAside>
+              </aside>
             ) : null}
 
-            <ProviderAppOutletChildren $isScrollOutlet={props.isScrollOutlet} $main={props.main}>
+            <main
+              className={CSS_CLASS.context.app.outletChildren}
+              style={getProviderAppOutletChildrenStyle(outletStyledProps)}
+            >
               {props.children}
-            </ProviderAppOutletChildren>
+            </main>
 
-            {props.rightAside?.length?.[breakpoint] ? (
-              <ProviderAppOutletRightAside $rightAside={props.rightAside}>
+            {outletStyledProps.rightAside?.length ? (
+              <aside
+                className={CSS_CLASS.context.app.outletRightAside}
+                style={getProviderAppOutletRightAsideStyle(outletStyledProps)}
+              >
                 {props.rightAside?.component || null}
-              </ProviderAppOutletRightAside>
+              </aside>
             ) : null}
 
-            {props.footer?.length?.[breakpoint] ? (
-              <ProviderAppOutletFooter $footer={props.footer}>
+            {outletStyledProps.footer?.length ? (
+              <footer
+                className={CSS_CLASS.context.app.outletFooter}
+                style={getProviderAppOutletFooterStyle(outletStyledProps)}
+              >
                 {props.footer?.component || null}
-              </ProviderAppOutletFooter>
+              </footer>
             ) : null}
-          </ProviderAppOutlet>
-        </ProviderAppWrapper>
+          </div>
+        </div>
       </Preview>
     </AppContext.Provider>
   );
@@ -140,7 +216,7 @@ export const ProviderApp: FC<IProviderApp> = (props) => {
 /**
  * Custom hook to manage preview properties.
  */
-const usePreview = (defaultPreview: IProviderApp['defaultPreview']) => {
+const usePreview = (defaultPreview: IAppProvider['defaultPreview']) => {
   const [previewProps, setIPreview] = useState(defaultPreview || { visible: true, defaultVisible: true });
 
   const changePreview = useCallback((newIPreview: IPreviewAdditional) => {

@@ -1,15 +1,19 @@
-import { useContext } from 'react';
+import { useContextSelector } from 'use-context-selector';
 
 import { AppContext } from './context';
-import { IAppContext } from './context.types';
+import { IAppContext, IUseAppDependencies } from './context.types';
 
-/**
- * Custom hook to access the AppContext.
- */
-export const useApp = (): IAppContext => {
-  const context = useContext(AppContext);
+export const useApp = (props: IUseAppDependencies): IAppContext => {
+  const context = useContextSelector(AppContext, (v) => {
+    return v
+      ? props.reduce((acc, prop) => {
+          acc[prop] = v[prop];
+          return acc;
+        }, {} as any)
+      : null;
+  });
   if (!context) {
-    throw new Error('useApp must be used within an ProviderApp');
+    throw new Error('useApp must be used within an AppContext');
   }
   return context;
 };
