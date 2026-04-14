@@ -1,6 +1,6 @@
-import { addOutline } from '@local/theme';
+import { CSS_CLASS, CSS_VARS } from '@local/styles/utils';
 
-import { motion } from 'framer-motion';
+import { CSSProperties } from 'react';
 
 import {
   DEFAULT_PROVIDER_DIALOG_ELEMENT_BACKGROUND,
@@ -9,42 +9,23 @@ import {
   DEFAULT_PROVIDER_DIALOG_ELEMENT_MAX_WIDTH,
   DEFAULT_PROVIDER_DIALOG_ELEMENT_PADDING,
 } from './context.constants';
-import { DialogElementWrapperProps, DialogLayoutProps } from './context.types';
+import { IDialogElementStyle, IDialogLayoutStyle } from './context.types';
 
-export const DialogLayout = styled(motion.div)<DialogLayoutProps>`
-  position: fixed;
-  flex: 1;
-  width: 100%;
-  height: 100%;
-  background-color: ${(props) => props.theme.palette.black50};
-  z-index: ${(props) => props.$zIndex};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-`;
+export const DialogClass = CSS_CLASS.context.dialog;
 
-export const DialogElementWrapper = styled(motion.dialog)<DialogElementWrapperProps<object>>`
-  ${addOutline};
-  max-width: ${(props) => props.$propsDialog?.maxWidth || DEFAULT_PROVIDER_DIALOG_ELEMENT_MAX_WIDTH};
-  max-height: ${(props) => props.$propsDialog?.maxHeight || DEFAULT_PROVIDER_DIALOG_ELEMENT_MAX_HEIGHT};
-  border-radius: ${(props) => props.$propsDialog?.borderRadius || DEFAULT_PROVIDER_DIALOG_ELEMENT_BORDER_RADIUS};
-  background: ${(props) =>
-    props.$propsDialog?.background
-      ? props.theme.palette[props.$propsDialog.background]
-      : props.theme.palette[DEFAULT_PROVIDER_DIALOG_ELEMENT_BACKGROUND]};
-  padding: ${(props) => props.$propsDialog?.padding || DEFAULT_PROVIDER_DIALOG_ELEMENT_PADDING};
-  width: max-content;
-  height: max-content;
-  border: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  position: relative;
-  box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.2);
-  overflow: hidden;
-`;
-export const DialogContent = styled(motion.div)``;
+export const getDialogLayoutClassName = () => DialogClass.layout;
+
+export const getDialogLayoutStyle = (props: IDialogLayoutStyle): CSSProperties => ({
+  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  zIndex: props.zIndex,
+});
+
+export const getDialogElementStyle = (props: IDialogElementStyle): CSSProperties => ({
+  maxWidth: props.propsDialog?.maxWidth || DEFAULT_PROVIDER_DIALOG_ELEMENT_MAX_WIDTH,
+  maxHeight: props.propsDialog?.maxHeight || DEFAULT_PROVIDER_DIALOG_ELEMENT_MAX_HEIGHT,
+  borderRadius: props.propsDialog?.borderRadius || DEFAULT_PROVIDER_DIALOG_ELEMENT_BORDER_RADIUS,
+  background: props.propsDialog?.background
+    ? CSS_VARS.palette[props.propsDialog.background]
+    : CSS_VARS.palette[DEFAULT_PROVIDER_DIALOG_ELEMENT_BACKGROUND],
+  padding: props.propsDialog?.padding || DEFAULT_PROVIDER_DIALOG_ELEMENT_PADDING,
+});

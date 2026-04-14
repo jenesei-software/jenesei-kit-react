@@ -1,19 +1,21 @@
 import { Outside } from '@local/areas/outside';
-import { THEME_GLOBAL_VALUE } from '@local/theme';
+import { setClasses } from '@local/styles/utils/functions';
 
-import { AnimatePresence } from 'framer-motion';
-import { createContext, FC, memo, useCallback, useEffect, useMemo, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { FC, memo, useCallback, useEffect, useMemo, useState } from 'react';
+import { createContext } from 'use-context-selector';
 
 import { DEFAULT_PROVIDER_DIALOG_DURATION_ELEMENT, DEFAULT_PROVIDER_DIALOG_DURATION_LAYOUT } from './context.constants';
-import { DialogElementWrapper, DialogLayout } from './context.styles';
-import { DialogContentProps, DialogContextProps, DialogElementProps, ProviderDialogProps } from './context.types';
+import { DialogClass, getDialogElementStyle, getDialogLayoutClassName, getDialogLayoutStyle } from './context.styles';
+import { IDialogContent, IDialogContext, IDialogElement, IDialogProvider } from './context.types';
 
-export const DialogContext = createContext<DialogContextProps | null>(null);
+export const DialogContext = createContext<IDialogContext | null>(null);
 
-export const ProviderDialog: FC<ProviderDialogProps> = (props) => {
-  const [dialogHistory, setDialogHistory] = useState<DialogContentProps[]>([]);
+export const ProviderDialog: FC<IDialogProvider> = (props) => {
+  const [dialogHistory, setDialogHistory] = useState<IDialogContent[]>([]);
+  const classNameDialogLayout = getDialogLayoutClassName();
 
-  const remove: DialogContextProps['remove'] = useCallback((id) => {
+  const remove: IDialogContext['remove'] = useCallback((id) => {
     setDialogHistory((prev) => {
       const itemToRemove = prev.find((item) => item.id === id);
 
@@ -39,7 +41,7 @@ export const ProviderDialog: FC<ProviderDialogProps> = (props) => {
     });
   }, []);
 
-  const update: DialogContextProps['update'] = useCallback((dialog) => {
+  const update: IDialogContext['update'] = useCallback((dialog) => {
     setDialogHistory((prev) => {
       return prev.map((item) => {
         if (item.id === dialog.id) {
@@ -50,13 +52,13 @@ export const ProviderDialog: FC<ProviderDialogProps> = (props) => {
     });
   }, []);
 
-  const add: DialogContextProps['add'] = useCallback((dialog) => {
+  const add: IDialogContext['add'] = useCallback((dialog) => {
     const id = dialog.id;
 
     setDialogHistory((prev) => {
       const existingIndex = prev.findIndex((item) => item.id === id);
 
-      let updatedHistory: DialogContentProps[];
+      let updatedHistory: IDialogContent[];
 
       if (existingIndex !== -1) {
         updatedHistory = [...prev];
@@ -91,8 +93,9 @@ export const ProviderDialog: FC<ProviderDialogProps> = (props) => {
     <DialogContext.Provider value={{ add, remove, update, dialogHistory }}>
       <AnimatePresence>
         {dialogHistoryLength && (
-          <DialogLayout
-            $zIndex={zIndex}
+          <motion.div
+            className={classNameDialogLayout}
+            style={getDialogLayoutStyle({ zIndex })}
             initial={{
               opacity: 0,
             }}
@@ -115,7 +118,7 @@ export const ProviderDialog: FC<ProviderDialogProps> = (props) => {
                 />
               );
             })}
-          </DialogLayout>
+          </motion.div>
         )}
       </AnimatePresence>
 
@@ -124,8 +127,17 @@ export const ProviderDialog: FC<ProviderDialogProps> = (props) => {
   );
 };
 
-const DialogElement = <T extends object>(props: DialogElementProps<T>) => {
+const DialogElement = (props: IDialogElement<Record<string, unknown>>) => {
   const [isAnimating, setIsAnimating] = useState(true);
+  const styleDialogElement = useMemo(() => {
+    return {
+      ...getDialogElementStyle({
+        propsDialog: props.props?.propsDialog,
+      }),
+      zIndex: -(props.index ?? 0),
+    };
+  }, [props.props?.propsDialog, props.index]);
+
   const isRemoveOnOutsideClick = useMemo(
     () => props.props?.propsDialog?.isRemoveOnOutsideClick ?? true,
     [props.props?.propsDialog?.isRemoveOnOutsideClick],
@@ -142,8 +154,9 @@ const DialogElement = <T extends object>(props: DialogElementProps<T>) => {
   return (
     props.index !== undefined && (
       <Outside onOutsideClick={() => isRemoveOnOutsideClick && onRemove?.()}>
-        <DialogElementWrapper
+        <motion.dialog
           key={props.id}
+          className={setClasses([DialogClass.element])}
           initial={{
             opacity: 0,
             scale: 0.8,
@@ -152,23 +165,16 @@ const DialogElement = <T extends object>(props: DialogElementProps<T>) => {
             opacity: 1,
             scale: 1,
           }}
-          class={THEME_GLOBAL_VALUE.id.dialog}
           onAnimationComplete={() => setIsAnimating(false)}
           transition={{
             type: 'spring',
             duration: DEFAULT_PROVIDER_DIALOG_DURATION_ELEMENT,
             delay: DEFAULT_PROVIDER_DIALOG_DURATION_LAYOUT,
           }}
-          style={{
-            zIndex: -props.index,
-          }}
-          $isDisabledOutline={props.props?.propsOutline?.isDisabledOutline}
-          $isOutlineBoxShadow={props.props?.propsOutline?.isOutlineBoxShadow}
-          $isReadOnly={props.props?.propsOutline?.isReadOnly}
-          $propsDialog={props.props?.propsDialog}
+          style={styleDialogElement}
         >
           {children}
-        </DialogElementWrapper>
+        </motion.dialog>
       </Outside>
     )
   );

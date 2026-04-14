@@ -1,12 +1,13 @@
 import { Stack } from '@local/components/stack';
 import { Typography } from '@local/components/typography';
 import { ProviderApp } from '@local/contexts/context-app';
+import { CSS_VARS } from '@local/styles/utils';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta: Meta<typeof ProviderApp> = {
   component: ProviderApp,
-  title: 'Context/App',
+  title: 'Context/1. App',
 };
 
 export default meta;
@@ -14,9 +15,9 @@ export default meta;
 type Story = StoryObj<typeof ProviderApp>;
 
 const defaultNotification = (
-  <div
+  <Stack
     style={{
-      backgroundColor: 'darkgoldenrod',
+      backgroundColor: CSS_VARS.palette.fillPrimaryDark,
       padding: '2px',
       height: '100%',
       width: '100%',
@@ -24,20 +25,18 @@ const defaultNotification = (
   >
     <Typography
       sx={{
-        default: {
-          variant: 'h8',
-          wrap: 'nowrap',
-        },
+        variant: 'headline',
+        wrap: 'nowrap',
       }}
     >
       Notification
     </Typography>
-  </div>
+  </Stack>
 );
 const defaultHeader = (
-  <div
+  <Stack
     style={{
-      backgroundColor: 'lightblue',
+      backgroundColor: CSS_VARS.palette.fillPrimaryLight,
       padding: '10px',
       height: '100%',
       width: '100%',
@@ -45,20 +44,18 @@ const defaultHeader = (
   >
     <Typography
       sx={{
-        default: {
-          variant: 'h5',
-          wrap: 'nowrap',
-        },
+        variant: 'headline',
+        wrap: 'nowrap',
       }}
     >
       Header
     </Typography>
-  </div>
+  </Stack>
 );
 const defaultFooter = (
-  <div
+  <Stack
     style={{
-      backgroundColor: 'lightcoral',
+      backgroundColor: CSS_VARS.palette.fillSecondaryLight,
       padding: '10px',
       height: '100%',
       width: '100%',
@@ -66,19 +63,18 @@ const defaultFooter = (
   >
     <Typography
       sx={{
-        default: {
-          variant: 'h5',
-        },
+        variant: 'headline',
+        wrap: 'nowrap',
       }}
     >
       Footer
     </Typography>
-  </div>
+  </Stack>
 );
 const defaultLeftAside = (
-  <div
+  <Stack
     style={{
-      backgroundColor: 'lightgreen',
+      backgroundColor: CSS_VARS.palette.fillTertiaryLight,
       padding: '10px',
       height: '100%',
       width: '100%',
@@ -86,19 +82,18 @@ const defaultLeftAside = (
   >
     <Typography
       sx={{
-        default: {
-          variant: 'h6',
-        },
+        variant: 'headline',
+        wrap: 'nowrap',
       }}
     >
       Left Aside
     </Typography>
-  </div>
+  </Stack>
 );
 const defaultRightAside = (
-  <div
+  <Stack
     style={{
-      backgroundColor: 'lightyellow',
+      backgroundColor: CSS_VARS.palette.fillQuaternaryLight,
       padding: '10px',
       height: '100%',
       width: '100%',
@@ -106,19 +101,18 @@ const defaultRightAside = (
   >
     <Typography
       sx={{
-        default: {
-          variant: 'h6',
-        },
+        variant: 'headline',
+        wrap: 'nowrap',
       }}
     >
       Right Aside
     </Typography>
-  </div>
+  </Stack>
 );
 const defaultNav = (
-  <div
+  <Stack
     style={{
-      backgroundColor: 'beige',
+      backgroundColor: CSS_VARS.palette.fillQuinaryLight,
       padding: '10px',
       height: '100%',
       width: '100%',
@@ -126,89 +120,54 @@ const defaultNav = (
   >
     <Typography
       sx={{
-        default: {
-          variant: 'h6',
-        },
+        variant: 'headline',
+        wrap: 'nowrap',
       }}
     >
       Nav
     </Typography>
-  </div>
+  </Stack>
 );
 const defaultChildren = (
   <Stack
-    sx={(theme) => ({
-      default: {
-        backgroundColor: theme.palette.whiteStandard,
-        padding: '10px',
-        flexDirection: 'column',
-        height: 'fit-content',
-      },
-      breakpoints: {
-        tablet: {
-          backgroundColor: theme.palette.whiteJanice,
-          padding: '10px',
-        },
-        mobile: {
-          backgroundColor: theme.palette.grayMonica,
-          padding: '10px',
-        },
-      },
-    })}
+    sx={{
+      backgroundColor: CSS_VARS.palette.fillDark,
+      padding: '10px',
+      flexDirection: 'column',
+      height: 'fit-content',
+    }}
   >
     <Typography
       sx={{
-        default: {
-          variant: 'h1',
-        },
+        variant: 'title-1',
+        wrap: 'nowrap',
       }}
     >
-      Title H1
+      Title 1
     </Typography>
     <Typography
       sx={{
-        default: {
-          variant: 'h2',
-        },
+        variant: 'title-2',
+        wrap: 'nowrap',
       }}
     >
-      Title H2
+      Title 2
     </Typography>
     <Typography
       sx={{
-        default: {
-          variant: 'h3',
-        },
+        variant: 'title-3',
+        wrap: 'nowrap',
       }}
     >
-      Title H3
+      Title 3
     </Typography>
     <Typography
       sx={{
-        default: {
-          variant: 'h4',
-        },
+        variant: 'title-4',
+        wrap: 'nowrap',
       }}
     >
-      Title H4
-    </Typography>
-    <Typography
-      sx={{
-        default: {
-          variant: 'h5',
-        },
-      }}
-    >
-      Title H5
-    </Typography>
-    <Typography
-      sx={{
-        default: {
-          variant: 'h6',
-        },
-      }}
-    >
-      Title H6
+      Title 4
     </Typography>
   </Stack>
 );
@@ -222,17 +181,15 @@ export const Default: Story = {
       content: (
         <Typography
           sx={{
-            default: {
-              variant: 'h6',
-              weight: 700,
-            },
+            variant: 'headline',
+            wrap: 'nowrap',
           }}
         >
           Loading
         </Typography>
       ),
     },
-    defaultBgColor: 'whiteStandard',
+    defaultBgColor: 'fillDark',
     isScrollOutlet: false,
     defaultTitle: 'Storybook?',
     defaultDescription: 'Description from Storybook?',
@@ -240,48 +197,60 @@ export const Default: Story = {
       component: defaultNotification,
       length: {
         default: '20px',
-        tablet: '20px',
-        mobile: null,
+        breakpoint: {
+          tablet: '15px',
+          mobile: '10px',
+        },
       },
     },
     header: {
       component: defaultHeader,
       length: {
         default: '80px',
-        tablet: '60px',
-        mobile: '40px',
+        breakpoint: {
+          tablet: '60px',
+          mobile: '40px',
+        },
       },
     },
     leftAside: {
       component: defaultLeftAside,
       length: {
         default: '180px',
-        tablet: '160px',
-        mobile: null,
+        breakpoint: {
+          tablet: '160px',
+          mobile: null,
+        },
       },
     },
     nav: {
       component: defaultNav,
       length: {
         default: '80px',
-        tablet: '60px',
-        mobile: '40px',
+        breakpoint: {
+          tablet: '60px',
+          mobile: '40px',
+        },
       },
     },
     rightAside: {
       component: defaultRightAside,
       length: {
         default: '180px',
-        tablet: '160px',
-        mobile: null,
+        breakpoint: {
+          tablet: '160px',
+          mobile: null,
+        },
       },
     },
     footer: {
       component: defaultFooter,
       length: {
         default: '80px',
-        tablet: '60px',
-        mobile: '40px',
+        breakpoint: {
+          tablet: '60px',
+          mobile: '40px',
+        },
       },
     },
     children: defaultChildren,
@@ -291,30 +260,36 @@ export const Default: Story = {
 export const AsideDifferentTop: Story = {
   render: (args) => <ProviderApp {...args} />,
   args: {
-    defaultBgColor: 'black40',
+    defaultBgColor: 'fillPrimaryDark',
     isScrollOutlet: true,
     header: {
       component: defaultHeader,
       length: {
         default: '80px',
-        tablet: '60px',
-        mobile: '40px',
+        breakpoint: {
+          tablet: '60px',
+          mobile: '40px',
+        },
       },
     },
     nav: {
       component: defaultNav,
       length: {
         default: '80px',
-        tablet: '60px',
-        mobile: '40px',
+        breakpoint: {
+          tablet: '60px',
+          mobile: '40px',
+        },
       },
     },
     leftAside: {
       component: defaultLeftAside,
       length: {
         default: '80px',
-        tablet: '60px',
-        mobile: null,
+        breakpoint: {
+          tablet: '60px',
+          mobile: null,
+        },
       },
       isTopNav: true,
     },
@@ -322,8 +297,10 @@ export const AsideDifferentTop: Story = {
       component: defaultRightAside,
       length: {
         default: '80px',
-        tablet: '60px',
-        mobile: null,
+        breakpoint: {
+          tablet: '60px',
+          mobile: null,
+        },
       },
       isTopFooter: true,
       isTopHeader: true,
@@ -332,8 +309,10 @@ export const AsideDifferentTop: Story = {
       component: defaultFooter,
       length: {
         default: '80px',
-        tablet: '60px',
-        mobile: '40px',
+        breakpoint: {
+          tablet: '60px',
+          mobile: '40px',
+        },
       },
     },
     children: defaultChildren,
@@ -343,22 +322,26 @@ export const AsideDifferentTop: Story = {
 export const WithoutAsides: Story = {
   render: (args) => <ProviderApp {...args} />,
   args: {
-    defaultBgColor: 'black50',
+    defaultBgColor: 'fillPrimaryDark',
     isScrollOutlet: false,
     header: {
       component: defaultHeader,
       length: {
         default: '80px',
-        tablet: '60px',
-        mobile: '40px',
+        breakpoint: {
+          tablet: '60px',
+          mobile: '40px',
+        },
       },
     },
     footer: {
       component: defaultFooter,
       length: {
         default: '80px',
-        tablet: '60px',
-        mobile: null,
+        breakpoint: {
+          tablet: '60px',
+          mobile: null,
+        },
       },
     },
     children: defaultChildren,

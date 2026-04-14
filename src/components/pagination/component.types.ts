@@ -1,5 +1,3 @@
-
-
 import { IButton } from '@local/components/button';
 
 import { CSSProperties } from 'react';
@@ -21,6 +19,6 @@ export type IPagination = {
     prev: string;
     next: string;
   };
-  className?:string;
-  style:CSSProperties
+  className?: string;
+  style: CSSProperties;
 };

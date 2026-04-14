@@ -13,4 +13,4 @@ export type {
   IThemeTypographyWeight,
   ITypography,
 } from './types';
-export {EXTRA_VALUE} from './types'
+export { EXTRA_VALUE } from './types';

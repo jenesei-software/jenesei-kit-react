@@ -7,31 +7,30 @@ import { CSSProperties, PropsWithChildren, Ref, RefObject } from 'react';
 /**
  * Props for the Popover component. / Свойства компонента Popover.
  */
-export type IPopover = PropsWithChildren &
-  {
-    className?: string;
-    style?: CSSProperties;
-    maxWidth?: string;
-    maxHeight?: string;
-    isOpen: boolean;
-    isArrow?: boolean;
-    floatingStyles: CSSProperties;
-    onClose?: () => void;
-    control?: IThemeControl;
-    sxTypography?: ITypography;
-    placement?: Placement;
-    arrowHeight?: number;
-    isCenteredArrow?: boolean;
-    /**
-     * Ref to the popover root element.
-     */
-    ref?: Ref<HTMLElement | null>;
-    refArrow?: RefObject<null>;
-    size: IThemeSize;
-    genre: IThemeGenrePopover;
-    context?: FloatingContext;
-    isDisabledBoxShadow?: boolean;
-  };
+export type IPopover = PropsWithChildren & {
+  className?: string;
+  style?: CSSProperties;
+  maxWidth?: string;
+  maxHeight?: string;
+  isOpen: boolean;
+  isArrow?: boolean;
+  floatingStyles: CSSProperties;
+  onClose?: () => void;
+  control?: IThemeControl;
+  sxTypography?: ITypography;
+  placement?: Placement;
+  arrowHeight?: number;
+  isCenteredArrow?: boolean;
+  /**
+   * Ref to the popover root element.
+   */
+  ref?: Ref<HTMLElement | null>;
+  refArrow?: RefObject<null>;
+  size: IThemeSize;
+  genre: IThemeGenrePopover;
+  context?: FloatingContext;
+  isDisabledBoxShadow?: boolean;
+};
 
 /**
  * Props for the usePopover hook (popover logic and behavior).

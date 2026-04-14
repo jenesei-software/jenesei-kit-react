@@ -1,11 +1,45 @@
 import { IPreviewAdditional } from '@local/areas/preview';
-import { ScreenWidthProps } from '@local/contexts/context-screen-width';
-import { IAddDollarSign } from '@local/cores/types';
-import { IThemePalette } from '@local/styles/utils';
+import { IThemeBreakpoint, IThemeOrientation, IThemePalette } from '@local/styles/utils';
 
 import { PropsWithChildren, ReactElement } from 'react';
 
-export interface IProviderApp extends PropsWithChildren {
+export interface IAppProviderElement {
+  component: ReactElement;
+  length?: {
+    default?: number | string | null;
+    breakpoint?: Partial<Record<IThemeBreakpoint, number | string | null | undefined>>;
+    orientation?: Partial<Record<IThemeOrientation, number | string | null | undefined>>;
+  };
+  zIndex?: number;
+}
+
+interface IAppProviderElementStyled {
+  component: ReactElement;
+  length?: number | string | null;
+  zIndex?: number;
+}
+
+export type IAppProviderOutletStyled = {
+  notification?: IAppProviderElementStyled;
+  header?: IAppProviderElementStyled;
+  nav?: IAppProviderElementStyled;
+  footer?: IAppProviderElementStyled;
+  leftAside?: IAppProviderElementStyled & {
+    isTopHeader?: boolean;
+    isTopFooter?: boolean;
+    isTopNav?: boolean;
+  };
+  rightAside?: IAppProviderElementStyled & {
+    isTopHeader?: boolean;
+    isTopFooter?: boolean;
+    isTopNav?: boolean;
+  };
+  main?: {
+    zIndex?: number;
+  };
+  isScrollOutlet?: boolean;
+};
+export interface IAppProvider extends PropsWithChildren {
   defaultPreview?: IPreviewAdditional;
   defaultBgColor: IThemePalette;
   defaultStatusBarColor: IThemePalette;
@@ -13,41 +47,19 @@ export interface IProviderApp extends PropsWithChildren {
   defaultTitle: string;
   defaultDescription: string;
   isScrollOutlet?: boolean;
-  notification?: {
-    component: ReactElement;
-    length?: ScreenWidthProps<string | null>;
-    zIndex?: number;
-  };
-  header?: {
-    component: ReactElement;
-    length?: ScreenWidthProps<string | null>;
-    zIndex?: number;
-  };
-  nav?: {
-    component: ReactElement;
-    length?: ScreenWidthProps<string | null>;
-    zIndex?: number;
-  };
-  footer?: {
-    component: ReactElement;
-    length?: ScreenWidthProps<string | null>;
-    zIndex?: number;
-  };
-  leftAside?: {
-    component: ReactElement;
-    length?: ScreenWidthProps<string | null>;
+  notification?: IAppProviderElement;
+  header?: IAppProviderElement;
+  nav?: IAppProviderElement;
+  footer?: IAppProviderElement;
+  leftAside?: IAppProviderElement & {
     isTopHeader?: boolean;
     isTopFooter?: boolean;
     isTopNav?: boolean;
-    zIndex?: number;
   };
-  rightAside?: {
-    component: ReactElement;
-    length?: ScreenWidthProps<string | null>;
+  rightAside?: IAppProviderElement & {
     isTopHeader?: boolean;
     isTopFooter?: boolean;
     isTopNav?: boolean;
-    zIndex?: number;
   };
   main?: {
     zIndex?: number;
@@ -73,19 +85,9 @@ export interface IAppContext {
   historyBgImage: (step: number) => void;
   historyDescription: (step: number) => void;
 }
+export type IUseAppDependencies = (keyof IAppContext)[];
 
-export interface IProviderAppWrapper {
-  $bgColor: IProviderApp['defaultBgColor'];
-  $bgImage: IProviderApp['defaultBgImage'] | null;
+export interface IAppProviderWrapper {
+  $bgColor: IAppProvider['defaultBgColor'];
+  $bgImage: IAppProvider['defaultBgImage'] | null;
 }
-
-export type IProviderAppOutlet = Partial<
-  IAddDollarSign<
-    Pick<IProviderApp, 'isScrollOutlet' | 'notification' | 'header' | 'nav' | 'footer' | 'leftAside' | 'rightAside'>
-  >
->;
-export type IProviderAppElement = Partial<
-  IAddDollarSign<Pick<IProviderApp, 'notification' | 'header' | 'nav' | 'footer' | 'leftAside' | 'rightAside'>>
->;
-
-export type IProviderAppOutletChildren = IAddDollarSign<Pick<IProviderApp, 'main' | 'isScrollOutlet'>>;

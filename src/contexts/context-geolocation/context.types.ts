@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 
-export type IProviderGeolocation = PropsWithChildren & {
+export type IGeolocationProvider = PropsWithChildren & {
   isAskEntrance?: boolean;
 };
 

@@ -30,7 +30,7 @@ export const Icon = (props: IIcon) => {
 
   const configIcon = useMemo(() => {
     return {
-      className: setClasses([CSS_CLASS.component.icon.root, CSS_CLASS.transition.icon,props.className]),
+      className: setClasses([CSS_CLASS.component.icon.root, CSS_CLASS.transition.icon, props.className]),
 
       style: setStyles([
         {

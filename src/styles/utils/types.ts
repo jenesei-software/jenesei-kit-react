@@ -78,6 +78,7 @@ export type IThemePalette = keyof typeof CSS_VARS.palette;
 export type IThemeShadow = keyof typeof CSS_CLASS.shadow;
 
 export type IThemeGenreButton = keyof typeof CSS_VARS.genre.button;
+export type IThemeGenreSonner = keyof typeof CSS_VARS.genre.button;
 export type IThemeGenreCheckbox = keyof typeof CSS_VARS.genre.checkbox;
 export type IThemeGenreToggle = keyof typeof CSS_VARS.genre.toggle;
 export type IThemeGenreInput = keyof typeof CSS_VARS.genre.input;
@@ -102,6 +103,5 @@ export const EXTRA_VALUE = {
     medium: 'controller-medium',
     mediumSmall: 'controller-medium-small',
     small: 'controller-small',
-  } as Record<IThemeSize,IThemeTypographyHeading>,
+  } as Record<IThemeSize, IThemeTypographyHeading>,
 };
-  

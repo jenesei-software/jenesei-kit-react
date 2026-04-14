@@ -6,7 +6,7 @@ export type IUseTypographyStyles = {
   sx: ITypography;
   className?: string;
   style?: CSSProperties;
-}
+};
 
 export interface IUseTypographyStylesResult {
   className: string;

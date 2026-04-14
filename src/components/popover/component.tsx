@@ -12,7 +12,7 @@ import {
   offset,
   shift,
   size,
-  useFloating
+  useFloating,
 } from '@floating-ui/react';
 import { motion, Variants } from 'framer-motion';
 import { FC, Ref, useCallback, useEffect, useMemo, useRef, useState } from 'react';
@@ -114,7 +114,7 @@ export const Popover: FC<IPopover> = (props) => {
         },
         right: {
           size: 'top',
-          value: `calc(50% - ${(props.arrowHeight ?? DEFAULT_ARROW_HEIGHT)}px)`,
+          value: `calc(50% - ${props.arrowHeight ?? DEFAULT_ARROW_HEIGHT}px)`,
         },
         bottom: {
           size: 'left',
@@ -122,7 +122,7 @@ export const Popover: FC<IPopover> = (props) => {
         },
         left: {
           size: 'top',
-          value: `calc(50% - ${(props.arrowHeight ?? DEFAULT_ARROW_HEIGHT)}px)`,
+          value: `calc(50% - ${props.arrowHeight ?? DEFAULT_ARROW_HEIGHT}px)`,
         },
       }[props.placement.split('-')[0]]
     : null;

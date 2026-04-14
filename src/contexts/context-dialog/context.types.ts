@@ -1,60 +1,57 @@
-import { AddDollarSign } from '@local/cores/types';
-import { addOutlineProps, IThemePaletteKeys } from '@local/theme';
+import { IThemePalette } from '@local/styles/utils';
 
 import { PropsWithChildren, ReactNode } from 'react';
 
-export type ProviderDialogProps = PropsWithChildren & {
+export type IDialogProvider = PropsWithChildren & {
   zIndex: number;
 };
 
-export type DialogContextProps<T extends object = any> = {
-  add: (dialog: DialogContentProps<T>) => void;
-  remove: (id: DialogContentProps<T>['id']) => void;
-  update: (dialog: DialogContentProps<T>) => void;
-  dialogHistory: DialogContentProps<T>[];
+export type IDialogContext<T extends object = Record<string, unknown>> = {
+  add: (dialog: IDialogContent<T>) => void;
+  remove: (id: IDialogContent<T>['id']) => void;
+  update: (dialog: IDialogContent<T>) => void;
+  dialogHistory: IDialogContent<T>[];
 };
 
-export type DialogContextItemProps = {
+export type IDialogItem = {
   add: () => void;
   remove: () => void;
   id: string | null;
 };
 
-export type DialogContentProps<T extends object = any> = {
-  props?: useDialogProps<T>;
+export type IDialogContent<T extends object = Record<string, unknown>> = {
+  props?: IUseDialog<T>;
   id?: string;
   index?: number;
   onRemove?: () => void;
 };
 
-export type useDialogProps<T extends object = any> = {
-  content?: DialogContentObjectPropsContent<T>;
-  propsDialog?: DialogContentObjectPropsDialog;
-  propsOutline?: addOutlineProps;
+export type IUseDialogDependencies = (keyof IDialogContext)[];
+export type IUseDialog<T extends object = Record<string, unknown>> = {
+  content?: IDialogContentNode<T>;
+  propsDialog?: IDialogDialogProps;
   propsCustom?: T;
   onRemove?: () => void;
 };
 
-type DialogContentObjectPropsDialog = {
+type IDialogDialogProps = {
   maxWidth?: string;
   maxHeight?: string;
   padding?: string;
   borderRadius?: string;
-  background?: IThemePaletteKeys;
+  background?: IThemePalette;
   isRemoveOnOutsideClick?: boolean;
 };
-export interface DialogContentObjectPropsContentProps<T extends object = any> {
+interface IDialogContentNodeProps<T extends object = Record<string, unknown>> {
   remove?: () => void;
   isAnimating?: boolean;
   propsCustom?: T;
 }
 
-type DialogContentObjectPropsContent<T extends object> = (props: DialogContentObjectPropsContentProps<T>) => ReactNode;
+type IDialogContentNode<T extends object> = (props: IDialogContentNodeProps<T>) => ReactNode;
 
-export type DialogElementProps<T extends object> = DialogContentProps<T>;
+export type IDialogElement<T extends object> = IDialogContent<T>;
 
-export type DialogLayoutProps = AddDollarSign<Pick<ProviderDialogProps, 'zIndex'>>;
+export type IDialogLayoutStyle = Pick<IDialogProvider, 'zIndex'>;
 
-export type DialogElementWrapperProps<T extends object> = AddDollarSign<
-  addOutlineProps & Pick<useDialogProps<T>, 'propsDialog'>
->;
+export type IDialogElementStyle<T extends object = Record<string, unknown>> = Pick<IUseDialog<T>, 'propsDialog'>;

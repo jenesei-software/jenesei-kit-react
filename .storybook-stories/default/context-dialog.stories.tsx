@@ -1,25 +1,25 @@
 import { Button } from '@local/components/button';
 import { Stack } from '@local/components/stack';
 import { Typography } from '@local/components/typography';
-import { ProviderDialog, ProviderDialogProps, useDialog, useDialogProps } from '@local/contexts/context-dialog';
+import { IDialogProvider, IUseDialog, ProviderDialog, useDialog } from '@local/contexts/context-dialog';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { FC, useMemo } from 'react';
 
 const meta: Meta<typeof ProviderDialog> = {
   component: ProviderDialog,
-  title: 'Context/Dialog',
+  title: 'Context/2. Dialog',
 };
 
 export default meta;
 
 type Story = StoryObj<typeof ProviderDialog>;
 
-const ProviderDialogWrapper: FC<ProviderDialogProps> = () => {
+const ProviderDialogWrapper: FC<IDialogProvider> = () => {
   return <ProviderDialogWrapperDouble />;
 };
 const ProviderDialogWrapperDouble: FC = () => {
-  const propsDialog: useDialogProps<{
+  const propsDialog: IUseDialog<{
     test: string;
   }> = useMemo(
     () => ({
@@ -27,37 +27,32 @@ const ProviderDialogWrapperDouble: FC = () => {
         test: 'test',
       },
       propsDialog: {
+        background:'fillLight',
         isRemoveOnOutsideClick: false,
       },
       content: (params) => {
         return (
           <Stack
             sx={{
-              default: {
-                flexDirection: 'column',
-                gap: '10px',
-              },
+              flexDirection: 'column',
+              gap: '10px',
             }}
           >
             <Typography
               sx={{
-                default: {
-                  variant: 'h6',
-                },
+                variant: 'title-5',
               }}
             >
               {params.propsCustom?.test}
             </Typography>
             <Typography
               sx={{
-                default: {
-                  variant: 'h6',
-                },
+                variant: 'title-5',
               }}
             >
               {params.isAnimating ? ' animating' : ' not animating'}
             </Typography>
-            <Button onClick={() => params.remove?.()} genre='black' size='medium'>
+            <Button onClick={() => params.remove?.()} genre='primary' size='medium'>
               Remove Dialog!
             </Button>
           </Stack>
@@ -74,17 +69,15 @@ const ProviderDialogWrapperDouble: FC = () => {
   return (
     <Stack
       sx={{
-        default: {
-          padding: '12px',
-          gap: '8px',
-          minHeight: '200dvh',
-        },
+        padding: '12px',
+        gap: '8px',
+        minHeight: '200dvh',
       }}
     >
-      <Button onClick={handleAdd} genre='black' size='medium'>
+      <Button onClick={handleAdd} genre='primary' size='medium'>
         Add Dialog!
       </Button>
-      <Button onClick={remove} genre='black' size='medium'>
+      <Button onClick={remove} genre='primary' size='medium'>
         Remove Dialog!
       </Button>
     </Stack>

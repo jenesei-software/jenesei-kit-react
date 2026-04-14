@@ -1,166 +1,62 @@
-import { ScreenWidthProps } from '@local/components/context-screen-width';
-import { addGridTransition, JeneseiPalette } from '@local/theme';
+import { CSS_VARS, IThemePalette } from '@local/styles/utils';
 
-import { css, styled } from 'styled-components';
+import { CSSProperties } from 'react';
 
-import { IProviderAppOutlet, IProviderAppOutletChildren, IProviderAppWrapper } from './context.types';
+import { IAppProviderOutletStyled } from './context.types';
 
-export const ProviderAppWrapper = styled.div<IProviderAppWrapper>`
-  display: flex;
-  flex-direction: column;
-  max-width: 100dvw;
-  min-height: 100dvh;
-  width: 100%;
-  overflow: hidden;
-  position: relative;
+type IAppOutletParts = IAppProviderOutletStyled;
 
-  background-color: ${(props) => JeneseiPalette[props.$bgColor]};
-  background-image: url(${(props) => props.$bgImage});
-`;
+const toPx = (value?: number | string | null) => (typeof value === 'number' ? `${value}px` : (value ?? '0px'));
 
-const generateGridTemplateAreas = (props: IProviderAppOutlet) => {
-  let templateAreas = `
+const generateGridTemplateAreas = (props: IAppOutletParts) => {
+  return `
     "notification notification notification"
-    "header header header"
-    "nav nav nav"
+    "${props.leftAside?.isTopHeader ? 'leftAside' : 'header'} header ${props.rightAside?.isTopHeader ? 'rightAside' : 'header'}"
+    "${props.leftAside?.isTopHeader ? 'leftAside' : props.leftAside?.isTopNav ? 'leftAside' : 'nav'} nav ${props.rightAside?.isTopHeader ? 'rightAside' : props.rightAside?.isTopNav ? 'rightAside' : 'nav'}"
     "leftAside children rightAside"
-    "footer footer footer"
+    "${props.leftAside?.isTopFooter ? 'leftAside' : 'footer'} footer ${props.rightAside?.isTopFooter ? 'rightAside' : 'footer'}"
   `;
-
-  templateAreas = `
-      "notification notification notification"
-      "${props.$leftAside?.isTopHeader ? 'leftAside' : 'header'} header ${props.$rightAside?.isTopHeader ? 'rightAside' : 'header'}"
-      "${props.$leftAside?.isTopHeader ? 'leftAside' : props.$leftAside?.isTopNav ? 'leftAside' : 'nav'} nav ${props.$rightAside?.isTopHeader ? 'rightAside' : props.$rightAside?.isTopNav ? 'rightAside' : 'nav'}"
-      "leftAside children rightAside"
-      "${props.$leftAside?.isTopFooter ? 'leftAside' : 'footer'} footer ${props.$rightAside?.isTopFooter ? 'rightAside' : 'footer'}"
-    `;
-
-  return templateAreas;
 };
 
-function toStyledAppOutletCSS(props: {
-  leftAsideWidth: string;
-  rightAsideWidth: string;
-  notificationHeight: string;
-  headerHeight: string;
-  navHeight: string;
-  footerHeight: string;
-}) {
-  return css`
-    grid-template-columns: ${() => `${props.leftAsideWidth} 1fr ${props.rightAsideWidth}`};
-    grid-template-rows: ${() =>
-      `${props.notificationHeight} ${props.headerHeight} ${props.navHeight} 1fr ${props.footerHeight}`};
-  `;
-}
+export const getProviderAppWrapperStyle = (bgColor: IThemePalette, bgImage: string | null): CSSProperties => ({
+  backgroundColor: CSS_VARS.palette[bgColor],
+  backgroundImage: bgImage ? `url(${bgImage})` : undefined,
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  backgroundRepeat: 'no-repeat',
+});
 
-const addSXAppOutlet = css<IProviderAppOutlet>`
-  ${(props) => {
-    const leftAsideWidth = props.$leftAside?.length?.default;
-    const rightAsideWidth = props.$rightAside?.length?.default;
-    const notificationHeight = props.$notification?.length?.default;
-    const headerHeight = props.$header?.length?.default;
-    const navHeight = props.$nav?.length?.default;
-    const footerHeight = props.$footer?.length?.default;
-    return toStyledAppOutletCSS({
-      leftAsideWidth: leftAsideWidth ?? '0px',
-      rightAsideWidth: rightAsideWidth ?? '0px',
-      notificationHeight: notificationHeight ?? '0px',
-      headerHeight: headerHeight ?? '0px',
-      navHeight: navHeight ?? '0px',
-      footerHeight: footerHeight ?? '0px',
-    });
-  }}
-  ${(props) => {
-    const leftAsideWidth = props.$leftAside?.length;
-    const rightAsideWidth = props.$rightAside?.length;
-    const notificationHeight = props.$notification?.length;
-    const headerHeight = props.$header?.length;
-    const navHeight = props.$nav?.length;
-    const footerHeight = props.$footer?.length;
+export const getProviderAppOutletStyle = (props: IAppOutletParts): CSSProperties => ({
+  gridTemplateAreas: generateGridTemplateAreas(props),
+  gridTemplateColumns: `${toPx(props.leftAside?.length)} 1fr ${toPx(props.rightAside?.length)}`,
+  gridTemplateRows: `${toPx(props.notification?.length)} ${toPx(props.header?.length)} ${toPx(props.nav?.length)} 1fr ${toPx(props.footer?.length)}`,
+});
 
-    return Object.entries(props.theme.screens)
-      .filter(([key]) => key !== 'default')
-      .map(([key]) => {
-        const deviceKey = key as keyof ScreenWidthProps<string | null>;
-        const screenWidth = props.theme.screens[deviceKey]?.width;
-        if (!screenWidth) return null;
-        return css`
-          @media (max-width: ${screenWidth}px) {
-            ${toStyledAppOutletCSS({
-              leftAsideWidth: leftAsideWidth?.[deviceKey] ? leftAsideWidth[deviceKey] : '0px',
-              rightAsideWidth: rightAsideWidth?.[deviceKey] ? rightAsideWidth[deviceKey] : '0px',
-              notificationHeight: notificationHeight?.[deviceKey] ? notificationHeight[deviceKey] : '0px',
-              headerHeight: headerHeight?.[deviceKey] ? headerHeight[deviceKey] : '0px',
-              navHeight: navHeight?.[deviceKey] ? navHeight[deviceKey] : '0px',
-              footerHeight: footerHeight?.[deviceKey] ? footerHeight[deviceKey] : '0px',
-            })}
-          }
-        `;
-      });
-  }}
-`;
-export const ProviderAppOutlet = styled.div<IProviderAppOutlet>`
-  display: grid;
-  width: 100%;
-  height: 100%;
+export const getProviderAppOutletChildrenStyle = (props: IAppOutletParts): CSSProperties => ({
+  zIndex: props.main?.zIndex ?? 'auto',
+  overflow: props.isScrollOutlet ? 'auto' : 'visible',
+});
 
-  overflow-y: auto;
-  overflow-x: hidden;
-  
-  min-height: 100dvh;
-  max-height: 100dvh;
-  
-  ${addGridTransition};
+export const getProviderAppOutletNotificationStyle = (props: IAppOutletParts): CSSProperties => ({
+  zIndex: props.notification?.zIndex ?? 'auto',
+});
 
-  ${(props) => `
-    grid-template-areas: ${generateGridTemplateAreas(props)};
-  `}
+export const getProviderAppOutletHeaderStyle = (props: IAppOutletParts): CSSProperties => ({
+  zIndex: props.header?.zIndex ?? 'auto',
+});
 
-  ${addSXAppOutlet};
-`;
+export const getProviderAppOutletFooterStyle = (props: IAppOutletParts): CSSProperties => ({
+  zIndex: props.footer?.zIndex ?? 'auto',
+});
 
-export const ProviderAppOutletChildren = styled.main<IProviderAppOutletChildren>`
-  z-index: ${(props) => props?.$main?.zIndex ?? 'auto'};
-  display: flex;
-  grid-area: children;
-  max-width: 100%;
-  max-height: 100%;
-  overflow: ${(props) => (props.$isScrollOutlet ? 'auto' : 'visible')};
-  scrollbar-gutter: stable;
-`;
+export const getProviderAppOutletNavStyle = (props: IAppOutletParts): CSSProperties => ({
+  zIndex: props.nav?.zIndex ?? 'auto',
+});
 
-export const ProviderAppOutletNotification = styled.section<IProviderAppOutlet>`
-  z-index: ${(props) => props?.$notification?.zIndex ?? 'auto'};
-  grid-area: notification;
-  display: flex;
-`;
+export const getProviderAppOutletLeftAsideStyle = (props: IAppOutletParts): CSSProperties => ({
+  zIndex: props.leftAside?.zIndex ?? 'auto',
+});
 
-export const ProviderAppOutletHeader = styled.header<IProviderAppOutlet>`
-  z-index: ${(props) => props?.$header?.zIndex ?? 'auto'};
-  grid-area: header;
-  display: flex;
-`;
-
-export const ProviderAppOutletFooter = styled.footer<IProviderAppOutlet>`
-  z-index: ${(props) => props?.$footer?.zIndex ?? 'auto'};
-  grid-area: footer;
-  display: flex;
-`;
-
-export const ProviderAppOutletNav = styled.nav<IProviderAppOutlet>`
-  z-index: ${(props) => props?.$nav?.zIndex ?? 'auto'};
-  grid-area: nav;
-  display: flex;
-`;
-
-export const ProviderAppOutletLeftAside = styled.aside<IProviderAppOutlet>`
-  z-index: ${(props) => props?.$leftAside?.zIndex ?? 'auto'};
-  grid-area: leftAside;
-  display: flex;
-`;
-
-export const ProviderAppOutletRightAside = styled.aside<IProviderAppOutlet>`
-  z-index: ${(props) => props?.$rightAside?.zIndex ?? 'auto'};
-  grid-area: rightAside;
-  display: flex;
-`;
+export const getProviderAppOutletRightAsideStyle = (props: IAppOutletParts): CSSProperties => ({
+  zIndex: props.rightAside?.zIndex ?? 'auto',
+});

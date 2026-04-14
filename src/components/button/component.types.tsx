@@ -27,7 +27,7 @@ type IButtonDefault = PropsWithChildren & {
   isOnlyIcon?: boolean;
 
   isZeroPadding?: boolean;
-  
+
   isSizeFitContent?: boolean;
 
   isFullRadius?: boolean;
@@ -47,7 +47,7 @@ type IButtonDefault = PropsWithChildren & {
   control?: IThemeControl;
 
   sxTypography?: ITypography;
-  
+
   ref?: Ref<HTMLElement | null>;
 
   size: IThemeSize;

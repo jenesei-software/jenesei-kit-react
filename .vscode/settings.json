@@ -26,5 +26,8 @@
   },
   "github.copilot.chat.commitMessageGeneration.instructions": [
     { "file": ".github/instructions/commit-rules.md" }
+  ],
+  "cSpell.words": [
+    "sonner"
   ]
 }
