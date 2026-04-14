@@ -34,7 +34,7 @@ on:
       package_manager:
         description: "Package manager"
         required: false
-        default: "yarn"
+        default: "npm"
         type: choice
         options:
           - npm
