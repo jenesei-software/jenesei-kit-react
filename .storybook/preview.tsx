@@ -2,10 +2,10 @@ import type { Preview } from '@storybook/react-vite';
 import { PropsWithChildren, StrictMode } from 'react';
 
 import { ProviderBrowserTheme } from '../src/contexts/context-browser-theme';
+import { ProviderDialog } from '../src/contexts/context-dialog';
 import { ProviderGeolocation } from '../src/contexts/context-geolocation';
 import { ProviderPermission } from '../src/contexts/context-permission';
 import { ProviderScreenWidth } from '../src/contexts/context-screen-width';
-import { ProviderDialog } from '../src/contexts/context-dialog';
 
 import '@fontsource/inter/100.css';
 import '@fontsource/inter/300.css';
@@ -34,13 +34,7 @@ import '@fontsource/work-sans/400.css';
 import '@fontsource/work-sans/500.css';
 import '@fontsource/work-sans/700.css';
 import '@fontsource/work-sans/900.css';
-import '@local/styles/css/areas.css';
-import '@local/styles/css/components.css';
-import '@local/styles/css/contexts.css';
-import '@local/styles/css/tokens.css';
-import '@local/styles/css/reset.css';
-import '@local/styles/css/keyframes.css';
-import '@local/styles/css/classes.css';
+import '@local/styles/css/index.css';
 import './preview.css';
 
 const preview: Preview = {
@@ -55,11 +49,10 @@ const preview: Preview = {
             <ProviderGeolocation>
               <ProviderBrowserTheme defaultMode={sbMode}>
                 <ProviderDialog zIndex={999}>
-<Layout>
-                  <Story />
-                </Layout>
+                  <Layout>
+                    <Story />
+                  </Layout>
                 </ProviderDialog>
-                
               </ProviderBrowserTheme>
             </ProviderGeolocation>
           </ProviderPermission>

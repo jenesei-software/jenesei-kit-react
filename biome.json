@@ -8,6 +8,7 @@
       "*.tsx",
       "*.js",
       "*.jsx",
+      ".storybook/**/*.tsx",
       ".storybook-stories/**",
       "!coverage",
       "!node_modules",

@@ -6,4 +6,4 @@ export const DEFAULT_PROVIDER_DIALOG_ELEMENT_MAX_HEIGHT: string = 'max-content';
 export const DEFAULT_PROVIDER_DIALOG_ELEMENT_MAX_WIDTH: string = 'max-content';
 export const DEFAULT_PROVIDER_DIALOG_ELEMENT_BORDER_RADIUS: string = '12px';
 export const DEFAULT_PROVIDER_DIALOG_ELEMENT_PADDING: string = '20px';
-export const DEFAULT_PROVIDER_DIALOG_ELEMENT_BACKGROUND: IThemePalette = 'whiteStandard';
+export const DEFAULT_PROVIDER_DIALOG_ELEMENT_BACKGROUND: IThemePalette = 'fillDarkStable';

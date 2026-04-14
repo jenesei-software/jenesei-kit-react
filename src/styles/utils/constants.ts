@@ -94,6 +94,97 @@ const CSS_VARS_PALETTE = {
   shadowPrimaryDark: 'var(--shadow-primary-dark)',
   shadowSecondaryDark: 'var(--shadow-secondary-dark)',
   shadowQuaternaryDark: 'var(--shadow-quaternary-dark)',
+
+  /* ACCENTS */
+  accentRedLightStable: 'var(--accent-red-light-stable)',
+  accentOrangeLightStable: 'var(--accent-orange-light-stable)',
+  accentYellowLightStable: 'var(--accent-yellow-light-stable)',
+  accentGreenLightStable: 'var(--accent-green-light-stable)',
+  accentMintLightStable: 'var(--accent-mint-light-stable)',
+  accentTealLightStable: 'var(--accent-teal-light-stable)',
+  accentCyanLightStable: 'var(--accent-cyan-light-stable)',
+  accentBlueLightStable: 'var(--accent-blue-light-stable)',
+  accentIndigoLightStable: 'var(--accent-indigo-light-stable)',
+  accentPurpleLightStable: 'var(--accent-purple-light-stable)',
+  accentPinkLightStable: 'var(--accent-pink-light-stable)',
+  accentBrownLightStable: 'var(--accent-brown-light-stable)',
+  accentGrayLightStable: 'var(--accent-gray-light-stable)',
+
+  /* FILLS */
+  fillLightStable: 'var(--fill-light-stable)',
+  fillPrimaryLightStable: 'var(--fill-primary-light-stable)',
+  fillSecondaryLightStable: 'var(--fill-secondary-light-stable)',
+  fillTertiaryLightStable: 'var(--fill-tertiary-light-stable)',
+  fillQuaternaryLightStable: 'var(--fill-quaternary-light-stable)',
+  fillQuinaryLightStable: 'var(--fill-quinary-light-stable)',
+
+  /* TEXT */
+  textPrimaryLightStable: 'var(--text-primary-light-stable)',
+  textSecondaryLightStable: 'var(--text-secondary-light-stable)',
+  textTertiaryLightStable: 'var(--text-tertiary-light-stable)',
+
+  /* CONTROLS */
+  controlMenuLightStable: 'var(--control-menu-light-stable)',
+  controlTooltipLightStable: 'var(--control-tooltip-light-stable)',
+  controlTransparentStable: 'var(--control-transparent-stable)',
+
+  /* SHADOWS */
+  shadowGlassLightStable: 'var(--shadow-glass-light-stable)',
+  shadowPrimaryLightStable: 'var(--shadow-primary-light-stable)',
+  shadowSecondaryLightStable: 'var(--shadow-secondary-light-stable)',
+  shadowQuaternaryLightStable: 'var(--shadow-quaternary-light-stable)',
+
+  /* PRODUCT */
+  productPrimaryLightStable: 'var(--product-primary-light-stable)',
+  productSecondaryLightStable: 'var(--product-secondary-light-stable)',
+  productTertiaryLightStable: 'var(--product-tertiary-light-stable)',
+  productQuaternaryLightStable: 'var(--product-quaternary-light-stable)',
+  productQuinaryLightStable: 'var(--product-quinary-light-stable)',
+
+  /* ACCENTS */
+  accentRedDarkStable: 'var(--accent-red-dark-stable)',
+  accentOrangeDarkStable: 'var(--accent-orange-dark-stable)',
+  accentYellowDarkStable: 'var(--accent-yellow-dark-stable)',
+  accentGreenDarkStable: 'var(--accent-green-dark-stable)',
+  accentMintDarkStable: 'var(--accent-mint-dark-stable)',
+  accentTealDarkStable: 'var(--accent-teal-dark-stable)',
+  accentCyanDarkStable: 'var(--accent-cyan-dark-stable)',
+  accentBlueDarkStable: 'var(--accent-blue-dark-stable)',
+  accentIndigoDarkStable: 'var(--accent-indigo-dark-stable)',
+  accentPurpleDarkStable: 'var(--accent-purple-dark-stable)',
+  accentPinkDarkStable: 'var(--accent-pink-dark-stable)',
+  accentBrownDarkStable: 'var(--accent-brown-dark-stable)',
+  accentGrayDarkStable: 'var(--accent-gray-dark-stable)',
+
+  /* FILLS */
+  fillDarkStable: 'var(--fill-dark-stable)',
+  fillPrimaryDarkStable: 'var(--fill-primary-dark-stable)',
+  fillSecondaryDarkStable: 'var(--fill-secondary-dark-stable)',
+  fillTertiaryDarkStable: 'var(--fill-tertiary-dark-stable)',
+  fillQuaternaryDarkStable: 'var(--fill-quaternary-dark-stable)',
+  fillQuinaryDarkStable: 'var(--fill-quinary-dark-stable)',
+
+  /* TEXT */
+  textPrimaryDarkStable: 'var(--text-primary-dark-stable)',
+  textSecondaryDarkStable: 'var(--text-secondary-dark-stable)',
+  textTertiaryDarkStable: 'var(--text-tertiary-dark-stable)',
+
+  /* CONTROLS */
+  controlMenuDarkStable: 'var(--control-menu-dark-stable)',
+  controlTooltipDarkStable: 'var(--control-tooltip-dark-stable)',
+
+  /* PRODUCT */
+  productPrimaryDarkStable: 'var(--product-primary-dark-stable)',
+  productSecondaryDarkStable: 'var(--product-secondary-dark-stable)',
+  productTertiaryDarkStable: 'var(--product-tertiary-dark-stable)',
+  productQuaternaryDarkStable: 'var(--product-quaternary-dark-stable)',
+  productQuinaryDarkStable: 'var(--product-quinary-dark-stable)',
+
+  /* SHADOWS */
+  shadowGlassDarkStable: 'var(--shadow-glass-dark-stable)',
+  shadowPrimaryDarkStable: 'var(--shadow-primary-dark-stable)',
+  shadowSecondaryDarkStable: 'var(--shadow-secondary-dark-stable)',
+  shadowQuaternaryDarkStable: 'var(--shadow-quaternary-dark-stable)',
 } as const;
 
 export const CSS_VARS = {

@@ -33,7 +33,7 @@
     "src",
     ".storybook-stories",
     ".storybook-stories/default",
-    ".storybook",
+    ".storybook/**/*.tsx",
   ],
   "exclude": ["node_modules"]
 }
