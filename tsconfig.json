@@ -31,6 +31,6 @@
     // `tsc` is used here as a type-check step; declarations come from `vite-plugin-dts`.
     "noEmit": true
   },
-  "include": ["src", "vite-env.d.ts"],
+  "include": ["src", "vite-env.d.ts", ".storybook-stories/**/*.ts", ".storybook-stories/**/*.tsx"],
   "exclude": ["build", "build-storybook", "node_modules"]
 }

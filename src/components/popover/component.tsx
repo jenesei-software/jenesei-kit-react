@@ -14,11 +14,12 @@ import {
   size,
   useFloating,
 } from '@floating-ui/react';
-import { motion, Variants } from 'framer-motion';
 import { FC, Ref, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { DEFAULT_ARROW_HEIGHT, DEFAULT_POPOVER_CLOSE_DELAY, DEFAULT_POPOVER_OFFSET } from './component.constants';
 import { IPopover, IUsePopover } from './component.types';
+
+const POPOVER_FADE_DURATION_MS = 300;
 
 // Утилита для поиска фокусируемых элементов
 const getFocusableElements = (container: HTMLElement): HTMLElement[] => {
@@ -49,20 +50,34 @@ const getNextFocusableElement = (currentElement: HTMLElement, backward = false):
   }
 };
 
-const variants: Variants = {
-  active: {
-    opacity: 1,
-    visibility: 'visible',
-    pointerEvents: 'auto',
-  },
-  inactive: {
-    opacity: 0,
-    visibility: 'hidden',
-    pointerEvents: 'none',
-  },
-};
-
 export const Popover: FC<IPopover> = (props) => {
+  const [isVisible, setIsVisible] = useState(props.isOpen);
+  const closeAnimationTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    if (closeAnimationTimeout.current) {
+      clearTimeout(closeAnimationTimeout.current);
+      closeAnimationTimeout.current = null;
+    }
+
+    if (props.isOpen) {
+      setIsVisible(true);
+      return;
+    }
+
+    closeAnimationTimeout.current = setTimeout(() => {
+      setIsVisible(false);
+      closeAnimationTimeout.current = null;
+    }, POPOVER_FADE_DURATION_MS);
+
+    return () => {
+      if (closeAnimationTimeout.current) {
+        clearTimeout(closeAnimationTimeout.current);
+        closeAnimationTimeout.current = null;
+      }
+    };
+  }, [props.isOpen]);
+
   const { className: classNameTypography, style: styleTypography } = useTypographyStyles({
     sx: { variant: 'callout', ...props?.sxTypography },
   });
@@ -129,7 +144,6 @@ export const Popover: FC<IPopover> = (props) => {
 
   return (
     <FloatingPortal>
-      {/* <div ref={props.ref as Ref<HTMLDivElement | null>} style={props.floatingStyles}> */}
       <div
         ref={props.ref as Ref<HTMLDivElement | null>}
         style={{
@@ -144,13 +158,22 @@ export const Popover: FC<IPopover> = (props) => {
           pointerEvents: props.isOpen ? 'auto' : 'none',
         }}
       >
-        <motion.div
+        <div
           tabIndex={-1}
           className={className}
-          style={style}
-          initial={{ opacity: 0 }}
-          variants={variants}
-          animate={props.isOpen ? 'active' : 'inactive'}
+          style={{
+            ...style,
+            transition: 'opacity var(--transition-default)',
+            ...(props.isOpen
+              ? {
+                  opacity: 1,
+                  visibility: 'visible',
+                }
+              : {
+                  opacity: 0,
+                  visibility: isVisible ? 'visible' : 'hidden',
+                }),
+          }}
         >
           {props.isArrow && props.context && (
             <FloatingArrow
@@ -163,7 +186,7 @@ export const Popover: FC<IPopover> = (props) => {
             />
           )}
           {props.children}
-        </motion.div>
+        </div>
       </div>
     </FloatingPortal>
   );

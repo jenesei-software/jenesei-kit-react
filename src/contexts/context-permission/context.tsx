@@ -1,3 +1,5 @@
+import { logger } from '@local/cores/logger';
+
 import { createContext, useCallback, useEffect, useState } from 'react';
 
 import { IPermissionContext, IPermissionProvider } from './context.types';
@@ -44,7 +46,7 @@ const useBiometricSupported = () => {
           setIsBiometricSupported(false);
         }
       } catch (error) {
-        console.error('Error checking biometric availability:', error);
+        logger.error('Error checking biometric availability:', error);
         setIsBiometricSupported(false);
       }
     };
@@ -77,7 +79,7 @@ const useGeolocationPermission = () => {
         () => setGeolocationPermission('denied'),
       );
     } else {
-      console.warn('Provider Permission. Geolocation is not supported in this browser.');
+      logger.warn('Provider Permission. Geolocation is not supported in this browser.');
     }
   }, []);
 
@@ -99,10 +101,10 @@ const useNotificationPermission = () => {
         setIsNotificationPermissionLoading(false);
         return permission;
       } catch (error) {
-        console.error('Provider Permission. Failed to request notification permission:', error);
+        logger.error('Provider Permission. Failed to request notification permission:', error);
       }
     } else {
-      console.warn('Provider Permission. Notifications are not supported in this browser.');
+      logger.warn('Provider Permission. Notifications are not supported in this browser.');
     }
     setIsNotificationPermissionLoading(false);
   }, []);

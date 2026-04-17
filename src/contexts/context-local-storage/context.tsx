@@ -1,3 +1,5 @@
+import { logger } from '@local/cores/logger';
+
 import { createContext, FC, useCallback, useEffect, useState } from 'react';
 
 import { ILocalStorageContext, ILocalStorageProvider, IValidLocalStorageObject } from './context.types';
@@ -68,7 +70,7 @@ const useProviderLocalStorage = (props: ILocalStorageProvider) => {
         localStorage.setItem(String(name), JSON.stringify(value));
         setLocalStorageValues((prevState) => ({ ...prevState, [name]: value }));
       } catch {
-        console.info(`Provider LocalStorage. ChangeLocalStorage error - key:${name}, value:${value}.`);
+        logger.info(`Provider LocalStorage. ChangeLocalStorage error - key:${name}, value:${value}.`);
       }
     },
     [],
@@ -82,7 +84,7 @@ const useProviderLocalStorage = (props: ILocalStorageProvider) => {
         [name]: undefined,
       }));
     } catch {
-      console.info(`Provider LocalStorage. RemoveLocalStorageValue error - key:${name}.`);
+      logger.info(`Provider LocalStorage. RemoveLocalStorageValue error - key:${name}.`);
     }
   }, []);
 
@@ -92,7 +94,7 @@ const useProviderLocalStorage = (props: ILocalStorageProvider) => {
         removeLocalStorageValue(String(key) as never);
       });
     } else {
-      console.info('Provider LocalStorage. RemoveLocalStorageValues - validate is not defined.');
+      logger.info('Provider LocalStorage. RemoveLocalStorageValues - validate is not defined.');
     }
   }, [props.validate, removeLocalStorageValue]);
 
@@ -119,7 +121,7 @@ const useProviderLocalStorage = (props: ILocalStorageProvider) => {
         }
       });
     } else {
-      console.info('Provider LocalStorage. CheckLocalStorage - validate is not defined.');
+      logger.info('Provider LocalStorage. CheckLocalStorage - validate is not defined.');
     }
   }, [props.validate, removeLocalStorageValue]);
 

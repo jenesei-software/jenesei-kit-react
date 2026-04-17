@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-
+import { logger } from '@jenesei-software/jenesei-library-log';
 const ROOT_DIR = process.cwd();
 const VITE_CONFIG_PATH = path.join(ROOT_DIR, 'vite.config.ts');
 const PACKAGE_JSON_PATH = path.join(ROOT_DIR, 'package.json');
@@ -14,7 +14,7 @@ function readJsonFile(filePath) {
 }
 
 function fail(message) {
-  console.error(message);
+  logger.error(message);
   process.exit(1);
 }
 
@@ -107,4 +107,4 @@ packageJson.exports = createExportsMap(entries);
 
 writePackageJson(packageJson);
 
-console.log(`OK: exports updated from vite.config.ts (${entries.length} entries)`);
+logger.info(`OK: exports updated from vite.config.ts (${entries.length} entries)`);

@@ -168,6 +168,7 @@ export const DatePicker = (props: IDatePicker) => {
         weekOfMonth: Math.ceil((result.length + 1) / 7),
         isToday: dateCurrent.isSame(dateToday, 'day'),
         isCurrentMonth,
+        isChoice: dateCurrent.valueOf() === valueMoment?.valueOf(),
         isDisabled: !!(
           (dateMin && dateCurrent.isBefore(dateMin, 'day')) ||
           (dateMax && dateCurrent.isAfter(dateMax, 'day'))
@@ -885,12 +886,12 @@ export const DatePicker = (props: IDatePicker) => {
                 className={setClasses([
                   CSS_CLASS.component.datePicker.day,
                   classNameTypographyDay,
-                  CSS_CLASS.control[day.isDisabled ? 'none' : 'boxShadow'],
+                  CSS_CLASS.control[day.isDisabled || day.isChoice ? 'none' : 'boxShadow'],
                   CSS_CLASS.transition.color,
                   day.isDisabled && CSS_CLASS.component.datePicker.dayIsHidden,
                   day.isToday && CSS_CLASS.component.datePicker.dayIsToday,
                   day.isWeekend && CSS_CLASS.component.datePicker.dayIsWeekend,
-                  day.value === valueMoment?.valueOf() && CSS_CLASS.component.datePicker.dayIsChoice,
+                  day.isChoice && CSS_CLASS.component.datePicker.dayIsChoice,
                   !day.isCurrentMonth && CSS_CLASS.component.datePicker.dayIsNotCurrentMonth,
                 ])}
                 style={setStyles([

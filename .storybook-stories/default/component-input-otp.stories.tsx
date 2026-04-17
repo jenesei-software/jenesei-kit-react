@@ -1,4 +1,5 @@
 import { IInputOTP, InputOTP as InputOTPComponent } from '@local/components/input-otp';
+import { logger } from '@local/cores/logger';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { FC } from 'react';
@@ -31,13 +32,13 @@ export const Index: Story = {
       width: '320px',
     },
     onComplete(otp) {
-      console.log('onComplete', otp);
+      logger.info('onComplete', otp);
     },
     onBlur(e) {
-      console.log('onBlur', e);
+      logger.info('onBlur', e);
     },
     onChange(value) {
-      console.log('onChange', value);
+      logger.info('onChange', value);
     },
   },
 };

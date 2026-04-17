@@ -5,14 +5,15 @@ import path, { resolve } from 'path';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 
+import { logger } from './src/cores/logger';
 import process from 'node:process';
 
 export default defineConfig(() => {
   const isStorybook = process.env.NODE_ENV === 'storybook';
   const rollupExternal = ['react', 'react-dom', 'react/jsx-runtime', 'react/jsx-dev-runtime'];
 
-  console.log('isStorybookBuild: ', String(isStorybook));
-
+  logger.info('isStorybookBuild: ', String(isStorybook));
+  
   const sizesBackgroundTransparent = [57, 64, 72, 76, 114, 120, 144, 152, 180, 192, 256, 384, 512];
   const sizesBackgroundWhite: number[] = [];
   const sizesFavicon = [64];
@@ -30,7 +31,7 @@ export default defineConfig(() => {
       },
     },
     plugins: [
-      !isStorybook &&
+      isStorybook &&
         pluginUpdateIcons({
           pathInputFile: path.resolve(__dirname, '.storybook-public/logos/logo-jenesei-kit-react.png'),
           pathOutputDirectory: path.resolve(__dirname, '.storybook-public/icons'),
@@ -39,7 +40,7 @@ export default defineConfig(() => {
           sizesBackgroundWhite: sizesBackgroundWhite,
           sizesFavicon: sizesFavicon,
         }),
-      !isStorybook &&
+      isStorybook &&
         pluginUpdateReadmePD({
           insertionPoint: '# IMPORTANT',
           pathReadme: resolve(__dirname, 'README.md'),
@@ -68,34 +69,18 @@ export default defineConfig(() => {
         ? {
             entry: {
               index: resolve(__dirname, 'src/index.ts'),
-              'style-theme': resolve(__dirname, 'src/styles/theme/index.ts'),
-              'style-add': resolve(__dirname, 'src/styles/add/index.ts'),
-              'style-sx': resolve(__dirname, 'src/styles/sx/index.ts'),
               'style-motion': resolve(__dirname, 'src/styles/motion/index.ts'),
-
-              types: resolve(__dirname, 'src/types.ts'),
-
-              functions: resolve(__dirname, 'src/functions.ts'),
-
-              consts: resolve(__dirname, 'src/consts.ts'),
+              'style-utils': resolve(__dirname, 'src/styles/utils/index.ts'),
 
               'components-error': resolve(__dirname, 'src/components/error/index.ts'),
-              'component-range': resolve(__dirname, 'src/components/range/index.ts'),
-              'component-accordion': resolve(__dirname, 'src/components/accordion/index.ts'),
               'component-button': resolve(__dirname, 'src/components/button/index.ts'),
-              'component-button-group': resolve(__dirname, 'src/components/button-group/index.ts'),
               'component-checkbox': resolve(__dirname, 'src/components/checkbox/index.ts'),
-              'component-checkbox-group': resolve(__dirname, 'src/components/checkbox-group/index.ts'),
               'component-date-picker': resolve(__dirname, 'src/components/date-picker/index.ts'),
               'component-icon': resolve(__dirname, 'src/components/icon/index.ts'),
-              'component-image': resolve(__dirname, 'src/components/image/index.ts'),
-              'component-image-select': resolve(__dirname, 'src/components/image-select/index.ts'),
-              'component-image-slider': resolve(__dirname, 'src/components/image-slider/index.ts'),
-              'component-image-button': resolve(__dirname, 'src/components/image-button/index.ts'),
               'component-input': resolve(__dirname, 'src/components/input/index.ts'),
               'component-input-otp': resolve(__dirname, 'src/components/input-otp/index.ts'),
               'component-pagination': resolve(__dirname, 'src/components/pagination/index.ts'),
-              'component-ripple': resolve(__dirname, 'src/components/ripple/index.ts'),
+              'component-popover': resolve(__dirname, 'src/components/popover/index.ts'),
               'component-select': resolve(__dirname, 'src/components/select/index.ts'),
               'component-separator': resolve(__dirname, 'src/components/separator/index.ts'),
               'component-stack': resolve(__dirname, 'src/components/stack/index.ts'),
@@ -106,14 +91,23 @@ export default defineConfig(() => {
 
               'area-outside': resolve(__dirname, 'src/areas/outside/index.ts'),
               'area-preview': resolve(__dirname, 'src/areas/preview/index.ts'),
-              'area-scroll': resolve(__dirname, 'src/areas/scroll/index.ts'),
               'area-skeleton': resolve(__dirname, 'src/areas/skeleton/index.ts'),
-              'area-smooth': resolve(__dirname, 'src/areas/smooth/index.ts'),
 
               'hooks-use-debounced-callback': resolve(__dirname, 'src/hooks/use-debounced-callback/index.ts'),
               'hooks-use-deep-compare-memoize': resolve(__dirname, 'src/hooks/use-deep-compare-memoize/index.ts'),
+              'hooks-use-deep-memo': resolve(__dirname, 'src/hooks/use-deep-memo/index.ts'),
+              'hooks-use-merge-refs': resolve(__dirname, 'src/hooks/use-merge-refs/index.ts'),
+              'hooks-use-overflowing': resolve(__dirname, 'src/hooks/use-overflowing/index.ts'),
+              'hooks-use-overflowing-advanced': resolve(__dirname, 'src/hooks/use-overflowing-advanced/index.ts'),
+              'hooks-use-overflowing-in-container': resolve(
+                __dirname,
+                'src/hooks/use-overflowing-in-container/index.ts',
+              ),
+              'hooks-use-responsive-layout': resolve(__dirname, 'src/hooks/use-responsive-layout/index.ts'),
+              'hooks-use-typography-styles': resolve(__dirname, 'src/hooks/use-typography-styles/index.ts'),
 
               'context-app': resolve(__dirname, 'src/contexts/context-app/index.ts'),
+              'context-browser-theme': resolve(__dirname, 'src/contexts/context-browser-theme/index.ts'),
               'context-cookie': resolve(__dirname, 'src/contexts/context-cookie/index.ts'),
               'context-dialog': resolve(__dirname, 'src/contexts/context-dialog/index.ts'),
               'context-geolocation': resolve(__dirname, 'src/contexts/context-geolocation/index.ts'),
