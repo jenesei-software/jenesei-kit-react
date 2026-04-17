@@ -3,7 +3,6 @@ import { IPagination, Pagination as PaginationComponent } from '@local/component
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { FC, useEffect, useState } from 'react';
 
-
 const meta: Meta<typeof PaginationComponent> = {
   component: PaginationComponent,
   title: 'Component/6. Pagination',
@@ -40,9 +39,7 @@ const PaginationWrapper: FC<IPagination> = (props) => {
   useEffect(() => {
     setIndex(props.index);
   }, [props.index]);
-  return (
-    <PaginationComponent {...props} index={index} changeIndex={(index) => setIndex(index)} />
-  );
+  return <PaginationComponent {...props} index={index} changeIndex={(index) => setIndex(index)} />;
 };
 
 export const Index: Story = {

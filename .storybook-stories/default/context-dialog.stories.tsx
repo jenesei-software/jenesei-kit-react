@@ -49,7 +49,6 @@ const ProviderDialogWrapperDouble: FC = () => {
               sx={{
                 variant: 'title-3',
                 color: 'accentBlueDark',
-
               }}
             >
               {params.isAnimating ? ' animating' : ' not animating'}

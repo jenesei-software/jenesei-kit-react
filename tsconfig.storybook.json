@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    // Stories often keep exploratory code and unused args around.
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noFallthroughCasesInSwitch": true,
+    "types": ["vite/client", "node"]
+  },
+  "include": ["src", ".storybook", ".storybook-stories", "vite-env.d.ts"],
+  "exclude": ["build", "build-storybook", "node_modules"]
+}

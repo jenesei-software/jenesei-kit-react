@@ -49,7 +49,7 @@ export default defineConfig(() => {
       react(),
       !isStorybook &&
         dts({
-          tsconfigPath: './tsconfig.json',
+          tsconfigPath: './tsconfig.build.json',
           outDir: './build',
           entryRoot: './src',
           compilerOptions: {

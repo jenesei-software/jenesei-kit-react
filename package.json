@@ -17,13 +17,14 @@
     "url": "git+https://github.com/jenesei-software/jenesei-kit-react.git"
   },
   "scripts": {
-    "typecheck": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.build.json",
+    "typecheck:storybook": "tsc -p tsconfig.storybook.json",
     "bundle-visualizer": "npx vite-bundle-visualizer",
     "changelog": "conventional-changelog -p eslint -i CHANGELOG.md -s -r 0",
     "gen:exports": "node scripts/generate-exports.mjs",
     "biome:lint": "biome lint src",
     "biome:lint:check": "biome lint src --no-fix",
-    "biome:format": "biome format --write src",
+    "biome:format": "biome format --write src .storybook-stories",
     "biome:format:check": "biome format src",
     "biome:migrate": "biome migrate --write",
     "biome:update": "biome update --write",

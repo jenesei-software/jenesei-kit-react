@@ -5,7 +5,6 @@ import { Typography } from '@local/components/typography';
 
 import { useMergeRefs } from '@floating-ui/react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { FC } from 'react';
 
 import { WrapperBig } from './tools';
 

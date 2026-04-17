@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    // Library sources stay strict because their declarations are published.
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["src", "vite-env.d.ts"],
+  "exclude": [
+    ".storybook",
+    ".storybook-public",
+    ".storybook-stories",
+    "build",
+    "build-storybook",
+    "node_modules"
+  ]
+}
