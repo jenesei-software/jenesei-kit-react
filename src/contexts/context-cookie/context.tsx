@@ -1,3 +1,5 @@
+import { logger } from '@local/cores/logger';
+
 import Cookies from 'js-cookie';
 import { createContext, FC, useCallback, useEffect, useState } from 'react';
 
@@ -66,7 +68,7 @@ const useProviderCookie = (props: ICookieProvider) => {
         Cookies.set(String(name), JSON.stringify(value), options);
         setCookieValues((prevState) => ({ ...prevState, [name]: value }));
       } catch {
-        console.info(`Provider Cookie. ChangeCookie error - key:${name}, value:${value}.`);
+        logger.info(`Provider Cookie. ChangeCookie error - key:${name}, value:${value}.`);
       }
     },
     [],
@@ -77,7 +79,7 @@ const useProviderCookie = (props: ICookieProvider) => {
       Cookies.remove(String(name), options);
       setCookieValues((prevState) => ({ ...prevState, [name]: undefined }));
     } catch {
-      console.info(`Provider Cookie. RemoveCookieValue error - key:${name}.`);
+      logger.info(`Provider Cookie. RemoveCookieValue error - key:${name}.`);
     }
   }, []);
 
@@ -87,7 +89,7 @@ const useProviderCookie = (props: ICookieProvider) => {
         removeCookieValue(String(key) as never);
       });
     } else {
-      console.info('Provider Cookie. Validate is not defined.');
+      logger.info('Provider Cookie. Validate is not defined.');
     }
   }, [props.validate, removeCookieValue]);
 
@@ -114,7 +116,7 @@ const useProviderCookie = (props: ICookieProvider) => {
         }
       });
     } else {
-      console.info('Provider Cookie. Validate is not defined.');
+      logger.info('Provider Cookie. Validate is not defined.');
     }
   }, [props.validate, removeCookieValue]);
 

@@ -1,6 +1,7 @@
 import { DatePicker as DatePickerComponent } from '@local/components/date-picker';
 import { Typography } from '@local/components/typography';
 import { LOCALE_INPUT, LOCALE_MONTHS, LOCALE_WEEKS } from '@local/cores/consts';
+import { logger } from '@local/cores/logger';
 
 import type { Meta } from '@storybook/react-vite';
 import moment from 'moment';
@@ -49,7 +50,7 @@ const CollectionWrapper: FC = () => {
             dateMax={moment.utc().startOf('day').valueOf()}
             dateDefault={moment.utc().startOf('day').valueOf()}
             onChange={(timestamp) => {
-              console.log('onChange', timestamp);
+              logger.info('onChange', timestamp);
               setValueOne(timestamp);
             }}
           />
@@ -71,7 +72,7 @@ const CollectionWrapper: FC = () => {
             dateMax={moment.utc().startOf('day').valueOf()}
             dateDefault={moment.utc().startOf('day').valueOf()}
             onChange={(timestamp) => {
-              console.log('onChange', timestamp);
+              logger.info('onChange', timestamp);
               setValueOne(timestamp);
             }}
           />
@@ -104,7 +105,7 @@ const CollectionWrapper: FC = () => {
             dateMax={moment.utc().startOf('day').valueOf()}
             dateDefault={moment.utc().startOf('day').valueOf()}
             onChange={(timestamp) => {
-              console.log('onChange', timestamp);
+              logger.info('onChange', timestamp);
               setValueOne(timestamp);
             }}
             size='large'
@@ -126,7 +127,7 @@ const CollectionWrapper: FC = () => {
             dateMax={moment.utc().startOf('day').valueOf()}
             dateDefault={moment.utc().startOf('day').valueOf()}
             onChange={(timestamp) => {
-              console.log('onChange', timestamp);
+              logger.info('onChange', timestamp);
               setValueOne(timestamp);
             }}
             size='largeMedium'
@@ -148,7 +149,7 @@ const CollectionWrapper: FC = () => {
             dateMax={moment.utc().startOf('day').valueOf()}
             dateDefault={moment.utc().startOf('day').valueOf()}
             onChange={(timestamp) => {
-              console.log('onChange', timestamp);
+              logger.info('onChange', timestamp);
               setValueOne(timestamp);
             }}
             size='medium'
@@ -170,7 +171,7 @@ const CollectionWrapper: FC = () => {
             dateMax={moment.utc().startOf('day').valueOf()}
             dateDefault={moment.utc().startOf('day').valueOf()}
             onChange={(timestamp) => {
-              console.log('onChange', timestamp);
+              logger.info('onChange', timestamp);
               setValueOne(timestamp);
             }}
             size='mediumSmall'
@@ -192,7 +193,7 @@ const CollectionWrapper: FC = () => {
             dateMax={moment.utc().startOf('day').valueOf()}
             dateDefault={moment.utc().startOf('day').valueOf()}
             onChange={(timestamp) => {
-              console.log('onChange', timestamp);
+              logger.info('onChange', timestamp);
               setValueOne(timestamp);
             }}
             size='small'
@@ -237,7 +238,7 @@ const CollectionWrapper: FC = () => {
               dateMax={moment.utc().startOf('day').valueOf()}
               dateDefault={moment.utc().startOf('day').valueOf()}
               onChange={(timestamp) => {
-                console.log('onChange', timestamp);
+                logger.info('onChange', timestamp);
                 setValueOne(timestamp);
               }}
             />
@@ -269,7 +270,7 @@ const CollectionWrapper: FC = () => {
               dateMax={moment.utc().subtract(18, 'years').valueOf()}
               dateDefault={moment.utc().subtract(18, 'years').valueOf()}
               onChange={(timestamp) => {
-                console.log('onChange', timestamp);
+                logger.info('onChange', timestamp);
                 setValueTwo(timestamp);
               }}
             />
@@ -302,7 +303,7 @@ const CollectionWrapper: FC = () => {
               dateMax={moment.utc().add(3, 'months').startOf('day').valueOf()}
               dateDefault={moment.utc().startOf('day').valueOf()}
               onChange={(timestamp) => {
-                console.log('onChange', timestamp);
+                logger.info('onChange', timestamp);
                 setValueThree(timestamp);
               }}
             />

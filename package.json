@@ -19,31 +19,34 @@
     "styled-components"
   ],
   "scripts": {
+    "typecheck": "tsc -p tsconfig.build.json",
+    "typecheck:storybook": "tsc -p tsconfig.storybook.json",
+    "bundle-visualizer": "npx vite-bundle-visualizer",
+    "changelog": "conventional-changelog -p eslint -i CHANGELOG.md -s -r 0",
     "gen:exports": "node scripts/generate-exports.mjs",
-    "biome:format": "biome format --write src",
-    "biome:lint": "biome lint .",
+    "biome:lint": "biome lint src",
+    "biome:lint:check": "biome lint src --no-fix",
+    "biome:format": "biome format --write src .storybook-stories",
+    "biome:format:check": "biome format src",
     "biome:migrate": "biome migrate --write",
     "biome:update": "biome update --write",
-    "build:library": "npm run gen:exports && tsc && vite build",
-    "build:main": "npm run gen:exports && tsc && vite build",
+    "build:library": "npm run gen:exports && vite build",
+    "build:main": "npm run gen:exports && vite build",
     "build:storybook": "npm run gen:exports && cross-env NODE_ENV=storybook storybook build --quiet --disable-telemetry -o build-storybook",
-    "storybook": "npm run gen:exports && storybook dev -p 3030",
-    "changelog": "conventional-changelog -p eslint -i CHANGELOG.md -s -r 0",
-    "percy:storybook": "npm run build:storybook && dotenv -e .env.local -- percy storybook ./build-storybook"
+    "storybook": "npm run gen:exports && storybook dev -p 3030"
   },
+  "type": "module",
+  "version": "2.0.0",
   "dependencies": {
     "@floating-ui/react": "^0.27.12",
+    "@jenesei-software/jenesei-library-log": "^2.0.0",
     "@tanstack/react-virtual": "^3.10.8",
     "clsx": "^2.1.1",
     "framer-motion": "^11.13.1",
     "js-cookie": "^3.0.5",
     "lodash": "^4.17.21",
     "moment": ">=2.30.1",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4",
-    "react-easy-crop": "^5.4.2",
     "react-number-format": "^5.4.2",
-    "scheduler": "^0.27.0",
     "use-context-selector": "^2.0.0",
     "uuid": "^11.0.3"
   },
@@ -54,9 +57,7 @@
     "@fontsource/roboto": "^5.1.0",
     "@fontsource/roboto-mono": "^5.2.6",
     "@fontsource/work-sans": "^5.2.5",
-    "@jenesei-software/jenesei-plugin-vite": "^1.3.1",
-    "@percy/cli": "^1.31.9",
-    "@percy/storybook": "^10.0.0",
+    "@jenesei-software/jenesei-plugin-vite": "^2.4.0",
     "@storybook/addon-docs": "^10.3.5",
     "@storybook/addon-links": "^10.3.5",
     "@storybook/react-vite": "^10.3.5",
@@ -71,21 +72,19 @@
     "cross-env": "^7.0.3",
     "dotenv-cli": "^11.0.0",
     "fs": "^0.0.1-security",
-    "globals": "^15.11.0",
     "path": "^0.12.7",
+    "react": "^19.2.4",
     "react-docgen-typescript": "^2.2.2",
-    "sharp": "^0.33.5",
+    "react-dom": "^19.2.4",
     "storybook": "^10.3.5",
-    "terser": "^5.38.1",
-    "typescript": "^5.6.3",
-    "typescript-plugin-css-modules": "^5.2.0",
+    "typescript": "^6.0.3",
     "vite": "^8.0.0",
     "vite-plugin-bundle-analyzer": "^0.0.1",
     "vite-plugin-dts": "^4.3.0"
   },
   "peerDependencies": {
-    "@tanstack/react-virtual": "^3.10.8",
-    "framer-motion": "^11.13.1"
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "exports": {
     ".": {
@@ -94,47 +93,17 @@
       "require": "./build/index.cjs.js",
       "default": "./build/index.es.js"
     },
-    "./style-theme": {
-      "types": "./build/style-theme.d.ts",
-      "import": "./build/style-theme.es.js",
-      "require": "./build/style-theme.cjs.js",
-      "default": "./build/style-theme.es.js"
-    },
-    "./style-add": {
-      "types": "./build/style-add.d.ts",
-      "import": "./build/style-add.es.js",
-      "require": "./build/style-add.cjs.js",
-      "default": "./build/style-add.es.js"
-    },
-    "./style-sx": {
-      "types": "./build/style-sx.d.ts",
-      "import": "./build/style-sx.es.js",
-      "require": "./build/style-sx.cjs.js",
-      "default": "./build/style-sx.es.js"
-    },
     "./style-motion": {
       "types": "./build/style-motion.d.ts",
       "import": "./build/style-motion.es.js",
       "require": "./build/style-motion.cjs.js",
       "default": "./build/style-motion.es.js"
     },
-    "./types": {
-      "types": "./build/types.d.ts",
-      "import": "./build/types.es.js",
-      "require": "./build/types.cjs.js",
-      "default": "./build/types.es.js"
-    },
-    "./functions": {
-      "types": "./build/functions.d.ts",
-      "import": "./build/functions.es.js",
-      "require": "./build/functions.cjs.js",
-      "default": "./build/functions.es.js"
-    },
-    "./consts": {
-      "types": "./build/consts.d.ts",
-      "import": "./build/consts.es.js",
-      "require": "./build/consts.cjs.js",
-      "default": "./build/consts.es.js"
+    "./style-utils": {
+      "types": "./build/style-utils.d.ts",
+      "import": "./build/style-utils.es.js",
+      "require": "./build/style-utils.cjs.js",
+      "default": "./build/style-utils.es.js"
     },
     "./components-error": {
       "types": "./build/components-error.d.ts",
@@ -142,41 +111,17 @@
       "require": "./build/components-error.cjs.js",
       "default": "./build/components-error.es.js"
     },
-    "./component-range": {
-      "types": "./build/component-range.d.ts",
-      "import": "./build/component-range.es.js",
-      "require": "./build/component-range.cjs.js",
-      "default": "./build/component-range.es.js"
-    },
-    "./component-accordion": {
-      "types": "./build/component-accordion.d.ts",
-      "import": "./build/component-accordion.es.js",
-      "require": "./build/component-accordion.cjs.js",
-      "default": "./build/component-accordion.es.js"
-    },
     "./component-button": {
       "types": "./build/component-button.d.ts",
       "import": "./build/component-button.es.js",
       "require": "./build/component-button.cjs.js",
       "default": "./build/component-button.es.js"
     },
-    "./component-button-group": {
-      "types": "./build/component-button-group.d.ts",
-      "import": "./build/component-button-group.es.js",
-      "require": "./build/component-button-group.cjs.js",
-      "default": "./build/component-button-group.es.js"
-    },
     "./component-checkbox": {
       "types": "./build/component-checkbox.d.ts",
       "import": "./build/component-checkbox.es.js",
       "require": "./build/component-checkbox.cjs.js",
       "default": "./build/component-checkbox.es.js"
-    },
-    "./component-checkbox-group": {
-      "types": "./build/component-checkbox-group.d.ts",
-      "import": "./build/component-checkbox-group.es.js",
-      "require": "./build/component-checkbox-group.cjs.js",
-      "default": "./build/component-checkbox-group.es.js"
     },
     "./component-date-picker": {
       "types": "./build/component-date-picker.d.ts",
@@ -189,30 +134,6 @@
       "import": "./build/component-icon.es.js",
       "require": "./build/component-icon.cjs.js",
       "default": "./build/component-icon.es.js"
-    },
-    "./component-image": {
-      "types": "./build/component-image.d.ts",
-      "import": "./build/component-image.es.js",
-      "require": "./build/component-image.cjs.js",
-      "default": "./build/component-image.es.js"
-    },
-    "./component-image-select": {
-      "types": "./build/component-image-select.d.ts",
-      "import": "./build/component-image-select.es.js",
-      "require": "./build/component-image-select.cjs.js",
-      "default": "./build/component-image-select.es.js"
-    },
-    "./component-image-slider": {
-      "types": "./build/component-image-slider.d.ts",
-      "import": "./build/component-image-slider.es.js",
-      "require": "./build/component-image-slider.cjs.js",
-      "default": "./build/component-image-slider.es.js"
-    },
-    "./component-image-button": {
-      "types": "./build/component-image-button.d.ts",
-      "import": "./build/component-image-button.es.js",
-      "require": "./build/component-image-button.cjs.js",
-      "default": "./build/component-image-button.es.js"
     },
     "./component-input": {
       "types": "./build/component-input.d.ts",
@@ -232,11 +153,11 @@
       "require": "./build/component-pagination.cjs.js",
       "default": "./build/component-pagination.es.js"
     },
-    "./component-ripple": {
-      "types": "./build/component-ripple.d.ts",
-      "import": "./build/component-ripple.es.js",
-      "require": "./build/component-ripple.cjs.js",
-      "default": "./build/component-ripple.es.js"
+    "./component-popover": {
+      "types": "./build/component-popover.d.ts",
+      "import": "./build/component-popover.es.js",
+      "require": "./build/component-popover.cjs.js",
+      "default": "./build/component-popover.es.js"
     },
     "./component-select": {
       "types": "./build/component-select.d.ts",
@@ -292,23 +213,11 @@
       "require": "./build/area-preview.cjs.js",
       "default": "./build/area-preview.es.js"
     },
-    "./area-scroll": {
-      "types": "./build/area-scroll.d.ts",
-      "import": "./build/area-scroll.es.js",
-      "require": "./build/area-scroll.cjs.js",
-      "default": "./build/area-scroll.es.js"
-    },
     "./area-skeleton": {
       "types": "./build/area-skeleton.d.ts",
       "import": "./build/area-skeleton.es.js",
       "require": "./build/area-skeleton.cjs.js",
       "default": "./build/area-skeleton.es.js"
-    },
-    "./area-smooth": {
-      "types": "./build/area-smooth.d.ts",
-      "import": "./build/area-smooth.es.js",
-      "require": "./build/area-smooth.cjs.js",
-      "default": "./build/area-smooth.es.js"
     },
     "./hooks-use-debounced-callback": {
       "types": "./build/hooks-use-debounced-callback.d.ts",
@@ -322,11 +231,53 @@
       "require": "./build/hooks-use-deep-compare-memoize.cjs.js",
       "default": "./build/hooks-use-deep-compare-memoize.es.js"
     },
+    "./hooks-use-deep-memo": {
+      "types": "./build/hooks-use-deep-memo.d.ts",
+      "import": "./build/hooks-use-deep-memo.es.js",
+      "require": "./build/hooks-use-deep-memo.cjs.js",
+      "default": "./build/hooks-use-deep-memo.es.js"
+    },
+    "./hooks-use-merge-refs": {
+      "types": "./build/hooks-use-merge-refs.d.ts",
+      "import": "./build/hooks-use-merge-refs.es.js",
+      "require": "./build/hooks-use-merge-refs.cjs.js",
+      "default": "./build/hooks-use-merge-refs.es.js"
+    },
+    "./hooks-use-overflowing": {
+      "types": "./build/hooks-use-overflowing.d.ts",
+      "import": "./build/hooks-use-overflowing.es.js",
+      "require": "./build/hooks-use-overflowing.cjs.js",
+      "default": "./build/hooks-use-overflowing.es.js"
+    },
+    "./hooks-use-overflowing-advanced": {
+      "types": "./build/hooks-use-overflowing-advanced.d.ts",
+      "import": "./build/hooks-use-overflowing-advanced.es.js",
+      "require": "./build/hooks-use-overflowing-advanced.cjs.js",
+      "default": "./build/hooks-use-overflowing-advanced.es.js"
+    },
+    "./hooks-use-responsive-layout": {
+      "types": "./build/hooks-use-responsive-layout.d.ts",
+      "import": "./build/hooks-use-responsive-layout.es.js",
+      "require": "./build/hooks-use-responsive-layout.cjs.js",
+      "default": "./build/hooks-use-responsive-layout.es.js"
+    },
+    "./hooks-use-typography-styles": {
+      "types": "./build/hooks-use-typography-styles.d.ts",
+      "import": "./build/hooks-use-typography-styles.es.js",
+      "require": "./build/hooks-use-typography-styles.cjs.js",
+      "default": "./build/hooks-use-typography-styles.es.js"
+    },
     "./context-app": {
       "types": "./build/context-app.d.ts",
       "import": "./build/context-app.es.js",
       "require": "./build/context-app.cjs.js",
       "default": "./build/context-app.es.js"
+    },
+    "./context-browser-theme": {
+      "types": "./build/context-browser-theme.d.ts",
+      "import": "./build/context-browser-theme.es.js",
+      "require": "./build/context-browser-theme.cjs.js",
+      "default": "./build/context-browser-theme.es.js"
     },
     "./context-cookie": {
       "types": "./build/context-cookie.d.ts",

@@ -1,3 +1,5 @@
+import { logger } from '@local/cores/logger';
+
 import { useEffect, useState } from 'react';
 
 export function useInjectSprites(urls: string[]) {
@@ -8,7 +10,7 @@ export function useInjectSprites(urls: string[]) {
       try {
         const res = await fetch(url);
         if (!res.ok) {
-          console.error(`Failed to load sprite: ${url}`);
+          logger.error(`Failed to load sprite: ${url}`);
           return;
         }
         const text = await res.text();
@@ -20,7 +22,7 @@ export function useInjectSprites(urls: string[]) {
         document.body.prepend(div);
         containers.push(div);
       } catch (err) {
-        console.error(`Error loading sprite ${url}`, err);
+        logger.error(`Error loading sprite ${url}`, err);
       }
     });
 

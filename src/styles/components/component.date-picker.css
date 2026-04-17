@@ -80,7 +80,10 @@
   cursor: pointer;
 }
 
-.component-date-picker__dropdown-list__day:hover:not(.component-date-picker__dropdown-list__day--is-hidden) {
+.component-date-picker__dropdown-list__day:hover:not(
+    .component-date-picker__dropdown-list__day--is-hidden,
+    .component-date-picker__dropdown-list__day--is-choice
+  ) {
   background: var(--component-date-picker-day-background-hover);
   border-color: var(--component-date-picker-day-border-hover);
   color: var(--component-date-picker-day-color-hover);

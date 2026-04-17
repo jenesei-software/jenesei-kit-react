@@ -1,2 +1,2 @@
 export * from './use';
-export type { IUseTooltip } from './use.types';
+export type { IUseOverflowingAdvanced } from './use.types';

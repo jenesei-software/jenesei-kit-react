@@ -93,6 +93,8 @@ export interface IDatePickerDay {
 
   isDisabled: boolean;
 
+  isChoice: boolean;
+
   isToday: boolean;
 
   isWeekend: boolean;

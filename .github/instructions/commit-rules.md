@@ -1,48 +1,43 @@
-# Git commits
+# Git Commits
 
-## Types:
+## Types
 
-* feat: new feature
-* fix: bug fix
-* docs: documentation
-* style: formatting
-* refactor: code change without feature
-* test: adding tests
-* chore: maintenance
+* `feat` - new feature
+* `fix` - bug fix
+* `docs` - documentation
+* `style` - formatting only
+* `refactor` - code change without new behavior
+* `test` - tests
+* `chore` - maintenance
 
-## Rules:
+## Format
 
-* Use imperative mood (e.g., "add", not "added")
-* Keep the first line short (max 72 chars)
-* The first line MUST fit in one visible line (no wrapping)
-* `<type>(scope): <short description>` must be lowercase
-* Body can use any casing (lowercase, uppercase, sentence case)
-* Add a body if the change is complex or long
-* Use bullet points for detailed descriptions
+`<type>(scope): <short description>`
 
-## Format:
+Optional body:
 
-<type>(scope): <short description>
+* use bullet points
+* add it only if the change is large or needs context
 
-(optional body as bullet list)
+## Rules
 
-* <change description>
-* <change description>
-* <change description>
+* Write in imperative mood: `add`, not `added`
+* Keep the first line lowercase
+* Keep the first line short: max 72 chars
+* The first line must stay on one visible line without wrapping
+* The body can use any casing
 
-## Long commit example:
+## Examples
 
-feat: enhance Popover and Select components
+`feat(auth): add login with Google`
+`fix(api): handle timeout error`
+`docs(readme): update installation instructions`
+`style(button): fix padding and margin`
 
-* Integrate Floating UI for better positioning with arrow support
-* Add animation variants to Popover
-* Refactor Popover styles and props for better customization
-* Update Select to use new Popover styles and control box shadow
-* Improve Select dropdown structure and usability
+Longer example:
 
-## Examples:
+`feat: enhance Popover and Select components`
 
-feat(auth): add login with Google
-fix(api): handle timeout error
-docs(readme): update installation instructions
-style(button): fix padding and margin
+* integrate Floating UI for better positioning with arrow support
+* add animation variants to Popover
+* refactor Popover styles and props for better customization

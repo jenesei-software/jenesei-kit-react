@@ -1,3 +1,5 @@
+import { logger } from '@local/cores/logger';
+
 import Cookies from 'js-cookie';
 
 import { ICookieAttributes } from './context.types';
@@ -8,7 +10,7 @@ export function getFromCookie<T>(key: string): T | null {
     try {
       return JSON.parse(item) as T;
     } catch (error) {
-      console.error(`Error parsing cookie item "${key}":`, error);
+      logger.error(`Error parsing cookie item "${key}":`, error);
       return null;
     }
   }
@@ -20,6 +22,6 @@ export function setToCookie<T>(key: string, value: T, options?: ICookieAttribute
     const item = JSON.stringify(value);
     Cookies.set(key, item, options);
   } catch (error) {
-    console.error(`Error setting cookie item "${key}":`, error);
+    logger.error(`Error setting cookie item "${key}":`, error);
   }
 }
