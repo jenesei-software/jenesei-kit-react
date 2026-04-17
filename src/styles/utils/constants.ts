@@ -36,7 +36,9 @@ const CSS_VARS_PALETTE = {
   shadowGlassLight: 'var(--shadow-glass-light)',
   shadowPrimaryLight: 'var(--shadow-primary-light)',
   shadowSecondaryLight: 'var(--shadow-secondary-light)',
+  shadowTertiaryLight: 'var(--shadow-tertiary-light)',
   shadowQuaternaryLight: 'var(--shadow-quaternary-light)',
+  shadowWindowInnerShadowLight: 'var(--shadow-window-inner-shadow-light)',
 
   /* PRODUCT */
   productPrimaryLight: 'var(--product-primary-light)',
@@ -93,7 +95,9 @@ const CSS_VARS_PALETTE = {
   shadowGlassDark: 'var(--shadow-glass-dark)',
   shadowPrimaryDark: 'var(--shadow-primary-dark)',
   shadowSecondaryDark: 'var(--shadow-secondary-dark)',
+  shadowTertiaryDark: 'var(--shadow-tertiary-dark)',
   shadowQuaternaryDark: 'var(--shadow-quaternary-dark)',
+  shadowWindowInnerShadowDark: 'var(--shadow-window-inner-shadow-dark)',
 
   /* ACCENTS */
   accentRedLightStable: 'var(--accent-red-light-stable)',
@@ -132,7 +136,9 @@ const CSS_VARS_PALETTE = {
   shadowGlassLightStable: 'var(--shadow-glass-light-stable)',
   shadowPrimaryLightStable: 'var(--shadow-primary-light-stable)',
   shadowSecondaryLightStable: 'var(--shadow-secondary-light-stable)',
+  shadowTertiaryLightStable: 'var(--shadow-tertiary-light-stable)',
   shadowQuaternaryLightStable: 'var(--shadow-quaternary-light-stable)',
+  shadowWindowInnerShadowLightStable: 'var(--shadow-window-inner-shadow-light-stable)',
 
   /* PRODUCT */
   productPrimaryLightStable: 'var(--product-primary-light-stable)',
@@ -184,7 +190,9 @@ const CSS_VARS_PALETTE = {
   shadowGlassDarkStable: 'var(--shadow-glass-dark-stable)',
   shadowPrimaryDarkStable: 'var(--shadow-primary-dark-stable)',
   shadowSecondaryDarkStable: 'var(--shadow-secondary-dark-stable)',
+  shadowTertiaryDarkStable: 'var(--shadow-tertiary-dark-stable)',
   shadowQuaternaryDarkStable: 'var(--shadow-quaternary-dark-stable)',
+  shadowWindowInnerShadowDarkStable: 'var(--shadow-window-inner-shadow-dark-stable)',
 } as const;
 
 export const CSS_VARS = {

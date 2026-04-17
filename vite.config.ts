@@ -5,11 +5,11 @@ import path, { resolve } from 'path';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 
-import { peerDependencies } from './package.json';
 import process from 'node:process';
 
 export default defineConfig(() => {
   const isStorybook = process.env.NODE_ENV === 'storybook';
+  const rollupExternal = ['react', 'react-dom', 'react/jsx-runtime', 'react/jsx-dev-runtime'];
 
   console.log('isStorybookBuild: ', String(isStorybook));
 
@@ -30,28 +30,32 @@ export default defineConfig(() => {
       },
     },
     plugins: [
-      // isStorybook &&
-      //   pluginUpdateIcons({
-      //     pathInputFile: path.resolve(__dirname, '.storybook-public/logos/logo-jenesei-kit-react.png'),
-      //     pathOutputDirectory: path.resolve(__dirname, '.storybook-public/icons'),
-      //     prefix: 'icon',
-      //     sizesBackgroundTransparent: sizesBackgroundTransparent,
-      //     sizesBackgroundWhite: sizesBackgroundWhite,
-      //     sizesFavicon: sizesFavicon,
-      //   }),
-      // isStorybook &&
-      //   pluginUpdateReadmePD({
-      //     insertionPoint: '# IMPORTANT',
-      //     pathReadme: resolve(__dirname, 'README.md'),
-      //     pathPackageJson: resolve(__dirname, 'package.json'),
-      //   }),
+      !isStorybook &&
+        pluginUpdateIcons({
+          pathInputFile: path.resolve(__dirname, '.storybook-public/logos/logo-jenesei-kit-react.png'),
+          pathOutputDirectory: path.resolve(__dirname, '.storybook-public/icons'),
+          prefix: 'icon',
+          sizesBackgroundTransparent: sizesBackgroundTransparent,
+          sizesBackgroundWhite: sizesBackgroundWhite,
+          sizesFavicon: sizesFavicon,
+        }),
+      !isStorybook &&
+        pluginUpdateReadmePD({
+          insertionPoint: '# IMPORTANT',
+          pathReadme: resolve(__dirname, 'README.md'),
+          pathPackageJson: resolve(__dirname, 'package.json'),
+        }),
       react(),
       !isStorybook &&
         dts({
-          include: ['src/'],
-          rollupTypes: true,
-          insertTypesEntry: true,
           tsconfigPath: './tsconfig.json',
+          outDir: './build',
+          entryRoot: './src',
+          compilerOptions: {
+            rootDir: './src',
+          },
+          insertTypesEntry: true,
+          logLevel: 'info',
         }),
     ].filter(Boolean),
     publicDir: false,
@@ -59,7 +63,7 @@ export default defineConfig(() => {
       sourcemap: true,
       outDir: './build',
       rootDir: './src',
-      minify: 'terser',
+      minify: 'esbuild',
       lib: !isStorybook
         ? {
             entry: {
@@ -123,7 +127,7 @@ export default defineConfig(() => {
           }
         : false,
       rollupOptions: {
-        external: Object.keys(peerDependencies),
+        external: rollupExternal,
         output: {
           globals: {
             react: 'React',

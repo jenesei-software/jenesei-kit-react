@@ -1,46 +1,77 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-const root = process.cwd();
-const vitePath = path.join(root, 'vite.config.ts');
-const pkgPath = path.join(root, 'package.json');
+const ROOT_DIR = process.cwd();
+const VITE_CONFIG_PATH = path.join(ROOT_DIR, 'vite.config.ts');
+const PACKAGE_JSON_PATH = path.join(ROOT_DIR, 'package.json');
 
-const viteText = fs.readFileSync(vitePath, 'utf8');
-const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
-
-// 1) Найти блок entry: { ... }
-const entryMatch = viteText.match(/entry\s*:\s*\{([\s\S]*?)\}\s*,\s*formats\s*:/m);
-if (!entryMatch) {
-  console.error('Не нашёл блок lib.entry в vite.config.ts (ожидал entry: { ... }, formats: ...).');
-  process.exit(1);
-}
-const entryBody = entryMatch[1];
-
-// 2) Спарсить строки вида: key: resolve(__dirname, 'src/...')
-const entries = [];
-const re = /^\s*(?:(["'])(.*?)\1|([A-Za-z_$][\w$-]*))\s*:\s*resolve\(\s*__dirname\s*,\s*(["'])(.*?)\4\s*\)\s*,?\s*$/gm;
-
-let m;
-m = re.exec(entryBody);
-while (m !== null) {
-  const key = m[2] ?? m[3];
-  const src = m[5];
-  entries.push({ key, src });
-  m = re.exec(entryBody);
+function readTextFile(filePath) {
+  return fs.readFileSync(filePath, 'utf8');
 }
 
-if (entries.length === 0) {
-  console.error(
-    "Не смог распарсить entry-ключи. Проверь, что записи выглядят как: key: resolve(__dirname, 'src/...').",
-  );
+function readJsonFile(filePath) {
+  return JSON.parse(readTextFile(filePath));
+}
+
+function fail(message) {
+  console.error(message);
   process.exit(1);
 }
 
-// 3) Собрать exports
-const exportsMap = {};
+function getLibEntryBlock(viteConfigText) {
+  const entryBlockMatch = viteConfigText.match(/entry\s*:\s*\{([\s\S]*?)\}\s*,\s*formats\s*:/m);
 
-// helper: строим запись export
-function exportRecord(name) {
+  if (!entryBlockMatch) {
+    fail('Could not find the `lib.entry` block in vite.config.ts.');
+  }
+
+  return entryBlockMatch[1];
+}
+
+function parseEntries(entryBlockText) {
+  const entryPattern =
+    /^\s*(?:(["'])(.*?)\1|([A-Za-z_$][\w$-]*))\s*:\s*resolve\(\s*__dirname\s*,\s*(["'])(.*?)\4\s*\)\s*,?\s*$/gm;
+
+  const entries = [];
+  const seenKeys = new Set();
+
+  let match = entryPattern.exec(entryBlockText);
+
+  while (match !== null) {
+    const key = match[2] ?? match[3];
+    const relativeSourcePath = match[5];
+
+    if (seenKeys.has(key)) {
+      fail(`Duplicate entry key found in vite.config.ts: "${key}".`);
+    }
+
+    seenKeys.add(key);
+    entries.push({
+      key,
+      relativeSourcePath,
+      absoluteSourcePath: path.join(ROOT_DIR, relativeSourcePath),
+    });
+
+    match = entryPattern.exec(entryBlockText);
+  }
+
+  if (entries.length === 0) {
+    fail('Could not parse any `lib.entry` items from vite.config.ts.');
+  }
+
+  return entries;
+}
+
+function validateEntries(entries) {
+  const missingEntries = entries.filter((entry) => !fs.existsSync(entry.absoluteSourcePath));
+
+  if (missingEntries.length > 0) {
+    const details = missingEntries.map((entry) => `- ${entry.key}: ${entry.relativeSourcePath}`).join('\n');
+    fail(`Found lib.entry items that point to missing files:\n${details}`);
+  }
+}
+
+function createExportRecord(name) {
   return {
     types: `./build/${name}.d.ts`,
     import: `./build/${name}.es.js`,
@@ -49,22 +80,31 @@ function exportRecord(name) {
   };
 }
 
-for (const { key } of entries) {
-  if (key === 'index') {
-    exportsMap['.'] = exportRecord('index');
-  } else {
-    exportsMap[`./${key}`] = exportRecord(key);
+function createExportsMap(entries) {
+  const exportsMap = {};
+
+  for (const entry of entries) {
+    const exportKey = entry.key === 'index' ? '.' : `./${entry.key}`;
+    exportsMap[exportKey] = createExportRecord(entry.key);
   }
+
+  return exportsMap;
 }
 
-// 4) Записать обратно
-pkg.exports = exportsMap;
+function writePackageJson(packageJson) {
+  fs.writeFileSync(PACKAGE_JSON_PATH, `${JSON.stringify(packageJson, null, 2)}\n`, 'utf8');
+}
 
-// опционально: чтобы top-level тоже был консистентный
-// pkg.main = "./build/index.cjs.js";
-// pkg.module = "./build/index.es.js";
-// pkg.types = "./build/index.d.ts";
+const viteConfigText = readTextFile(VITE_CONFIG_PATH);
+const packageJson = readJsonFile(PACKAGE_JSON_PATH);
 
-fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n', 'utf8');
+const entryBlockText = getLibEntryBlock(viteConfigText);
+const entries = parseEntries(entryBlockText);
 
-console.log(`OK: exports обновлён из vite.config.ts (${entries.length} entries)`);
+validateEntries(entries);
+
+packageJson.exports = createExportsMap(entries);
+
+writePackageJson(packageJson);
+
+console.log(`OK: exports updated from vite.config.ts (${entries.length} entries)`);
