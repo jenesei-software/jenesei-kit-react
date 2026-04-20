@@ -65,8 +65,10 @@ export default defineConfig(() => {
       outDir: './build',
       rootDir: './src',
       minify: 'esbuild',
+      cssCodeSplit: false,
       lib: !isStorybook
         ? {
+            cssFileName: 'styles',
             entry: {
               index: resolve(__dirname, 'src/index.ts'),
               'style-motion': resolve(__dirname, 'src/styles/motion/index.ts'),

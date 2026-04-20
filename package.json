@@ -314,6 +314,7 @@
       "import": "./build/context-sonner.es.js",
       "require": "./build/context-sonner.cjs.js",
       "default": "./build/context-sonner.es.js"
-    }
+    },
+    "./styles.css": "./build/styles.css"
   }
 }

@@ -2,6 +2,14 @@
 
 This is a frontend library for React from Jenesei Software.
 
+## Styles
+
+Import the shared library styles once in your application entry:
+
+```typescript
+import '@jenesei-software/jenesei-kit-react/styles.css'
+```
+
 ## Customize the cookie and local storage
 
 ```typescript
