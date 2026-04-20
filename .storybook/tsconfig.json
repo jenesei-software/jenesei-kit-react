@@ -1,0 +1,5 @@
+{
+  "extends": "../tsconfig.storybook.json",
+  "include": ["./*.ts", "./*.tsx", "../src", "../.storybook-stories", "../vite-env.d.ts"],
+  "exclude": ["../build", "../build-storybook", "../node_modules"]
+}
