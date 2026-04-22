@@ -10,7 +10,12 @@ import process from 'node:process';
 
 export default defineConfig(() => {
   const isStorybook = process.env.NODE_ENV === 'storybook';
-  const rollupExternal = ['react', 'react-dom', 'react/jsx-runtime', 'react/jsx-dev-runtime'];
+  const rollupExternal = [
+    'react',
+    'react-dom',
+    'react/jsx-runtime',
+    'react/jsx-dev-runtime',
+  ];
 
   logger.info('isStorybookBuild: ', String(isStorybook));
 

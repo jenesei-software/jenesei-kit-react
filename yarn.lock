@@ -572,10 +572,10 @@
   resolved "https://registry.yarnpkg.com/@jenesei-software/jenesei-library-log/-/jenesei-library-log-2.0.0.tgz#6179e9f1b394bfc10a6818f95df844ab240bbc31"
   integrity sha512-IPVeF5NXxVeuOPmKdjf/M5eAj+ru/gU6MQNBMoTJlFJqm/bOFjl9JabnDEVNNa4BzZspmC68zvY2QUnRlc3Olw==
 
-"@jenesei-software/jenesei-plugin-vite@^2.4.0":
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/@jenesei-software/jenesei-plugin-vite/-/jenesei-plugin-vite-2.4.0.tgz#7ee334dc78b7602dc81a1b42464dadd94e548579"
-  integrity sha512-GzR06HGvgmhPYVmT0sCM0gekEA+4484CcvImBmjGX7774TzQhltHBNVzQcsRiTrM/FJ8e7jUW3sYtxUPO28WrQ==
+"@jenesei-software/jenesei-plugin-vite@^2.6.0":
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/@jenesei-software/jenesei-plugin-vite/-/jenesei-plugin-vite-2.6.0.tgz#2962e5086e0a262d40edd279ff9aac6f0d0a03da"
+  integrity sha512-QzU6boTXqs8qtVsfwkARqiVBNIPrrGFvm7CEYLNAXC+7wPUFcK/Io8+VSPD2A2rBdmzNlQkU06gohTK7qNyjzA==
   dependencies:
     "@jenesei-software/jenesei-library-log" "^2.0.0"
     sharp "^0.34.5"
