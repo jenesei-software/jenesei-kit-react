@@ -1,0 +1,1 @@
+import{n as e,o as t}from"./chunk-jRWAZmH_.js";import{t as n}from"./react-CauK803j.js";function r(e){return(0,i.useMemo)(()=>e.every(e=>e==null)?null:t=>{e.forEach(e=>{e&&(typeof e==`function`?e(t):e.current=t)})},[e])}var i,a=e((()=>{i=t(n(),1)})),o=e((()=>{a()}));export{r as n,o as t};

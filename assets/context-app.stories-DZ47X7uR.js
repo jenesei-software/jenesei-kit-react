@@ -1,0 +1,173 @@
+import{n as e,o as t}from"./chunk-jRWAZmH_.js";import{t as n}from"./react-CauK803j.js";import{n as r,t as i}from"./dist-DoWz-BCH.js";import{a,c as o,d as s,m as c,o as ee,u as l}from"./es-B0aPOTho.js";import{n as u,t as te}from"./stack-cMaVq_mm.js";import{n as ne,t as d}from"./iframe-DKkpx5xB.js";import{n as re,t as f}from"./preview-iaM0sSw_.js";import{n as p,t as m}from"./typography-SHUkuvPC.js";var h,g,_,v,y,b,x,S,C,w,T,E=e((()=>{o(),h=e=>typeof e==`number`?`${e}px`:e??`0px`,g=e=>`
+    "notification notification notification"
+    "${e.leftAside?.isTopHeader?`leftAside`:`header`} header ${e.rightAside?.isTopHeader?`rightAside`:`header`}"
+    "${e.leftAside?.isTopHeader||e.leftAside?.isTopNav?`leftAside`:`nav`} nav ${e.rightAside?.isTopHeader||e.rightAside?.isTopNav?`rightAside`:`nav`}"
+    "leftAside children rightAside"
+    "${e.leftAside?.isTopFooter?`leftAside`:`footer`} footer ${e.rightAside?.isTopFooter?`rightAside`:`footer`}"
+  `,_=(e,t)=>({backgroundColor:s.palette[e],backgroundImage:t?`url(${t})`:void 0,backgroundSize:`cover`,backgroundPosition:`center`,backgroundRepeat:`no-repeat`}),v=e=>({gridTemplateAreas:g(e),gridTemplateColumns:`${h(e.leftAside?.length)} 1fr ${h(e.rightAside?.length)}`,gridTemplateRows:`${h(e.notification?.length)} ${h(e.header?.length)} ${h(e.nav?.length)} 1fr ${h(e.footer?.length)}`}),y=e=>({zIndex:e.main?.zIndex??`auto`,overflow:e.isScrollOutlet?`auto`:`visible`}),b=e=>({zIndex:e.notification?.zIndex??`auto`}),x=e=>({zIndex:e.header?.zIndex??`auto`}),S=e=>({zIndex:e.footer?.zIndex??`auto`}),C=e=>({zIndex:e.nav?.zIndex??`auto`}),w=e=>({zIndex:e.leftAside?.zIndex??`auto`}),T=e=>({zIndex:e.rightAside?.zIndex??`auto`})})),D,O,k,A,j,M,N,P,F,I,L,R=e((()=>{f(),d(),o(),a(),D=t(n(),1),r(),E(),O=c(),k=`/home/runner/work/jenesei-kit-react/jenesei-kit-react/src/contexts/context-app/context.tsx`,A=i(null),j=e=>{let{bgColor:t,changeBgColor:n,historyBgColor:r,setDefaultBgColor:i}=N(e.defaultBgColor),{statusBarColor:a,changeStatusBarColor:o,historyStatusBarColor:c,setDefaultStatusBarColor:u}=P(e.defaultStatusBarColor),{bgImage:te,changeBgImage:d,historyBgImage:f,setDefaultBgImage:p}=F(e.defaultBgImage||null),{title:m,changeTitle:h,setHistoryTitle:g,setDefaultTitle:E}=I(e.defaultTitle||null),{description:j,changeDescription:R,historyDescription:z,setDefaultDescription:B}=L(e.defaultDescription),{changePreview:V,previewProps:H}=M(e.defaultPreview),{breakpoint:U,type:W,orientation:G}=ne([`breakpoint`,`type`,`orientation`]),K=(0,D.useCallback)(e=>{if(!e)return null;if(W===`orientation`&&e.orientation)return e.orientation?.[G]??null;if(e.breakpoint&&e.breakpoint)return U===`default`?e.default??null:e.breakpoint?.[U]??null},[U,G,W]),q=(0,D.useMemo)(()=>({isScrollOutlet:e.isScrollOutlet,main:e.main,notification:e.notification?{component:e.notification.component,length:K(e.notification.length),zIndex:e.notification.zIndex}:void 0,header:e.header?{component:e.header.component,length:K(e.header.length),zIndex:e.header.zIndex}:void 0,nav:e.nav?{component:e.nav.component,length:K(e.nav.length),zIndex:e.nav.zIndex}:void 0,footer:e.footer?{component:e.footer.component,length:K(e.footer.length),zIndex:e.footer.zIndex}:void 0,leftAside:e.leftAside?{component:e.leftAside.component,length:K(e.leftAside.length),zIndex:e.leftAside.zIndex,isTopHeader:e.leftAside.isTopHeader,isTopFooter:e.leftAside.isTopFooter,isTopNav:e.leftAside.isTopNav}:void 0,rightAside:e.rightAside?{component:e.rightAside.component,length:K(e.rightAside.length),zIndex:e.rightAside.zIndex,isTopHeader:e.rightAside.isTopHeader,isTopFooter:e.rightAside.isTopFooter,isTopNav:e.rightAside.isTopNav}:void 0}),[e.footer,e.header,e.leftAside,e.main,e.nav,e.notification,e.rightAside,e.isScrollOutlet,K]);return(0,O.jsxDEV)(A.Provider,{value:{changePreview:V,changeStatusBarColor:o,changeBgColor:n,changeBgImage:d,changeTitle:h,changeDescription:R,historyStatusBarColor:c,historyBgColor:r,historyBgImage:f,setHistoryTitle:g,historyDescription:z,setDefaultStatusBarColor:u,setDefaultBgColor:i,setDefaultBgImage:p,setDefaultTitle:E,setDefaultDescription:B},children:[(0,O.jsxDEV)(`title`,{children:m},void 0,!1,{fileName:k,lineNumber:141,columnNumber:7},void 0),(0,O.jsxDEV)(`meta`,{name:`description`,content:j},void 0,!1,{fileName:k,lineNumber:142,columnNumber:7},void 0),(0,O.jsxDEV)(`meta`,{name:`theme-color`,content:s.palette[a]},void 0,!1,{fileName:k,lineNumber:143,columnNumber:7},void 0),(0,O.jsxDEV)(`meta`,{name:`apple-mobile-web-app-status-bar-style`,content:`default`},void 0,!1,{fileName:k,lineNumber:144,columnNumber:7},void 0),(0,O.jsxDEV)(`meta`,{name:`mobile-web-app-capable`,content:`yes`},void 0,!1,{fileName:k,lineNumber:145,columnNumber:7},void 0),(0,O.jsxDEV)(re,{...H,children:(0,O.jsxDEV)(`div`,{className:l.context.app.wrapper,style:_(t,te),children:(0,O.jsxDEV)(`div`,{className:ee([l.context.app.outlet,l.transition.grid]),style:v(q),children:[q.notification?.length?(0,O.jsxDEV)(`section`,{className:l.context.app.outletNotification,style:b(q),children:e.notification?.component||null},void 0,!1,{fileName:k,lineNumber:153,columnNumber:15},void 0):null,q.header?.length?(0,O.jsxDEV)(`header`,{className:l.context.app.outletHeader,style:x(q),children:e.header?.component||null},void 0,!1,{fileName:k,lineNumber:162,columnNumber:15},void 0):null,q.nav?.length?(0,O.jsxDEV)(`nav`,{className:l.context.app.outletNav,style:C(q),children:e.nav?.component||null},void 0,!1,{fileName:k,lineNumber:171,columnNumber:15},void 0):null,q.leftAside?.length?(0,O.jsxDEV)(`aside`,{className:l.context.app.outletLeftAside,style:w(q),children:e.leftAside?.component||null},void 0,!1,{fileName:k,lineNumber:177,columnNumber:15},void 0):null,(0,O.jsxDEV)(`main`,{className:l.context.app.outletChildren,style:y(q),children:e.children},void 0,!1,{fileName:k,lineNumber:185,columnNumber:13},void 0),q.rightAside?.length?(0,O.jsxDEV)(`aside`,{className:l.context.app.outletRightAside,style:T(q),children:e.rightAside?.component||null},void 0,!1,{fileName:k,lineNumber:193,columnNumber:15},void 0):null,q.footer?.length?(0,O.jsxDEV)(`footer`,{className:l.context.app.outletFooter,style:S(q),children:e.footer?.component||null},void 0,!1,{fileName:k,lineNumber:202,columnNumber:15},void 0):null]},void 0,!0,{fileName:k,lineNumber:148,columnNumber:11},void 0)},void 0,!1,{fileName:k,lineNumber:147,columnNumber:9},void 0)},void 0,!1,{fileName:k,lineNumber:146,columnNumber:7},void 0)]},void 0,!0,{fileName:k,lineNumber:121,columnNumber:5},void 0)},M=e=>{let[t,n]=(0,D.useState)(e||{visible:!0,defaultVisible:!0}),r=(0,D.useCallback)(e=>{n(e)},[]);return(0,D.useEffect)(()=>{e&&n(e)},[e]),{previewProps:t,changePreview:r}},N=e=>{let[t,n]=(0,D.useState)({bgColor:e,bgColorHistory:[e],bgColorIndex:0}),r=(0,D.useCallback)(e=>{n(t=>{let n=[...t.bgColorHistory.slice(0,t.bgColorIndex+1),e];return{bgColor:e,bgColorHistory:n,bgColorIndex:n.length-1}})},[]),i=(0,D.useCallback)(e=>{n(t=>{let n=t.bgColorIndex+e;return n>=0&&n<t.bgColorHistory.length?{...t,bgColor:t.bgColorHistory[n],bgColorIndex:n}:t})},[]),a=(0,D.useCallback)(()=>{n({bgColor:e,bgColorHistory:[e],bgColorIndex:0})},[e]);return(0,D.useEffect)(()=>{n({bgColor:e,bgColorHistory:[e],bgColorIndex:0})},[e]),{bgColor:t.bgColor,changeBgColor:r,historyBgColor:i,setDefaultBgColor:a,bgColorIndex:t.bgColorIndex}},P=e=>{let[t,n]=(0,D.useState)({statusBarColor:e,statusBarColorHistory:[e],statusBarColorIndex:0}),r=(0,D.useCallback)(e=>{n(t=>{let n=[...t.statusBarColorHistory.slice(0,t.statusBarColorIndex+1),e];return{statusBarColor:e,statusBarColorHistory:n,statusBarColorIndex:n.length-1}})},[]),i=(0,D.useCallback)(e=>{n(t=>{let n=t.statusBarColorIndex+e;return n>=0&&n<t.statusBarColorHistory.length?{...t,statusBarColor:t.statusBarColorHistory[n],statusBarColorIndex:n}:t})},[]),a=(0,D.useCallback)(()=>{n({statusBarColor:e,statusBarColorHistory:[e],statusBarColorIndex:0})},[e]);return(0,D.useEffect)(()=>{n({statusBarColor:e,statusBarColorHistory:[e],statusBarColorIndex:0})},[e]),{statusBarColor:t.statusBarColor,changeStatusBarColor:r,historyStatusBarColor:i,setDefaultStatusBarColor:a,statusBarColorIndex:t.statusBarColorIndex}},F=e=>{let[t,n]=(0,D.useState)({bgImage:e,bgImageHistory:[e],bgImageIndex:0}),r=(0,D.useCallback)(e=>{n(t=>{let n=[...t.bgImageHistory.slice(0,t.bgImageIndex+1),e];return{bgImage:e,bgImageHistory:n,bgImageIndex:n.length-1}})},[]),i=(0,D.useCallback)(e=>{n(t=>{let n=t.bgImageIndex+e;return n>=0&&n<t.bgImageHistory.length?{...t,bgImage:t.bgImageHistory[n],bgImageIndex:n}:t})},[]),a=(0,D.useCallback)(()=>{n({bgImage:e,bgImageHistory:[e],bgImageIndex:0})},[e]);return(0,D.useEffect)(()=>{n({bgImage:e,bgImageHistory:[e],bgImageIndex:0})},[e]),{bgImage:t.bgImage,changeBgImage:r,historyBgImage:i,setDefaultBgImage:a,bgImageIndex:t.bgImageIndex}},I=e=>{let[t,n]=(0,D.useState)({title:e,titleHistory:[e],titleIndex:0}),r=(0,D.useCallback)(e=>{n(t=>{let n=[...t.titleHistory.slice(0,t.titleIndex+1),e];return{title:e,titleHistory:n,titleIndex:n.length-1}})},[]),i=(0,D.useCallback)(e=>{n(t=>{let n=t.titleIndex+e;return n>=0&&n<t.titleHistory.length?{...t,title:t.titleHistory[n],titleIndex:n}:t})},[]),a=(0,D.useCallback)(()=>{n({title:e,titleHistory:[e],titleIndex:0})},[e]);return(0,D.useEffect)(()=>{n({title:e,titleHistory:[e],titleIndex:0})},[e]),{title:t.title,titleIndex:t.titleIndex,titleHistory:t.titleHistory,changeTitle:r,setHistoryTitle:i,setDefaultTitle:a}},L=e=>{let[t,n]=(0,D.useState)({description:e,descriptionHistory:[e],descriptionIndex:0}),r=(0,D.useCallback)(e=>{n(t=>{let n=[...t.descriptionHistory.slice(0,t.descriptionIndex+1),e];return{description:e,descriptionHistory:n,descriptionIndex:n.length-1}})},[]),i=(0,D.useCallback)(e=>{n(t=>{let n=t.descriptionIndex+e;return n>=0&&n<t.descriptionHistory.length?{...t,description:t.descriptionHistory[n],descriptionIndex:n}:t})},[]),a=(0,D.useCallback)(()=>{n({description:e,descriptionHistory:[e],descriptionIndex:0})},[e]);return(0,D.useEffect)(()=>{n({description:e,descriptionHistory:[e],descriptionIndex:0})},[e]),{description:t.description,changeDescription:r,historyDescription:i,setDefaultDescription:a,descriptionIndex:t.descriptionIndex}};try{j.displayName=`ProviderApp`,j.__docgenInfo={description:``,displayName:`ProviderApp`,filePath:`/home/runner/work/jenesei-kit-react/jenesei-kit-react/src/contexts/context-app/context.tsx`,methods:[],props:{defaultPreview:{defaultValue:null,declarations:[{fileName:`jenesei-kit-react/src/contexts/context-app/context.types.ts`,name:`IAppProvider`}],description:``,name:`defaultPreview`,parent:{fileName:`jenesei-kit-react/src/contexts/context-app/context.types.ts`,name:`IAppProvider`},required:!1,tags:{},type:{name:`IPreviewAdditional`}},defaultBgColor:{defaultValue:null,declarations:[{fileName:`jenesei-kit-react/src/contexts/context-app/context.types.ts`,name:`IAppProvider`}],description:``,name:`defaultBgColor`,parent:{fileName:`jenesei-kit-react/src/contexts/context-app/context.types.ts`,name:`IAppProvider`},required:!0,tags:{},type:{name:`enum`,raw:`"inherit" | "transparent" | "accentRedLight" | "accentOrangeLight" | "accentYellowLight" | "accentGreenLight" | "accentMintLight" | "accentTealLight" | "accentCyanLight" | ... 135 more ... | "shadowWindowInnerShadowDarkStable"`,value:[{value:`"inherit"`},{value:`"transparent"`},{value:`"accentRedLight"`},{value:`"accentOrangeLight"`},{value:`"accentYellowLight"`},{value:`"accentGreenLight"`},{value:`"accentMintLight"`},{value:`"accentTealLight"`},{value:`"accentCyanLight"`},{value:`"accentBlueLight"`},{value:`"accentIndigoLight"`},{value:`"accentPurpleLight"`},{value:`"accentPinkLight"`},{value:`"accentBrownLight"`},{value:`"accentGrayLight"`},{value:`"fillLight"`},{value:`"fillPrimaryLight"`},{value:`"fillSecondaryLight"`},{value:`"fillTertiaryLight"`},{value:`"fillQuaternaryLight"`},{value:`"fillQuinaryLight"`},{value:`"textPrimaryLight"`},{value:`"textSecondaryLight"`},{value:`"textTertiaryLight"`},{value:`"controlMenuLight"`},{value:`"controlTooltipLight"`},{value:`"controlTransparent"`},{value:`"shadowGlassLight"`},{value:`"shadowPrimaryLight"`},{value:`"shadowSecondaryLight"`},{value:`"shadowTertiaryLight"`},{value:`"shadowQuaternaryLight"`},{value:`"shadowWindowInnerShadowLight"`},{value:`"productPrimaryLight"`},{value:`"productSecondaryLight"`},{value:`"productTertiaryLight"`},{value:`"productQuaternaryLight"`},{value:`"productQuinaryLight"`},{value:`"current"`},{value:`"accentRedDark"`},{value:`"accentOrangeDark"`},{value:`"accentYellowDark"`},{value:`"accentGreenDark"`},{value:`"accentMintDark"`},{value:`"accentTealDark"`},{value:`"accentCyanDark"`},{value:`"accentBlueDark"`},{value:`"accentIndigoDark"`},{value:`"accentPurpleDark"`},{value:`"accentPinkDark"`},{value:`"accentBrownDark"`},{value:`"accentGrayDark"`},{value:`"fillDark"`},{value:`"fillPrimaryDark"`},{value:`"fillSecondaryDark"`},{value:`"fillTertiaryDark"`},{value:`"fillQuaternaryDark"`},{value:`"fillQuinaryDark"`},{value:`"textPrimaryDark"`},{value:`"textSecondaryDark"`},{value:`"textTertiaryDark"`},{value:`"controlMenuDark"`},{value:`"controlTooltipDark"`},{value:`"productPrimaryDark"`},{value:`"productSecondaryDark"`},{value:`"productTertiaryDark"`},{value:`"productQuaternaryDark"`},{value:`"productQuinaryDark"`},{value:`"shadowGlassDark"`},{value:`"shadowPrimaryDark"`},{value:`"shadowSecondaryDark"`},{value:`"shadowTertiaryDark"`},{value:`"shadowQuaternaryDark"`},{value:`"shadowWindowInnerShadowDark"`},{value:`"accentRedLightStable"`},{value:`"accentOrangeLightStable"`},{value:`"accentYellowLightStable"`},{value:`"accentGreenLightStable"`},{value:`"accentMintLightStable"`},{value:`"accentTealLightStable"`},{value:`"accentCyanLightStable"`},{value:`"accentBlueLightStable"`},{value:`"accentIndigoLightStable"`},{value:`"accentPurpleLightStable"`},{value:`"accentPinkLightStable"`},{value:`"accentBrownLightStable"`},{value:`"accentGrayLightStable"`},{value:`"fillLightStable"`},{value:`"fillPrimaryLightStable"`},{value:`"fillSecondaryLightStable"`},{value:`"fillTertiaryLightStable"`},{value:`"fillQuaternaryLightStable"`},{value:`"fillQuinaryLightStable"`},{value:`"textPrimaryLightStable"`},{value:`"textSecondaryLightStable"`},{value:`"textTertiaryLightStable"`},{value:`"controlMenuLightStable"`},{value:`"controlTooltipLightStable"`},{value:`"controlTransparentStable"`},{value:`"shadowGlassLightStable"`},{value:`"shadowPrimaryLightStable"`},{value:`"shadowSecondaryLightStable"`},{value:`"shadowTertiaryLightStable"`},{value:`"shadowQuaternaryLightStable"`},{value:`"shadowWindowInnerShadowLightStable"`},{value:`"productPrimaryLightStable"`},{value:`"productSecondaryLightStable"`},{value:`"productTertiaryLightStable"`},{value:`"productQuaternaryLightStable"`},{value:`"productQuinaryLightStable"`},{value:`"accentRedDarkStable"`},{value:`"accentOrangeDarkStable"`},{value:`"accentYellowDarkStable"`},{value:`"accentGreenDarkStable"`},{value:`"accentMintDarkStable"`},{value:`"accentTealDarkStable"`},{value:`"accentCyanDarkStable"`},{value:`"accentBlueDarkStable"`},{value:`"accentIndigoDarkStable"`},{value:`"accentPurpleDarkStable"`},{value:`"accentPinkDarkStable"`},{value:`"accentBrownDarkStable"`},{value:`"accentGrayDarkStable"`},{value:`"fillDarkStable"`},{value:`"fillPrimaryDarkStable"`},{value:`"fillSecondaryDarkStable"`},{value:`"fillTertiaryDarkStable"`},{value:`"fillQuaternaryDarkStable"`},{value:`"fillQuinaryDarkStable"`},{value:`"textPrimaryDarkStable"`},{value:`"textSecondaryDarkStable"`},{value:`"textTertiaryDarkStable"`},{value:`"controlMenuDarkStable"`},{value:`"controlTooltipDarkStable"`},{value:`"productPrimaryDarkStable"`},{value:`"productSecondaryDarkStable"`},{value:`"productTertiaryDarkStable"`},{value:`"productQuaternaryDarkStable"`},{value:`"productQuinaryDarkStable"`},{value:`"shadowGlassDarkStable"`},{value:`"shadowPrimaryDarkStable"`},{value:`"shadowSecondaryDarkStable"`},{value:`"shadowTertiaryDarkStable"`},{value:`"shadowQuaternaryDarkStable"`},{value:`"shadowWindowInnerShadowDarkStable"`}]}},defaultStatusBarColor:{defaultValue:null,declarations:[{fileName:`jenesei-kit-react/src/contexts/context-app/context.types.ts`,name:`IAppProvider`}],description:``,name:`defaultStatusBarColor`,parent:{fileName:`jenesei-kit-react/src/contexts/context-app/context.types.ts`,name:`IAppProvider`},required:!0,tags:{},type:{name:`enum`,raw:`"inherit" | "transparent" | "accentRedLight" | "accentOrangeLight" | "accentYellowLight" | "accentGreenLight" | "accentMintLight" | "accentTealLight" | "accentCyanLight" | ... 135 more ... | "shadowWindowInnerShadowDarkStable"`,value:[{value:`"inherit"`},{value:`"transparent"`},{value:`"accentRedLight"`},{value:`"accentOrangeLight"`},{value:`"accentYellowLight"`},{value:`"accentGreenLight"`},{value:`"accentMintLight"`},{value:`"accentTealLight"`},{value:`"accentCyanLight"`},{value:`"accentBlueLight"`},{value:`"accentIndigoLight"`},{value:`"accentPurpleLight"`},{value:`"accentPinkLight"`},{value:`"accentBrownLight"`},{value:`"accentGrayLight"`},{value:`"fillLight"`},{value:`"fillPrimaryLight"`},{value:`"fillSecondaryLight"`},{value:`"fillTertiaryLight"`},{value:`"fillQuaternaryLight"`},{value:`"fillQuinaryLight"`},{value:`"textPrimaryLight"`},{value:`"textSecondaryLight"`},{value:`"textTertiaryLight"`},{value:`"controlMenuLight"`},{value:`"controlTooltipLight"`},{value:`"controlTransparent"`},{value:`"shadowGlassLight"`},{value:`"shadowPrimaryLight"`},{value:`"shadowSecondaryLight"`},{value:`"shadowTertiaryLight"`},{value:`"shadowQuaternaryLight"`},{value:`"shadowWindowInnerShadowLight"`},{value:`"productPrimaryLight"`},{value:`"productSecondaryLight"`},{value:`"productTertiaryLight"`},{value:`"productQuaternaryLight"`},{value:`"productQuinaryLight"`},{value:`"current"`},{value:`"accentRedDark"`},{value:`"accentOrangeDark"`},{value:`"accentYellowDark"`},{value:`"accentGreenDark"`},{value:`"accentMintDark"`},{value:`"accentTealDark"`},{value:`"accentCyanDark"`},{value:`"accentBlueDark"`},{value:`"accentIndigoDark"`},{value:`"accentPurpleDark"`},{value:`"accentPinkDark"`},{value:`"accentBrownDark"`},{value:`"accentGrayDark"`},{value:`"fillDark"`},{value:`"fillPrimaryDark"`},{value:`"fillSecondaryDark"`},{value:`"fillTertiaryDark"`},{value:`"fillQuaternaryDark"`},{value:`"fillQuinaryDark"`},{value:`"textPrimaryDark"`},{value:`"textSecondaryDark"`},{value:`"textTertiaryDark"`},{value:`"controlMenuDark"`},{value:`"controlTooltipDark"`},{value:`"productPrimaryDark"`},{value:`"productSecondaryDark"`},{value:`"productTertiaryDark"`},{value:`"productQuaternaryDark"`},{value:`"productQuinaryDark"`},{value:`"shadowGlassDark"`},{value:`"shadowPrimaryDark"`},{value:`"shadowSecondaryDark"`},{value:`"shadowTertiaryDark"`},{value:`"shadowQuaternaryDark"`},{value:`"shadowWindowInnerShadowDark"`},{value:`"accentRedLightStable"`},{value:`"accentOrangeLightStable"`},{value:`"accentYellowLightStable"`},{value:`"accentGreenLightStable"`},{value:`"accentMintLightStable"`},{value:`"accentTealLightStable"`},{value:`"accentCyanLightStable"`},{value:`"accentBlueLightStable"`},{value:`"accentIndigoLightStable"`},{value:`"accentPurpleLightStable"`},{value:`"accentPinkLightStable"`},{value:`"accentBrownLightStable"`},{value:`"accentGrayLightStable"`},{value:`"fillLightStable"`},{value:`"fillPrimaryLightStable"`},{value:`"fillSecondaryLightStable"`},{value:`"fillTertiaryLightStable"`},{value:`"fillQuaternaryLightStable"`},{value:`"fillQuinaryLightStable"`},{value:`"textPrimaryLightStable"`},{value:`"textSecondaryLightStable"`},{value:`"textTertiaryLightStable"`},{value:`"controlMenuLightStable"`},{value:`"controlTooltipLightStable"`},{value:`"controlTransparentStable"`},{value:`"shadowGlassLightStable"`},{value:`"shadowPrimaryLightStable"`},{value:`"shadowSecondaryLightStable"`},{value:`"shadowTertiaryLightStable"`},{value:`"shadowQuaternaryLightStable"`},{value:`"shadowWindowInnerShadowLightStable"`},{value:`"productPrimaryLightStable"`},{value:`"productSecondaryLightStable"`},{value:`"productTertiaryLightStable"`},{value:`"productQuaternaryLightStable"`},{value:`"productQuinaryLightStable"`},{value:`"accentRedDarkStable"`},{value:`"accentOrangeDarkStable"`},{value:`"accentYellowDarkStable"`},{value:`"accentGreenDarkStable"`},{value:`"accentMintDarkStable"`},{value:`"accentTealDarkStable"`},{value:`"accentCyanDarkStable"`},{value:`"accentBlueDarkStable"`},{value:`"accentIndigoDarkStable"`},{value:`"accentPurpleDarkStable"`},{value:`"accentPinkDarkStable"`},{value:`"accentBrownDarkStable"`},{value:`"accentGrayDarkStable"`},{value:`"fillDarkStable"`},{value:`"fillPrimaryDarkStable"`},{value:`"fillSecondaryDarkStable"`},{value:`"fillTertiaryDarkStable"`},{value:`"fillQuaternaryDarkStable"`},{value:`"fillQuinaryDarkStable"`},{value:`"textPrimaryDarkStable"`},{value:`"textSecondaryDarkStable"`},{value:`"textTertiaryDarkStable"`},{value:`"controlMenuDarkStable"`},{value:`"controlTooltipDarkStable"`},{value:`"productPrimaryDarkStable"`},{value:`"productSecondaryDarkStable"`},{value:`"productTertiaryDarkStable"`},{value:`"productQuaternaryDarkStable"`},{value:`"productQuinaryDarkStable"`},{value:`"shadowGlassDarkStable"`},{value:`"shadowPrimaryDarkStable"`},{value:`"shadowSecondaryDarkStable"`},{value:`"shadowTertiaryDarkStable"`},{value:`"shadowQuaternaryDarkStable"`},{value:`"shadowWindowInnerShadowDarkStable"`}]}},defaultBgImage:{defaultValue:null,declarations:[{fileName:`jenesei-kit-react/src/contexts/context-app/context.types.ts`,name:`IAppProvider`}],description:``,name:`defaultBgImage`,parent:{fileName:`jenesei-kit-react/src/contexts/context-app/context.types.ts`,name:`IAppProvider`},required:!1,tags:{},type:{name:`string`}},defaultTitle:{defaultValue:null,declarations:[{fileName:`jenesei-kit-react/src/contexts/context-app/context.types.ts`,name:`IAppProvider`}],description:``,name:`defaultTitle`,parent:{fileName:`jenesei-kit-react/src/contexts/context-app/context.types.ts`,name:`IAppProvider`},required:!0,tags:{},type:{name:`string`}},defaultDescription:{defaultValue:null,declarations:[{fileName:`jenesei-kit-react/src/contexts/context-app/context.types.ts`,name:`IAppProvider`}],description:``,name:`defaultDescription`,parent:{fileName:`jenesei-kit-react/src/contexts/context-app/context.types.ts`,name:`IAppProvider`},required:!0,tags:{},type:{name:`string`}},isScrollOutlet:{defaultValue:null,declarations:[{fileName:`jenesei-kit-react/src/contexts/context-app/context.types.ts`,name:`IAppProvider`}],description:``,name:`isScrollOutlet`,parent:{fileName:`jenesei-kit-react/src/contexts/context-app/context.types.ts`,name:`IAppProvider`},required:!1,tags:{},type:{name:`boolean`}},notification:{defaultValue:null,declarations:[{fileName:`jenesei-kit-react/src/contexts/context-app/context.types.ts`,name:`IAppProvider`}],description:``,name:`notification`,parent:{fileName:`jenesei-kit-react/src/contexts/context-app/context.types.ts`,name:`IAppProvider`},required:!1,tags:{},type:{name:`IAppProviderElement`}},header:{defaultValue:null,declarations:[{fileName:`jenesei-kit-react/src/contexts/context-app/context.types.ts`,name:`IAppProvider`}],description:``,name:`header`,parent:{fileName:`jenesei-kit-react/src/contexts/context-app/context.types.ts`,name:`IAppProvider`},required:!1,tags:{},type:{name:`IAppProviderElement`}},nav:{defaultValue:null,declarations:[{fileName:`jenesei-kit-react/src/contexts/context-app/context.types.ts`,name:`IAppProvider`}],description:``,name:`nav`,parent:{fileName:`jenesei-kit-react/src/contexts/context-app/context.types.ts`,name:`IAppProvider`},required:!1,tags:{},type:{name:`IAppProviderElement`}},footer:{defaultValue:null,declarations:[{fileName:`jenesei-kit-react/src/contexts/context-app/context.types.ts`,name:`IAppProvider`}],description:``,name:`footer`,parent:{fileName:`jenesei-kit-react/src/contexts/context-app/context.types.ts`,name:`IAppProvider`},required:!1,tags:{},type:{name:`IAppProviderElement`}},leftAside:{defaultValue:null,declarations:[{fileName:`jenesei-kit-react/src/contexts/context-app/context.types.ts`,name:`IAppProvider`}],description:``,name:`leftAside`,parent:{fileName:`jenesei-kit-react/src/contexts/context-app/context.types.ts`,name:`IAppProvider`},required:!1,tags:{},type:{name:`(IAppProviderElement & { isTopHeader?: boolean; isTopFooter?: boolean; isTopNav?: boolean | undefined; }) | undefined`}},rightAside:{defaultValue:null,declarations:[{fileName:`jenesei-kit-react/src/contexts/context-app/context.types.ts`,name:`IAppProvider`}],description:``,name:`rightAside`,parent:{fileName:`jenesei-kit-react/src/contexts/context-app/context.types.ts`,name:`IAppProvider`},required:!1,tags:{},type:{name:`(IAppProviderElement & { isTopHeader?: boolean; isTopFooter?: boolean; isTopNav?: boolean | undefined; }) | undefined`}},main:{defaultValue:null,declarations:[{fileName:`jenesei-kit-react/src/contexts/context-app/context.types.ts`,name:`IAppProvider`}],description:``,name:`main`,parent:{fileName:`jenesei-kit-react/src/contexts/context-app/context.types.ts`,name:`IAppProvider`},required:!1,tags:{},type:{name:`{ zIndex?: number; }`}}},tags:{}}}catch{}try{N.displayName=`useBgColor`,N.__docgenInfo={description:``,displayName:`useBgColor`,filePath:`/home/runner/work/jenesei-kit-react/jenesei-kit-react/src/contexts/context-app/context.tsx`,methods:[],props:{},tags:{}}}catch{}try{P.displayName=`useStatusBarColor`,P.__docgenInfo={description:``,displayName:`useStatusBarColor`,filePath:`/home/runner/work/jenesei-kit-react/jenesei-kit-react/src/contexts/context-app/context.tsx`,methods:[],props:{},tags:{}}}catch{}try{F.displayName=`useBgImage`,F.__docgenInfo={description:``,displayName:`useBgImage`,filePath:`/home/runner/work/jenesei-kit-react/jenesei-kit-react/src/contexts/context-app/context.tsx`,methods:[],props:{},tags:{}}}catch{}try{L.displayName=`useDescription`,L.__docgenInfo={description:``,displayName:`useDescription`,filePath:`/home/runner/work/jenesei-kit-react/jenesei-kit-react/src/contexts/context-app/context.tsx`,methods:[],props:{},tags:{}}}catch{}})),z=e((()=>{R()})),B=e((()=>{R(),z()})),V,H,U,W,G,K,q,J,Y,X,Z,Q,$,ie;e((()=>{te(),m(),B(),o(),V=c(),H=`/home/runner/work/jenesei-kit-react/jenesei-kit-react/.storybook-stories/default/context-app.stories.tsx`,U={component:j,title:`Context/1. App`},W=(0,V.jsxDEV)(u,{style:{backgroundColor:s.palette.fillPrimaryDark,padding:`2px`,height:`100%`,width:`100%`},children:(0,V.jsxDEV)(p,{sx:{variant:`headline`,wrap:`nowrap`},children:`Notification`},void 0,!1,{fileName:H,lineNumber:18,columnNumber:5},void 0)},void 0,!1,{fileName:H,lineNumber:12,columnNumber:29},void 0),G=(0,V.jsxDEV)(u,{style:{backgroundColor:s.palette.fillPrimaryLight,padding:`10px`,height:`100%`,width:`100%`},children:(0,V.jsxDEV)(p,{sx:{variant:`headline`,wrap:`nowrap`},children:`Header`},void 0,!1,{fileName:H,lineNumber:31,columnNumber:5},void 0)},void 0,!1,{fileName:H,lineNumber:25,columnNumber:23},void 0),K=(0,V.jsxDEV)(u,{style:{backgroundColor:s.palette.fillSecondaryLight,padding:`10px`,height:`100%`,width:`100%`},children:(0,V.jsxDEV)(p,{sx:{variant:`headline`,wrap:`nowrap`},children:`Footer`},void 0,!1,{fileName:H,lineNumber:44,columnNumber:5},void 0)},void 0,!1,{fileName:H,lineNumber:38,columnNumber:23},void 0),q=(0,V.jsxDEV)(u,{style:{backgroundColor:s.palette.fillTertiaryLight,padding:`10px`,height:`100%`,width:`100%`},children:(0,V.jsxDEV)(p,{sx:{variant:`headline`,wrap:`nowrap`},children:`Left Aside`},void 0,!1,{fileName:H,lineNumber:57,columnNumber:5},void 0)},void 0,!1,{fileName:H,lineNumber:51,columnNumber:26},void 0),J=(0,V.jsxDEV)(u,{style:{backgroundColor:s.palette.fillQuaternaryLight,padding:`10px`,height:`100%`,width:`100%`},children:(0,V.jsxDEV)(p,{sx:{variant:`headline`,wrap:`nowrap`},children:`Right Aside`},void 0,!1,{fileName:H,lineNumber:70,columnNumber:5},void 0)},void 0,!1,{fileName:H,lineNumber:64,columnNumber:27},void 0),Y=(0,V.jsxDEV)(u,{style:{backgroundColor:s.palette.fillQuinaryLight,padding:`10px`,height:`100%`,width:`100%`},children:(0,V.jsxDEV)(p,{sx:{variant:`headline`,wrap:`nowrap`},children:`Nav`},void 0,!1,{fileName:H,lineNumber:83,columnNumber:5},void 0)},void 0,!1,{fileName:H,lineNumber:77,columnNumber:20},void 0),X=(0,V.jsxDEV)(u,{sx:{backgroundColor:s.palette.fillDark,padding:`10px`,flexDirection:`column`,height:`fit-content`},children:[(0,V.jsxDEV)(p,{sx:{variant:`title-1`,wrap:`nowrap`},children:`Title 1`},void 0,!1,{fileName:H,lineNumber:96,columnNumber:5},void 0),(0,V.jsxDEV)(p,{sx:{variant:`title-2`,wrap:`nowrap`},children:`Title 2`},void 0,!1,{fileName:H,lineNumber:102,columnNumber:5},void 0),(0,V.jsxDEV)(p,{sx:{variant:`title-3`,wrap:`nowrap`},children:`Title 3`},void 0,!1,{fileName:H,lineNumber:108,columnNumber:5},void 0),(0,V.jsxDEV)(p,{sx:{variant:`title-4`,wrap:`nowrap`},children:`Title 4`},void 0,!1,{fileName:H,lineNumber:114,columnNumber:5},void 0)]},void 0,!0,{fileName:H,lineNumber:90,columnNumber:25},void 0),Z={args:{defaultPreview:{defaultVisible:!1,visible:!0,minTime:2e3,content:(0,V.jsxDEV)(p,{sx:{variant:`headline`,wrap:`nowrap`},children:`Loading`},void 0,!1,{fileName:H,lineNumber:127,columnNumber:16},void 0)},defaultBgColor:`fillDark`,isScrollOutlet:!1,defaultTitle:`Storybook?`,defaultDescription:`Description from Storybook?`,notification:{component:W,length:{default:`20px`,breakpoint:{tablet:`15px`,mobile:`10px`}}},header:{component:G,length:{default:`80px`,breakpoint:{tablet:`60px`,mobile:`40px`}}},leftAside:{component:q,length:{default:`180px`,breakpoint:{tablet:`160px`,mobile:null}}},nav:{component:Y,length:{default:`80px`,breakpoint:{tablet:`60px`,mobile:`40px`}}},rightAside:{component:J,length:{default:`180px`,breakpoint:{tablet:`160px`,mobile:null}}},footer:{component:K,length:{default:`80px`,breakpoint:{tablet:`60px`,mobile:`40px`}}},children:X}},Q={render:e=>(0,V.jsxDEV)(j,{...e},void 0,!1,{fileName:H,lineNumber:202,columnNumber:19},void 0),args:{defaultBgColor:`fillPrimaryDark`,isScrollOutlet:!0,header:{component:G,length:{default:`80px`,breakpoint:{tablet:`60px`,mobile:`40px`}}},nav:{component:Y,length:{default:`80px`,breakpoint:{tablet:`60px`,mobile:`40px`}}},leftAside:{component:q,length:{default:`80px`,breakpoint:{tablet:`60px`,mobile:null}},isTopNav:!0},rightAside:{component:J,length:{default:`80px`,breakpoint:{tablet:`60px`,mobile:null}},isTopFooter:!0,isTopHeader:!0},footer:{component:K,length:{default:`80px`,breakpoint:{tablet:`60px`,mobile:`40px`}}},children:X}},$={render:e=>(0,V.jsxDEV)(j,{...e},void 0,!1,{fileName:H,lineNumber:263,columnNumber:19},void 0),args:{defaultBgColor:`fillPrimaryDark`,isScrollOutlet:!1,header:{component:G,length:{default:`80px`,breakpoint:{tablet:`60px`,mobile:`40px`}}},footer:{component:K,length:{default:`80px`,breakpoint:{tablet:`60px`,mobile:null}}},children:X}},Z.parameters={...Z.parameters,docs:{...Z.parameters?.docs,source:{originalSource:`{
+  args: {
+    defaultPreview: {
+      defaultVisible: false,
+      visible: true,
+      minTime: 2000,
+      content: <Typography sx={{
+        variant: 'headline',
+        wrap: 'nowrap'
+      }}>
+          Loading
+        </Typography>
+    },
+    defaultBgColor: 'fillDark',
+    isScrollOutlet: false,
+    defaultTitle: 'Storybook?',
+    defaultDescription: 'Description from Storybook?',
+    notification: {
+      component: defaultNotification,
+      length: {
+        default: '20px',
+        breakpoint: {
+          tablet: '15px',
+          mobile: '10px'
+        }
+      }
+    },
+    header: {
+      component: defaultHeader,
+      length: {
+        default: '80px',
+        breakpoint: {
+          tablet: '60px',
+          mobile: '40px'
+        }
+      }
+    },
+    leftAside: {
+      component: defaultLeftAside,
+      length: {
+        default: '180px',
+        breakpoint: {
+          tablet: '160px',
+          mobile: null
+        }
+      }
+    },
+    nav: {
+      component: defaultNav,
+      length: {
+        default: '80px',
+        breakpoint: {
+          tablet: '60px',
+          mobile: '40px'
+        }
+      }
+    },
+    rightAside: {
+      component: defaultRightAside,
+      length: {
+        default: '180px',
+        breakpoint: {
+          tablet: '160px',
+          mobile: null
+        }
+      }
+    },
+    footer: {
+      component: defaultFooter,
+      length: {
+        default: '80px',
+        breakpoint: {
+          tablet: '60px',
+          mobile: '40px'
+        }
+      }
+    },
+    children: defaultChildren
+  }
+}`,...Z.parameters?.docs?.source}}},Q.parameters={...Q.parameters,docs:{...Q.parameters?.docs,source:{originalSource:`{
+  render: args => <ProviderApp {...args} />,
+  args: {
+    defaultBgColor: 'fillPrimaryDark',
+    isScrollOutlet: true,
+    header: {
+      component: defaultHeader,
+      length: {
+        default: '80px',
+        breakpoint: {
+          tablet: '60px',
+          mobile: '40px'
+        }
+      }
+    },
+    nav: {
+      component: defaultNav,
+      length: {
+        default: '80px',
+        breakpoint: {
+          tablet: '60px',
+          mobile: '40px'
+        }
+      }
+    },
+    leftAside: {
+      component: defaultLeftAside,
+      length: {
+        default: '80px',
+        breakpoint: {
+          tablet: '60px',
+          mobile: null
+        }
+      },
+      isTopNav: true
+    },
+    rightAside: {
+      component: defaultRightAside,
+      length: {
+        default: '80px',
+        breakpoint: {
+          tablet: '60px',
+          mobile: null
+        }
+      },
+      isTopFooter: true,
+      isTopHeader: true
+    },
+    footer: {
+      component: defaultFooter,
+      length: {
+        default: '80px',
+        breakpoint: {
+          tablet: '60px',
+          mobile: '40px'
+        }
+      }
+    },
+    children: defaultChildren
+  }
+}`,...Q.parameters?.docs?.source}}},$.parameters={...$.parameters,docs:{...$.parameters?.docs,source:{originalSource:`{
+  render: args => <ProviderApp {...args} />,
+  args: {
+    defaultBgColor: 'fillPrimaryDark',
+    isScrollOutlet: false,
+    header: {
+      component: defaultHeader,
+      length: {
+        default: '80px',
+        breakpoint: {
+          tablet: '60px',
+          mobile: '40px'
+        }
+      }
+    },
+    footer: {
+      component: defaultFooter,
+      length: {
+        default: '80px',
+        breakpoint: {
+          tablet: '60px',
+          mobile: null
+        }
+      }
+    },
+    children: defaultChildren
+  }
+}`,...$.parameters?.docs?.source}}},ie=[`Default`,`AsideDifferentTop`,`WithoutAsides`]}))();export{Q as AsideDifferentTop,Z as Default,$ as WithoutAsides,ie as __namedExportsOrder,U as default};
