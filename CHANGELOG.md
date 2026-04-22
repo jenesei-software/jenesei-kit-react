@@ -1,4 +1,26 @@
 
+# [2.0.0](https://github.com/jenesei-software/jenesei-kit-react/compare/v1.3.40...v2.0.0) (2026-04-17)
+
+
+### chore
+
+* clean up code and improve formatting across multiple files ([9038b71](https://github.com/jenesei-software/jenesei-kit-react/commit/9038b71b5c1a99911f58229f73938f9f164183a1))
+* clean up code structure and remove unused imports ([d5a035d](https://github.com/jenesei-software/jenesei-kit-react/commit/d5a035d5cc62e80702a7bdc0eefe9786fe454039))
+* remove redundant code blocks from changes section ([afd88be](https://github.com/jenesei-software/jenesei-kit-react/commit/afd88be54bdfb23b27591f4c83719320842c9688))
+
+### feat
+
+* Add new properties and styles to Button, Select, Popover, and Tooltip components ([4e25526](https://github.com/jenesei-software/jenesei-kit-react/commit/4e25526b121cbeb6d0d67571f44b2daa2b8beb0f))
+* Enhance Popover and Select components with new features and styles ([2a49cb9](https://github.com/jenesei-software/jenesei-kit-react/commit/2a49cb9c9bba742c0053181e51d7dc72ea3461e1))
+
+### refactor
+
+* reorganize imports and update constants usage ([55da5c5](https://github.com/jenesei-software/jenesei-kit-react/commit/55da5c55b6f0c28feb3bfdf4d141a27c3aadd1fd))
+
+### version
+
+* 2.0.0 ([002d597](https://github.com/jenesei-software/jenesei-kit-react/commit/002d59708bada50a68eaad3c5502bee13f084921))
+
 ## [1.3.40](https://github.com/jenesei-software/jenesei-kit-react/compare/v1.3.39...v1.3.40) (2025-10-21)
 
 

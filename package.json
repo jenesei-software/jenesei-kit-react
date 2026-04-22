@@ -35,9 +35,10 @@
     "build:storybook": "npm run gen:exports && cross-env NODE_ENV=storybook storybook build --quiet --disable-telemetry -o build-storybook",
     "storybook": "npm run gen:exports && storybook dev -p 3030"
   },
+  "type": "module",
+  "version": "2.1.0",
   "dependencies": {
     "@floating-ui/react": "^0.27.12",
-    "@jenesei-software/jenesei-library-log": "^2.0.0",
     "@tanstack/react-virtual": "^3.10.8",
     "clsx": "^2.1.1",
     "framer-motion": "^11.13.1",
@@ -55,6 +56,7 @@
     "@fontsource/roboto": "^5.1.0",
     "@fontsource/roboto-mono": "^5.2.6",
     "@fontsource/work-sans": "^5.2.5",
+    "@jenesei-software/jenesei-library-log": "^2.0.0",
     "@jenesei-software/jenesei-plugin-vite": "^2.4.0",
     "@storybook/addon-docs": "^10.3.5",
     "@storybook/addon-links": "^10.3.5",
@@ -66,11 +68,7 @@
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^6.0.1",
     "autoprefixer": "^10.4.27",
-    "baseline-browser-mapping": "^2.9.18",
     "cross-env": "^7.0.3",
-    "dotenv-cli": "^11.0.0",
-    "fs": "^0.0.1-security",
-    "path": "^0.12.7",
     "react": "^19.2.4",
     "react-docgen-typescript": "^2.2.2",
     "react-dom": "^19.2.4",
@@ -81,6 +79,7 @@
     "vite-plugin-dts": "^4.3.0"
   },
   "peerDependencies": {
+    "@jenesei-software/jenesei-library-log": "^2.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
@@ -318,6 +317,7 @@
       "import": "./build/context-sonner.es.js",
       "require": "./build/context-sonner.cjs.js",
       "default": "./build/context-sonner.es.js"
-    }
+    },
+    "./styles.css": "./build/styles.css"
   }
 }

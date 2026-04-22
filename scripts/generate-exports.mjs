@@ -88,6 +88,8 @@ function createExportsMap(entries) {
     exportsMap[exportKey] = createExportRecord(entry.key);
   }
 
+  exportsMap['./styles.css'] = './build/styles.css';
+
   return exportsMap;
 }
 

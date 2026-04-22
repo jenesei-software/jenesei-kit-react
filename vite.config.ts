@@ -1,11 +1,11 @@
 import { pluginUpdateIcons, pluginUpdateReadmePD } from '@jenesei-software/jenesei-plugin-vite';
 import react from '@vitejs/plugin-react';
 import autoprefixer from 'autoprefixer';
-import path, { resolve } from 'path';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 
 import { logger } from './src/cores/logger';
+import path, { resolve } from 'node:path';
 import process from 'node:process';
 
 export default defineConfig(() => {
@@ -13,7 +13,7 @@ export default defineConfig(() => {
   const rollupExternal = ['react', 'react-dom', 'react/jsx-runtime', 'react/jsx-dev-runtime'];
 
   logger.info('isStorybookBuild: ', String(isStorybook));
-  
+
   const sizesBackgroundTransparent = [57, 64, 72, 76, 114, 120, 144, 152, 180, 192, 256, 384, 512];
   const sizesBackgroundWhite: number[] = [];
   const sizesFavicon = [64];
@@ -65,8 +65,10 @@ export default defineConfig(() => {
       outDir: './build',
       rootDir: './src',
       minify: 'esbuild',
+      cssCodeSplit: false,
       lib: !isStorybook
         ? {
+            cssFileName: 'styles',
             entry: {
               index: resolve(__dirname, 'src/index.ts'),
               'style-motion': resolve(__dirname, 'src/styles/motion/index.ts'),

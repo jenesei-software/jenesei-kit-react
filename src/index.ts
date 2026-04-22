@@ -1,3 +1,5 @@
+import './styles/css/index.css';
+
 export * from './styles/motion';
 export * from './styles/utils';
 
