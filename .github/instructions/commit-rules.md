@@ -1,5 +1,7 @@
 # Git Commits
 
+Generate exactly one commit message for the whole staged change.
+
 ## Types
 
 * `feat` - new feature
@@ -21,10 +23,18 @@ Optional body:
 
 ## Rules
 
+* Generate exactly one commit message
+* Do not generate multiple commit messages
+* Do not create one commit per file, folder, component, or config
+* Choose the main purpose of the change
+* Use the most appropriate single type
+* Use a scope only if it describes the main area of the change
 * Write in imperative mood: `add`, not `added`
 * Keep the first line lowercase
 * Keep the first line short: max 72 chars
 * The first line must stay on one visible line without wrapping
+* Do not mention every changed file
+* Do not list implementation details in the first line
 * The body can use any casing
 
 ## Examples
@@ -36,8 +46,8 @@ Optional body:
 
 Longer example:
 
-`feat: enhance Popover and Select components`
+`feat(dev): improve local development routing`
 
-* integrate Floating UI for better positioning with arrow support
-* add animation variants to Popover
-* refactor Popover styles and props for better customization
+* update local environment URLs
+* configure Docker ports for local services
+* adjust Caddy routing for local development
