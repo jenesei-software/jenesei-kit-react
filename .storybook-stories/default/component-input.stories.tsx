@@ -401,7 +401,7 @@ const CollectionWrapper: FC = () => {
               right: '0px',
               width: '20px',
               children: (
-                <Stack sx={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Stack style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                   <Typography sx={{ variant: 'title-3', color: 'textPrimaryLight' }}>$</Typography>
                 </Stack>
               ),
@@ -419,7 +419,7 @@ const CollectionWrapper: FC = () => {
               right: '0px',
               width: '24px',
               children: (
-                <Stack sx={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Stack style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                   <Icon type={'logo'} name={'Jenesei'} size={'large'} color='textPrimaryLight' />
                 </Stack>
               ),
@@ -439,7 +439,7 @@ const CollectionWrapper: FC = () => {
               isFocusInput: true,
               children: (
                 <Stack
-                  sx={{
+                  style={{
                     paddingLeft: '2px',
                     paddingRight: '2px',
                     flex: 1,
@@ -458,7 +458,7 @@ const CollectionWrapper: FC = () => {
               width: '24px',
               isFocusInput: true,
               children: (
-                <Stack sx={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Stack style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                   <Icon type={'logo'} name={'Jenesei'} size={'large'} color='textPrimaryLight' />
                 </Stack>
               ),

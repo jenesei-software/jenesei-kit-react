@@ -3,6 +3,9 @@ import { CSS_VARS, ISx } from '@local/styles/utils';
 
 import { FC, PropsWithChildren } from 'react';
 
+export const LOREM_IPSUM_TEXT =
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae metus non justo facilisis volutpat. Suspendisse potenti. Donec luctus, nibh at laoreet gravida, turpis sem aliquet augue, vitae finibus justo massa vitae nunc.';
+
 export const WrapperBig: FC<PropsWithChildren & ISx> = (props) => {
   return (
     <Stack

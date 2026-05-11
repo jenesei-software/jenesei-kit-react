@@ -1,7 +1,5 @@
 import { IPreview, Preview as PreviewComponent } from '@local/areas/preview';
 import { Stack } from '@local/components/stack';
-import { Typography } from '@local/components/typography';
-import { MotionTypingEffect } from '@local/styles/motion';
 import { CSS_VARS } from '@local/styles/utils/constants';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -29,7 +27,7 @@ const CollectionWrapper: FC = () => {
   return (
     <WrapperBig>
       <Stack
-        sx={{
+        style={{
           position: 'relative',
           width: '200px',
           height: '200px',
@@ -41,7 +39,7 @@ const CollectionWrapper: FC = () => {
         <PreviewComponent time={2000} defaultVisible={false} />
       </Stack>
       <Stack
-        sx={{
+        style={{
           position: 'relative',
           width: '200px',
           height: '200px',

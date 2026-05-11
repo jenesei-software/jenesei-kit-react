@@ -1,4 +1,4 @@
-import { SelectLanguage, SelectMonths, SelectYear } from '@local/components/select';
+import { SelectMonths, SelectYear } from '@local/components/select';
 import { Typography } from '@local/components/typography';
 import { LOCALE_MONTHS } from '@local/cores/consts';
 
@@ -8,8 +8,8 @@ import { FC, useState } from 'react';
 
 import { WrapperBig, WrapperMin } from './tools';
 
-const meta: Meta<typeof SelectLanguage> = {
-  component: SelectLanguage,
+const meta: Meta<typeof SelectYear> = {
+  component: SelectYear,
   title: 'Component/12. Select',
 };
 

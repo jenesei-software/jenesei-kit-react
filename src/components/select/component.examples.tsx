@@ -1,35 +1,12 @@
-import { LIST_LANGUAGE } from '@local/cores/consts';
+
 
 import moment from 'moment';
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { Select } from './component';
-import { ISelectLanguage, ISelectLanguageOption, ISelectMonth, ISelectMonths, ISelectYear } from './component.types';
+import { ISelectExampleOption, ISelectMonth, ISelectMonths, ISelectYear } from './component.types';
 
-export const SelectLanguage: FC<ISelectLanguage> = (props) => {
-  const { value, onChange } = props;
 
-  const option = LIST_LANGUAGE;
-
-  const [viewOption] = useState<ISelectLanguageOption[]>(option);
-
-  const handleSelectChange = (value: ISelectLanguageOption[]) => {
-    if (value.length === 0) {
-      onChange(null);
-    } else {
-      onChange(value[0].value.toString());
-    }
-  };
-  const valueLocal = useMemo(() => {
-    const findOption = option.find((e) => e.value === value);
-    if (!findOption) return [];
-    return [findOption];
-  }, [value]);
-
-  return (
-    <Select<ISelectLanguageOption> {...props} option={viewOption} value={valueLocal} onChange={handleSelectChange} />
-  );
-};
 export const SelectMonth: FC<ISelectMonth> = (props) => {
   const { value, onChange, dateMin, dateMax, monthsLocale, isShortLabel } = props;
 
@@ -55,7 +32,7 @@ export const SelectMonth: FC<ISelectMonth> = (props) => {
     });
   }, [monthsLocale, year, dateMin, dateMax, isShortLabel]);
 
-  const handleSelectChange = (value: ISelectLanguageOption[]) => {
+  const handleSelectChange = (value: ISelectExampleOption[]) => {
     if (value.length === 0) onChange(null);
     onChange(+value[0].value);
   };
@@ -65,7 +42,7 @@ export const SelectMonth: FC<ISelectMonth> = (props) => {
     return [findOption];
   }, [value, option]);
 
-  return <Select<ISelectLanguageOption> {...props} option={option} value={valueLocal} onChange={handleSelectChange} />;
+  return <Select<ISelectExampleOption> {...props} option={option} value={valueLocal} onChange={handleSelectChange} />;
 };
 export const SelectMonths: FC<ISelectMonths> = (props) => {
   const { value, onChange, dateMin, dateMax, monthsLocale, isShortLabel } = props;
@@ -91,18 +68,18 @@ export const SelectMonths: FC<ISelectMonths> = (props) => {
       };
     });
   }, [monthsLocale, year, dateMin, dateMax, isShortLabel]);
-  const [viewOption, setViewOption] = useState<ISelectLanguageOption[]>(option);
+  const [viewOption, setViewOption] = useState<ISelectExampleOption[]>(option);
 
   useEffect(() => {
     setViewOption(option);
   }, [option]);
-  const handleSelectChange = (value: ISelectLanguageOption[]) => {
+  const handleSelectChange = (value: ISelectExampleOption[]) => {
     if (value.length === 0) onChange([]);
     onChange(value.map((e) => +e.value));
   };
   const valueLocal = useMemo(() => {
     if (!value || value.length === 0) return [];
-    return value.map((val) => option.find((opt) => opt.value === val)).filter(Boolean) as ISelectLanguageOption[];
+    return value.map((val) => option.find((opt) => opt.value === val)).filter(Boolean) as ISelectExampleOption[];
   }, [value, option]);
 
   const [search, setSearch] = useState<string>('');
@@ -122,7 +99,7 @@ export const SelectMonths: FC<ISelectMonths> = (props) => {
     [option],
   );
   return (
-    <Select<ISelectLanguageOption>
+    <Select<ISelectExampleOption>
       {...props}
       valueSearch={search}
       onChangeSearch={handleSearchChange}
@@ -164,7 +141,7 @@ export const SelectYear: FC<ISelectYear> = (props) => {
       : yearArray.sort((a, b) => b.value - a.value);
   }, [endYear, startYear, sortOrder]);
 
-  const handleSelectChange = (value: ISelectLanguageOption[]) => {
+  const handleSelectChange = (value: ISelectExampleOption[]) => {
     if (value.length === 0) onChange(null);
     onChange(+value[0].value);
   };
@@ -174,5 +151,5 @@ export const SelectYear: FC<ISelectYear> = (props) => {
     return [findOption];
   }, [value, option]);
 
-  return <Select<ISelectLanguageOption> {...props} option={option} value={valueLocal} onChange={handleSelectChange} />;
+  return <Select<ISelectExampleOption> {...props} option={option} value={valueLocal} onChange={handleSelectChange} />;
 };
