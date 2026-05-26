@@ -4,7 +4,6 @@ import {
   IDatePickerTranslateWeek,
 } from '@local/components/date-picker';
 
-
 export const LOCALE_INPUT: IDatePickerTranslateInput = {
   day: 'ДД',
   month: 'ММ',

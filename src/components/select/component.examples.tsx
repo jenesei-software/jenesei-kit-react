@@ -1,11 +1,8 @@
-
-
 import moment from 'moment';
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { Select } from './component';
 import { ISelectExampleOption, ISelectMonth, ISelectMonths, ISelectYear } from './component.types';
-
 
 export const SelectMonth: FC<ISelectMonth> = (props) => {
   const { value, onChange, dateMin, dateMax, monthsLocale, isShortLabel } = props;
