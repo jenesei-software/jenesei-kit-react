@@ -2,7 +2,7 @@ import { Outside } from '@local/areas/outside';
 import { setClasses } from '@local/styles/utils/functions';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { FC, memo, useCallback, useEffect, useMemo, useState } from 'react';
+import { CSSProperties, FC, memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { createContext } from 'use-context-selector';
 
 import { DEFAULT_PROVIDER_DIALOG_DURATION_ELEMENT, DEFAULT_PROVIDER_DIALOG_DURATION_LAYOUT } from './context.constants';
@@ -107,7 +107,7 @@ export const ProviderDialog: FC<IDialogProvider> = (props) => {
             }}
             transition={{ type: 'spring', duration: DEFAULT_PROVIDER_DIALOG_DURATION_LAYOUT }}
           >
-            {dialogHistory.map((dialog) => {
+            {[...dialogHistory].reverse().map((dialog) => {
               return (
                 <MemoizedDialogElement
                   key={dialog.id}
@@ -134,9 +134,18 @@ const DialogElement = (props: IDialogElement<Record<string, unknown>>) => {
       ...getDialogElementStyle({
         propsDialog: props.props?.propsDialog,
       }),
-      zIndex: -(props.index ?? 0),
     };
-  }, [props.props?.propsDialog, props.index]);
+  }, [props.props?.propsDialog]);
+  const styleDialogLayer = useMemo<CSSProperties>(() => {
+    return {
+      position: 'absolute',
+      inset: 0,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      pointerEvents: props.index === 0 ? 'auto' : 'none',
+    };
+  }, [props.index]);
 
   const isRemoveOnOutsideClick = useMemo(
     () => props.props?.propsDialog?.isRemoveOnOutsideClick ?? true,
@@ -147,35 +156,39 @@ const DialogElement = (props: IDialogElement<Record<string, unknown>>) => {
     props.onRemove?.();
   }, [props.onRemove, props.props?.onRemove]);
 
-  const children = useMemo(
-    () => props.props?.content?.({ remove: onRemove, isAnimating: isAnimating, propsCustom: props.props.propsCustom }),
-    [props.props?.content, isAnimating, props?.props?.propsCustom, onRemove],
-  );
+  const Content = props.props?.content;
+  const children = useMemo(() => {
+    if (props.id === undefined || Content === undefined) return null;
+
+    return <Content remove={onRemove} isAnimating={isAnimating} propsCustom={props.props?.propsCustom} id={props.id} />;
+  }, [Content, isAnimating, props.props?.propsCustom, onRemove, props.id]);
   return (
     props.index !== undefined && (
-      <Outside onOutsideClick={() => isRemoveOnOutsideClick && onRemove?.()}>
-        <motion.dialog
-          key={props.id}
-          className={setClasses([DialogClass.element])}
-          initial={{
-            opacity: 0,
-            scale: 0.8,
-          }}
-          animate={{
-            opacity: 1,
-            scale: 1,
-          }}
-          onAnimationComplete={() => setIsAnimating(false)}
-          transition={{
-            type: 'spring',
-            duration: DEFAULT_PROVIDER_DIALOG_DURATION_ELEMENT,
-            delay: DEFAULT_PROVIDER_DIALOG_DURATION_LAYOUT,
-          }}
-          style={styleDialogElement}
-        >
-          {children}
-        </motion.dialog>
-      </Outside>
+      <div style={styleDialogLayer}>
+        <Outside onOutsideClick={() => props.index === 0 && isRemoveOnOutsideClick && onRemove?.()}>
+          <motion.dialog
+            key={props.id}
+            className={setClasses([DialogClass.element])}
+            initial={{
+              opacity: 0,
+              scale: 0.8,
+            }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+            }}
+            onAnimationComplete={() => setIsAnimating(false)}
+            transition={{
+              type: 'spring',
+              duration: DEFAULT_PROVIDER_DIALOG_DURATION_ELEMENT,
+              delay: DEFAULT_PROVIDER_DIALOG_DURATION_LAYOUT,
+            }}
+            style={styleDialogElement}
+          >
+            {children}
+          </motion.dialog>
+        </Outside>
+      </div>
     )
   );
 };

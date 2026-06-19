@@ -1,6 +1,6 @@
 import { useDeepCompareMemoize } from '@local/hooks/use-deep-compare-memoize';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useContextSelector } from 'use-context-selector';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -23,17 +23,22 @@ export const useDialogs = (props: IUseDialogDependencies): IDialogContext => {
 };
 
 export const useDialog = <T extends object = Record<string, unknown>>(props?: IUseDialog<T>): IDialogItem => {
-  const { add, remove, update } = useDialogs(['add', 'remove', 'update']);
+  const { add, remove, update, dialogHistory } = useDialogs(['add', 'remove', 'update', 'dialogHistory']);
   const [id, setId] = useState<string | null>(null);
   const refId = useRef<string | null>(null);
   const propsMemo = useDeepCompareMemoize(props);
+  const isOpen = useMemo(() => {
+    return id !== null && dialogHistory.some((dialog) => dialog.id === id);
+  }, [dialogHistory, id]);
 
   const localRemove = useCallback(() => {
-    if (refId.current) {
-      setId(null);
-      remove(refId.current);
-      refId.current = null;
-    }
+    const dialogId = refId.current;
+
+    if (!dialogId) return;
+
+    setId(null);
+    refId.current = null;
+    remove(dialogId);
   }, [remove]);
 
   const localAdd: IDialogItem['add'] = useCallback(() => {
@@ -52,10 +57,21 @@ export const useDialog = <T extends object = Record<string, unknown>>(props?: IU
   }, [add, propsMemo, localRemove]);
 
   useEffect(() => {
+    const dialogId = refId.current;
+
+    if (!dialogId) return;
+
+    if (!dialogHistory.some((dialog) => dialog.id === dialogId)) {
+      setId(null);
+      refId.current = null;
+    }
+  }, [dialogHistory]);
+
+  useEffect(() => {
     if (refId.current) {
       update({ id: refId.current, props: propsMemo as IUseDialog<Record<string, unknown>> });
     }
   }, [propsMemo, update]);
 
-  return { add: localAdd, remove: localRemove, id: id };
+  return { add: localAdd, remove: localRemove, id: id, isOpen: isOpen };
 };
