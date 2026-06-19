@@ -1,3 +1,52 @@
+## [2.2.2](https://github.com/jenesei-software/jenesei-kit-react/compare/v2.2.1...v2.2.2) (2026-06-19)
+
+
+### chore
+
+* add .editorconfig and .gitattributes for consistent formatting ([5d5bdfd](https://github.com/jenesei-software/jenesei-kit-react/commit/5d5bdfdb73c8bd50f0e65f5dce0b6853deebafdc))
+
+### docs
+
+* add AGENTS.md ([8df7664](https://github.com/jenesei-software/jenesei-kit-react/commit/8df7664b17c07bf1afdfb6273aebabdf990fc426))
+
+## [2.2.1](https://github.com/jenesei-software/jenesei-kit-react/compare/v2.2.0...v2.2.1) (2026-05-11)
+
+
+### version
+
+* 2.2.1 ([9ba5a7d](https://github.com/jenesei-software/jenesei-kit-react/commit/9ba5a7d4c3b7e494ede660d2d3abf58a591e8d35))
+
+# [2.2.0](https://github.com/jenesei-software/jenesei-kit-react/compare/v2.1.0...v2.2.0) (2026-04-22)
+
+
+### version
+
+* 2.2.0 ([fa2ddea](https://github.com/jenesei-software/jenesei-kit-react/commit/fa2ddea38203ea5131a67e8658f75674648111df))
+
+# [2.1.0](https://github.com/jenesei-software/jenesei-kit-react/compare/v2.0.2...v2.1.0) (2026-04-22)
+
+
+### version
+
+* 2.1.0 ([5e8989a](https://github.com/jenesei-software/jenesei-kit-react/commit/5e8989aa80c82c57515404f5b357f72cfd946421))
+
+## [2.0.2](https://github.com/jenesei-software/jenesei-kit-react/compare/v2.0.1...v2.0.2) (2026-04-20)
+
+
+### version
+
+* 2.0.2 ([559a713](https://github.com/jenesei-software/jenesei-kit-react/commit/559a7135c2a6c402549430955003560d6155c8dd))
+
+## [2.0.1](https://github.com/jenesei-software/jenesei-kit-react/compare/v2.0.0...v2.0.1) (2026-04-20)
+
+
+### chore
+
+* clean up unused code and improve project structure ([bd988f2](https://github.com/jenesei-software/jenesei-kit-react/commit/bd988f2dba15e568d0d23ef57ae293a093bbbac6))
+
+### version
+
+* 2.0.1 ([7e565f4](https://github.com/jenesei-software/jenesei-kit-react/commit/7e565f42c3bb44b78cfc53f01b02c5fc02f9d6d5))
 
 # [2.0.0](https://github.com/jenesei-software/jenesei-kit-react/compare/v1.3.40...v2.0.0) (2026-04-17)
 
