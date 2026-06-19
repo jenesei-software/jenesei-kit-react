@@ -41,11 +41,17 @@ on:
           - yarn
           - bun
           - pnpm
+      run_changelog:
+        description: "Run package manager changelog script before version commit if it exists"
+        required: false
+        default: true
+        type: boolean
 
 jobs:
   call-publisher:
     uses: jenesei-software/.github/.github/workflows/deploy-library.yml@main
     with:
+      run_changelog: ${{ inputs.run_changelog }}
       env_property: ${{ inputs.env_property }}
       build_folder: ${{ inputs.build_folder }}
       registry_type: ${{ inputs.registry_type }}
