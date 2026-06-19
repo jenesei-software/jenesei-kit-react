@@ -1,23 +1,14 @@
 {
+  "files.exclude": {
+    "node_modules": true,
+  },
+  "search.exclude": {
+    "node_modules": true,
+  },
   "eslint.enable": false,
   "prettier.enable": false,
   "editor.defaultFormatter": "biomejs.biome",
-  "[javascript]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  },
-  "[javascriptreact]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  },
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  },
-  "[twig]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  },
-  "[css]": {
+  "[javascript][typescript][javascriptreact][typescriptreact][json][jsonc][css]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
   "editor.codeActionsOnSave": {

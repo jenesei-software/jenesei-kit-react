@@ -60,7 +60,7 @@ export type ILayoutValue<A> = {
 export type ILayoutResponsive<A> = ILayoutValue<A>;
 
 export type ISx = {
-  sx?: CSSProperties;
+  sx?: CSSProperties | undefined;
 };
 
 export type IThemeTypographyHeading = keyof typeof CSS_VARS.font.sizeHeading;

@@ -17,6 +17,7 @@ export type IDialogItem = {
   add: () => void;
   remove: () => void;
   id: string | null;
+  isOpen: boolean;
 };
 
 export type IDialogContent<T extends object = Record<string, unknown>> = {
@@ -42,9 +43,10 @@ type IDialogDialogProps = {
   background?: IThemePalette;
   isRemoveOnOutsideClick?: boolean;
 };
-interface IDialogContentNodeProps<T extends object = Record<string, unknown>> {
+export interface IDialogContentNodeProps<T extends object = Record<string, unknown>> {
   remove?: () => void;
   isAnimating?: boolean;
+  id: string;
   propsCustom?: T;
 }
 

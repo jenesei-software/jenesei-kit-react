@@ -40,10 +40,16 @@ on:
         required: false
         type: boolean
         default: true
+      run_changelog:
+        description: "Has changelog"
+        required: false
+        default: false
+        type: boolean
 jobs:
   call-publisher:
     uses: jenesei-software/.github/.github/workflows/deploy-node.yml@main
     with:
+      run_changelog: ${{ inputs.run_changelog }}
       env_property: ${{ inputs.env_property }}
       build_folder: ${{ inputs.build_folder }}
       version_type: ${{ inputs.version_type }}

@@ -15,19 +15,18 @@ const meta: Meta<typeof SkeletonComponent> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof SkeletonComponent>;
 
 const SkeletonWrapper: FC<ISkeleton> = (props) => {
   return (
     <SkeletonComponent
       {...props}
-      sx={{
+      style={{
         overflow: 'auto',
         borderRadius: '12px',
       }}
     >
       <Stack
-        sx={{
+        style={{
           width: '300px',
           height: '300px',
           padding: '12px',
@@ -46,6 +45,7 @@ const SkeletonWrapper: FC<ISkeleton> = (props) => {
     </SkeletonComponent>
   );
 };
+type Story = StoryObj<typeof SkeletonWrapper>;
 
 export const Index: Story = {
   render: (args) => <SkeletonWrapper {...args} />,
@@ -55,14 +55,14 @@ export const Index: Story = {
 const CollectionWrapper: FC = () => {
   return (
     <Stack
-      sx={{
+      style={{
         overflow: 'auto',
         flexDirection: 'row',
         gap: '12px',
       }}
     >
       <Stack
-        sx={{
+        style={{
           flexDirection: 'column',
           gap: '12px',
         }}
@@ -73,12 +73,12 @@ const CollectionWrapper: FC = () => {
           color='productPrimaryLight'
           type='primary'
           time={2000}
-          sx={{
+          style={{
             borderRadius: '6px',
           }}
         >
           <Stack
-            sx={{
+            style={{
               width: '300px',
               height: '300px',
               padding: '12px',
@@ -96,7 +96,7 @@ const CollectionWrapper: FC = () => {
           </Stack>
         </SkeletonComponent>
         <Stack
-          sx={{
+          style={{
             flexDirection: 'row',
             gap: '12px',
           }}
@@ -111,7 +111,7 @@ const CollectionWrapper: FC = () => {
             type='primary'
           >
             <Stack
-              sx={{
+              style={{
                 width: '50px',
                 height: '50px',
                 padding: '12px',
@@ -140,7 +140,7 @@ const CollectionWrapper: FC = () => {
             type='secondary'
           >
             <Stack
-              sx={{
+              style={{
                 width: '100%',
                 height: '50px',
                 borderRadius: '6px',
@@ -161,7 +161,7 @@ const CollectionWrapper: FC = () => {
         </Stack>
       </Stack>
       <Stack
-        sx={{
+        style={{
           flexDirection: 'column',
           gap: '12px',
         }}
@@ -177,7 +177,7 @@ const CollectionWrapper: FC = () => {
           }}
         >
           <Stack
-            sx={{
+            style={{
               width: '300px',
               height: '300px',
               padding: '12px',
@@ -195,7 +195,7 @@ const CollectionWrapper: FC = () => {
           </Stack>
         </SkeletonComponent>
         <Stack
-          sx={{
+          style={{
             flexDirection: 'row',
             gap: '12px',
           }}
@@ -210,7 +210,7 @@ const CollectionWrapper: FC = () => {
             type='primary'
           >
             <Stack
-              sx={{
+              style={{
                 width: '50px',
                 height: '50px',
                 padding: '12px',
@@ -239,7 +239,7 @@ const CollectionWrapper: FC = () => {
             type='secondary'
           >
             <Stack
-              sx={{
+              style={{
                 width: '100%',
                 height: '50px',
                 borderRadius: '6px',

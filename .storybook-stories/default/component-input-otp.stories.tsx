@@ -18,9 +18,7 @@ const defaultArgs: Partial<IInputOTP> = {
 };
 
 const InputOTPWrapper: FC<IInputOTP> = (props) => {
-  return (
-    <InputOTPComponent {...props} />
-  );
+  return <InputOTPComponent {...props} />;
 };
 
 export const Index: Story = {

@@ -1,21 +1,133 @@
+# [2.3.0](https://github.com/jenesei-software/jenesei-kit-react/compare/v2.2.2...v2.3.0) (2026-06-19)
+
+
+### refactor
+
+* simplify run_changelog input description ([7158841](https://github.com/jenesei-software/jenesei-kit-react/commit/7158841788842a11c75da34a11c8294bd3fa2b51))
+
+## [2.2.2](https://github.com/jenesei-software/jenesei-kit-react/compare/v2.2.1...v2.2.2) (2026-06-19)
+
+
+### chore
+
+* add .editorconfig and .gitattributes for consistent formatting ([5d5bdfd](https://github.com/jenesei-software/jenesei-kit-react/commit/5d5bdfdb73c8bd50f0e65f5dce0b6853deebafdc))
+
+### docs
+
+* add AGENTS.md ([8df7664](https://github.com/jenesei-software/jenesei-kit-react/commit/8df7664b17c07bf1afdfb6273aebabdf990fc426))
+
+### feat
+
+* add run_changelog input for deploy workflows ([e44edf3](https://github.com/jenesei-software/jenesei-kit-react/commit/e44edf38e6345eeb868b0a516f20fe8f11e85578))
+
+### refactor
+
+* enhance dialog context and story integration ([b61f34f](https://github.com/jenesei-software/jenesei-kit-react/commit/b61f34fdde61becd56a4ace57fbbf11a3eaae32a))
+* update changelog input description for clarity ([30d1bc7](https://github.com/jenesei-software/jenesei-kit-react/commit/30d1bc7e6dbe7a1440affcdf0f8c74ce7de18d1b))
+
+### version
+
+* 2.2.2 ([b0c6cd0](https://github.com/jenesei-software/jenesei-kit-react/commit/b0c6cd0013ddeaf8b9892f894c163270c37f7998))
+
+## [2.2.1](https://github.com/jenesei-software/jenesei-kit-react/compare/v2.2.0...v2.2.1) (2026-05-11)
+
+
+### docs
+
+* update commit message guidelines for clarity ([35160ec](https://github.com/jenesei-software/jenesei-kit-react/commit/35160ec3f7dc91083e86d458a145fb4c8601d57f))
+
+### refactor
+
+* consolidate formatter settings for multiple languages ([0fe1910](https://github.com/jenesei-software/jenesei-kit-react/commit/0fe191031a7b9cae2d4dac2b2c56bd4436fc8cfe))
+* replace 'sx' with 'style' for consistency ([5e0e7b4](https://github.com/jenesei-software/jenesei-kit-react/commit/5e0e7b4a81f1052429a2bf056275b0c48ece63c7))
+* update include and exclude paths for Storybook ([4644d32](https://github.com/jenesei-software/jenesei-kit-react/commit/4644d324e526c55ff3e5042eeed04d0c9a56bab4))
+
+### version
+
+* 2.2.1 ([9ba5a7d](https://github.com/jenesei-software/jenesei-kit-react/commit/9ba5a7d4c3b7e494ede660d2d3abf58a591e8d35))
+
+# [2.2.0](https://github.com/jenesei-software/jenesei-kit-react/compare/v2.1.0...v2.2.0) (2026-04-22)
+
+
+### chore
+
+* update dependencies for jenesei-library-log and jenesei-plugin-vite ([179dcb6](https://github.com/jenesei-software/jenesei-kit-react/commit/179dcb63e911bf6d0488de755a2606f09b0cdf3a))
+
+### version
+
+* 2.2.0 ([fa2ddea](https://github.com/jenesei-software/jenesei-kit-react/commit/fa2ddea38203ea5131a67e8658f75674648111df))
+
+# [2.1.0](https://github.com/jenesei-software/jenesei-kit-react/compare/v2.0.2...v2.1.0) (2026-04-22)
+
+
+### chore
+
+* update @jenesei-software/jenesei-library-log dependency ([6640903](https://github.com/jenesei-software/jenesei-kit-react/commit/6640903372c56aafae449cec561dcdd6acd39efc))
+
+### feat
+
+* add tsconfig for Storybook configuration ([41154f6](https://github.com/jenesei-software/jenesei-kit-react/commit/41154f683c1a32d2c69aa67bdd289c89ca38bd89))
+
+### version
+
+* 2.1.0 ([5e8989a](https://github.com/jenesei-software/jenesei-kit-react/commit/5e8989aa80c82c57515404f5b357f72cfd946421))
+
+## [2.0.2](https://github.com/jenesei-software/jenesei-kit-react/compare/v2.0.1...v2.0.2) (2026-04-20)
+
+
+### feat
+
+* add styles.css import and update exports for styles ([2daedf9](https://github.com/jenesei-software/jenesei-kit-react/commit/2daedf9eb5f4f71587f1fa8e89a116ef2262af23))
+
+### version
+
+* 2.0.2 ([559a713](https://github.com/jenesei-software/jenesei-kit-react/commit/559a7135c2a6c402549430955003560d6155c8dd))
+
+## [2.0.1](https://github.com/jenesei-software/jenesei-kit-react/compare/v2.0.0...v2.0.1) (2026-04-20)
+
+
+### chore
+
+* clean up unused code and improve project structure ([bd988f2](https://github.com/jenesei-software/jenesei-kit-react/commit/bd988f2dba15e568d0d23ef57ae293a093bbbac6))
+* update changelog for version 2.0.0 release ([38ec06d](https://github.com/jenesei-software/jenesei-kit-react/commit/38ec06d073f187991e6ce9537b6ced3c989d9ad8))
+
+### version
+
+* 2.0.1 ([7e565f4](https://github.com/jenesei-software/jenesei-kit-react/commit/7e565f42c3bb44b78cfc53f01b02c5fc02f9d6d5))
 
 # [2.0.0](https://github.com/jenesei-software/jenesei-kit-react/compare/v1.3.40...v2.0.0) (2026-04-17)
 
 
 ### chore
 
+* change default package manager from npm to yarn ([522d72e](https://github.com/jenesei-software/jenesei-kit-react/commit/522d72e3397660f53fd4aa1996f6c1b482b609cf))
+* change default package manager from yarn to npm ([4637ac9](https://github.com/jenesei-software/jenesei-kit-react/commit/4637ac97d0c3be8ef24c8d55b1e943860d203d04))
 * clean up code and improve formatting across multiple files ([9038b71](https://github.com/jenesei-software/jenesei-kit-react/commit/9038b71b5c1a99911f58229f73938f9f164183a1))
 * clean up code structure and remove unused imports ([d5a035d](https://github.com/jenesei-software/jenesei-kit-react/commit/d5a035d5cc62e80702a7bdc0eefe9786fe454039))
 * remove redundant code blocks from changes section ([afd88be](https://github.com/jenesei-software/jenesei-kit-react/commit/afd88be54bdfb23b27591f4c83719320842c9688))
+* remove unused context dialog and sonner stories ([4394afb](https://github.com/jenesei-software/jenesei-kit-react/commit/4394afbe7b85258aa1f0ad0a8c1cfdd69e422de6))
+
+### docs
+
+* add commit message guidelines and examples ([7f8a1c3](https://github.com/jenesei-software/jenesei-kit-react/commit/7f8a1c31ddbdf3f7365074b1084c92f4f2565b52))
+* add new version to history ([3a93105](https://github.com/jenesei-software/jenesei-kit-react/commit/3a93105848f843538ab46d0a308eb73f0df805a0))
+* update commit message guidelines for consistency ([1766a78](https://github.com/jenesei-software/jenesei-kit-react/commit/1766a78a6fba2fa8539f910c69901dd98707cb07))
 
 ### feat
 
+*  date-picker ([1f7184a](https://github.com/jenesei-software/jenesei-kit-react/commit/1f7184ac9084f3a56402c74a4a77215faa71c1d3))
+* add commit message guidelines and examples ([8ff1320](https://github.com/jenesei-software/jenesei-kit-react/commit/8ff1320f4ed421717b0141efc687c8d88e45cdf6))
+* add DatePicker component with localization support ([5376cbb](https://github.com/jenesei-software/jenesei-kit-react/commit/5376cbb4eafd1ce6758e7e5c120427f1ce267ab5))
+* add list palette story with updated styles ([ec4cac0](https://github.com/jenesei-software/jenesei-kit-react/commit/ec4cac0e6523ffb7c156685b543011619c91014f))
 * Add new properties and styles to Button, Select, Popover, and Tooltip components ([4e25526](https://github.com/jenesei-software/jenesei-kit-react/commit/4e25526b121cbeb6d0d67571f44b2daa2b8beb0f))
 * Enhance Popover and Select components with new features and styles ([2a49cb9](https://github.com/jenesei-software/jenesei-kit-react/commit/2a49cb9c9bba742c0053181e51d7dc72ea3461e1))
+* refactor context app structure and styles ([ce81d07](https://github.com/jenesei-software/jenesei-kit-react/commit/ce81d076e398b739d10268cc15f3dd315876032d))
 
 ### refactor
 
 * reorganize imports and update constants usage ([55da5c5](https://github.com/jenesei-software/jenesei-kit-react/commit/55da5c55b6f0c28feb3bfdf4d141a27c3aadd1fd))
+* streamline styles and component structure ([f506143](https://github.com/jenesei-software/jenesei-kit-react/commit/f50614345a69caa0a1434e85f02f9150702f216c))
+* update styles and structure for consistency ([dd4fe40](https://github.com/jenesei-software/jenesei-kit-react/commit/dd4fe406cbf2558447ee676fb9ebe74a076ab382))
 
 ### version
 
@@ -579,6 +691,10 @@
 ## [1.1.18](https://github.com/jenesei-software/jenesei-kit-react/compare/v1.1.17-storybook.1...v1.1.18) (2025-06-28)
 
 
+### refactor
+
+* enhance input handling ([ea47d23](https://github.com/jenesei-software/jenesei-kit-react/commit/ea47d23c1bf70d9437d019aec3808bbd804a9b4a))
+
 ### version
 
 * 1.1.18 ([89dc0fb](https://github.com/jenesei-software/jenesei-kit-react/commit/89dc0fb1f5c250377a7cedcf2dc0d693bedf69f9))
@@ -662,7 +778,10 @@
 
 ### feat
 
+* new universal component ([c91ee42](https://github.com/jenesei-software/jenesei-kit-react/commit/c91ee42a852c5eee2a94a0054a9016746c576669))
+* nice logic ([8f93bfa](https://github.com/jenesei-software/jenesei-kit-react/commit/8f93bfae2c7d063205b9a3377d5ded4d6bbfc88f))
 * refactor code structure for improved readability and maintainability ([d52a782](https://github.com/jenesei-software/jenesei-kit-react/commit/d52a782e2ae1baa1bef089c76885c940f82477c4))
+* update base logic ([834af83](https://github.com/jenesei-software/jenesei-kit-react/commit/834af83b97ae97a1366ac971c46f0f7e9bd86c68))
 
 ### version
 

@@ -1,8 +1,8 @@
 export { Select } from './component';
-export { SelectLanguage, SelectMonth, SelectMonths, SelectYear } from './component.examples';
+export { SelectMonth, SelectMonths, SelectYear } from './component.examples';
 export type {
   ISelect,
-  ISelectLanguage,
+  ISelectItem,
   ISelectMonth,
   ISelectMonths,
   ISelectYear,

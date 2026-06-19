@@ -83,16 +83,11 @@ export type ISelect<T extends ISelectItem> = {
   getEstimateSize?: (index: number) => number;
 };
 
-export interface ISelectLanguageOption extends ISelectItem {
+export interface ISelectExampleOption extends ISelectItem {
   placeholder: string;
 
   search?: string;
 }
-
-export type ISelectLanguage = Omit<ISelect<ISelectItem>, 'option' | 'value' | 'onChange'> & {
-  value: string | null;
-  onChange: (language: string | null) => void;
-};
 
 export type ISelectMonth = Omit<ISelect<ISelectItem>, 'option' | 'value' | 'onChange'> & {
   dateMin?: number;

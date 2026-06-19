@@ -27,5 +27,15 @@
 
     // `tsc` is used only as a type-check step in this repo.
     "noEmit": true
-  }
+  },
+  "include": [
+    "src",
+    ".storybook/**/*.ts",
+    ".storybook/**/*.tsx",
+    ".storybook-stories/**/*.ts",
+    ".storybook-stories/**/*.tsx",
+    "vite-env.d.ts",
+    "vite.config.ts"
+  ],
+  "exclude": ["build", "build-storybook", "node_modules"]
 }
