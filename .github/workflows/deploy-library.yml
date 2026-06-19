@@ -42,7 +42,7 @@ on:
           - bun
           - pnpm
       run_changelog:
-        description: "Run package manager changelog script before version commit if it exists"
+        description: "Has changelog"
         required: false
         default: true
         type: boolean
