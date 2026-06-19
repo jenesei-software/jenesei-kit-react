@@ -1,0 +1,8 @@
+import{n as e}from"./chunk-jRWAZmH_.js";import{d as t,m as n,p as r}from"./es-B0aPOTho.js";import{n as i,t as a}from"./stack-cMaVq_mm.js";import{n as o,t as s}from"./preview-DWMZd9q6.js";import{i as c,n as l}from"./tools-CPr3dJCe.js";var u,d,f,p,m,h,g;e((()=>{s(),a(),r(),c(),u=n(),d=`/home/runner/work/jenesei-kit-react/jenesei-kit-react/.storybook-stories/default/area-preview.stories.tsx`,f={component:o,title:`Area/1. Preview`},p={args:{visible:!1,minTime:2e3}},m=()=>(0,u.jsxDEV)(l,{children:[(0,u.jsxDEV)(i,{style:{position:`relative`,width:`200px`,height:`200px`,backgroundColor:t.palette.fillQuaternaryLight,color:t.palette.textPrimaryLight,borderRadius:`8px`},children:(0,u.jsxDEV)(o,{time:2e3,defaultVisible:!1},void 0,!1,{fileName:d,lineNumber:29,columnNumber:9},void 0)},void 0,!1,{fileName:d,lineNumber:21,columnNumber:7},void 0),(0,u.jsxDEV)(i,{style:{position:`relative`,width:`200px`,height:`200px`,backgroundColor:t.palette.accentBlueLight,color:t.palette.textPrimaryDark,borderRadius:`8px`},children:(0,u.jsxDEV)(o,{time:2e3,defaultVisible:!1},void 0,!1,{fileName:d,lineNumber:39,columnNumber:9},void 0)},void 0,!1,{fileName:d,lineNumber:31,columnNumber:7},void 0)]},void 0,!0,{fileName:d,lineNumber:20,columnNumber:10},void 0),h={render:()=>(0,u.jsxDEV)(m,{},void 0,!1,{fileName:d,lineNumber:44,columnNumber:17},void 0)},p.parameters={...p.parameters,docs:{...p.parameters?.docs,source:{originalSource:`{
+  args: {
+    visible: false,
+    minTime: 2000
+  }
+}`,...p.parameters?.docs?.source}}},h.parameters={...h.parameters,docs:{...h.parameters?.docs,source:{originalSource:`{
+  render: () => <CollectionWrapper />
+}`,...h.parameters?.docs?.source}}},g=[`Index`,`Collection`]}))();export{h as Collection,p as Index,g as __namedExportsOrder,f as default};
