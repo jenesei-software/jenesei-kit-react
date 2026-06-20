@@ -4,12 +4,13 @@ import { CSS_VARS } from '@local/styles/utils';
 import { CSS_CLASS, CSS_VARS_RAW } from '@local/styles/utils/constants';
 import { setClasses, setStyles } from '@local/styles/utils/functions';
 
-import { useMemo } from 'react';
+import isEqual from 'lodash/isEqual';
+import { memo, useMemo } from 'react';
 
 import { useLazyInjectSprite } from './component.hooks';
 import { IIcon } from './component.types';
 
-export const Icon = (props: IIcon) => {
+const IconComponent = (props: IIcon) => {
   const iconId = useMemo(() => getIconId({ type: props.type, name: props.name }), [props.name, props.type]);
   const spriteUrl = useMemo(() => getSpriteUrl({ type: props.type }), [props.type]);
   const { loaded, error } = useLazyInjectSprite(spriteUrl);
@@ -67,7 +68,7 @@ export const Icon = (props: IIcon) => {
       onKeyDown={(e) => {
         if (props.onClick && (e.key === 'Enter' || e.key === ' ')) {
           e.preventDefault();
-          props.onClick(e as any);
+          e.currentTarget.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
         }
       }}
       tabIndex={props.tabIndex}
@@ -78,6 +79,23 @@ export const Icon = (props: IIcon) => {
     </svg>
   );
 };
+
+export const Icon = memo(IconComponent, areIconPropsEqual);
+
+function areIconPropsEqual(prevProps: IIcon, nextProps: IIcon) {
+  return (
+    prevProps.type === nextProps.type &&
+    prevProps.name === nextProps.name &&
+    prevProps.className === nextProps.className &&
+    prevProps.onClick === nextProps.onClick &&
+    prevProps.size === nextProps.size &&
+    prevProps.color === nextProps.color &&
+    prevProps.turn === nextProps.turn &&
+    prevProps.order === nextProps.order &&
+    prevProps.tabIndex === nextProps.tabIndex &&
+    isEqual(prevProps.style, nextProps.style)
+  );
+}
 
 export function getIconId(props: { type: string; name: string }) {
   return `#${props.type}-${props.name}`;

@@ -40,65 +40,87 @@ type SpriteStatus = {
   error?: Error;
 };
 
+type SpriteState = {
+  loaded: boolean;
+  error: Error | null;
+};
+
 const loadedSprites = new Map<string, SpriteStatus>();
 
+const getSpriteState = (url: string): SpriteState => {
+  const status = loadedSprites.get(url);
+
+  return {
+    loaded: status?.loaded ?? false,
+    error: status?.error ?? null,
+  };
+};
+
+const isSameSpriteState = (stateA: SpriteState, stateB: SpriteState) =>
+  stateA.loaded === stateB.loaded && stateA.error === stateB.error;
+
+const setSpriteStatus = (url: string, status: SpriteStatus) => {
+  loadedSprites.set(url, status);
+};
+
+const ensureSprite = (url: string) => {
+  const status = loadedSprites.get(url);
+  if (status) return status.promise;
+
+  const promise = (async () => {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`Failed to load sprite: ${url}`);
+    const text = await res.text();
+    const div = document.createElement('div');
+    div.style.display = 'none';
+    div.innerHTML = text;
+    document.body.prepend(div);
+  })();
+
+  setSpriteStatus(url, { promise, loaded: false });
+
+  promise.then(
+    () => {
+      setSpriteStatus(url, { promise, loaded: true });
+    },
+    (err) => {
+      const error = err instanceof Error ? err : new Error(String(err));
+      setSpriteStatus(url, { promise, loaded: true, error });
+    },
+  );
+
+  return promise;
+};
+
 export function useLazyInjectSprite(url: string) {
-  const [loaded, setLoaded] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
+  const [state, setState] = useState<SpriteState>(() => getSpriteState(url));
 
   useEffect(() => {
     let isMounted = true;
+    const currentState = getSpriteState(url);
 
-    // Проверяем актуальный статус прямо здесь
-    const status = loadedSprites.get(url);
-    if (status?.loaded) {
-      setLoaded(true);
-      setError(status.error ?? null);
+    if (currentState.loaded) {
+      setState((prevState) => (isSameSpriteState(prevState, currentState) ? prevState : currentState));
       return;
     }
 
-    let promise: Promise<void>;
-
-    if (!status) {
-      const p = (async () => {
-        const res = await fetch(url);
-        if (!res.ok) throw new Error(`Failed to load sprite: ${url}`);
-        const text = await res.text();
-        const div = document.createElement('div');
-        div.style.display = 'none';
-        div.innerHTML = text;
-        document.body.prepend(div);
-      })();
-
-      loadedSprites.set(url, { promise: p, loaded: false });
-
-      p.then(() => {
-        const prev = loadedSprites.get(url);
-        loadedSprites.set(url, { ...(prev as any), promise: p, loaded: true });
-      }).catch((err) => {
-        const errorObj = err instanceof Error ? err : new Error(String(err));
-        const prev = loadedSprites.get(url);
-        loadedSprites.set(url, { ...(prev as any), promise: p, loaded: true, error: errorObj });
-      });
-
-      promise = p;
-    } else {
-      promise = status.promise;
-    }
-
-    promise
-      .then(() => {
+    ensureSprite(url).then(
+      () => {
         if (!isMounted) return;
-        const s = loadedSprites.get(url);
-        setLoaded(s?.loaded ?? true);
-        setError(s?.error ?? null);
-      })
-      .catch(() => {}); // Ошибка уже сохранена в статусе
+        const nextState = getSpriteState(url);
+        setState((prevState) => (isSameSpriteState(prevState, nextState) ? prevState : nextState));
+      },
+      () => {
+        if (!isMounted) return;
+        const nextState = getSpriteState(url);
+        setState((prevState) => (isSameSpriteState(prevState, nextState) ? prevState : nextState));
+      },
+    );
 
     return () => {
       isMounted = false;
     };
   }, [url]);
 
-  return { loaded, error };
+  return state;
 }

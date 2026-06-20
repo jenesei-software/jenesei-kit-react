@@ -6,44 +6,9 @@ import { CSS_CLASS, CSS_VARS, CSS_VARS_RAW, EXTRA_VALUE } from '@local/styles/ut
 import { setClasses, setStyles } from '@local/styles/utils/functions';
 
 import isEqual from 'lodash/isEqual';
-import { FC, memo, Ref, useCallback, useMemo, useRef } from 'react';
+import { FC, memo, Ref, useMemo, useRef } from 'react';
 
 import { IButton } from './component.types';
-
-export const Button: FC<IButton> = (props) => {
-  const onClickRef = useRef(props.onClick);
-  const onFocusRef = useRef(props.onFocus);
-  const onMouseDownRef = useRef(props.onMouseDown);
-  const isDisabledRef = useRef(props.isDisabled);
-
-  onClickRef.current = props.onClick;
-  onFocusRef.current = props.onFocus;
-  onMouseDownRef.current = props.onMouseDown;
-  isDisabledRef.current = props.isDisabled;
-
-  const handleClick = useCallback<Exclude<IButton['onClick'], undefined>>((event) => {
-    if (!isDisabledRef.current) {
-      onClickRef.current?.(event);
-    }
-  }, []);
-
-  const handleFocus = useCallback<Exclude<IButton['onFocus'], undefined>>((event) => {
-    onFocusRef.current?.(event);
-  }, []);
-
-  const handleMouseDown = useCallback<Exclude<IButton['onMouseDown'], undefined>>((event) => {
-    onMouseDownRef.current?.(event);
-  }, []);
-
-  return (
-    <ButtonView
-      {...props}
-      onClick={props.onClick ? handleClick : undefined}
-      onFocus={props.onFocus ? handleFocus : undefined}
-      onMouseDown={props.onMouseDown ? handleMouseDown : undefined}
-    />
-  );
-};
 
 const ButtonComponent: FC<IButton> = (props) => {
   const icons = useDeepCompareMemoize(props.icons ?? []);
@@ -173,9 +138,8 @@ const ButtonComponent: FC<IButton> = (props) => {
   );
 };
 
-const ButtonView = memo(ButtonComponent, areButtonPropsEqual);
+export const Button = memo(ButtonComponent, areButtonPropsEqual);
 Button.displayName = 'Button';
-ButtonView.displayName = 'ButtonView';
 
 function areButtonPropsEqual(prev: IButton, next: IButton) {
   const { icons: prevIcons, style: prevStyle, sxTypography: prevSxTypography, ...prevRest } = prev;
