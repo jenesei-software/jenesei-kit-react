@@ -614,6 +614,7 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
                 return (
                   <DropdownListOption
                     key={virtualRow.index}
+                    virtualRowIndex={virtualRow.index}
                     virtualRowSize={virtualRow.size}
                     virtualRowStart={virtualRow.start}
                     isChecked={isChecked}
@@ -668,6 +669,7 @@ const ContainerDropdownListOption = <T extends object & ISelectItem>(props: ICon
       onKeyDown={handleKeyDown}
       style={setStyles([
         {
+          zIndex: props.virtualRowIndex,
           position: 'absolute',
           height: `${props.virtualRowSize}px`,
           transform: `translateY(${props.virtualRowStart}px)`,

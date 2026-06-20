@@ -124,7 +124,7 @@ export type IContainerDropdownListOption<T extends ISelectItem> = Pick<
   onClick: () => void;
 
   virtualRowSize: number;
-
+  virtualRowIndex: number;
   virtualRowStart: number;
 };
 export type IContainerSelectListOption<T extends ISelectItem> = Pick<
