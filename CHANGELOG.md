@@ -1,9 +1,20 @@
+## [2.3.4](https://github.com/jenesei-software/jenesei-kit-react/compare/v2.3.3...v2.3.4) (2026-06-20)
+
+
+### refactor
+
+* simplify event handling and improve performance ([e2bcff1](https://github.com/jenesei-software/jenesei-kit-react/commit/e2bcff11abaf7a4cc988d653e9d4e8ccf67b5a24))
+
 ## [2.3.3](https://github.com/jenesei-software/jenesei-kit-react/compare/v2.3.2...v2.3.3) (2026-06-20)
 
 
 ### refactor
 
 * optimize event handlers and improve performance ([537d3a6](https://github.com/jenesei-software/jenesei-kit-react/commit/537d3a694b372f5362f9f6045179349c9a0b194c))
+
+### version
+
+* 2.3.3 ([5b96a2e](https://github.com/jenesei-software/jenesei-kit-react/commit/5b96a2e0231c9ee27c7fbd70cb44c89fd2dec7b9))
 
 ## [2.3.2](https://github.com/jenesei-software/jenesei-kit-react/compare/v2.3.1...v2.3.2) (2026-06-20)
 
