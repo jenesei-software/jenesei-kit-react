@@ -1,9 +1,20 @@
+## [2.3.1](https://github.com/jenesei-software/jenesei-kit-react/compare/v2.3.0...v2.3.1) (2026-06-20)
+
+
+### style
+
+* enhance layout and styling for html and body elements ([b6517dc](https://github.com/jenesei-software/jenesei-kit-react/commit/b6517dc47260264e890f2c1ba174935891846fed))
+
 # [2.3.0](https://github.com/jenesei-software/jenesei-kit-react/compare/v2.2.2...v2.3.0) (2026-06-19)
 
 
 ### refactor
 
 * simplify run_changelog input description ([7158841](https://github.com/jenesei-software/jenesei-kit-react/commit/7158841788842a11c75da34a11c8294bd3fa2b51))
+
+### version
+
+* 2.3.0 ([c5be05e](https://github.com/jenesei-software/jenesei-kit-react/commit/c5be05ebd39763263d6225131b38a18223d854c5))
 
 ## [2.2.2](https://github.com/jenesei-software/jenesei-kit-react/compare/v2.2.1...v2.2.2) (2026-06-19)
 
