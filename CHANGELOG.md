@@ -1,3 +1,10 @@
+## [2.3.3](https://github.com/jenesei-software/jenesei-kit-react/compare/v2.3.2...v2.3.3) (2026-06-20)
+
+
+### refactor
+
+* optimize event handlers and improve performance ([537d3a6](https://github.com/jenesei-software/jenesei-kit-react/commit/537d3a694b372f5362f9f6045179349c9a0b194c))
+
 ## [2.3.2](https://github.com/jenesei-software/jenesei-kit-react/compare/v2.3.1...v2.3.2) (2026-06-20)
 
 
@@ -5,6 +12,10 @@
 
 * add useFps hook for frame rate tracking ([c6f8c07](https://github.com/jenesei-software/jenesei-kit-react/commit/c6f8c07629758211e1e58eebd144c34074e72c0e))
 * add virtual row index to dropdown list options ([0f71be3](https://github.com/jenesei-software/jenesei-kit-react/commit/0f71be38e3e778fa6931c03ce70cf3655c55d196))
+
+### version
+
+* 2.3.2 ([40ea3c5](https://github.com/jenesei-software/jenesei-kit-react/commit/40ea3c5f17aed0b62830a7206a06df63fbb1a44d))
 
 ## [2.3.1](https://github.com/jenesei-software/jenesei-kit-react/compare/v2.3.0...v2.3.1) (2026-06-20)
 
