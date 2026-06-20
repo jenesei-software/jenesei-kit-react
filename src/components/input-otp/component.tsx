@@ -49,7 +49,7 @@ export const InputOTP = (props: IInputOTP) => {
         return newOtp;
       });
     },
-    [props],
+    [props.onChange, props.onComplete],
   );
 
   const handleChange = useCallback(
@@ -77,7 +77,7 @@ export const InputOTP = (props: IInputOTP) => {
         return newOtp;
       });
     },
-    [props],
+    [props.onChange, props.onComplete],
   );
 
   const handleKeyDown = (index: number, e: KeyboardEvent<HTMLInputElement>) => {

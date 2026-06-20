@@ -31,6 +31,7 @@ export * from './contexts/context-sonner';
 export * from './hooks/use-debounced-callback';
 export * from './hooks/use-deep-compare-memoize';
 export * from './hooks/use-deep-memo';
+export * from './hooks/use-fps';
 export * from './hooks/use-merge-refs';
 export * from './hooks/use-overflowing';
 export * from './hooks/use-overflowing-advanced';

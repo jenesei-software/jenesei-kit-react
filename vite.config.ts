@@ -10,12 +10,7 @@ import process from 'node:process';
 
 export default defineConfig(() => {
   const isStorybook = process.env.NODE_ENV === 'storybook';
-  const rollupExternal = [
-    'react',
-    'react-dom',
-    'react/jsx-runtime',
-    'react/jsx-dev-runtime',
-  ];
+  const rollupExternal = ['react', 'react-dom', 'react/jsx-runtime', 'react/jsx-dev-runtime'];
 
   logger.info('isStorybookBuild: ', String(isStorybook));
 
@@ -103,6 +98,7 @@ export default defineConfig(() => {
               'hooks-use-debounced-callback': resolve(__dirname, 'src/hooks/use-debounced-callback/index.ts'),
               'hooks-use-deep-compare-memoize': resolve(__dirname, 'src/hooks/use-deep-compare-memoize/index.ts'),
               'hooks-use-deep-memo': resolve(__dirname, 'src/hooks/use-deep-memo/index.ts'),
+              'hooks-use-fps': resolve(__dirname, 'src/hooks/use-fps/index.ts'),
               'hooks-use-merge-refs': resolve(__dirname, 'src/hooks/use-merge-refs/index.ts'),
               'hooks-use-overflowing': resolve(__dirname, 'src/hooks/use-overflowing/index.ts'),
               'hooks-use-overflowing-advanced': resolve(__dirname, 'src/hooks/use-overflowing-advanced/index.ts'),

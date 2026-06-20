@@ -22,7 +22,7 @@ export const Outside: FC<IOutside> = (props) => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [props]);
+  }, [props.onOutsideClick]);
 
   return (
     <Stack sx={props.sx} ref={elementRef}>

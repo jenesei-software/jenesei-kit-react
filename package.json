@@ -231,6 +231,12 @@
       "require": "./build/hooks-use-deep-memo.cjs.js",
       "default": "./build/hooks-use-deep-memo.es.js"
     },
+    "./hooks-use-fps": {
+      "types": "./build/hooks-use-fps.d.ts",
+      "import": "./build/hooks-use-fps.es.js",
+      "require": "./build/hooks-use-fps.cjs.js",
+      "default": "./build/hooks-use-fps.es.js"
+    },
     "./hooks-use-merge-refs": {
       "types": "./build/hooks-use-merge-refs.d.ts",
       "import": "./build/hooks-use-merge-refs.es.js",

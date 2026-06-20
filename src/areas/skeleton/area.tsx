@@ -3,15 +3,15 @@ import { CSS_CLASS, CSS_VARS } from '@local/styles/utils';
 import { CSS_VARS_RAW } from '@local/styles/utils/constants';
 import { setClasses, setStyles } from '@local/styles/utils/functions';
 
-import { FC, useEffect, useMemo, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 import { ISkeleton } from './area.types';
 
 export const Skeleton: FC<ISkeleton> = (props) => {
   const [visible, setVisible] = useState(props.defaultVisible ?? false);
 
-  const propsVisible = useMemo(() => ('visible' in props ? props.visible : null), [props]);
-  const propsTime = useMemo(() => ('time' in props ? props.time : null), [props]);
+  const propsVisible = 'visible' in props ? props.visible : null;
+  const propsTime = 'time' in props ? props.time : null;
 
   useEffect(() => {
     if (propsVisible !== null && propsTime === null) {

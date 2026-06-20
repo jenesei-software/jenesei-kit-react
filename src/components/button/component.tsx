@@ -1,24 +1,32 @@
 import { getIconComponents } from '@local/components/icon';
+import { useDeepCompareMemoize } from '@local/hooks/use-deep-compare-memoize';
 import { useMergeRefs } from '@local/hooks/use-merge-refs';
 import { useTypographyStyles } from '@local/hooks/use-typography-styles';
 import { CSS_CLASS, CSS_VARS, CSS_VARS_RAW, EXTRA_VALUE } from '@local/styles/utils';
 import { setClasses, setStyles } from '@local/styles/utils/functions';
 
-import { FC, Ref, useCallback, useMemo, useRef } from 'react';
+import isEqual from 'lodash/isEqual';
+import { FC, memo, Ref, useCallback, useMemo, useRef } from 'react';
 
 import { IButton } from './component.types';
 
-export const Button: FC<IButton> = (props) => {
+const ButtonComponent: FC<IButton> = (props) => {
+  const icons = useDeepCompareMemoize(props.icons ?? []);
+  const propsStyle = useDeepCompareMemoize(props.style);
+  const sxTypography = useDeepCompareMemoize(props.sxTypography);
+  const hasIconGroupOrder = 'iconGroupOrder' in props;
+  const iconGroupOrder = hasIconGroupOrder ? props.iconGroupOrder : undefined;
+
   const iconComponents = useMemo(
     () =>
       getIconComponents({
-        icons: (props.icons ?? []).map((e) => ({
+        icons: icons.map((e) => ({
           ...e,
           style: { color: CSS_VARS.genre.button[props.genre].color.index },
         })),
         size: props.size,
       }),
-    [props.icons, props.size, props.genre],
+    [icons, props.size, props.genre],
   );
 
   const handleClick = useCallback<Exclude<IButton['onClick'], undefined>>(
@@ -32,11 +40,19 @@ export const Button: FC<IButton> = (props) => {
 
   const refDefault = useRef<HTMLButtonElement>(null);
 
-  const ref = useMergeRefs([refDefault, props.ref]);
+  const refs = useMemo(() => [refDefault, props.ref], [props.ref]);
+  const ref = useMergeRefs(refs);
+
+  const typographySx = useMemo(
+    () => ({ variant: EXTRA_VALUE.sizeToController[props.size], isNoUserSelect: true, ...sxTypography }),
+    [props.size, sxTypography],
+  );
+
+  const typographyStyle = useMemo(() => ({ order: 0, display: 'inline-flex' }), []);
 
   const { className: classNameTypography, style: styleTypography } = useTypographyStyles({
-    sx: { variant: EXTRA_VALUE.sizeToController[props.size], isNoUserSelect: true, ...props?.sxTypography },
-    style: { order: 0, display: 'inline-flex' },
+    sx: typographySx,
+    style: typographyStyle,
   });
 
   const { className, style } = useMemo(() => {
@@ -67,12 +83,12 @@ export const Button: FC<IButton> = (props) => {
     vars[CSS_VARS_RAW.component.button.radius] = CSS_VARS.size[props.size].radius;
     vars[CSS_VARS_RAW.component.button.gap] = `calc(${CSS_VARS.size[props.size].padding} - 2px)`;
 
-    const style = setStyles([Object.keys(vars).length ? vars : undefined, props.style]);
+    const style = setStyles([Object.keys(vars).length ? vars : undefined, propsStyle]);
 
     return { className, style };
   }, [
     props.className,
-    props.style,
+    propsStyle,
     props.genre,
     props.isDisabled,
     props.isFullSize,
@@ -97,13 +113,12 @@ export const Button: FC<IButton> = (props) => {
 
     const vars: Record<string, string> = {};
 
-    if ('iconGroupOrder' in props)
-      vars[CSS_VARS_RAW.component.button.iconGroupOrder] = String(props.iconGroupOrder ?? 'initial');
+    if (hasIconGroupOrder) vars[CSS_VARS_RAW.component.button.iconGroupOrder] = String(iconGroupOrder ?? 'initial');
 
     const style = setStyles([Object.keys(vars).length ? vars : undefined]);
 
     return { className, style };
-  }, [props]);
+  }, [props.isIconGroup, hasIconGroupOrder, iconGroupOrder]);
 
   return (
     <button
@@ -131,3 +146,29 @@ export const Button: FC<IButton> = (props) => {
     </button>
   );
 };
+
+export const Button = memo(ButtonComponent, areButtonPropsEqual);
+Button.displayName = 'Button';
+
+function areButtonPropsEqual(prev: IButton, next: IButton) {
+  const { icons: prevIcons, style: prevStyle, sxTypography: prevSxTypography, ...prevRest } = prev;
+  const { icons: nextIcons, style: nextStyle, sxTypography: nextSxTypography, ...nextRest } = next;
+
+  return (
+    isEqual(prevIcons, nextIcons) &&
+    isEqual(prevStyle, nextStyle) &&
+    isEqual(prevSxTypography, nextSxTypography) &&
+    areShallowEqual(prevRest, nextRest)
+  );
+}
+
+function areShallowEqual<T extends Record<string, unknown>>(prev: T, next: T) {
+  const prevKeys = Object.keys(prev);
+  const nextKeys = Object.keys(next);
+
+  if (prevKeys.length !== nextKeys.length) return false;
+
+  const nextKeysSet = new Set(nextKeys);
+
+  return prevKeys.every((key) => nextKeysSet.has(key) && Object.is(prev[key], next[key]));
+}

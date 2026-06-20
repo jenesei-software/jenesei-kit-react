@@ -3,15 +3,15 @@ import { Stack, StackMotion } from '@local/components/stack';
 import { CSS_CLASS } from '@local/styles/utils';
 
 import { AnimatePresence } from 'framer-motion';
-import { FC, useEffect, useMemo, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 import { IPreview } from './area.types';
 
 export const Preview: FC<IPreview> = (props) => {
   const [visible, setVisible] = useState(props.defaultVisible ?? false);
 
-  const propsVisible = useMemo(() => ('visible' in props ? props.visible : null), [props]);
-  const propsTime = useMemo(() => ('time' in props ? props.time : null), [props]);
+  const propsVisible = 'visible' in props ? props.visible : null;
+  const propsTime = 'time' in props ? props.time : null;
 
   useEffect(() => {
     if (propsVisible !== null && propsTime === null) {

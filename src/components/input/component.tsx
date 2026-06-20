@@ -25,7 +25,7 @@ export const Input = (props: IInput) => {
         }
       }
     },
-    [props],
+    [props.variety, props.isNoSpaces, props.onChange],
   );
 
   const { className: classNameTypography, style: styleTypography } = useTypographyStyles({
@@ -126,7 +126,8 @@ export const Input = (props: IInput) => {
 
   const refDefault = useRef<HTMLInputElement>(null);
 
-  const ref = useMergeRefs([refDefault, props.ref]);
+  const refs = useMemo(() => [refDefault, props.ref], [props.ref]);
+  const ref = useMergeRefs(refs);
 
   return (
     <>

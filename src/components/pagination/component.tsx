@@ -24,7 +24,7 @@ export const Pagination: FC<IPagination> = (props) => {
     } else {
       props.changeIndex(props.index - 1);
     }
-  }, [props]);
+  }, [props.index, props.isInfinity, props.length, props.changeIndex]);
 
   const handleNext = useCallback(() => {
     if (props.index === props.length - 1) {
@@ -34,7 +34,7 @@ export const Pagination: FC<IPagination> = (props) => {
     } else {
       props.changeIndex(props.index + 1);
     }
-  }, [props]);
+  }, [props.index, props.isInfinity, props.length, props.changeIndex]);
 
   const visibleButtons = useMemo(() => {
     const half = Math.floor(props.viewQuantity / 2);

@@ -1,5 +1,5 @@
-/** biome-ignore-all lint/a11y/noNoninteractiveTabindex: <explanation> */
-/** biome-ignore-all lint/a11y/useKeyWithClickEvents: <explanation> */
+/** biome-ignore-all lint/a11y/noNoninteractiveTabindex: Select uses focusable list items for custom keyboard navigation. */
+/** biome-ignore-all lint/a11y/useKeyWithClickEvents: Select handles keyboard activation on clickable list options. */
 import { Button } from '@local/components/button';
 import { ErrorMessage } from '@local/components/error';
 import { Icon } from '@local/components/icon';
@@ -54,8 +54,13 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
   const refTextArea = useRef<HTMLTextAreaElement>(null);
   const refDropdownList = useRef<HTMLDivElement>(null);
 
-  const refReference = useMergeRefs([props.refReference, refReferencePopover]);
-  const refFloating = useMergeRefs([props.refFloating, refFloatingPopover]);
+  const refsReference = useMemo(
+    () => [props.refReference, refReferencePopover],
+    [props.refReference, refReferencePopover],
+  );
+  const refsFloating = useMemo(() => [props.refFloating, refFloatingPopover], [props.refFloating, refFloatingPopover]);
+  const refReference = useMergeRefs(refsReference);
+  const refFloating = useMergeRefs(refsFloating);
 
   const labelSelectAll = useMemo(() => props.labelSelectAll ?? DEFAULT_LABEL_SELECT_ALL, [props.labelSelectAll]);
   const labelPlaceholder = useMemo(() => props.labelPlaceholder ?? DEFAULT_LABEL_PLACEHOLDER, [props.labelPlaceholder]);
@@ -193,20 +198,17 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
         close();
       }
     },
-    [close, props],
+    [close, props.isMulti, props.isOnClickOptionClose, props.isStayValueAfterSelect, props.onChange, props.value],
   );
   const onClickAll = useCallback(() => {
     props.onChangeAll?.(isAll ? [] : props.option, !isAll);
     if (props.isOnClickOptionClose) {
       close();
     }
-  }, [close, isAll, props]);
-  // const onClear = useCallback(() => {
-  //   props.onChange([]);
-  // }, [props]);
+  }, [close, isAll, props.isOnClickOptionClose, props.onChangeAll, props.option]);
   const onClearSearch = useCallback(() => {
     props.onChangeSearch?.('');
-  }, [props]);
+  }, [props.onChangeSearch]);
   const onScroll = useCallback(
     (containerRefElement?: HTMLDivElement | null) => {
       if (containerRefElement) {
@@ -216,14 +218,14 @@ export const Select = <T extends object & ISelectItem>(props: ISelect<T>) => {
         }
       }
     },
-    [heightDropdownList, props],
+    [heightDropdownList, props.fetchNextPage, props.isFetching],
   );
   const onAddOption = useCallback(
     (value: string) => {
       props.onAddOption?.(value);
       props.onChangeSearch?.('');
     },
-    [props],
+    [props.onAddOption, props.onChangeSearch],
   );
 
   const { className: classNameTypography, style: styleTypography } = useTypographyStyles({
