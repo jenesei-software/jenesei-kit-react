@@ -38,7 +38,7 @@ export const TextArea = (props: ITextArea) => {
     [props.isNoSpaces, props.onChange],
   );
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  // biome-ignore lint/correctness/useExhaustiveDependencies: value changes should remeasure auto-height textareas.
   useEffect(() => {
     if (props.isAutoHeight) {
       requestAnimationFrame(resizeTextarea);
@@ -108,7 +108,7 @@ export const TextArea = (props: ITextArea) => {
     vars[CSS_VARS_RAW.component.textarea.color] = CSS_VARS.genre.textarea[props.genre].color;
     vars[CSS_VARS_RAW.component.textarea.placeholderColor] = CSS_VARS.genre.textarea[props.genre].placeholder;
 
-    const style = setStyles([props.style, styleTypography, Object.keys(vars).length ? vars : undefined]);
+    const style = setStyles([styleTypography, Object.keys(vars).length ? vars : undefined, props.style]);
 
     return { className, style };
   }, [props.style, props.genre, classNameTypography, styleTypography]);
@@ -140,9 +140,9 @@ export const TextArea = (props: ITextArea) => {
           autoComplete={props.autoComplete}
           id={props.id}
           style={{
-            ...styleTextarea,
             minHeight: `${minHeight}px`,
             maxHeight: props.isResize ? 'none' : props.isAutoHeight ? `${maxHeight}px` : `${minHeight}px`,
+            ...styleTextarea,
           }}
         />
       </div>

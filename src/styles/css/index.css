@@ -1,7 +1,9 @@
-@import "./areas.css";
-@import "./components.css";
-@import "./contexts.css";
-@import "./tokens.css";
-@import "./reset.css";
-@import "./keyframes.css";
-@import "./classes.css";
+@layer jenesei-kit;
+
+@import "./areas.css" layer(jenesei-kit);
+@import "./components.css" layer(jenesei-kit);
+@import "./contexts.css" layer(jenesei-kit);
+@import "./tokens.css" layer(jenesei-kit);
+@import "./reset.css" layer(jenesei-kit);
+@import "./keyframes.css" layer(jenesei-kit);
+@import "./classes.css" layer(jenesei-kit);

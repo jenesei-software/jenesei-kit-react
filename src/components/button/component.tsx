@@ -10,6 +10,41 @@ import { FC, memo, Ref, useCallback, useMemo, useRef } from 'react';
 
 import { IButton } from './component.types';
 
+export const Button: FC<IButton> = (props) => {
+  const onClickRef = useRef(props.onClick);
+  const onFocusRef = useRef(props.onFocus);
+  const onMouseDownRef = useRef(props.onMouseDown);
+  const isDisabledRef = useRef(props.isDisabled);
+
+  onClickRef.current = props.onClick;
+  onFocusRef.current = props.onFocus;
+  onMouseDownRef.current = props.onMouseDown;
+  isDisabledRef.current = props.isDisabled;
+
+  const handleClick = useCallback<Exclude<IButton['onClick'], undefined>>((event) => {
+    if (!isDisabledRef.current) {
+      onClickRef.current?.(event);
+    }
+  }, []);
+
+  const handleFocus = useCallback<Exclude<IButton['onFocus'], undefined>>((event) => {
+    onFocusRef.current?.(event);
+  }, []);
+
+  const handleMouseDown = useCallback<Exclude<IButton['onMouseDown'], undefined>>((event) => {
+    onMouseDownRef.current?.(event);
+  }, []);
+
+  return (
+    <ButtonView
+      {...props}
+      onClick={props.onClick ? handleClick : undefined}
+      onFocus={props.onFocus ? handleFocus : undefined}
+      onMouseDown={props.onMouseDown ? handleMouseDown : undefined}
+    />
+  );
+};
+
 const ButtonComponent: FC<IButton> = (props) => {
   const icons = useDeepCompareMemoize(props.icons ?? []);
   const propsStyle = useDeepCompareMemoize(props.style);
@@ -27,15 +62,6 @@ const ButtonComponent: FC<IButton> = (props) => {
         size: props.size,
       }),
     [icons, props.size, props.genre],
-  );
-
-  const handleClick = useCallback<Exclude<IButton['onClick'], undefined>>(
-    (event) => {
-      if (!props.isDisabled && props.onClick) {
-        props.onClick(event);
-      }
-    },
-    [props.isDisabled, props.onClick],
   );
 
   const refDefault = useRef<HTMLButtonElement>(null);
@@ -126,7 +152,7 @@ const ButtonComponent: FC<IButton> = (props) => {
       disabled={props.isDisabled}
       className={className}
       style={style}
-      onClick={handleClick}
+      onClick={props.onClick}
       onFocus={props.onFocus}
       onMouseDown={props.onMouseDown}
       type={props.type ?? 'button'}
@@ -147,8 +173,9 @@ const ButtonComponent: FC<IButton> = (props) => {
   );
 };
 
-export const Button = memo(ButtonComponent, areButtonPropsEqual);
+const ButtonView = memo(ButtonComponent, areButtonPropsEqual);
 Button.displayName = 'Button';
+ButtonView.displayName = 'ButtonView';
 
 function areButtonPropsEqual(prev: IButton, next: IButton) {
   const { icons: prevIcons, style: prevStyle, sxTypography: prevSxTypography, ...prevRest } = prev;

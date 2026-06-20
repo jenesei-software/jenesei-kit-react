@@ -111,7 +111,7 @@ export const Input = (props: IInput) => {
     vars[CSS_VARS_RAW.component.input.placeholderColor] = CSS_VARS.genre.input[props.genre].placeholder;
     vars[CSS_VARS_RAW.component.input.padding] = CSS_VARS.size[props.size].padding;
 
-    const style = setStyles([props.style, styleTypography, Object.keys(vars).length ? vars : undefined]);
+    const style = setStyles([styleTypography, Object.keys(vars).length ? vars : undefined, props.style]);
 
     return { className, style };
   }, [
