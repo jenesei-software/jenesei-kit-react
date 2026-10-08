@@ -86,7 +86,6 @@
 
   white-space: nowrap;
   text-overflow: ellipsis;
-  overflow: hidden;
 }
 .component-input {
   padding: 0 var(--component-input-padding);

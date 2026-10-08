@@ -3,19 +3,9 @@ name: deploy-library
 on:
   workflow_dispatch:
     inputs:
-      build_folder:
-        description: "Build output folder"
-        required: false
-        default: "build"
-        type: string
-      env_property:
-        description: "Environment property"
-        default: "VITE_APP_VERSION"
-        required: false
-        type: string
       registry_type:
         description: "Registry type"
-        required: true
+        required: false
         default: "all"
         type: choice
         options:
@@ -24,13 +14,18 @@ on:
           - all
       version_type:
         description: "Version bump"
-        required: true
+        required: false
         default: "patch"
         type: choice
         options:
           - major
           - minor
           - patch
+          - none
+      explicit_version:
+        description: "Explicit version, overrides version_type"
+        required: false
+        type: string
       package_manager:
         description: "Package manager"
         required: false
@@ -41,22 +36,27 @@ on:
           - yarn
           - bun
           - pnpm
-      run_changelog:
-        description: "Has changelog"
+      check_command:
+        description: "Check command, empty skips checks"
         required: false
-        default: true
-        type: boolean
+        default: "check"
+        type: string
+      changelog_preset:
+        description: "conventional-changelog preset, empty disables changelog"
+        required: false
+        default: "angular"
+        type: string
 
 jobs:
-  call-publisher:
+  release:
     uses: jenesei-software/.github/.github/workflows/deploy-library.yml@main
     with:
-      run_changelog: ${{ inputs.run_changelog }}
-      env_property: ${{ inputs.env_property }}
-      build_folder: ${{ inputs.build_folder }}
-      registry_type: ${{ inputs.registry_type }}
       version_type: ${{ inputs.version_type }}
+      explicit_version: ${{ inputs.explicit_version }}
       package_manager: ${{ inputs.package_manager }}
+      registry_type: ${{ inputs.registry_type }}
+      check_command: ${{ inputs.check_command }}
+      changelog_preset: ${{ inputs.changelog_preset }}
     secrets:
       NPM_TOKEN: ${{ secrets.NPM_CYRILSTRONE_TOKEN }}
-      ACCESS_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
+      ACCESS_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

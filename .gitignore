@@ -30,3 +30,7 @@ dist-ssr
 
 *storybook.log
 stats.html
+
+# Local env overrides. The checked-in .env holds the icon asset version only.
+.env.local
+.env.*.local

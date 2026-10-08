@@ -110,7 +110,10 @@ export const LOCALE_WEEKS: IDatePickerTranslateWeek[] = [
   },
 ];
 
-export const LIBRARY_VERSION = import.meta.env.VITE_APP_VERSION;
-export const ICON_VERSION = import.meta.env.VITE_ICON_VERSION;
+/**
+ * Release tag of jenesei-software/jenesei-id-assets used to build CDN icon URLs.
+ * Bump manually when icons change. Independent of the library version in package.json.
+ */
+export const ICON_VERSION = '1.4.0';
 
 // export const LIST_TYPOGRAPHY_VARIANTS_DEFAULT: IThemeTypographyHeading[] = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];

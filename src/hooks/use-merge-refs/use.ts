@@ -10,7 +10,6 @@ export function useMergeRefs<T>(refs: Array<Ref<T> | undefined>): Ref<T> | null 
         if (typeof ref === 'function') {
           ref(node);
         } else {
-          // @ts-ignore
           ref.current = node;
         }
       });
