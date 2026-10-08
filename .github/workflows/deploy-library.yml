@@ -36,6 +36,16 @@ on:
           - yarn
           - bun
           - pnpm
+      build_folder:
+        description: "Build output folder shipped in the package"
+        required: false
+        default: "build"
+        type: string
+      build_command:
+        description: "Build command, defaults to build"
+        required: false
+        default: ""
+        type: string
       check_command:
         description: "Check command, empty skips checks"
         required: false
@@ -55,6 +65,8 @@ jobs:
       explicit_version: ${{ inputs.explicit_version }}
       package_manager: ${{ inputs.package_manager }}
       registry_type: ${{ inputs.registry_type }}
+      build_folder: ${{ inputs.build_folder }}
+      build_command: ${{ inputs.build_command }}
       check_command: ${{ inputs.check_command }}
       changelog_preset: ${{ inputs.changelog_preset }}
     secrets:
