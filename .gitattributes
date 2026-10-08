@@ -1,1 +1,23 @@
+# Canonical line endings for the repository are LF.
+# text=auto keeps binaries binary and applies eol=lf to all text files.
+* text=auto eol=lf
+
 *.sh text eol=lf
+
+# Explicitly binary - never normalize
+*.avif binary
+*.eot binary
+*.gif binary
+*.ico binary
+*.jpeg binary
+*.jpg binary
+*.pdf binary
+*.png binary
+*.tar binary
+*.ttf binary
+*.webp binary
+*.woff binary
+*.woff2 binary
+*.zip binary
+*.gz binary
+*.vsix binary
