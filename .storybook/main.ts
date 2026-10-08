@@ -7,7 +7,12 @@ const config: StorybookConfig = {
     name: '@storybook/react-vite',
     options: {},
   },
-  typescript: {
+typescript: {
+    // Do not switch to 'react-docgen-typescript' here.
+    // This project uses TypeScript 7, whose JS surface has no ts.sys, and
+    // Storybook 10 resolves the tsconfig through ts.sys.fileExists.
+    // With 'react-docgen-typescript' the build dies with
+    // "Cannot read properties of undefined (reading 'fileExists')".
     reactDocgen: 'react-docgen',
   },
   staticDirs: ['../.storybook-public'],

@@ -1,0 +1,74 @@
+name: deploy-storybook
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    env:
+      PACKAGE_MANAGER: yarn
+      BUILD_FOLDER: build-storybook
+      BUILD_COMMAND: build:storybook
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22.x"
+          cache: yarn
+
+      - name: Setup npmrc for GitHub Packages
+        run: |
+          touch ~/.npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.ACCESS_GITHUB_TOKEN }}" >> ~/.npmrc
+          echo "@jenesei-software:registry=https://npm.pkg.github.com/" >> ~/.npmrc
+        env:
+          NPM_CONFIG_USERCONFIG: ~/.npmrc
+
+      - name: Install dependencies
+        env:
+          NPM_CONFIG_USERCONFIG: ~/.npmrc
+          NPM_TOKEN: ${{ secrets.ACCESS_GITHUB_TOKEN }}
+        run: |
+          case "$PACKAGE_MANAGER" in
+            npm) npm ci ;;
+            yarn) corepack enable && yarn install --frozen-lockfile ;;
+            bun) bun install --frozen-lockfile ;;
+            pnpm) pnpm install --frozen-lockfile ;;
+            *) echo "::error::Unknown package manager: $PACKAGE_MANAGER"; exit 1 ;;
+          esac
+
+      - name: Build storybook
+        run: |
+          case "$PACKAGE_MANAGER" in
+            npm) npm run "$BUILD_COMMAND" ;;
+            yarn) yarn "$BUILD_COMMAND" ;;
+            bun) bun run "$BUILD_COMMAND" ;;
+            pnpm) pnpm run "$BUILD_COMMAND" ;;
+          esac
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ env.BUILD_FOLDER }}
+
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4

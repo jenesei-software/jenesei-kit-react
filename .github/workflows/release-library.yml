@@ -1,5 +1,4 @@
-name: deploy-library
-
+name: release-library
 on:
   workflow_dispatch:
     inputs:
@@ -59,7 +58,7 @@ on:
 
 jobs:
   release:
-    uses: jenesei-software/.github/.github/workflows/deploy-library.yml@main
+    uses: jenesei-software/.github/.github/workflows/release-library.yml@main
     with:
       version_type: ${{ inputs.version_type }}
       explicit_version: ${{ inputs.explicit_version }}
