@@ -68,6 +68,7 @@ jobs:
       build_command: ${{ inputs.build_command }}
       check_command: ${{ inputs.check_command }}
       changelog_preset: ${{ inputs.changelog_preset }}
+      github_packages_scope: "true"
     secrets:
       NPM_TOKEN: ${{ secrets.NPM_CYRILSTRONE_TOKEN }}
       ACCESS_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

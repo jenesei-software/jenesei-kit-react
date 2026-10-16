@@ -31,7 +31,7 @@ This repository is a published React component library, not an application.
 yarn gen:exports
 yarn typecheck
 yarn typecheck:storybook
-yarn biome:lint:check
+yarn biome:lint
 yarn build:library
 yarn build:storybook
 yarn storybook

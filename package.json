@@ -21,6 +21,7 @@
     "check": "biome check src .storybook-stories && tsc -p tsconfig.build.json",
     "typecheck": "tsc -p tsconfig.build.json",
     "typecheck:storybook": "tsc -p tsconfig.storybook.json",
+    "build": "yarn build:library",
     "build:library": "yarn gen:exports && vite build",
     "build:main": "yarn gen:exports && vite build",
     "build:storybook": "yarn gen:exports && cross-env NODE_ENV=storybook storybook build --quiet --disable-telemetry -o build-storybook",

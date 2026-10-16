@@ -11,6 +11,8 @@
 *.ico binary
 *.jpeg binary
 *.jpg binary
+*.mp3 binary
+*.ogg binary
 *.pdf binary
 *.png binary
 *.tar binary

@@ -2,6 +2,10 @@
 
 This is a frontend library for React from Jenesei Software.
 
+## 🚀 ACTUAL VERSIONS
+
+- `2.3.6`
+
 ## Styles
 
 Import the shared library styles once in your application entry:

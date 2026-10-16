@@ -16,6 +16,15 @@ commit rules for this repository.
 
 `<type>(scope): <short description>`
 
+When the current branch carries a project issue ID (for example
+`feature/FW-1568-cookie-consent` or `feature/SE-42-tense-scoring`), use the issue ID as
+the scope:
+
+`<type>(<ISSUE-ID>): <short description>`
+
+Take the ID from the branch name, keep the type, and never invent an issue ID. When the
+branch has none, use the plain scope.
+
 optional body:
 
 * write it as a list, one item per line
@@ -41,6 +50,7 @@ optional body:
 ## Examples
 
 `feat(auth): add login with Google`
+`feat(FW-1568): implement cookie consent`
 `fix(api): handle timeout error`
 `docs(readme): update installation instructions`
 `style(button): fix padding and margin`
